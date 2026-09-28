@@ -25,12 +25,19 @@
 }
 
 // -----------------------------------------------------------------------------
-// Yearly report search block (placed via Layout Builder on entry_page)
+// Annual report search block (injected via hook_node_view)
 // -----------------------------------------------------------------------------
-.#{$nsp}-search-page__search {
+// Annual report search injected via hook_node_view.
+.#{$nsp}-report-search {
+  padding: var(--#{$nsp}-space-lg) 0;
   position: relative;
+  width: 100%;
 
-  // Autocomplete dropdown inside the report search
+  .#{$nsp}-searchbar {
+    width: 100%;
+  }
+
+  // Autocomplete dropdown
   .search-api-autocomplete-search {
     background-color: var(--#{$nsp}-color-base-white);
     border: 1px solid var(--#{$nsp}-color-neutral-250);

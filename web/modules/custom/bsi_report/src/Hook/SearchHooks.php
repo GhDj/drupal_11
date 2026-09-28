@@ -40,7 +40,7 @@ class SearchHooks {
     $build['yearly_report_search'] = [
       '#type' => 'container',
       '#attributes' => [
-        'class' => ['bsi-search-page__search'],
+        'class' => ['bsi-report-search'],
       ],
       '#weight' => -10,
       'heading' => [
