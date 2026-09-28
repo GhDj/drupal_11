@@ -31,11 +31,6 @@ class SearchHooks {
       return;
     }
 
-    // Only show on nodes that are part of a book.
-    if (empty($node->book['bid'])) {
-      return;
-    }
-
     $build['yearly_report_search'] = [
       '#type' => 'container',
       '#attributes' => [
