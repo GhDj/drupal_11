@@ -27,7 +27,7 @@ class SearchHooks {
       return;
     }
 
-    if ($node->bundle() !== 'report_page') {
+    if (!in_array($node->bundle(), ['entry_page', 'report_page'], TRUE)) {
       return;
     }
 

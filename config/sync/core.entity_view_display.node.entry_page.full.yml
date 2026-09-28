@@ -20,12 +20,10 @@ dependencies:
     - field.field.node.entry_page.layout_builder__layout
     - field.field.node.entry_page.layout_builder__translation
     - node.type.entry_page
-    - views.view.search_yearly_report
   module:
     - layout_builder
     - layout_builder_restrictions
     - layout_discovery
-    - views
 third_party_settings:
   layout_builder:
     enabled: true
@@ -54,7 +52,7 @@ third_party_settings:
                 settings:
                   view_mode: default
                 third_party_settings: {  }
-            weight: 2
+            weight: 1
             additional: {  }
           a2286e42-9664-4ac9-a50f-08674accb627:
             uuid: a2286e42-9664-4ac9-a50f-08674accb627
@@ -65,18 +63,6 @@ third_party_settings:
               context_mapping:
                 entity: layout_builder.entity
             weight: 0
-            additional: {  }
-          b7e3a1f2-5d84-4c9e-a2b1-8f6d4e3c7a90:
-            uuid: b7e3a1f2-5d84-4c9e-a2b1-8f6d4e3c7a90
-            region: content
-            configuration:
-              id: 'views_block:search_yearly_report-block_search_yearly_reports'
-              label: 'Search Yearly Report'
-              label_display: '0'
-              provider: views
-              views_label: ''
-              items_per_page: none
-            weight: 1
             additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
