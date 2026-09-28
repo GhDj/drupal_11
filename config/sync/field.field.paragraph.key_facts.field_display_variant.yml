@@ -1,0 +1,29 @@
+uuid: d7142d40-cedb-4e19-ad42-5f67e2f792d5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_display_variant
+    - paragraphs.paragraphs_type.key_facts
+  module:
+    - bsi_custom
+third_party_settings:
+  bsi_custom:
+    preset_options:
+      blue-900: 'Blauer Hintergrund'
+      blue-100: 'Grauer Hintergrund'
+    preset_other: ''
+id: paragraph.key_facts.field_display_variant
+field_name: field_display_variant
+entity_type: paragraph
+bundle: key_facts
+label: 'Display variant'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: blue-900
+default_value_callback: ''
+settings: {  }
+field_type: string

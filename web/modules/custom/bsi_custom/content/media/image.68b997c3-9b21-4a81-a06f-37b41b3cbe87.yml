@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 68b997c3-9b21-4a81-a06f-37b41b3cbe87
+  bundle: image
+  default_langcode: de
+  depends:
+    6910d647-e1cb-4964-92b2-0bf603e0dabc: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Beispiel-Medium Bild 600x200px, ohne Copyright'
+  created:
+    -
+      value: 1774001577
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: 6910d647-e1cb-4964-92b2-0bf603e0dabc
+      alt: 'Einfarbig hellgrauer Hintergrund mit zentrierter Aufschrift "400 x 200"'
+      title: ''
+      width: 400
+      height: 200

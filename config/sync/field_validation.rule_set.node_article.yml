@@ -1,0 +1,41 @@
+uuid: b205d355-1507-476f-8dcf-10846640351f
+langcode: en
+status: true
+dependencies: {  }
+name: node_article
+label: 'node article validation'
+entity_type: node
+bundle: article
+field_validation_rules:
+  2fbb9e48-628d-4936-9828-e11312e22704:
+    id: not_null_constraint_rule
+    title: 'Heading required if links are set'
+    data:
+      validate_mode: default
+      message: 'Please provide a heading for the linkbox items.'
+    weight: 1
+    uuid: 2fbb9e48-628d-4936-9828-e11312e22704
+    field_name: field_links_title
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_links
+      operator: not_empty
+      value: ''
+  80eec174-3099-4fe5-a2b0-07ccb2a7311c:
+    id: not_null_constraint_rule
+    title: 'Heading required if downloads are set'
+    data:
+      validate_mode: default
+      message: 'Please provide a heading for the linkbox downloads.'
+    weight: 2
+    uuid: 80eec174-3099-4fe5-a2b0-07ccb2a7311c
+    field_name: field_downloads_title
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_downloads
+      operator: not_empty
+      value: ''

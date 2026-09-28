@@ -1,0 +1,21 @@
+uuid: dc976bb8-72e3-435f-b898-57d06eb3a386
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_publication_date
+    - node.type.certificate
+  module:
+    - datetime
+id: node.certificate.field_publication_date
+field_name: field_publication_date
+entity_type: node
+bundle: certificate
+label: 'Release date'
+description: 'Date of first publication'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

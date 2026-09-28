@@ -1,0 +1,22 @@
+uuid: 307f542d-a781-4e02-bf38-91b6b99ba21b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_text
+    - paragraphs.paragraphs_type.contact
+  module:
+    - text
+id: paragraph.contact.field_section_text
+field_name: field_section_text
+entity_type: paragraph
+bundle: contact
+label: Introduction
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

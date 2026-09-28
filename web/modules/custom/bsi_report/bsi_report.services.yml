@@ -1,0 +1,7 @@
+services:
+  bsi_report.book.outline.decorator:
+    class: Drupal\bsi_report\BookOutlineDecorator
+    decorates: book.outline
+    arguments:
+      - '@bsi_report.book.outline.decorator.inner'
+      - '@book.manager'

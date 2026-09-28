@@ -1,0 +1,29 @@
+--- a/core/themes/claro/css/theme/media-library.css
++++ b/core/themes/claro/css/theme/media-library.css
+@@ -579,6 +579,7 @@
+   height: 11.25rem;
+   object-fit: contain;
+   object-position: center center;
++  display: inline-block;
+ }
+
+ .media-library-item--grid.is-hover::before,
+@@ -647,6 +648,7 @@
+
+ .media-library-item__preview {
+   padding-bottom: 2.125rem;
++  height: calc(220px - 2.125rem);
+ }
+
+ .field--widget-media-library-widget .media-library-item__preview {
+@@ -684,8 +686,9 @@
+   bottom: 0;
+   display: block;
+   overflow: hidden;
+-  max-width: calc(100% - 0.625rem);
++  width: calc(100% - 0.625rem);
+   max-height: calc(100% - 3.125rem);
++  min-height: 1.75rem;
+   padding: 0.3125rem;
+   background: white;
+ }

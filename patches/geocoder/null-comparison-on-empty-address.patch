@@ -1,0 +1,10 @@
+--- a/modules/geocoder_address/src/AddressService.php
++++ b/modules/geocoder_address/src/AddressService.php
+@@ -136,7 +136,7 @@
+     // Without a country code this won't work.
+     if (empty($values['country_code'])) {
+-      return '';
++      return NULL;
+     }
+
+     // Use the Address formatter to create a string ordered appropriately

@@ -1,0 +1,55 @@
+{#
+/**
+ * Banner
+ */
+#}
+{% set classes = [
+  'bsi-content-teaser',
+  'bsi-block',
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block title %}
+      {% if content.field_section_title.0 %}
+        <!-- Teaser Heading -->
+        {{ content.field_section_title }}
+      {% endif %}
+    {% endblock %}
+
+    {% block content %}
+      <div class="bsi-content-teaser__content">
+        <!-- Teaser Card -->
+        {% set variant = elements['#paragraph'].field_display_variant.value %}
+        <div class="bsi-card bsi-card--{{ variant|default('')|clean_class }} bsi-content-teaser__card">
+          <div class="bsi-card__image">
+            {{ content.field_media }}
+          </div>
+          <div class="bsi-card__content">
+            <div class="bsi-card__text">
+              <div class="bsi-card__body bsi-bodytext">
+                {{ content.field_section_text }}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if content.field_link[0] %}
+          <div class="more-link">
+          {#
+              BEM modifiers should use `--` prefix, but apparently do not in the link
+              template. So fall back to using extra classes.
+            #}
+            {{ content.field_link|merge({
+              '#modifiers': [],
+              '#extra_classes': ['bsi-link--button', 'bsi-link--secondary-button', 'bsi-link--cta'],
+            }) }}
+          </div>
+        {% endif %}
+
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

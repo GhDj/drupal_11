@@ -1,0 +1,5 @@
+name: 'BSI Access'
+type: module
+description: 'Customizations for the BSI access functionality'
+package: BSI
+core_version_requirement: ^10 || ^11

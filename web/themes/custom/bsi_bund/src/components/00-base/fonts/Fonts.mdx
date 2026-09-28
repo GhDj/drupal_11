@@ -1,0 +1,60 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { FontsLoader } from "./FontsLoader";
+
+<Meta title="Base/Fonts" />
+
+# Fonts
+
+The font system provides typography foundation for the component library. All
+font configuration is defined in `src/globals/config/tokens.06-font.json`.
+
+<FontsLoader />
+
+## Implementation
+
+All font styles are defined in
+[`src/components/00-base/fonts/_fonts.scss`](/?path=/story/base-fonts--docs)
+without using mixins.
+
+### Font Faces
+
+The component declares `@font-face` rules directly:
+
+```scss
+@font-face {
+  font-display: swap;
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: 400;
+  size-adjust: 100%;
+  src: url("../../../assets/default/fonts/BundesSansWeb-Regular.woff")
+    format("woff");
+}
+```
+
+### Root Configuration
+
+CSS custom properties are set on the `:root` element:
+
+```scss
+:root {
+  --font-family-base: #{$font-family-sans}, #{$font-fallback};
+  --font-family-serif: #{$font-family-serif}, #{$font-fallback-serif};
+  --root-font-size: #{$base-font-size};
+  --root-line-height: #{$root-line-height};
+  --root-letter-spacing: #{$root-letter-spacing};
+  --font-color: var(--#{$nsp}-color-base-black);
+  --background-color: var(--#{$nsp}-color-white);
+
+  font-family: var(--font-family-base);
+  font-size: var(--root-font-size);
+  letter-spacing: var(--root-letter-spacing);
+  line-height: var(--root-line-height);
+}
+```
+
+## Usage
+
+Fonts are automatically applied to the `:root` element and inherited throughout
+the application. No manual configuration is needed - just use the standard CSS
+font properties or the CSS custom properties defined above.

@@ -1,0 +1,76 @@
+{#
+  Field template for the Paragraph field "field_items" of type "sequence".
+#}
+
+{% set fully_inline = not multiple and label_display == 'inline' %}
+{% set base_name = base_name|default('field') %}
+
+{% set classes = [
+  base_name,
+  false ? 'field--name-' ~ field_name|clean_class,
+  false ? 'field--type-' ~ field_type|clean_class,
+  false ? 'field--label-' ~ label_display,
+  base_name == 'field' ? 'field--label-' ~ label_display,
+  label_display == 'inline' and not fully_inline ? 'clearfix',
+] %}
+
+{% block content %}
+  <div{{ attributes.addClass(classes) }}>
+
+    {# set sequence variant #}
+    {% set variant = element['#object'].field_display_variant.value %}
+
+    {% block items %}
+      {# timeline #}
+      {% if variant == 'timeline' %}
+        <div class="bsi-timeline bsi-grid">
+          <div class="bsi-timeline__content">
+
+            {# progress bar #}
+            <div class="bsi-timeline__progress"></div>
+
+            {# years/months #}
+            {% for year, months in years %}
+              <div class="bsi-timeline__year">
+                {% if year and year != 'default' %}
+                  <div class="bsi-timeline__year-title">{{ year }}</div>
+                {% endif %}
+
+                {% for month in months %}
+                  <div class="bsi-timeline__month bsi-timeline__month--{{ loop.index % 2 ? 'align-left' : 'align-right' }}">
+                    {% if month.title %}
+                      <div class="bsi-timeline__month-title">
+                        {{- month.title.0|default(loop.index) -}}
+                      </div>
+                    {% endif %}
+
+                    {% for item in month|without('title') %}
+                      {{ item.content|merge({
+                        '#attributes': item.attributes.addClass('bsi-timeline__item'),
+                      }) }}
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        {# process #}
+        <div class="bsi-process bsi-grid">
+          <div class="bsi-grid-indented">
+            <ol>
+              {% for item in items %}
+                {% block item %}
+                  <li{{ item.attributes.addClass(base_name ~ '__item') }}>
+                    {{ item.content }}
+                  </li>
+                {% endblock %}
+              {% endfor %}
+            </ol>
+          </div>
+        </div>
+      {% endif %}
+    {% endblock %}
+  </div>
+{% endblock %}

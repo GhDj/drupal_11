@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 2e678c04-c646-4dd2-ad42-fd125adb7c6a
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: criticality-3.png
+  uri:
+    -
+      value: 'public://media-icons/generic/criticality-3.png'
+  filemime:
+    -
+      value: image/png
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1778586599

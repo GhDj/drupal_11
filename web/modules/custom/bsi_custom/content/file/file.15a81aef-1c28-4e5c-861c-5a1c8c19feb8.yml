@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 15a81aef-1c28-4e5c-861c-5a1c8c19feb8
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: empty.zip
+  uri:
+    -
+      value: 'private://download/2026-05/empty.zip'
+  filemime:
+    -
+      value: application/zip
+  filesize:
+    -
+      value: 22
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1779365523

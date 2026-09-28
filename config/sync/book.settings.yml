@@ -1,0 +1,13 @@
+_core:
+  default_config_hash: Y61OL3iuupvET4fODe_GpNwWctlXU81TDN1K9wPUZaY
+allowed_types:
+  -
+    content_type: entry_page
+    child_type: report_page
+  -
+    content_type: report_page
+    child_type: report_page
+book_sort: weight
+truncate_label: false
+use_parent_selector: true
+use_alternative_form: false

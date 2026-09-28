@@ -1,0 +1,22 @@
+uuid: 864cc91f-4a80-49ab-ad52-08c3c7c1a21b
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.entry_page
+id: node.entry_page.status
+field_name: status
+entity_type: node
+bundle: entry_page
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

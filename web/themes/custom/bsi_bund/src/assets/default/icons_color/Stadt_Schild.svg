@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: #004b76;
+      }
+
+      .st0, .st1 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+
+      .st1 {
+        stroke: #00a4b9;
+      }
+    </style>
+  </defs>
+  <g>
+    <g>
+      <g>
+        <path class="st0" d="M11.5,57.7V19.8c0-.2,0-.4.2-.5.1-.1.3-.2.5-.2h12.2"/>
+        <rect class="st0" x="16.1" y="23.9" width="4.2" height="4"/>
+        <path class="st0" d="M61.5,43.3v-23.6c0-.2,0-.4-.2-.5-.1-.1-.3-.2-.5-.2h-12.2"/>
+      </g>
+      <polyline class="st0" points="30.8 57.7 30.8 51 42.2 51 42.2 57.7"/>
+    </g>
+    <line class="st0" x1="36.5" y1="51" x2="36.5" y2="57.7"/>
+    <path class="st0" d="M9.2,57.7h34"/>
+    <g>
+      <rect class="st0" x="29.5" y="16.7" width="4.8" height="4.8"/>
+      <rect class="st0" x="38.6" y="16.7" width="4.8" height="4.8"/>
+      <rect class="st0" x="29.5" y="25.1" width="4.8" height="4.8"/>
+      <rect class="st0" x="38.6" y="25.1" width="4.8" height="4.8"/>
+      <rect class="st0" x="29.5" y="33.6" width="4.8" height="4.8"/>
+      <rect class="st0" x="38.6" y="33.6" width="4.8" height="4.8"/>
+      <rect class="st0" x="29.5" y="42" width="4.8" height="4.8"/>
+      <path class="st0" d="M41.9,46.8h-3.3v-4.8h4.8"/>
+      <rect class="st0" x="16.1" y="32.1" width="4.2" height="4"/>
+      <rect class="st0" x="16.1" y="40.3" width="4.2" height="4"/>
+      <rect class="st0" x="16.1" y="48.6" width="4.2" height="4"/>
+      <rect class="st0" x="52.7" y="23.9" width="4.2" height="4"/>
+      <rect class="st0" x="52.7" y="32.1" width="4.2" height="4"/>
+      <path class="st0" d="M24.4,57.5V13c0-.2,0-.4.2-.5.2-.1.4-.2.6-.2h22.5c.5,0,.8.3.8.8v30.5"/>
+    </g>
+  </g>
+  <g>
+    <path class="st1" d="M54.4,48.6c-2.8,0-5,.3-6.4.6v4.5c0,5.6,4.2,7.9,6.4,8.8v-14Z"/>
+    <path class="st1" d="M54.5,65.9c-2-.6-9.6-3.4-9.6-12.2v-6.8c2.1-.8,4.9-1.5,9.4-1.5s6.9.5,9.8,1.5v6.8c0,8.6-7.7,11.4-9.6,12.2h0Z"/>
+  </g>
+</svg>

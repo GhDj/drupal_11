@@ -1,0 +1,21 @@
+uuid: dd6131ff-8b75-4917-8e7c-e25826688ee7
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_security_label_mobile
+label: 'BSI Security Label (mobile)'
+effects:
+  d61c741a-9b57-402d-ad9e-dcee9837104e:
+    uuid: d61c741a-9b57-402d-ad9e-dcee9837104e
+    id: image_scale
+    weight: 1
+    data:
+      width: 135
+      height: null
+      upscale: true
+  964ff14e-2abe-4be8-9e26-582bd52cc4b1:
+    uuid: 964ff14e-2abe-4be8-9e26-582bd52cc4b1
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

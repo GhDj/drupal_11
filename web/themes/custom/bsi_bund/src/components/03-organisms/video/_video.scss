@@ -1,0 +1,100 @@
+@use "plyr/dist/plyr.css";
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/grid" as *;
+
+.#{$nsp}-video {
+  margin-block: var(--#{$nsp}-space-module);
+
+  &__text {
+    margin-block-start: var(--#{$nsp}-space-md);
+  }
+  // PLYR CUSTOMIZATIONS
+  .plyr {
+    --plyr-color-main: var(--#{$nsp}-color-blue-800);
+    --plyr-video-controls-background: rgba(243, 247, 253, 0.8);
+    --plyr-video-control-color: var(--#{$nsp}-color-blue-800);
+    --plyr-video-progress-buffered-background: #a7c1d0;
+    --plyr-control-spacing: var(--#{$nsp}-space-2xs);
+    --plyr-control-icon-size: 24px;
+    --plyr-focus-visible-color: var(--#{$nsp}-color-base-focus);
+  }
+
+  .plyr--video .plyr__controls {
+    padding: 8px;
+
+    @include breakpoint-md {
+      padding: 24px;
+    }
+  }
+
+  .plyr__playback-controls {
+    height: 35px;
+  }
+
+  .plyr__control:focus-visible,
+  .plyr--full-ui
+    input[type="range"]:focus-visible::-webkit-slider-runnable-track {
+    outline-style: solid;
+  }
+
+  .plyr__time + .plyr__time--duration {
+    &:before {
+      margin-inline: 3px;
+    }
+  }
+
+  .plyr__progress-container {
+    flex: 1;
+    margin-right: var(--#{$nsp}-space-md);
+
+    @include breakpoint-md {
+      margin-left: var(--#{$nsp}-space-md);
+    }
+  }
+
+  .plyr__volume {
+    max-width: initial;
+    min-width: initial;
+    position: relative;
+    width: auto;
+
+    // The actual volume input range
+    input[data-plyr="volume"] {
+      background-color: var(--#{$nsp}-color-neutral-100);
+      border-radius: 0;
+      left: 50%;
+      margin: 0;
+      max-width: none;
+      opacity: 0;
+      padding: 16px;
+      position: absolute;
+      top: -16px;
+      transform: rotate(-90deg);
+      transform-origin: left;
+      transition: all 0.2s ease;
+      width: 120px;
+      z-index: -1;
+    }
+
+    // Show the slider on hover
+    &:hover input[data-plyr="volume"],
+    &:focus-within input[data-plyr="volume"] {
+      opacity: 1;
+      top: -1rem; // Adjust based on height of slider
+      z-index: 2;
+    }
+  }
+
+  .plyr__control--overlaid {
+    background-color: transparent;
+    border: solid 1.5px var(--#{$nsp}-color-base-white);
+    border-radius: 5px;
+    color: var(--#{$nsp}-color-base-white);
+    padding: 12px 32px;
+  }
+
+  .plyr__menu__container .plyr__control[role="menuitemradio"]:after {
+    left: 10px;
+  }
+}

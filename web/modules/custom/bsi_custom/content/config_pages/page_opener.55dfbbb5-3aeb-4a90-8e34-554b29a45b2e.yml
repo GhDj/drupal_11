@@ -1,0 +1,20 @@
+_meta:
+  version: '1.0'
+  entity_type: config_pages
+  uuid: 55dfbbb5-3aeb-4a90-8e34-554b29a45b2e
+  bundle: page_opener
+  depends:
+    e8ec5dea-6bd4-45e4-ba68-024bc200d493: media
+default:
+  label:
+    -
+      value: 'Page opener'
+  type:
+    -
+      target_id: page_opener
+  context:
+    -
+      value: 'a:2:{i:0;a:1:{s:13:"static_opener";s:5:"event";}i:1;a:1:{s:8:"language";s:2:"en";}}'
+  field_media:
+    -
+      entity: e8ec5dea-6bd4-45e4-ba68-024bc200d493

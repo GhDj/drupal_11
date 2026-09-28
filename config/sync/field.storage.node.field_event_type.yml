@@ -1,0 +1,33 @@
+uuid: e27d7b8b-f1a0-43cf-ba1e-766d26389893
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_event_type
+field_name: field_event_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: bsi_s_own_events
+      label: "BSI's own events"
+    -
+      value: bsi_as_a_participant
+      label: 'BSI as a participant'
+    -
+      value: career_events
+      label: 'Career Events'
+    -
+      value: miscellaneous
+      label: Miscellaneous
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

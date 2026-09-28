@@ -1,0 +1,126 @@
+<!-- static content of the Webform Library -->
+<div
+  class="form-type-select js-webform-type-select webform-type-select js-form-item form-item js-form-type-select form-type--select js-form-item-subject form-item--subject">
+  <label for="edit-subject" class="form-item__label">Subject</label>
+  <select data-drupal-selector="edit-subject" id="edit-subject" name="subject"
+    class="form-select form-element form-element--type-select">
+    <option value="" selected="">Please select</option>
+    <option value="27">Serviceleistungen</option>
+  </select>
+</div>
+<div
+  class="form-type-textarea js-webform-type-textarea webform-type-textarea js-form-item form-item js-form-type-textarea form-type--textarea js-form-item-message form-item--message">
+  <label for="edit-message" class="form-item__label js-form-required form-required">Message</label>
+  <div class="form-textarea-wrapper">
+    <textarea data-drupal-selector="edit-message" id="edit-message" name="message" rows="5" cols="60"
+      class="form-textarea required resize-vertical form-element form-element--type-textarea form-element--api-textarea"
+      required="required"></textarea>
+  </div>
+</div>
+<div data-drupal-selector="edit-flex-name" class="webform-flexbox js-webform-flexbox js-form-wrapper form-wrapper"
+  id="edit-flex-name">
+  <div class="webform-flex webform-flex--1">
+    <div class="webform-flex--container">
+      <div
+        class="form-type-textfield js-webform-type-textfield webform-type-textfield js-form-item form-item js-form-type-textfield form-type--textfield js-form-item-name-first form-item--name-first">
+        <label for="edit-name-first" class="form-item__label">First name</label>
+        <input data-drupal-selector="edit-name-first" type="text" id="edit-name-first" name="name_first" value=""
+          size="60" maxlength="255"
+          class="form-text form-element form-element--type-text form-element--api-textfield" />
+      </div>
+    </div>
+  </div>
+  <div class="webform-flex webform-flex--1">
+    <div class="webform-flex--container">
+      <div
+        class="form-type-textfield js-webform-type-textfield webform-type-textfield js-form-item form-item js-form-type-textfield form-type--textfield js-form-item-name-last form-item--name-last">
+        <label for="edit-name-last" class="form-item__label js-form-required form-required">Last name</label>
+        <input data-drupal-selector="edit-name-last" type="text" id="edit-name-last" name="name_last" value="" size="60"
+          maxlength="255" class="form-text required form-element form-element--type-text form-element--api-textfield"
+          required="required" />
+      </div>
+    </div>
+  </div>
+</div>
+<div data-drupal-selector="edit-flex-contact" class="webform-flexbox js-webform-flexbox js-form-wrapper form-wrapper"
+  id="edit-flex-contact">
+  <div class="webform-flex webform-flex--1">
+    <div class="webform-flex--container">
+      <div
+        class="form-type-tel js-webform-type-tel webform-type-tel js-form-item form-item js-form-type-tel form-type--tel js-form-item-phone form-item--phone">
+        <label for="edit-phone" class="form-item__label">Phone</label>
+        <input data-drupal-selector="edit-phone" type="tel" id="edit-phone" name="phone" value="" size="30"
+          maxlength="128" class="form-tel form-element form-element--type-tel form-element--api-tel" />
+      </div>
+    </div>
+  </div>
+  <div class="webform-flex webform-flex--1">
+    <div class="webform-flex--container">
+      <div
+        class="form-type-email js-webform-type-email webform-type-email js-form-item form-item js-form-type-email form-type--email js-form-item-email form-item--email">
+        <label for="edit-email" class="form-item__label js-form-required form-required">Email</label>
+        <input data-drupal-selector="edit-email" type="email" id="edit-email" name="email" value="" size="60"
+          maxlength="254" class="form-email required form-element form-element--type-email form-element--api-email"
+          required="required" />
+      </div>
+    </div>
+  </div>
+</div>
+<div id="edit-help-required"
+  class="form-type-webform-markup js-webform-type-webform-markup webform-type-webform-markup js-form-item form-item js-form-type-webform-markup form-type--webform-markup js-form-item-help-required form-item--help-required form-item--no-label">
+  <p><small>Required fields are marked with an asterisk (*).</small></p>
+</div>
+<fieldset data-drupal-selector="edit-captcha" class="captcha captcha-type-challenge--friendlycaptcha" data-nosnippet="">
+  <legend class="captcha__title js-form-required form-required">
+    Security check
+  </legend>
+  <div class="captcha__element">
+    <input data-drupal-selector="edit-captcha-sid" type="hidden" name="captcha_sid" value="20" />
+    <input data-drupal-selector="edit-captcha-token" type="hidden" name="captcha_token"
+      value="nNSgXoGeck-dfdifdbvf_SPEUC89UquCzOHm6od-284" />
+    <input data-drupal-selector="edit-captcha-response" type="hidden" name="captcha_response"
+      value="Friendly Captcha no captcha" />
+    <div class="frc-captcha" data-sitekey="6255bd03-ae1f-4827-9160-addfcf720a92" data-lang="en">
+      <div class="frc-container">
+        <svg class="frc-icon" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" height="32" width="32"
+          viewBox="0 0 24 24">
+          <path
+            d="M17,11c0.34,0,0.67,0.04,1,0.09V6.27L10.5,3L3,6.27v4.91c0,4.54,3.2,8.79,7.5,9.82c0.55-0.13,1.08-0.32,1.6-0.55 C11.41,19.47,11,18.28,11,17C11,13.69,13.69,11,17,11z">
+          </path>
+          <path d="M17,13c-2.21,0-4,1.79-4,4c0,2.21,1.79,4,4,4s4-1.79,4-4C21,14.79,19.21,13,17,13z M17,14.38"></path>
+        </svg>
+        <div class="frc-content">
+          <span class="frc-text">Anti-Robot Verification</span>
+          <button type="button" class="frc-button">
+            Click to start verification
+          </button>
+        </div>
+      </div>
+      <span class="frc-banner"><a lang="en" href="https://friendlycaptcha.com/" rel="noopener"
+          target="_blank"><b>Friendly</b>Captcha ⇗</a></span>
+      <input name="frc-captcha-solution" class="frc-captcha-solution" type="hidden" value=".UNSTARTED" />
+    </div>
+    <noscript>You need Javascript for CAPTCHA verification to submit this
+      form.
+    </noscript>
+    <input data-drupal-selector="edit-captcha-cacheable" type="hidden" name="captcha_cacheable" value="1" />
+  </div>
+  <div class="captcha__description description">
+    This question is for testing whether or not you are a human visitor
+    and to prevent automated spam submissions.
+  </div>
+</fieldset>
+<div
+  class="form-type-checkbox js-webform-type-checkbox webform-type-checkbox js-form-item form-item js-form-type-checkbox form-type--checkbox form-type--boolean js-form-item-terms-conditions form-item--terms-conditions">
+  <input data-drupal-selector="edit-terms-conditions" type="checkbox" id="edit-terms-conditions" name="terms_conditions"
+    value="1" class="form-checkbox required form-boolean form-boolean--type-checkbox" required="required" />
+  <label for="edit-terms-conditions" class="form-item__label option js-form-required form-required">I have read and
+    agree to the
+    <a href="#">declaration of consent</a>.</label>
+</div>
+<input data-drupal-selector="edit-recipient-mail" type="hidden" name="recipient_mail" value="" />
+<div data-drupal-selector="edit-actions" class="form-actions webform-actions js-form-wrapper form-wrapper"
+  id="edit-actions">
+  <input class="webform-button--submit button button--primary js-form-submit form-submit"
+    data-drupal-selector="edit-actions-submit" type="submit" id="edit-actions-submit" name="op" value="Send message" />
+</div>

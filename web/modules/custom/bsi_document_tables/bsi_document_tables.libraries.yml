@@ -1,0 +1,21 @@
+frontend:
+  version: VERSION
+  css:
+    theme:
+      css/document-tables.css: {}
+  js:
+    js/frontend-toc.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+backend:
+  version: VERSION
+  css:
+    theme:
+      css/admin-forms.css: {}
+  js:
+    js/admin-forms.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

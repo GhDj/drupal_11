@@ -1,0 +1,8 @@
+name: 'BSI Jahreslagebericht'
+type: module
+description: 'Code related to the yearly IT security report, based on book.'
+package: BSI
+core_version_requirement: ^10 || ^11
+dependencies:
+  - book:book
+  - menu_entity_index:menu_entity_index

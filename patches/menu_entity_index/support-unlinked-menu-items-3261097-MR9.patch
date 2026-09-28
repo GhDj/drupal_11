@@ -1,0 +1,525 @@
+diff --git a/config/install/menu_entity_index.configuration.yml b/config/install/menu_entity_index.configuration.yml
+index b0c835d1fc947fe4ad8ed0b22fe2f98a48cd7fb5..648c2cc9d377f142f2ba0386606f4657e24f4f08 100644
+--- a/config/install/menu_entity_index.configuration.yml
++++ b/config/install/menu_entity_index.configuration.yml
+@@ -1,3 +1,4 @@
+ all_menus: false
+ entity_types: {}
+ menus: {}
++include_empty: false
+diff --git a/config/schema/menu_entity_index.schema.yml b/config/schema/menu_entity_index.schema.yml
+index be3148789d414d8e400974d146fe2303ded3bd78..2778dab478b27bdeae457ac5546d70052dc43e54 100644
+--- a/config/schema/menu_entity_index.schema.yml
++++ b/config/schema/menu_entity_index.schema.yml
+@@ -17,3 +17,6 @@ menu_entity_index.configuration:
+     all_menus:
+       type: boolean
+       label: 'Track all menus'
++    include_empty:
++      type: boolean
++      label: 'Track empty links'
+diff --git a/src/Form/ConfigurationForm.php b/src/Form/ConfigurationForm.php
+index c2cc76fcae3423fc24f0c0b514fc128ba55f1130..2e9326944ce75464711a24e006eb69a17ecef471 100644
+--- a/src/Form/ConfigurationForm.php
++++ b/src/Form/ConfigurationForm.php
+@@ -2,46 +2,44 @@
+
+ namespace Drupal\menu_entity_index\Form;
+
+-use Drupal\Core\Form\FormBase;
++use Drupal\Core\Config\ConfigFactoryInterface;
++use Drupal\Core\Config\TypedConfigManagerInterface;
++use Drupal\Core\Form\ConfigFormBase;
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\menu_entity_index\TrackerInterface;
+-use Symfony\Component\DependencyInjection\ContainerInterface;
++use Symfony\Component\DependencyInjection\Attribute\Autowire;
+
+ /**
+  * Provides a configuration form for administrative settings.
+  *
+  * @package Drupal\menu_entity_index\Form
+  */
+-class ConfigurationForm extends FormBase {
+-
+-  /**
+-   * The Menu Entity Index Tracker service.
+-   *
+-   * @var \Drupal\menu_entity_index\TrackerInterface
+-   */
+-  protected $tracker;
++class ConfigurationForm extends ConfigFormBase {
+
+   /**
+    * {@inheritdoc}
+    */
+-  public function __construct(TrackerInterface $tracker) {
+-    $this->tracker = $tracker;
++  public function __construct(
++    ConfigFactoryInterface $config_factory,
++    protected TypedConfigManagerInterface $typedConfigManager,
++    #[Autowire(service: 'menu_entity_index.tracker')]
++    protected TrackerInterface $tracker,
++  ) {
++    parent::__construct($config_factory, $this->typedConfigManager);
+   }
+
+   /**
+    * {@inheritdoc}
+    */
+-  public static function create(ContainerInterface $container): static {
+-    return new static(
+-      $container->get('menu_entity_index.tracker')
+-    );
++  public function getFormId(): string {
++    return 'menu_entity_index_configuration_form';
+   }
+
+   /**
+    * {@inheritdoc}
+    */
+-  public function getFormId(): string {
+-    return 'menu_entity_index_configuration_form';
++  protected function getEditableConfigNames(): array {
++    return ['menu_entity_index.configuration'];
+   }
+
+   /**
+@@ -75,6 +73,14 @@ class ConfigurationForm extends FormBase {
+       '#options' => $this->tracker->getAvailableEntityTypes(),
+       '#default_value' => $config->get('entity_types'),
+     ];
++
++    $form['include_empty'] = [
++      '#type' => 'checkbox',
++      '#title' => $this->t('Track empty links'),
++      '#description' => $this->t('This includes links using <code>&lt;nolink&gt;</code>, <code>&lt;none&gt;</code> or otherwise empty paths.'),
++      '#config_target' => 'menu_entity_index.configuration:include_empty',
++    ];
++
+     $form['actions']['#type'] = 'actions';
+     $form['actions']['submit'] = [
+       '#type' => 'submit',
+@@ -88,15 +94,18 @@ class ConfigurationForm extends FormBase {
+       '#submit' => [[get_class($this), 'rebuildIndex']],
+     ];
+     $form['#theme'] = 'system_config_form';
+-    return $form;
++    return parent::buildForm($form, $form_state);
+   }
+
+   /**
+    * {@inheritdoc}
+    */
+-  public function submitForm(array &$form, FormStateInterface $form_state) {
+-    $this->tracker->setConfiguration($form_state->getValues());
+-    $this->messenger()->addStatus($this->t('The configuration options have been saved.'));
++  public function submitForm(array &$form, FormStateInterface $form_state): void {
++    $config = $this->config('menu_entity_index.configuration');
++    $force_rebuild = (bool) $config->get('include_empty') !== $config->getOriginal('include_empty');
++
++    $this->tracker->setConfiguration($form_state->getValues(), $force_rebuild);
++    parent::submitForm($form, $form_state);
+   }
+
+   /**
+@@ -104,7 +113,7 @@ class ConfigurationForm extends FormBase {
+    *
+    * @ingroup form
+    */
+-  public static function rebuildIndex(array &$form, FormStateInterface $form_state) {
++  public static function rebuildIndex(array &$form, FormStateInterface $form_state): void {
+     \Drupal::service('menu_entity_index.tracker')->setConfiguration($form_state->getValues(), TRUE);
+     \Drupal::service('messenger')->addStatus(t('The index has been rebuilt.'));
+   }
+diff --git a/src/Tracker.php b/src/Tracker.php
+index ff894892c4f22f131cef3cfe0a75aba40181f17e..8e572d6b42ac44b597296ae1f243d63cec25d6eb 100644
+--- a/src/Tracker.php
++++ b/src/Tracker.php
+@@ -12,6 +12,7 @@ use Drupal\Core\Entity\EntityRepositoryInterface;
+ use Drupal\Core\Entity\EntityTypeInterface;
+ use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Extension\ModuleExtensionList;
++use Drupal\Core\Language\LanguageInterface;
+ use Drupal\Core\Menu\MenuLinkInterface;
+ use Drupal\Core\Menu\MenuLinkManagerInterface;
+ use Drupal\Core\Messenger\MessengerTrait;
+@@ -266,7 +267,9 @@ class Tracker implements TrackerInterface {
+    */
+   public function setConfiguration(array $form_values = [], $force_rebuild = FALSE) {
+     $entity_type_ids = !empty($form_values['entity_types']) ? array_filter($form_values['entity_types']) : [];
+-    $force = $force_rebuild || $this->setTrackedEntityTypes($entity_type_ids);
++    $track_empty_changed = $this->setTrackingEmptyLinks((bool) $form_values['include_empty']);
++    $entity_types_changed = $this->setTrackedEntityTypes($entity_type_ids);
++    $force = $force_rebuild || $track_empty_changed || $entity_types_changed;
+
+     if ($form_values['all_menus']) {
+       $this->setTrackAllMenus($force);
+@@ -350,6 +353,13 @@ class Tracker implements TrackerInterface {
+     return $type instanceof ContentEntityType && in_array($type->id(), $this->getTrackedEntityTypes());
+   }
+
++  /**
++   * {@inheritdoc}
++   */
++  public function isTrackingEmptyLinks(): bool {
++    return $this->config->get('include_empty');
++  }
++
+   /**
+    * Sets entity types to track and updates database table accordingly.
+    *
+@@ -365,6 +375,17 @@ class Tracker implements TrackerInterface {
+     return count($new_types) > 0;
+   }
+
++  /**
++   * Sets whether to track empty links and updates database table accordingly.
++   */
++  protected function setTrackingEmptyLinks(bool $include_empty): bool {
++    $config = $this->configFactory->getEditable('menu_entity_index.configuration');
++    $needs_rebuild = (bool) $config->get('include_empty') !== $config->getOriginal('include_empty');
++
++    $config->set('include_empty', $include_empty)->save();
++    return $needs_rebuild;
++  }
++
+   /**
+    * Scans menu links in menus for references to target entities via Batch API.
+    *
+@@ -518,6 +539,7 @@ class Tracker implements TrackerInterface {
+     if ($entity->getEntityTypeId() !== 'menu_link_content') {
+       return;
+     }
++    /** @var \Drupal\menu_link_content\MenuLinkContentInterface $entity */
+     // Process menu links in tracked menus only.
+     if (!in_array($entity->getMenuName(), $this->getTrackedMenus())) {
+       return;
+@@ -542,6 +564,14 @@ class Tracker implements TrackerInterface {
+     catch (\InvalidArgumentException $e) {
+       return;
+     }
++
++    if ($url === '' || (!str_starts_with($url, '/') && parse_url($url, PHP_URL_SCHEME) === NULL)) {
++      if ($this->config->get('include_empty')) {
++        $this->addEmptyTarget($entity);
++      }
++      return;
++    }
++
+     $route_request = $this->getRequestForUrl($url);
+     if ($route_request) {
+       $route_match = RouteMatch::createFromRequest($route_request);
+@@ -582,7 +612,7 @@ class Tracker implements TrackerInterface {
+    *
+    * @param \Drupal\Core\Entity\EntityInterface $entity
+    *   The host entity for which to add tracking records.
+-   * @param array $targets
++   * @param array<\Drupal\Core\Entity\EntityInterface> $targets
+    *   An array of target entities.
+    *
+    * @return int|bool
+@@ -593,18 +623,10 @@ class Tracker implements TrackerInterface {
+       return FALSE;
+     }
+
+-    $parent_link = NULL;
+-    $parent_entity = NULL;
+-    $parent_id = $entity->getParentId();
+-    if (!empty($parent_id) && $this->menuLinkManager->hasDefinition($parent_id)) {
+-      $parent_link = $this->menuLinkManager->createInstance($parent_id);
+-      if ($parent_link->getBaseId() == 'menu_link_content') {
+-        $parent_entity = $this->entityRepository->loadEntityByUuid($parent_link->getBaseId(), $parent_link->getDerivativeId());
+-      }
+-      elseif ($parent_link->getBaseId() == 'views_view') {
+-        $parent_entity = $parent_link->loadView();
+-      }
+-    }
++    $parent_link = $this->getParentLink($entity);
++    $parent_entity = $parent_link ? $this->getTargetEntity($parent_link) : NULL;
++
++    /** @var \Drupal\Core\Menu\MenuLinkInterface $menu_link */
+     $menu_link = $this->menuLinkManager->createInstance($entity->getPluginId());
+     $host_values = [
+       'menu_name' => $entity->getMenuName(),
+@@ -614,8 +636,8 @@ class Tracker implements TrackerInterface {
+       'entity_id' => $entity->id(),
+       'entity_uuid' => $entity->uuid(),
+       'parent_type' => $parent_link ? $parent_link->getBaseId() : '',
+-      'parent_id' => $parent_entity ? $parent_entity->id() : NULL,
+-      'parent_uuid' => $parent_link ? (string) $parent_link->getDerivativeId() : '',
++      'parent_id' => $parent_entity?->id(),
++      'parent_uuid' => (string) $parent_link?->getDerivativeId(),
+       'langcode' => $entity->getEntityType()->hasKey('langcode') ? $entity->language()->getId() : '',
+     ];
+     $query = $this->database->insert('menu_entity_index')
+@@ -649,6 +671,65 @@ class Tracker implements TrackerInterface {
+     return $query->execute();
+   }
+
++  /**
++   * Track a menu link with empty url.
++   */
++  protected function addEmptyTarget(EntityInterface $entity): mixed {
++    $parent_link = $this->getParentLink($entity);
++    $parent_entity = $parent_link ? $this->getTargetEntity($parent_link) : NULL;
++
++    /** @var \Drupal\Core\Menu\MenuLinkInterface $menu_link */
++    $menu_link = $this->menuLinkManager->createInstance($entity->getPluginId());
++    $host_values = [
++      'menu_name' => $entity->getMenuName(),
++      'level' => $menu_link ? $this->getMenuLinkLevel($menu_link) : 0,
++      'entity_type' => $entity->getEntityTypeId(),
++      'entity_subtype' => $entity->bundle(),
++      'entity_id' => $entity->id(),
++      'entity_uuid' => $entity->uuid(),
++      'parent_type' => $parent_link ? $parent_link->getBaseId() : '',
++      'parent_id' => $parent_entity?->id(),
++      'parent_uuid' => (string) $parent_link?->getDerivativeId(),
++      'langcode' => $entity->getEntityType()->hasKey('langcode') ? $entity->language()->getId() : '',
++    ];
++    $target_values = [
++      'target_type' => '',
++      'target_subtype' => '',
++      'target_id' => 0,
++      'target_uuid' => '',
++      'target_langcode' => LanguageInterface::LANGCODE_NOT_APPLICABLE,
++    ];
++
++    return $this->database->insert('menu_entity_index')
++      ->fields(array_keys($target_values + $host_values))
++      ->values($target_values + $host_values)
++      ->execute();
++  }
++
++  /**
++   * Get the link's parent link, if any.
++   */
++  protected function getParentLink(EntityInterface $entity): ?MenuLinkInterface {
++    $parent_id = $entity->getParentId();
++    if (!empty($parent_id) && $this->menuLinkManager->hasDefinition($parent_id)) {
++      return $this->menuLinkManager->createInstance($parent_id);
++    }
++    return NULL;
++  }
++
++  /**
++   * Get the entity targeted by the link.
++   */
++  protected function getTargetEntity(MenuLinkInterface $link): ?EntityInterface {
++    return match ($link->getBaseId()) {
++      'menu_link_content' => $this->entityRepository->loadEntityByUuid(
++        $link->getBaseId(), $link->getDerivativeId(),
++      ),
++      'views_view' => $link->loadView(),
++      default => NULL,
++    };
++  }
++
+   /**
+    * Gets menu level of a menu link.
+    *
+diff --git a/src/TrackerInterface.php b/src/TrackerInterface.php
+index 8aca48ec0aa98f6d6178bdb30290b3300590b225..493e5e6ba8add00cdda449cc46c5ef30392277bc 100644
+--- a/src/TrackerInterface.php
++++ b/src/TrackerInterface.php
+@@ -81,6 +81,11 @@ interface TrackerInterface {
+    */
+   public function isTrackedEntityType(EntityTypeInterface $type);
+
++  /**
++   * Whether empty link targets are tracked.
++   */
++  public function isTrackingEmptyLinks(): bool;
++
+   /**
+    * Gets stored configuration object.
+    *
+diff --git a/tests/src/Functional/MenuEntityIndexTest.php b/tests/src/Functional/MenuEntityIndexTest.php
+index 1f1ed73f79c204ea98216cc294761de105bdf5b9..afe81607b5547509bb2ca5a556c59509e7c93100 100644
+--- a/tests/src/Functional/MenuEntityIndexTest.php
++++ b/tests/src/Functional/MenuEntityIndexTest.php
+@@ -5,9 +5,9 @@ declare(strict_types=1);
+ namespace Drupal\Tests\menu_entity_index\Functional;
+
+ use Drupal\Core\Database\Database;
++use Drupal\node\Entity\Node;
+ use Drupal\Tests\BrowserTestBase;
+ use Drupal\Tests\menu_entity_index\Traits\MenuEntityIndexTestTrait;
+-use Drupal\node\Entity\Node;
+ use PHPUnit\Framework\Attributes\Group;
+ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
+@@ -325,4 +325,99 @@ class MenuEntityIndexTest extends BrowserTestBase {
+     $this->assertNoFormWidget($node);
+   }
+
++  /**
++   * Test that empty links are not stored in the database.
++   */
++  public function testIgnoreEmptyLink() {
++    $this->drupalLogin($this->users['admin_user']);
++    $this->reconfigure([
++      'menus[main]' => 'main',
++      'entity_types[node]' => 'node',
++      'include_empty' => FALSE,
++    ]);
++
++    // Ensure frontpage is stored.
++    $node = \Drupal::entityTypeManager()->getStorage('node')
++      ->create([
++        'type' => 'page',
++        'title' => $this->randomMachineName(),
++        'status' => 1,
++      ]);
++    $node->save();
++
++    \Drupal::configFactory()->getEditable('system.site')
++      ->set('page.front', '/' . $node->toUrl('canonical')->getInternalPath())
++      ->save();
++
++    // Create a menu link.
++    $menu_link = $this->addMenuLink('<front>');
++    $this->assertTableRow($menu_link, $node);
++
++    // Test variants of how links can be empty.
++    $this->editMenuLink($menu_link, ['link[0][uri]' => '#foo']);
++    $this->assertEmptyTable();
++
++    $this->editMenuLink($menu_link, ['link[0][uri]' => '<nolink>']);
++    $this->assertEmptyTable();
++
++    $this->editMenuLink($menu_link, ['link[0][uri]' => '<none>']);
++    $this->assertEmptyTable();
++
++    $this->editMenuLink($menu_link, ['link[0][uri]' => '<button>']);
++    $this->assertEmptyTable();
++
++    // Delete menu link.
++    $this->deleteMenuLink($menu_link);
++    $this->assertEmptyTable();
++  }
++
++  /**
++   * Test that empty links are stored in the database.
++   */
++  public function testIncludeEmptyLink() {
++    $this->drupalLogin($this->users['admin_user']);
++    $this->reconfigure([
++      'menus[main]' => 'main',
++      'entity_types[node]' => 'node',
++      'include_empty' => TRUE,
++    ]);
++
++    // Ensure frontpage is stored.
++    $node = \Drupal::entityTypeManager()->getStorage('node')
++      ->create([
++        'type' => 'page',
++        'title' => $this->randomMachineName(),
++        'status' => 1,
++      ]);
++    $node->save();
++
++    \Drupal::configFactory()->getEditable('system.site')
++      ->set('page.front', '/' . $node->toUrl('canonical')->getInternalPath())
++      ->save();
++
++    // Create a menu link.
++    $menu_link = $this->addMenuLink('<front>');
++    $this->assertTableRow($menu_link, $node);
++
++    // Test variants of how links can be empty.
++    $this->editMenuLink($menu_link, ['link[0][uri]' => '/']);
++    $this->assertTableRow($menu_link);
++
++    $this->editMenuLink($menu_link, ['link[0][uri]' => '<none>']);
++    $this->assertTableRow($menu_link);
++
++    $this->editMenuLink($menu_link, ['link[0][uri]' => '<nolink>']);
++    $this->assertTableRow($menu_link);
++
++    $this->editMenuLink($menu_link, ['link[0][uri]' => '<button>']);
++    $this->assertTableRow($menu_link);
++
++    $this->editMenuLink($menu_link, ['link[0][uri]' => '#foo']);
++    $this->assertTableRow($menu_link);
++
++    // Delete menu link.
++    $this->deleteMenuLink($menu_link);
++    $this->assertEmptyTable();
++  }
++
+ }
+diff --git a/tests/src/Traits/MenuEntityIndexTestTrait.php b/tests/src/Traits/MenuEntityIndexTestTrait.php
+index d3d05e262018d13902708843c6c7f45a1c9ee562..f4229b000b47aea1c05121926f05a7494a4fb0cb 100644
+--- a/tests/src/Traits/MenuEntityIndexTestTrait.php
++++ b/tests/src/Traits/MenuEntityIndexTestTrait.php
+@@ -4,6 +4,7 @@ namespace Drupal\Tests\menu_entity_index\Traits;
+
+ use Drupal\Core\Database\Database;
+ use Drupal\Core\Entity\ContentEntityInterface;
++use Drupal\Core\Language\LanguageInterface;
+ use Drupal\Core\Url;
+ use Drupal\menu_link_content\Entity\MenuLinkContent;
+
+@@ -15,7 +16,7 @@ trait MenuEntityIndexTestTrait {
+   /**
+    * Creates a new menu link to an entity.
+    *
+-   * @param ?\Drupal\Core\Entity\ContentEntityInterface $entity
++   * @param \Drupal\Core\Entity\ContentEntityInterface|string|null $target
+    *   The entity to link to, if any.
+    * @param ?\Drupal\menu_link_content\Entity\MenuLinkContent $parent
+    *   Parent menu item, if any.
+@@ -25,13 +26,17 @@ trait MenuEntityIndexTestTrait {
+    * @return \Drupal\menu_link_content\Entity\MenuLinkContent
+    *   The menu link content entity for the new menu link.
+    */
+-  protected function addMenuLink(?ContentEntityInterface $entity = NULL, ?MenuLinkContent $parent = NULL, string $menu_name = 'main'): MenuLinkContent {
++  protected function addMenuLink(ContentEntityInterface|string|null $target = '<front>', ?MenuLinkContent $parent = NULL, string $menu_name = 'main'): MenuLinkContent {
+     $this->drupalGet('admin/structure/menu/manage/' . $menu_name . '/add');
+     $this->assertSession()->statusCodeEquals(200);
+
++    $uri = $target instanceof ContentEntityInterface
++      ? '/' . $target->toUrl('canonical')->getInternalPath()
++      : $target;
++
+     $title = '!link_' . $this->randomMachineName(16);
+     $edit = [
+-      'link[0][uri]' => is_object($entity) ? '/' . $entity->toUrl('canonical')->getInternalPath() : '<front>',
++      'link[0][uri]' => $uri,
+       'title[0][value]' => $title,
+       'description[0][value]' => '',
+       'enabled[value]' => 1,
+@@ -163,12 +168,12 @@ trait MenuEntityIndexTestTrait {
+    *
+    * @param \Drupal\menu_link_content\Entity\MenuLinkContent $entity
+    *   The menu link content entity.
+-   * @param \Drupal\Core\Entity\ContentEntityInterface $target_entity
++   * @param ?\Drupal\Core\Entity\ContentEntityInterface $target_entity
+    *   The target entity.
+    * @param ?\Drupal\menu_link_content\Entity\MenuLinkContent $parent
+    *   The parent menu link content entity, if any.
+    */
+-  protected function assertTableRow(MenuLinkContent $entity, ContentEntityInterface $target_entity, ?MenuLinkContent $parent = NULL): void {
++  protected function assertTableRow(MenuLinkContent $entity, ?ContentEntityInterface $target_entity = NULL, ?MenuLinkContent $parent = NULL): void {
+     $query = Database::getConnection()
+       ->select('menu_entity_index', 'mei')
+       ->fields('mei', [
+@@ -198,11 +203,11 @@ trait MenuEntityIndexTestTrait {
+       ->condition('parent_id', (is_object($parent) ? $parent->id() : NULL), (is_object($parent) ? '=' : 'IS NULL'))
+       ->condition('parent_uuid', (is_object($parent) ? $parent->uuid() : ''))
+       ->condition('langcode', $entity->language()->getId())
+-      ->condition('target_type', $target_entity->getEntityTypeId())
+-      ->condition('target_subtype', $target_entity->bundle())
+-      ->condition('target_id', $target_entity->id())
+-      ->condition('target_uuid', $target_entity->uuid())
+-      ->condition('target_langcode', $target_entity->language()->getId());
++      ->condition('target_type', $target_entity?->getEntityTypeId() ?? '')
++      ->condition('target_subtype', $target_entity?->bundle() ?? '')
++      ->condition('target_id', $target_entity?->id() ?? 0)
++      ->condition('target_uuid', $target_entity?->uuid() ?? '')
++      ->condition('target_langcode', $target_entity?->language()->getId() ?? LanguageInterface::LANGCODE_NOT_APPLICABLE);
+     $result = (clone $query)->execute();
+     $row_count = $query
+       ->countQuery()

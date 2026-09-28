@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: #004b76;
+      }
+
+      .st0, .st1 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+
+      .st1 {
+        stroke: #00a4b9;
+      }
+    </style>
+  </defs>
+  <g id="Ebene_1" inkscape:version="0.92.4 (5da689c313, 2019-01-14)" sodipodi:docname="Grafik-7_1200055680_opt.svg">
+    <sodipodi:namedview id="base" bordercolor="#666666" borderopacity="1.0" inkscape:current-layer="layer2" inkscape:cx="17.67224" inkscape:cy="6.0885382" inkscape:document-units="mm" inkscape:guide-bbox="true" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:showpageshadow="false" inkscape:window-height="1113" inkscape:window-maximized="1" inkscape:window-width="1920" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:zoom="3.959798" pagecolor="#ffffff" showgrid="false" showguides="true" units="px">
+      <sodipodi:guide inkscape:locked="false" orientation="1,0" position="2.9399648,4.2763124"/>
+      <sodipodi:guide inkscape:locked="false" orientation="1,0" position="16.437075,-12.361216"/>
+      <sodipodi:guide inkscape:locked="false" orientation="1,0" position="9.8221548,4.7440342"/>
+    </sodipodi:namedview>
+    <polyline class="st1" points="56.8 22.4 52.5 26.7 48.1 31.1 43.7 26.7"/>
+    <path class="st0" d="M24.2,40.8h-6.5c-.6,0-1.1-.5-1.1-1.1v-6.5c0-.6.5-1.1,1.1-1.1h6.5c.6,0,1.1.5,1.1,1.1v6.5c0,.6-.5,1.1-1.1,1.1Z" inkscape:connector-curvature="0"/>
+    <line class="st0" x1="16.5" y1="47.4" x2="23.1" y2="47.4"/>
+    <line class="st0" x1="27.4" y1="47.4" x2="34" y2="47.4"/>
+    <line class="st0" x1="38.3" y1="47.4" x2="44.8" y2="47.4"/>
+    <line class="st0" x1="49.2" y1="47.4" x2="55.7" y2="47.4"/>
+    <line class="st0" x1="16.5" y1="51.7" x2="31.8" y2="51.7"/>
+    <ellipse class="st1" cx="50.3" cy="26.7" rx="14.1" ry="14.1"/>
+    <path class="st0" d="M31.8,23.4H14.4c-2.4,0-4.4,1.9-4.4,4.3v26.1c0,2.4,1.9,4.3,4.4,4.3h43.5c2.4,0,4.4-1.9,4.4-4.3v-13" inkscape:connector-curvature="0"/>
+  </g>
+</svg>

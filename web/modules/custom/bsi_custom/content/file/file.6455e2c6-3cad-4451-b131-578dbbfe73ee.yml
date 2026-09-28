@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 6455e2c6-3cad-4451-b131-578dbbfe73ee
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Opener-Kurzmitteilung.png
+  uri:
+    -
+      value: 'private://image/2026-05/Opener-Kurzmitteilung.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 3557331
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1780044390

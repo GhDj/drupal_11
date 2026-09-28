@@ -1,0 +1,21 @@
+uuid: cf3f53bb-8046-4a74-b39e-28d5afe0db22
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_downloads_title
+    - node.type.page
+  module:
+    - options
+id: node.page.field_downloads_title
+field_name: field_downloads_title
+entity_type: node
+bundle: page
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

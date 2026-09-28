@@ -1,0 +1,6 @@
+bsi_webform.settings:
+  title: 'Webform settings'
+  description: 'Custom Webform settings.'
+  parent: system.admin_config_content
+  route_name: bsi_webform.settings
+  weight: 10

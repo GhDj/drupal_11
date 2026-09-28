@@ -1,0 +1,33 @@
+uuid: 6e08f7e1-1e0e-4d71-a57f-2238b5702362
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_degree
+field_name: field_degree
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: training
+      label: 'Vocational training'
+    -
+      value: master
+      label: Master/Diploma
+    -
+      value: bachelor
+      label: Bachelor/Diploma
+    -
+      value: other
+      label: 'Other qualifications'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,12 @@
+{#
+/**
+* Top-Link
+*/
+#}
+
+{% include '@bsi_bund/elements/link.html.twig' with {
+    url: content.link['#url'],
+    icon: 'to-top',
+    extra_classes: 'bsi-link bsi-footer__scroll-top',
+    attributes: create_attribute({ 'aria-label': content.link['#title'] })
+} only %}

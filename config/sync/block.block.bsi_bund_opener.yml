@@ -1,0 +1,28 @@
+uuid: e204c77a-d40c-4fcb-bb52-22accbed1332
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - ctools
+  theme:
+    - bsi_bund
+id: bsi_bund_opener
+theme: bsi_bund
+region: pre_content
+weight: -13
+provider: null
+plugin: 'entity_view:node'
+settings:
+  id: 'entity_view:node'
+  label: 'Opener (Node)'
+  label_display: '0'
+  provider: ctools
+  context_mapping:
+    entity: '@node.node_route_context:node'
+  view_mode: opener
+visibility:
+  request_route_name:
+    id: request_route_name
+    negate: false
+    route_names: "entity.node.canonical\r\nentity.node.revision\r\nentity.node.latest_version"

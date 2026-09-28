@@ -1,0 +1,14 @@
+{#
+/**
+ * Download with "Inline (center)" viewtype
+ */
+#}
+{% extends '@bsi_bund/content/media/media--publication--inline-center.html.twig' %}
+
+{% block fileImage %}
+  {% include '@bsi_bund/components/icon.twig' with {
+    name: "download",
+    decorative: true,
+    extra_classes: 'bsi-downloads__media-icon',
+  } only %}
+{% endblock %}

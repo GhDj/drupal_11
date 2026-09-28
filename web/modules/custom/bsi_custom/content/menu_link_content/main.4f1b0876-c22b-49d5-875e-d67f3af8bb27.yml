@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 4f1b0876-c22b-49d5-875e-d67f3af8bb27
+  bundle: menu_link_content
+  default_langcode: de
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Lage
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      uri: 'route:<none>'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -49
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1776959282

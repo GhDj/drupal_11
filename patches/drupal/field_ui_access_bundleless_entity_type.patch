@@ -1,0 +1,11 @@
+--- a/core/modules/field_ui/src/Access/ViewModeAccessCheck.php
++++ b/core/modules/field_ui/src/Access/ViewModeAccessCheck.php
+@@ -62,7 +62,7 @@
+     if ($entity_type_id = $route->getDefault('entity_type_id')) {
+       if (empty($bundle)) {
+         $entity_type = $this->entityTypeManager->getDefinition($entity_type_id);
+-        $bundle = $route_match->getRawParameter($entity_type->getBundleEntityType());
++        $bundle = $route_match->getRawParameter($entity_type->getBundleEntityType() ?: $entity_type_id);
+       }
+
+       $visibility = FALSE;

@@ -1,0 +1,15 @@
+uuid: 5abcfd7f-e9e5-4b34-a15b-e6980b15d359
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.csn
+    - user.role.authenticated
+id: csn-outsider
+label: Outsider
+weight: -101
+admin: false
+scope: outsider
+global_role: authenticated
+group_type: csn
+permissions: {  }

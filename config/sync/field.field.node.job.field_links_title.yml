@@ -1,0 +1,21 @@
+uuid: 48c6b8b1-2a25-4d1e-b8a9-7d877788cb73
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_links_title
+    - node.type.job
+  module:
+    - options
+id: node.job.field_links_title
+field_name: field_links_title
+entity_type: node
+bundle: job
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

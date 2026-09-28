@@ -1,0 +1,101 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 72ef9f50-cfce-437e-8f3b-1d5cdb512948
+  bundle: article
+  default_langcode: de
+  depends:
+    734b5cd9-35c8-437f-a44a-1d2c1084d793: media
+translations:
+  en:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    title:
+      -
+        value: 'Example Announcement'
+    created:
+      -
+        value: 1778575303
+    path:
+      -
+        alias: ''
+        langcode: en
+        pathauto: 1
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    field_link:
+      -
+        uri: 'route:<none>'
+        resolvable_uri: ''
+        title: 'Mehr zum Beispiel'
+        options: {  }
+    field_links_title:
+      -
+        value: more_information
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Beispiel-Inhalt Meldung'
+  created:
+    -
+      value: 1778574253
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: /aktuelles/mitteilungen/2026-05-12-beispiel-inhalt-meldung
+      langcode: de
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes.'
+      format: plain_text
+      summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.'
+  field_article_type:
+    -
+      value: announcement
+  field_link:
+    -
+      uri: 'route:<none>'
+      resolvable_uri: ''
+      title: 'Mehr zum Beispiel'
+      options: {  }
+  field_links:
+    -
+      uri: 'internal:/'
+      resolvable_uri: /
+      title: Startseite
+      options: {  }
+  field_links_title:
+    -
+      value: more_information
+  field_media:
+    -
+      entity: 734b5cd9-35c8-437f-a44a-1d2c1084d793

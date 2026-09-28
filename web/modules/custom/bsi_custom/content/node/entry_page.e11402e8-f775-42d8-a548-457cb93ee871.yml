@@ -1,0 +1,126 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: e11402e8-f775-42d8-a548-457cb93ee871
+  bundle: entry_page
+  default_langcode: de
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Suche
+  created:
+    -
+      value: 1780052113
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  node_keeper:
+    -
+      value: true
+  alias_keeper:
+    -
+      value: false
+  keeper_machine_name:
+    -
+      value: global_search
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  sae_exclude:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: ''
+      format: plain_text
+      summary: 'Die Ergebnisse können Sie mit den angegebenen Filtern eingrenzen. Für die Suche nach einer exakten Wortgruppe setzen Sie die Suchworte in Anführungszeichen.'
+  layout_builder__layout:
+    -
+      section:
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          d30b598f-5be0-4746-9bbf-f3e4b1cf0be1:
+            uuid: d30b598f-5be0-4746-9bbf-f3e4b1cf0be1
+            region: content
+            configuration:
+              id: 'facet_block:year_node_and_media_only'
+              label: Jahr
+              label_display: visible
+              provider: facets
+              context_mapping: {  }
+            weight: '0'
+            additional: {  }
+          5669b34d-f8b5-4b25-86a8-bb532b2b51ee:
+            uuid: 5669b34d-f8b5-4b25-86a8-bb532b2b51ee
+            region: content
+            configuration:
+              id: 'facet_block:topics'
+              label: Topics
+              label_display: visible
+              provider: facets
+              context_mapping: {  }
+            weight: '-2'
+            additional: {  }
+          eefe85d9-8138-4cae-8e68-5355878774eb:
+            uuid: eefe85d9-8138-4cae-8e68-5355878774eb
+            region: content
+            configuration:
+              id: 'facet_block:audiences'
+              label: Audiences
+              label_display: visible
+              provider: facets
+              context_mapping: {  }
+            weight: '-1'
+            additional: {  }
+          ccf608c2-e9b1-4413-82b3-eddd9c77d723:
+            uuid: ccf608c2-e9b1-4413-82b3-eddd9c77d723
+            region: content
+            configuration:
+              id: 'views_exposed_filter_block:search-block_search_global'
+              label: ''
+              label_display: 0
+              provider: views
+              views_label: ''
+              context_mapping: {  }
+            weight: '-3'
+            additional: {  }
+          453f932f-2111-4a31-90c7-822308bf3e73:
+            uuid: 453f932f-2111-4a31-90c7-822308bf3e73
+            region: content
+            configuration:
+              id: 'views_block:search-block_search_global'
+              label: ''
+              label_display: 0
+              provider: views
+              views_label: ''
+              items_per_page: null
+              exposed_sort:
+                sort_by: search_api_relevance
+                sort_order: DESC
+              context_mapping: {  }
+            weight: '2'
+            additional: {  }
+        third_party_settings: {  }

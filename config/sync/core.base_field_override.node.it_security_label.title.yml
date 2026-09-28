@@ -1,0 +1,18 @@
+uuid: ce2d4a33-13ec-41d1-a4e4-199242663647
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.it_security_label
+id: node.it_security_label.title
+field_name: title
+entity_type: node
+bundle: it_security_label
+label: 'Product name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

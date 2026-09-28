@@ -1,0 +1,78 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: ea861a40-cb74-4ab1-af02-c5a4700a3374
+  bundle: page
+  default_langcode: de
+  depends:
+    734b5cd9-35c8-437f-a44a-1d2c1084d793: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Testinhalt: Textformate'
+  created:
+    -
+      value: 1773146945
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Dies ist ein kurzer Opener-Text'
+      format: plain_text
+      summary: 'Benutzerdefinierte Zusammenfassung für Suchergebnisse und Teaser-Listen'
+  field_media:
+    -
+      entity: 734b5cd9-35c8-437f-a44a-1d2c1084d793
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: b0d1e914-83b4-4fd9-ac2c-278ea4427a4f
+          bundle: text_section
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1781260741
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_section_text:
+            -
+              value: '<h2>Textelemente und Bilder</h2><p>Li Europan <span lang="en" dir="ltr">lingues </span>es membres del sam familie. <a href="/node/3" data-entity-type="node" data-entity-uuid="4fac59bf-57ce-4b83-b808-7fd1878b8901">Lor separat existentie es un myth.</a> Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilite de un nov lingua franca: <strong>On refusa continuar payar custosi traductores.</strong> <abbr title="Beispiel">ABC</abbr> (BSI) und Artificial Intelligence.</p><a href="https://bsi.bund.de" data-entity-type="external"><drupal-media data-entity-type="media" data-entity-uuid="734b5cd9-35c8-437f-a44a-1d2c1084d793" data-link-entity-type="external" data-align="center">&nbsp;</drupal-media></a><drupal-media data-entity-type="media" data-entity-uuid="734b5cd9-35c8-437f-a44a-1d2c1084d793" data-view-mode="inline_side" data-align="right">&nbsp;</drupal-media><p>At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles. Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues. <em>Li nov lingua franca va esser plu simplic e regulari quam li existent Europan lingues.</em> It va esser tam simplic quam Occidental in fact, it va esser Occidental.&nbsp;</p><p>A un Angleso it va semblar un simplificat Angles, quam un skeptic Cambridge amico dit me que Occidental es. <a href="https://www.blindtextgenerator.de/">Li Europan lingues</a> es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules.</p><drupal-media data-entity-type="media" data-entity-uuid="734b5cd9-35c8-437f-a44a-1d2c1084d793" data-view-mode="inline_side" data-align="left">&nbsp;</drupal-media><p>Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles. Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent Europan lingues. It va esser tam simplic quam Occidental in fact, it va esser Occidental.</p><p>&nbsp;</p><p>&nbsp;</p><h2>Links</h2><ul><li data-list-item-id="e424c65e8b6a9adac6d402fa0e14a88b6"><a href="/node/1" data-entity-type="node" data-entity-uuid="ea861a40-cb74-4ab1-af02-c5a4700a3374">interner Link auf "Testinhalt: Einfache Seite"</a></li><li data-list-item-id="ed064d83478d2b2d442851c7714f37718"><a href="https://www.bsi.bund.de/">externer Link auf die BSI Webseite</a></li><li data-list-item-id="ed7b60c62f9fee8a7444ac2ae82a90d90"><a href="/media/18" data-entity-type="media" data-entity-uuid="17b72bea-aeca-45c6-9b9e-8ff901e1ddf5" data-entity-substitution="media_download_inline">Link auf Dateidownload</a></li></ul><h2>Komplexe Elemente</h2><h2>Tabelle</h2><table class="table"><caption>Eine Tabelle mit Caption</caption><thead><tr><th>Tabelle</th><th>Eins</th><th>Zwei</th><th>Drei</th><th>Vier</th><th>Fünf</th><th>Sechs</th></tr></thead><tbody><tr><th>Alpha</th><td>Alpha 1</td><td>Alpha 2</td><td>Alpha 3</td><td>Alpha 4</td><td>Alpha 5</td><td rowspan="3">6</td></tr><tr><th>Beta</th><td colspan="3"><h3>Zwischenüberschrift</h3><p><strong>Text </strong>mit <em>Markup</em>. Zelle mit Rowspan.</p></td><td>Beta 4</td><td>Beta 5</td></tr><tr><th>Gamma</th><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr></tbody></table><h3>Quellcode &amp; Zitate</h3><pre><code class="language-php">echo ''Hallo Welt!'';</code></pre><p>Auch inline Code ist möglich, z.B. <code>$variable = ''foo'';</code>. Diese Darstellung ist etwas dezenter. <q>And now for something completely different</q>:</p><blockquote><p>There can never be enough cat videos.<br><cite>Someone on the internet</cite></p></blockquote><h3>Listen</h3><ul><li data-list-item-id="ee538de2f88f73ef8911e463fa85fa043">Ein Punkt</li><li data-list-item-id="e8f77ce3c72a29d491fc34c46660ca1d1">Ein weiterer Punkt<ol><li data-list-item-id="e58e06674fcaa9bb8d1d7f9240b0d3d57">Ein nummerierter Unterpunkt</li><li data-list-item-id="ed614c85d5a2e92363cda776b71334a95">Ein weiterer Unterpunkt</li></ol></li><li data-list-item-id="ed10537fcf1ee4f0c8e71ced47d6b55b8">Ein letzter Punkt</li></ul><p>Hallo Welt!</p>'
+              format: advanced

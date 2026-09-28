@@ -1,0 +1,11 @@
+services:
+  Drupal\webform_entity_cart\WebformEntityCartInterface:
+    alias: webform_entity_cart.cookie
+    public: false
+  webform_entity_cart.cookie:
+    class: Drupal\webform_entity_cart\CookieCart
+    autowire: true
+  webform_entity_cart.cookie_subscriber:
+    class: Drupal\webform_entity_cart\EventSubscriber\CookieCartSubscriber
+    tags:
+      - { name: event_subscriber }

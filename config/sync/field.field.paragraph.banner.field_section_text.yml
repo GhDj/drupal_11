@@ -1,0 +1,24 @@
+uuid: 3e428f3b-a019-4b15-b249-0ced4b9199f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_text
+    - filter.format.basic
+    - paragraphs.paragraphs_type.banner
+  module:
+    - text
+id: paragraph.banner.field_section_text
+field_name: field_section_text
+entity_type: paragraph
+bundle: banner
+label: Introduction
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic
+field_type: text_long

@@ -1,0 +1,23 @@
+uuid: a4ce1644-e1e6-40fd-a4ee-f8f69e50a049
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.page_frame
+    - field.storage.config_pages.field_certificate
+  module:
+    - ui_icons_field
+id: config_pages.page_frame.field_certificate
+field_name: field_certificate
+entity_type: config_pages
+bundle: page_frame
+label: Certificate
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_icon_pack:
+    bsi_cert_images: bsi_cert_images
+field_type: ui_icon

@@ -1,0 +1,26 @@
+# @todo Do we want to add multipliers for 1.5x (Android) + 2x (Mac)?
+bsi_custom.mobile:
+  label: mobile
+  mediaQuery: 'all and (min-width: 0px)'
+  weight: 0
+  multipliers:
+    - 1x
+bsi_custom.narrow:
+  label: narrow
+  mediaQuery: 'all and (min-width: 576px)'
+  weight: 1
+  multipliers:
+    - 1x
+bsi_custom.standard:
+  label: standard
+  mediaQuery: 'all and (min-width: 992px)'
+  weight: 2
+  multipliers:
+    - 1x
+bsi_custom.wide:
+  label: wide
+  mediaQuery: 'all and (min-width: 1224px)'
+  weight: 3
+  multipliers:
+    - 1x
+    - 2x

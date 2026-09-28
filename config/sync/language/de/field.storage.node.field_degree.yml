@@ -1,0 +1,10 @@
+settings:
+  allowed_values:
+    -
+      label: Ausbildung
+    -
+      label: Master/Diplom
+    -
+      label: Bachelor/Diplom
+    -
+      label: 'Sonstige Abschlüsse'

@@ -1,0 +1,33 @@
+uuid: 17788255-c825-419c-b196-984d19a30492
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_salary_group
+field_name: field_salary_group
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: E6
+      label: E6
+    -
+      value: E7
+      label: E7
+    -
+      value: E8
+      label: E8
+    -
+      value: E9
+      label: E9
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

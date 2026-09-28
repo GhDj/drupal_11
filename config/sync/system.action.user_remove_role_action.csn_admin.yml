@@ -1,0 +1,14 @@
+uuid: 750f801e-c80d-4f5d-b70d-5d1b8d72a719
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.csn_admin
+  module:
+    - user
+id: user_remove_role_action.csn_admin
+label: 'Remove the CSN Admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: csn_admin

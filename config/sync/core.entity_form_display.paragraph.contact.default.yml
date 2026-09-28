@@ -1,0 +1,63 @@
+uuid: 2d2f5fc7-f514-481f-acc0-198c91961501
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.contact.field_jumplink
+    - field.field.paragraph.contact.field_link
+    - field.field.paragraph.contact.field_media_items
+    - field.field.paragraph.contact.field_section_text
+    - field.field.paragraph.contact.field_section_title
+    - paragraphs.paragraphs_type.contact
+  module:
+    - link
+    - media_library
+    - text
+id: paragraph.contact.default
+targetEntityType: paragraph
+bundle: contact
+mode: default
+content:
+  field_jumplink:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_link:
+    type: link_default
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_media_items:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_section_text:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  translation: true

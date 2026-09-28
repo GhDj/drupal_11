@@ -1,0 +1,68 @@
+{#
+  node of article opener
+#}
+{%
+  set classes = [
+    'bsi-opener',
+    'bsi-opener--left-outside',
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+{{ attach_library('claro/classy.node') }}
+
+{% if content.field_media.0 %}
+  <div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {% if label and view_mode != "full" %}
+      <h2{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h2>
+    {% endif %}
+    {{ title_suffix }}
+
+    <div class="bsi-opener__content-wrapper">
+      <figure class="bsi-image bsi-opener__image">
+        {{ content.field_media }}
+      </figure>
+
+      <div class="bsi-opener__content-grid">
+        <div class="bsi-opener__content">
+
+          {% if content.title.0 %}
+            <h1 class="bsi-heading bsi-heading--2 bsi-opener__title">
+              {{ content.title.0 }}
+            </h1>
+          {% endif %}
+
+          {% if content.field_article_type.0 %}
+            <div class="bsi-opener__text">
+              {{ content.field_article_type.0 }}
+            </div>
+          {% endif %}
+
+          {% if content.body.0 %}
+            <div class="bsi-opener__text">
+              {{ content.body.0 }}
+            </div>
+          {% endif %}
+          {{ content|without('title', 'field_media', 'body', 'field_article_type', 'group_tagline') }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% else %}
+
+  <div class="bsi-grid">
+    <h1 class="bsi-heading bsi-heading--1">
+      {{ content.title.0 }}
+    </h1>
+    {{ content|without('title', 'field_media', 'body') }}
+  </div>
+
+{% endif %}

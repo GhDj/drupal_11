@@ -1,0 +1,30 @@
+uuid: 92ec2ce8-220d-410a-8b46-fdb69b1ca1a8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_article_type
+field_name: field_article_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: announcement
+      label: Announcement
+    -
+      value: cybernation
+      label: 'Cybernation Blog'
+    -
+      value: press_release
+      label: 'Press Release'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

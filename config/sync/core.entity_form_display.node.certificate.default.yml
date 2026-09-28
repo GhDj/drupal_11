@@ -1,0 +1,444 @@
+uuid: 946b5e1e-ea3b-4de5-9a71-53a121ff3f3d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.certificate.field_applicant
+    - field.field.node.certificate.field_applicant_address
+    - field.field.node.certificate.field_applicant_information
+    - field.field.node.certificate.field_archivation_date
+    - field.field.node.certificate.field_assurance
+    - field.field.node.certificate.field_audiences
+    - field.field.node.certificate.field_certificate_type
+    - field.field.node.certificate.field_certification_date
+    - field.field.node.certificate.field_certification_documents
+    - field.field.node.certificate.field_certification_validation
+    - field.field.node.certificate.field_description
+    - field.field.node.certificate.field_evaluation_basics
+    - field.field.node.certificate.field_evaluation_facility
+    - field.field.node.certificate.field_evaluation_scope
+    - field.field.node.certificate.field_further_details_2
+    - field.field.node.certificate.field_further_details_3
+    - field.field.node.certificate.field_further_details_4
+    - field.field.node.certificate.field_information_network
+    - field.field.node.certificate.field_metatags
+    - field.field.node.certificate.field_name
+    - field.field.node.certificate.field_protection_profile
+    - field.field.node.certificate.field_protection_profile_issuer
+    - field.field.node.certificate.field_publication_date
+    - field.field.node.certificate.field_tags
+    - field.field.node.certificate.field_technical_guideline
+    - field.field.node.certificate.field_test_item
+    - field.field.node.certificate.field_topics
+    - node.type.certificate
+    - workflows.workflow.nodes
+  module:
+    - content_moderation
+    - datetime
+    - field_group
+    - metatag
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_url:
+      children:
+        - path
+        - short_url
+      label: Url
+      region: content
+      parent_name: ''
+      weight: 4
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
+        description: ''
+        required_fields: true
+        weight: 0
+    group_tabs:
+      children:
+        - group_table
+        - group_teaser
+        - group_terms
+      label: Tabs
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: horizontal
+        width_breakpoint: 640
+    group_teaser:
+      children:
+        - field_publication_date
+        - field_archivation_date
+        - field_certificate_type
+      label: Teaser
+      region: content
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_workflow:
+      children:
+        - status
+        - moderation_state
+      label: Workflow
+      region: content
+      parent_name: ''
+      weight: 3
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
+        description: ''
+        required_fields: true
+        weight: 0
+    group_table:
+      children:
+        - field_applicant
+        - field_applicant_address
+        - field_applicant_information
+        - field_information_network
+        - field_evaluation_facility
+        - field_test_item
+        - field_technical_guideline
+        - field_evaluation_scope
+        - field_evaluation_basics
+        - field_assurance
+        - field_protection_profile
+        - field_protection_profile_issuer
+        - field_certification_date
+        - field_certification_validation
+      label: Table
+      region: content
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_terms:
+      children:
+        - field_topics
+        - field_audiences
+        - field_tags
+      label: Terms
+      region: content
+      parent_name: group_tabs
+      weight: 22
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: false
+    group_language:
+      children:
+        - langcode
+      label: Language
+      region: content
+      parent_name: ''
+      weight: 5
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
+        description: ''
+        required_fields: true
+        weight: 0
+id: node.certificate.default
+targetEntityType: node
+bundle: certificate
+mode: default
+content:
+  field_applicant:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_applicant_address:
+    type: string_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_applicant_information:
+    type: string_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_archivation_date:
+    type: datetime_default
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_assurance:
+    type: entity_reference_autocomplete
+    weight: 11
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_audiences:
+    type: options_buttons
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_certificate_type:
+    type: entity_reference_autocomplete
+    weight: 18
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_certification_date:
+    type: datetime_default
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_certification_documents:
+    type: text_textarea
+    weight: 11
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_certification_validation:
+    type: datetime_default
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_description:
+    type: text_textarea
+    weight: 7
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_evaluation_basics:
+    type: text_textarea
+    weight: 10
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_evaluation_facility:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_evaluation_scope:
+    type: string_textarea
+    weight: 9
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_further_details_2:
+    type: text_textarea
+    weight: 8
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_further_details_3:
+    type: text_textarea
+    weight: 9
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_further_details_4:
+    type: text_textarea
+    weight: 10
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_information_network:
+    type: text_textarea
+    weight: 5
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_metatags:
+    type: metatag_firehose
+    weight: 6
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  field_name:
+    type: text_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_protection_profile:
+    type: text_textarea
+    weight: 12
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_protection_profile_issuer:
+    type: text_textarea
+    weight: 13
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_publication_date:
+    type: datetime_default
+    weight: 16
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_tags:
+    type: entity_reference_autocomplete_tags
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_technical_guideline:
+    type: text_textarea
+    weight: 8
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_test_item:
+    type: text_textfield
+    weight: 7
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_topics:
+    type: options_buttons
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 12
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  short_url:
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 11
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  alias_keeper: true
+  changed: true
+  created: true
+  keeper_machine_name: true
+  menu_entity_index: true
+  node_keeper: true
+  promote: true
+  simple_sitemap: true
+  sticky: true
+  uid: true
+  url_redirects: true

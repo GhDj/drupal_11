@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the BSI Jahreslagebericht module.
+ */
+
+use Drupal\Core\Database\Schema;
+use Drupal\Core\Installer\Exception\InstallerException;
+
+/**
+ * Implements hook_install().
+ */
+function bsi_report_install(): void {
+  $schema = \Drupal::database()->schema();
+  _bsi_report_alter_book_schema($schema);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function bsi_uninstall(): void {
+  $schema = \Drupal::database()->schema();
+  if ($schema->fieldExists('book', 'link_uri')) {
+    $schema->dropField('book', 'link_uri');
+  }
+}
+
+/**
+ * Alter the table schema for book to add link_uri property.
+ */
+function _bsi_report_alter_book_schema(Schema $schema): void {
+  if (!$schema->tableExists('book')) {
+    throw new InstallerException('Book table is missing.');
+  }
+  if ($schema->fieldExists('book', 'link_uri')) {
+    return;
+  }
+
+  $schema->addField('book', 'link_uri', [
+    'type' => 'varchar',
+    'length' => 2048,
+    'not null' => FALSE,
+    'description' => 'The URI override for the item',
+  ]);
+}

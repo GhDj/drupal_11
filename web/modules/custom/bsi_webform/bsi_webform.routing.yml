@@ -1,0 +1,7 @@
+bsi_webform.settings:
+  path: '/admin/config/content/settings'
+  defaults:
+    _title: 'Webform settings'
+    _form: 'Drupal\bsi_webform\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

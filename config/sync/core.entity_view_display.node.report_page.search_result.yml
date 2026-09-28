@@ -1,0 +1,111 @@
+uuid: 37eb14c2-3f57-4a98-aa79-175f300a5c8c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.report_page.body
+    - field.field.node.report_page.field_audiences
+    - field.field.node.report_page.field_downloads
+    - field.field.node.report_page.field_downloads_title
+    - field.field.node.report_page.field_links
+    - field.field.node.report_page.field_links_title
+    - field.field.node.report_page.field_media
+    - field.field.node.report_page.field_metatags
+    - field.field.node.report_page.field_paragraphs
+    - field.field.node.report_page.field_subtitle
+    - field.field.node.report_page.field_tags
+    - field.field.node.report_page.field_topics
+    - node.type.report_page
+  module:
+    - bsi_custom
+    - layout_builder
+    - text_summary_formatter
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.report_page.search_result
+targetEntityType: node
+bundle: report_page
+mode: search_result
+content:
+  body:
+    type: text_summary_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  created:
+    type: timestamp
+    label: hidden
+    settings:
+      date_format: date_short
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: ''
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+        description: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_audiences:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_topics:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  book_navigation: true
+  book_navigation_without_tree: true
+  changed: true
+  content_moderation_control: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_downloads: true
+  field_downloads_title: true
+  field_links: true
+  field_links_title: true
+  field_media: true
+  field_metatags: true
+  field_paragraphs: true
+  field_subtitle: true
+  field_tags: true
+  langcode: true
+  links: true
+  short_url: true
+  uid: true

@@ -1,0 +1,78 @@
+// -----------------------------------------------------------------------------
+// Searchmenu
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/grid" as *;
+
+.#{$nsp}-searchmenu {
+  background-color: var(--#{$nsp}-color-base-white);
+  position: relative;
+  top: calc(
+    var(--#{$nsp}-header-height) + var(--drupal-toolbar-height, 0px) +
+      var(--drupal-environment-indicator-height, 0px)
+  );
+  width: 100%;
+
+  &[popover] {
+    display: none;
+
+    &:popover-open {
+      display: block;
+      overflow: visible;
+    }
+  }
+
+  &__title {
+    margin-block-end: var(--#{$nsp}-space-xs);
+  }
+
+  &__list {
+    @include grid-columns(1);
+    display: grid;
+    gap: var(--#{$nsp}-space-sm);
+
+    @include breakpoint-md {
+      @include grid-columns(2);
+    }
+
+    @include breakpoint-lg {
+      @include grid-columns(3);
+    }
+
+    .#{$nsp}-link {
+      display: flex;
+
+      .#{$nsp}-link__content {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+    }
+  }
+
+  .#{$nsp}-grid {
+    position: relative;
+
+    @include breakpoint-lg {
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+  }
+}
+
+// Autocomplete
+.search-api-autocomplete-search {
+  --jui-dropdown-bg-color: var(--#{$nsp}-color-neutral-50);
+  --jui-dropdown--active-bg-color: var(--#{$nsp}-color-blue-750);
+  .bsi-header & {
+    left: 0 !important;
+    right: 0;
+    top: 84px !important;
+    width: auto !important;
+  }
+  .ui-menu-item-wrapper.ui-state-active .search-api-autocomplete-suggestion {
+    background: var(--#{$nsp}-color-blue-750);
+  }
+}

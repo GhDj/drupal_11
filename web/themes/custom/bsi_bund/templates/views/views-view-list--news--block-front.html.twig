@@ -1,0 +1,14 @@
+{#
+/**
+ * Custom Card Group View Template
+ */
+#}
+<div class="bsi-card-group">
+  <ul class="bsi-card-group__items">
+    {% for row in rows %}
+      <li class="bsi-card-group__item">
+        {{ row.content }}
+      </li>
+    {% endfor %}
+  </ul>
+</div>

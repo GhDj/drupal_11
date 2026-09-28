@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 90d36a49-cdf4-4993-b7f0-c7df373f9b7e
+  bundle: report_page
+  default_langcode: de
+default:
+  revision_uid:
+    -
+      target_id: 1
+  revision_log:
+    -
+      value: 'Der Titel wurde von <em class="placeholder">APT-Gruppen (Ebene 2)</em> zu <em class="placeholder">APT-Gruppen</em> geändert.'
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: APT-Gruppen
+  created:
+    -
+      value: 1777994155
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_links_title:
+    -
+      value: more_information

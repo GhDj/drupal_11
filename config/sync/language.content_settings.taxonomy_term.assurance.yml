@@ -1,0 +1,18 @@
+uuid: 9e01eee4-155a-4bd5-a7df-e0cde1a048e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.assurance
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: taxonomy_term.assurance
+target_entity_type_id: taxonomy_term
+target_bundle: assurance
+default_langcode: de
+language_alterable: true

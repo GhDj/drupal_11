@@ -1,0 +1,33 @@
+{#
+/**
+* @file
+* Default theme implementation to display the file entity as a video tag.
+*
+* Available variables:
+* - attributes: An array of HTML attributes, intended to be added to the
+*   video tag.
+* - sources: And array of items to be added as sources for the video tag. Each
+*   element is an array with the following elements:
+*   - url: A url object.
+*   - attributes: A Drupal attributes object to be added to the source tag.
+* - tracks: And array of items to be added as source tracks for the video tag. Each
+*   element is an array with the following elements:
+*   - url: A url object.
+*   - attributes: A Drupal attributes object to be added to the track tag.
+* - poster: A url object for the poster image, if any.
+*
+* @ingroup themeable
+*/
+#}
+<video {{ attributes }} preload="none" data-icon-path="{{ file_url('themes/custom/bsi_bund/dist/icons.svg') }}">
+  {% for source in sources %}
+    <source {{ source.attributes }} />
+  {% endfor %}
+  {% for track in tracks %}
+    <track {{ track.attributes }}{% if loop.index == 1 %} default{% endif %}/>
+  {% endfor %}
+  {# {{ 'Your browser does not support the video tag. Alternatively, you may <a href=":download_url">download the video file</a>.'|trans({
+    ':download_url': sources.0.url,
+  }) #}
+</video>
+

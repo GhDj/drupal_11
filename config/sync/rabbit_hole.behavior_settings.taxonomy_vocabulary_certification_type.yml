@@ -1,0 +1,14 @@
+uuid: ccaf43e1-4242-4d27-b177-39dbd1112885
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.certification_type
+id: taxonomy_vocabulary_certification_type
+entity_type_id: taxonomy_vocabulary
+entity_id: certification_type
+action: page_not_found
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

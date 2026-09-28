@@ -1,0 +1,20 @@
+uuid: 4f6c74b1-baca-42af-a15c-8a76869d2707
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.csn
+    - user.role.authenticated
+id: csn-member
+label: Member
+weight: -100
+admin: false
+scope: insider
+global_role: authenticated
+group_type: csn
+permissions:
+  - 'create group_node:page entity'
+  - 'update own group_node:page entity'
+  - 'view group'
+  - 'view group_membership relationship'
+  - 'view own unpublished group_node:page entity'

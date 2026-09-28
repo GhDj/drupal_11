@@ -1,0 +1,162 @@
+uuid: fa287756-7448-450c-bde7-7cfc90444079
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.contact.field_address
+    - field.field.media.contact.field_availability
+    - field.field.media.contact.field_geolocation
+    - field.field.media.contact.field_icon
+    - field.field.media.contact.field_mail
+    - field.field.media.contact.field_phone
+    - field.field.media.contact.field_social_media
+    - field.field.media.contact.field_vat_number
+    - field.field.media.contact.field_website
+    - media.type.contact
+  module:
+    - address
+    - field_group
+    - geofield
+    - link
+    - office_hours
+    - phone_label
+    - ui_icons_field
+third_party_settings:
+  field_group:
+    group_workflow:
+      children:
+        - status
+      label: Workflow
+      region: content
+      parent_name: ''
+      weight: 10
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: true
+        description: ''
+        required_fields: true
+        weight: 0
+    group_language:
+      children:
+        - langcode
+      label: Language
+      region: content
+      parent_name: ''
+      weight: 11
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
+        description: ''
+        required_fields: true
+        weight: 0
+id: media.contact.default
+targetEntityType: media
+bundle: contact
+mode: default
+content:
+  field_address:
+    type: address_default
+    weight: 2
+    region: content
+    settings:
+      wrapper_type: fieldset
+    third_party_settings: {  }
+  field_availability:
+    type: office_hours_list
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_geolocation:
+    type: geofield_latlon
+    weight: 3
+    region: content
+    settings:
+      html5_geolocation: false
+    third_party_settings: {  }
+  field_icon:
+    type: icon_widget
+    weight: 1
+    region: content
+    settings:
+      icon_selector: icon_picker
+      result_format: list
+      max_result: 24
+    third_party_settings: {  }
+  field_mail:
+    type: email_default
+    weight: 6
+    region: content
+    settings:
+      placeholder: ''
+      size: 60
+    third_party_settings: {  }
+  field_phone:
+    type: phone_label_default
+    weight: 5
+    region: content
+    settings:
+      placeholder: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_social_media:
+    type: link_default
+    weight: 8
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_vat_number:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_website:
+    type: link_default
+    weight: 7
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 8
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 7
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  changed: true
+  created: true
+  path: true
+  thumbnail: true
+  translation: true
+  uid: true

@@ -1,0 +1,15 @@
+uuid: 0bbd529f-dab9-4efd-9880-327fd7046537
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_remote_file
+id: video
+label: Video
+description: ''
+source: remote_file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_source
+field_map: {  }

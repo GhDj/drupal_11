@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: e3f4cce5-3e03-4eef-9b71-a22ddaeae3db
+  bundle: download
+  default_langcode: de
+  depends:
+    e7503837-07f6-4b28-9ba2-0858a4afe5b7: file
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Geschützte PDF Datei - Land + Bund'
+  created:
+    -
+      value: 1784022570
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_accessibility:
+    -
+      value: false
+  field_media_file:
+    -
+      entity: e7503837-07f6-4b28-9ba2-0858a4afe5b7
+      display: true
+      description: ''

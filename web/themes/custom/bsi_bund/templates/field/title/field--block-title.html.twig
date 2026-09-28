@@ -1,0 +1,34 @@
+{#
+/**
+ * Field template with h2 for components with title
+ */
+#}
+
+{% set fully_inline = not multiple and label_display == 'inline' %}
+{% set base_name = base_name|default('field') %}
+{% set field_wrapper = true %}
+
+{% set classes = [
+    base_name,
+    false ? 'field--name-' ~ field_name|clean_class,
+    false ? 'field--type-' ~ field_type|clean_class,
+    false ? 'field--label-' ~ label_display,
+    base_name == 'field' ? 'field--label-' ~ label_display,
+    label_display == 'inline' and not fully_inline ? 'clearfix',
+    'bsi-heading',
+    'bsi-heading--2',
+    'bsi-block__title',
+] %}
+{% set title_classes = [
+    base_name ~ '__label',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+] %}
+{% block content %}
+    <h2{{ attributes.addClass(classes) }}>
+        {% for item in items %}
+            {% block item %}
+                {{ item.content }}
+            {% endblock %}
+        {% endfor %}
+    </h2>
+{% endblock %}

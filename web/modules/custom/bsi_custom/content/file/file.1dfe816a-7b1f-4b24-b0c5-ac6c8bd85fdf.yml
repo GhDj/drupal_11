@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 1dfe816a-7b1f-4b24-b0c5-ac6c8bd85fdf
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Opener-Katalog-Liste.png
+  uri:
+    -
+      value: 'private://image/2026-05/Opener-Katalog-Liste.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 3492837
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1780044433

@@ -1,0 +1,18 @@
+uuid: f1c27239-5037-4f2c-a256-d2f2c022f8d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.administration
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: group.administration
+target_entity_type_id: group
+target_bundle: administration
+default_langcode: de
+language_alterable: true

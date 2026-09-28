@@ -1,0 +1,16 @@
+uuid: 0b93401e-9b0f-4a66-b1fe-141f48d026c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.csn
+    - node.type.page
+  module:
+    - gnode
+    - node
+id: csn-group_node-page
+group_type: csn
+content_plugin: 'group_node:page'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1

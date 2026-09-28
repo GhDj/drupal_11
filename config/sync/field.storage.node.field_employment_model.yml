@@ -1,0 +1,30 @@
+uuid: 56affd34-c143-466c-a8ab-90b8dc9941fa
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_employment_model
+field_name: field_employment_model
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: full_time
+      label: Full-time
+    -
+      value: part_time
+      label: Part-time
+    -
+      value: hourly
+      label: Hourly
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

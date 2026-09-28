@@ -1,0 +1,6 @@
+services:
+  short_url.helper:
+    class: Drupal\short_url\ShortUrlHelper
+    autowire: true
+  Drupal\short_url\ShortUrlHelper:
+    alias: short_url.helper

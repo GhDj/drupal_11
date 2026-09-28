@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: dd1f644e-924a-4903-b19d-410cd233e8de
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Opener-Cybernation.jpg
+  uri:
+    -
+      value: 'private://image/2026-07/Opener-Cybernation_0.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 434291
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1784616510

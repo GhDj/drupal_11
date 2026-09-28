@@ -1,0 +1,19 @@
+uuid: 8b3ea3d9-f430-40c1-82a9-dfcfbe15b183
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_applicant_information
+    - node.type.certificate
+id: node.certificate.field_applicant_information
+field_name: field_applicant_information
+entity_type: node
+bundle: certificate
+label: 'Short text on the applicant'
+description: 'Brief information about the applicant.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,110 @@
+{#
+/**
+ * @file
+ * Theme override for a link field.
+ *
+ * This template maps Drupal field data to the design system's
+ * link component (link.twig).
+ *
+ * -----------------------------------------------------------------------------
+ * PURPOSE
+ * -----------------------------------------------------------------------------
+ * - Transforms Drupal field render data into a structured link component.
+ * - Delegates all markup rendering to the reusable `link.twig` component.
+ * - Keeps this template focused on data preparation only.
+ *
+ * -----------------------------------------------------------------------------
+ * MAPPING
+ * -----------------------------------------------------------------------------
+ * Storybook (linkTemplate args)       → Drupal (Twig #properties)
+ *
+ * linkUrl                            -> kommt aus field (item.content['#url'])
+ * linkText                           -> item.content['#title']
+ * linkTitle                          -> #title
+ * linkExtraClasses                   -> #modifiers (z.B. ['button'])
+ *
+ * linkIconBefore                     -> #icon + #icon_position = 'before'
+ * linkIconAfter                      -> #icon + #icon_position = 'after'
+ * linkAddOnText                      -> #add_on
+ *
+ * -----------------------------------------------------------------------------
+ * EXAMPLE USAGE
+ * -----------------------------------------------------------------------------
+ * {{ content.field_link|merge({
+ *   '#modifiers': ['button', 'button--secondary'],
+ *   '#extra_classes': ['use-ajax', 'my-custom-class'],
+ *   '#icon': 'external-link',
+ *   '#icon_position': 'before',
+ *   '#add_on': 'PDF, 2MB',
+ *   '#title': 'Learn more'|t
+ * }) }}
+ *
+ * -----------------------------------------------------------------------------
+ * behaviour
+ * -----------------------------------------------------------------------------
+ * - #icon
+ *   -> überschreibt das Icon (string), oder schaltet es ab (false)
+ *
+ * - #icon_position
+ *   -> überschreibt die Icon-Position ('before', 'after')
+ *
+ * - externe Links (http/https)
+ *   -> bekommen automatisch "external-link" icon (fallback)
+ *
+ * - modifier 'button'
+ *   -> erzeugt bsi-link-button + Variante (z.B. --tertiary)
+ *
+ * -----------------------------------------------------------------------------
+ */
+#}
+{% extends 'field.html.twig' %}
+
+{# Design-system features #}
+{% set modifiers = element['#modifiers']|default([]) %}
+{% set extra_classes = element['#extra_classes']|default([]) %}
+{% set icon = element['#icon'] is defined and element['#icon'] is not null ? element['#icon'] : null %}
+{% set icon_position = element['#icon_position']|default(null) %}
+{% set add_on = element['#add_on']|default(null) %}
+
+{% set base_class = 'bsi-link' %}
+
+{% block content %}
+  {% block label %}
+  {% if not label_hidden -%}
+    {% if fully_inline -%}
+      <span{{ title_attributes.addClass(title_classes) }}>{{ label }}:</span>
+    {%- else -%}
+      <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+    {%- endif %}
+  {%- endif %}
+  {% endblock %}
+
+  {% block items %}
+    {% for item in items %}
+      {% block item %}
+        {% set url = item.content['#url'] %}
+        {% set link_type = url.isRouted() and url.getRouteName() == 'media_entity_download.download'
+          ? 'download'
+          : (url.isExternal() ? 'external' : 'internal')
+        %}
+        {# @see \Drupal\Core\Utility\LinkGenerator::generate #}
+        {% if url.isRouted() and url.getRouteName() in ['<nolink>', '<button>'] %}
+          {% set link_type = url.getRouteName() == '<nolink>' ? 'span' : 'button' %}
+        {% endif %}
+
+        {% include '@bsi_bund/elements/link.html.twig' with {
+          'base_class': base_class,
+          'url': item.content['#url'],
+          'title': item.content['#title'],
+          'attributes': item.attributes
+            .merge(create_attribute(item.content['#options']['attributes']|default([])))
+            .addClass(modifiers|map((m) => base_class ~ '-' ~ m))
+            .addClass(extra_classes),
+          'link_type': link_type,
+          'icon': icon,
+          'icon_position': icon_position,
+        } only %}
+      {% endblock %}
+    {% endfor %}
+  {% endblock %}
+{% endblock %}

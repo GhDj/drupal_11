@@ -1,0 +1,69 @@
+--- a/src/Form/GroupPermissionsForm.php
++++ b/src/Form/GroupPermissionsForm.php
+@@ -105,9 +105,9 @@
+   public function buildForm(array $form, FormStateInterface $form_state) {
+     // Cluster the roles by scope to make the UI easier to understand.
+     $role_info = [
+-      PermissionScopeInterface::OUTSIDER_ID => [],
+-      PermissionScopeInterface::INSIDER_ID => [],
+-      PermissionScopeInterface::INDIVIDUAL_ID => [],
++      // PermissionScopeInterface::OUTSIDER_ID => [],
++      // PermissionScopeInterface::INSIDER_ID => [],
++      // PermissionScopeInterface::INDIVIDUAL_ID => [],
+     ];
+
+     // Sort the group roles using the static sort() method.
+@@ -118,7 +118,8 @@
+     // Retrieve information for every role to user further down. We do this to
+     // prevent the same methods from being fired (rows * permissions) times.
+     foreach ($group_roles as $role_name => $group_role) {
+-      $role_info[$group_role->getScope()][$role_name] = [
++      $role_info/*[$group_role->getScope()]*/[$role_name] = [
++        'scope' => $group_role->getScope(),
+         'label' => $group_role->label(),
+         'global_role' => ($global_role = $group_role->getGlobalRole()) ? $global_role->label() : FALSE,
+         'permissions' => $group_role->getPermissions(),
+@@ -150,11 +151,11 @@
+     ];
+
+     // Create a column with header for every group role.
+-    foreach ($role_info as $scope_id => $scope_info) {
+-      foreach ($scope_info as $info) {
++    foreach ($role_info as $role_name => $info) {
++      // foreach ($scope_info as $info) {
+         $label = $info['label'];
+         if ($info['global_role']) {
+-          $icon = $scope_id === PermissionScopeInterface::OUTSIDER_ID ? '&#128274;' : '&#128273;';
++          $icon = $info['scope'] === PermissionScopeInterface::OUTSIDER_ID ? '&#128274;' : '&#128273;';
+           $label .= '<br />(' . $icon . ' ' . $info['global_role'] . ')';
+         }
+
+@@ -162,7 +163,7 @@
+           'data' => ['#markup' => $label],
+           'class' => ['checkbox'],
+         ];
+-      }
++      // }
+     }
+
+     // Render the permission as sections of rows.
+@@ -214,8 +215,8 @@
+           }
+
+           // Finally build a checkbox cell for every group role.
+-          foreach ($role_info as $scope_info) {
+-            foreach ($scope_info as $role_name => $info) {
++          foreach ($role_info as $role_name => $info) {
++            // foreach ($scope_info as $role_name => $info) {
+               $marker_text = FALSE;
+
+               // Show a red '-' if the permission is unavailable.
+@@ -258,7 +259,7 @@
+                 ],
+                 '#parents' => [$role_name, $perm],
+               ];
+-            }
++            // }
+           }
+         }
+       }

@@ -1,0 +1,24 @@
+uuid: 40e0f08c-b521-4deb-9b56-984210e7beaa
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.page_opener
+    - field.field.config_pages.page_opener.field_media
+  module:
+    - media_library
+id: config_pages.page_opener.default
+targetEntityType: config_pages
+bundle: page_opener
+mode: default
+content:
+  field_media:
+    type: media_library_widget
+    weight: 0
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+hidden:
+  changed: true
+  label: true

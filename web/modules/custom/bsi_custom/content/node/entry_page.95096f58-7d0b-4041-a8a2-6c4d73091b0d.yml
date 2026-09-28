@@ -1,0 +1,200 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 95096f58-7d0b-4041-a8a2-6c4d73091b0d
+  bundle: entry_page
+  default_langcode: de
+  depends:
+    68b997c3-9b21-4a81-a06f-37b41b3cbe87: media
+translations:
+  en:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    title:
+      -
+        value: 'Contact Us'
+    created:
+      -
+        value: 1778165338
+    node_keeper:
+      -
+        value: false
+    alias_keeper:
+      -
+        value: false
+    path:
+      -
+        alias: /service/contact
+        langcode: en
+        pathauto: 0
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    body:
+      -
+        value: 'English ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.'
+        format: plain_text
+        summary: 'Englisch ipsum dolor sit amet, consectetuer adipiscing elit.'
+    field_links_title:
+      -
+        value: more_information
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Kontaktieren Sie uns'
+  created:
+    -
+      value: 1778165258
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  node_keeper:
+    -
+      value: false
+  alias_keeper:
+    -
+      value: false
+  path:
+    -
+      alias: /service/kontakt
+      langcode: de
+      pathauto: 0
+  sae_exclude:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.'
+      format: plain_text
+      summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
+  field_links_title:
+    -
+      value: more_information
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 8eaf9d1e-9527-4de5-9237-4c3c507329ad
+          bundle: banner
+          default_langcode: de
+        translations:
+          en:
+            status:
+              -
+                value: true
+            created:
+              -
+                value: 1778168675
+            content_translation_source:
+              -
+                value: de
+            content_translation_outdated:
+              -
+                value: false
+            field_link:
+              -
+                uri: 'route:<none>'
+                resolvable_uri: ''
+                title: 'Topic contents'
+                options: {  }
+            field_section_title:
+              -
+                value: 'Turn your event into a catalyst for cybersecurity—with an active contribution from our experts.'
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778168675
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_link:
+            -
+              uri: 'route:<none>'
+              resolvable_uri: ''
+              title: Themeninhalte
+              options: {  }
+          field_media:
+            -
+              entity: 68b997c3-9b21-4a81-a06f-37b41b3cbe87
+          field_section_title:
+            -
+              value: 'Machen Sie Ihre Veranstaltung zum Impulsgeber für Cyber-Sicherheit – mit einem aktiven Beitrag unserer Erpert:innen.'
+  layout_builder__layout:
+    -
+      section:
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          524c35f3-46a6-4c08-a228-d00afb590a73:
+            uuid: 524c35f3-46a6-4c08-a228-d00afb590a73
+            region: content
+            configuration:
+              id: webform_block
+              label: Webform
+              label_display: 0
+              provider: webform
+              webform_id: contact
+              default_data: ''
+              redirect: 0
+              lazy: 0
+              context_mapping: {  }
+            weight: 0
+            additional: {  }
+          63f4f82a-9466-4ef3-9d07-e0f780eda76f:
+            uuid: 63f4f82a-9466-4ef3-9d07-e0f780eda76f
+            region: content
+            configuration:
+              id: 'field_block:node:entry_page:field_paragraphs'
+              label: Paragraphs
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }

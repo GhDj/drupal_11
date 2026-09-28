@@ -1,0 +1,219 @@
+label: Editoria11y-Ergebnisse
+display:
+  default:
+    display_title: Standard
+    display_options:
+      title: 'Wichtigste Ergebnisse'
+      fields:
+        id: {  }
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: Sortierung
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      use_more_text: 'Alle Seiten mit Problemen'
+  block_recent_issues:
+    display_title: 'Block: Aktuelle Probleme'
+    display_options:
+      fields:
+        created:
+          label: Erkannt
+        result_name:
+          label: Ausgabe
+        page_path:
+          label: 'Pfad zur Seite'
+        page_title:
+          label: Seite
+      use_more_text: 'Neueste Probleme'
+  block_top_issues:
+    display_title: 'Block: Am häufigsten auftretende Warnungen'
+    display_options:
+      fields:
+        result_name:
+          label: Ausgabe
+        result_name_count:
+          label: Anzahl
+      use_more_text: 'Alle Probleme'
+  block_top_results:
+    display_title: 'Block: Seiten mit den Meisten Fehlermeldungen'
+    display_options:
+      fields:
+        page_title:
+          label: Seite
+        page_path:
+          label: 'Pfad zur Seite'
+        page_result_count:
+          label: 'Probleme auf dieser Seite'
+      use_more_text: 'Alle Seiten mit Problemen'
+  issues__page:
+    display_title: 'Alle Probleme'
+    display_options:
+      title: 'Alle Probleme'
+      fields:
+        result_name:
+          label: Ausgabe
+        result_name_count:
+          label: Anzahl
+      pager:
+        options:
+          tags:
+            first: '« Anfang'
+            last: 'Ende »'
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      sorts:
+        result_name_count:
+          expose:
+            label: 'Anzahl Ergebis-Name'
+        result_name:
+          expose:
+            label: 'Name des Ergebnisses'
+      use_more_text: 'Alle Seiten mit Problemen'
+      menu:
+        title: Problemarten
+  issues_by_page__page:
+    display_title: 'Propbleme auf einer bestimmten Seite'
+    display_options:
+      title: 'Propbleme auf einer bestimmten Seite'
+      fields:
+        result_name_count:
+          label: Anzahl
+        result_name:
+          label: Ausgabe
+        created:
+          label: Erkannt
+        page_path:
+          label: 'Pfad zur Seite'
+        page_title:
+          label: Seitentitel
+      pager:
+        options:
+          tags:
+            first: '« Anfang'
+            last: 'Ende »'
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      arguments:
+        page_path:
+          exception:
+            title: Alle
+      header:
+        area_text_custom:
+          content: '<h1>Barrierefreiheits-Issues auf Seite {{page_title}}</h1>'
+      footer:
+        area_text_custom_1:
+          content: '<p><a href="../editoria11y/pages" class="button button--primary">Alle Seiten mit Issues</a></p>'
+        area_text_custom:
+          content: '<span class="ed11y-reset-this-path" hidden><p class="more-link"><a role="button" class="action-link action-link--icon-trash action-link--danger"><span hidden class="ed11y-api-path">{{ page_path }}</span>Ergebnisse für diese Seite zurücksetzen</a></p></span>'
+      menu:
+        title: Problemarten
+  pages__page:
+    display_title: 'Alle Seiten mit Problemen'
+    display_options:
+      title: 'Seiten mit Barrierefreiheitsproblemen'
+      fields:
+        page_result_count:
+          label: 'Probleme gefunden'
+        page_title:
+          label: Seite
+        page_path:
+          label: Pfad
+        entity_type:
+          label: Typ
+        page_language:
+          label: Sprache
+      pager:
+        options:
+          tags: {  }
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      filters:
+        page_title:
+          expose:
+            label: 'Der Seitentitel enthält'
+        page_url:
+          expose:
+            label: 'Url enthält'
+        page_language:
+          expose:
+            label: Sprache
+        entity_type:
+          expose:
+            label: Seitentyp
+      menu:
+        title: 'Seiten mit Problemen'
+  pages_by_issue__page:
+    display_title: 'Seiten mit der angegebenen Problematik'
+    display_options:
+      title: 'Seiten mit einem bestimmten Problem'
+      fields:
+        result_name_count:
+          label: Anzahl
+        page_title:
+          label: Seite
+        created:
+          label: Erkannt
+      pager:
+        options:
+          tags: {  }
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      arguments:
+        result_name:
+          exception:
+            title: Alle
+          title: 'Seiten mit Problemen: "{{ arguments.result_name }}"'
+      footer:
+        area_text_custom:
+          content: '<a href="../editoria11y/issues" class="button button--primary">Alle Issues</a>'
+      menu:
+        title: 'Seiten mit Problemen'
+  recent__page:
+    display_title: 'Neueste Probleme'
+    display_options:
+      title: 'Aktuelle Barrierefreiheitsprobleme'
+      fields:
+        created:
+          label: Erkannt
+        result_name:
+          label: Ausgabe
+        result_name_count:
+          label: Anzahl
+        page_title:
+          label: Seite
+        entity_type:
+          label: Typ
+        page_language:
+          label: Sprache
+      pager:
+        options:
+          tags: {  }
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      filters:
+        page_title:
+          expose:
+            label: 'Der Seitentitel enthält'
+        page_url:
+          expose:
+            label: 'Url enthält'
+        page_language:
+          expose:
+            label: Sprache
+        entity_type:
+          expose:
+            label: Seitentyp
+      menu:
+        title: 'Neueste Probleme'

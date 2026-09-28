@@ -1,0 +1,12 @@
+--- a/core/modules/text/src/Plugin/Field/FieldFormatter/TextDefaultFormatter.php
++++ b/core/modules/text/src/Plugin/Field/FieldFormatter/TextDefaultFormatter.php
+@@ -30,6 +30,9 @@
+     // The ProcessedText element already handles cache context & tag bubbling.
+     // @see \Drupal\filter\Element\ProcessedText::preRenderText()
+     foreach ($items as $delta => $item) {
++      if ($item->value === '') {
++        continue;
++      }
+       $elements[$delta] = [
+         '#type' => 'processed_text',
+         '#text' => $item->value,

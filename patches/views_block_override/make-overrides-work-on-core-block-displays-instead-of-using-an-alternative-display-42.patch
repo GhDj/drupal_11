@@ -1,0 +1,2132 @@
+diff --git a/README.md b/README.md
+index b70284c31040d8f9ac59d2df1c666433a2d04cb9..8476fdc3518046dc5cc317d4937c1dd58ef7b92c 100644
+--- a/README.md
++++ b/README.md
+@@ -1,7 +1,15 @@
+ # Views block override
+
+-This module allows overriding views contextual arguments and exposing sort from
+-the block setting form.
++This module allows overriding block displays per block instance. Allowed
++overrides are provided through display/block/override plugins.
++
++Available out-of-the-box overrides are:
++- Items per page (default core override)
++- Pager ID (override the pager id)
++- More link Text (override the "more"-link text)
++- More link Url (override the "more"-link URL)
++- Contextual filters (override the available contextual filters)
++- Exposed sort (override default sort by and order settings)
+
+ For a full description of the module, visit the
+ [project page](https://www.drupal.org/project/views_block_override).
+@@ -42,9 +50,8 @@ information, see
+
+ **General usage**
+
+-When adding a new views display for your block, choose 'Block with overrides'.
+-Additional checkboxes for overriding contextual filters and exposing sort will
+-be available at 'override settings'.
++When adding a new views display for your block, additional checkboxes for
++overriding all override plugins will be available at 'override settings'.
+
+ **Autocomplete**
+
+diff --git a/src/Annotation/ViewsBlockOverride.php b/src/Annotation/ViewsBlockOverride.php
+new file mode 100755
+index 0000000000000000000000000000000000000000..be5d784f19a67b99e9d24925a772e95170b685f1
+--- /dev/null
++++ b/src/Annotation/ViewsBlockOverride.php
+@@ -0,0 +1,40 @@
++<?php
++
++namespace Drupal\views_block_override\Annotation;
++
++use Drupal\Component\Annotation\Plugin;
++use Drupal\Core\Annotation\Translation;
++
++/**
++ * Defines a views block override plugin object.
++ *
++ * @Annotation
++ */
++class ViewsBlockOverride extends Plugin {
++
++  /**
++   * The plugin ID.
++   *
++   * @var string
++   */
++  public string $id;
++
++  /**
++   * The human-readable name of the plugin.
++   *
++   * @var string|\Drupal\Core\Annotation\Translation
++   *
++   * @ingroup plugin_translatable
++   */
++  public string|Translation $label;
++
++  /**
++   * The human-readable description of the plugin.
++   *
++   * @var string|\Drupal\Core\Annotation\Translation
++   *
++   * @ingroup plugin_translatable
++   */
++  public string|Translation $description;
++
++}
+diff --git a/src/Plugin/views/display/ViewsBlockOverride.php b/src/Plugin/views/display/ViewsBlockOverride.php
+index 6dd06d1251f767727dde4f1412558d0d02b37561..4bba77e9ff2acc54ba7ebd689559728b37885f66 100644
+--- a/src/Plugin/views/display/ViewsBlockOverride.php
++++ b/src/Plugin/views/display/ViewsBlockOverride.php
+@@ -2,518 +2,30 @@
+
+ namespace Drupal\views_block_override\Plugin\views\display;
+
+-use Drupal\Core\Block\BlockManagerInterface;
+-use Drupal\Core\Block\BlockPluginInterface;
+-use Drupal\Core\Entity\EntityTypeBundleInfo;
+-use Drupal\Core\Entity\EntityTypeManagerInterface;
+-use Drupal\Core\Form\FormStateInterface;
+-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+-use Drupal\views\Plugin\Block\ViewsBlock;
+-use Drupal\views\Plugin\views\display\Block;
+-use Symfony\Component\DependencyInjection\ContainerInterface;
++use Drupal\views_block_override\ViewsBlockDisplayOverride;
+
+ /**
+  * A block plugin that allows exposed filters to be configured.
+  *
++ * Keep this to prevent errors when loading views who still use the old
++ * display id.
++ *
+  * @ingroup views_block_override
+  *
+  * @ViewsDisplay(
+  *   id = "views_block_override",
+- *   title = @Translation("Block with overrides"),
+- *   help = @Translation("Display the view as a block with more configuration options."),
++ *   title = @Translation("Block with overrides (Deprecated)"),
++ *   help = @Translation("Deprecated: You sould use a normal block display instead."),
+  *   theme = "views_view",
+  *   register_theme = FALSE,
+  *   uses_hook_block = TRUE,
+  *   contextual_links_locations = {"block"},
+- *   admin = @Translation("Block with overrides")
++ *   admin = @Translation("Block with overrides (Deprecated)")
+  * )
+  *
+  * @see \Drupal\views\Plugin\block\ViewsBlock
+  * @see \Drupal\views\Plugin\Derivative\ViewsBlock
+  */
+-class ViewsBlockOverride extends Block implements ContainerFactoryPluginInterface {
+-
+-  /**
+-   * The block being overridden.
+-   *
+-   * @var \Drupal\Core\Block\BlockPluginInterface
+-   */
+-  protected BlockPluginInterface $block;
+-
+-  /**
+-   * The EntityTypeBundleInfo object.
+-   *
+-   * @var \Drupal\Core\Entity\EntityTypeBundleInfo
+-   */
+-  protected EntityTypeBundleInfo $entityTypeBundleInfo;
+-
+-  /**
+-   * {@inheritdoc}
+-   */
+-  public function __construct(
+-    array $configuration,
+-    $plugin_id,
+-    $plugin_definition,
+-    EntityTypeManagerInterface $entity_type_manager,
+-    BlockManagerInterface $block_manager,
+-    EntityTypeBundleInfo $entity_type_bundle_info,
+-  ) {
+-    parent::__construct($configuration, $plugin_id, $plugin_definition, $entity_type_manager, $block_manager);
+-    $this->entityTypeBundleInfo = $entity_type_bundle_info;
+-  }
+-
+-  /**
+-   * {@inheritdoc}
+-   */
+-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+-    return new static(
+-      $configuration,
+-      $plugin_id,
+-      $plugin_definition,
+-      $container->get('entity_type.manager'),
+-      $container->get('plugin.manager.block'),
+-      $container->get('entity_type.bundle.info'),
+-    );
+-  }
+-
+-  /**
+-   * {@inheritdoc}
+-   */
+-  protected function defineOptions() {
+-    $options = parent::defineOptions();
+-    $options['allow']['contains']['contextual_filter'] = ['default' => FALSE];
+-    $options['allow']['contains']['exposed_sort'] = ['default' => FALSE];
+-    $options['allow']['contains']['pager_id'] = ['default' => FALSE];
+-    $options['allow']['contains']['more_link_text'] = ['default' => FALSE];
+-    $options['allow']['contains']['more_link_custom_url'] = ['default' => FALSE];
+-    return $options;
+-  }
+-
+-  /**
+-   * Returns plugin-specific settings for the block.
+-   *
+-   * @param array $settings
+-   *   The settings of the block.
+-   *
+-   * @return array
+-   *   An array of block-specific settings to override the defaults provided in
+-   *   \Drupal\views\Plugin\Block\ViewsBlock::defaultConfiguration().
+-   *
+-   * @see \Drupal\views\Plugin\Block\ViewsBlock::defaultConfiguration()
+-   */
+-  public function blockSettings(array $settings) {
+-    $settings = parent::blockSettings($settings);
+-
+-    // All contextual filters can be overridden.
+-    $contextual_filters = $this->view->display_handler->getHandlers('argument');
+-    foreach ($contextual_filters as $id => $contextual_filter) {
+-      $settings['contextual_filter'][$id]['enabled'] = FALSE;
+-      $settings['contextual_filter'][$id]['value'] = '';
+-    }
+-    $settings['exposed_sort']['sort_by'] = 'title';
+-    $settings['exposed_sort']['sort_order'] = 'DESC';
+-
+-    $pager = $this->view->display_handler->getOption('pager');
+-    $settings['pager_id']['enabled'] = FALSE;
+-    $settings['pager_id']['value'] = $pager['options']['id'] ?? 0;
+-
+-    return $settings;
+-  }
+-
+-  /**
+-   * Provide the summary for page options in the views UI.
+-   *
+-   * This output is returned as an array.
+-   */
+-  public function optionsSummary(&$categories, &$options) {
+-    parent::optionsSummary($categories, $options);
+-
+-    $filtered_allow = array_filter($this->getOption('allow'));
+-    $allowed = [];
+-    if (isset($filtered_allow['items_per_page'])) {
+-      $allowed[] = $this->t('Items per page');
+-    }
+-    if (isset($filtered_allow['contextual_filter'])) {
+-      $allowed[] = $this->t('Contextual filters');
+-    }
+-    if (isset($filtered_allow['exposed_sort'])) {
+-      $allowed[] = $this->t('Exposed sort');
+-    }
+-    if (isset($filtered_allow['pager_id'])) {
+-      $allowed[] = $this->t('Pager ID');
+-    }
+-    if (isset($filtered_allow['more_link_text'])) {
+-      $allowed[] = $this->t('More link text');
+-    }
+-    if (isset($filtered_allow['more_link_custom_url'])) {
+-      $allowed[] = $this->t('More link URL');
+-    }
+-    $options['allow'] = [
+-      'category' => 'block',
+-      'title' => $this->t('Allow settings'),
+-      'value' => empty($allowed) ? $this->t('None') : implode(', ', $allowed),
+-    ];
+-  }
+-
+-  /**
+-   * Adds the configuration form elements specific to this views block plugin.
+-   *
+-   * This method allows block instances to override the views exposed filters.
+-   *
+-   * @param \Drupal\views\Plugin\Block\ViewsBlock $block
+-   *   The ViewsBlock plugin.
+-   * @param array $form
+-   *   The form definition array for the block configuration form.
+-   * @param \Drupal\Core\Form\FormStateInterface $form_state
+-   *   The current state of the form.
+-   *
+-   * @return array
+-   *   The renderable form array representing the entire configuration form.
+-   *
+-   * @see \Drupal\views\Plugin\Block\ViewsBlock::blockForm()
+-   *
+-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+-   */
+-  public function blockForm(ViewsBlock $block, array &$form, FormStateInterface $form_state) {
+-    parent::blockForm($block, $form, $form_state);
+-    $allow_settings = array_filter($this->getOption('allow'));
+-    $block_configuration = $block->getConfiguration();
+-    foreach ($allow_settings as $type => $enabled) {
+-      if (empty($enabled)) {
+-        continue;
+-      }
+-
+-      if ($type === 'contextual_filter') {
+-        $items = $this->view->display_handler->getHandlers('argument');
+-        /** @var \Drupal\views\Plugin\views\HandlerBase $item */
+-        foreach ($items as $id => $item) {
+-          if ($type != 'contextual_filter') {
+-            continue;
+-          }
+-
+-          $form['override'][$block->getDerivativeId()][$type][$id]['enabled'] = [
+-            '#type' => 'checkbox',
+-            '#title' => $this->t('Override %plugin', ['%plugin' => $item->adminLabel()]),
+-            '#default_value' => $block_configuration[$type][$id]['enabled'],
+-          ];
+-          $value = $block_configuration[$type][$id]['value'];
+-          $form['override'][$block->getDerivativeId()][$type][$id]['value'] = [
+-            '#type' => 'textfield',
+-            '#title' => $this->t('Value for %label', ['%label' => $item->adminLabel()]),
+-            '#title_display' => 'none',
+-            '#default_value' => $value,
+-            '#states' => [
+-              'visible' => [
+-                [
+-                  ':input[name*="[override][' . $block->getDerivativeId() . '][' . $type . '][' . $id . '][enabled]"]' => ['checked' => TRUE],
+-                ],
+-              ],
+-            ],
+-          ];
+-
+-          // If a validator for entity type is set, create an autocomplete.
+-          if (isset($item->options['validate']) &&
+-            strpos($item->options['validate']['type'], 'entity:') !== FALSE) {
+-
+-            $split = explode(':', $item->options['validate']['type']);
+-            $entity_type = $split[1];
+-            if (substr($entity_type, -5) == '_type') {
+-              $bundles = [];
+-              foreach ($this->entityTypeBundleInfo->getBundleInfo(substr($entity_type, 0, -5)) as $key => $bundle) {
+-                $bundles[$key] = $bundle['label'];
+-              }
+-
+-              if ($item->options['break_phrase']) {
+-                $form['override'][$block->getDerivativeId()][$type][$id]['value']['#type'] = 'checkboxes';
+-              }
+-              else {
+-                $form['override'][$block->getDerivativeId()][$type][$id]['value']['#type'] = 'radios';
+-              }
+-              $form['override'][$block->getDerivativeId()][$type][$id]['value']['#options'] = $bundles;
+-              $form['override'][$block->getDerivativeId()][$type][$id]['value']['#default_value'] = $value;
+-            }
+-            else {
+-              $form['override'][$block->getDerivativeId()][$type][$id]['value']['#type'] = 'entity_autocomplete';
+-              $form['override'][$block->getDerivativeId()][$type][$id]['value']['#target_type'] = $entity_type;
+-              if ($value) {
+-                $storage = $this->entityTypeManager->getStorage($entity_type);
+-                $entity = $storage->load($value);
+-                $form['override'][$block->getDerivativeId()][$type][$id]['value']['#default_value'] = $entity;
+-              }
+-              else {
+-                $form['override'][$block->getDerivativeId()][$type][$id]['value']['#default_value'] = '';
+-              }
+-              if (
+-                isset($item->options['validate_options']) &&
+-                isset($item->options['validate_options']['bundles'])
+-              ) {
+-                $form['override'][$block->getDerivativeId()][$type][$id]['value']['#selection_settings']['target_bundles'] =
+-                  $item->options['validate_options']['bundles'];
+-              }
+-
+-            }
+-
+-          }
+-        }
+-      }
+-
+-      elseif ($type === 'exposed_sort') {
+-        $order_list = [];
+-        foreach ($this->view->getHandlers('sort') as $field => $handler) {
+-          // Use exposed label when available, or use machine name as backup.
+-          if (!empty($handler['expose']['label'])) {
+-            $order_list[$field] = $handler['expose']['label'];
+-          }
+-          else {
+-            $order_list[$field] = $handler['field'];
+-          }
+-        }
+-        $form['override'][$block->getDerivativeId()][$type]['sort_by'] = [
+-          '#type' => 'select',
+-          '#title' => $this->t('Order'),
+-          '#options' => $order_list,
+-          '#default_value' => $block_configuration[$type]['sort_by'],
+-        ];
+-        $form['override'][$block->getDerivativeId()][$type]['sort_order'] = [
+-          '#type' => 'select',
+-          '#title' => $this->t('Sort'),
+-          '#options' => [
+-            'ASC' => $this->t('Ascending'),
+-            'DESC' => $this->t('Descending'),
+-          ],
+-          '#default_value' => $block_configuration[$type]['sort_order'],
+-        ];
+-      }
+-
+-      elseif ($type === 'pager_id') {
+-        $form['override'][$block->getDerivativeId()][$type]['enabled'] = [
+-          '#type' => 'checkbox',
+-          '#title' => $this->t('Override pager ID'),
+-          '#description' => $this->t("Unless you're experiencing problems with pagers related to this view, you should leave this disabled."),
+-          '#default_value' => $block_configuration[$type]['enabled'],
+-        ];
+-        $form['override'][$block->getDerivativeId()][$type]['value'] = [
+-          '#type' => 'number',
+-          '#title' => $this->t('Pager ID'),
+-          '#min' => 0,
+-          '#default_value' => $block_configuration[$type]['value'],
+-          '#description' => $this->t("Unless you're experiencing problems with pagers related to this view, you should leave this at it's default value. If using multiple pagers on one page you may need to set this number to a higher value so as not to conflict within the ?page= array. Large values will add a lot of commas to your URLs, so avoid if possible."),
+-          '#states' => [
+-            'visible' => [
+-              [
+-                ':input[name*="[override][' . $block->getDerivativeId() . '][' . $type . '][enabled]"]' => ['checked' => TRUE],
+-              ],
+-            ],
+-          ],
+-        ];
+-      }
+-
+-      elseif ($type === 'more_link_text') {
+-        $form['override'][$block->getDerivativeId()][$type] = [
+-          '#type' => 'textfield',
+-          '#title' => $this->t('More link text'),
+-          '#description' => $this->t('The text to display for the more link.'),
+-          '#default_value' => $block_configuration[$type] ?? '',
+-        ];
+-      }
+-
+-      elseif ($type === 'more_link_custom_url') {
+-        $form['override'][$block->getDerivativeId()][$type] = [
+-          '#type' => 'textfield',
+-          '#title' => $this->t('More link URL'),
+-          '#description' => $this->t('A URL for the more link.'),
+-          '#default_value' => $block_configuration[$type] ?? '',
+-        ];
+-      }
+-    }
+-
+-    return $form;
+-  }
+-
+-  /**
+-   * Handles form submission for the views block configuration form.
+-   *
+-   * @param \Drupal\views\Plugin\Block\ViewsBlock $block
+-   *   The ViewsBlock plugin.
+-   * @param array $form
+-   *   The form definition array for the full block configuration form.
+-   * @param \Drupal\Core\Form\FormStateInterface $form_state
+-   *   The current state of the form.
+-   *
+-   * @see \Drupal\views\Plugin\Block\ViewsBlock::blockSubmit()
+-   */
+-  public function blockSubmit(ViewsBlock $block, $form, FormStateInterface $form_state) {
+-    parent::blockSubmit($block, $form, $form_state);
+-
+-    $overrides = $form_state->getValue(['override']);
+-    $config = $block->getConfiguration();
+-    $block_id = $block->getDerivativeId();
+-
+-    // Bail out when we don't save any override.
+-    if (!isset($overrides[$block_id])) {
+-      return;
+-    }
+-
+-    foreach ($overrides[$block_id] as $type => $values) {
+-      if ($type === 'contextual_filter') {
+-        foreach ($values as $id => $settings) {
+-          // Save overridden contextual_filter when control field is enabled.
+-          if ($settings['enabled']) {
+-            $config[$type][$id] = [
+-              'enabled' => TRUE,
+-              'value' => $settings['value'],
+-            ];
+-          }
+-          // Remove overridden contextual_filter when control field is not
+-          // enabled.
+-          else {
+-            if (isset($config[$type][$id])) {
+-              unset($config[$type][$id]);
+-            }
+-          }
+-        }
+-      }
+-      else {
+-        // Save override when control field is enabled.
+-        if (isset($values['enabled'])) {
+-          if ($values['enabled']) {
+-            $config[$type] = $values;
+-          }
+-          // Remove override when control field is not enabled.
+-          else {
+-            unset($config[$type]);
+-          }
+-        }
+-        // Save when there is no control field.
+-        else {
+-          if (is_array($values)) {
+-            foreach ($values as $id => $value) {
+-              $config[$type][$id] = $value;
+-            }
+-          }
+-          else {
+-            if ($values !== "") {
+-              $config[$type] = $values;
+-            }
+-            // Remove override when there is no value.
+-            else {
+-              unset($config[$type]);
+-            }
+-          }
+-        }
+-      }
+-    }
+-
+-    $block->setConfiguration($config);
+-  }
+-
+-  /**
+-   * Allows to change the display settings right before executing the block.
+-   *
+-   * @param \Drupal\views\Plugin\Block\ViewsBlock $block
+-   *   The block plugin for views displays.
+-   */
+-  public function preBlockBuild(ViewsBlock $block) {
+-    parent::preBlockBuild($block);
+-
+-    $config = $block->getConfiguration();
+-
+-    $filtered_allow = array_filter($this->getOption('allow'));
+-
+-    // If sort configuration is turned off, do not allow overrides to have
+-    // effect.
+-    if (isset($filtered_allow['exposed_sort']) && $filtered_allow['exposed_sort']) {
+-
+-      if (!empty($config['exposed_sort'])) {
+-        // Get original sorts.
+-        $sorts = $this->view->display_handler->getOption('sorts');
+-
+-        // Get the selected exposed sort and set it as the only sort option.
+-        if (!empty($config['exposed_sort']['sort_by'])) {
+-
+-          // In some situations, the exposed sort is not passed as a nested
+-          // [value].
+-          $sort_by = $config['exposed_sort']['sort_by']['value'] ?? $config['exposed_sort']['sort_by'];
+-          $sort_order = $config['exposed_sort']['sort_order']['value'] ?? $config['exposed_sort']['sort_order'];
+-
+-          $exposed_sort = $sorts[$sort_by];
+-          $exposed_sort['order'] = $sort_order;
+-          $this->view->display_handler->setOption('sorts', [$exposed_sort]);
+-        }
+-      }
+-    }
+-
+-    // If pager configuration is turned off, do not allow overrides to have
+-    // effect.
+-    if (isset($filtered_allow['exposed_sort']) && $filtered_allow['exposed_sort']) {
+-
+-      // Set the pager ID if control field is enabled.
+-      if (!empty($config['pager_id']['enabled'])) {
+-        $pager = $this->view->display_handler->getOption('pager');
+-        $pager['options']['id'] = $config['pager_id']['value'];
+-        $this->view->display_handler->setOption('pager', $pager);
+-      }
+-    }
+-
+-    $this->block = $block;
+-  }
+-
+-  /**
+-   * The display block handler returns the structure necessary for a block.
+-   */
+-  public function execute() {
+-    $config = $this->block->getConfiguration();
+-    if (!empty($config['contextual_filter'])) {
+-      $view_args = $this->view->args;
+-      $index = 0;
+-      foreach ($config['contextual_filter'] as $values) {
+-        if ($values['enabled']) {
+-
+-          // Contextual filters can have multiple values.
+-          if (is_array($values['value'])) {
+-            $active_values = [];
+-            foreach ($values['value'] as $value) {
+-              if ($value) {
+-                $active_values[] = $value;
+-              }
+-            }
+-            $values['value'] = implode("+", $active_values);
+-          }
+-
+-          $view_args[$index] = $values['value'];
+-        }
+-
+-        $index++;
+-      }
+-      $this->view->setArguments($view_args);
+-    }
+-
+-    if (!empty($config['more_link_custom_url'])) {
+-      $this->view->display_handler->setOption('use_more', TRUE);
+-      $this->view->display_handler->setOption('link_display', 'custom_url');
+-      $this->view->display_handler->setOption('link_url', $config['more_link_custom_url']);
+-    }
+-
+-    if (!empty($config['more_link_text']) && $this->view->display_handler->getOption('use_more')) {
+-      $this->view->display_handler->setOption('use_more_text', $config['more_link_text']);
+-    }
+-
+-    return parent::execute();
+-  }
+-
+-  /**
+-   * Provide the default form for setting options.
+-   */
+-  public function buildOptionsForm(&$form, FormStateInterface $form_state) {
+-    parent::buildOptionsForm($form, $form_state);
+-
+-    if ($form_state->get('section') == 'allow') {
+-      $form['allow']['#options']['contextual_filter'] = $this->t('Contextual filters');
+-      $form['allow']['#options']['exposed_sort'] = $this->t('Exposed sort');
+-      $form['allow']['#options']['pager_id'] = $this->t('Pager ID');
+-      $form['allow']['#options']['more_link_text'] = $this->t('More link text');
+-      $form['allow']['#options']['more_link_custom_url'] = $this->t('More link URL');
+-    }
+-  }
++class ViewsBlockOverride extends ViewsBlockDisplayOverride {
+
+ }
+diff --git a/src/Plugin/views/display/block/override/ContextualFilter.php b/src/Plugin/views/display/block/override/ContextualFilter.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..395f2e4d8d504fb648eedac5086fe25dd94631c9
+--- /dev/null
++++ b/src/Plugin/views/display/block/override/ContextualFilter.php
+@@ -0,0 +1,231 @@
++<?php
++
++namespace Drupal\views_block_override\Plugin\views\display\block\override;
++
++use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
++use Drupal\Component\Plugin\Exception\PluginNotFoundException;
++use Drupal\Core\Entity\EntityTypeBundleInfo;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\views\Plugin\Block\ViewsBlock;
++use Drupal\views\ViewExecutable;
++use Drupal\views_block_override\ViewsBlockOverridePluginBase;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++
++/**
++ * Provides a contextual filter block override.
++ *
++ * @ViewsBlockOverride(
++ *   id = "contextual_filter",
++ *   label = @Translation("Contextual filter"),
++ *   description = @Translation("Override contextual filter settings."),
++ * )
++ */
++class ContextualFilter extends ViewsBlockOverridePluginBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function __construct(
++    array $configuration,
++    $plugin_id,
++    $plugin_definition,
++    protected EntityTypeBundleInfo $entityTypeBundleInfo,
++    protected EntityTypeManagerInterface $entityTypeManager,
++  ) {
++    parent::__construct($configuration, $plugin_id, $plugin_definition);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
++    return new static(
++      $configuration,
++      $plugin_id,
++      $plugin_definition,
++      $container->get('entity_type.bundle.info'),
++      $container->get('entity_type.manager'),
++    );
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSettings(array $settings, ViewExecutable $view): array {
++    $settings = parent::blockSettings($settings, $view);
++
++    // All contextual filters can be overridden.
++    $contextual_filters = $view->display_handler->getHandlers('argument');
++    foreach ($contextual_filters as $id => $contextual_filter) {
++      $settings['contextual_filter'][$id]['enabled'] = FALSE;
++      $settings['contextual_filter'][$id]['value'] = '';
++    }
++
++    return $settings;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockForm(ViewsBlock $block, array &$form, FormStateInterface $form_state): array {
++    $form = parent::blockForm($block, $form, $form_state);
++
++    $block_configuration = $block->getConfiguration();
++
++    $items = $block->getViewExecutable()->display_handler->getHandlers('argument');
++
++    /** @var \Drupal\views\Plugin\views\HandlerBase $item */
++    foreach ($items as $id => $item) {
++
++      $configuration = $block_configuration['contextual_filter'][$id];
++
++      $item_form_element = [];
++
++      $item_form_element['enabled'] = [
++        '#type' => 'checkbox',
++        '#title' => $this->t('Override %plugin', ['%plugin' => $item->adminLabel()]),
++        '#default_value' => $configuration['enabled'],
++      ];
++
++      $item_form_element['value'] = [
++        '#type' => 'textfield',
++        '#title' => $this->t('Value for %label', ['%label' => $item->adminLabel()]),
++        '#title_display' => 'none',
++        '#default_value' => $configuration['value'],
++        '#states' => [
++          'visible' => [
++            [
++              ':input[name*="[override][contextual_filter][' . $id . '][enabled]"]' => ['checked' => TRUE],
++            ],
++          ],
++        ],
++      ];
++
++      // If a validator for entity type is set, create an autocomplete.
++      if (isset($item->options['validate']) &&
++        str_contains($item->options['validate']['type'], 'entity:')) {
++
++        $split = explode(':', $item->options['validate']['type']);
++        $entity_type = $split[1];
++
++        if (str_ends_with($entity_type, '_type')) {
++
++          $entity_type_id = substr($entity_type, 0, -5);
++
++          $bundles = $this->entityTypeBundleInfo->getBundleInfo($entity_type_id);
++          foreach ($bundles as &$bundle) {
++            $bundle = $bundle['label'];
++          }
++          unset($bundle);
++
++          if ($item->options['break_phrase']) {
++            $item_form_element['value']['#type'] = 'checkboxes';
++          }
++          else {
++            $item_form_element['value']['#type'] = 'radios';
++          }
++
++          $item_form_element['value']['#options'] = $bundles;
++          $item_form_element['value']['#default_value'] = $configuration['value'];
++        }
++        else {
++          $item_form_element['value']['#type'] = 'entity_autocomplete';
++          $item_form_element['value']['#target_type'] = $entity_type;
++
++          if ($configuration['value']) {
++            try {
++              $storage = $this->entityTypeManager->getStorage($entity_type);
++              $entity = $storage->load($configuration['value']);
++            }
++            catch (InvalidPluginDefinitionException | PluginNotFoundException) {
++              // Should never happen, but keep IDE happy.
++              $entity = NULL;
++            }
++
++            $item_form_element['value']['#default_value'] = $entity;
++          }
++          else {
++            $item_form_element['value']['#default_value'] = '';
++          }
++
++          if (isset($item->options['validate_options']['bundles'])) {
++            $item_form_element['value']['#selection_settings']['target_bundles'] = $item->options['validate_options']['bundles'];
++          }
++
++        }
++
++      }
++
++      $form['override']['contextual_filter'][$id] = $item_form_element;
++    }
++
++    return $form;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSubmit(ViewsBlock $block, $form, FormStateInterface $form_state): void {
++    parent::blockSubmit($block, $form, $form_state);
++
++    $overrides = $form_state->getValue(['override']);
++    $block_config = $block->getConfiguration();
++
++    // Get the submitted overrides.
++    $values = $overrides['contextual_filter'] ?? [];
++
++    foreach ($values as $id => $settings) {
++      if ($settings['enabled']) {
++        // Save overridden contextual_filter when control field is enabled.
++        $block_config['contextual_filter'][$id] = [
++          'enabled' => TRUE,
++          'value' => $settings['value'],
++        ];
++      }
++      else {
++        // Remove overridden contextual_filter when control field is not
++        // enabled.
++        unset($block_config['contextual_filter'][$id]);
++      }
++    }
++
++    $block->setConfiguration($block_config);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function execute(): void {
++    parent::execute();
++
++    $block_config = $this->block->getConfiguration();
++    $view = $this->block->getViewExecutable();
++    $view_args = $view->args;
++
++    $index = 0;
++
++    foreach ($block_config['contextual_filter'] as $values) {
++      if ($values['enabled']) {
++
++        // Contextual filters can have multiple values.
++        if (is_array($values['value'])) {
++          $active_values = [];
++          foreach ($values['value'] as $value) {
++            if ($value) {
++              $active_values[] = $value;
++            }
++          }
++          $values['value'] = implode("+", $active_values);
++        }
++
++        $view_args[$index] = $values['value'];
++      }
++
++      $index++;
++    }
++
++    $view->setArguments($view_args);
++  }
++
++}
+diff --git a/src/Plugin/views/display/block/override/ExposedSort.php b/src/Plugin/views/display/block/override/ExposedSort.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..90483f48f07838f431d226088a6c76ed9eed960f
+--- /dev/null
++++ b/src/Plugin/views/display/block/override/ExposedSort.php
+@@ -0,0 +1,167 @@
++<?php
++
++namespace Drupal\views_block_override\Plugin\views\display\block\override;
++
++use Drupal\Core\Entity\EntityTypeBundleInfo;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\views\Plugin\Block\ViewsBlock;
++use Drupal\views\ViewExecutable;
++use Drupal\views_block_override\ViewsBlockOverridePluginBase;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++
++/**
++ * Provides a exposed sort block override.
++ *
++ * @ViewsBlockOverride(
++ *   id = "exposed_sort",
++ *   label = @Translation("Exposed sort"),
++ *   description = @Translation("Override exposed sort settings."),
++ * )
++ */
++class ExposedSort extends ViewsBlockOverridePluginBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function __construct(
++    array $configuration,
++    $plugin_id,
++    $plugin_definition,
++    protected EntityTypeBundleInfo $entityTypeBundleInfo,
++    protected EntityTypeManagerInterface $entityTypeManager,
++  ) {
++    parent::__construct($configuration, $plugin_id, $plugin_definition);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
++    return new static(
++      $configuration,
++      $plugin_id,
++      $plugin_definition,
++      $container->get('entity_type.bundle.info'),
++      $container->get('entity_type.manager'),
++    );
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSettings(array $settings, ViewExecutable $view): array {
++    $settings = parent::blockSettings($settings, $view);
++
++    $options = $this->getSortOptions($view);
++
++    $settings['exposed_sort']['sort_by'] = array_key_first($options) ?? 'title';
++    $settings['exposed_sort']['sort_order'] = 'DESC';
++
++    return $settings;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockForm(ViewsBlock $block, array &$form, FormStateInterface $form_state): array {
++    $form = parent::blockForm($block, $form, $form_state);
++
++    $block_configuration = $block->getConfiguration();
++
++    $form['override']['exposed_sort']['sort_by'] = [
++      '#type' => 'select',
++      '#title' => $this->t('Order'),
++      '#options' => $this->getSortOptions($block->getViewExecutable()),
++      '#default_value' => $block_configuration['exposed_sort']['sort_by'],
++    ];
++    $form['override']['exposed_sort']['sort_order'] = [
++      '#type' => 'select',
++      '#title' => $this->t('Sort'),
++      '#options' => [
++        'ASC' => $this->t('Ascending'),
++        'DESC' => $this->t('Descending'),
++      ],
++      '#default_value' => $block_configuration['exposed_sort']['sort_order'],
++    ];
++
++    return $form;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSubmit(ViewsBlock $block, $form, FormStateInterface $form_state): void {
++    parent::blockSubmit($block, $form, $form_state);
++
++    $overrides = $form_state->getValue(['override']);
++    $block_config = $block->getConfiguration();
++
++    $block_config['exposed_sort'] = $overrides['exposed_sort'] ?? [];
++
++    if (empty($block_config['exposed_sort'])) {
++      // Remove override when there is no value.
++      unset($block_config['exposed_sort']);
++    }
++
++    $block->setConfiguration($block_config);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function preBlockBuild(ViewsBlock $block): void {
++    parent::preBlockBuild($block);
++
++    $block_config = $block->getConfiguration();
++
++    if (!empty($block_config['exposed_sort'])) {
++
++      // Get original sorts.
++      $sorts = $block->getViewExecutable()->display_handler->getOption('sorts');
++
++      // Get the selected exposed sort and set it as the only sort option.
++      if (!empty($block_config['exposed_sort']['sort_by'])) {
++
++        // In some situations, the exposed sort is not passed as a nested
++        // [value].
++        $sort_by = $block_config['exposed_sort']['sort_by']['value'] ?? $block_config['exposed_sort']['sort_by'];
++        $sort_order = $block_config['exposed_sort']['sort_order']['value'] ?? $block_config['exposed_sort']['sort_order'];
++
++        $exposed_sort = $sorts[$sort_by];
++        $exposed_sort['order'] = $sort_order;
++
++        $block->getViewExecutable()->display_handler->setOption('sorts', [$exposed_sort]);
++      }
++    }
++
++  }
++
++  /**
++   * Get the sort handlers as an options list.
++   *
++   * @param \Drupal\views\ViewExecutable $view
++   *   The view to get the sorting handlers from.
++   *
++   * @return array
++   *   A list of sort handlers, keyed by the field.
++   */
++  protected function getSortOptions(ViewExecutable $view): array {
++    $sort_handlers = $view->getHandlers('sort');
++
++    $options = [];
++
++    foreach ($sort_handlers as $field => $handler) {
++      // Use exposed label when available, or use machine name as backup.
++      if (!empty($handler['expose']['label'])) {
++        $options[$field] = $handler['expose']['label'];
++      }
++      else {
++        $options[$field] = $handler['field'];
++      }
++    }
++
++    return $options;
++  }
++
++}
+diff --git a/src/Plugin/views/display/block/override/ItemsPerPage.php b/src/Plugin/views/display/block/override/ItemsPerPage.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..2ebc9a30f537ddffdb3b7eb2adfca9221b70e23d
+--- /dev/null
++++ b/src/Plugin/views/display/block/override/ItemsPerPage.php
+@@ -0,0 +1,20 @@
++<?php
++
++namespace Drupal\views_block_override\Plugin\views\display\block\override;
++
++use Drupal\views_block_override\ViewsBlockOverridePluginBase;
++
++/**
++ * Provides a Items per page block override.
++ *
++ * This is just an empty wrapper for core's one and only override.
++ *
++ * @ViewsBlockOverride(
++ *   id = "items_per_page",
++ *   label = @Translation("Items per page"),
++ *   description = @Translation("Override items per page view settings."),
++ * )
++ */
++class ItemsPerPage extends ViewsBlockOverridePluginBase {
++
++}
+diff --git a/src/Plugin/views/display/block/override/MoreLinkCustomUrl.php b/src/Plugin/views/display/block/override/MoreLinkCustomUrl.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..9964500cf40d7d5abc7cc6ec8f3136cde509d8cd
+--- /dev/null
++++ b/src/Plugin/views/display/block/override/MoreLinkCustomUrl.php
+@@ -0,0 +1,73 @@
++<?php
++
++namespace Drupal\views_block_override\Plugin\views\display\block\override;
++
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\views\Plugin\Block\ViewsBlock;
++use Drupal\views_block_override\ViewsBlockOverridePluginBase;
++
++/**
++ * Provides a views block more link url override.
++ *
++ * @ViewsBlockOverride(
++ *   id = "more_link_custom_url",
++ *   label = @Translation("More link url"),
++ *   description = @Translation("Override the more link url."),
++ * )
++ */
++class MoreLinkCustomUrl extends ViewsBlockOverridePluginBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockForm(ViewsBlock $block, array &$form, FormStateInterface $form_state): array {
++    $form = parent::blockForm($block, $form, $form_state);
++
++    $block_configuration = $block->getConfiguration();
++
++    $form['override']['more_link_custom_url'] = [
++      '#type' => 'textfield',
++      '#title' => $this->t('More link URL'),
++      '#description' => $this->t('A URL for the more link.'),
++      '#default_value' => $block_configuration['more_link_custom_url'] ?? '',
++    ];
++
++    return $form;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSubmit(ViewsBlock $block, $form, FormStateInterface $form_state): void {
++    parent::blockSubmit($block, $form, $form_state);
++
++    $overrides = $form_state->getValue(['override']);
++    $block_config = $block->getConfiguration();
++
++    $block_config['more_link_custom_url'] = $overrides['more_link_custom_url'] ?? '';
++
++    if (empty($block_config['more_link_custom_url'])) {
++      // Remove override when there is no value.
++      unset($block_config['more_link_custom_url']);
++    }
++
++    $block->setConfiguration($block_config);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function execute(): void {
++    parent::execute();
++
++    $block_config = $this->block->getConfiguration();
++    $view = $this->block->getViewExecutable();
++
++    if (!empty($block_config['more_link_custom_url'])) {
++      $view->display_handler->setOption('use_more', TRUE);
++      $view->display_handler->setOption('link_display', 'custom_url');
++      $view->display_handler->setOption('link_url', $block_config['more_link_custom_url']);
++    }
++  }
++
++}
+diff --git a/src/Plugin/views/display/block/override/MoreLinkText.php b/src/Plugin/views/display/block/override/MoreLinkText.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..1bd507429d820d3ab03df4c25d9157633faf4255
+--- /dev/null
++++ b/src/Plugin/views/display/block/override/MoreLinkText.php
+@@ -0,0 +1,72 @@
++<?php
++
++namespace Drupal\views_block_override\Plugin\views\display\block\override;
++
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\views\Plugin\Block\ViewsBlock;
++use Drupal\views_block_override\ViewsBlockOverridePluginBase;
++
++/**
++ * Provides a views block more link text override.
++ *
++ * @ViewsBlockOverride(
++ *   id = "more_link_text",
++ *   label = @Translation("More link text"),
++ *   description = @Translation("Override the more link text."),
++ * )
++ */
++class MoreLinkText extends ViewsBlockOverridePluginBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockForm(ViewsBlock $block, array &$form, FormStateInterface $form_state): array {
++    $form = parent::blockForm($block, $form, $form_state);
++
++    $block_configuration = $block->getConfiguration();
++
++    $form['override']['more_link_text'] = [
++      '#type' => 'textfield',
++      '#title' => $this->t('More link text'),
++      '#description' => $this->t('The text to display for the more link.'),
++      '#default_value' => $block_configuration['more_link_text'] ?? '',
++    ];
++
++    return $form;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSubmit(ViewsBlock $block, $form, FormStateInterface $form_state): void {
++    parent::blockSubmit($block, $form, $form_state);
++
++    $overrides = $form_state->getValue(['override']);
++    $block_config = $block->getConfiguration();
++
++    // Save when there is no control field.
++    $block_config['more_link_text'] = $overrides['more_link_text'] ?? '';
++
++    if (empty($block_config['more_link_text'])) {
++      // Remove override when there is no value.
++      unset($block_config['more_link_text']);
++    }
++
++    $block->setConfiguration($block_config);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function execute(): void {
++    parent::execute();
++
++    $block_config = $this->block->getConfiguration();
++    $view = $this->block->getViewExecutable();
++
++    if (!empty($block_config['more_link_text']) && $view->display_handler->getOption('use_more')) {
++      $view->display_handler->setOption('use_more_text', $block_config['more_link_text']);
++    }
++  }
++
++}
+diff --git a/src/Plugin/views/display/block/override/PagerId.php b/src/Plugin/views/display/block/override/PagerId.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..0f6d498c1125f4959b913511a92c59201155fbd8
+--- /dev/null
++++ b/src/Plugin/views/display/block/override/PagerId.php
+@@ -0,0 +1,105 @@
++<?php
++
++namespace Drupal\views_block_override\Plugin\views\display\block\override;
++
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\views\Plugin\Block\ViewsBlock;
++use Drupal\views\ViewExecutable;
++use Drupal\views_block_override\ViewsBlockOverridePluginBase;
++
++/**
++ * Provides a pager id block override.
++ *
++ * @ViewsBlockOverride(
++ *   id = "pager_id",
++ *   label = @Translation("Pager ID"),
++ *   description = @Translation("Override the pager ID."),
++ * )
++ */
++class PagerId extends ViewsBlockOverridePluginBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSettings(array $settings, ViewExecutable $view): array {
++    $settings = parent::blockSettings($settings, $view);
++
++    $pager = $view->display_handler->getOption('pager');
++
++    $settings['pager_id']['enabled'] = FALSE;
++    $settings['pager_id']['value'] = $pager['options']['id'] ?? 0;
++
++    return $settings;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockForm(ViewsBlock $block, array &$form, FormStateInterface $form_state): array {
++    $form = parent::blockForm($block, $form, $form_state);
++
++    $block_configuration = $block->getConfiguration();
++
++    $form['override']['pager_id']['enabled'] = [
++      '#type' => 'checkbox',
++      '#title' => $this->t('Override pager ID'),
++      '#description' => $this->t("Unless you're experiencing problems with pagers related to this view, you should leave this disabled."),
++      '#default_value' => $block_configuration['pager_id']['enabled'],
++    ];
++
++    $form['override']['pager_id']['value'] = [
++      '#type' => 'number',
++      '#title' => $this->t('Pager ID'),
++      '#min' => 0,
++      '#default_value' => $block_configuration['pager_id']['value'],
++      '#description' => $this->t("Unless you're experiencing problems with pagers related to this view, you should leave this at it's default value. If using multiple pagers on one page you may need to set this number to a higher value so as not to conflict within the ?page= array. Large values will add a lot of commas to your URLs, so avoid if possible."),
++      '#states' => [
++        'visible' => [
++          [
++            ':input[name*="[override][pager_id][enabled]"]' => ['checked' => TRUE],
++          ],
++        ],
++      ],
++    ];
++
++    return $form;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSubmit(ViewsBlock $block, $form, FormStateInterface $form_state): void {
++    parent::blockSubmit($block, $form, $form_state);
++
++    $overrides = $form_state->getValue(['override']);
++    $block_config = $block->getConfiguration();
++
++    // Get the submitted overrides.
++    $values = $overrides['pager_id'] ?? [];
++
++    if (!empty($values['enabled'])) {
++      $block_config['pager_id'] = $values;
++    }
++    else {
++      unset($block_config['pager_id']);
++    }
++
++    $block->setConfiguration($block_config);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function preBlockBuild(ViewsBlock $block): void {
++    parent::preBlockBuild($block);
++
++    $block_config = $block->getConfiguration();
++
++    if (!empty($block_config['pager_id']['enabled']) && !empty($block_config['pager_id']['value'])) {
++      $pager = $block->getViewExecutable()->display_handler->getOption('pager');
++      $pager['options']['id'] = $block_config['pager_id']['value'];
++      $block->getViewExecutable()->display_handler->setOption('pager', $pager);
++    }
++  }
++
++}
+diff --git a/src/ViewsBlockDisplayOverride.php b/src/ViewsBlockDisplayOverride.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..3415a8e5afd96e1ebb922402feda0bdddf568037
+--- /dev/null
++++ b/src/ViewsBlockDisplayOverride.php
+@@ -0,0 +1,248 @@
++<?php
++
++namespace Drupal\views_block_override;
++
++use Drupal\Core\Block\BlockManagerInterface;
++use Drupal\Core\Entity\EntityTypeBundleInfo;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
++use Drupal\views\Plugin\Block\ViewsBlock;
++use Drupal\views\Plugin\views\display\Block;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++
++/**
++ * An extended block display plugin.
++ *
++ * Allows to override views settings per block instance. It uses extra
++ * display override plugins to extend the settings of a core views block
++ * display.
++ *
++ * @ingroup views_block_override
++ *
++ * @see \Drupal\views\Plugin\block\ViewsBlock
++ * @see \Drupal\views\Plugin\Derivative\ViewsBlock
++ */
++class ViewsBlockDisplayOverride extends Block implements ContainerFactoryPluginInterface {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function __construct(
++    array $configuration,
++    $plugin_id,
++    $plugin_definition,
++    EntityTypeManagerInterface $entity_type_manager,
++    BlockManagerInterface $block_manager,
++    protected EntityTypeBundleInfo $entityTypeBundleInfo,
++    protected ViewsBlockOverridePluginManagerInterface $overridePluginManager,
++  ) {
++    parent::__construct($configuration, $plugin_id, $plugin_definition, $entity_type_manager, $block_manager);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
++    return new static(
++      $configuration,
++      $plugin_id,
++      $plugin_definition,
++      $container->get('entity_type.manager'),
++      $container->get('plugin.manager.block'),
++      $container->get('entity_type.bundle.info'),
++      $container->get('views_block_override.manager')
++    );
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function defineOptions(): array {
++    $options = parent::defineOptions();
++
++    $plugins = $this->overridePluginManager->getPlugins();
++
++    foreach ($plugins as $plugin) {
++      $plugin->defineOptions($options);
++    }
++
++    return $options;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSettings(array $settings): array {
++    $settings = parent::blockSettings($settings);
++
++    $allow_settings = array_filter($this->getOption('allow'));
++
++    $plugins = $this->overridePluginManager->getPlugins();
++
++    foreach ($plugins as $plugin_id => $plugin) {
++      if (empty($allow_settings[$plugin_id])) {
++        continue;
++      }
++      $settings = $plugin->blockSettings($settings, $this->view);
++    }
++
++    return $settings;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function execute() {
++
++    $allow_settings = array_filter($this->getOption('allow'));
++
++    $plugins = $this->overridePluginManager->getPlugins();
++
++    foreach ($plugins as $plugin_id => $plugin) {
++      if (empty($allow_settings[$plugin_id])) {
++        continue;
++      }
++
++      $plugin->execute();
++    }
++
++    return parent::execute();
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function optionsSummary(&$categories, &$options): void {
++    parent::optionsSummary($categories, $options);
++
++    // Override what core did for 'allow'.
++    $filtered_allow = array_filter($this->getOption('allow'));
++    $allowed = [];
++
++    $plugins = $this->overridePluginManager->getPlugins();
++    foreach ($plugins as $plugin_id => $plugin) {
++      if (isset($filtered_allow[$plugin_id])) {
++        $plugin_summary = $plugin->optionsSummary($categories, $options);
++        if (!empty($plugin_summary)) {
++          $allowed[] = implode(', ', $plugin_summary);
++        }
++      }
++    }
++
++    $options['allow'] = [
++      'category' => 'block',
++      'title' => $this->t('Allow settings'),
++      'value' => empty($allowed) ? $this->t('None') : implode(', ', $allowed),
++    ];
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function buildOptionsForm(&$form, FormStateInterface $form_state): void {
++    parent::buildOptionsForm($form, $form_state);
++
++    // Override what core did for 'allow'.
++    if ($form_state->get('section') == 'allow') {
++      $form['allow']['#options'] = $this->overridePluginManager->getPluginOptions();
++    }
++
++    // Let the plugins build their form options.
++    $plugins = $this->overridePluginManager->getPlugins();
++    foreach ($plugins as $plugin) {
++      $plugin->buildOptionsForm($form, $form_state);
++    }
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function submitOptionsForm(&$form, FormStateInterface $form_state): void {
++    parent::submitOptionsForm($form, $form_state);
++
++    // Let the plugins handle their form submition.
++    $plugins = $this->overridePluginManager->getPlugins();
++    foreach ($plugins as $plugin) {
++      $plugin->submitOptionsForm($form, $form_state);
++    }
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockForm(ViewsBlock $block, array &$form, FormStateInterface $form_state): array {
++    $form = parent::blockForm($block, $form, $form_state);
++
++    $allow_settings = array_filter($this->getOption('allow'));
++
++    $plugins = $this->overridePluginManager->getPlugins();
++    foreach ($plugins as $plugin_id => $plugin) {
++      if (empty($allow_settings[$plugin_id])) {
++        continue;
++      }
++
++      $form = $plugin->blockForm($block, $form, $form_state);
++    }
++
++    return $form;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockValidate(ViewsBlock $block, array $form, FormStateInterface $form_state): void {
++    parent::blockValidate($block, $form, $form_state);
++
++    $allow_settings = array_filter($this->getOption('allow'));
++
++    $plugins = $this->overridePluginManager->getPlugins();
++    foreach ($plugins as $plugin_id => $plugin) {
++      if (empty($allow_settings[$plugin_id])) {
++        continue;
++      }
++
++      $plugin->blockValidate($block, $form, $form_state);
++    }
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSubmit(ViewsBlock $block, $form, FormStateInterface $form_state): void {
++    parent::blockSubmit($block, $form, $form_state);
++
++    $overrides = $form_state->getValue(['override']);
++
++    $plugins = $this->overridePluginManager->getPlugins();
++
++    foreach ($plugins as $plugin_id => $plugin) {
++
++      if (empty($overrides[$plugin_id])) {
++        continue;
++      }
++
++      $plugin->blockSubmit($block, $form, $form_state);
++    }
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function preBlockBuild(ViewsBlock $block): void {
++    parent::preBlockBuild($block);
++
++    $allow_settings = array_filter($this->getOption('allow'));
++
++    $plugins = $this->overridePluginManager->getPlugins();
++    foreach ($plugins as $plugin_id => $plugin) {
++      if (empty($allow_settings[$plugin_id])) {
++        continue;
++      }
++
++      $plugin->preBlockBuild($block);
++    }
++
++  }
++
++}
+diff --git a/src/ViewsBlockOverridePluginBase.php b/src/ViewsBlockOverridePluginBase.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..698bec7fa30cea8426bfb1c5a28702708366f3f1
+--- /dev/null
++++ b/src/ViewsBlockOverridePluginBase.php
+@@ -0,0 +1,123 @@
++<?php
++
++namespace Drupal\views_block_override;
++
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
++use Drupal\Core\Plugin\PluginBase;
++use Drupal\Core\StringTranslation\TranslatableMarkup;
++use Drupal\views\Plugin\Block\ViewsBlock;
++use Drupal\views\ViewExecutable;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++
++/**
++ * Base class for views block override plugins.
++ *
++ * @ingroup plugin_api
++ */
++abstract class ViewsBlockOverridePluginBase extends PluginBase implements ViewsBlockOverridePluginInterface, ContainerFactoryPluginInterface {
++
++  /**
++   * The block being overridden.
++   *
++   * @var \Drupal\views\Plugin\Block\ViewsBlock
++   */
++  protected ViewsBlock $block;
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
++    return new static(
++      $configuration,
++      $plugin_id,
++      $plugin_definition
++    );
++  }
++
++  /**
++   * Get the name of this plugin.
++   *
++   * @return \Drupal\Core\StringTranslation\TranslatableMarkup|string
++   *   The human readable name of this plugin.
++   */
++  public function getLabel(): TranslatableMarkup|string {
++    return $this->getPluginDefinition()['label'];
++  }
++
++  /**
++   * Get the description of this plugin.
++   *
++   * @return \Drupal\Core\StringTranslation\TranslatableMarkup|string
++   *   The description of this plugin.
++   */
++  public function getDescription(): TranslatableMarkup|string {
++    return $this->getPluginDefinition()['description'];
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function defineOptions(array &$options): void {
++    if (empty($options['allow']['contains'][$this->getPluginId()])) {
++      $options['allow']['contains'][$this->getPluginId()] = ['default' => FALSE];
++    }
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSettings(array $settings, ViewExecutable $view): array {
++    return $settings;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function execute(): void {}
++
++  /**
++   * {@inheritdoc}
++   */
++  public function optionsSummary(&$categories, &$options): array {
++    return [
++      $this->getLabel(),
++    ];
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function buildOptionsForm(&$form, FormStateInterface $form_state): void {}
++
++  /**
++   * {@inheritdoc}
++   */
++  public function submitOptionsForm(&$form, FormStateInterface $form_state): void {}
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockForm(ViewsBlock $block, array &$form, FormStateInterface $form_state): array {
++    return $form;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockValidate(ViewsBlock $block, array $form, FormStateInterface $form_state): void {}
++
++  /**
++   * {@inheritdoc}
++   */
++  public function blockSubmit(ViewsBlock $block, array $form, FormStateInterface $form_state): void {}
++
++  /**
++   * {@inheritdoc}
++   */
++  public function preBlockBuild(ViewsBlock $block): void {
++    // Store the block, so other functions can use it.
++    $this->block = $block;
++  }
++
++}
+diff --git a/src/ViewsBlockOverridePluginInterface.php b/src/ViewsBlockOverridePluginInterface.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..8d25dcddd6bdd693607aefaefcfee1aeaeb2fc2e
+--- /dev/null
++++ b/src/ViewsBlockOverridePluginInterface.php
+@@ -0,0 +1,181 @@
++<?php
++
++namespace Drupal\views_block_override;
++
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\StringTranslation\TranslatableMarkup;
++use Drupal\views\Plugin\Block\ViewsBlock;
++use Drupal\views\ViewExecutable;
++
++/**
++ * Provides a views block override plugin interface.
++ *
++ * @see \Drupal\views_block_override\Annotation\ViewsBlockOverride
++ * @see plugin_api
++ */
++interface ViewsBlockOverridePluginInterface {
++
++  /**
++   * Get the label of this plugin.
++   *
++   * @return \Drupal\Core\StringTranslation\TranslatableMarkup|string
++   *   The human readable name of this plugin.
++   */
++  public function getLabel(): TranslatableMarkup|string;
++
++  /**
++   * Get the description of this plugin.
++   *
++   * @return \Drupal\Core\StringTranslation\TranslatableMarkup|string
++   *   The description of this plugin.
++   */
++  public function getDescription(): TranslatableMarkup|string;
++
++  /**
++   * Information about options for all kinds of purposes will be held here.
++   *
++   * @param array $options
++   *   The options array to modify or to add items to.
++   *
++   * @see \Drupal\views\Plugin\views\display\Block::defineOptions()
++   * @see \Drupal\views_block_override\ViewsBlockDisplayOverride::defineOptions()
++   */
++  public function defineOptions(array &$options): void;
++
++  /**
++   * Returns plugin-specific settings for the block.
++   *
++   * This method is only called when this plugin is allowed in the block
++   * override settings of the view configuration.
++   *
++   * @param array $settings
++   *   The complete settings of the block.
++   * @param \Drupal\views\ViewExecutable $view
++   *   The view executable being manipulated.
++   *
++   * @return array
++   *   An array of block-specific settings to override the defaults provided in
++   *   \Drupal\views\Plugin\Block\ViewsBlock::defaultConfiguration().
++   *
++   * @see \Drupal\views\Plugin\views\display\Block::blockSettings()
++   * @see \Drupal\views_block_override\ViewsBlockDisplayOverride::blockSettings()
++   */
++  public function blockSettings(array $settings, ViewExecutable $view): array;
++
++  /**
++   * Allow for maniulating the view right before execution.
++   *
++   * This method is only called when this plugin is allowed in the block
++   * override settings of the view configuration.
++   *
++   * @see \Drupal\views\Plugin\views\display\Block::execute()
++   * @see \Drupal\views_block_override\ViewsBlockDisplayOverride::execute()
++   */
++  public function execute();
++
++  /**
++   * Provide the summary for block options in the views UI.
++   *
++   * @return array
++   *   A list of strings summarizing this plugins settings.
++   *
++   * @see \Drupal\views\Plugin\views\display\Block::optionsSummary()
++   * @see \Drupal\views_block_override\ViewsBlockDisplayOverride::optionsSummary()
++   */
++  public function optionsSummary(&$categories, &$options): array;
++
++  /**
++   * Provide the default form for setting options.
++   *
++   * @see \Drupal\views\Plugin\views\display\Block::buildOptionsForm()
++   * @see \Drupal\views_block_override\ViewsBlockDisplayOverride::buildOptionsForm()
++   */
++  public function buildOptionsForm(&$form, FormStateInterface $form_state): void;
++
++  /**
++   * Perform any necessary changes to the options form values prior to storage.
++   *
++   * There is no need for this function to actually store the data.
++   *
++   * @see \Drupal\views\Plugin\views\display\Block::submitOptionsForm()
++   * @see \Drupal\views_block_override\ViewsBlockDisplayOverride::submitOptionsForm()
++   */
++  public function submitOptionsForm(&$form, FormStateInterface $form_state): void;
++
++  /**
++   * Adds the configuration form elements specific to this views block plugin.
++   *
++   * This method is only called when this plugin is allowed in the block
++   * override settings of the view configuration.
++   *
++   * @param \Drupal\views\Plugin\Block\ViewsBlock $block
++   *   The ViewsBlock plugin.
++   * @param array $form
++   *   The form definition array for the block configuration form.
++   * @param \Drupal\Core\Form\FormStateInterface $form_state
++   *   The current state of the form.
++   *
++   * @return array
++   *   The renderable form array representing the entire configuration form.
++   *
++   * @see \Drupal\views\Plugin\views\display\Block::blockForm()
++   * @see \Drupal\views_block_override\ViewsBlockDisplayOverride::blockForm()
++   */
++  public function blockForm(ViewsBlock $block, array &$form, FormStateInterface $form_state): array;
++
++  /**
++   * Handles form validation for the views block configuration form.
++   *
++   * This method is only called when this plugin is allowed in the block
++   * override settings of the view configuration.
++   *
++   * @param \Drupal\views\Plugin\Block\ViewsBlock $block
++   *   The ViewsBlock plugin.
++   * @param array $form
++   *   The form definition array for the block configuration form.
++   * @param \Drupal\Core\Form\FormStateInterface $form_state
++   *   The current state of the form.
++   *
++   * @see \Drupal\views\Plugin\views\display\Block::blockValidate()
++   * @see \Drupal\views_block_override\ViewsBlockDisplayOverride::blockValidate()
++   */
++  public function blockValidate(ViewsBlock $block, array $form, FormStateInterface $form_state);
++
++  /**
++   * Handles form submission for the views block configuration form.
++   *
++   * This method is only called when this plugin is allowed in the block
++   * override settings of the view configuration.
++   *
++   * @param \Drupal\views\Plugin\Block\ViewsBlock $block
++   *   The ViewsBlock plugin.
++   * @param array $form
++   *   The form definition array for the full block configuration form.
++   * @param \Drupal\Core\Form\FormStateInterface $form_state
++   *   The current state of the form.
++   *
++   * @see \Drupal\views\Plugin\views\display\Block::blockSubmit()
++   * @see \Drupal\views_block_override\ViewsBlockDisplayOverride::blockSubmit()
++   */
++  public function blockSubmit(ViewsBlock $block, array $form, FormStateInterface $form_state);
++
++  /**
++   * Allows to change the display settings right before executing the block.
++   *
++   * This method is only called when this plugin is allowed in the block
++   * override settings of the view configuration.
++   *
++   * If you override this method, and want to manipulate the view or block in
++   * the execute call, you should call the parent base implentation. It stores
++   * the block in the plugin instance.
++   *
++   * @param \Drupal\views\Plugin\Block\ViewsBlock $block
++   *   The block plugin for views displays.
++   *
++   * @see \Drupal\views\Plugin\views\display\Block::preBlockBuild()
++   * @see \Drupal\views_block_override\ViewsBlockOverridePluginBase::preBlockBuild()
++   * @see \Drupal\views_block_override\ViewsBlockDisplayOverride::preBlockBuild()
++   */
++  public function preBlockBuild(ViewsBlock $block): void;
++
++}
+diff --git a/src/ViewsBlockOverridePluginManager.php b/src/ViewsBlockOverridePluginManager.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..455ffe730c194167ae70ec9f1d95669fbeae2cdd
+--- /dev/null
++++ b/src/ViewsBlockOverridePluginManager.php
+@@ -0,0 +1,81 @@
++<?php
++
++namespace Drupal\views_block_override;
++
++use Drupal\Component\Plugin\Exception\PluginException;
++use Drupal\Core\Cache\CacheBackendInterface;
++use Drupal\Core\Extension\ModuleHandlerInterface;
++use Drupal\Core\Plugin\DefaultPluginManager;
++
++/**
++ * Provides a menu sort plugin manager.
++ */
++class ViewsBlockOverridePluginManager extends DefaultPluginManager implements ViewsBlockOverridePluginManagerInterface {
++
++  /**
++   * A cached lists of plugin instances.
++   *
++   * @var \Drupal\views_block_override\ViewsBlockOverridePluginInterface[]
++   */
++  protected array $pluginInstances = [];
++
++  /**
++   * Constructs a ViewsBlockOverridePluginManager object.
++   *
++   * @param \Traversable $namespaces
++   *   An object that implements \Traversable which contains the root paths
++   *   keyed by the corresponding namespace to look for plugin implementations.
++   * @param \Drupal\Core\Cache\CacheBackendInterface $cache_backend
++   *   Cache backend instance to use.
++   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
++   *   The module handler to invoke the alter hook with.
++   */
++  public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
++    parent::__construct(
++      'Plugin/views/display/block/override',
++      $namespaces,
++      $module_handler,
++      'Drupal\views_block_override\ViewsBlockOverridePluginInterface',
++      'Drupal\views_block_override\Annotation\ViewsBlockOverride'
++    );
++    $this->alterInfo('menu_sort_info');
++    $this->setCacheBackend($cache_backend, 'views_plugins_display_block_override_plugins');
++  }
++
++  /**
++   * {@inheritDoc}
++   */
++  public function getPluginOptions(): array {
++    $definitions = $this->getDefinitions() ?? [];
++
++    $options = array_map(
++      function (array $definition) {
++        return (string) $definition['label'];
++      },
++      $definitions
++    );
++
++    return $options ?: [];
++  }
++
++  /**
++   * {@inheritDoc}
++   */
++  public function getPlugins(): array {
++
++    if (empty($this->pluginInstances)) {
++      $definitions = $this->getDefinitions() ?? [];
++      foreach ($definitions as $plugin_id => $definition) {
++        try {
++          $this->pluginInstances[$plugin_id] = $this->createInstance($plugin_id, $definition);
++        }
++        catch (PluginException) {
++          // We do nothing, we just skip it.
++        }
++      }
++    }
++
++    return $this->pluginInstances;
++  }
++
++}
+diff --git a/src/ViewsBlockOverridePluginManagerInterface.php b/src/ViewsBlockOverridePluginManagerInterface.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..6cf6e44212c91fa5dd6392f6148d60e5ccd3ce7e
+--- /dev/null
++++ b/src/ViewsBlockOverridePluginManagerInterface.php
+@@ -0,0 +1,32 @@
++<?php
++
++namespace Drupal\views_block_override;
++
++use Drupal\Component\Plugin\PluginManagerInterface;
++
++/**
++ * Provides a views block override plugins manager.
++ *
++ * @see \Drupal\views_block_override\Annotation\ViewsBlockOverride
++ * @see \Drupal\views_block_override\ViewsBlockOverridePluginInterface
++ * @see plugin_api
++ */
++interface ViewsBlockOverridePluginManagerInterface extends PluginManagerInterface {
++
++  /**
++   * Get a key value options array of available plugins.
++   *
++   * @return array
++   *   A list key values pairs keyed by plugin id and plugin labels as values.
++   */
++  public function getPluginOptions(): array;
++
++  /**
++   * Get a key value array of plugin instances.
++   *
++   * @return \Drupal\views_block_override\ViewsBlockOverridePluginInterface[]
++   *   A list of available plugins, keyed by plugin id.
++   */
++  public function getPlugins(): array;
++
++}
+diff --git a/views_block_override.install b/views_block_override.install
+new file mode 100644
+index 0000000000000000000000000000000000000000..ea5e7e4db1e0e03c789b3ffec4f9c93f34ba372b
+--- /dev/null
++++ b/views_block_override.install
+@@ -0,0 +1,84 @@
++<?php
++
++/**
++ * @file
++ * Install file for views_blocks_override module.
++ */
++
++use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
++use Drupal\Component\Plugin\Exception\PluginNotFoundException;
++
++/**
++ * Implements hook_views_plugins_display_alter().
++ */
++function views_block_override_update_9001(array &$sandbox): void {
++
++  $logger = \Drupal::logger('update');
++
++  if (empty($sandbox['views'])) {
++    // Initialise the update batch.
++    try {
++      $storage = \Drupal::entityTypeManager()->getStorage('view');
++    }
++    catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {
++      $logger->error($e->getMessage());
++      return;
++    }
++
++    $sandbox['views'] = $storage->getQuery()
++      ->accessCheck(FALSE)
++      ->execute();
++
++    if (empty($sandbox['views'])) {
++      $logger->notice(t('No views to update.'));
++      return;
++    }
++
++    $sandbox['views'] = array_keys($sandbox['views']);
++    $sandbox['current'] = 0;
++    $sandbox['total'] = count($sandbox['views']);
++    $sandbox['#finished'] = 0;
++  }
++
++  // Process each item found on by one.
++  $id = $sandbox['views'][$sandbox['current']] ?? 0;
++
++  // Load the config object for editing.
++  $config = \Drupal::service('config.factory')->getEditable('views.view.' . $id);
++
++  // Get full config data.
++  $data = $config->getRawData();
++
++  if (empty($data)) {
++    $logger->warning(t('View %id could not be loaded.', [
++      '%id' => $id,
++    ]));
++  }
++  else {
++    $display_ids = [];
++    foreach ($data['display'] as $display_id => $display_settings) {
++      if ($display_settings['display_plugin'] == 'views_block_override') {
++        $data['display'][$display_id]['display_plugin'] = 'block';
++        $display_ids[] = $display_id;
++      }
++    }
++
++    if (count($display_ids)) {
++      // Save the modified configuration.
++      $config->setData($data)->save();
++
++      $logger->notice(t('View %id updated displays: %display_ids.', [
++        '%id' => $id,
++        '%display_ids' => implode(', ', $display_ids),
++      ]));
++    }
++  }
++
++  $sandbox['current']++;
++  $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
++
++  if ($sandbox['#finished'] >= 1) {
++    $logger->notice(t('Rebuilding view cache'));
++    \Drupal::service('views.views_data')->clear();
++  }
++}
+diff --git a/views_block_override.module b/views_block_override.module
+new file mode 100644
+index 0000000000000000000000000000000000000000..ef9e6abe2cb868ab4eea3863df25f049d4c66a2e
+--- /dev/null
++++ b/views_block_override.module
+@@ -0,0 +1,16 @@
++<?php
++
++/**
++ * @file
++ * Module file for views_blocks_override module.
++ */
++
++use Drupal\views_block_override\ViewsBlockDisplayOverride;
++
++/**
++ * Implements hook_views_plugins_display_alter().
++ */
++function views_block_override_views_plugins_display_alter(array &$plugins): void {
++  // Override the core Block class with our own.
++  $plugins['block']['class'] = ViewsBlockDisplayOverride::class;
++}
+diff --git a/views_block_override.services.yml b/views_block_override.services.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..7a449582b04b36cefaed5ae9d81945d5a42370f1
+--- /dev/null
++++ b/views_block_override.services.yml
+@@ -0,0 +1,4 @@
++services:
++  views_block_override.manager:
++    class: Drupal\views_block_override\ViewsBlockOverridePluginManager
++    parent: default_plugin_manager

@@ -1,0 +1,19 @@
+langcode: en
+sources:
+  citizen:
+    label: 'Citizen CERT'
+    source_url: 'https://wid.cert-bund.de/content/public/buergercert/rss'
+    source_format: rss
+    teaser_count: 9
+    cta_url: 'https://www.buerger-cert.de'
+    cta_text: 'Citizen CERT RSS feed'
+  federal:
+    label: 'Federal CERT Messages'
+    source_url: 'https://wid.cert-bund.de/content/public/securityAdvisory/rss'
+    source_format: rss
+    teaser_count: 9
+    cta_url: 'https://wid.cert-bund.de'
+    cta_text: 'Federal CERT RSS feed'
+cron_interval: 360
+cache_max_age: 3600
+request_timeout: 8

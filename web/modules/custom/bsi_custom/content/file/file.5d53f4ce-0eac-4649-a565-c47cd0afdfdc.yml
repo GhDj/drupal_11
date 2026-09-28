@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 5d53f4ce-0eac-4649-a565-c47cd0afdfdc
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: jlb_01-bedrohungen.jpg
+  uri:
+    -
+      value: 'private://image/2026-05/jlb_01-bedrohungen.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 95901
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1778149357

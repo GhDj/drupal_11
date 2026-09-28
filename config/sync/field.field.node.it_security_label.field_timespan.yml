@@ -1,0 +1,21 @@
+uuid: 55c911a9-0334-45bf-ac63-bc9da39bbb7f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_timespan
+    - node.type.it_security_label
+  module:
+    - datetime_range
+id: node.it_security_label.field_timespan
+field_name: field_timespan
+entity_type: node
+bundle: it_security_label
+label: Validity
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

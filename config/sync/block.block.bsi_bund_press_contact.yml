@@ -1,0 +1,31 @@
+uuid: 178d91f2-625e-4868-a6c1-4acfbb60f4d6
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+  theme:
+    - bsi_bund
+id: bsi_bund_press_contact
+theme: bsi_bund
+region: content
+weight: -11
+provider: null
+plugin: bsi_custom_press_contact
+settings:
+  id: bsi_custom_press_contact
+  label: 'Press contact'
+  label_display: visible
+  provider: bsi_custom
+  context_mapping:
+    node: '@node.node_route_context:node'
+  press_contact: 30
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article

@@ -1,0 +1,21 @@
+uuid: 240f00aa-d5ad-40fa-9250-950fd02e6b39
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_archivation_date
+    - node.type.certificate
+  module:
+    - datetime
+id: node.certificate.field_archivation_date
+field_name: field_archivation_date
+entity_type: node
+bundle: certificate
+label: 'Archiving date'
+description: 'Date from which the certificate is considered archived'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

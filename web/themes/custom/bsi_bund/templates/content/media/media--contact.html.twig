@@ -1,0 +1,174 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see \Drupal\media\MediaThemeHooks::preprocessMedia
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set has_address = media.field_address.address_line1|default(null) and true or false %}
+
+{% if view_mode != 'default' %}
+  <div{{ attributes.addClass('bsi-contact', 'bsi-contact--teaser') }}>
+{% endif %}
+
+  {% block icon %}
+    {% if content.field_icon %}
+      {% include '@bsi_bund/components/icon.twig' with {
+        name: media.field_icon.target_id|split(':')[1]|default('multi-user'),
+        decorative: true,
+        extra_classes: 'bsi-contact__icon',
+      } only %}
+    {% endif %}
+  {% endblock %}
+
+  <div class="bsi-contact__content">
+    {{ title_prefix }}
+
+    {% block title %}
+      {% if content.name.0 -%}
+        <h2{{ title_attributes.addClass('bsi-heading', 'bsi-heading--2', 'bsi-contact__title') }}>
+          {{ content.name.0 }}
+        </h2>
+      {%- endif %}
+    {% endblock %}
+
+    {{ title_suffix }}
+
+    {% block info %}
+      <div class="bsi-contact__info">
+        {% set address_data = media.field_address.0 %}
+
+        {% if address_data.organization %}
+          <span class="bsi-contact__info-row">
+            {{ address_data.organization }}
+          </span>
+        {% endif %}
+
+        {% if address_data.given_name or address_data.family_name %}
+          <span class="bsi-contact__info-row bsi-contact__info-row--person">
+            {{ address_data.given_name }}
+            {{ address_data.family_name }}
+          </span>
+        {% else %}
+          <span class="bsi-contact__info-row">
+            {{ address_data.family_name }}
+          </span>
+        {% endif %}
+
+        {% if address_data.additional_name %}
+          <span class="bsi-contact__info-row">
+            {{ address_data.additional_name }}
+          </span>
+        {% endif %}
+      </div>
+    {% endblock %}
+
+    {% block details %}
+      {% set details = content|without(
+        'field_icon',
+        'name',
+        not has_address ? 'field_address',
+        'field_social_media',
+      )|filter((field) => field.0) %}
+
+      {% if details %}
+        <ul class="bsi-list bsi-list--unstyled {{ view_mode == 'default' ? 'bsi-contact__detail-list' : 'bsi-contact__details' }}">
+          {% for field_name, items in details %}
+
+            {# Expose every item as a separate data row. #}
+            {% for delta, item in items|filter((v, k) => k|first != '#') %}
+              <li class="bsi-list__item">
+
+                {# Prepare the single item, but keep wrapper data for preprocessing. #}
+                {% set filtered_items = items|filter((v, k) => k|first == '#' or k == delta)
+                  |merge({ '#label_display': 'hidden' }) %}
+
+                {% if items['#label_display'] == 'hidden' %}
+                  <span class="bsi-contact__label{{ items['#label_display'] == 'visually_hidden' ? ' visually-hidden' }}">
+                    {{ _self.data_label(filtered_items) }}:
+                  </span>
+
+                  <span class="bsi-contact__value">
+                    {% block data_value %}
+                      {% if filtered_items.0['#type']|default(null) == 'link' %}
+                        {{ filtered_items|merge({
+                          '#icon': false,
+                          '#attributes': create_attribute(filtered_items['#attributes']|default([]))
+                            .addClass('bsi-link', 'bsi-contact__link')
+                            .toArray(),
+                        }) }}
+                      {% else %}
+                        {# Render as-is. #}
+                        {{ filtered_items }}
+                      {% endif %}
+                    {% endblock %}
+                  </span>
+                {% else %}
+                  {# Show link with icon #}
+                  {{ filtered_items|merge({
+                    '#icon': {
+                      'field_phone': 'phone',
+                      'field_mail': 'mail',
+                      'field_website': 'link-chain',
+                    }[field_name]|default(false),
+                    '#attributes': create_attribute(filtered_items['#attributes']|default([]))
+                      .addClass('bsi-link', 'bsi-contact__link')
+                      .toArray(),
+                  }) }}
+                {% endif %}
+
+              </li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endblock %}
+
+    {% block cta %}
+      {% if content.field_social_media.0 %}
+        {% include '@bsi_bund/elements/link.html.twig' with {
+          url: content.field_social_media.0['#url'],
+          title: content.field_social_media.0['#title'],
+          icon: 'chevron-right',
+          icon_position: 'before',
+          extra_classes: [
+            'bsi-contact__ctalink',
+            'bsi-link--button',
+            'bsi-link--tertiary-button',
+          ],
+        } only %}
+      {% endif %}
+    {% endblock %}
+
+  </div>
+
+{% if view_mode != 'default' %}
+  </div>
+{% endif %}
+
+
+{% macro data_label(items) %}
+  {# Must match keys on /admin/structure/media/manage/contact/fields/media.contact.field_phone #}
+  {% set phone_label_map = {
+    0: 'Phone'|trans({}, {context: 'Phone label abbreviation'}),
+    1: 'Service'|trans({}, {context: 'Phone label abbreviation'}),
+    2: 'Fax'|trans({}, {context: 'Phone label abbreviation'}),
+    3: 'Mobile'|trans({}, {context: 'Phone label abbreviation'}),
+  } %}
+
+  {% if items['#field_name'] == 'field_phone' %}
+    {{- phone_label_map[items.0['#preset_option']]|default(
+      'Phone'|trans({}, {context: 'Phone label abbreviation'})
+    ) -}}
+  {% else %}
+    {{ items['#title'] }}
+  {% endif %}
+{% endmacro %}

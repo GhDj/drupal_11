@@ -1,0 +1,56 @@
+{#
+  Paragraph template for the sequence item paragraph type.
+#}
+{% set classes = [
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
+
+{% block paragraph %}
+  {# check for timeline-variant #}
+  {% set is_timeline = attributes.hasClass('bsi-timeline__item') %}
+
+  {% block content %}
+    {# timeline #}
+    {% if is_timeline %}
+
+      <div{{ attributes.addClass(classes) }}>
+
+        {# timeline marker #}
+        <div class="bsi-timeline__marker"></div>
+
+        {# cards #}
+        <div class="bsi-timeline__card">
+          {# section title #}
+          <h3 class="bsi-timeline__card-title">{{ content.field_section_title.0 }}</h3>
+
+          {# section text #}
+          {{ content|without('field_step_label') }}
+        </div>
+      </div>
+
+    {% else %}
+      {# process #}
+
+      {# section label #}
+      {% if content.field_step_label.0  %}
+        <span class="bsi-process__label">{{ content.field_step_label.0 }}</span>
+      {% endif %}
+
+      <div class="bsi-process__content">
+
+        {# section title #}
+        <h3 class="bsi-process__title">{{ content.field_section_title.0 }}</h3>
+
+        {# section text #}
+        {{ content.field_section_text }}
+      </div>
+
+      {# section additionals #}
+      {% if content.field_highlight.0 %}
+        <div class="bsi-bodytext bsi-process__addition">
+          {{ content.field_highlight }}
+        </div>
+      {% endif %}
+    {% endif %}
+  {% endblock %}
+{% endblock paragraph %}

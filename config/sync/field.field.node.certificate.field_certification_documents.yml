@@ -1,0 +1,24 @@
+uuid: af52bcc2-b634-4513-a857-cc57eeee9573
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_certification_documents
+    - filter.format.advanced
+    - node.type.certificate
+  module:
+    - text
+id: node.certificate.field_certification_documents
+field_name: field_certification_documents
+entity_type: node
+bundle: certificate
+label: 'Certification Reports / Security Specifications'
+description: 'Central certification documents that can be linked here'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - advanced
+field_type: text_long

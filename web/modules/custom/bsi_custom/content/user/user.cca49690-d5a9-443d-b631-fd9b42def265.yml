@@ -1,0 +1,46 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: cca49690-d5a9-443d-b631-fd9b42def265
+  default_langcode: de
+default:
+  preferred_langcode:
+    -
+      value: de
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: 'Test Verwaltung - Bund'
+  pass:
+    -
+      value: $2y$10$a0uw.kAVr9LlDkkxXVitkOojZS/wCHck4GXjX5QJv2Cyr5BiM1H9G
+      existing: ''
+      pre_hashed: false
+  mail:
+    -
+      value: test-bund@init.de
+  timezone:
+    -
+      value: Europe/Berlin
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1784040401
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: test-bund@init.de
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0

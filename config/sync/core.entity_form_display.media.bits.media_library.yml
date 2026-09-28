@@ -1,0 +1,47 @@
+uuid: 5e8606af-64d4-4784-84a3-84429b4a7e37
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.bits.field_criticality
+    - field.field.media.bits.field_media_file
+    - media.type.bits
+  module:
+    - file
+id: media.bits.media_library
+targetEntityType: media
+bundle: bits
+mode: media_library
+content:
+  field_media_file:
+    type: file_generic
+    weight: 1
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  changed: true
+  created: true
+  field_criticality: true
+  path: true
+  status: true
+  thumbnail: true
+  translation: true
+  uid: true

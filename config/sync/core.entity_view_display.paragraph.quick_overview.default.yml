@@ -1,0 +1,42 @@
+uuid: 8258721e-0c48-48e9-b94c-a58a6cae061a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.quick_overview.field_items
+    - field.field.paragraph.quick_overview.field_jumplink
+    - field.field.paragraph.quick_overview.field_section_title
+    - paragraphs.paragraphs_type.quick_overview
+  module:
+    - bsi_custom
+    - entity_reference_revisions
+id: paragraph.quick_overview.default
+targetEntityType: paragraph
+bundle: quick_overview
+mode: default
+content:
+  field_items:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_section_title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_jumplink: true
+  search_api_excerpt: true

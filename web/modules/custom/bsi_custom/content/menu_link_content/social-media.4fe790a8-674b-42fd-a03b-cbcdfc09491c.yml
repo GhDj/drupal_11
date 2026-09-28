@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 4fe790a8-674b-42fd-a03b-cbcdfc09491c
+  bundle: menu_link_content
+  default_langcode: zxx
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Bluesky
+  menu_name:
+    -
+      value: social-media
+  link:
+    -
+      uri: 'https://bsky.app/profile/bsi.bund.de'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -49
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1779451754

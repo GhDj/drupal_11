@@ -1,0 +1,16 @@
+settings:
+  plugins:
+    ckeditor5_style:
+      styles:
+        -
+          label: Rahmen
+        -
+          label: 'Linie Grau'
+        -
+          label: 'Linie Blau (sekundär)'
+        -
+          label: 'Gelbe Box'
+        -
+          label: 'Graue Box (sekundär)'
+        -
+          label: 'Button (sekundär)'

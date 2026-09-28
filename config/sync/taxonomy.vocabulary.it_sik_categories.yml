@@ -1,0 +1,9 @@
+uuid: 04077eda-004e-4454-86d5-9552caafb1ce
+langcode: en
+status: true
+dependencies: {  }
+name: 'IT-SiK categories'
+vid: it_sik_categories
+description: null
+weight: 0
+new_revision: false

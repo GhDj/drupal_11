@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for bsi_cert.
+ */
+
+use Drupal\bsi_cert\Service\BsiCertFeedClient;
+
+/**
+ * Add the cron fetch interval and drop the obsolete cache_max_age setting.
+ */
+function bsi_cert_update_10001(): void {
+  $config = \Drupal::configFactory()->getEditable('bsi_cert.settings');
+  if ($config->get('cron_interval') === NULL) {
+    $config->set('cron_interval', 300);
+  }
+  // The feed is no longer read on page requests, so this value is unused.
+  $config->clear('cache_max_age');
+  $config->save();
+}
+
+/**
+ * Migrate stored feed items to the new state keys and reset the throttle.
+ */
+function bsi_cert_update_10002(): void {
+  $state = \Drupal::state();
+  foreach ([BsiCertFeedClient::TYPE_CITIZEN, BsiCertFeedClient::TYPE_FEDERAL] as $source) {
+    // Old key: bsi_cert.last_good.<source>. New key: bsi_cert.items.<source>.
+    $legacy = $state->get('bsi_cert.last_good.' . $source);
+    if ($legacy !== NULL && $state->get(BsiCertFeedClient::STATE_PREFIX . $source) === NULL) {
+      $state->set(BsiCertFeedClient::STATE_PREFIX . $source, $legacy);
+    }
+    $state->delete('bsi_cert.last_good.' . $source);
+  }
+  // Force the next cron run to fetch.
+  $state->set('bsi_cert.next_run', 0);
+}

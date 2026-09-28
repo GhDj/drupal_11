@@ -1,0 +1,143 @@
+diff --git a/maxlength.module b/maxlength.module
+--- a/maxlength.module
++++ b/maxlength.module
+@@ -33,25 +33,13 @@
+     MaxLengthCallbacks::class,
+     'maxlengthPreRender',
+   ];
+-  $cache['textfield']['#process'][] = [
+-    MaxLengthCallbacks::class,
+-    'processElement',
+-  ];
+   $cache['textarea']['#pre_render'][] = [
+     MaxLengthCallbacks::class,
+     'maxlengthPreRender',
+   ];
+-  $cache['textarea']['#process'][] = [
+-    MaxLengthCallbacks::class,
+-    'processElement',
+-  ];
+   $cache['text_format']['#pre_render'][] = [
+     MaxLengthCallbacks::class,
+     'maxlengthPreRender',
+-  ];
+-  $cache['text_format']['#process'][] = [
+-    MaxLengthCallbacks::class,
+-    'processElement',
+   ];
+ }
+
+@@ -107,8 +99,7 @@
+       $element['maxlength_js_enforce'] = [
+         '#type' => 'checkbox',
+         '#title' => t('Hard limit'),
+-        '#description' => t('If checked, a user is prevented from typing past the character limit.<br/>
+-          If unchecked, a user sees a negative character count when typing past the limit.'),
++        '#description' => t('If enabled, the author is prevented from saving the form if the character limit exceeds the maxlength.'),
+         '#default_value' => $plugin->getThirdPartySetting('maxlength', 'maxlength_js_enforce'),
+       ];
+     }
+@@ -144,7 +135,7 @@
+     }
+     if (!empty($allowed_settings['truncate_setting'])) {
+       if ($context['widget']->getThirdPartySetting('maxlength', 'maxlength_js_enforce')) {
+-        $summary[] = t('Maximum length - Hard limit');
++        $summary[] = t('Maximum length - Display error on save');
+       }
+     }
+   }
+@@ -191,6 +182,14 @@
+       if (isset($thirdPartySettings['maxlength']['maxlength_js_enforce']) && $thirdPartySettings['maxlength']['maxlength_js_enforce']) {
+         $element['value']['#attributes']['#maxlength_js_enforce'] = TRUE;
+         $element['#attributes']['#maxlength_js_enforce'] = TRUE;
++        // Add validation callback to enforce maxlength setting on form save.
++        $element['#element_validate'][] = [MaxLengthCallbacks::class, 'validateMaxLength'];
++        if (isset($element['value'])) {
++          $element['value']['#element_validate'][] = [MaxLengthCallbacks::class, 'validateMaxLength'];
++        }
++        if (isset($thirdPartySettings['maxlength']['maxlength_js_summary']) && $thirdPartySettings['maxlength']['maxlength_js_summary'] > 0) {
++          $element['summary']['#element_validate'][] = [MaxLengthCallbacks::class, 'validateMaxLength'];
++        }
+       }
+     }
+   }
+
+diff --git a/src/MaxLengthCallbacks.php b/src/MaxLengthCallbacks.php
+index 4bd47c3a9b9dc8ed2c20e12a7510073626403378..02a8ae9958b8d17ed2f5cc19e885c305a5ce384d 100644
+--- a/src/MaxLengthCallbacks.php
++++ b/src/MaxLengthCallbacks.php
+@@ -2,6 +2,7 @@
+
+ namespace Drupal\maxlength;
+
++use Drupal\Component\Utility\NestedArray;
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\Core\Security\TrustedCallbackInterface;
+
+@@ -14,7 +15,7 @@ class MaxLengthCallbacks implements TrustedCallbackInterface {
+    * {@inheritDoc}
+    */
+   public static function trustedCallbacks() {
+-    return ['maxlengthPreRender', 'processElement'];
++    return ['maxlengthPreRender'];
+   }
+
+   /**
+@@ -41,21 +42,45 @@ class MaxLengthCallbacks implements TrustedCallbackInterface {
+   }
+
+   /**
+-   * Process handler for the form elements that can have maxlength attribute.
++   * Validation callback for form save validation of maximum length.
+    *
+-   * @param array|mixed $element
+-   *   The render array.
++   * @param array $element
++   *   The element being processed.
+    * @param \Drupal\Core\Form\FormStateInterface $form_state
+-   *   Form state.
+-   *
+-   * @return array
+-   *   The processed render array.
++   *   The current state of the form.
++   * @param array $complete_form
++   *   The complete form structure.
+    */
+-  public static function processElement($element, FormStateInterface $form_state) {
+-    if (isset($element['#attributes']['#maxlength_js_enforce']) && $element['#attributes']['#maxlength_js_enforce']) {
+-      $element['#attributes']['class'][] = 'maxlength_js_enforce';
++  public static function validateMaxLength(&$element, FormStateInterface $form_state, &$complete_form) {
++    if (!empty($element['#value']) && !empty($element['#attributes']['data-maxlength'])) {
++      // Replace CRLF newlines with plain LF to be consistent with javascript count,
++      // see ml.twochar_lineending()
++      $value = str_replace("\r\n", "\n", $element['#value']);
++      $maxlength = $element['#attributes']['data-maxlength'];
++      $length = mb_strlen($value);
++      if ($length > $maxlength) {
++        $name = $element['#title'];
++
++        // If this is a summary field of a text and summary combo, add the actual field label
++        // to the error message to be more helpful.
++        if (!empty($element['#array_parents'])) {
++          $key = end($element['#array_parents']);
++          if ($key === 'summary') {
++            $parent_path = array_slice($element['#array_parents'], 0, -1);
++            $key_exists = NULL;
++            $parent = NestedArray::getValue($complete_form, $parent_path, $key_exists);
++            if ($key_exists && !empty($parent['#title'])) {
++              $name = $parent['#title'] . ' summary';
++            }
++          }
++        }
++
++        $form_state->setError($element, t('@name cannot be longer than %max characters but is currently %length characters long.', [
++          '@name' => $name,
++          '%max' => $maxlength,
++          '%length' => $length
++        ]));
++      }
+     }
+-    return $element;
+   }
+-
+ }

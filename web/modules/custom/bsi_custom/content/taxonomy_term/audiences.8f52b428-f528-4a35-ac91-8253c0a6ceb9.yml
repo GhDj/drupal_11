@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 8f52b428-f528-4a35-ac91-8253c0a6ceb9
+  bundle: audiences
+  default_langcode: de
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Regulierte Wirtschaft'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1779441071

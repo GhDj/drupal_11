@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Theme override for the Search Yearly Report views block.
+ *
+ * Wraps the search view in the bsi-search-page__search layout with a
+ * heading "Lagebericht durchsuchen" above the search bar.
+ */
+#}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'bsi-search-page__search',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  <span class="bsi-searchbar__title">{{ 'Search annual report'|t }}</span>
+  {{ title_suffix }}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</div>

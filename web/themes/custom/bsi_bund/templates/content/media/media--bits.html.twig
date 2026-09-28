@@ -1,0 +1,48 @@
+{#
+/**
+* @file
+* Theme override to display a media item.
+*
+* Available variables:
+* - name: Name of the media.
+* - content: Media content.
+*
+* @see \Drupal\media\MediaThemeHooks::preprocessMedia
+*
+* @ingroup themeable
+*/
+#}
+{% set criticality_map = {
+    1: 'info',
+    2: 'neutral',
+    3: 'high',
+    4: 'critical',
+} %}
+{% set criticality = criticality_map[media.field_criticality.value|default(0)] %}
+
+<article{{ attributes.addClass('bsi-border-card', 'bsi-border-card--' ~ criticality) }}>
+    <div class="bsi-border-card__meta">
+        {% for key, child in content.group_tagline|filter((v, k) => k|first != '#') %}
+            {# These class names are making it really hard to work with. #}
+            {% set badge_type = {
+                created: 'date',
+                field_criticality: criticality,
+            }[key] %}
+
+            <span class="bsi-badge bsi-badge--{{ badge_type }}">{{ child.0 }}</span>
+
+        {% endfor %}
+    </div>
+    {{ content.group_tagline['#cache']|render }}
+
+    <h3 class="bsi-heading bsi-heading--4 bsi-border-card__title">
+        {{ title_prefix }}
+        {{- content.name.0 -}}
+        {{ title_suffix }}
+    </h3>
+    {{ content|without('group_tagline', 'name') }}
+</article>
+
+
+
+

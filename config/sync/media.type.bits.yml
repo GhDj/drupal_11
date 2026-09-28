@@ -1,0 +1,13 @@
+uuid: 6e92a926-d8b3-4d8b-a7b2-7bb92b3bf5df
+langcode: en
+status: true
+dependencies: {  }
+id: bits
+label: 'Security announcement'
+description: ''
+source: file
+queue_thumbnail_downloads: false
+new_revision: true
+source_configuration:
+  source_field: field_media_file
+field_map: {  }

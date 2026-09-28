@@ -1,0 +1,82 @@
+id: user_import_role_editor
+label: 'Import users (role: editor) from CSV'
+migration_group: user_imports
+
+source:
+  plugin: csv
+  path: 'modules/custom/user_import_migrate/import/editors.csv'
+  delimiter: ';'
+  header_row_count: 1
+  ids:
+    E-Mail: E-Mail
+  fields:
+    - name: Vorname
+      label: Vorname
+    - name: Nachname
+      label: Nachname
+    - name: E-Mail
+      label: E-Mail
+
+process:
+  # Existiert schon ein User mit dieser E-Mail? -> uid oder NULL
+  _existing_uid:
+    plugin: entity_lookup
+    entity_type: user
+    value_key: mail
+    source: 'E-Mail'
+
+  # Wenn gefunden (uid != null): komplette Zeile überspringen
+  _skip_existing:
+    plugin: skip_on_value
+    source: '@_existing_uid'
+    method: row
+    not_equals: true
+    value: null
+
+  mail: 'E-Mail'
+
+  # Erster Buchstabe des Vornamens (substr-Plugin, multibyte-sicher)
+  _initial:
+    plugin: substr
+    source: Vorname
+    start: 0
+    length: 1
+
+  # Initiale + Nachname
+  _username_base:
+    plugin: concat
+    source:
+      - '@_initial'
+      - Nachname
+
+  # Username normalisieren: kleinschreiben, dann Whitespace entfernen
+  name:
+    - plugin: callback
+      callable: mb_strtolower
+      source: '@_username_base'
+    - plugin: str_replace
+      regex: true
+      search: '/\s+/'
+      replace: ''
+
+  # Einheitliches Startpasswort
+  pass:
+    - plugin: default_value
+      default_value: 'bsi2026'
+    - plugin: service
+      service: password
+      method: hash
+
+  status:
+    plugin: default_value
+    default_value: 1
+
+  roles:
+    plugin: default_value
+    default_value:
+      - editor
+
+destination:
+  plugin: 'entity:user'
+
+migration_dependencies: { }

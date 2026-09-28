@@ -1,0 +1,14 @@
+{% extends "block.html.twig" %}
+{#
+/**
+ * @file
+ * Theme override for tabs.
+ */
+#}
+{% block content %}
+  {% if content %}
+    <div class="bsi-grid">
+      {{ content }}
+    </div>
+  {% endif %}
+{% endblock %}

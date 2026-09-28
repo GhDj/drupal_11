@@ -1,0 +1,119 @@
+diff --git a/config/schema/media_entity_download.schema.yml b/config/schema/media_entity_download.schema.yml
+--- a/config/schema/media_entity_download.schema.yml
++++ b/config/schema/media_entity_download.schema.yml
+@@ -2,6 +2,12 @@
+   type: field.formatter.settings.link
+   label: 'Download link formatter settings'
+   mapping:
++    title:
++      type: string
++      label: 'Link title'
++    custom_title:
++      type: label
++      label: 'Custom title'
+     disposition:
+       type: string
+       label: 'What Content-Disposition HTTP header may be used for download responses'
+
+diff --git a/src/Plugin/Field/FieldFormatter/DownloadLinkFieldFormatter.php b/src/Plugin/Field/FieldFormatter/DownloadLinkFieldFormatter.php
+--- a/src/Plugin/Field/FieldFormatter/DownloadLinkFieldFormatter.php
++++ b/src/Plugin/Field/FieldFormatter/DownloadLinkFieldFormatter.php
+@@ -35,6 +35,10 @@
+    */
+   protected $entityTypeManager;
+
++  protected const string LINK_TITLE_FILE_NAME = 'filename';
++  protected const string LINK_TITLE_FILE_DESCRIPTION = 'description';
++  protected const string LINK_TITLE_CUSTOM = 'custom';
++
+   /**
+    * {@inheritdoc}
+    */
+@@ -49,6 +53,8 @@
+    */
+   public static function defaultSettings() {
+     return [
++      'title' => static::LINK_TITLE_FILE_NAME,
++      'custom_title' => NULL,
+       'disposition' => ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+     ] + parent::defaultSettings();
+   }
+@@ -58,6 +64,30 @@
+    */
+   public function settingsForm(array $form, FormStateInterface $form_state) {
+     $elements = parent::settingsForm($form, $form_state);
++
++    $elements['title'] = [
++      '#type' => 'select',
++      '#title' => $this->t('Link text'),
++      '#options' => [
++        static::LINK_TITLE_FILE_NAME => $this->t('File name'),
++        static::LINK_TITLE_FILE_DESCRIPTION => $this->t('Replace the file name by its description when available'),
++        static::LINK_TITLE_CUSTOM => $this->t('Custom'),
++      ],
++      '#default_value' => $this->getSetting('title'),
++      '#weight' => -1,
++    ];
++    $elements['custom_title'] = [
++      '#type' => 'textfield',
++      '#title' => $this->t('Custom text'),
++      '#default_value' => $this->getSetting('custom_title'),
++      '#weight' => -1,
++      '#states' => [
++        'visible' => [
++          ':input[name$="[settings_edit_form][settings][title]"]' => ['value' => static::LINK_TITLE_CUSTOM],
++        ],
++      ],
++    ];
++
+     $elements['disposition'] = [
+       '#type' => 'radios',
+       '#title' => $this->t('Download behavior'),
+@@ -78,6 +108,15 @@
+   public function settingsSummary() {
+     $summary = parent::settingsSummary();
+     $settings = $this->getSettings();
++    if ($this->getSetting('title') !== static::LINK_TITLE_FILE_NAME) {
++      $summary[] = match($this->getSetting('title')) {
++        static::LINK_TITLE_FILE_DESCRIPTION => $this->t('Replace the file name by its description when available'),
++        static::LINK_TITLE_CUSTOM => $this->t('@field_name: @label', [
++          '@field_name' => $this->t('Link text'),
++          '@label' => $this->getSetting('custom_title'),
++        ]),
++      };
++    }
+     if ($settings['disposition'] == ResponseHeaderBag::DISPOSITION_ATTACHMENT) {
+       $summary[] = $this->t('Force "Save as..." dialog');
+     }
+@@ -108,7 +147,11 @@
+         continue;
+       }
+
+-      $filename = $file->getFilename();
++      $title = match($this->getSetting('title')) {
++        static::LINK_TITLE_FILE_NAME => $file->getFilename(),
++        static::LINK_TITLE_FILE_DESCRIPTION => $item->get('description') ?? $file->getFilename(),
++        static::LINK_TITLE_CUSTOM => $this->getSetting('custom_title'),
++      };
+       $mime_type = $file->getMimeType();
+
+       if (!class_exists(DeprecationHelper::class)) {
+@@ -125,7 +168,7 @@
+
+       $url_options['attributes'] = [
+         'type' => "$mime_type; length={$file->getSize()}",
+-        'title' => $filename,
++        'title' => $title,
+         // Classes to add to the file field for icons.
+         'class' => [
+           'file',
+@@ -154,7 +197,7 @@
+       $elements[$delta] = [
+         '#type' => 'link',
+         '#url' => $url,
+-        '#title' => $filename,
++        '#title' => $title,
+       ];
+     }
+
+

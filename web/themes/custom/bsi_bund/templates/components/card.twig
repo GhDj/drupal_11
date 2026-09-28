@@ -1,0 +1,136 @@
+{#
+/**
+ * Card component for use in Drupal templates.
+ *
+ * Mirrors the `bsi-card` molecule from Storybook
+ * (src/components/02-molecules/card).
+ *
+ * Parameters (all optional):
+ *
+ * tag (string, default: 'div')
+ *   -> Wrapping element ('div' or 'li').
+ *
+ * attributes (Attribute)
+ *   -> Drupal Attribute object from the parent template. The base
+ *      `bsi-card` class + modifier classes are merged in. If omitted,
+ *      a fresh Attribute is created.
+ *
+ * extra_classes (array, default: [])
+ *   -> Additional class strings appended after modifier classes.
+ *
+ * image_position (string, default: '')
+ *   -> '', 'image-left', or 'image-right'. Adds `bsi-card--image-{position}`.
+ *
+ * theme (string, default: '')
+ *   -> Value for the `data-theme` attribute (e.g. 'blue-100').
+ *
+ * has_divider (bool, default: false)
+ *   -> Renders `<hr />` between text and CTA.
+ *
+ * heading (renderable | string)
+ *   -> Rendered inside the `<h*>`.
+ *
+ * heading_level (int, default: 3)
+ *   -> 2 or 3 — the `<h*>` tag used for the heading.
+ *
+ * heading_style (int, default: 4)
+ *   -> 2, 3, or 4 — the `bsi-heading--*` class applied to the heading.
+ *
+ * image (renderable | string)
+ *   -> Rendered inside `.bsi-card__image` (wrapped in `<figure class="bsi-image">`).
+ *
+ * topline (renderable | string)
+ *   -> Rendered inside `.bsi-card__topline`.
+ *
+ * body (renderable | string)
+ *   -> Rendered inside `.bsi-card__body`.
+ *
+ * link (renderable | string)
+ *   -> Rendered as-is where the CTA belongs. Callers pass the already-styled
+ *      link, e.g. `content.field_link|merge({
+ *        '#extra_classes': ['bsi-card__link'],
+ *      })`.
+ *
+ * Usage:
+ *
+ * {% include '@bsi_bund/components/card.twig' with {
+ *   attributes: attributes.addClass(node_classes),
+ *   image_position: 'image-left',
+ *   extra_classes: ['bsi-card--featured'],
+ *   has_divider: true,
+ *   image: content.field_media,
+ *   topline: content.created,
+ *   heading: content.title,
+ *   body: content.body,
+ *   link: content.field_link|merge({
+ *     '#extra_classes': ['bsi-card__link'],
+ *   }),
+ * } %}
+ */
+#}
+
+{% set tag = tag|default('div') %}
+{% set extra_classes = extra_classes|default([]) %}
+{% set image_position = image_position|default('') %}
+{% set theme = theme|default('') %}
+{% set has_divider = has_divider ?? false %}
+{% set heading_level = heading_level|default(3) %}
+{% set heading_style = heading_style|default(4) %}
+
+{% set card_classes = [
+  'bsi-card',
+  image_position ? 'bsi-card--' ~ image_position,
+]|merge(extra_classes) %}
+
+{% set card_attributes = (attributes ?: create_attribute()).addClass(card_classes) %}
+{% if theme %}
+  {% set card_attributes = card_attributes.setAttribute('data-theme', theme) %}
+{% endif %}
+
+<{{ tag }}{{ card_attributes }}>
+  {% if image is not empty %}
+    <div class="bsi-card__image">
+      <figure class="bsi-image">
+        {{ image }}
+      </figure>
+    </div>
+  {% endif %}
+
+  {% if topline is not empty or heading is not empty or body is not empty or link is not empty %}
+    <div class="bsi-card__content">
+      {% if topline is not empty or heading is not empty or body is not empty %}
+        <div class="bsi-card__text">
+          {% if topline is not empty or heading is not empty %}
+            <div class="bsi-card__heading-wrapper">
+              {% if topline is not empty %}
+                <div class="bsi-card__topline">
+                  {{ topline }}
+                </div>
+              {% endif %}
+
+              {% if heading is not empty %}
+                <h{{ heading_level }} class="bsi-heading bsi-heading--{{ heading_style }} bsi-card__heading">
+                  {{ heading }}
+                </h{{ heading_level }}>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          {% if body is not empty %}
+            <div class="bsi-card__body">
+              {{ body }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if has_divider %}
+        <hr />
+      {% endif %}
+
+      {% if link is not empty %}
+        {{ link }}
+      {% endif %}
+    </div>
+  {% endif %}
+</{{ tag }}>

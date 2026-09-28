@@ -1,0 +1,20 @@
+{
+  "fontFormat": "woff",
+  "fontFamilySans": "BundesSansWeb",
+  "fontFamilySerif": "BundesSerifWeb",
+  "fontFallback": "\"Helvetica\", \"Arial\", sans-serif",
+  "fontFallbackSerif": "serif",
+  "fontWeights": {
+    "regular": {
+      "weight": 400,
+      "file": "BundesSansWeb-Regular.woff"
+    },
+    "bold": {
+      "weight": 700,
+      "file": "BundesSansWeb-Bold.woff"
+    }
+  },
+  "baseFontSize": "16px",
+  "rootLineHeight": 1.2,
+  "rootLetterSpacing": "normal"
+}

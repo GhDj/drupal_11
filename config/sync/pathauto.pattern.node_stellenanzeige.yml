@@ -1,0 +1,33 @@
+uuid: 179d5285-cb31-4b61-8517-c995582ecd7a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.job
+  module:
+    - language
+    - node
+id: node_stellenanzeige
+label: 'Node: Stellenanzeige'
+type: 'canonical_entities:node'
+pattern: '/stellenangebote/[node:field_code]-[node:title]'
+selection_criteria:
+  ff00b72c-c359-42b7-88a4-0d5249d67c54:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      job: job
+  c159286d-0dc1-40c8-a1c9-968139e02315:
+    id: language
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    langcodes:
+      de: de
+selection_logic: and
+weight: -6
+relationships:
+  'node:langcode:language':
+    label: Language

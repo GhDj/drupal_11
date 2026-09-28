@@ -1,0 +1,169 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: d206eb9c-fd66-43b5-94d5-3552fe14b6e6
+  bundle: entry_page
+  default_langcode: de
+translations:
+  en:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    title:
+      -
+        value: Cart
+    created:
+      -
+        value: 1782293821
+    node_keeper:
+      -
+        value: false
+    alias_keeper:
+      -
+        value: false
+    path:
+      -
+        alias: /cart
+        langcode: en
+        pathauto: 0
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Warenkorb
+  created:
+    -
+      value: 1781265002
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  node_keeper:
+    -
+      value: false
+  alias_keeper:
+    -
+      value: false
+  path:
+    -
+      alias: /service/publikationen/warenkorb
+      langcode: de
+      pathauto: 0
+  sae_exclude:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 69744a61-dc3d-4af6-9074-0091ec9baa5c
+          bundle: text_section
+          default_langcode: de
+        translations:
+          en:
+            status:
+              -
+                value: true
+            created:
+              -
+                value: 1781265002
+            content_translation_source:
+              -
+                value: de
+            content_translation_outdated:
+              -
+                value: false
+            field_section_text:
+              -
+                value: '<p>Here you can order publications in printed form. Simply select a publication from the website and, if necessary, adjust the number of copies to suit your requirements by changing the figure. Then click on the ‘UPDATE’ button. Once your order is complete, click on the ‘ORDER’ button and fill in your order details.</p><p>Please note that larger orders of up to 100 copies are reserved exclusively for public sector organisations. For private individuals and non-public sector organisations, the maximum order quantity is 5 copies per item. It is therefore essential that you state the name of the public sector organisation for which you work.</p>'
+                format: advanced
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1781265002
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_section_text:
+            -
+              value: '<p>Hier haben Sie die Möglichkeit Publikationen in gedruckter Form zu bestellen. Wählen Sie einfach eine Publikation von der Website aus und passen Sie ggf. die Anzahl der Exemplare über eine Änderung der Ziffer an Ihren Bedarf an. Anschließend klicken Sie auf den Button AKTUALISIEREN. Ist Ihre Bestellung komplett, so klicken Sie auf den Button BESTELLEN und füllen die Besteller-Daten aus.</p><p>Beachten Sie bitte, dass ausschließlich für öffentliche Einrichtungen eine größere Bestellmenge von bis zu 100 Exemplaren vorbehalten ist. Für Privatpersonen und nicht öffentliche Einrichtungen liegt die maximale Bestellmenge bei 5 Exemplaren pro Artikel. Daher ist die Nennung der öffentlichen Einrichtung für die Sie tätig sind, unabdingbar.</p>'
+              format: advanced
+  layout_builder__layout:
+    -
+      section:
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          63f4f82a-9466-4ef3-9d07-e0f780eda76f:
+            uuid: 63f4f82a-9466-4ef3-9d07-e0f780eda76f
+            region: content
+            configuration:
+              id: 'field_block:node:entry_page:field_paragraphs'
+              label: Seitenabschnitte
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          43d93067-8f83-46e4-925c-65e962e43816:
+            uuid: 43d93067-8f83-46e4-925c-65e962e43816
+            region: content
+            configuration:
+              id: webform_block
+              label: Webform
+              label_display: 0
+              provider: webform
+              webform_id: cart
+              default_data: ''
+              redirect: 0
+              lazy: 0
+              context_mapping: {  }
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }

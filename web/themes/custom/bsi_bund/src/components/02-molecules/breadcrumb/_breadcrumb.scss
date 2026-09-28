@@ -1,0 +1,86 @@
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+:root {
+  --#{$nsp}-breadcrumb-height: 70px;
+}
+
+.#{$nsp}-breadcrumb {
+  --#{$nsp}-icon-width: 16px;
+  --#{$nsp}-breadcrumb-bg-color: #f1f2f3; // no token in designsystem
+  background-color: var(--#{$nsp}-breadcrumb-bg-color);
+  height: var(--#{$nsp}-breadcrumb-height);
+
+  &__list {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    list-style: none;
+    margin-inline: auto;
+    max-width: var(--#{$nsp}-grid-max-width);
+    padding: var(--#{$nsp}-space-md) var(--#{$nsp}-grid-padding);
+  }
+
+  &__list-item {
+    align-items: center;
+    display: flex;
+    font-size: var(--#{$nsp}-link-font-size);
+    white-space: nowrap;
+  }
+
+  &__list-item + &__list-item {
+    position: relative;
+
+    &::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M9.5 5.44995C9.77614 5.44996 10 5.67381 10 5.94995C10 6.22609 9.77614 6.44995 9.5 6.44995H2.5C2.22386 6.44995 2 6.22609 2 5.94995C2 5.67381 2.22386 5.44995 2.5 5.44995H9.5Z' fill='%23121419'/%3E%3Cpath d='M6.69649 3.14645C6.89175 2.95118 7.20826 2.95118 7.40352 3.14645L9.85371 5.59664C10.0488 5.79192 10.0489 6.10848 9.85371 6.30367L7.40352 8.75338C7.20826 8.94864 6.89175 8.94864 6.69649 8.75338C6.50127 8.55811 6.50124 8.2416 6.69649 8.04635L8.79268 5.94967L6.69649 3.85348C6.50123 3.65822 6.50123 3.34171 6.69649 3.14645Z' fill='%23121419'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      content: "";
+      display: block;
+      float: left;
+      height: 12px;
+      margin-inline: 10px;
+      width: 12px;
+    }
+  }
+
+  &__list-item:nth-last-child(n + 3):nth-child(n + 2) {
+    display: none;
+
+    @include breakpoint-lg {
+      display: flex;
+    }
+  }
+
+  &__link {
+    --#{$nsp}-link-decoration-line: none;
+    --#{$nsp}-link-decoration-line-hover: none;
+    --#{$nsp}-link-color: var(--#{$nsp}-color-typo-secondary);
+  }
+
+  &__link {
+    &:after {
+      content: "...";
+
+      @include breakpoint-lg {
+        content: none;
+      }
+    }
+
+    > span {
+      display: none;
+
+      @include breakpoint-lg {
+        display: inline-block;
+      }
+    }
+  }
+
+  [aria-current="page"] {
+    color: var(--#{$nsp}-color-typo-tertiary);
+    font-weight: 500;
+  }
+
+  &__home {
+    margin-top: -2px;
+  }
+}

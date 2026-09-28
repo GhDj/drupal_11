@@ -1,0 +1,19 @@
+uuid: baef28aa-cede-4b72-b1ab-e3f8a2286cfb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_evaluation_scope
+    - node.type.certificate
+id: node.certificate.field_evaluation_scope
+field_name: field_evaluation_scope
+entity_type: node
+bundle: certificate
+label: 'Test area(s)'
+description: 'Information on the test area'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: #004b76;
+      }
+
+      .st0, .st1 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+
+      .st1 {
+        stroke: #00a4b9;
+      }
+    </style>
+  </defs>
+  <g>
+    <g>
+      <polygon class="st0" points="15.2 14.3 15.2 60.9 18.2 60.9 15.2 60.9 15.2 14.3 42.2 14.3 15.2 14.3"/>
+      <polygon class="st0" points="15.2 49.1 23 49.1 23 38.4 23 49.1 15.2 49.1"/>
+      <polygon class="st0" points="59.2 14.3 54.4 14.3 54.4 56.2 41.5 56.2 41.5 60.9 27 60.9 59.2 60.9 59.2 14.3"/>
+      <polygon class="st0" points="32.2 33.2 32.2 51.5 41.5 51.5 32.2 51.5 32.2 33.2 27.7 33.2 27.7 44.4 27.7 56.2 41.5 56.2 27.7 56.2 27.7 44.4 27.7 33.2 32.2 33.2"/>
+    </g>
+    <g>
+      <path class="st0" d="M54.4,23h4.7-4.7Z"/>
+      <path class="st0" d="M54.4,50.8h4.7-4.7Z"/>
+      <rect class="st0" x="46.2" y="44.7" width="8.2" height="11.5"/>
+      <rect class="st0" x="41.7" y="28" width="8" height="8.6"/>
+    </g>
+    <polygon class="st0" points="15.2 23.8 36.8 23.8 36.8 19 15.2 19 15.2 14.3 44.7 14.3 44.7 23.3 41.7 23.3 41.7 44.6 37 44.6 37 28.5 23 28.5 23 38.4 15.2 38.4 15.2 23.8"/>
+  </g>
+  <g>
+    <path class="st1" d="M49.7,7.5v9.7V7.5Z"/>
+    <path class="st1" d="M46.7,9.8l3-3,3,3"/>
+  </g>
+  <g>
+    <path class="st1" d="M22.5,55.3v9.7-9.7Z"/>
+    <path class="st1" d="M19.5,57.6l3-3,3,3"/>
+  </g>
+</svg>

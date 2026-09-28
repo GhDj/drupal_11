@@ -1,0 +1,24 @@
+uuid: 9dd81a08-6a48-4194-97cf-9887a3616f94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_protection_profile_issuer
+    - filter.format.advanced
+    - node.type.certificate
+  module:
+    - text
+id: node.certificate.field_protection_profile_issuer
+field_name: field_protection_profile_issuer
+entity_type: node
+bundle: certificate
+label: Publisher
+description: 'Publisher of the protection profile'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - advanced
+field_type: text_long

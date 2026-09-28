@@ -1,0 +1,21 @@
+uuid: 71c4376c-4104-4245-90fc-feb2bbe24e7e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_use_cart
+    - media.type.publication
+id: media.publication.field_use_cart
+field_name: field_use_cart
+entity_type: media
+bundle: publication
+label: 'Order a printed copy'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

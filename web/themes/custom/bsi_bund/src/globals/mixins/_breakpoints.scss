@@ -1,0 +1,41 @@
+@use "@globals/foundation/variables" as *;
+
+// -----------------------------------------------------------------------------
+// Breakpoint Mixins
+// -----------------------------------------------------------------------------
+
+/**
+ * Small breakpoint (min-width)
+ */
+@mixin breakpoint-sm {
+  @media only screen and (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+/**
+ * Medium breakpoint (min-width)
+ */
+@mixin breakpoint-md {
+  @media only screen and (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+/**
+ * Large breakpoint (min-width)
+ */
+@mixin breakpoint-lg {
+  @media only screen and (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+/**
+ * Extra large breakpoint (min-width)
+ */
+@mixin breakpoint-xl {
+  @media only screen and (min-width: $breakpoint-xl) {
+    @content;
+  }
+}

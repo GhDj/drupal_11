@@ -1,0 +1,62 @@
+uuid: 2e5915ff-92c0-4ae3-aba6-60f1d3a532f9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.contact.field_jumplink
+    - field.field.paragraph.contact.field_link
+    - field.field.paragraph.contact.field_media_items
+    - field.field.paragraph.contact.field_section_text
+    - field.field.paragraph.contact.field_section_title
+    - paragraphs.paragraphs_type.contact
+  module:
+    - bsi_custom
+    - link
+    - text
+id: paragraph.contact.default
+targetEntityType: paragraph
+bundle: contact
+mode: default
+content:
+  field_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_media_items:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser_single
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_section_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_section_title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_jumplink: true
+  search_api_excerpt: true

@@ -1,0 +1,57 @@
+uuid: fe0351f4-2e41-4735-a3d3-270fbd670ab9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_display.node.entry_page.full
+    - node.type.article
+    - node.type.entry_page
+    - node.type.event
+    - node.type.page
+    - workflows.workflow.nodes
+  module:
+    - content_moderation
+    - duplicate_node
+    - editoria11y
+    - group
+    - layout_builder
+    - node
+    - paragraphs_type_permissions
+    - path
+    - role_delegation
+    - short_url
+id: csn_admin
+label: 'CSN Admin'
+weight: -5
+is_admin: false
+permissions:
+  - 'access content overview'
+  - 'administer users'
+  - 'assign csn_admin role'
+  - 'assign csn_deh role'
+  - 'configure editable entry_page node layout overrides'
+  - 'create article content'
+  - 'create csn group'
+  - 'create entry_page content'
+  - 'create event content'
+  - 'create page content'
+  - 'create paragraph content view'
+  - 'create url aliases'
+  - 'delete any article content'
+  - 'delete any event content'
+  - 'delete any page content'
+  - 'duplicate article content'
+  - 'duplicate entry_page content'
+  - 'duplicate event content'
+  - 'duplicate inventory content'
+  - 'duplicate it_security_label content'
+  - 'duplicate job content'
+  - 'duplicate page content'
+  - 'duplicate report_page content'
+  - 'edit short_url'
+  - 'update paragraph content view'
+  - 'use nodes transition create_new_draft'
+  - 'use nodes transition request_approval'
+  - 'use nodes transition withdraw'
+  - 'view any unpublished content'
+  - 'view editoria11y checker'

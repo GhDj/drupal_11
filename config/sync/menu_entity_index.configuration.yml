@@ -1,0 +1,8 @@
+_core:
+  default_config_hash: N0NuJlV53T4Gi5cJMycuXZtKANjEXiphxOrwVGeZXko
+entity_types:
+  node: node
+menus:
+  main: main
+all_menus: false
+include_empty: false

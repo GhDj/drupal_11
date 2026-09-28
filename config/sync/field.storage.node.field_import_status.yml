@@ -1,0 +1,30 @@
+uuid: 39072363-ca4e-4cda-85dc-ccbeb53b9e73
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_import_status
+field_name: field_import_status
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: pending
+      label: pending
+    -
+      value: processed
+      label: processed
+    -
+      value: error
+      label: error
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

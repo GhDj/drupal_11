@@ -1,0 +1,45 @@
+{#
+  Menu Teaser
+#}
+{%
+  set classes = [
+    'bsi-card',
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }} data-theme="blue-100">
+    {% block content %}
+      <div class="bsi-card__content">
+        <div class="bsi-card__text">
+          <div class="bsi-card__heading-wrapper">
+            <p class="bsi-card__topline">{{ content.field_byline.0 }}</p>
+
+            <h3 class="bsi-heading bsi-heading--4 bsi-heading--linked bsi-card__heading">
+              {{ content.field_section_title.0 }}
+            </h3>
+          </div>
+
+          <div class="bsi-card__body">
+            {{ content.field_section_text }}
+          </div>
+        </div>
+
+        <hr>
+
+        {% include '@bsi_bund/elements/link.html.twig' with {
+          url: content.field_link.0['#url'],
+          title: content.field_link.0['#title'],
+          icon: 'chevron-right',
+          icon_position: 'before',
+          extra_classes: ['bsi-card__link'],
+        } only %}
+
+      </div>
+    {% endblock %}
+
+  </div>
+{% endblock paragraph %}

@@ -1,0 +1,68 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 0de05fdd-edac-4a59-a5f7-7946513fe3e1
+  bundle: menu_link_content
+  default_langcode: de
+translations:
+  en:
+    title:
+      -
+        value: Career
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_id: 1
+    content_translation_status:
+      -
+        value: true
+    content_translation_created:
+      -
+        value: 1778680170
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Karriere
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      uri: 'route:<none>'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -46
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1776950809

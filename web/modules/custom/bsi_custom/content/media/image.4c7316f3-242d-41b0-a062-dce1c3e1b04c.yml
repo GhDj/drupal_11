@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 4c7316f3-242d-41b0-a062-dce1c3e1b04c
+  bundle: image
+  default_langcode: de
+  depends:
+    d74a0f23-3c4b-47d4-8dfb-ffefb46887c0: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'JLB: Vorworte'
+  created:
+    -
+      value: 1778149434
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: d74a0f23-3c4b-47d4-8dfb-ffefb46887c0
+      alt: 'Zweigeteiltes Bild, links Alexander Dobrindt, rechts Claudia Plattner'
+      title: ''
+      width: 960
+      height: 400

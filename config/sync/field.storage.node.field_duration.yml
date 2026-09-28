@@ -1,0 +1,30 @@
+uuid: 1ccb0cb9-de8f-415f-b92f-95f56e2cb907
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_duration
+field_name: field_duration
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: permanent
+      label: Permanent
+    -
+      value: fixed_two_years
+      label: 'Fixed-term (2 years)'
+    -
+      value: fixed
+      label: Fixed-term
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,24 @@
+uuid: 78f4746f-7727-4c0d-afa2-9525286c8791
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_highlight
+    - filter.format.basic
+    - paragraphs.paragraphs_type.introduction
+  module:
+    - text
+id: paragraph.introduction.field_highlight
+field_name: field_highlight
+entity_type: paragraph
+bundle: introduction
+label: Highlight
+description: 'Displayed on the left in bold.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic
+field_type: text_long

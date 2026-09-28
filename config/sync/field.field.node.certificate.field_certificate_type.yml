@@ -1,0 +1,29 @@
+uuid: fb79302a-fea3-40e2-8b45-ffa13fe20ed3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_certificate_type
+    - node.type.certificate
+    - taxonomy.vocabulary.certification_type
+id: node.certificate.field_certificate_type
+field_name: field_certificate_type
+entity_type: node
+bundle: certificate
+label: 'Certificate type'
+description: 'Type the certificate belongs to.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      certification_type: certification_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

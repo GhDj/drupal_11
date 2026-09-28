@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 62f03dc5-ab77-4386-9570-5a2064528635
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Opener-Suchliste.png
+  uri:
+    -
+      value: 'private://image/2026-05/Opener-Suchliste.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 3483311
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1780045167

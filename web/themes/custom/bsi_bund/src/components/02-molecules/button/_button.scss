@@ -1,0 +1,410 @@
+// -----------------------------------------------------------------------------
+// Button
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+
+// -----------------------------------------------------------------------------
+// Tokens
+// -----------------------------------------------------------------------------
+:root {
+  --#{$nsp}-button-decoration-line: none;
+  --#{$nsp}-button-decoration-line-hover: none;
+  --#{$nsp}-control-button-base-border-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-control-button-base-background-active: var(
+    --#{$nsp}-color-alpha-dark-95
+  );
+  --#{$nsp}-control-button-oncolor-border-default: var(
+    --#{$nsp}-color-alpha-dark-100
+  );
+  --#{$nsp}-control-button-oncolor-border-active: var(
+    --#{$nsp}-color-alpha-light-50
+  );
+  --#{$nsp}-control-button-oncolor-background-default: var(
+    --#{$nsp}-color-alpha-dark-90
+  );
+  --#{$nsp}-control-button-oncolor-background-hover: var(
+    --#{$nsp}-color-alpha-dark-80
+  );
+  --#{$nsp}-control-button-oncolor-background-active: var(
+    --#{$nsp}-color-alpha-dark-90
+  );
+  --#{$nsp}-inline-action-base-text-default: var(--#{$nsp}-color-neutral-1000);
+  --#{$nsp}-inline-action-base-text-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-inline-action-base-underline-default: var(
+    --#{$nsp}-color-alpha-dark-80
+  );
+  --#{$nsp}-inline-action-base-underline-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-inline-action-oncolor-text-default: var(--#{$nsp}-color-neutral-50);
+  --#{$nsp}-inline-action-oncolor-text-hover: var(--#{$nsp}-color-neutral-50);
+  --#{$nsp}-inline-action-oncolor-underline-default: var(
+    --#{$nsp}-color-alpha-light-70
+  );
+  --#{$nsp}-inline-action-oncolor-underline-hover: var(
+    --#{$nsp}-color-neutral-50
+  );
+  --#{$nsp}-button-border-radius: 4px;
+  --#{$nsp}-button-border-width: 1px;
+  --#{$nsp}-button-border-width-active: 2px;
+  --#{$nsp}-button-dock-width: 356px;
+  --#{$nsp}-button-small-font-size: 14px;
+  --#{$nsp}-button-small-line-height: 100%;
+}
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-button,
+.button {
+  align-items: center;
+  background: var(--#{$nsp}-button-background);
+  border: var(--#{$nsp}-button-border-width) solid
+    var(--#{$nsp}-button-border-color);
+  border-radius: var(--#{$nsp}-button-border-radius);
+  box-sizing: border-box;
+  color: var(--#{$nsp}-button-text-color);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-family-base);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  gap: var(--#{$nsp}-size-2xs);
+  height: 48px;
+  justify-content: center;
+  letter-spacing: -0.1px;
+  line-height: 100%;
+  padding: var(--#{$nsp}-size-sm) var(--#{$nsp}-size-lg);
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+
+  &:hover,
+  &--state-hover {
+    background: var(--#{$nsp}-button-background-hover);
+    border-color: var(--#{$nsp}-button-border-color-hover);
+    color: var(--#{$nsp}-button-text-color-hover);
+
+    .#{$nsp}-button__text {
+      text-decoration: var(--#{$nsp}-button-decoration-line-hover);
+    }
+  }
+
+  &:active,
+  &--state-active {
+    background: var(--#{$nsp}-button-background-active);
+    border-color: var(--#{$nsp}-button-border-color-active);
+    border-width: var(--#{$nsp}-button-border-width-active);
+    color: var(--#{$nsp}-button-text-color-active);
+  }
+
+  &:focus-visible,
+  &--state-focused {
+    background: var(--#{$nsp}-button-background-active);
+    border-color: var(--#{$nsp}-button-border-color-active);
+    border-width: var(--#{$nsp}-button-border-width-active);
+    color: var(--#{$nsp}-button-text-color-active);
+    outline: 2px solid;
+    outline-color: var(--#{$nsp}-color-base-focus);
+    outline-offset: 2px;
+  }
+
+  &:disabled,
+  &--state-disabled {
+    background: var(--#{$nsp}-button-background-disabled);
+    border-color: var(--#{$nsp}-button-border-color-disabled);
+    color: var(--#{$nsp}-button-text-color-disabled);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &--icon-only {
+    padding: 0;
+    width: 48px;
+  }
+
+  &__text {
+    display: inline-block;
+    text-decoration: var(--#{$nsp}-button-decoration-line);
+  }
+
+  &__icon {
+    width: var(--#{$nsp}-icon-width, 24px);
+  }
+}
+
+.#{$nsp}-button--size-sm:not(.#{$nsp}-button--control):not(
+    .#{$nsp}-button--inline-action
+  ) {
+  font-size: var(--#{$nsp}-button-small-font-size);
+  gap: var(--#{$nsp}-size-3xs);
+  height: var(--#{$nsp}-size-xl);
+  line-height: var(--#{$nsp}-button-small-line-height);
+  padding: var(--#{$nsp}-size-2xs) var(--#{$nsp}-size-xs);
+
+  .#{$nsp}-button__icon {
+    --#{$nsp}-icon-height: var(--#{$nsp}-size-sm);
+    --#{$nsp}-icon-width: var(--#{$nsp}-size-sm);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Control Button
+// -----------------------------------------------------------------------------
+.#{$nsp}-button.#{$nsp}-button--control {
+  --#{$nsp}-button-border-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-button-background: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-text-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-button-border-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-background-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-button-text-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-border-color-active: var(
+    --#{$nsp}-control-button-base-border-active
+  );
+  --#{$nsp}-button-background-active: var(
+    --#{$nsp}-control-button-base-background-active
+  );
+  --#{$nsp}-button-text-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-control-button-size: var(--#{$nsp}-size-3xl);
+  --#{$nsp}-icon-height: var(--#{$nsp}-size-lg);
+  --#{$nsp}-icon-width: var(--#{$nsp}-size-lg);
+
+  height: var(--#{$nsp}-control-button-size);
+  width: var(--#{$nsp}-control-button-size);
+
+  &.#{$nsp}-button--size-lg {
+    --#{$nsp}-control-button-size: var(--#{$nsp}-size-3xl);
+    --#{$nsp}-icon-height: var(--#{$nsp}-size-lg);
+    --#{$nsp}-icon-width: var(--#{$nsp}-size-lg);
+  }
+
+  &.#{$nsp}-button--size-md {
+    --#{$nsp}-control-button-size: var(--#{$nsp}-size-2xl);
+    --#{$nsp}-icon-height: var(--#{$nsp}-size-md);
+    --#{$nsp}-icon-width: var(--#{$nsp}-size-md);
+  }
+
+  &.#{$nsp}-button--size-sm {
+    --#{$nsp}-control-button-size: var(--#{$nsp}-size-lg);
+    --#{$nsp}-icon-height: var(--#{$nsp}-size-sm);
+    --#{$nsp}-icon-width: var(--#{$nsp}-size-sm);
+  }
+
+  &:active,
+  &.#{$nsp}-button--state-active {
+    background: var(--#{$nsp}-control-button-base-background-active);
+    border-color: var(--#{$nsp}-control-button-base-border-active);
+    border-width: var(--#{$nsp}-button-border-width);
+  }
+}
+
+.#{$nsp}-button--control.#{$nsp}-button--mode-on-color {
+  --#{$nsp}-button-border-color: var(
+    --#{$nsp}-control-button-oncolor-border-default
+  );
+  --#{$nsp}-button-background: var(
+    --#{$nsp}-control-button-oncolor-background-default
+  );
+  --#{$nsp}-button-text-color: var(--#{$nsp}-color-neutral-50);
+  --#{$nsp}-button-border-color-hover: var(
+    --#{$nsp}-control-button-oncolor-border-default
+  );
+  --#{$nsp}-button-background-hover: var(
+    --#{$nsp}-control-button-oncolor-background-hover
+  );
+  --#{$nsp}-button-text-color-hover: var(--#{$nsp}-color-neutral-50);
+  --#{$nsp}-button-border-color-active: var(
+    --#{$nsp}-control-button-oncolor-border-active
+  );
+  --#{$nsp}-button-background-active: var(
+    --#{$nsp}-control-button-oncolor-background-active
+  );
+  --#{$nsp}-button-text-color-active: var(--#{$nsp}-color-neutral-50);
+
+  &:active,
+  &.#{$nsp}-button--state-active {
+    border-color: var(--#{$nsp}-control-button-oncolor-border-active);
+    border-width: var(--#{$nsp}-button-border-width);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Inline Action Button
+// -----------------------------------------------------------------------------
+.#{$nsp}-button.#{$nsp}-button--inline-action {
+  --#{$nsp}-button-decoration-line: underline;
+  --#{$nsp}-button-background: transparent;
+  --#{$nsp}-button-background-hover: transparent;
+  --#{$nsp}-button-background-active: transparent;
+  --#{$nsp}-button-border-color: transparent;
+  --#{$nsp}-button-border-color-hover: transparent;
+  --#{$nsp}-button-border-color-active: transparent;
+  --#{$nsp}-button-border-width: 0;
+  --#{$nsp}-text-decoration-thickness: 1px;
+  --#{$nsp}-button-text-color: var(--#{$nsp}-inline-action-base-text-default);
+  --#{$nsp}-button-text-color-hover: var(
+    --#{$nsp}-inline-action-base-text-hover
+  );
+  --#{$nsp}-button-text-color-active: var(
+    --#{$nsp}-inline-action-base-text-hover
+  );
+  --#{$nsp}-inline-action-underline-color: var(
+    --#{$nsp}-inline-action-base-underline-default
+  );
+
+  align-items: center;
+  gap: var(--#{$nsp}-space-2xs);
+  height: auto;
+  padding: 0;
+  white-space: nowrap;
+
+  &:hover,
+  &.#{$nsp}-button--state-hover {
+    --#{$nsp}-inline-action-underline-color: var(
+      --#{$nsp}-inline-action-base-underline-hover
+    );
+  }
+
+  &:active,
+  &.#{$nsp}-button--state-active {
+    border-width: 0;
+  }
+
+  .#{$nsp}-button__text {
+    text-decoration-color: var(--#{$nsp}-inline-action-underline-color);
+    text-decoration-thickness: var(--#{$nsp}-text-decoration-thickness);
+    text-underline-offset: var(--#{$nsp}-space-4xs);
+    text-underline-position: from-font;
+  }
+
+  .#{$nsp}-button__icon {
+    --#{$nsp}-icon-height: var(--#{$nsp}-size-sm);
+    --#{$nsp}-icon-width: var(--#{$nsp}-size-sm);
+  }
+}
+
+.#{$nsp}-button--inline-action.#{$nsp}-button--mode-on-color {
+  --#{$nsp}-button-text-color: var(
+    --#{$nsp}-inline-action-oncolor-text-default
+  );
+  --#{$nsp}-button-text-color-hover: var(
+    --#{$nsp}-inline-action-oncolor-text-hover
+  );
+  --#{$nsp}-button-text-color-active: var(
+    --#{$nsp}-inline-action-oncolor-text-hover
+  );
+  --#{$nsp}-inline-action-underline-color: var(
+    --#{$nsp}-inline-action-oncolor-underline-default
+  );
+
+  &:hover,
+  &.#{$nsp}-button--state-hover {
+    --#{$nsp}-inline-action-underline-color: var(
+      --#{$nsp}-inline-action-oncolor-underline-hover
+    );
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Button Dock
+// -----------------------------------------------------------------------------
+.#{$nsp}-button--dock {
+  max-width: var(--#{$nsp}-button-dock-width);
+  width: 100%;
+}
+
+// -----------------------------------------------------------------------------
+// Themes
+// -----------------------------------------------------------------------------
+
+// Primary
+// -----------------------------------------------
+.#{$nsp}-button--primary,
+.button--primary {
+  --#{$nsp}-button-border-color: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-background: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-text-color: var(--#{$nsp}-color-neutral-50);
+  --#{$nsp}-button-border-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-background-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-button-text-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-border-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-background-active: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-button-text-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-border-color-disabled: var(--#{$nsp}-color-neutral-150);
+  --#{$nsp}-button-background-disabled: var(--#{$nsp}-color-neutral-100);
+  --#{$nsp}-button-text-color-disabled: var(--#{$nsp}-color-neutral-400);
+}
+
+// Secondary
+// -----------------------------------------------
+.#{$nsp}-button--secondary {
+  --#{$nsp}-button-border-color: var(--#{$nsp}-color-blue-150);
+  --#{$nsp}-button-background: var(--#{$nsp}-color-blue-150);
+  --#{$nsp}-button-text-color: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-border-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-background-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-button-text-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-border-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-background-active: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-button-text-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-border-color-disabled: var(--#{$nsp}-color-neutral-150);
+  --#{$nsp}-button-background-disabled: var(--#{$nsp}-color-neutral-100);
+  --#{$nsp}-button-text-color-disabled: var(--#{$nsp}-color-neutral-400);
+}
+
+// Tertiary
+// -----------------------------------------------
+.#{$nsp}-button--tertiary {
+  --#{$nsp}-button-border-color: transparent;
+  --#{$nsp}-button-background: transparent;
+  --#{$nsp}-button-text-color: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-border-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-text-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-border-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-text-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-border-color-disabled: var(--#{$nsp}-color-neutral-150);
+  --#{$nsp}-button-background-disabled: var(--#{$nsp}-color-neutral-100);
+  --#{$nsp}-button-text-color-disabled: var(--#{$nsp}-color-neutral-400);
+
+  &:focus-visible,
+  &.#{$nsp}-button--state-focused {
+    border-color: var(--#{$nsp}-color-base-focus);
+    border-width: var(--#{$nsp}-button-border-width);
+    outline: none;
+    padding: var(--#{$nsp}-size-sm) var(--#{$nsp}-size-lg);
+  }
+}
+
+// Destructive
+// -----------------------------------------------
+.#{$nsp}-button--destructive {
+  --#{$nsp}-button-border-color: var(--#{$nsp}-color-red-750);
+  --#{$nsp}-button-background: var(--#{$nsp}-color-red-750);
+  --#{$nsp}-button-text-color: var(--#{$nsp}-color-neutral-50);
+  --#{$nsp}-button-border-color-hover: var(--#{$nsp}-color-red-750);
+  --#{$nsp}-button-background-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-button-text-color-hover: var(--#{$nsp}-color-red-750);
+  --#{$nsp}-button-border-color-active: var(--#{$nsp}-color-red-750);
+  --#{$nsp}-button-background-active: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-button-text-color-active: var(--#{$nsp}-color-red-750);
+  --#{$nsp}-button-border-color-disabled: var(--#{$nsp}-color-neutral-150);
+  --#{$nsp}-button-background-disabled: var(--#{$nsp}-color-neutral-100);
+  --#{$nsp}-button-text-color-disabled: var(--#{$nsp}-color-neutral-400);
+}
+
+// Success
+// -----------------------------------------------
+.#{$nsp}-button--success {
+  --#{$nsp}-button-border-color: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-button-background: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-button-text-color: var(--#{$nsp}-color-neutral-50);
+  --#{$nsp}-button-border-color-hover: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-button-background-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-button-text-color-hover: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-button-border-color-active: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-button-background-active: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-button-text-color-active: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-button-border-color-disabled: var(--#{$nsp}-color-neutral-150);
+  --#{$nsp}-button-background-disabled: var(--#{$nsp}-color-neutral-100);
+  --#{$nsp}-button-text-color-disabled: var(--#{$nsp}-color-neutral-400);
+}

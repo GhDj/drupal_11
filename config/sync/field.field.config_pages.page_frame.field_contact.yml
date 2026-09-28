@@ -1,0 +1,23 @@
+uuid: 3e530e96-5d63-4528-b02c-ec9b998c5b9c
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.page_frame
+    - field.storage.config_pages.field_contact
+  module:
+    - link
+id: config_pages.page_frame.field_contact
+field_name: field_contact
+entity_type: config_pages
+bundle: page_frame
+label: Contact
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 2
+  link_type: 1
+field_type: link

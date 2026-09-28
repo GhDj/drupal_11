@@ -1,0 +1,19 @@
+uuid: 8b2ac27d-42a6-461e-a06b-5a1a4ba20dd6
+langcode: en
+status: true
+dependencies: {  }
+id: page_opener
+label: 'Page opener'
+token: false
+context:
+  show_warning: true
+  group:
+    static_opener: true
+    language: true
+  fallback:
+    language: en
+    static_opener: ''
+menu:
+  path: /admin/config/user-interface/page-opener
+  weight: 0
+  description: ''

@@ -1,0 +1,23 @@
+uuid: 7182bd34-862c-4f6f-b59d-9b6c8a1ad9b7
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+  theme:
+    - bsi_bund
+id: bsi_bund_certificate
+theme: bsi_bund
+region: footer
+weight: -8
+provider: null
+plugin: config_pages_field
+settings:
+  id: config_pages_field
+  label: Certificate
+  label_display: '0'
+  provider: bsi_custom
+  config_page_type: page_frame
+  config_page_view_mode: full
+  field_name: field_certificate
+visibility: {  }

@@ -1,0 +1,40 @@
+title: Warenkorb
+elements: |
+  page_cart:
+    '#title': Warenkorb
+  cart_items:
+    '#title': 'Ihr Warenkorb'
+  page_shipping:
+    '#title': Versanddaten
+  shipping_salutation:
+    '#title': Anrede
+    '#options':
+      Mrs.: Frau
+      Mr.: Herr
+    '#empty_option': 'Nicht angegeben'
+  shipping_name_first:
+    '#title': Vorname
+  shipping_name_last:
+    '#title': Nachname
+  shipping_company:
+    '#title': Unternehmen
+  address:
+    '#title': Adresse
+    '#address__title': Straße/Postfach
+    '#address_2__title': 'Adresse 2'
+    '#city__title': Stadt/Ort
+    '#state_province__title': Bundesland/Provinz
+    '#postal_code__title': Postleitzahl
+    '#country__title': Land
+  shipping_mail:
+    '#title': E-Mail
+  shipping_notes:
+    '#title': Anmerkungen
+settings:
+  preview_title: Zusammenfassung
+  confirmation_title: 'Vielen Dank für Ihre Bestellung'
+  confirmation_message: '<p><span style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);display:inline !important;float:none;font-family:system-ui, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-line;widows:2;word-spacing:0px;">Ihre Bestellung wurde übermittelt und wird von unserem Team so schnell wie möglich bearbeitet.</span></p>'
+  confirmation_back_label: 'Zurück zur Kasse'
+handlers:
+  email:
+    label: E-Mail

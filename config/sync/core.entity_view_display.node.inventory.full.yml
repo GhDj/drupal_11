@@ -1,0 +1,58 @@
+uuid: 5706da93-3911-4eaf-80a6-b7bf9a550355
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.inventory.body
+    - field.field.node.inventory.field_audiences
+    - field.field.node.inventory.field_metatags
+    - field.field.node.inventory.field_paragraphs
+    - field.field.node.inventory.field_tags
+    - field.field.node.inventory.field_topics
+    - node.type.inventory
+  module:
+    - entity_reference_revisions
+    - text
+id: node.inventory.full
+targetEntityType: node
+bundle: inventory
+mode: full
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audiences: true
+  field_metatags: true
+  field_tags: true
+  field_topics: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  title: true
+  uid: true

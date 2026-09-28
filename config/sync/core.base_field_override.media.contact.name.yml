@@ -1,0 +1,20 @@
+uuid: dd398189-e13e-4be2-b1be-c5aca2817055
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.contact
+id: media.contact.name
+field_name: name
+entity_type: media
+bundle: contact
+label: Label
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string

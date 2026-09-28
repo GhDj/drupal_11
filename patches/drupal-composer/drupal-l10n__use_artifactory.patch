@@ -1,0 +1,18 @@
+diff --git a/src/FileFetcher.php b/src/FileFetcher.php
+index 49b16d4..5b19424 100644
+--- a/src/FileFetcher.php
++++ b/src/FileFetcher.php
+@@ -199,10 +199,10 @@ protected function getUrl($package_name, $drupal_project_name, $filename) {
+
+     // Special case for Drupal core.
+     if (in_array($package_name, ['drupal/core', 'drupal/drupal'])) {
+-      return 'https://ftp.drupal.org/files/translations/' . $core_folder . '/drupal/' . $filename;
++      return 'https://artifacts.init.de:443/artifactory/drupal-translations-simple-remote/' . $core_folder . '/drupal/' . $filename;
+     }
+     else {
+-      return 'https://ftp.drupal.org/files/translations/' . $core_folder . '/' . $drupal_project_name . '/' . $filename;
++      return 'https://artifacts.init.de:443/artifactory/drupal-translations-simple-remote/' . $core_folder . '/' . $drupal_project_name . '/' . $filename;
+     }
+   }
+
+

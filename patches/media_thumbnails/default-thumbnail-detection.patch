@@ -1,0 +1,14 @@
+--- a/media_thumbnails.module
++++ b/media_thumbnails.module
+@@ -62,8 +62,10 @@
+       $thumbnailUri = $thumbnail->getFileUri();
+       $default_icon_uri = \Drupal::config('media.settings')
+         ->get('icon_base_uri');
++      // @todo This does not handle dynamic default images.
++      $default_thumbnail_filename = $entity->getSource()->getPluginDefinition()['default_thumbnail_filename'];
+       // Rebuild the thumbnail if using default thumbnail.
+-      if (strstr($thumbnailUri, $default_icon_uri) !== FALSE) {
++      if ($thumbnailUri === ($default_icon_uri . '/' . $default_thumbnail_filename)) {
+         $manager->updateThumbnail($entity);
+       }
+     }

@@ -1,0 +1,40 @@
+{#
+/**
+ * icon component for use in drupal
+ * name (string, required)
+ *   -> Icon name (id from icons.svg)
+ *
+ * decorative (bool, optional, default: true)
+ *   -> true  = aria-hidden
+ *   -> false = visible for screenreaders
+ *
+ * extra_classes (string, optional)
+ *  ->additional CSS Classes
+ *
+ * Usage
+ *
+ * {% include '@atoms/icon/icon.twig' with {
+ *   name: 'external-link',
+ *   decorative: true,
+ *   extra_classes: 'bsi-link__icon'
+ * } %}
+ *
+#}
+
+{% set icon_name = name|default('') %}
+{% set decorative = decorative ?? true %}
+{% set extra_classes = extra_classes|default('') %}
+
+{% if icon_name %}
+  <svg
+    class="bsi-icon {{ extra_classes }}"
+    {% if decorative %}
+      aria-hidden="true"
+      focusable="false"
+    {% else %}
+      role="img"
+    {% endif %}
+  >
+    <use href="{{ file_url('themes/custom/bsi_bund/dist/icons.svg') }}#{{ icon_name }}"></use>
+  </svg>
+{% endif %}

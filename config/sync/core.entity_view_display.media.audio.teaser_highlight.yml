@@ -1,0 +1,77 @@
+uuid: ba8d3261-d11a-4809-b531-603643c15956
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.teaser_highlight
+    - field.field.media.audio.field_body
+    - field.field.media.audio.field_copyright
+    - field.field.media.audio.field_media_source
+    - field.field.media.audio.field_tags
+    - media.type.audio
+    - responsive_image.styles.bsi_teaser_highlight
+  module:
+    - bsi_custom
+    - layout_builder
+    - responsive_image
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.audio.teaser_highlight
+targetEntityType: media
+bundle: audio
+mode: teaser_highlight
+content:
+  created:
+    type: timestamp
+    label: hidden
+    settings:
+      date_format: date_short
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: ''
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+        description: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  thumbnail:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: bsi_teaser_highlight
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_body: true
+  field_copyright: true
+  field_media_source: true
+  field_tags: true
+  langcode: true
+  search_api_excerpt: true
+  uid: true

@@ -1,0 +1,147 @@
+// -----------------------------------------------------------------------------
+// Form
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+@use "@molecules/button/button" as *;
+
+.block-webform {
+  margin-block: var(--#{$nsp}-space-md);
+}
+
+// FORM ELEMENT (input, textarea, selects)
+.form-element {
+  --input-padding-vertical: var(--#{$nsp}-space-sm);
+  --input-padding-horizontal: 13.5px;
+  --input-fg-color: var(--#{$nsp}-color-typo-secondary);
+  --input-border-size: 1px;
+  --input-border-color: var(--#{$nsp}-color-border-muted);
+  --input-border-radius-size: 0;
+  --input-bg-color: var(--#{$nsp}-color-neutral-50);
+  --input-font-size: var(--#{$nsp}-space-sm);
+  --input-line-height: 1.3;
+  --color-focus: transparent;
+  --input--hover-border-color: var(--#{$nsp}-color-border-muted);
+  width: 100%;
+
+  &:focus-visible {
+    outline: 2px solid var(--#{$nsp}-color-base-focus);
+    outline-offset: 2px;
+  }
+
+  &[aria-invalid] {
+    border: 1px solid var(--#{$nsp}-color-red-100);
+  }
+}
+
+// FORM ITEM
+.form-error {
+  @include typography("label-small");
+  color: var(--#{$nsp}-color-red-100);
+  margin-block-start: var(--#{$nsp}-space-xs);
+}
+
+// FORM ITEM
+.form-item {
+  margin-block: var(--#{$nsp}-space-2xl);
+}
+
+.form-item--help-required small {
+  @include typography("text-support-small");
+}
+
+// FORM LABEL
+.form-item__label {
+  @include typography("label-small");
+  color: var(--#{$nsp}-color-typo-secondary);
+  display: block;
+  margin-block: 0 var(--#{$nsp}-space-xs);
+
+  // CHECKBOX LABEL
+  &.option {
+    @include typography("label");
+    color: var(--#{$nsp}-color-typo-primary);
+  }
+
+  & > a {
+    color: var(--#{$nsp}-color-typo-primary);
+  }
+}
+
+// CHECKBOX / RADIO BUTTON
+.form-boolean {
+  --color-focus: tranparent;
+
+  &:focus-visible {
+    outline: 1px solid var(--#{$nsp}-color-base-focus);
+  }
+
+  &[aria-invalid] {
+    border: 1px solid var(--#{$nsp}-color-red-100);
+  }
+}
+
+// SELECT
+.form-select {
+  width: 100%;
+
+  @include breakpoint-md {
+    width: calc(50% - var(--#{$nsp}-grid-gutter) / 2);
+  }
+}
+
+.form-boolean--type-checkbox:checked {
+  background-color: var(--#{$nsp}-color-blue-750);
+  border-color: var(--#{$nsp}-color-blue-750);
+}
+
+.form-actions {
+  margin-block: 0;
+
+  .button,
+  .form-actions .action-link {
+    margin: 0;
+  }
+}
+
+// FORM GRID
+.webform-flexbox {
+  display: block;
+  margin-block: var(--#{$nsp}-space-2xl);
+  margin-inline: 0;
+
+  @include breakpoint-md {
+    column-gap: var(--#{$nsp}-grid-gutter);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.webform-flex--container {
+  margin-inline: 0;
+}
+
+.webform-flex--container .form-item {
+  @include breakpoint-md {
+    margin-block: 0;
+  }
+}
+
+// CAPTCHA (special styling of fieldset and legend)
+.captcha__title {
+  @include typography("label-small");
+  color: var(--#{$nsp}-color-typo-secondary);
+  display: block;
+  padding-block-end: var(--#{$nsp}-space-xs);
+}
+
+.captcha__description {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

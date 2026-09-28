@@ -1,0 +1,20 @@
+_meta:
+  version: '1.0'
+  entity_type: config_pages
+  uuid: baf8466c-cc9e-43c5-a375-fbbf388dd2a0
+  bundle: page_opener
+  depends:
+    d36931b0-e4ef-48e7-8cb2-e9c7c1c99047: media
+default:
+  label:
+    -
+      value: Einstiegselement
+  type:
+    -
+      target_id: page_opener
+  context:
+    -
+      value: 'a:2:{i:0;a:1:{s:13:"static_opener";s:3:"job";}i:1;a:1:{s:8:"language";s:2:"de";}}'
+  field_media:
+    -
+      entity: d36931b0-e4ef-48e7-8cb2-e9c7c1c99047

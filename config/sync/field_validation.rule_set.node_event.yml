@@ -1,0 +1,41 @@
+uuid: 368dac72-f74f-4889-8189-a577bf75ac2c
+langcode: en
+status: true
+dependencies: {  }
+name: node_event
+label: 'node event validation'
+entity_type: node
+bundle: event
+field_validation_rules:
+  3c3e3f1a-2de3-4d45-99b0-1b9bd0f3f5d9:
+    id: not_null_constraint_rule
+    title: 'Heading required if links are set'
+    data:
+      validate_mode: default
+      message: 'Please provide a heading for the linkbox items.'
+    weight: 1
+    uuid: 3c3e3f1a-2de3-4d45-99b0-1b9bd0f3f5d9
+    field_name: field_links_title
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_links
+      operator: not_empty
+      value: ''
+  c67eee0c-6874-452d-baaa-7f7fefa192f7:
+    id: not_null_constraint_rule
+    title: 'Heading required if downloads are set'
+    data:
+      validate_mode: default
+      message: 'Please provide a heading for the linkbox downloads.'
+    weight: 2
+    uuid: c67eee0c-6874-452d-baaa-7f7fefa192f7
+    field_name: field_downloads_title
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_downloads
+      operator: not_empty
+      value: ''

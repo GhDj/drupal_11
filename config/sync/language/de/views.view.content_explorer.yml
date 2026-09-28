@@ -1,0 +1,10 @@
+display:
+  block_level_1:
+    display_options:
+      block_description: 'Explorer (Ebene 1)'
+  block_level_2:
+    display_options:
+      block_description: 'Explorer (Ebene 2)'
+  block_level_3:
+    display_options:
+      block_description: 'Explorer (Ebene 3)'

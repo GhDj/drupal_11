@@ -1,0 +1,51 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: fe94dabb-3577-4379-b8bd-3a6113b41daf
+  bundle: video
+  default_langcode: de
+  depends:
+    58a857c7-bc5c-4daf-8b4b-3cf80ad7e75c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Beispiel-Medium Video'
+  created:
+    -
+      value: 1774445008
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  rh_action:
+    -
+      value: display_page
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_source:
+    -
+      uri: 'https://multimedia.gsb.bund.de/BSI/Video/Themen/NIS2/NIS2_Mythen_Web.mp4'
+      title: ''
+      options: {  }
+  field_tracks:
+    -
+      entity: 58a857c7-bc5c-4daf-8b4b-3cf80ad7e75c
+      display: true
+      description: 'English Captions'

@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@globals/*": ["./src/globals/*"],
+      "@base/*": ["./src/components/00-base/*"],
+      "@atoms/*": ["./src/components/01-atoms/*"],
+      "@molecules/*": ["./src/components/02-molecules/*"],
+      "@organisms/*": ["./src/components/03-organisms/*"],
+      "@templates/*": ["./src/components/04-templates/*"],
+      "@pages/*": ["./src/components/05-pages/*"],
+      "@demo-content/*": ["./src/demo-content/*"]
+    },
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "lib": ["ES2022", "DOM"],
+    "jsx": "react-jsx",
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "useUnknownInCatchVariables": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "types": ["vite/client", "@types/jest"]
+  },
+  "include": [
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.stories.ts",
+    "src/**/*.stories.tsx",
+    "src/types/**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "dist", "storybook-static"]
+}

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: ed8f393b-5f71-48fd-8c84-867ea9b7eccf
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Opener-Pressemitteilung.png
+  uri:
+    -
+      value: 'private://image/2026-05/Opener-Pressemitteilung.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 3526112
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1780044321

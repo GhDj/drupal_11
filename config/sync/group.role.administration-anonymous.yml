@@ -1,0 +1,15 @@
+uuid: 410efa06-1924-43c3-a212-1b15d1514ef4
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.administration
+    - user.role.anonymous
+id: administration-anonymous
+label: Anonymous
+weight: -10
+admin: false
+scope: outsider
+global_role: anonymous
+group_type: administration
+permissions: {  }

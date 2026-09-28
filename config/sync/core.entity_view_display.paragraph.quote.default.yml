@@ -1,0 +1,71 @@
+uuid: d7b64056-8bf4-4756-996c-37220b504489
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.quote.field_author
+    - field.field.paragraph.quote.field_byline
+    - field.field.paragraph.quote.field_link
+    - field.field.paragraph.quote.field_media
+    - field.field.paragraph.quote.field_section_text
+    - paragraphs.paragraphs_type.quote
+  module:
+    - bsi_custom
+    - link
+    - text
+id: paragraph.quote.default
+targetEntityType: paragraph
+bundle: quote
+mode: default
+content:
+  field_author:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_byline:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: quote
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_section_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  search_api_excerpt: true

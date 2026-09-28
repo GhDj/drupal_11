@@ -1,0 +1,21 @@
+uuid: 4d77122e-f8f9-49a5-bb1c-8949c7afd266
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_lightbox_narrow
+label: 'BSI Lightbox (narrow)'
+effects:
+  16d448de-bddf-4d50-9cfe-d02ccdc5435e:
+    uuid: 16d448de-bddf-4d50-9cfe-d02ccdc5435e
+    id: image_scale
+    weight: 1
+    data:
+      width: 959
+      height: null
+      upscale: false
+  fb6b9290-f7ac-4634-82d4-4a287f7a8aad:
+    uuid: fb6b9290-f7ac-4634-82d4-4a287f7a8aad
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

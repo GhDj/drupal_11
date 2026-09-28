@@ -1,0 +1,160 @@
+uuid: 3abb05dd-4e8e-44bd-a461-8d051a9489ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.opener
+    - field.field.node.it_security_label.field_audiences
+    - field.field.node.it_security_label.field_category
+    - field.field.node.it_security_label.field_code
+    - field.field.node.it_security_label.field_import_status
+    - field.field.node.it_security_label.field_import_timestamp
+    - field.field.node.it_security_label.field_import_uuid
+    - field.field.node.it_security_label.field_label_image
+    - field.field.node.it_security_label.field_label_markup
+    - field.field.node.it_security_label.field_metatags
+    - field.field.node.it_security_label.field_producer
+    - field.field.node.it_security_label.field_security_info
+    - field.field.node.it_security_label.field_tags
+    - field.field.node.it_security_label.field_timespan
+    - field.field.node.it_security_label.field_topics
+    - node.type.it_security_label
+  module:
+    - datetime_range
+    - field_group
+    - file
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  field_group:
+    group_left:
+      children:
+        - field_label_image
+      label: Left
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: section
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_right:
+      children:
+        - title
+        - field_producer
+        - field_security_info
+        - field_timespan
+        - field_code
+        - field_category
+      label: Right
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: section
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: node.it_security_label.opener
+targetEntityType: node
+bundle: it_security_label
+mode: opener
+content:
+  field_category:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_code:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_label_image:
+    type: file_default
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_producer:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_security_info:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_timespan:
+    type: daterange_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: date_short
+      from_to: end_date
+      separator: '-'
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  changed: true
+  content_moderation_control: true
+  created: true
+  field_audiences: true
+  field_import_status: true
+  field_import_timestamp: true
+  field_import_uuid: true
+  field_label_markup: true
+  field_metatags: true
+  field_tags: true
+  field_topics: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  uid: true

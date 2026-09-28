@@ -1,0 +1,7 @@
+bsi_social.settings:
+  path: '/admin/config/media/social-media'
+  defaults:
+    _title: 'Social Media Settings'
+    _form: 'Drupal\bsi_social\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

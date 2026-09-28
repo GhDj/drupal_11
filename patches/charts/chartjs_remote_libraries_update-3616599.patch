@@ -1,0 +1,100 @@
+diff --git a/modules/charts_chartjs/README.md b/modules/charts_chartjs/README.md
+index e6f74a42f009f4e03ffe938d58836474153868af..bd4a5b87d58903da5078aff8fd7154aed461779d 100755
+--- a/modules/charts_chartjs/README.md
++++ b/modules/charts_chartjs/README.md
+@@ -190,7 +190,7 @@ them. So: create a new directory in your project root called "scripts".
+ 7. Run the following command; you should find that new directories have been
+    created under "/libraries".
+
+-        composer require --prefer-dist npm-asset/chart.js:^4.4
++        composer require --prefer-dist npm-asset/chart.js:^4.5
+         npm-asset/chartjs-adapter-date-fns:^3.0
+         npm-asset/chartjs-plugin-datalabels:^2.0
+         npm-asset/chartjs-plugin-annotation:^3.1
+diff --git a/modules/charts_chartjs/charts_chartjs.libraries.yml b/modules/charts_chartjs/charts_chartjs.libraries.yml
+index 1db9872b480bc01b1e66ec9ffd56ebb68b1dba1f..a1c06e8a45ee4b7c8ccfda4d6c1e790981e41da5 100755
+--- a/modules/charts_chartjs/charts_chartjs.libraries.yml
++++ b/modules/charts_chartjs/charts_chartjs.libraries.yml
+@@ -2,11 +2,11 @@ charts_chartjs:
+   remote: 'https://github.com/chartjs/Chart.js'
+   version: VERSION
+   license:
+-    name: 'Apache 2.0'
+-    url: 'https://www.apache.org/licenses/LICENSE-2.0'
++    name: 'MIT'
++    url: 'https://opensource.org/licenses/MIT'
+     gpl-compatible: false
+   cdn:
+-    /libraries/chart.js/: https://unpkg.com/chart.js@4.4.0/
++    /libraries/chart.js/: https://unpkg.com/chart.js@4.5.1/
+     /libraries/chartjs-adapter-date-fns/: https://unpkg.com/chartjs-adapter-date-fns@3.0.0/
+     /libraries/chartjs-plugin-datalabels/: https://unpkg.com/chartjs-plugin-datalabels@2.0.0/
+     /libraries/chartjs-plugin-annotation/: https://unpkg.com/chartjs-plugin-annotation@3.1.0/
+@@ -14,7 +14,7 @@ charts_chartjs:
+     /libraries/chart.js/dist/chart.umd.js: { }
+     /libraries/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.js: { }
+     /libraries/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js: { }
+-    /libraries/chartjs-plugin-annotation/dist/chartjs-plugin-annotation.js: { }
++    /libraries/chartjs-plugin-annotation/dist/chartjs-plugin-annotation.min.js: { minified: true }
+   dependencies:
+     - core/drupal
+     - core/once
+@@ -34,7 +34,7 @@ chartjs_treemap_plugin:
+     - charts_chartjs/charts_chartjs
+
+ chartjs:
+-  version: 1.x
++  version: 1.0.x
+   js:
+     js/charts_chartjs.js: { weight: -1, attributes: { defer: true } }
+   dependencies:
+diff --git a/modules/charts_chartjs/composer.json b/modules/charts_chartjs/composer.json
+index 63e216efd1f116b52a03e0594b6560da5e987e23..ff18d166a8bccd7074c1c4319f82748880734770 100755
+--- a/modules/charts_chartjs/composer.json
++++ b/modules/charts_chartjs/composer.json
+@@ -15,7 +15,7 @@
+     },
+     "require": {
+         "oomphinc/composer-installers-extender": "^2",
+-        "npm-asset/chart.js": "^4.4",
++        "npm-asset/chart.js": "^4.5",
+         "npm-asset/chartjs-adapter-date-fns": "^3.0",
+         "npm-asset/chartjs-plugin-datalabels": "^2.0"
+     },
+diff --git a/modules/charts_chartjs/js/charts_chartjs.js b/modules/charts_chartjs/js/charts_chartjs.js
+index 7370c8c1f0c194f09164084673ef6d60977f5449..fee10b282bc36c1dcc0580d7c89a62476afa3359 100755
+--- a/modules/charts_chartjs/js/charts_chartjs.js
++++ b/modules/charts_chartjs/js/charts_chartjs.js
+@@ -78,6 +78,8 @@
+             // Always disable the dataLabels plugin for treemap to prevent
+             // coordinate display.
+             if (hasDataLabelsDisplay || hasAlternativeDataLabels) {
++              options.plugins = options.plugins || {};
++              options.plugins.dataLabels = options.plugins.dataLabels || {};
+               options.plugins.dataLabels.display = false;
+             }
+           }
+diff --git a/modules/charts_chartjs/package.json b/modules/charts_chartjs/package.json
+index 52f3f05e63aaca238c80087fa885e1223c0d225e..96d1c3224bb0986d839e283d775aad06b22980ef 100644
+--- a/modules/charts_chartjs/package.json
++++ b/modules/charts_chartjs/package.json
+@@ -7,7 +7,7 @@
+       "libraries:copy": "rimraf ../../../../../libraries/chart.js ../../../../../libraries/chartjs-adapter-date-fns ../../../../../libraries/chartjs-plugin-datalabels ../../../../../libraries/chartjs-plugin-annotation && copy-files-from-to"
+     },
+     "dependencies": {
+-      "chart.js": "^4.4.0",
++      "chart.js": "^4.5.1",
+       "chartjs-adapter-date-fns": "^3.0.0",
+       "chartjs-plugin-datalabels": "^2.2.0",
+       "chartjs-plugin-annotation": "^3.1.0"
+@@ -30,8 +30,8 @@
+         "to": "../../../../../libraries/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js"
+       },
+       {
+-        "from": "../../../../../../node_modules/chartjs-plugin-annotation/dist/chartjs-plugin-annotation.js",
+-        "to": "../../../../../libraries/chartjs-plugin-annotation/dist/chartjs-plugin-annotation.js"
++        "from": "../../../../../../node_modules/chartjs-plugin-annotation/dist/chartjs-plugin-annotation.min.js",
++        "to": "../../../../../libraries/chartjs-plugin-annotation/dist/chartjs-plugin-annotation.min.js"
+       }
+     ]
+   }

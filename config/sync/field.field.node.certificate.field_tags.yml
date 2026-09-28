@@ -1,0 +1,29 @@
+uuid: 58a50053-0888-45b5-977a-77b05da27363
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.certificate
+    - taxonomy.vocabulary.tags
+id: node.certificate.field_tags
+field_name: field_tags
+entity_type: node
+bundle: certificate
+label: Tags
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

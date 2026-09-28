@@ -1,0 +1,18 @@
+{#
+/**
+ * Fields of facts and figures paragraph
+ */
+#}
+{% block content %}
+    <ul{{ attributes.addClass('bsi-facts-group__items') }}>
+        {% block items %}
+            {% for item in items %}
+                {% block item %}
+                    <li{{ item.attributes.addClass('bsi-facts-group__item') }}>
+                        {{ item.content }}
+                    </li>
+                {% endblock %}
+            {% endfor %}
+        {% endblock %}
+    </ul>
+{% endblock %}

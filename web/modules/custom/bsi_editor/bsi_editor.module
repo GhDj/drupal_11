@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for BSI Editor Experience module.
+ */
+
+use Drupal\bsi_editor\Plugin\CKEditor5Plugin\LanguageSelect;
+
+/**
+ * Implements hook_ckeditor5_plugin_info_alter().
+ */
+function bsi_editor_ckeditor5_plugin_info_alter(array &$plugin_definitions): void {
+  /** @var array<\Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition> $plugin_definitions */
+  if (!isset($plugin_definitions['ckeditor5_language'])) {
+    return;
+  }
+
+  $plugin_definitions['ckeditor5_language']->setClass(LanguageSelect::class);
+}

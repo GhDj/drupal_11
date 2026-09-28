@@ -1,0 +1,30 @@
+third_party_settings:
+  field_group:
+    group_workflow:
+      label: Arbeitsablauf
+    group_language:
+      label: Sprache
+    group_terms:
+      label: Begriffe
+    group_tiles:
+      label: Kachelteaser
+      format_settings:
+        description: 'Kachelteaser werden unter dem Inhalt ausgespielt, um den Nutzer bei der Navigation durch die Webseite zu unterstützen.'
+content:
+  field_downloads_title:
+    settings:
+      other_option: Andere…
+      other_field_label: 'Eigene Überschrift'
+  field_links_title:
+    settings:
+      other_option: Andere…
+      other_field_label: 'Eigene Überschrift'
+  body:
+    third_party_settings:
+      maxlength:
+        maxlength_js_label: 'Eingabe begrenzt auf @limit Zeichen, verbleibend: <strong>@remaining</strong>'
+        maxlength_js_label_summary: 'Eingabe begrenzt auf @limit Zeichen, verbleibend: <strong>@remaining</strong>'
+  title:
+    third_party_settings:
+      maxlength:
+        maxlength_js_label: 'Eingabe begrenzt auf @limit Zeichen, verbleibend: <strong>@remaining</strong>'

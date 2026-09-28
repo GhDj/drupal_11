@@ -1,0 +1,24 @@
+uuid: f65cfb96-5933-4b54-a334-1b640f1ff51d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_downloads_title
+field_name: field_downloads_title
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Downloads
+      label: Downloads
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke-dasharray: 2.8 5.5;
+      }
+
+      .st0, .st1, .st2, .st3, .st4, .st5 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+
+      .st0, .st1, .st2, .st3, .st5 {
+        stroke: #004b76;
+      }
+
+      .st1 {
+        stroke-dasharray: 5.5 5.5;
+      }
+
+      .st3 {
+        stroke-dasharray: 4.1 4.1;
+      }
+
+      .st4 {
+        stroke: #00a4b9;
+      }
+
+      .st5 {
+        stroke-dasharray: 2.8 1.4;
+      }
+    </style>
+  </defs>
+  <g>
+    <polyline class="st2" points="46.4 12.3 46.4 23.2 57.2 23.2"/>
+    <polyline class="st2" points="20.3 55.7 20.3 62.2 57.2 62.2 57.2 23.2 46.4 12.3 20.3 12.3 20.3 23.2"/>
+    <polyline class="st2" points="61.5 62.2 63.7 62.2 63.7 23.2 52.9 12.3"/>
+  </g>
+  <polyline class="st4" points="33.3 31.9 24.7 42.7 24.7 53.6 20.3 49.2 20.3 42.7 11.6 31.9"/>
+  <path class="st4" d="M33.3,31.8H11.6c-1.2,0-2.2-1-2.2-2.2s1-2.2,2.2-2.2h21.7c1.2,0,2.2,1,2.2,2.2s-1,2.2-2.2,2.2Z"/>
+  <g>
+    <line class="st3" x1="50.7" y1="34" x2="37.7" y2="34"/>
+    <line class="st5" x1="39.8" y1="29.7" x2="50.7" y2="29.7"/>
+    <line class="st1" x1="33.3" y1="38.4" x2="50.7" y2="38.4"/>
+    <line class="st1" x1="30.1" y1="42.7" x2="50.7" y2="42.7"/>
+    <line class="st3" x1="29" y1="47" x2="50.7" y2="47"/>
+  </g>
+  <line class="st0" x1="29" y1="51.4" x2="50.7" y2="51.4"/>
+</svg>

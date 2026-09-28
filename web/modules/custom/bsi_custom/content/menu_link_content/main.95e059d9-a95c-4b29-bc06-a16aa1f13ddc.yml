@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 95e059d9-a95c-4b29-bc06-a16aa1f13ddc
+  bundle: menu_link_content
+  default_langcode: de
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Service
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      uri: 'route:<none>'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -45
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1776950799

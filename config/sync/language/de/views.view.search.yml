@@ -1,0 +1,68 @@
+description: Suchen
+display:
+  default:
+    display_options:
+      pager:
+        options:
+          tags:
+            first: '« Erste'
+            last: 'Letzte »'
+          expose:
+            items_per_page_label: 'Einträge pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+          exposed_sorts_label: Sortieren
+      empty:
+        area_text_custom:
+          content: 'Ihre Suche ergab keine Treffer.'
+      sorts:
+        search_api_relevance:
+          expose:
+            label: Relevanz
+      header:
+        result:
+          content: '@start bis @end von @total Ergebnissen'
+      filters:
+        search_api_fulltext_1:
+          expose:
+            label: Volltextsuche
+        facets_field_audiences:
+          expose:
+            label: Zielgruppen
+          facet:
+            missing_label: andere
+        facets_field_topics:
+          expose:
+            label: Themen
+          facet:
+            missing_label: andere
+        facets_field_year:
+          expose:
+            label: Jahr
+          facet:
+            missing_label: andere
+  block_search_global:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: 'Alle Filter zurücksetzen'
+          exposed_sorts_label: Sortieren
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+          text_input_required: 'Wählen Sie einen beliebigen Filter aus und klicken Sie auf Anwenden, um die Ergebnisse anzuzeigen'
+      header:
+        result:
+          content: '@start bis @end von @total Ergebnissen'
+      block_description: 'Globale Suche'
+      title: 'Globale Suche'
+    display_title: 'Block – Globale Suche'
+  block_search_slot:
+    display_options:
+      block_description: Suchschlitz

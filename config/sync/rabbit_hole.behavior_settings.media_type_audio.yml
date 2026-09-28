@@ -1,0 +1,14 @@
+uuid: 15baef7d-87df-48d9-a1e1-bf3def5762e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.audio
+id: media_type_audio
+entity_type_id: media_type
+entity_id: audio
+action: page_not_found
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

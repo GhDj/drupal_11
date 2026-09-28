@@ -1,0 +1,182 @@
+// -----------------------------------------------------------------------------
+// Card
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-card {
+  background-color: var(--bsi-theme-bg-color, var(--#{$nsp}-color-base-white));
+  border-radius: 4px;
+  clip-path: inset(-5px); // instead overflow:hidden (doesn't cut the boxshadow)
+  display: flex;
+  flex-direction: column;
+  gap: var(--#{$nsp}-space-md);
+  padding: var(--#{$nsp}-space-sm);
+  position: relative;
+
+  &__image {
+    border-radius: var(--#{$nsp}-space-4xs);
+    overflow: clip;
+  }
+
+  &__text {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-2xs);
+    min-width: 0;
+  }
+
+  &__topline {
+    @include typography("body-small-compact");
+    margin-bottom: var(--#{$nsp}-space-2xs);
+  }
+
+  &__heading {
+    @include typography("heading-5");
+    font-weight: 700;
+    hyphens: auto;
+    overflow-wrap: break-word;
+
+    .#{$nsp}-heading__link {
+      &::after {
+        bottom: 0;
+        content: "";
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+  }
+
+  &__body {
+    color: var(--#{$nsp}-card-body-color, var(--#{$nsp}-color-neutral-750));
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  &__link {
+    --#{$nsp}-link-color: var(--#{$nsp}-color-blue-750);
+    --#{$nsp}-link-decoration-line: none;
+    display: block;
+    margin-block-end: var(--#{$nsp}-space-xs);
+
+    &::after {
+      bottom: 0;
+      content: "";
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  &__text + &__link {
+    margin-block-start: var(--#{$nsp}-space-md);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Variants
+// -----------------------------------------------------------------------------
+
+// Image position
+// ----------------------------------------------
+.#{$nsp}-card--image-left {
+  gap: var(--#{$nsp}-space-2xl);
+
+  @include breakpoint-lg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  &:not(:has(img)) {
+    @include breakpoint-lg {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.#{$nsp}-card--image-right {
+  gap: var(--#{$nsp}-space-2xl);
+
+  @include breakpoint-lg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .#{$nsp}-card {
+    &__image {
+      @include breakpoint-lg {
+        order: 2;
+      }
+    }
+
+    &__content {
+      @include breakpoint-lg {
+        order: 1;
+      }
+    }
+  }
+}
+
+// Featured
+// ----------------------------------------------
+.#{$nsp}-card--featured {
+  box-shadow: 0 0 4px 0 rgba(33, 35, 40, 0.25);
+
+  .#{$nsp}-card__image * {
+    height: 100%;
+  }
+}
+
+// Small Image
+// ----------------------------------------------
+.#{$nsp}-card--small-image {
+  gap: var(--#{$nsp}-space-md);
+
+  @include breakpoint-lg {
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
+
+  .#{$nsp}-card__image {
+    aspect-ratio: 1/1;
+    height: 160px;
+    width: 160px;
+  }
+}
+
+// Icon Card
+// ----------------------------------------------
+.#{$nsp}-card--icon {
+  --bsi-icon-width: 130px;
+  background: var(--#{$nsp}-color-blue-100);
+  border: 1px solid transparent;
+  gap: var(--#{$nsp}-space-md);
+  padding: var(--#{$nsp}-space-md);
+  text-align: center;
+
+  &:hover {
+    background: var(--#{$nsp}-color-blue-150);
+    border: 1px solid var(--#{$nsp}-color-blue-800);
+  }
+
+  .#{$nsp}-card {
+    &__heading {
+      color: var(--#{$nsp}-color-typo-primary);
+    }
+
+    &__icon-box {
+      background: var(--#{$nsp}-color-base-white);
+      border-radius: var(--#{$nsp}-space-4xs);
+      padding: var(--bsi-space-2xs);
+    }
+  }
+}

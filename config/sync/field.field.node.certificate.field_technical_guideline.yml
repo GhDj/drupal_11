@@ -1,0 +1,24 @@
+uuid: ce13503b-0c1e-49a6-a88d-d78190e099bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_technical_guideline
+    - filter.format.advanced
+    - node.type.certificate
+  module:
+    - text
+id: node.certificate.field_technical_guideline
+field_name: field_technical_guideline
+entity_type: node
+bundle: certificate
+label: 'Technical guideline'
+description: 'Link to related Technical Guideline'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - advanced
+field_type: text_long

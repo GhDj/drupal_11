@@ -1,0 +1,6 @@
+services:
+  bsi_custom.address_subscriber:
+    class: Drupal\bsi_custom\EventSubscriber\BsiCustomAddressSubscriber
+    arguments: ['@entity_type.manager']
+    tags:
+      - { name: event_subscriber }

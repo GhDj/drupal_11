@@ -1,0 +1,9 @@
+uuid: 1bdda8a8-a3e0-412f-8d9c-c6665c283abf
+langcode: en
+status: true
+dependencies: {  }
+name: 'Certification type'
+vid: certification_type
+description: null
+weight: 0
+new_revision: false

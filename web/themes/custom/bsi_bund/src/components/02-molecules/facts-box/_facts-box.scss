@@ -1,0 +1,75 @@
+// -----------------------------------------------------------------------------
+// Facts Box
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-facts-box {
+  display: flex;
+  gap: var(--#{$nsp}-space-sm);
+  padding: var(--#{$nsp}-space-lg);
+  width: 100%;
+
+  @include breakpoint-xl {
+    column-gap: var(--#{$nsp}-space-lg);
+  }
+
+  &__icon-wrap {
+    align-items: flex-start;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__icon {
+    --#{$nsp}-icon-width: var(--#{$nsp}-size-2xl);
+
+    @include breakpoint-xl {
+      --#{$nsp}-icon-width: var(--#{$nsp}-size-7xl);
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-module);
+  }
+
+  &__title {
+    font-weight: 700;
+  }
+
+  &__list {
+    display: grid;
+    gap: var(--#{$nsp}-space-module);
+    margin: 0;
+
+    @include breakpoint-xl {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__item-title {
+    --#{$nsp}-ruler-color: var(--#{$nsp}-color-neutral-350);
+    border-bottom: 1px solid var(--#{$nsp}-ruler-color);
+    margin: 0 0 var(--#{$nsp}-space-sm);
+    padding-bottom: var(--#{$nsp}-space-sm);
+
+    [data-theme="blue-900"] & {
+      --#{$nsp}-ruler-color: var(--#{$nsp}-color-alpha-light-70);
+    }
+  }
+
+  &__item-heading {
+    font-weight: 700;
+  }
+
+  &__item-value {
+    @include typography("body-compact");
+    margin: 0;
+  }
+}

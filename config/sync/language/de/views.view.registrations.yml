@@ -1,0 +1,58 @@
+label: Registrierungen
+display:
+  default:
+    display_title: Standard
+    display_options:
+      title: Registrierungen
+      fields:
+        registration_id:
+          label: ID
+          separator: ', '
+        type:
+          label: Typ
+          separator: ', '
+        mail:
+          label: E-Mail
+          separator: ', '
+        user_uid:
+          label: Benutzer
+          separator: ', '
+        host_entity:
+          label: 'Übergeordnete Entität'
+        count:
+          label: Leerzeichen
+          separator: ', '
+        created:
+          label: Erstellt
+          separator: ', '
+        state:
+          label: Status
+          separator: ', '
+        operations:
+          label: Aktionslinks
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« Anfang'
+            last: 'Ende »'
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: Sortierung
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      filters:
+        mail:
+          expose:
+            label: E-Mail-Adresse
+        type:
+          expose:
+            label: Typ
+  page_1:
+    display_title: Seite

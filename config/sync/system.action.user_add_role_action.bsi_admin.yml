@@ -1,0 +1,14 @@
+uuid: e0f39ca4-6d00-4c50-9aee-f850e901befb
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.bsi_admin
+  module:
+    - user
+id: user_add_role_action.bsi_admin
+label: 'Add the BSI Admin role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: bsi_admin

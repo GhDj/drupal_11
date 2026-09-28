@@ -1,0 +1,3 @@
+view access restrictions:
+  title: 'View access restrictions'
+  description: 'Allows the user to see which groups a content item is assigned to.'

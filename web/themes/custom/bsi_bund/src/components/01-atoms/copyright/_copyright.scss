@@ -1,0 +1,17 @@
+// -----------------------------------------------------------------------------
+// Copyright
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/typography" as *;
+
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-copyright {
+  @include typography("text-support");
+  color: var(--#{$nsp}-color-typo-secondary);
+  text-align: right;
+  + .#{$nsp}-image__caption-text {
+    margin-top: var(--#{$nsp}-space-sm);
+  }
+}

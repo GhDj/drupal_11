@@ -1,0 +1,51 @@
+years:
+  - title: "2025"
+    months:
+      - title: "Januar"
+        items:
+          - title: "Lorem ipsum"
+            description: >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Sed non risus. Suspendisse lectus tortor.
+
+          - title: "Lorem ipsum"
+            description: >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Sed non risus. Suspendisse lectus tortor.
+            image:
+              imageSrc: "demo-image-4_3.jpg"
+
+      - title: "Februar"
+        items:
+          - title: "Lorem ipsum"
+            description: >
+              In in enim posuere, ultrices quam et, sagittis massa.
+
+          - title: "Lorem ipsum"
+            description: >
+              In in enim posuere, ultrices quam et, sagittis massa.
+            image:
+              imageSrc: "demo-image-16_9.jpg"
+
+          - title: "Lorem ipsum"
+            description: >
+              In in enim posuere, ultrices quam et, sagittis massa.
+
+      - title: "Juli"
+        items:
+          - title: "Lorem ipsum"
+            description: >
+              In in enim posuere, ultrices quam et, sagittis massa.
+
+  - title: "2026"
+    months:
+      - title: "Januar"
+        items:
+          - title: "Lorem ipsum"
+            description: >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Sed non risus. Suspendisse lectus tortor.
+          - title: "Lorem ipsum"
+            description: >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Sed non risus. Suspendisse lectus tortor.

@@ -1,0 +1,228 @@
+/**
+ * BSI Document Tables - Admin Form Styling
+ */
+
+/* BSI Custom: Table of Contents styling */
+.bsi-table-of-contents {
+  background-color: #f8f9fa !important;
+  border: 2px solid #dee2e6 !important;
+  border-radius: 8px !important;
+  padding: 20px !important;
+  margin: 20px 0 30px 0 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.bsi-table-of-contents h3 {
+  color: #495057 !important;
+  font-size: 1.25rem !important;
+  font-weight: bold !important;
+  margin: 0 0 15px 0 !important;
+  padding-bottom: 10px !important;
+  border-bottom: 2px solid #dee2e6 !important;
+}
+
+.bsi-toc-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.bsi-toc-list li {
+  margin: 8px 0 !important;
+  padding: 0 !important;
+}
+
+.bsi-toc-link {
+  display: block !important;
+  color: #007bff !important;
+  text-decoration: none !important;
+  padding: 8px 12px !important;
+  border-radius: 4px !important;
+  transition: all 0.3s ease !important;
+  font-weight: 500 !important;
+}
+
+.bsi-toc-link:hover {
+  background-color: #e9ecef !important;
+  color: #0056b3 !important;
+  text-decoration: none !important;
+  transform: translateX(5px) !important;
+}
+
+.bsi-toc-link:focus {
+  outline: 2px solid #007bff !important;
+  outline-offset: 2px !important;
+}
+
+/* Improve paragraphs widget styling */
+.field--widget-paragraphs .paragraphs-subform {
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  background: #fafafa;
+}
+
+.field--widget-paragraphs .paragraphs-subform .paragraphs-subform {
+  border-color: #c0c0c0;
+  background: #f0f0f0;
+}
+
+.field--widget-paragraphs .paragraphs-subform .paragraphs-subform .paragraphs-subform {
+  border-color: #a0a0a0;
+  background: #e8e8e8;
+}
+
+/* Section headers in admin */
+.paragraph--type--text-section > .paragraphs-subform,
+.paragraph--type--table-section > .paragraphs-subform {
+  border-left: 4px solid #2E74B5;
+}
+
+.paragraph--type--table-row > .paragraphs-subform {
+  border-left: 4px solid #28a745;
+}
+
+.paragraph--type--table-cell > .paragraphs-subform {
+  border-left: 4px solid #ffc107;
+}
+
+/* Improve form field styling */
+.field--name-field-document-title input,
+.field--name-field-section-title input {
+  font-size: 1.2em;
+  padding: 8px 12px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+}
+
+.field--name-field-document-title input:focus,
+.field--name-field-section-title input:focus {
+  border-color: #2E74B5;
+  box-shadow: 0 0 0 2px rgba(46, 116, 181, 0.1);
+}
+
+/* Help text styling */
+.form-item .description {
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+  margin-top: 0.5em;
+}
+
+/* Paragraphs buttons */
+.paragraphs-features {
+  margin-top: 0.5rem;
+}
+
+.paragraphs-features .button {
+  margin-right: 0.5rem;
+  font-size: 0.9em;
+}
+
+/* Table structure visualization */
+.field--name-field-table-rows > .field__label:after {
+  content: " 📊";
+}
+
+.field--name-field-row-cells > .field__label:after {
+  content: " 📋";
+}
+
+.field--name-field-cell-content > .field__label:after {
+  content: " 📝";
+}
+
+/* Row type indicators */
+.field--name-field-row-type select {
+  font-weight: bold;
+}
+
+.field--name-field-row-type select option[value="header"] {
+  background-color: #2E74B5;
+  color: white;
+}
+
+.field--name-field-row-type select option[value="footer"] {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* Responsive admin forms */
+@media (max-width: 768px) {
+  .paragraphs-subform {
+    padding: 0.5rem;
+  }
+  
+  .field--name-field-document-title input {
+    font-size: 1em;
+  }
+}
+
+/* Success messages */
+.messages--status {
+  border-left: 4px solid #28a745;
+}
+
+/* Warning messages */
+.messages--warning {
+  border-left: 4px solid #ffc107;
+}
+
+/* Error messages */  
+.messages--error {
+  border-left: 4px solid #dc3545;
+}
+
+/* BSI Custom: CLEAR Alternating row styling - FIXED */
+.bsi-row-even {
+  background-color: #ffffff !important;
+  border-left: 5px solid #28a745 !important;
+  border-top: 2px solid #28a745 !important;
+  border-bottom: 2px solid #28a745 !important;
+}
+
+.bsi-row-odd {
+  background-color: #fff3cd !important;
+  border-left: 5px solid #fd7e14 !important;
+  border-top: 2px solid #fd7e14 !important;
+  border-bottom: 2px solid #fd7e14 !important;
+}
+
+/* Visual indicators for row types and numbering - FIXED */
+.bsi-row-even .paragraphs-item-title::before {
+  content: "✓ EVEN ";
+  color: #28a745 !important;
+  font-weight: bold !important;
+  font-size: 0.9em !important;
+}
+
+.bsi-row-odd .paragraphs-item-title::before {
+  content: "● ODD ";
+  color: #fd7e14 !important;
+  font-weight: bold !important;
+  font-size: 0.9em !important;
+}
+
+.row-type-header .paragraphs-item-title::before {
+  content: "📋 ";
+  color: #2E74B5;
+}
+
+.row-type-data .paragraphs-item-title::before {
+  content: "📄 ";
+  color: #6c757d;
+}
+
+/* Cell number styling */
+.field--name-field-row-cells .paragraphs-item-title {
+  font-size: 0.9em !important;
+  background-color: #e9ecef !important;
+  color: #495057 !important;
+}
+
+/* Hover effects for better UX */
+.paragraphs-subform:hover {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+  transform: translateY(-1px) !important;
+  transition: all 0.2s ease !important;
+}

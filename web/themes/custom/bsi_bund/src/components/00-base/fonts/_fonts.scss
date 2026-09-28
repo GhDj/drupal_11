@@ -1,0 +1,66 @@
+@use "@globals/foundation/variables" as *;
+
+// -----------------------------------------------------------------------------
+// Fonts
+// -----------------------------------------------------------------------------
+
+// Font Face Declarations
+// ----------------------------------------------
+
+@font-face {
+  font-display: swap;
+  font-family: $font-family-sans;
+  font-style: normal;
+  font-weight: 400;
+  size-adjust: 100%;
+  src: url("../../../assets/default/fonts/BundesSansWeb-Regular.woff")
+    format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: $font-family-sans;
+  font-style: normal;
+  font-weight: 700;
+  size-adjust: 100%;
+  src: url("../../../assets/default/fonts/BundesSansWeb-Bold.woff")
+    format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: $font-family-serif;
+  font-style: normal;
+  font-weight: 400;
+  size-adjust: 100%;
+  src: url("../../../assets/default/fonts/BundesSerifWeb-Regular.woff")
+    format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: $font-family-serif;
+  font-style: normal;
+  font-weight: 700;
+  size-adjust: 100%;
+  src: url("../../../assets/default/fonts/BundesSerifWeb-Bold.woff")
+    format("woff");
+}
+
+// Root Font Configuration
+// ----------------------------------------------
+
+:root {
+  --font-family-base: #{$font-family-sans}, #{$font-fallback};
+  --font-family-serif: #{$font-family-serif}, #{$font-fallback-serif};
+  --root-font-size: #{$base-font-size};
+  --root-line-height: #{$root-line-height};
+  --root-letter-spacing: #{$root-letter-spacing};
+  --font-color: var(--#{$nsp}-color-black);
+  --background-color: var(--#{$nsp}-color-base-white);
+
+  font-family: var(--font-family-base);
+  font-size: var(--root-font-size);
+  letter-spacing: var(--root-letter-spacing);
+  line-height: var(--root-line-height);
+}

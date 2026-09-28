@@ -1,0 +1,47 @@
+uuid: 7aea182f-3a0f-402e-acf5-792708b6eb74
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.publication.field_accessibility
+    - field.field.media.publication.field_body
+    - field.field.media.publication.field_copyright
+    - field.field.media.publication.field_media_file
+    - field.field.media.publication.field_media_type
+    - field.field.media.publication.field_tags
+    - field.field.media.publication.field_use_cart
+    - media.type.publication
+  module:
+    - bsi_custom
+id: media.publication.default
+targetEntityType: media
+bundle: publication
+mode: default
+content:
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_accessibility: true
+  field_body: true
+  field_copyright: true
+  field_media_file: true
+  field_media_type: true
+  field_tags: true
+  field_use_cart: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

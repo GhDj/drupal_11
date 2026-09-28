@@ -1,0 +1,63 @@
+// -----------------------------------------------------------------------------
+// Dropdown — generic custom popover button + list
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+
+.#{$nsp}-dropdown {
+  position: relative;
+  width: 100%;
+
+  &__trigger {
+    --#{$nsp}-button-background: var(--#{$nsp}-color-base-white);
+    --#{$nsp}-button-border-color: var(--#{$nsp}-color-border);
+    --#{$nsp}-button-border-radius: 0;
+    --#{$nsp}-button-text-color: var(--#{$nsp}-color-typo-primary);
+    font: inherit;
+    justify-content: space-between;
+    width: 100%;
+
+    &[aria-expanded="true"] .#{$nsp}-button__icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__list[hidden] {
+    display: none;
+  }
+
+  &__list {
+    background-color: var(--#{$nsp}-color-base-white);
+    border: 1px solid var(--#{$nsp}-color-border);
+    border-top: 0;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 1;
+  }
+
+  &__item {
+    border-top: 1px solid var(--#{$nsp}-color-border-muted);
+
+    &:first-child {
+      border-top: 0;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--#{$nsp}-color-neutral-100);
+    }
+
+    &.is-active {
+      background-color: var(--#{$nsp}-color-neutral-100);
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: var(--#{$nsp}-space-sm) var(--#{$nsp}-space-lg);
+  }
+}

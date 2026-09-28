@@ -1,0 +1,13 @@
+webform_entity_cart.update:
+  path: '/cart/{operation}/{entity_type_id}/{entity_id}/{count}'
+  defaults:
+    _title: 'Update cart'
+    _controller: '\Drupal\webform_entity_cart\Controller\WebformEntityCartController'
+    count: null
+  requirements:
+    _permission: 'use entity cart'
+    _csrf_token: 'TRUE'
+    operation: add|update|remove
+    count: \d*
+  options:
+    _format: 'json'

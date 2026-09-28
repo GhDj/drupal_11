@@ -1,0 +1,2 @@
+permission_callbacks:
+  - \Drupal\bsi_media\MediaDownloadPermissions::mediaTypePermissions

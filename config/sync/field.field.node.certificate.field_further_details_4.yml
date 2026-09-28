@@ -1,0 +1,24 @@
+uuid: 0373913c-4d1a-4fdf-a5dd-154a62fc18da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_further_details_4
+    - filter.format.advanced
+    - node.type.certificate
+  module:
+    - text
+id: node.certificate.field_further_details_4
+field_name: field_further_details_4
+entity_type: node
+bundle: certificate
+label: 'Additional information 4'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - advanced
+field_type: text_long

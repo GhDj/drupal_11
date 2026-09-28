@@ -1,0 +1,28 @@
+{# Meta-Navigation #}
+
+{% import _self as menus %}
+
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% if items %}
+    <ul class="bsi-metanav__list">
+      {% for item in items %}
+        <li class="bsi-metanav__item">
+          {% if icon = item.original_link.entity.field_icon.target_id|default(false) %}
+            {% set icon = icon|split(':')[1] %}
+          {% elseif item.original_link.pluginId starts with 'header.language:' %}
+            {% set icon = 'globe' %}
+          {% endif %}
+          {% include '@bsi_bund/elements/link.html.twig' with {
+            url: item.url,
+            title: item.title,
+            extra_classes: 'bsi-metanav__link',
+            icon: icon,
+            icon_position: 'after',
+          } only %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

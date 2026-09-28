@@ -1,0 +1,57 @@
+uuid: b4473a80-f4dd-438c-a679-cb76956d87aa
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_step_label
+field_name: field_step_label
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: month_01
+      label: January
+    -
+      value: month_02
+      label: February
+    -
+      value: month_03
+      label: March
+    -
+      value: month_04
+      label: April
+    -
+      value: month_05
+      label: May
+    -
+      value: month_06
+      label: June
+    -
+      value: month_07
+      label: July
+    -
+      value: month_08
+      label: August
+    -
+      value: month_09
+      label: September
+    -
+      value: month_10
+      label: October
+    -
+      value: month_11
+      label: November
+    -
+      value: month_12
+      label: December
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

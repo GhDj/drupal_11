@@ -1,0 +1,8 @@
+name: 'Media Remote File'
+type: module
+description: 'Media entity suppport for any remote file. No oEmbed, no provider list.'
+package: Media
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:link
+  - drupal:media

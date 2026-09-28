@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ * CERT teaser lists.
+ */
+
+/**
+ * Implements hook_theme().
+ *
+ * Ships a minimal default template (templates/bsi-cert-teaserlist.html.twig) so
+ * the block renders out of the box for testing. The frontend theme is expected
+ * to override this template.
+ */
+function bsi_cert_theme(): array {
+  return [
+    'bsi_cert_teaserlist' => [
+      'variables' => [
+        'label' => NULL,
+        'items' => [],
+        'source' => NULL,
+        'more_link' => NULL,
+      ],
+      'template' => 'bsi-cert-teaserlist',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * The external CERT feeds are fetched here and only here. Every configured
+ * source is downloaded, parsed and persisted to state; the frontend never
+ * touches the network, it only reads the stored result.
+ *
+ * The fetch is throttled to the configured interval (default 300 s / 5 min)
+ * via state, so it does not matter how often Drupal cron itself is triggered
+ * as long as it runs at least once per interval. On the OKD deployment make
+ * sure a CronJob invokes `drush cron` at least every 5 minutes (ideally every
+ * minute).
+ */
+function bsi_cert_cron(): void {
+  $state = \Drupal::state();
+  $now = (int) \Drupal::time()->getRequestTime();
+
+  // Skip until the throttle window has elapsed.
+  if ($now < (int) $state->get('bsi_cert.next_run', 0)) {
+    return;
+  }
+
+  $config = \Drupal::config('bsi_cert.settings');
+  $interval = (int) ($config->get('cron_interval') ?: 300);
+
+  /** @var \Drupal\bsi_cert\Service\BsiCertFeedClient $client */
+  $client = \Drupal::service('bsi_cert.feed_client');
+
+  foreach (($config->get('sources') ?: []) as $key => $source) {
+    if (!empty($source['source_url'])) {
+      $client->refresh($key);
+    }
+  }
+
+  $state->set('bsi_cert.next_run', $now + $interval);
+}

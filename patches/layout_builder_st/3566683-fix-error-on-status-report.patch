@@ -1,0 +1,28 @@
+From 360442a46538c9f862db77dc1b3bb4b46a00bc8f Mon Sep 17 00:00:00 2001
+From: Petar Basic <petar.basic@uns.ac.rs>
+Date: Fri, 9 Jan 2026 17:28:00 +0100
+Subject: [PATCH] fix: #3566683: Fix hook runtime requirements fuuntion.
+
+---
+ src/Hook/RequirementHooks.php | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/Hook/RequirementHooks.php b/src/Hook/RequirementHooks.php
+index 2b15288..f09bd0a 100644
+--- a/src/Hook/RequirementHooks.php
++++ b/src/Hook/RequirementHooks.php
+@@ -19,10 +19,10 @@ class RequirementHooks {
+   use StringTranslationTrait;
+
+   /**
+-   * Implements hook_requirements().
++   * Implements hook_runtime_requirements().
+    */
+   #[Hook('runtime_requirements')]
+-  public function runtimeRequirements($phase) {
++  public function runtimeRequirements(): array {
+     $requirements = [];
+
+     if ($this->moduleHandler->moduleExists('layout_builder_at')) {
+--
+GitLab

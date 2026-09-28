@@ -1,0 +1,30 @@
+uuid: 1dc5af42-779d-4685-a21b-065a2698bb9c
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - menu_multilingual
+    - system
+  theme:
+    - bsi_bund
+third_party_settings:
+  menu_multilingual:
+    only_translated_labels: false
+    only_translated_content: true
+id: bsi_bund_mainnavigation
+theme: bsi_bund
+region: header
+weight: -6
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 4
+  expand_all_items: true
+visibility: {  }

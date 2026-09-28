@@ -1,0 +1,11 @@
+# Schema for the configuration files of the Bsi webform module.
+bsi_webform.settings:
+  type: config_object
+  label: 'Bsi webform settings'
+  mapping:
+    element_types:
+      type: sequence
+      label: 'Selected Webform element types'
+      sequence:
+        type: string
+        label: 'Element type ID'

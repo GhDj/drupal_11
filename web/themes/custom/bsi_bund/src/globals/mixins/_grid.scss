@@ -1,0 +1,135 @@
+// -----------------------------------------------------------------------------
+// Grid Mixins
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+/**
+ * Grid mixin
+ * Applies grid layout with dynamic columns and gutters based on CSS variables.
+ * Designed to be used on a container element that should behave as a grid.
+ *
+ * @example
+ *   .my-grid {
+ *     @include grid();
+ *   }
+ **/
+@mixin grid($is-nested: false) {
+  column-gap: var(--#{$nsp}-grid-gutter);
+  display: grid;
+  grid-template-columns: repeat(var(--#{$nsp}-grid-columns), minmax(0, 1fr));
+  margin-inline: auto;
+  max-width: var(--#{$nsp}-grid-max-width);
+  padding: var(--#{$nsp}-grid-module-padding) var(--#{$nsp}-grid-padding);
+  row-gap: var(--#{$nsp}-grid-row-gap);
+
+  // resets for nested grids
+  // --------------------------------------------
+  .#{$nsp}-grid {
+    --#{$nsp}-grid-module-padding: 0;
+    --#{$nsp}-grid-padding: 0;
+    margin-inline: initial;
+  }
+
+  @if $is-nested {
+    --#{$nsp}-grid-module-padding: 0;
+    --#{$nsp}-grid-padding: 0;
+    margin-inline: initial;
+  }
+
+  // Grid items span all columns by default
+  :where(&) > * {
+    grid-column: 1 / -1;
+  }
+
+  // Reset spanning for variant grids at medium breakpoint and up
+  &[class*="#{$nsp}-grid--"],
+  [class*="#{$nsp}-grid--"] {
+    > * {
+      @include breakpoint-md {
+        grid-column: auto;
+      }
+    }
+  }
+}
+
+/**
+ * Indented grid variant — positions the element at columns 2–11 within a
+ * parent 12-column grid at breakpoint-lg and up.
+ */
+@mixin grid-indented {
+  @include breakpoint-lg {
+    grid-column: 2 / 12;
+
+    > * {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+/**
+ * Make an element span across a specific number of columns
+ *
+ * @param {number} $columns - Number of columns to span
+ *
+ * @example
+ *   .grid-item {
+ *     @include grid-span-col(2); // Spans 2 columns
+ *   }
+ */
+@mixin grid-span-col($columns) {
+  grid-column: span $columns;
+}
+
+/**
+ * Set a fixed number of equally sized grid columns.
+ *
+ * @param {number} $columns - Number of columns per row
+ *
+ * @example
+ *   .grid {
+ *     @include grid-columns(3);
+ *   }
+ */
+@mixin grid-columns($columns) {
+  grid-template-columns: repeat($columns, minmax(0, 1fr));
+}
+
+/**
+ * Make an element span across all columns (full width)
+ *
+ * @example
+ *   .grid-item--full {
+ *     @include grid-span-col-full;
+ *   }
+ */
+@mixin grid-span-col-full {
+  grid-column: 1 / -1;
+}
+
+/**
+ * Position an element at a specific grid column
+ *
+ * @param {number} $start - Starting column number
+ * @param {number} $end - Ending column number (optional, defaults to span 1)
+ *
+ * @example
+ *   .grid-item {
+ *     @include grid-col(2, 4); // From column 2 to 4
+ *     @include grid-col(1); // Start at column 1, span 1
+ *   }
+ */
+@mixin grid-col($start, $end: null) {
+  @if $end {
+    grid-column: $start / $end;
+  } @else {
+    grid-column: $start;
+  }
+}
+
+@mixin grid-container {
+  margin-inline: auto;
+  max-width: var(--#{$nsp}-grid-max-width);
+  padding-inline: var(--#{$nsp}-grid-padding);
+}

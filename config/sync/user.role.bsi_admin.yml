@@ -1,0 +1,273 @@
+uuid: 93bf74ef-a687-49d3-a25d-3ca2ccb734d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_display.node.entry_page.full
+    - filter.format.advanced
+    - media.type.audio
+    - media.type.bits
+    - media.type.chart
+    - media.type.contact
+    - media.type.download
+    - media.type.gallery
+    - media.type.image
+    - media.type.publication
+    - media.type.video
+    - node.type.article
+    - node.type.entry_page
+    - node.type.event
+    - node.type.inventory
+    - node.type.it_security_label
+    - node.type.job
+    - node.type.page
+    - node.type.report_page
+    - taxonomy.vocabulary.abbreviations
+    - taxonomy.vocabulary.audiences
+    - taxonomy.vocabulary.contact_topics
+    - taxonomy.vocabulary.dictionary
+    - taxonomy.vocabulary.it_sik_categories
+    - taxonomy.vocabulary.media_types
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.topics
+    - workflows.workflow.nodes
+  module:
+    - asset_injector
+    - block
+    - book
+    - bsi_charts
+    - config_pages
+    - content_moderation
+    - content_translation
+    - contextual
+    - duplicate_node
+    - editoria11y
+    - environment_indicator
+    - file
+    - filter
+    - group
+    - help
+    - honeypot
+    - layout_builder
+    - locale
+    - media
+    - menu_admin_per_menu
+    - metatag
+    - node
+    - node_keep
+    - paragraphs
+    - paragraphs_type_permissions
+    - path
+    - pathauto
+    - redirect
+    - registration
+    - role_delegation
+    - short_url
+    - simple_sitemap
+    - system
+    - tablefield
+    - taxonomy
+    - toolbar
+    - update
+    - webform
+    - webform_simplify
+    - webform_templates
+id: bsi_admin
+label: 'BSI Admin'
+weight: -7
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access book list'
+  - 'access config_pages overview'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access environment indicator'
+  - 'access files overview'
+  - 'access group overview'
+  - 'access help pages'
+  - 'access media overview'
+  - 'access node_keep widget'
+  - 'access registration overview'
+  - 'access site reports'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'access webform help'
+  - 'access webform overview'
+  - 'add content to books'
+  - 'addrow tablefield'
+  - 'administer blocks'
+  - 'administer book outlines'
+  - 'administer css assets injector'
+  - 'administer footer menu items'
+  - 'administer header menu items'
+  - 'administer honeypot'
+  - 'administer main menu items'
+  - 'administer media'
+  - 'administer meta tags'
+  - 'administer node published status'
+  - 'administer node_keep per node'
+  - 'administer nodes'
+  - 'administer redirects'
+  - 'administer registration'
+  - 'administer registration types'
+  - 'administer social-media menu items'
+  - 'administer url aliases'
+  - 'administer users'
+  - 'administer webform templates'
+  - 'assign bsi_admin role'
+  - 'assign csn_admin role'
+  - 'assign csn_deh role'
+  - 'assign editor role'
+  - 'bsi_chart customize chart axis'
+  - 'bsi_chart customize chart display'
+  - 'bsi_chart use import csv'
+  - 'bulk delete aliases'
+  - 'bulk update aliases'
+  - 'bypass paragraphs type content access'
+  - 'configure editable entry_page node layout overrides'
+  - 'create and edit custom blocks'
+  - 'create article content'
+  - 'create content translations'
+  - 'create entry_page content'
+  - 'create event content'
+  - 'create inventory content'
+  - 'create it_security_label content'
+  - 'create job content'
+  - 'create media'
+  - 'create new books'
+  - 'create page content'
+  - 'create paragraph content view'
+  - 'create registration'
+  - 'create report_page content'
+  - 'create terms in abbreviations'
+  - 'create terms in audiences'
+  - 'create terms in contact_topics'
+  - 'create terms in dictionary'
+  - 'create terms in it_sik_categories'
+  - 'create terms in media_types'
+  - 'create terms in tags'
+  - 'create terms in topics'
+  - 'create url aliases'
+  - 'create webform'
+  - 'delete all revisions'
+  - 'delete all taxonomy revisions'
+  - 'delete any article content'
+  - 'delete any entry_page content'
+  - 'delete any event content'
+  - 'delete any file'
+  - 'delete any inventory content'
+  - 'delete any it_security_label content'
+  - 'delete any job content'
+  - 'delete any media'
+  - 'delete any page content'
+  - 'delete any report_page content'
+  - 'delete any webform submission'
+  - 'delete article revisions'
+  - 'delete content translations'
+  - 'delete entry_page revisions'
+  - 'delete event revisions'
+  - 'delete host registration'
+  - 'delete inventory revisions'
+  - 'delete it_security_label revisions'
+  - 'delete job revisions'
+  - 'delete page revisions'
+  - 'delete report_page revisions'
+  - 'delete terms in abbreviations'
+  - 'delete terms in audiences'
+  - 'delete terms in contact_topics'
+  - 'delete terms in dictionary'
+  - 'delete terms in it_sik_categories'
+  - 'delete terms in media_types'
+  - 'delete terms in tags'
+  - 'delete terms in topics'
+  - 'duplicate article content'
+  - 'duplicate entry_page content'
+  - 'duplicate event content'
+  - 'duplicate inventory content'
+  - 'duplicate it_security_label content'
+  - 'duplicate job content'
+  - 'duplicate page content'
+  - 'duplicate report_page content'
+  - 'edit any article content'
+  - 'edit any entry_page content'
+  - 'edit any event content'
+  - 'edit any inventory content'
+  - 'edit any it_security_label content'
+  - 'edit any job content'
+  - 'edit any page content'
+  - 'edit any report_page content'
+  - 'edit any webform'
+  - 'edit any webform access settings'
+  - 'edit any webform asset settings'
+  - 'edit any webform confirmation settings'
+  - 'edit any webform form settings'
+  - 'edit any webform general settings'
+  - 'edit any webform handler settings'
+  - 'edit any webform submission'
+  - 'edit any webform submission settings'
+  - 'edit config_pages entity'
+  - 'edit entity sitemap settings'
+  - 'edit short_url'
+  - 'edit terms in abbreviations'
+  - 'edit terms in audiences'
+  - 'edit terms in contact_topics'
+  - 'edit terms in dictionary'
+  - 'edit terms in it_sik_categories'
+  - 'edit terms in media_types'
+  - 'edit terms in tags'
+  - 'edit terms in topics'
+  - 'edit webform variants'
+  - 'export tablefield'
+  - 'import tablefield'
+  - 'manage editoria11y results'
+  - 'mark as ok in editoria11y'
+  - 'paste tablefield'
+  - 'reorder book pages'
+  - 'revert all revisions'
+  - 'revert all taxonomy revisions'
+  - 'revert any audio media revisions'
+  - 'revert any bits media revisions'
+  - 'revert any chart media revisions'
+  - 'revert any contact media revisions'
+  - 'revert any download media revisions'
+  - 'revert any gallery media revisions'
+  - 'revert any image media revisions'
+  - 'revert any publication media revisions'
+  - 'revert any video media revisions'
+  - 'select account cancellation method'
+  - 'translate interface'
+  - 'update any media'
+  - 'update content translations'
+  - 'update host registration'
+  - 'update paragraph content view'
+  - 'use nodes transition create_new_draft'
+  - 'use nodes transition publish'
+  - 'use nodes transition reject'
+  - 'use nodes transition request_approval'
+  - 'use nodes transition request_deletion'
+  - 'use nodes transition revise'
+  - 'use nodes transition unpublish'
+  - 'use nodes transition withdraw'
+  - 'use text format advanced'
+  - 'view all revisions'
+  - 'view all taxonomy revisions'
+  - 'view any registration'
+  - 'view any unpublished content'
+  - 'view any webform submission'
+  - 'view config_pages entity'
+  - 'view editoria11y checker'
+  - 'view host registration'
+  - 'view own registration'
+  - 'view term revisions in abbreviations'
+  - 'view term revisions in audiences'
+  - 'view term revisions in contact_topics'
+  - 'view term revisions in dictionary'
+  - 'view term revisions in it_sik_categories'
+  - 'view term revisions in media_types'
+  - 'view term revisions in tags'
+  - 'view term revisions in topics'
+  - 'view the administration theme'
+  - 'view unpublished paragraphs'
+  - 'view update notifications'

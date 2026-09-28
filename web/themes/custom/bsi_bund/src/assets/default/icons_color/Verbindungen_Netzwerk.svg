@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: #004b76;
+      }
+
+      .st0, .st1 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+
+      .st1 {
+        stroke: #00a4b9;
+      }
+    </style>
+  </defs>
+  <line class="st0" x1="34.1" y1="14.3" x2="18.4" y2="14.3"/>
+  <path class="st0" d="M17.7,27.3l17.3-11.4"/>
+  <ellipse class="st0" cx="15" cy="14.3" rx="3" ry="3"/>
+  <ellipse class="st0" cx="37.6" cy="14.3" rx="3" ry="3"/>
+  <ellipse class="st0" cx="59.8" cy="14.3" rx="3" ry="3"/>
+  <ellipse class="st0" cx="59.8" cy="29.2" rx="3" ry="3"/>
+  <ellipse class="st1" cx="59.8" cy="44.2" rx="3" ry="3"/>
+  <ellipse class="st1" cx="59.8" cy="59.2" rx="3" ry="3"/>
+  <line class="st0" x1="56.9" y1="29" x2="40.7" y2="29"/>
+  <line class="st1" x1="56.3" y1="44.3" x2="40.7" y2="44.3"/>
+  <line class="st0" x1="34.1" y1="29.1" x2="18.4" y2="29.1"/>
+  <path class="st0" d="M17.8,42.6l17.1-11.9"/>
+  <ellipse class="st0" cx="15" cy="29.1" rx="3" ry="3"/>
+  <ellipse class="st0" cx="37.6" cy="29.1" rx="3" ry="3"/>
+  <ellipse class="st0" cx="15" cy="44.3" rx="3" ry="3"/>
+  <ellipse class="st0" cx="15" cy="59.2" rx="3" ry="3"/>
+  <ellipse class="st1" cx="37.6" cy="44.3" rx="3" ry="3"/>
+  <line class="st0" x1="59.8" y1="17.3" x2="59.8" y2="26.2"/>
+  <line class="st1" x1="59.8" y1="47.2" x2="59.8" y2="55.9"/>
+</svg>

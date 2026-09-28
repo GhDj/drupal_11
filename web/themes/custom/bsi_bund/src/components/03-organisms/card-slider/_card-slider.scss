@@ -1,0 +1,27 @@
+// -----------------------------------------------------------------------------
+// Card Slider
+// -----------------------------------------------------------------------------
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/grid" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-card-slider {
+  overflow: hidden;
+
+  &__items {
+    align-items: stretch;
+  }
+
+  &__item > * {
+    height: 100%;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,19 @@
+uuid: 496aad61-21c1-4da2-9fd6-7cea384e2765
+langcode: en
+status: true
+dependencies:
+  module:
+    - config_pages
+    - link
+id: config_pages.field_suggestions
+field_name: field_suggestions
+entity_type: config_pages
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 5
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

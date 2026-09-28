@@ -1,0 +1,17 @@
+ckeditor_abbreviation:
+  js:
+    js/ckeditor-abbreviation.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/drupalSettings
+    - core/drupal.debounce
+    - ckeditor_abbreviation/abbreviation
+
+editoria11y:
+  js:
+    js/ed11y-abbreviations.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - editoria11y/editoria11y

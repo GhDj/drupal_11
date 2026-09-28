@@ -1,0 +1,21 @@
+{
+  "spaceBase": "4px",
+  "space": {
+    "5xs": "#{calc($space-base * 0.5)}",
+    "4xs": "#{calc($space-base * 1)}",
+    "3xs": "#{calc($space-base * 1.5)}",
+    "2xs": "#{calc($space-base * 2)}",
+    "xs": "#{calc($space-base * 3)}",
+    "sm": "#{calc($space-base * 4)}",
+    "md": "#{calc($space-base * 5)}",
+    "lg": "#{calc($space-base * 6)}",
+    "xl": "#{calc($space-base * 8)}",
+    "2xl": "#{calc($space-base * 10)}",
+    "3xl": "#{calc($space-base * 12)}",
+    "4xl": "#{calc($space-base * 14)}",
+    "5xl": "#{calc($space-base * 16)}",
+    "6xl": "#{calc($space-base * 20)}",
+    "7xl": "#{calc($space-base * 30)}",
+    "module": "24px"
+  }
+}

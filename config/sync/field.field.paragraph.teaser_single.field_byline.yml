@@ -1,0 +1,19 @@
+uuid: a164cca8-c1ba-4494-bb1b-01c46c2a634c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_byline
+    - paragraphs.paragraphs_type.teaser_single
+id: paragraph.teaser_single.field_byline
+field_name: field_byline
+entity_type: paragraph
+bundle: teaser_single
+label: Byline
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,52 @@
+uuid: a4d315ff-19ed-4886-94d8-917ede027f94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sequence.field_display_animate
+    - field.field.paragraph.sequence.field_display_variant
+    - field.field.paragraph.sequence.field_items
+    - field.field.paragraph.sequence.field_jumplink
+    - field.field.paragraph.sequence.field_section_text
+    - field.field.paragraph.sequence.field_section_title
+    - paragraphs.paragraphs_type.sequence
+  module:
+    - bsi_custom
+    - entity_reference_revisions
+    - text
+id: paragraph.sequence.default
+targetEntityType: paragraph
+bundle: sequence
+mode: default
+content:
+  field_items:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_section_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_section_title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_display_animate: true
+  field_display_variant: true
+  field_jumplink: true
+  search_api_excerpt: true

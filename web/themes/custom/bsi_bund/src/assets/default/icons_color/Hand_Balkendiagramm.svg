@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #004b76;
+        stroke-miterlimit: 35.3;
+      }
+
+      .st0, .st1 {
+        stroke: #004b76;
+      }
+
+      .st0, .st1, .st2, .st3 {
+        stroke-width: 1.2px;
+      }
+
+      .st1, .st2, .st3 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .st2 {
+        stroke: #00a4b9;
+      }
+
+      .st3 {
+        stroke: #004f80;
+      }
+    </style>
+  </defs>
+  <g id="svg168" inkscape:version="0.92.4 (5da689c313, 2019-01-14)" sodipodi:docname="Grafik-5-1210146626.svg">
+    <sodipodi:namedview id="base" bordercolor="#666666" borderopacity="1.0" inkscape:current-layer="layer2" inkscape:cx="17.67224" inkscape:cy="6.0885382" inkscape:document-units="mm" inkscape:guide-bbox="true" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:showpageshadow="false" inkscape:window-height="1113" inkscape:window-maximized="1" inkscape:window-width="1920" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:zoom="3.959798" pagecolor="#ffffff" showgrid="false" showguides="true" units="px">
+      <sodipodi:guide id="guide190" inkscape:locked="false" orientation="1,0" position="2.9399648,4.2763124"/>
+      <sodipodi:guide id="guide192" inkscape:locked="false" orientation="1,0" position="16.437075,-12.361216"/>
+      <sodipodi:guide id="guide194" inkscape:locked="false" orientation="1,0" position="9.8221548,4.7440342"/>
+    </sodipodi:namedview>
+    <polyline id="polyline13763" class="st2" points="36.7 38.4 36.7 21.1 43.7 21.1 43.7 37.4"/>
+    <path id="polyline13761" class="st2" d="M29.5,35.8v-8.5h7.2v10.1" inkscape:connector-curvature="0" sodipodi:nodetypes="cccc"/>
+    <path id="polyline13765" class="st2" d="M43.7,38.3V15h7.2v21.5" inkscape:connector-curvature="0" sodipodi:nodetypes="cccc"/>
+    <path id="path13769" class="st3" d="M46.5,40.3s5.2-3.9,8.5-6.4c3.5-2.7,6.2-1.5,8.3.7l-16.6,16.1h-20.7" inkscape:connector-curvature="0" sodipodi:nodetypes="ccccc"/>
+    <path id="path13771" class="st3" d="M18.3,42.4c4.1-5.2,6.4-6.4,10.4-6.4s5.2.4,8,2.4h6.2c1,0,4.2.4,4.2,5.4h-12.9" inkscape:connector-curvature="0" sodipodi:nodetypes="cscscc"/>
+    <polyline id="polyline13777" class="st1" points="10.6 45.3 15.5 40.2 29.2 54.4 24.3 59.4"/>
+    <circle id="ellipse13781" class="st0" cx="16" cy="47.8" r="1.3"/>
+  </g>
+</svg>

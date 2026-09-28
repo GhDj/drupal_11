@@ -1,0 +1,99 @@
+uuid: 96bf743a-7f39-4644-90b6-aa1113c5bfb1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.linkbox
+    - field.field.node.report_page.body
+    - field.field.node.report_page.field_audiences
+    - field.field.node.report_page.field_downloads
+    - field.field.node.report_page.field_downloads_title
+    - field.field.node.report_page.field_links
+    - field.field.node.report_page.field_links_title
+    - field.field.node.report_page.field_media
+    - field.field.node.report_page.field_metatags
+    - field.field.node.report_page.field_paragraphs
+    - field.field.node.report_page.field_subtitle
+    - field.field.node.report_page.field_tags
+    - field.field.node.report_page.field_topics
+    - node.type.report_page
+  module:
+    - bsi_custom
+    - layout_builder
+    - link
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.report_page.linkbox
+targetEntityType: node
+bundle: report_page
+mode: linkbox
+content:
+  field_downloads:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_downloads_title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_links:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_links_title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  book_navigation: true
+  book_navigation_without_tree: true
+  changed: true
+  content_moderation_control: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audiences: true
+  field_media: true
+  field_metatags: true
+  field_paragraphs: true
+  field_subtitle: true
+  field_tags: true
+  field_topics: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  title: true
+  uid: true

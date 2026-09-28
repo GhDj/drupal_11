@@ -1,0 +1,68 @@
+// -----------------------------------------------------------------------------
+// Accordion
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+.#{$nsp}-accordion {
+  --#{$nsp}-grid-row-gap: 0;
+
+  &__item {
+    border-bottom: 1px solid var(--#{$nsp}-color-neutral-350);
+
+    .bsi-bodytext {
+      margin-bottom: 20px;
+    }
+
+    &.is-open {
+      border-bottom: 1px solid var(--#{$nsp}-color-blue-800);
+    }
+  }
+
+  &__title {
+    align-items: center;
+    display: flex;
+    gap: var(--#{$nsp}-space-sm);
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+  }
+
+  &__heading {
+    @include typography("heading-5");
+    font-weight: 700;
+    padding-block: var(--#{$nsp}-space-lg);
+  }
+
+  &__trigger {
+    background-color: var(--#{$nsp}-color-blue-800);
+    color: var(--bsi-color-base-white);
+    flex-shrink: 0;
+
+    &[aria-expanded="true"] .#{$nsp}-button__icon {
+      transform: rotate(180deg);
+    }
+
+    &::before {
+      bottom: 0;
+      content: "";
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  &__icon {
+    align-items: center;
+    display: flex;
+    transition: transform 0.2s ease;
+  }
+
+  &__panel {
+    padding-bottom: var(--#{$nsp}-space-xl);
+    padding-top: var(--#{$nsp}-space-sm);
+  }
+}

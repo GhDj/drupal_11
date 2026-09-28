@@ -1,0 +1,23 @@
+
+{% import _self as menus %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  https://twig.symfony.com/doc/3.x/tags/macro.html
+#}
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    <nav class="bsi-footer__service-nav">
+    {% for item in items %}
+        {% include '@bsi_bund/elements/link.html.twig' with {
+          url: item.url.toString,
+          title: item.title,
+          extra_classes: 'bsi-footer__service-link',
+        } only %}
+    {% endfor %}
+    </nav>
+  {% endif %}
+{% endmacro %}

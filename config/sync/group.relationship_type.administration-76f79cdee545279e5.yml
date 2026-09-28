@@ -1,0 +1,17 @@
+uuid: afdabede-c5ab-4517-8fc0-00305ad8eef0
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.administration
+    - media.type.download
+  module:
+    - groupmedia
+    - media
+id: administration-76f79cdee545279e5
+group_type: administration
+content_plugin: 'group_media:download'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  tracking_enabled: 1

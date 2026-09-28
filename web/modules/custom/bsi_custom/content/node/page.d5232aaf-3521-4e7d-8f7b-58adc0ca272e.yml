@@ -1,0 +1,81 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: d5232aaf-3521-4e7d-8f7b-58adc0ca272e
+  bundle: page
+  default_langcode: de
+  depends:
+    734b5cd9-35c8-437f-a44a-1d2c1084d793: media
+    e3f4cce5-3e03-4eef-9b71-a22ddaeae3db: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Geschützter Inhalt: Inhaltsseite Land'
+  created:
+    -
+      value: 1784022489
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Dies ist ein Inhalt, welcher im Kontext der Gruppe "Landes- und Kommunalverwaltung" erstellt wurde.'
+      format: plain_text
+      summary: ''
+  field_media:
+    -
+      entity: 734b5cd9-35c8-437f-a44a-1d2c1084d793
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 1f9faafa-ff0b-4765-8c36-b75c11be4708
+          bundle: downloads
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1784022548
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_media_items:
+            -
+              entity: e3f4cce5-3e03-4eef-9b71-a22ddaeae3db
+          field_section_title:
+            -
+              value: Downloads

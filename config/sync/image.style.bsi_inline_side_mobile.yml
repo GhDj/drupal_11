@@ -1,0 +1,21 @@
+uuid: 29d3cfe9-15f1-40e2-acfd-cc00ee5f4fb9
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_inline_side_mobile
+label: 'BSI Inline side (mobile)'
+effects:
+  e5dc7851-99bd-4859-9326-6c9d3a4ffcb0:
+    uuid: e5dc7851-99bd-4859-9326-6c9d3a4ffcb0
+    id: image_scale
+    weight: 1
+    data:
+      width: 544
+      height: null
+      upscale: true
+  ba57ad65-eb4f-4f7c-9633-46188a21ead6:
+    uuid: ba57ad65-eb4f-4f7c-9633-46188a21ead6
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

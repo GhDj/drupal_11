@@ -1,0 +1,31 @@
+{#
+/**
+ * Field template without any wrappers around the content
+ */
+#}
+{% set fully_inline = not multiple and label_display == 'inline' %}
+{% set base_name = base_name|default('field') %}
+{% set title_classes = [
+    base_name ~ '__label',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+] %}
+{% block content %}
+    {% block label %}
+        {% if not label_hidden -%}
+            {% if fully_inline -%}
+                {# Note the colon label suffix. #}
+                <span{{ title_attributes.addClass(title_classes) }}>{{ label }}:</span>
+            {%- else -%}
+                <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+            {%- endif %}
+        {%- endif %}
+    {% endblock %}
+
+    {% block items %}
+        {% for item in items %}
+            {% block item %}
+                {{ item.content }}
+            {% endblock %}
+        {% endfor %}
+    {% endblock %}
+{% endblock %}

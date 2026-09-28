@@ -1,0 +1,43 @@
+uuid: 361a18fb-470a-48a4-982e-4ea6e47d761c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.opener
+    - field.field.media.gallery.field_body
+    - field.field.media.gallery.field_media_items
+    - media.type.gallery
+  module:
+    - bsi_custom
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.gallery.opener
+targetEntityType: media
+bundle: gallery
+mode: opener
+content:
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_body: true
+  field_media_items: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

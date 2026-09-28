@@ -1,0 +1,369 @@
+diff --git a/menu_entity_index.module b/menu_entity_index.module
+index 4e3676e4add8dd3925302c8d502a824014cb3e06..5fecc1029acc068d0f5bee03f93ac7ef3c9b4765 100644
+--- a/menu_entity_index.module
++++ b/menu_entity_index.module
+@@ -136,3 +136,10 @@ function menu_entity_index_entity_type_alter(array &$entity_types) {
+     $entity_types['menu_link_content']->setHandlerClass('views_data', 'Drupal\menu_entity_index\ViewsData\MenuLinkContent');
+   }
+ }
++
++/**
++ * Implements hook_views_data().
++ */
++function menu_entity_index_views_data() {
++  return \Drupal::service('menu_entity_index.views_data')->getViewsData();
++}
+diff --git a/menu_entity_index.views.inc b/menu_entity_index.views.inc
+deleted file mode 100644
+index 8cd40b7eade687d69050e8238b495a17d4988bce..0000000000000000000000000000000000000000
+--- a/menu_entity_index.views.inc
++++ /dev/null
+@@ -1,15 +0,0 @@
+-<?php
+-
+-/**
+- * @file
+- * Provides views data for Menu Entity Index module.
+- *
+- * @ingroup views_module_handlers
+- */
+-
+-/**
+- * Implements hook_views_data().
+- */
+-function menu_entity_index_views_data() {
+-  return \Drupal::service('menu_entity_index.views_data')->getViewsData();
+-}
+diff --git a/src/Form/ConfigurationForm.php b/src/Form/ConfigurationForm.php
+index ca0a97e3daf59a6486f7004bfcff05bffe2c9244..c2cc76fcae3423fc24f0c0b514fc128ba55f1130 100644
+--- a/src/Form/ConfigurationForm.php
++++ b/src/Form/ConfigurationForm.php
+@@ -31,7 +31,7 @@ class ConfigurationForm extends FormBase {
+   /**
+    * {@inheritdoc}
+    */
+-  public static function create(ContainerInterface $container) {
++  public static function create(ContainerInterface $container): static {
+     return new static(
+       $container->get('menu_entity_index.tracker')
+     );
+@@ -40,14 +40,14 @@ class ConfigurationForm extends FormBase {
+   /**
+    * {@inheritdoc}
+    */
+-  public function getFormId() {
++  public function getFormId(): string {
+     return 'menu_entity_index_configuration_form';
+   }
+
+   /**
+    * {@inheritdoc}
+    */
+-  public function buildForm(array $form, FormStateInterface $form_state) {
++  public function buildForm(array $form, FormStateInterface $form_state): array {
+     $config = $this->tracker->getConfiguration();
+     $form['all_menus'] = [
+       '#type' => 'checkbox',
+diff --git a/src/Plugin/views/argument_default/Menu.php b/src/Plugin/views/argument_default/Menu.php
+index 0e1851f189a6981b4ec7919a1197bd645149d30c..bfe8d05be18138fe5d3a1c2229e259ef9e62ce47 100644
+--- a/src/Plugin/views/argument_default/Menu.php
++++ b/src/Plugin/views/argument_default/Menu.php
+@@ -5,7 +5,9 @@ namespace Drupal\menu_entity_index\Plugin\views\argument_default;
+ use Drupal\Core\Cache\Cache;
+ use Drupal\Core\Cache\CacheableDependencyInterface;
+ use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\StringTranslation\TranslatableMarkup;
+ use Drupal\menu_entity_index\TrackerInterface;
++use Drupal\views\Attribute\ViewsArgumentDefault;
+ use Drupal\views\Plugin\views\argument_default\ArgumentDefaultPluginBase;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
+
+@@ -19,6 +21,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
+  *   title = @Translation("Menu")
+  * )
+  */
++#[ViewsArgumentDefault(
++  id: 'menu',
++  title: new TranslatableMarkup('Menu')
++)]
+ class Menu extends ArgumentDefaultPluginBase implements CacheableDependencyInterface {
+
+   /**
+@@ -50,7 +56,7 @@ class Menu extends ArgumentDefaultPluginBase implements CacheableDependencyInter
+   /**
+    * {@inheritdoc}
+    */
+-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+     return new static(
+       $configuration,
+       $plugin_id,
+@@ -62,7 +68,7 @@ class Menu extends ArgumentDefaultPluginBase implements CacheableDependencyInter
+   /**
+    * {@inheritdoc}
+    */
+-  protected function defineOptions() {
++  protected function defineOptions(): array {
+     $options = parent::defineOptions();
+     $options['argument'] = ['default' => ''];
+
+@@ -92,14 +98,14 @@ class Menu extends ArgumentDefaultPluginBase implements CacheableDependencyInter
+   /**
+    * {@inheritdoc}
+    */
+-  public function getCacheMaxAge() {
++  public function getCacheMaxAge(): int {
+     return Cache::PERMANENT;
+   }
+
+   /**
+    * {@inheritdoc}
+    */
+-  public function getCacheContexts() {
++  public function getCacheContexts(): array {
+     return [];
+   }
+
+diff --git a/src/Plugin/views/field/Menu.php b/src/Plugin/views/field/Menu.php
+index 7b21efca1b68b60db63ca871a95533f6a6f931ef..3276ad07cd008e436c692b31c3fd376679ece4c9 100644
+--- a/src/Plugin/views/field/Menu.php
++++ b/src/Plugin/views/field/Menu.php
+@@ -2,7 +2,9 @@
+
+ namespace Drupal\menu_entity_index\Plugin\views\field;
+
++use Drupal\Component\Render\MarkupInterface;
+ use Drupal\menu_entity_index\TrackerInterface;
++use Drupal\views\Attribute\ViewsField;
+ use Drupal\views\Plugin\views\field\FieldPluginBase;
+ use Drupal\views\ResultRow;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
+@@ -14,6 +16,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
+  *
+  * @ViewsField("menu")
+  */
++#[ViewsField(
++  id: 'menu',
++)]
+ class Menu extends FieldPluginBase {
+
+   /**
+@@ -45,7 +50,7 @@ class Menu extends FieldPluginBase {
+   /**
+    * {@inheritdoc}
+    */
+-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+     return new static(
+       $configuration,
+       $plugin_id,
+@@ -57,7 +62,7 @@ class Menu extends FieldPluginBase {
+   /**
+    * {@inheritdoc}
+    */
+-  public function render(ResultRow $values) {
++  public function render(ResultRow $values): string|MarkupInterface {
+     $available_menus = $this->tracker->getAvailableMenus();
+     $value = $this->getValue($values);
+     $value = $available_menus[$value] ?? $value;
+diff --git a/src/Plugin/views/field/TargetType.php b/src/Plugin/views/field/TargetType.php
+index 1f4ae1bc5845e4635148e2817a7b05278db651ae..57221b5f8263fc7e8f383162f2c02d2141b86f57 100644
+--- a/src/Plugin/views/field/TargetType.php
++++ b/src/Plugin/views/field/TargetType.php
+@@ -2,7 +2,9 @@
+
+ namespace Drupal\menu_entity_index\Plugin\views\field;
+
++use Drupal\Component\Render\MarkupInterface;
+ use Drupal\menu_entity_index\TrackerInterface;
++use Drupal\views\Attribute\ViewsField;
+ use Drupal\views\Plugin\views\field\FieldPluginBase;
+ use Drupal\views\ResultRow;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
+@@ -14,6 +16,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
+  *
+  * @ViewsField("menu_entity_index_target_type")
+  */
++#[ViewsField(
++  id: 'menu_entity_index_target_type',
++)]
+ class TargetType extends FieldPluginBase {
+
+   /**
+@@ -45,7 +50,7 @@ class TargetType extends FieldPluginBase {
+   /**
+    * {@inheritdoc}
+    */
+-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+     return new static(
+       $configuration,
+       $plugin_id,
+@@ -57,7 +62,7 @@ class TargetType extends FieldPluginBase {
+   /**
+    * {@inheritdoc}
+    */
+-  public function render(ResultRow $values) {
++  public function render(ResultRow $values): string|MarkupInterface {
+     $available_menus = $this->tracker->getAvailableEntityTypes();
+     $value = $this->getValue($values);
+     $value = $available_menus[$value] ?? $value;
+diff --git a/src/Plugin/views/filter/Menu.php b/src/Plugin/views/filter/Menu.php
+index 02cf3aeb8d9d405048ae79cf70a21eb903fe375b..024c500094db1438ed6c314e57e060b740602e71 100644
+--- a/src/Plugin/views/filter/Menu.php
++++ b/src/Plugin/views/filter/Menu.php
+@@ -4,6 +4,7 @@ namespace Drupal\menu_entity_index\Plugin\views\filter;
+
+ use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\menu_entity_index\TrackerInterface;
++use Drupal\views\Attribute\ViewsFilter;
+ use Drupal\views\Plugin\views\filter\InOperator;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
+
+@@ -14,6 +15,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
+  *
+  * @ViewsFilter("menu")
+  */
++#[ViewsFilter(
++  id: 'menu',
++)]
+ class Menu extends InOperator {
+
+   /**
+@@ -62,7 +66,7 @@ class Menu extends InOperator {
+   /**
+    * {@inheritdoc}
+    */
+-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+     return new static(
+       $configuration,
+       $plugin_id,
+@@ -75,7 +79,7 @@ class Menu extends InOperator {
+   /**
+    * {@inheritdoc}
+    */
+-  public function getValueOptions() {
++  public function getValueOptions(): ?array {
+     if (!isset($this->valueOptions)) {
+       $options = $this->tracker->getAvailableMenus();
+       if ($this->trackedOnly) {
+@@ -93,7 +97,7 @@ class Menu extends InOperator {
+   /**
+    * {@inheritdoc}
+    */
+-  public function calculateDependencies() {
++  public function calculateDependencies(): array {
+     $dependencies = parent::calculateDependencies();
+
+     // Add a cacheable dependency on our configuration.
+diff --git a/src/Plugin/views/filter/TargetType.php b/src/Plugin/views/filter/TargetType.php
+index f0637cd0b270524acd4979a3282e865df35a3c06..b4989e84a5b8df9ab54ff565810ef0103c558e4e 100644
+--- a/src/Plugin/views/filter/TargetType.php
++++ b/src/Plugin/views/filter/TargetType.php
+@@ -3,6 +3,7 @@
+ namespace Drupal\menu_entity_index\Plugin\views\filter;
+
+ use Drupal\menu_entity_index\TrackerInterface;
++use Drupal\views\Attribute\ViewsFilter;
+ use Drupal\views\Plugin\views\filter\InOperator;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
+
+@@ -13,6 +14,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
+  *
+  * @ViewsFilter("menu_entity_index_target_type")
+  */
++#[ViewsFilter(
++  id: 'menu_entity_index_target_type',
++)]
+ class TargetType extends InOperator {
+
+   /**
+@@ -43,7 +47,7 @@ class TargetType extends InOperator {
+   /**
+    * {@inheritdoc}
+    */
+-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+     return new static(
+       $configuration,
+       $plugin_id,
+@@ -55,7 +59,7 @@ class TargetType extends InOperator {
+   /**
+    * {@inheritdoc}
+    */
+-  public function getValueOptions() {
++  public function getValueOptions(): ?array {
+     if (!isset($this->valueOptions)) {
+       $options = $this->tracker->getAvailableEntityTypes();
+       $tracked_types = $this->tracker->getTrackedEntityTypes();
+@@ -70,7 +74,7 @@ class TargetType extends InOperator {
+   /**
+    * {@inheritdoc}
+    */
+-  public function calculateDependencies() {
++  public function calculateDependencies(): array {
+     $dependencies = parent::calculateDependencies();
+
+     // Add a cacheable dependency on our configuration.
+diff --git a/src/ViewsData/MenuLinkContent.php b/src/ViewsData/MenuLinkContent.php
+index c1d93601a6d1e25fa0cb2c81fcd017e3ae4e7b6e..df5f81f7e6bd87ca753143e9558ffc89db209d52 100644
+--- a/src/ViewsData/MenuLinkContent.php
++++ b/src/ViewsData/MenuLinkContent.php
+@@ -15,7 +15,7 @@ class MenuLinkContent extends EntityViewsData {
+   /**
+    * {@inheritdoc}
+    */
+-  public function getViewsData() {
++  public function getViewsData(): array {
+     $data = parent::getViewsData();
+
+     foreach ($data as $table => $table_data) {
+diff --git a/tests/src/Functional/DrushCommandsTest.php b/tests/src/Functional/DrushCommandsTest.php
+index 3b811358713c73ba5fb53dca5f247937d2f47076..3573c275d01b3bcc5c12990716d7732dc42c810d 100644
+--- a/tests/src/Functional/DrushCommandsTest.php
++++ b/tests/src/Functional/DrushCommandsTest.php
+@@ -7,12 +7,16 @@ use Drupal\Tests\BrowserTestBase;
+ use Drupal\Tests\menu_entity_index\Traits\MenuEntityIndexTestTrait;
+ use Drush\TestTraits\DrushTestTrait;
+ use Drupal\node\Entity\Node;
++use PHPUnit\Framework\Attributes\Group;
++use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
+ /**
+  * Provides functional tests for Menu Entity Index module.
+  *
+  * @group menu_entity_index
+  */
++#[Group('menu_entity_index')]
++#[RunTestsInSeparateProcesses]
+ class DrushCommandsTest extends BrowserTestBase {
+   use DrushTestTrait;
+   use MenuEntityIndexTestTrait;
+diff --git a/tests/src/Functional/MenuEntityIndexTest.php b/tests/src/Functional/MenuEntityIndexTest.php
+index b5477c89944a3cab89c44abc0d4b554ecebfbdea..1f1ed73f79c204ea98216cc294761de105bdf5b9 100644
+--- a/tests/src/Functional/MenuEntityIndexTest.php
++++ b/tests/src/Functional/MenuEntityIndexTest.php
+@@ -1,17 +1,23 @@
+ <?php
+
++declare(strict_types=1);
++
+ namespace Drupal\Tests\menu_entity_index\Functional;
+
+ use Drupal\Core\Database\Database;
+ use Drupal\Tests\BrowserTestBase;
+ use Drupal\Tests\menu_entity_index\Traits\MenuEntityIndexTestTrait;
+ use Drupal\node\Entity\Node;
++use PHPUnit\Framework\Attributes\Group;
++use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
+ /**
+  * Provides functional tests for Menu Entity Index module.
+  *
+  * @group menu_entity_index
+  */
++#[Group('menu_entity_index')]
++#[RunTestsInSeparateProcesses]
+ class MenuEntityIndexTest extends BrowserTestBase {
+   use MenuEntityIndexTestTrait;

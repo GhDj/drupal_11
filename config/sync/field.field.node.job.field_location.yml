@@ -1,0 +1,29 @@
+uuid: c666a412-0c0d-4600-b356-f67bfdd15039
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_location
+    - node.type.job
+  module:
+    - bsi_custom
+third_party_settings:
+  bsi_custom:
+    preset_options:
+      - Berlin
+      - Bonn
+      - Freital
+      - Saarbrücken
+    preset_other: ''
+id: node.job.field_location
+field_name: field_location
+entity_type: node
+bundle: job
+label: Location
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

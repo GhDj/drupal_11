@@ -1,0 +1,72 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 31a3bb89-72d2-4443-8a25-aa612d125cb6
+  bundle: menu_link_content
+  default_langcode: de
+translations:
+  en:
+    title:
+      -
+        value: 'Log out'
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_id: 1
+    content_translation_status:
+      -
+        value: true
+    content_translation_created:
+      -
+        value: 1784708644
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Abmelden
+  menu_name:
+    -
+      value: header
+  link:
+    -
+      uri: 'internal:/user/logout'
+      resolvable_uri: '/user/logout?token=fzL0Ox4jS6qafdt6gzGzjWGb_hsR6kJ8L8E0D4hC5Mo'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: -43
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1784708566
+  field_icon:
+    -
+      target_id: 'bsi_icons:logout'

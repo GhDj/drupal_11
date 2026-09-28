@@ -1,0 +1,18 @@
+{# TODO - template renaming/suggestion for stage  #}
+<div class="bsi-hero-slider__overlay">
+  {% include '@bsi_bund/components/card.twig' with {
+    tag: 'article',
+    extra_classes: ['bsi-hero-slider__card'],
+    theme: 'neutral-50',
+    has_divider: true,
+    image: content.field_media,
+    topline: content.field_byline,
+    heading: content.field_section_title,
+    heading_level: 3,
+    heading_style: 5,
+    body: content.field_section_text,
+    link: content.field_link is not empty ? content.field_link|merge({
+      '#extra_classes': ['bsi-card__link'],
+    }) : null,
+  } %}
+</div>

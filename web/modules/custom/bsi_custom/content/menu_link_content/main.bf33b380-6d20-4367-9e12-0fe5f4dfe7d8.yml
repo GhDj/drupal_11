@@ -1,0 +1,68 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: bf33b380-6d20-4367-9e12-0fe5f4dfe7d8
+  bundle: menu_link_content
+  default_langcode: de
+translations:
+  en:
+    title:
+      -
+        value: Reporting
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_id: 1
+    content_translation_status:
+      -
+        value: true
+    content_translation_created:
+      -
+        value: 1779443314
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Melden
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      uri: 'route:<none>'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -47
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1774013041

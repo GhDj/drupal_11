@@ -1,0 +1,19 @@
+uuid: f9c51991-d93c-4752-807a-9a53c170d02c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_mail
+    - media.type.contact
+id: media.contact.field_mail
+field_name: field_mail
+entity_type: media
+bundle: contact
+label: Mail
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

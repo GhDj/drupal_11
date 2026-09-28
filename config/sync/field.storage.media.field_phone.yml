@@ -1,0 +1,19 @@
+uuid: 22b652f5-488b-43ff-a96a-f35e4178924d
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - phone_label
+id: media.field_phone
+field_name: field_phone
+entity_type: media
+type: phone_label
+settings: {  }
+module: phone_label
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,320 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 93a05176-623c-4e1b-9b02-ff46a4de3204
+  bundle: entry_page
+  default_langcode: de
+  depends:
+    734b5cd9-35c8-437f-a44a-1d2c1084d793: media
+    68b997c3-9b21-4a81-a06f-37b41b3cbe87: media
+default:
+  nid:
+    -
+      value: 1
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Bundesministerium für Sicherheit in der Informationstechnik'
+  created:
+    -
+      value: 1777376189
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  node_keeper:
+    -
+      value: true
+  keeper_machine_name:
+    -
+      value: front
+  path:
+    -
+      alias: /home
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: ''
+      format: plain_text
+      summary: 'Startseite des bsi.bund.de'
+  field_media:
+    -
+      entity: 734b5cd9-35c8-437f-a44a-1d2c1084d793
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 4ad3cb69-32db-41c7-b7be-9023962747b3
+          bundle: banner
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778168994
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_link:
+            -
+              uri: 'https://portal.bsi.bund.de'
+              title: 'Zum BSI-Portal'
+              options: {  }
+          field_section_text:
+            -
+              value: '<p>Nutzen Sie das BSI-Portal für sichere Meldungen, Anträge und geschützte Fachverfahren.</p>'
+              format: basic
+          field_section_title:
+            -
+              value: 'Digitale Services & Meldungen'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 9c5b1ccc-5622-4c7d-a908-861f64c0a1e9
+          bundle: quote
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778567174
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_author:
+            -
+              value: Blindtext
+          field_byline:
+            -
+              value: 'Stellt Platzhalter-Texte bereit'
+          field_link:
+            -
+              uri: 'https://www.blindtextgenerator.de'
+              title: Blindtextgenerator
+              options: {  }
+          field_media:
+            -
+              entity: 734b5cd9-35c8-437f-a44a-1d2c1084d793
+          field_section_text:
+            -
+              value: '<p>Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark.</p>'
+              format: basic
+  field_stage_extra:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 8dcc97c0-5c67-425e-b8af-d95af3239cf0
+          bundle: teaser_single
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778487083
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_byline:
+            -
+              value: 24.05.2026
+          field_display_variant:
+            -
+              value: image_left
+          field_link:
+            -
+              uri: 'route:<none>'
+              title: 'Zur Veranstaltung'
+              options: {  }
+          field_section_text:
+            -
+              value: '<p>Barcelona</p><p>Weiterer Beschreibungstext stünde hier.</p>'
+              format: advanced
+          field_section_title:
+            -
+              value: 'Mobile World Congress 2026'
+  field_stage_items:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 9b30f7c6-e711-47a1-a4e8-f91e87462946
+          bundle: teaser_single
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778242824
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_display_variant:
+            -
+              value: image_left
+          field_link:
+            -
+              uri: 'route:<none>'
+              title: 'Zum Wheel of Distortion'
+              options: {  }
+          field_media:
+            -
+              entity: 734b5cd9-35c8-437f-a44a-1d2c1084d793
+          field_section_text:
+            -
+              value: '<p>In das Jahr 2026 sind die meisten von uns mit dem Gefühl gestartet, dass in unserer Welt etwas Grundlegendes aus den Fugen geraten ist. Es sind nicht mehr nur einzelne alte Gewohn- und Gewissheiten, auf die kein Verlass mehr ist; es ist vielmehr eine tiefe und grundsätzlich empfundene Verunsicherung.</p>'
+              format: basic
+          field_section_title:
+            -
+              value: 'Welt(un)ordnung im digitalen Raum'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 8b0b2418-124f-4ee3-bb8b-282b45e61ff2
+          bundle: teaser_single
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778242919
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_display_variant:
+            -
+              value: image_left
+          field_link:
+            -
+              uri: 'route:<none>'
+              title: Weiterlesen
+              options: {  }
+          field_media:
+            -
+              entity: 68b997c3-9b21-4a81-a06f-37b41b3cbe87
+          field_section_text:
+            -
+              value: '<p>Dies ist ein Beispiel-Inhalt für ein Bühnenelement.</p>'
+              format: basic
+          field_section_title:
+            -
+              value: 'Beispiel-Inhalt Bühnenelement'
+  layout_builder__layout:
+    -
+      section:
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          63f4f82a-9466-4ef3-9d07-e0f780eda76f:
+            uuid: 63f4f82a-9466-4ef3-9d07-e0f780eda76f
+            region: content
+            configuration:
+              id: 'field_block:node:entry_page:field_paragraphs'
+              label: Paragraphs
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          86380779-13c4-4917-a31b-a82a383aa0cc:
+            uuid: 86380779-13c4-4917-a31b-a82a383aa0cc
+            region: content
+            configuration:
+              id: 'views_block:news-block_front'
+              label: ''
+              label_display: visible
+              provider: views
+              views_label: ''
+              items_per_page: null
+              context_mapping: {  }
+            weight: 0
+            additional: {  }
+          7fc0c029-99fc-4d51-b4a2-eb1bd37a3413:
+            uuid: 7fc0c029-99fc-4d51-b4a2-eb1bd37a3413
+            region: content
+            configuration:
+              id: 'views_block:security-block_front'
+              label: ''
+              label_display: visible
+              provider: views
+              views_label: ''
+              items_per_page: null
+              context_mapping: {  }
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }

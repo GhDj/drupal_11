@@ -1,0 +1,33 @@
+uuid: f8c4ce91-c301-49df-8c40-478db5ea05ea
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.event
+  module:
+    - language
+    - node
+id: node_termin
+label: 'Node: Termin'
+type: 'canonical_entities:node'
+pattern: '/termine/[node:created:html_date]-[node:title]'
+selection_criteria:
+  ff00b72c-c359-42b7-88a4-0d5249d67c54:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      event: event
+  c159286d-0dc1-40c8-a1c9-968139e02315:
+    id: language
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    langcodes:
+      de: de
+selection_logic: and
+weight: -5
+relationships:
+  'node:langcode:language':
+    label: Language

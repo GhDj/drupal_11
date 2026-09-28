@@ -1,0 +1,18 @@
+settings:
+  default_submit_button_label: Absenden
+  default_reset_button_label: Zurücksetzen
+  default_delete_button_label: Löschen
+  default_wizard_start_label: Beginn
+  default_wizard_toggle_show_label: 'Alle zeigen'
+  default_preview_next_button_label: Vorschau
+  default_preview_label: Vorschau
+  default_confirmation_back_label: 'Zurück zum Formular'
+  dialog_options:
+    narrow:
+      title: Schmal
+    wide:
+      title: Breit
+element:
+  default_more_title: Weitere
+mail:
+  default_from_name: '[site:name]'

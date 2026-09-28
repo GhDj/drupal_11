@@ -1,0 +1,61 @@
+uuid: 177476af-70ab-4424-a33b-9ca7681cc0ef
+langcode: en
+status: true
+dependencies: {  }
+name: node_page
+label: 'node page validation'
+entity_type: node
+bundle: page
+field_validation_rules:
+  fbe4e1ce-4a25-43bf-a7f8-404da8ff6d03:
+    id: not_null_constraint_rule
+    title: 'Heading required if links are set'
+    data:
+      validate_mode: default
+      message: 'Please provide a heading for the linkbox items.'
+    weight: 1
+    uuid: fbe4e1ce-4a25-43bf-a7f8-404da8ff6d03
+    field_name: field_links_title
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_links
+      operator: not_empty
+      value: ''
+  686096be-c089-42a6-b307-2ff21bf897b4:
+    id: not_null_constraint_rule
+    title: 'Heading required if downloads are set'
+    data:
+      validate_mode: default
+      message: 'Please provide a heading for the linkbox downloads.'
+    weight: 2
+    uuid: 686096be-c089-42a6-b307-2ff21bf897b4
+    field_name: field_downloads_title
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_downloads
+      operator: not_empty
+      value: ''
+  257acffe-f92a-4dfe-9225-a5c67ea8325f:
+    id: count_constraint_rule
+    title: 'Teaser tiles limited to 8 entries'
+    data:
+      validate_mode: default
+      min: '0'
+      max: '8'
+      maxMessage: 'This collection should contain %limit element or less.|This collection should contain %limit elements or less.'
+      minMessage: 'This collection should contain %limit element or more.|This collection should contain %limit elements or more.'
+      exactMessage: 'This collection should contain exactly %limit element.|This collection should contain exactly %limit elements.'
+    weight: 3
+    uuid: 257acffe-f92a-4dfe-9225-a5c67ea8325f
+    field_name: field_teaser_tiles
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: ''
+      operator: ''
+      value: ''

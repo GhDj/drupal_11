@@ -1,0 +1,12 @@
+diff --git a/composer.json b/composer.json
+index 990e9cbc822341a326de31c849d367cf236bcb27..2b85f6831d0e94b7d01046a00b7b19f82a960f4b 100644
+--- a/composer.json
++++ b/composer.json
+@@ -22,6 +22,6 @@
+   "license": "GPL-2.0-or-later",
+   "minimum-stability": "dev",
+   "require": {
+-    "drupal/group": "^3.0"
++    "drupal/group": "^3.0 || ^4.0@alpha"
+   }
+ }

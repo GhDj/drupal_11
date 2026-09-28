@@ -1,0 +1,7 @@
+{
+  "customProperties": ["color", "space", "size"],
+  "tsVars": ["NSP", "breakpoint"],
+
+  "scssExclude": ["space", "size", "color"],
+  "scssMaps": ["typography", "fontWeights"]
+}

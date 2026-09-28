@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #00a4b9;
+      }
+
+      .st0, .st1, .st2 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+
+      .st0, .st2 {
+        stroke: #00a4b9;
+      }
+
+      .st1 {
+        stroke: #004b76;
+      }
+
+      .st1, .st2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g>
+    <line class="st1" x1="8.9" y1="60.2" x2="59.6" y2="60.2"/>
+    <g>
+      <polyline class="st1" points="59.6 38.8 59.6 34.2 14.1 34.2 14.1 60.2"/>
+      <polyline class="st1" points="21.3 46.2 21.3 41 26.5 41"/>
+      <polyline class="st1" points="30.3 46.2 30.3 41 35.5 41"/>
+      <polyline class="st1" points="39.4 46.2 39.4 41 44.6 41"/>
+      <polyline class="st1" points="21.3 55.3 21.3 50 26.5 50"/>
+      <polyline class="st1" points="30.3 55.3 30.3 50 35.5 50"/>
+      <polyline class="st1" points="39.4 55.3 39.4 50 44.6 50"/>
+      <polygon class="st1" points="17.6 13.4 14.1 33 14.1 34.2 24.4 34.2 21 13.4 17.6 13.4"/>
+      <polyline class="st1" points="24.4 34.2 35.4 23.3 36 23.3 36 34.2 36.6 34.2 47.1 23.3 47.6 23.3 47.6 34.2 48.2 34.2 59.1 23.3 59.6 23.3 59.6 34.2"/>
+    </g>
+  </g>
+  <circle class="st0" cx="51.1" cy="54.3" r=".8"/>
+  <path class="st2" d="M56.5,54.9c0-3.3-2.7-5.8-5.8-5.8"/>
+  <path class="st2" d="M61.1,54.9c0-5.8-4.7-10.4-10.4-10.4"/>
+  <path class="st2" d="M65.4,54.9c0-8.2-6.7-14.9-14.9-14.9"/>
+</svg>

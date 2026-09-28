@@ -1,0 +1,13 @@
+type: module
+name: 'BSI Custom'
+description: 'Customizations for the BSI Drupal site'
+package: BSI
+
+core_version_requirement: ^10 || ^11
+
+dependencies:
+  - drupal:filter
+  - field_group:field_group
+  - select_or_other:select_or_other
+  - viewsreference_filter:viewsreference_filter
+  - config_pages:config_pages

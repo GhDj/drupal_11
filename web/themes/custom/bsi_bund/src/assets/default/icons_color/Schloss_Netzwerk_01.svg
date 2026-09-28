@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: #004b76;
+      }
+
+      .st0, .st1 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+
+      .st1 {
+        stroke: #00a4b9;
+      }
+    </style>
+  </defs>
+  <g id="svg168" inkscape:version="0.92.4 (5da689c313, 2019-01-14)" sodipodi:docname="Grafik-7-118685632.svg">
+    <sodipodi:namedview id="base" bordercolor="#666666" borderopacity="1.0" inkscape:current-layer="layer2" inkscape:cx="17.67224" inkscape:cy="6.0885382" inkscape:document-units="mm" inkscape:guide-bbox="true" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:showpageshadow="false" inkscape:window-height="1113" inkscape:window-maximized="1" inkscape:window-width="1920" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:zoom="3.959798" pagecolor="#ffffff" showgrid="false" showguides="true" units="px">
+      <sodipodi:guide id="guide190" inkscape:locked="false" orientation="1,0" position="2.9399648,4.2763124"/>
+      <sodipodi:guide id="guide192" inkscape:locked="false" orientation="1,0" position="16.437075,-12.361216"/>
+      <sodipodi:guide id="guide194" inkscape:locked="false" orientation="1,0" position="9.8221548,4.7440342"/>
+    </sodipodi:namedview>
+    <circle id="circle26933" class="st0" cx="36.9" cy="62" r="2"/>
+    <circle id="circle26935" class="st0" cx="51.9" cy="58" r="2"/>
+    <circle id="circle26937" class="st0" cx="21.9" cy="58" r="2"/>
+    <circle id="circle26939" class="st0" cx="61.9" cy="36" r="2"/>
+    <circle id="circle26941" class="st0" cx="57.9" cy="50" r="2"/>
+    <circle id="circle26943" class="st0" cx="57.9" cy="22" r="2"/>
+    <polyline id="polyline26945" class="st0" points="57.9 48 57.9 42 53.9 42"/>
+    <circle id="circle26947" class="st0" cx="11.9" cy="36" r="2"/>
+    <circle id="circle26949" class="st0" cx="15.9" cy="50" r="2"/>
+    <circle id="circle26951" class="st1" cx="36.9" cy="36" r="2"/>
+    <circle id="circle26953" class="st0" cx="15.9" cy="22" r="2"/>
+    <polyline id="polyline26955" class="st0" points="15.9 24 15.9 30 19.9 30"/>
+    <path id="path26957" class="st0" d="M40.9,48h7c1.1,0,2-.9,2-2v-10h10" inkscape:connector-curvature="0"/>
+    <polyline id="polyline26959" class="st0" points="49.9 58 43.9 58 43.9 48.2"/>
+    <path id="path26961" class="st0" d="M49.9,32v-4c0-1.1-.9-2-2-2h-22c-1.1,0-2,.9-2,2v8h-10" inkscape:connector-curvature="0"/>
+    <polyline id="polyline26963" class="st0" points="57.9 24 57.9 30 49.9 30"/>
+    <path id="path26965" class="st0" d="M23.9,40v6c0,1.1.9,2,2,2h11v12" inkscape:connector-curvature="0"/>
+    <polyline id="polyline26967" class="st0" points="15.9 48 15.9 42 23.9 42"/>
+    <polyline id="polyline26969" class="st0" points="23.9 58 29.9 58 29.9 52"/>
+    <path id="path26971" class="st0" d="M28.9,26v-8c0-4.4,3.6-8,8-8h0c4.4,0,8,3.6,8,8v8" inkscape:connector-curvature="0"/>
+    <line id="line26973" class="st1" x1="36.9" y1="42" x2="36.9" y2="38"/>
+  </g>
+</svg>

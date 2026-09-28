@@ -1,0 +1,28 @@
+// -----------------------------------------------------------------------------
+// List
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-list {
+  @include typography("body");
+  padding-left: var(--#{$nsp}-space-xl);
+
+  &--bullet {
+    list-style: disc outside;
+  }
+
+  &--unstyled {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  &__item::marker {
+    color: currentColor;
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,18 @@
+uuid: 6b27dc27-ab53-4ed3-8741-8dcfcf79fb58
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.entry_page
+id: node.entry_page.created
+field_name: created
+entity_type: node
+bundle: entry_page
+label: 'Authored on'
+description: 'The date and time that the content was created.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

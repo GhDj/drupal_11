@@ -1,0 +1,19 @@
+uuid: a5dbdf80-ef63-4161-9a72-06a86bc7c8df
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_information_network
+field_name: field_information_network
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

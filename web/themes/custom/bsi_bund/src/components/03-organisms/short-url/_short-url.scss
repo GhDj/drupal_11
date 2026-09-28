@@ -1,0 +1,34 @@
+// -----------------------------------------------------------------------------
+// Short Url
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-short-url {
+  --#{$nsp}-ruler-margin: var(--#{$nsp}-space-2xs);
+  background: var(--#{$nsp}-color-blue-100);
+  display: flex;
+  gap: var(--#{$nsp}-space-lg);
+  padding: var(--#{$nsp}-space-sm);
+
+  &__icon {
+    --#{$nsp}-icon-width: var(--#{$nsp}-size-2xl);
+
+    @include breakpoint-lg {
+      --#{$nsp}-icon-width: var(--#{$nsp}-size-7xl);
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-weight: 700;
+  }
+}

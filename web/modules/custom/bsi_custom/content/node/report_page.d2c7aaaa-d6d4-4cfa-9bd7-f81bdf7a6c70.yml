@@ -1,0 +1,169 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: d2c7aaaa-d6d4-4cfa-9bd7-f81bdf7a6c70
+  bundle: report_page
+  default_langcode: de
+  depends:
+    4c7316f3-242d-41b0-a062-dce1c3e1b04c: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Vorworte und Fazit'
+  created:
+    -
+      value: 1777550459
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_links_title:
+    -
+      value: more_information
+  field_media:
+    -
+      entity: 4c7316f3-242d-41b0-a062-dce1c3e1b04c
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ee99f5b7-dc95-41c6-8f8d-1e5b8de4b0f2
+          bundle: text_section
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778149154
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_section_text:
+            -
+              value: '<p>Die Cybersicherheit in Deutschland musste auch im vergangenen Jahr an vielen Fronten verteidigt werden. Durch die geopolitischen Entwicklungen hat sich die Bedrohungslage weiter verschärft: Insbesondere russische Akteure greifen die IT-Strukturen deutscher Unternehmen, Kommunen und Privatleute an. Auch Kriminelle mit rein monetären Interessen haben es auf unsere Daten abgesehen. Gleichzeitig wollen und müssen wir die Digitalisierung in unserem Land voranbringen und dabei für sichere Informationstechnik sorgen.</p><p>Digitale Prozesse verfügbar zu machen ist die Voraussetzung für mehr Service und weniger Bürokratie. Digitalisierung dient so den Bürgerinnen und Bürgern wie der Wirtschaft. Um diesen Weg trittfest und zugänglich zu gestalten, hat die Bundesregierung das Bundesministerium für Digitalisierung und Staatsmodernisierung gegründet.&nbsp;</p><p>Aber im gleichen Maß, in dem wir Digitalisierung vorantreiben, müssen wir im BMI auch IT-Sicherheit fordern und fördern. Denn Nutzerinnen und Nutzer akzeptieren nur solche Informationstechnik, die sicher ist. Cybersicherheit macht daher den Weg zum digitalen Staat erst gangbar. Im vorliegenden Bericht zu ihrer Lage in Deutschland 2025 sind die Kapitel zu Angriffsfläche und Resilienz entsprechend die umfangreichsten.</p><p>Als weiteren Eckpfeiler zur Stärkung der Cybersicherheit hat die Bundesregierung im August die Schaffung des deutschen Cyberdomes beschlossen: ein System zur teilautomatisierten Abwehr im Netz, um Schäden durch Cyberangriffe zu reduzieren und bestenfalls zu vermeiden.&nbsp;</p><p>In Bezug auf die Breite möglicher Handlungsfelder ist dieser BSI-Lagebericht eine wichtige Entscheidungshilfe für die Auswahl und die Priorisierung von Maßnahmen zu mehr Cybersicherheit. Das gilt nicht nur für Regierung und Wirtschaft, sondern darüber hinaus für Bürgerinnen und Bürger: Denn der aufgezeigte Trend zur wachsenden Sorglosigkeit von Verbraucherinnen und Verbrauchern ist höchst bedenklich. Das Wissen über Maßnahmen, mit denen die oder der Einzelne seine Accounts schützen kann, ist leider weniger geworden, und die Bereitschaft, sie anzuwenden, insbesondere unter jüngeren Menschen nur gering. Aber der Lagebericht zeigt zudem: Es gibt keine uninteressanten Ziele für Cyberangriffe, solange Aufwand und Nutzen in einem für Angreifer günstigen Verhältnis stehen.&nbsp;</p><p>Auch deshalb ist dieser Bericht so wichtig: Indem er die ganze Bandbreite möglicher Angriffs- und Schutzpunkte aufzeigt, schärft er das Bewusstsein dafür, wie wichtig Cybersicherheit für jede und jeden Einzelnen von uns und für die Cybernation Deutschland ist. Unsere Gesellschaft, unsere Wirtschaft und letztlich unsere Demokratie als solche sind darauf angewiesen. Ich danke allen daher herzlich, die an diesem wichtigen Bericht mitgewirkt haben.</p><p>Ihr</p><p>Alexander Dobrindt</p>'
+              format: basic
+          field_section_title:
+            -
+              value: 'Vorwort des Bundesministers des Innern'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 394dc1c5-b7d5-4776-84de-e031a0065b4b
+          bundle: text_section
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778149169
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_section_text:
+            -
+              value: '<p><strong>Cybersicherheit in Deutschland messbar machen:</strong> Dieses Ziel haben wir vor einem Jahr ausgerufen – als wichtigen Meilenstein auf dem Weg zur Cybernation Deutschland. <strong>Denn nur, was man messen kann, kann man objektiv verbessern,</strong> und das ist auch dringend geboten: Die Cybersicherheit in Deutschland auf ein Niveau zu heben, das die Resilienz unseres Landes insgesamt signifikant erhöht, ist eines unserer Kernziele, denen unser gesamtes Engagement untergeordnet ist.</p><p>Mit der Veröffentlichung des diesjährigen Berichts zur Lage der IT-Sicherheit in Deutschland sind wir dem erstgenannten Ziel ein beachtliches Stück nähergekommen: <strong>Die Cybersicherheitslage ist messbarer geworden,</strong> und zwar in den Dimensionen Bedrohungen, Angriffsfläche, Gefährdungen, Schadwirkung und Resilienz. Unser Lagebericht stellt erstmals konsequent statistische Indikatoren in den Vordergrund: Trends, Wechselbeziehungen, Erfolge und Handlungsbedarfe werden auf Datenbasis sichtbar. Wahr ist aber auch: Mit Blick auf das Ziel, die Cybersicherheitslage in Deutschland zu verbessern, haben wir alle gemeinsam – Staat, Wirtschaft, Wissenschaft und Gesellschaft – noch ein großes Stück Arbeit vor uns. Denn <strong>die Gesamtlage ist nach wie vor angespannt.</strong>&nbsp;</p><p>Schaut man etwas genauer hin, erkennt man jedoch: Die Lage ist dynamisch, und in einzelnen Dimensionen hat sie sich in der Tat verbessert. Denn erstens können wir eine <strong>Bedrohungslage</strong> konstatieren, die sich ein kleines bisschen entspannt hat. Diesen Umstand haben wir auch schlagkräftigen internationalen Strafverfolgungsmaßnahmen zu verdanken, bei denen wir als BSI zum Teil technisch unterstützt haben und die dazu führten, dass gleich zwei vormals sehr aktive Angreifergruppen ihre Aktivitäten nahezu vollständig eingestellt haben. Inwieweit andere Gruppierungen diese Lücke füllen, bleibt abzuwarten. Zweitens stellen wir fest, dass unsere <strong>Resilienzmaßnahmen</strong> im Bereich der Kritischen Infrastrukturen mehr und mehr Wirkung entfalten. Mit der nun unmittelbar bevorstehenden Umsetzung der europäischen NIS-2-Richtlinie in nationales Recht wird sich dieser Effekt zügig auf einen sechsfachen Radius im Bereich der Wirtschaft ausweiten, und mit Inkrafttreten des Cyber Resilience Acts (CRA) werden wir ähnlich spürbare Effekte auf Produktebene erzielen.</p><p>Das war es aber leider auch schon mit den guten Nachrichten. Der sich stabilisierenden Bedrohungslage steht nämlich eine mit dem Fortschritt der Digitalisierung nicht nur immer größer werdende, sondern auch immer schlechter geschützte <strong>Angriffsfläche</strong> gegenüber. So waren beispielsweise bei fast der Hälfte der online erreichbaren IP-Adressen im deutschen Internet sensible Informationen öffentlich einsehbar. Dafür muss man dann noch nicht einmal ein erfahrener Hacker sein, um solche Schwächen auszunutzen. Auch digitale Kommunikationswege wie Social-Media-Accounts, Messenger und E-Mail bilden große, schwer schützbare Angriffsflächen. Um das Thema E-Mail-Sicherheit hat sich das BSI gemeinsam mit den Verbänden eco und Bitkom im Rahmen einer Aktionskampagne gekümmert, der sich rund 150 Unternehmen angeschlossen haben: Unser gemeinsames Ziel ist, den Kanal E-Mail in Deutschland endlich in der Fläche sicherer zu machen – denn so wie bisher kann und darf es nicht weitergehen.</p><p>Apropos schlecht geschützt: Was uns besonders besorgt, sind Angriffsziele, die wir als <strong>vulnerable Gruppen</strong> bezeichnen und auf die sich Angreifer im Cyberraum immer häufiger stürzen. Man könnte auch sagen, <strong>es gibt einen Trend zu „leichter Beute“.</strong> Gemeint sind kleine Unternehmen, Kommunen, Vereine, Verbände, Institutionen des vorpolitischen Raumes sowie Verbraucherinnen und Verbraucher: Sie alle haben gemeinsam, dass es ihnen häufig nicht nur an Wissen, Ressourcen und Fähigkeiten zur IT-Sicherheit mangelt, sondern zu oft auch an der grundsätzlichen Einsicht, dass sie sehr wohl lohnende Ziele für Cyberangriffe sind. Unter dem Kosten-Nutzen-Kalkül der Angreifenden gibt es im Jahr 2025 nämlich keine uninteressanten Ziele mehr, bei denen vermeintlich „nichts zu holen“ wäre.</p><p>Daraus folgt: Für das kommende Jahr ist es nicht nur unsere gesamtstaatliche Aufgabe, Menschen, Institutionen und Organisationen in Deutschland stärker als bisher für Bedrohungen im digitalen Raum zu sensibilisieren. Wir müssen darüber hinaus auch stärker ins Handeln kommen, indem wir aktiv <strong>Schutzmaßnahmen</strong> umsetzen – und zwar <strong>für alle.</strong> Dazu gehören neben einer robusteren Cybersicherheitsarchitektur, die auch Länder und Kommunen einbezieht, leicht umsetzbare Hilfestellungen sowie eine vernünftige und unbürokratische Regulierungsdurchsetzung.&nbsp;</p><p>Wir müssen und werden uns resilient aufstellen, indem wir unsere Angriffsflächen widerstandsfähig gegen Cyberaggression in all ihren Spielarten machen: gegen <strong>Cyber Crime</strong> (Straftaten aus finanziellen Motiven), gegen <strong>Cyber Conflict</strong> (staatlich gelenkte Angriffe mit politischem oder militärischem Hintergrund) wie auch gegen <strong>Cyber Dominance</strong> (die Fähigkeit von Herstellern digitaler Produkte, dauerhaft Zugriff auf Systeme und Informationen ihrer Kundinnen und Kunden zu behalten). Dieser Bericht zur Lage der IT-Sicherheit macht mehr als deutlich: <strong>Wenn wir es nicht kurzfristig schaffen, uns und unsere Angriffsflächen gegen das gesamte Bedrohungsspektrum zu verteidigen, werden wir verwundbar bleiben – und früher oder später auch verwundet werden. Lassen wir es also nicht so weit kommen.&nbsp;</strong></p><p>Ihre</p><p>Claudia Plattner</p>'
+              format: basic
+          field_section_title:
+            -
+              value: 'Vorwort der Präsidentin des BSI'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 96bcc296-a3cc-4229-8bed-2751a6fc986f
+          bundle: text_section
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778149189
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_section_text:
+            -
+              value: '<p>Für die Lage der IT-Sicherheit in Deutschland besteht im Jahr 2025 kein Grund zur Entwarnung: Sie bleibt weiterhin auf angespanntem Niveau. Zwar sind wiederholt Erfolge gegen Cyberkriminalität zu verzeichnen, die sich weiter zuspitzende geopolitische Lage führt aber zu einer unverändert angespannten IT-Sicherheitslage. Ein wesentlicher Faktor dafür sind weiterhin die unzureichend geschützten Angriffsflächen.</p><p>Die Lageentwicklung wird in diesem ersten Online-Bericht des BSI noch deutlicher als in den Vorjahren durch quantitative Messungen dargestellt. Die Anzahl der Diagramme und Tabellen hat sich mit über 70 mehr als verdoppelt, während die Texte prägnanter gehalten sind und sich auf die statistischen Aussagen fokussieren. Dafür führen mehr Links als in den Vorjahren zu vertiefenden Informationen und zahlreiche Verweise stellen Querverbindungen her.&nbsp;</p><p>Wie schon im vorangegangenen Jahr hat das BSI auch in diesem Berichtszeitraum die Lage der Cybernation Deutschland in den fünf Dimensionen Bedrohungen, Angriffsfläche, Gefährdungen, Schadwirkungen und Resilienz beobachtet. Die noch konsequentere Darstellung der Lage in statistischen Messzahlen erleichtert Schlussfolgerungen: So werden einerseits Handlungsbedarfe, zum Beispiel im Bereich der Datenleaks oder der maliziösen Webseiten, direkt belegbar. Andererseits sind aber auch Erfolge messbar, etwa beim Botnetz-Monitoring im Rahmen des BSI-Sinkholing. Damit hat das BSI einen wichtigen Meilenstein auf dem Weg hin zu einem vollständigen Wirksamkeitsmonitoring und einem umfassenden, quantitativ messbaren Cyberlagebild für Deutschland erreicht.</p><h3>Die Entwicklung der Cybersicherheit im Berichtszeitraum</h3><p>In der Dimension <strong>Bedrohungen</strong> sind in diesem Jahr durchaus positive Trends zu beobachten. Im Cybercrime-Bereich führten internationale Strafverfolgungsmaßnahmen zu einer Stabilisierung. Namentlich mit LockBit und Alphv konnten zwei vormals sehr aktive Angreifergruppen nahezu ausgeschaltet werden. Bei den Angriffsinfrastrukturen stachen im Berichtszeitraum insbesondere die Botnetze Badbox und Vo1d als die größten und aktivsten hervor. An der Bekämpfung von Botnetzen in Deutschland war das BSI mit Sinkholing-Maßnahmen beteiligt.</p><p>Die <strong>Angriffsflächen</strong> in Deutschland – insbesondere Web-Angriffsflächen – zeigen dagegen nach wie vor einen besorgniserregenden Zustand. Web-Angriffsflächen müssen mehr professionelle Aufmerksamkeit durch wirksames Angriffsflächenmanagement erhalten. So werden beispielsweise viel zu oft bekannte Schwachstellen in Perimetersystemen zu spät oder gar nicht gepatcht. Im aktuellen Berichtszeitraum wurden darüber hinaus durchschnittlich täglich 119 neue Schwachstellen in IT-Systemen bekannt, ein Wachstum von rund 24 Prozent im Vergleich zum vergangenen Berichtszeitraum. Angriffsflächenmanagement für Web-Angriffsflächen muss ab sofort genauso selbstverständlich werden wie es z.&nbsp;B. Antiviren-Software für Mail-Angriffsflächen heute schon ist.</p><p>Die im Berichtszeitraum beobachteten <strong>Gefährdungen</strong>, das heißt die Zahl der tatsächlichen Angriffe, Vorfälle und Störungen, gingen damit auch in diesem Jahr nicht zurück. Erfolge im Bereich der Bedrohungen führen wegen zu vieler zu schlecht geschützter Angriffsflächen noch nicht zu einer Abnahme der Gefährdungen. Dabei setzte sich konkret der Trend weg von großen, aufwendigen Angriffen hin zu vielen kleinen, einfach durchzuführenden fort: rund 80 Prozent der angezeigten Angriffe, zum Beispiel mit Ransomware, richteten sich gegen kleine und mittlere Unternehmen (KMU), denen häufig die Mittel und das Wissen fehlen, um sich selbstständig zu schützen.&nbsp;</p><p>In der Dimension <strong>Schadwirkung</strong> beobachtete das BSI ebenso weiterhin hohe Werte. Die Anzahl der Leak-Geschädigten nahm zu, ebenso wie Zugangsdatendiebstähle. Während die Bereitschaft zur Zahlung von Lösegeldern im aktuellen Berichtszeitraum weiter sank, wurden im Zuge von Datenleaks nach Exploitation-Angriffen die durchschnittlich höchsten Lösegelder seit Beginn der Aufzeichnungen registriert. Hinzu kommen die Kosten durch entgangene Einnahmen bei angriffsbedingten Systemausfällen sowie Kosten für IT-forensische Untersuchungen oder für die Wiederherstellung von IT-Systemen.&nbsp;</p><p>Die dargestellten Gefährdungen und Schadwirkungen im BSI-Lagebericht 2025 zeigen, dass in der Dimension <strong>Resilienz</strong> noch großer Handlungsbedarf besteht. Vor allen Dingen die eigenen Angriffsflächen müssen verstärkt in den Fokus genommen werden. Während hier beispielsweise die meldepflichtigen KRITIS-Betreiber stetig Fortschritte bei ihren ISMS- und BCMS-Reifegraden erzielen, stehen wirksame Maßnahmen insbesondere bei vulnerablen Gruppen wie beispielsweise KMU, politiknahen Institutionen oder Verbraucherinnen und Verbrauchern überwiegend noch aus.&nbsp;</p><h3>Die Schlussfolgerung des BSI: Angriffsflächen schützen!</h3><p>Der Schutz der Angriffsflächen ist 2026 der entscheidende Hebel, um die Cybersicherheit zu verbessern. Wie der diesjährige Bericht zeigt, suchen Angreifer verstärkt einfach anzugreifende Ziele mit schlechter Resilienz aus. Alle Institutionen müssen ihre Risikobewertung entsprechend anpassen: Je schlechter eine Angriffsfläche geschützt wird, desto wahrscheinlicher wird ein erfolgreicher Angriff. Dagegen senkt jedes konsequente Angriffsflächenmanagement – etwa ein restriktives Zugangsmanagement, zeitnahe Updates oder die Minimierung öffentlich erreichbarer Systeme – das Risiko erfolgreicher Angriffe unmittelbar. Dies trifft nicht nur auf große und umsatzstarke Unternehmen zu, sondern genauso auf KMU, Behörden, Wissenschaft sowie Bürgerinnen und Bürger. Und nur, wer sich aktiv schützt, erhöht die Chancen, Gefährdungen zu entgehen oder Schadwirkungen zu minimieren.</p><p>Die Analyse und das Management der eigenen Angriffsflächen müssen daher in jedem Unternehmen und jeder Institution – ob klein oder groß – als unverzichtbarer Teil eines effektiven Risikomanagements verstanden werden. Zudem müssen Hersteller, Diensteanbieter und staatliche Stellen gemeinsam an sicheren Produkten arbeiten und für Unternehmen und Verbrauchende einen besseren Schutz bieten. Aber auch die Bürgerinnen und Bürger müssen ihr Bewusstsein für Cybersicherheit erhöhen und resilienter werden.&nbsp;</p><p>Alle gesellschaftlichen Akteure, Wirtschaft, Staat, Forschung, Verbraucherschutz und auch die Verbrauchenden selbst sind gefordert, künftig noch stärker wirksame Maßnahmen zum Schutz ihrer Angriffsflächen zu ergreifen.</p>'
+              format: basic
+          field_section_title:
+            -
+              value: Fazit
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 97f75440-58eb-4fdd-acd7-08dd83fde0ae
+          bundle: introduction
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778149500
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_highlight:
+            -
+              value: '<p>Das Bundesamt für Sicherheit in der Informationstechnik (BSI) berichtet an das Bundesministerium des Inneren (BMI) und die deutsche Öffentlichkeit einmal jährlich umfassend zur Lage der IT-Sicherheit in Deutschland.</p>'
+              format: basic

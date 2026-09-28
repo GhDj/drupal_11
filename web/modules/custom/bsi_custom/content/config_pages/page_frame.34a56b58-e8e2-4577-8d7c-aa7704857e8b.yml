@@ -1,0 +1,85 @@
+_meta:
+  version: '1.0'
+  entity_type: config_pages
+  uuid: 34a56b58-e8e2-4577-8d7c-aa7704857e8b
+  bundle: page_frame
+default:
+  label:
+    -
+      value: Seitenrahmen
+  type:
+    -
+      target_id: page_frame
+  context:
+    -
+      value: 'a:1:{i:0;a:1:{s:8:"language";s:2:"de";}}'
+  field_certificate:
+    -
+      target_id: 'bsi_cert_images:Logo_Zertifizierung-ISO27001_IT-Grundschutz'
+  field_certificate_url:
+    -
+      uri: 'internal:#TBD'
+      resolvable_uri: '#TBD'
+      title: ''
+      options: {  }
+  field_contact:
+    -
+      uri: 'internal:/service/kontakt'
+      resolvable_uri: /service/kontakt
+      title: 'Kontakt aufnehmen'
+      options: {  }
+  field_copyright:
+    -
+      value: 'Bundesamt für Sicherheit in der Informationstechnik'
+  field_newsletter:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: c9781817-14ee-437a-973b-b85dafa573ce
+          bundle: teaser_single
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1779807433
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: de
+          content_translation_outdated:
+            -
+              value: false
+          field_display_variant:
+            -
+              value: image_left
+          field_link:
+            -
+              uri: 'route:<none>'
+              resolvable_uri: ''
+              title: 'Zur Newsletter-Anmeldung'
+              options: {  }
+          field_section_text:
+            -
+              value: '<p>Der BSI-Newsletter informiert regelmäßig über Entwicklungen, Warnungen und Maßnahmen zur digitalen Sicherheit.</p>'
+              format: basic
+          field_section_title:
+            -
+              value: 'Unser Newsletter'
+  field_suggestions:
+    -
+      uri: 'internal:#TBD'
+      resolvable_uri: '#TBD'
+      title: 'Technische Richtlinien'
+      options: {  }
+    -
+      uri: 'internal:#TBD'
+      resolvable_uri: '#TBD'
+      title: 'Künstliche Intelligenz'
+      options: {  }

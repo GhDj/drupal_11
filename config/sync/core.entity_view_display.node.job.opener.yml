@@ -1,0 +1,183 @@
+uuid: 54d90aeb-8200-4a3b-a79f-9e95051c95cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.opener
+    - field.field.node.job.body
+    - field.field.node.job.field_audiences
+    - field.field.node.job.field_code
+    - field.field.node.job.field_deadline
+    - field.field.node.job.field_degree
+    - field.field.node.job.field_downloads
+    - field.field.node.job.field_downloads_title
+    - field.field.node.job.field_duration
+    - field.field.node.job.field_employment_model
+    - field.field.node.job.field_links
+    - field.field.node.job.field_links_title
+    - field.field.node.job.field_location
+    - field.field.node.job.field_metatags
+    - field.field.node.job.field_paragraphs
+    - field.field.node.job.field_salary_group
+    - field.field.node.job.field_start_date
+    - field.field.node.job.field_tags
+    - field.field.node.job.field_topics
+    - node.type.job
+  module:
+    - bsi_custom
+    - datetime
+    - field_group
+    - layout_builder
+    - options
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  field_group:
+    group_header:
+      children:
+        - field_location
+        - field_employment_model
+        - field_degree
+        - field_salary_group
+        - field_start_date
+        - field_deadline
+        - field_duration
+        - field_code
+      label: Header
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: section
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_tiles:
+      children: {  }
+      label: Tiles
+      parent_name: ''
+      region: hidden
+      weight: 19
+      format_type: html_element
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: node.job.opener
+targetEntityType: node
+bundle: job
+mode: opener
+content:
+  field_code:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_deadline:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: date_short
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_degree:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_duration:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_employment_model:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_location:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_salary_group:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_start_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: date_short
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  changed: true
+  content_moderation_control: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audiences: true
+  field_downloads: true
+  field_downloads_title: true
+  field_links: true
+  field_links_title: true
+  field_metatags: true
+  field_paragraphs: true
+  field_tags: true
+  field_topics: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  uid: true

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 58a857c7-bc5c-4daf-8b4b-3cf80ad7e75c
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: test.vtt
+  uri:
+    -
+      value: 'private://video/tracks/test.vtt'
+  filemime:
+    -
+      value: text/vtt
+  filesize:
+    -
+      value: 131
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1774605853

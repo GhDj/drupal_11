@@ -1,0 +1,79 @@
+uuid: 9a1c1c51-b269-4658-a4f0-9b9cf7289e77
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser_triplet
+    - field.field.node.job.body
+    - field.field.node.job.field_audiences
+    - field.field.node.job.field_code
+    - field.field.node.job.field_deadline
+    - field.field.node.job.field_degree
+    - field.field.node.job.field_downloads
+    - field.field.node.job.field_downloads_title
+    - field.field.node.job.field_duration
+    - field.field.node.job.field_employment_model
+    - field.field.node.job.field_links
+    - field.field.node.job.field_links_title
+    - field.field.node.job.field_location
+    - field.field.node.job.field_metatags
+    - field.field.node.job.field_paragraphs
+    - field.field.node.job.field_salary_group
+    - field.field.node.job.field_start_date
+    - field.field.node.job.field_tags
+    - field.field.node.job.field_topics
+    - node.type.job
+  module:
+    - bsi_custom
+    - text_summary_formatter
+id: node.job.teaser_triplet
+targetEntityType: node
+bundle: job
+mode: teaser_triplet
+content:
+  body:
+    type: text_summary_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  content_moderation_control: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audiences: true
+  field_code: true
+  field_deadline: true
+  field_degree: true
+  field_downloads: true
+  field_downloads_title: true
+  field_duration: true
+  field_employment_model: true
+  field_links: true
+  field_links_title: true
+  field_location: true
+  field_metatags: true
+  field_paragraphs: true
+  field_salary_group: true
+  field_start_date: true
+  field_tags: true
+  field_topics: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  uid: true

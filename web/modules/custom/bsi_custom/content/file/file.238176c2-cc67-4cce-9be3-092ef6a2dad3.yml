@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 238176c2-cc67-4cce-9be3-092ef6a2dad3
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Opener-Bildstrecke.png
+  uri:
+    -
+      value: 'private://image/2026-05/Opener-Bildstrecke.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 3475365
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1780044177

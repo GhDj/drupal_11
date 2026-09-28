@@ -1,0 +1,17 @@
+// Minor Drupal overrides
+// -----------------------------------------------------------------------------
+
+// add height of Drupals admin-toolbar as custom-property
+.toolbar-horizontal {
+  --drupal-toolbar-height: 79px;
+}
+
+// add height of Drupals admin-toolbar as custom-property
+.toolbar-vertical {
+  --drupal-toolbar-height: 40px;
+}
+
+// add height of Drupals environment indicator as custom-property
+.environment-indicator {
+  --drupal-environment-indicator-height: 42px;
+}

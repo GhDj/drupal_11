@@ -1,0 +1,40 @@
+uuid: 188469a9-2676-46b0-ac69-b6e18a6749a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.audio.field_body
+    - field.field.media.audio.field_copyright
+    - field.field.media.audio.field_media_source
+    - field.field.media.audio.field_tags
+    - media.type.audio
+  module:
+    - bsi_custom
+id: media.audio.default
+targetEntityType: media
+bundle: audio
+mode: default
+content:
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_body: true
+  field_copyright: true
+  field_media_source: true
+  field_tags: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

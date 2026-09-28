@@ -1,0 +1,29 @@
+{#
+/**
+ * Quickoverview Teaser
+ */
+#}
+
+{%
+  set classes = [
+    'bsi-block',
+    'bsi-grid',
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {{ content.field_section_title }}
+
+      <div class="bsi-block__content">
+        <section class="bsi-60-sec" data-bsi-60-sec>
+          {{ content.field_items }}
+        </section>
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

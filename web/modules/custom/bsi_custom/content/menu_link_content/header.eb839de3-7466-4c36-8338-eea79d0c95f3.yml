@@ -1,0 +1,72 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: eb839de3-7466-4c36-8338-eea79d0c95f3
+  bundle: menu_link_content
+  default_langcode: de
+translations:
+  en:
+    title:
+      -
+        value: 'Sign language'
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_id: 1
+    content_translation_status:
+      -
+        value: true
+    content_translation_created:
+      -
+        value: 1783344165
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Gebärdensprache
+  menu_name:
+    -
+      value: header
+  link:
+    -
+      uri: 'route:<none>'
+      resolvable_uri: ''
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -47
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1779451322
+  field_icon:
+    -
+      target_id: 'bsi_icons:sign-language'

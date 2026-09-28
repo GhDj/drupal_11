@@ -1,0 +1,21 @@
+// -----------------------------------------------------------------------------
+// Icon
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+
+// -----------------------------------------------------------------------------
+// Core-Styles
+// -----------------------------------------------------------------------------
+:root {
+  --#{$nsp}-icon-width: 24px;
+}
+.#{$nsp}-icon {
+  color: var(--#{$nsp}-icon-color, inherit);
+  display: inline-block;
+  flex-shrink: 0;
+  height: var(--#{$nsp}-icon-height, var(--#{$nsp}-icon-width));
+  shape-rendering: geometricPrecision;
+  vertical-align: middle;
+  width: var(--#{$nsp}-icon-width);
+}

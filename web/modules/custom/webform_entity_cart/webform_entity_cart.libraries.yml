@@ -1,0 +1,7 @@
+script:
+  js:
+    js/webform-entity-cart.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once

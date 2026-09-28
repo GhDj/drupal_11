@@ -1,0 +1,47 @@
+uuid: 93368c99-06c8-42ef-866c-befdad6e59ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.download.field_accessibility
+    - field.field.media.download.field_body
+    - field.field.media.download.field_copyright
+    - field.field.media.download.field_media_file
+    - field.field.media.download.field_tags
+    - image.style.media_library
+    - media.type.download
+  module:
+    - image
+id: media.download.media_library
+targetEntityType: media
+bundle: download
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: media_library
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  access_restrictions: true
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_accessibility: true
+  field_body: true
+  field_copyright: true
+  field_media_file: true
+  field_tags: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  uid: true

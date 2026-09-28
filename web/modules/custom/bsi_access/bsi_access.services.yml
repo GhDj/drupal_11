@@ -1,0 +1,10 @@
+services:
+  bsi_access.delete_node_access_check:
+    class: Drupal\bsi_access\Access\DeleteNodeAccessCheck
+    tags:
+      - { name: access_check, applies_to: _bsi_access_delete_node_access }
+
+  bsi_access.route_subscriber:
+    class: Drupal\bsi_access\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }

@@ -1,0 +1,87 @@
+uuid: 57d1970b-32e1-4de4-97d7-66b5d35bbe3f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.inline_side
+    - field.field.media.download.field_accessibility
+    - field.field.media.download.field_body
+    - field.field.media.download.field_copyright
+    - field.field.media.download.field_media_file
+    - field.field.media.download.field_tags
+    - image.style.thumbnail
+    - media.type.download
+  module:
+    - bsi_custom
+    - file
+    - image
+    - text_summary_formatter
+id: media.download.inline_side
+targetEntityType: media
+bundle: download
+mode: inline_side
+content:
+  field_accessibility:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_body:
+    type: text_summary_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_copyright:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_media_file:
+    type: file_default
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  access_restrictions: true
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_tags: true
+  langcode: true
+  search_api_excerpt: true
+  uid: true

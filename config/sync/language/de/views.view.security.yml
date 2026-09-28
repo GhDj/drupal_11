@@ -1,0 +1,10 @@
+display:
+  default:
+    display_options:
+      title: BSI-IT-Sicherheitsmeldungen
+  block_front:
+    display_title: Startseite
+    display_options:
+      block_description: 'Startseite: BSI-IT-Sicherheitsmeldungen'
+      use_more_text: 'Alle Sicherheitsmeldungen'
+label: Sicherheitsmeldungen

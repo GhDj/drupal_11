@@ -1,0 +1,35 @@
+uuid: 2e98e25c-95a7-48d9-b25e-3c88118cfe91
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.introduction.field_highlight
+    - field.field.paragraph.introduction.field_section_text
+    - paragraphs.paragraphs_type.introduction
+  module:
+    - text
+id: paragraph.introduction.default
+targetEntityType: paragraph
+bundle: introduction
+mode: default
+content:
+  field_highlight:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_section_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  search_api_excerpt: true

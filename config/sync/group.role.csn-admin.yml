@@ -1,0 +1,14 @@
+uuid: 602c84ec-cf9a-4a79-96b8-57fd5c290ad2
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.csn
+id: csn-admin
+label: 'Group Admin'
+weight: 100
+admin: true
+scope: individual
+global_role: null
+group_type: csn
+permissions: {  }

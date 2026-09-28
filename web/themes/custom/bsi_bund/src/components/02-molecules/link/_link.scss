@@ -1,0 +1,175 @@
+// -----------------------------------------------------------------------------
+// Link
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+:root {
+  --#{$nsp}-link-bg-color: transparent;
+  --#{$nsp}-link-border-color: transparent;
+  --#{$nsp}-link-border-width: 0;
+  --#{$nsp}-link-color: var(--#{$nsp}-color-neutral-1000);
+  --#{$nsp}-link-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-decoration-line: none;
+  --#{$nsp}-link-decoration-line-hover: underline;
+  --#{$nsp}-link-decoration-style: solid;
+  --#{$nsp}-link-font-size: 16px;
+  --#{$nsp}-link-hover-bg-color: transparent;
+  --#{$nsp}-link-hover-border-color: transparent;
+  --#{$nsp}-link-icon-width: var(--#{$nsp}-size-sm);
+  --#{$nsp}-link-underline-color: var(--#{$nsp}-color-neutral-300);
+  --#{$nsp}-link-underline-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-underline-style: solid;
+}
+
+.#{$nsp}-link {
+  align-items: flex-start;
+  background-color: var(--#{$nsp}-link-bg-color);
+  border-color: var(--#{$nsp}-link-border-color);
+  border-style: var(--#{$nsp}-link-decoration-style);
+  border-width: var(--#{$nsp}-link-border-width);
+  color: var(--#{$nsp}-link-color);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-family-base);
+  font-size: var(--#{$nsp}-link-font-size);
+  font-style: normal;
+  font-weight: 400;
+  gap: var(--#{$nsp}-space-2xs);
+  justify-content: flex-start;
+  line-height: 100%;
+  max-width: 100%;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+
+  &:focus-visible {
+    outline: 2px solid;
+    outline-color: var(--#{$nsp}-color-base-focus);
+    outline-offset: 2px;
+  }
+
+  &:hover {
+    background-color: var(--#{$nsp}-link-hover-bg-color);
+    border-color: var(--#{$nsp}-link-hover-border-color);
+    color: var(--#{$nsp}-link-color-hover);
+
+    .#{$nsp}-link__text {
+      text-decoration-color: var(--#{$nsp}-link-underline-color-hover);
+      text-decoration-line: var(--#{$nsp}-link-decoration-line-hover);
+    }
+  }
+
+  &__content {
+    align-items: center;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: var(--#{$nsp}-space-2xs);
+    min-width: 0;
+  }
+
+  &__text {
+    display: inline-block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    text-decoration-color: var(--#{$nsp}-link-underline-color);
+    text-decoration-line: var(--#{$nsp}-link-decoration-line);
+    text-decoration-style: var(--#{$nsp}-link-underline-style);
+    text-decoration-thickness: var(--#{$nsp}-text-decoration-thickness, 1px);
+    text-underline-offset: var(--#{$nsp}-space-4xs);
+    text-underline-position: from-font;
+  }
+
+  &__add-on {
+    color: var(--#{$nsp}-color-typo-secondary);
+    display: inline-block;
+    overflow-wrap: anywhere;
+  }
+
+  .#{$nsp}-icon {
+    --#{$nsp}-icon-width: var(--#{$nsp}-link-icon-width);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Variants
+// -----------------------------------------------------------------------------
+
+// CTA-Link
+.#{$nsp}-link--cta {
+  display: flex;
+  margin-inline: auto;
+  position: relative;
+  width: fit-content;
+
+  &::before,
+  &::after {
+    background-color: var(--#{$nsp}-color-neutral-250);
+    content: "";
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100vw;
+  }
+
+  &::before {
+    right: calc(100% + var(--#{$nsp}-space-sm));
+  }
+
+  &::after {
+    left: calc(100% + var(--#{$nsp}-space-sm));
+  }
+}
+
+// claro link wrapper
+// prevents overflow of cta horizontal lines
+// ----------------------------------------------
+.more-link:has(.#{$nsp}-link--cta) {
+  overflow: hidden;
+}
+
+// Themes
+// -----------------------------------------------------------------------------
+
+// General button styles for links
+// ----------------------------------------------
+.#{$nsp}-link--button {
+  --#{$nsp}-link-decoration-line: none;
+  --#{$nsp}-link-decoration-line-hover: none;
+  --#{$nsp}-link-border-width: 1px;
+  border-radius: 2px;
+  padding: var(--#{$nsp}-space-sm) var(--#{$nsp}-space-lg);
+}
+
+// Style: Primary Button
+// ----------------------------------------------
+.#{$nsp}-link--primary-button {
+  --#{$nsp}-link-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-bg-color: var(--#{$nsp}-color-blue-800);
+  --#{$nsp}-link-border-color: var(--#{$nsp}-color-blue-800);
+  --#{$nsp}-link-hover-bg-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-hover-border-color: var(--#{$nsp}-color-blue-800);
+}
+
+// Style: Secondary Button
+// ----------------------------------------------
+.#{$nsp}-link--secondary-button {
+  --#{$nsp}-link-color: var(--#{$nsp}-color-blue-800);
+  --#{$nsp}-link-bg-color: var(--#{$nsp}-color-blue-150);
+  --#{$nsp}-link-border-color: var(--#{$nsp}-color-blue-150);
+  --#{$nsp}-link-hover-bg-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-hover-border-color: var(--#{$nsp}-color-blue-800);
+}
+
+// Style: Tertiary Button
+// ----------------------------------------------
+.#{$nsp}-link--tertiary-button {
+  --#{$nsp}-link-color: var(--#{$nsp}-color-blue-800);
+  --#{$nsp}-link-bg-color: transparent;
+  --#{$nsp}-link-border-color: transparent;
+  --#{$nsp}-link-hover-bg-color: transparent;
+  --#{$nsp}-link-hover-border-color: var(--#{$nsp}-color-blue-800);
+}

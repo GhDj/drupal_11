@@ -1,0 +1,29 @@
+uuid: f0f5bca4-b3d8-4a67-8bb5-1d6f57131291
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_contact
+    - media.type.contact
+    - taxonomy.vocabulary.contact_topics
+id: taxonomy_term.contact_topics.field_contact
+field_name: field_contact
+entity_type: taxonomy_term
+bundle: contact_topics
+label: 'Default contact'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      contact: contact
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

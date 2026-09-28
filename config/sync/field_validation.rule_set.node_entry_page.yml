@@ -1,0 +1,57 @@
+uuid: 7ce03916-4e6e-4168-bd08-c287373009df
+langcode: en
+status: true
+dependencies: {  }
+name: node_entry_page
+label: 'node entry_page validation'
+entity_type: node
+bundle: entry_page
+field_validation_rules:
+  e6ea5cbb-6314-40a5-8eeb-896f7adbc0c6:
+    id: not_null_constraint_rule
+    title: 'Heading required if links are set'
+    data:
+      validate_mode: default
+      message: 'Please provide a heading for the linkbox items.'
+    weight: 1
+    uuid: e6ea5cbb-6314-40a5-8eeb-896f7adbc0c6
+    field_name: field_links_title
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_links
+      operator: not_empty
+      value: ''
+  9bd59734-cf58-481f-8e76-10daf43b4abf:
+    id: not_null_constraint_rule
+    title: 'Heading required if downloads are set'
+    data:
+      validate_mode: default
+      message: 'Please provide a heading for the linkbox downloads.'
+    weight: 2
+    uuid: 9bd59734-cf58-481f-8e76-10daf43b4abf
+    field_name: field_downloads_title
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_downloads
+      operator: not_empty
+      value: ''
+  b17d5c0d-6a94-458b-85e7-4f3ae4d4a34c:
+    id: blank_constraint_rule
+    title: 'Body must be empty if stage items are set'
+    data:
+      validate_mode: default
+      message: 'This value should be blank when using stage items.'
+    weight: 3
+    uuid: b17d5c0d-6a94-458b-85e7-4f3ae4d4a34c
+    field_name: body
+    column: value
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_stage_items
+      operator: not_empty
+      value: ''

@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Theme override for a link to a file.
+ */
+#}
+
+{% set title = file.mimeType == 'application/pdf' ? 'PDF' : link['#title'] %}
+
+{% include '@bsi_bund/elements/link.html.twig' with {
+  'url': link['#url'],
+  'title': title,
+  'link_type': 'download',
+  'icon': 'download',
+  'icon_position': 'before',
+  'add_on': file_size ?: null,
+  'extra_classes': [],
+} only %}

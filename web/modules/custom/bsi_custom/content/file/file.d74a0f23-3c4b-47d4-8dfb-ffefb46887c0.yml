@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: d74a0f23-3c4b-47d4-8dfb-ffefb46887c0
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: jlb-vorwort.jpg
+  uri:
+    -
+      value: 'private://image/2026-05/jlb-vorwort.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 50736
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1778149434

@@ -1,0 +1,14 @@
+uuid: 9dcfc382-8973-4384-8a91-7ad14a50c5b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.csn_deh
+  module:
+    - user
+id: user_remove_role_action.csn_deh
+label: 'Remove the Digital First-Aider role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: csn_deh

@@ -1,0 +1,89 @@
+uuid: e8d73e11-1672-4fff-aabf-796b599faf1c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.opener
+    - field.field.node.page.body
+    - field.field.node.page.field_audiences
+    - field.field.node.page.field_downloads
+    - field.field.node.page.field_downloads_title
+    - field.field.node.page.field_icon
+    - field.field.node.page.field_links
+    - field.field.node.page.field_links_title
+    - field.field.node.page.field_media
+    - field.field.node.page.field_metatags
+    - field.field.node.page.field_paragraphs
+    - field.field.node.page.field_parents
+    - field.field.node.page.field_tags
+    - field.field.node.page.field_teaser_tiles
+    - field.field.node.page.field_topics
+    - node.type.page
+  module:
+    - bsi_custom
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.page.opener
+targetEntityType: node
+bundle: page
+mode: opener
+content:
+  access_restrictions:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: opener_image
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  content_moderation_control: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audiences: true
+  field_downloads: true
+  field_downloads_title: true
+  field_icon: true
+  field_links: true
+  field_links_title: true
+  field_metatags: true
+  field_paragraphs: true
+  field_parents: true
+  field_tags: true
+  field_teaser_tiles: true
+  field_topics: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  uid: true

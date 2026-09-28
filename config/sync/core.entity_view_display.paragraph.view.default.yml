@@ -1,0 +1,51 @@
+uuid: eaa8b461-8b7e-4b01-b036-a6655066234f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.view.field_jumplink
+    - field.field.paragraph.view.field_section_text
+    - field.field.paragraph.view.field_section_title
+    - field.field.paragraph.view.field_view
+    - paragraphs.paragraphs_type.view
+  module:
+    - bsi_custom
+    - text
+    - viewsreference
+id: paragraph.view.default
+targetEntityType: paragraph
+bundle: view
+mode: default
+content:
+  field_section_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_section_title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_view:
+    type: viewsreference_formatter
+    label: hidden
+    settings:
+      plugin_types:
+        embed: embed
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_jumplink: true
+  search_api_excerpt: true

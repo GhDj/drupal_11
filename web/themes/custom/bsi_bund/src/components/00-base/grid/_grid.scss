@@ -1,0 +1,55 @@
+// -----------------------------------------------------------------------------
+// Grids
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/grid" as *;
+@use "./_grid.variables" as variables;
+
+// -----------------------------------------------------------------------------
+// Core-Styles
+// -----------------------------------------------------------------------------
+.#{$nsp}-grid {
+  @include grid();
+  margin-bottom: var(--#{$nsp}-space-module);
+
+  //if grid is last item in block, let the block handle the spacing
+  &:last-child {
+    .#{$nsp}-block & {
+      --#{$nsp}-space-module: 0;
+    }
+  }
+}
+
+.#{$nsp}-grid-indented {
+  @include grid-indented();
+}
+// -----------------------------------------------------------------------------
+// Variants
+// -----------------------------------------------------------------------------
+
+// Two column variant
+.#{$nsp}-grid--two-items {
+  @include breakpoint-md {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// Three column variant
+.#{$nsp}-grid--three-items {
+  @include breakpoint-md {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Four column variant
+.#{$nsp}-grid--four-items {
+  @include breakpoint-md {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint-lg {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

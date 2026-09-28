@@ -1,0 +1,24 @@
+@use "@globals/mixins/grid" as *;
+
+/* Base reset */
+.layout-container {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Breakpoint 38em (Toolbar / No Toolbar) */
+@media screen and (min-width: 38em) {
+  body:not(.toolbar-tray-open) .layout-container,
+  .toolbar-tray-open:not(.toolbar-vertical) .layout-container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Breakpoint 60em */
+@media screen and (min-width: 60em) {
+  .layout-container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

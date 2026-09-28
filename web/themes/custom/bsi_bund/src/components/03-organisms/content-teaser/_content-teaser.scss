@@ -1,0 +1,30 @@
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/grid" as *;
+
+.#{$nsp}-content-teaser {
+  @include grid();
+  --#{$nsp}-card-body-color: var(--#{$nsp}-color-black);
+  padding-block: var(--#{$nsp}-padding-block);
+  row-gap: var(--#{$nsp}-space-2xl);
+
+  &__content {
+    @include grid-indented();
+    display: flex;
+    flex-direction: column;
+    &:has(.more-link) {
+      gap: var(--#{$nsp}-space-2xl);
+    }
+  }
+
+  &__card {
+    padding: 0;
+    row-gap: var(--#{$nsp}-space-xl);
+  }
+
+  &__image {
+    @include breakpoint-lg {
+      max-width: 480px;
+    }
+  }
+}

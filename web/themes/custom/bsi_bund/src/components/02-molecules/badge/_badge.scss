@@ -1,0 +1,55 @@
+// -----------------------------------------------------------------------------
+// Badge
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+:root {
+  --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-neutral-300);
+}
+
+.#{$nsp}-badge {
+  @include typography("text-support");
+  background-color: var(--#{$nsp}-badge-bg-color);
+  border-radius: var(--#{$nsp}-space-4xs);
+  padding: var(--#{$nsp}-space-5xs) var(--#{$nsp}-space-2xs);
+}
+
+// -----------------------------------------------------------------------------
+// Themes
+// -----------------------------------------------------------------------------
+
+.#{$nsp}-badge--none {
+  --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-neutral-300);
+}
+
+.#{$nsp}-badge--niedrig,
+.#{$nsp}-badge--low {
+  --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-green-100);
+  color: var(--#{$nsp}-color-base-white);
+}
+.#{$nsp}-badge--mittel,
+.#{$nsp}-badge--medium {
+  --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-yellow-100);
+}
+.#{$nsp}-badge--hoch,
+.#{$nsp}-badge--high {
+  --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-orange-100);
+}
+.#{$nsp}-badge--kritisch,
+.#{$nsp}-badge--critical {
+  --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-red-100);
+  color: var(--#{$nsp}-color-base-white);
+}
+
+.#{$nsp}-badge--status {
+  --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-neutral-100);
+}
+
+.#{$nsp}-badge--date {
+  --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-blue-100);
+}

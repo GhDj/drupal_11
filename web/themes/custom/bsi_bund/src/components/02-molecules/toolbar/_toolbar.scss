@@ -1,0 +1,86 @@
+// -----------------------------------------------------------------------------
+// Quote
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+.#{$nsp}-toolbar {
+  --#{$nsp}-toolbar-bg-color: var(--#{$nsp}-color-blue-100);
+  --#{$nsp}-toolbar-position-top: 40%;
+  --#{$nsp}-toolbar-box-shadow: 0 0 4px 0 rgba(33, 35, 40, 0.25);
+  --#{$nsp}-link-font-size: initial;
+  --#{$nsp}-link-color: var(--#{$nsp}-color-blue-800);
+  --#{$nsp}-link-decoration-line: none;
+  --#{$nsp}-paragraph-spacing: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--#{$nsp}-space-xs);
+  position: fixed;
+  right: 0;
+  top: var(--#{$nsp}-toolbar-position-top);
+  z-index: 100;
+
+  @include breakpoint-lg {
+    gap: var(--#{$nsp}-space-sm);
+  }
+
+  &__button {
+    --#{$nsp}-button-background: var(--#{$nsp}-toolbar-bg-color);
+    box-shadow: var(--#{$nsp}-toolbar-box-shadow);
+
+    @include breakpoint-lg {
+      height: 72px;
+      width: 72px;
+    }
+  }
+
+  &__button--phone {
+    anchor-name: --toolbar-phone;
+  }
+
+  &__button--mail {
+    anchor-name: --toolbar-mail;
+  }
+
+  &__popover {
+    background-color: var(--#{$nsp}-toolbar-bg-color);
+    border-radius: var(--#{$nsp}-space-4xs);
+    box-shadow: var(--#{$nsp}-toolbar-box-shadow);
+    color: var(--#{$nsp}-color-blue-800);
+    gap: var(--#{$nsp}-space-sm);
+    left: auto;
+    max-width: 400px;
+    min-height: 60px;
+    padding: var(--#{$nsp}-space-lg);
+    position: fixed;
+    right: 0;
+    top: var(--#{$nsp}-toolbar-position-top);
+    width: max-content;
+
+    &:popover-open {
+      display: flex;
+      max-width: 100vw;
+    }
+  }
+
+  &__label {
+    &:not(:first-child) {
+      margin-top: 8px;
+    }
+  }
+
+  &__popover--phone {
+    top: calc(anchor(--toolbar-phone bottom) + 2px);
+    transform: translateY(-100%);
+  }
+
+  &__popover--mail {
+    top: calc(anchor(--toolbar-mail top) - 2px);
+  }
+
+  &__popover-content {
+    line-height: 1.4;
+    margin-top: -2px;
+  }
+}

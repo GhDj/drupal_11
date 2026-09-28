@@ -1,0 +1,35 @@
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+.#{$nsp}-page-grid {
+  &__stage + &__main,
+  &__anchors + &__main {
+    padding: var(--#{$nsp}-space-4xl) var(--#{$nsp}-grid-padding);
+  }
+
+  &__breadcrumb + &__anchors,
+  &__stage + &__anchors {
+    margin-block: var(--#{$nsp}-space-lg);
+
+    @include breakpoint-lg {
+      margin-block: var(--#{$nsp}-space-4xl);
+    }
+  }
+
+  &__main {
+    background-color: var(--#{$nsp}-color-base-white);
+    column-gap: var(--#{$nsp}-grid-gutter);
+    display: grid;
+    margin-inline: auto;
+    max-width: var(--#{$nsp}-grid-max-width);
+    padding: 0 var(--#{$nsp}-grid-padding) var(--#{$nsp}-space-4xl);
+    position: relative;
+    row-gap: var(--#{$nsp}-space-4xl);
+
+    // reset padding for components that bring their own grid
+    > * {
+      --#{$nsp}-grid-padding: 0;
+      --#{$nsp}-grid-module-padding: 0;
+    }
+  }
+}

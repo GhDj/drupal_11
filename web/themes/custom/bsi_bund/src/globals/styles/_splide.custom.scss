@@ -1,0 +1,56 @@
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+.splide {
+  .splide__pagination__page {
+    all: unset;
+
+    background-color: var(--#{$nsp}-color-neutral-350);
+    border: 0;
+    cursor: pointer;
+    display: block;
+    height: 2px;
+    opacity: 1;
+    padding: 0;
+    width: 100%;
+
+    &.is-active {
+      background-color: var(--#{$nsp}-color-blue-750);
+      transform: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--#{$nsp}-color-base-focus);
+      outline-offset: 4px;
+    }
+  }
+
+  .splide__pagination li {
+    all: unset;
+    flex: 1;
+  }
+
+  .splide__pagination {
+    background-color: var(--#{$nsp}-color-base-white);
+    display: flex;
+    gap: var(--#{$nsp}-space-2xs);
+    list-style: none;
+    margin: auto;
+    margin-bottom: 0;
+    padding-inline: var(--#{$nsp}-grid-padding);
+    padding-bottom: var(--#{$nsp}-space-lg);
+    padding-top: var(--#{$nsp}-space-lg);
+    pointer-events: auto;
+    position: unset;
+    width: 100%;
+
+    @include breakpoint-md {
+      gap: var(--#{$nsp}-space-sm);
+      padding-top: var(--#{$nsp}-space-xl);
+    }
+
+    li {
+      flex: 1 1 0;
+    }
+  }
+}

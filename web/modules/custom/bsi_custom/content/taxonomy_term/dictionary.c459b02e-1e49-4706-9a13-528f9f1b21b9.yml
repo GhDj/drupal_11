@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: c459b02e-1e49-4706-9a13-528f9f1b21b9
+  bundle: dictionary
+  default_langcode: zxx
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Artificial Intelligence'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1776781286
+  field_language:
+    -
+      value: en

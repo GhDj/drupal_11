@@ -1,0 +1,46 @@
+uuid: e78e1a9b-4a0a-439d-9c32-872569801f33
+langcode: en
+status: true
+dependencies:
+  module:
+    - book
+    - bsi_custom
+    - node
+  theme:
+    - bsi_bund
+id: bsi_bund_book_navigation
+theme: bsi_bund
+region: pre_content
+weight: -8
+provider: null
+plugin: book_navigation
+settings:
+  id: book_navigation
+  label: 'Book navigation'
+  label_display: visible
+  provider: book
+  block_mode: 'book pages'
+  show_top_item: false
+  use_top_level_title: true
+  starting_level: 1
+  max_depth: 0
+  book_select: 0
+  expanded: true
+visibility:
+  book:
+    id: book
+    books: {  }
+    negate: 1
+    context_mapping:
+      node: '@node.node_route_context:node'
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      report_page: report_page
+  request_route_name:
+    id: request_route_name
+    negate: false
+    route_names: entity.node.canonical

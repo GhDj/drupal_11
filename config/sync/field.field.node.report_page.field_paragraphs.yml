@@ -1,0 +1,110 @@
+uuid: f72a519e-6eb4-415e-a0ba-6d00c39615a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraphs
+    - node.type.report_page
+    - paragraphs.paragraphs_type.accordion
+    - paragraphs.paragraphs_type.banner
+    - paragraphs.paragraphs_type.contact
+    - paragraphs.paragraphs_type.downloads
+    - paragraphs.paragraphs_type.facts_figures
+    - paragraphs.paragraphs_type.introduction
+    - paragraphs.paragraphs_type.key_facts
+    - paragraphs.paragraphs_type.media
+    - paragraphs.paragraphs_type.quick_overview
+    - paragraphs.paragraphs_type.quote
+    - paragraphs.paragraphs_type.sequence
+    - paragraphs.paragraphs_type.tabs
+    - paragraphs.paragraphs_type.teaser_single
+    - paragraphs.paragraphs_type.text_section
+    - paragraphs.paragraphs_type.view
+  module:
+    - entity_reference_revisions
+id: node.report_page.field_paragraphs
+field_name: field_paragraphs
+entity_type: node
+bundle: report_page
+label: Paragraphs
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      accordion: accordion
+      banner: banner
+      contact: contact
+      downloads: downloads
+      facts_figures: facts_figures
+      introduction: introduction
+      key_facts: key_facts
+      media: media
+      quick_overview: quick_overview
+      quote: quote
+      sequence: sequence
+      tabs: tabs
+      teaser_single: teaser_single
+      text_section: text_section
+      view: view
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 0
+        enabled: true
+      banner:
+        weight: 0
+        enabled: true
+      contact:
+        weight: 0
+        enabled: true
+      definition_item:
+        weight: 0
+        enabled: false
+      downloads:
+        weight: 0
+        enabled: true
+      facts_figures:
+        weight: 0
+        enabled: true
+      introduction:
+        weight: 0
+        enabled: true
+      key_facts:
+        weight: 0
+        enabled: true
+      media:
+        weight: 0
+        enabled: true
+      quick_overview:
+        weight: 0
+        enabled: true
+      quote:
+        weight: 0
+        enabled: true
+      sequence:
+        weight: 0
+        enabled: true
+      sequence_item:
+        weight: 0
+        enabled: false
+      table_section:
+        weight: 0
+        enabled: true
+      tabs:
+        weight: 0
+        enabled: true
+      teaser_single:
+        weight: 0
+        enabled: true
+      text_section:
+        weight: 0
+        enabled: true
+      view:
+        weight: 0
+        enabled: true
+field_type: entity_reference_revisions

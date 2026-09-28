@@ -1,0 +1,20 @@
+uuid: 6e4aa7aa-e775-495e-ad98-08b9c1994213
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_certification_validation
+field_name: field_certification_validation
+entity_type: node
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,36 @@
+// -----------------------------------------------------------------------------
+// Link Box
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-linkbox {
+  background: var(--#{$nsp}-color-blue-100);
+  display: flex;
+  gap: var(--#{$nsp}-size-lg);
+  padding: var(--#{$nsp}-size-sm);
+
+  &__icon {
+    --#{$nsp}-icon-width: var(--#{$nsp}-size-2xl);
+
+    @include breakpoint-lg {
+      --#{$nsp}-icon-width: var(--#{$nsp}-size-6xl);
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-size-2xl);
+    width: 100%;
+
+    @include breakpoint-lg {
+      flex-direction: row;
+    }
+  }
+}

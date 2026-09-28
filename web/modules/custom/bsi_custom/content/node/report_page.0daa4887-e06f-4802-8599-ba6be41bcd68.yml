@@ -1,0 +1,201 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 0daa4887-e06f-4802-8599-ba6be41bcd68
+  bundle: report_page
+  default_langcode: de
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Lage in Deutschland'
+  created:
+    -
+      value: 1777550379
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_links_title:
+    -
+      value: more_information
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: f6d53565-efaf-4b4d-8a11-e7baa8c1dfc5
+          bundle: key_facts
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1779175895
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_display_icon:
+            -
+              value: true
+          field_display_variant:
+            -
+              value: highlight
+          field_items:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: df7bdb3e-63e1-4b3a-9d32-c59fdfd6c84c
+                  bundle: definition_item
+                  default_langcode: de
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1779175958
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_section_text:
+                    -
+                      value: 'Einsatz gefälschter Nachrichtenportale'
+                      format: plain_text
+                  field_section_title:
+                    -
+                      value: Technik
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 9977f341-b7b5-49e4-9f95-722c46f78799
+                  bundle: definition_item
+                  default_langcode: de
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1779175975
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_section_text:
+                    -
+                      value: 'Behördenübergreifende Bekämpfung'
+                      format: plain_text
+                  field_section_title:
+                    -
+                      value: Reaktion
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 3b42f224-bc57-4099-8c3f-78ca1732cf33
+                  bundle: definition_item
+                  default_langcode: de
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1779175995
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_section_text:
+                    -
+                      value: 'Oktober 2024'
+                      format: plain_text
+                  field_section_title:
+                    -
+                      value: Zeitraum
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: b8aae950-bcbd-45ba-80e7-4d5fe4de4b8b
+                  bundle: definition_item
+                  default_langcode: de
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1779176013
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_section_text:
+                    -
+                      value: '--'
+                      format: plain_text
+                  field_section_title:
+                    -
+                      value: Schwachstelle
+          field_section_title:
+            -
+              value: 'Informationen zum Ereignis'

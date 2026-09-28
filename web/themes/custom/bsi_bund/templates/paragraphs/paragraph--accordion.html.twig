@@ -1,0 +1,30 @@
+{#
+/**
+* Template for accordion
+*/
+#}
+{%
+set classes = [
+'bsi-accordion',
+'bsi-grid',
+'paragraph',
+'paragraph--type--' ~ paragraph.bundle|clean_class,
+view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+not paragraph.isPublished() ? 'paragraph--unpublished'
+]
+%}
+{% block paragraph %}
+<div class="bsi-block bsi-grid">
+  {% block content %}
+    {{content|without('field_items')|without('field_section_text')}}
+    <div class="bsi-block__content">
+      {{content|without('field_items')|without('field_section_title')}}
+        <div{{ attributes.addClass(classes) }} data-bsi-accordion>
+          <div class="bsi-grid-indented">
+              {{ content|without('field_section_title')|without('field_section_text') }}
+          </div>
+        </div>
+    </div>
+  {% endblock %}
+</div>
+{% endblock paragraph %}

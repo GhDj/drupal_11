@@ -1,0 +1,21 @@
+uuid: acf16062-e1de-4702-91e8-f60fea40bd26
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_certification_validation
+    - node.type.certificate
+  module:
+    - datetime
+id: node.certificate.field_certification_validation
+field_name: field_certification_validation
+entity_type: node
+bundle: certificate
+label: 'Valid until'
+description: 'Validity of the certificate.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

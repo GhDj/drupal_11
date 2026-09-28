@@ -1,0 +1,36 @@
+{#
+/**
+ * Banner
+ */
+#}
+{%
+  set classes = [
+    'bsi-block',
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+{% block paragraph %}
+<div{{ attributes.addClass(classes) }}>
+  <div class="bsi-banner" data-theme="blue-900">
+    {% block content %}
+        {{ content.field_media }}
+
+        <div class="bsi-banner__content" data-theme="blue-900">
+          {{ content.field_section_title }}
+
+          <div class="bsi-banner__text">
+            {{ content.field_section_text }}
+          </div>
+
+          {{ content.field_link|merge({
+            '#modifiers': ['button', 'button--secondary'],
+            '#extra_classes': ['bsi-banner__cta']
+          }) }}
+        </div>
+    {% endblock %}
+  </div>
+</div>
+{% endblock paragraph %}

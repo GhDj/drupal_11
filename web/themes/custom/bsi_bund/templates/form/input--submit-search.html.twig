@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see \Drupal\Core\Form\FormPreprocess::preprocessInput()
+ * @see claro_preprocess_input()
+ */
+#}
+{% set classes = [
+  'bsi-button',
+  'bsi-button--tertiary',
+  'bsi-button--icon-only',
+  'bsi-header__search-button',
+] %}
+<button{{ attributes.removeClass('button').addClass(classes) }}>
+  {% include '@bsi_bund/components/icon.twig' with {
+    name: "search",
+    decorative: true,
+    extra_classes: "bsi-button__icon bsi-button__icon--search"
+  } %}
+  <span class="visually-hidden">{{ element['#value'] }}</span>
+</button>

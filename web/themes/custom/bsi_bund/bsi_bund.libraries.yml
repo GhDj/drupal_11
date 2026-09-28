@@ -1,0 +1,6 @@
+global:
+  css:
+    theme:
+      dist/styles.css: {}
+  js:
+    dist/index.js: { preprocess: false, minified: true }

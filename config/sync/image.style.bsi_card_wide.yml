@@ -1,0 +1,21 @@
+uuid: 19c05dcb-a13b-439b-b972-6585abf82599
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_card_wide
+label: 'BSI Card (wide)'
+effects:
+  0f0c6cd1-e822-464e-9655-26dd184c65cd:
+    uuid: 0f0c6cd1-e822-464e-9655-26dd184c65cd
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 345
+      height: 259
+      anchor: center-center
+  227f7f73-cabd-44a6-a570-6a02d2b67258:
+    uuid: 227f7f73-cabd-44a6-a570-6a02d2b67258
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

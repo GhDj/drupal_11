@@ -1,0 +1,9 @@
+type: module
+name: 'Short URL'
+description: 'Create short urls for your content using redirects'
+package: SEO
+
+core_version_requirement: ^10 || ^11
+
+dependencies:
+  - drupal:redirect

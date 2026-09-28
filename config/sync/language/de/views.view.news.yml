@@ -1,0 +1,10 @@
+label: Aktuelles
+display:
+  default:
+    display_options:
+      title: Aktuelles
+      use_more_text: 'Alle News anzeigen'
+      link_url: /aktuelles
+  block_front:
+    display_options:
+      block_description: 'Startseite: Aktuelles'

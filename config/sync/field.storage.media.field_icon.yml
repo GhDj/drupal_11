@@ -1,0 +1,19 @@
+uuid: 3b07bcf1-cbcb-41a1-9957-4daf80232808
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - ui_icons_field
+id: media.field_icon
+field_name: field_icon
+entity_type: media
+type: ui_icon
+settings: {  }
+module: ui_icons_field
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

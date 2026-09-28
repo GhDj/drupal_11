@@ -1,0 +1,55 @@
+_meta:
+  version: '1.0'
+  entity_type: group
+  uuid: 109c516a-b884-474d-9f7a-334908a81ff0
+  bundle: administration
+  default_langcode: de
+translations:
+  en:
+    status:
+      -
+        value: true
+    label:
+      -
+        value: 'Federal Administration'
+    created:
+      -
+        value: 1783949818
+    path:
+      -
+        alias: ''
+        langcode: en
+        pathauto: 0
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  label:
+    -
+      value: Bundesverwaltung
+  created:
+    -
+      value: 1783949124
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false

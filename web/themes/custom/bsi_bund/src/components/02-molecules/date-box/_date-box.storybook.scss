@@ -1,0 +1,6 @@
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+.#{$nsp}-date-box {
+  max-width: 420px;
+}

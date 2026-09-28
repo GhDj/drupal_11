@@ -1,0 +1,6 @@
+header.language:de:
+  menu_name: header
+  class: Drupal\bsi_custom\Plugin\Menu\LanguageSwitchMenuLink
+header.language:en:
+  menu_name: header
+  class: Drupal\bsi_custom\Plugin\Menu\LanguageSwitchMenuLink

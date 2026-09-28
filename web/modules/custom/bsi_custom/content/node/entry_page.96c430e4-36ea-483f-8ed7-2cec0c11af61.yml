@@ -1,0 +1,168 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 96c430e4-36ea-483f-8ed7-2cec0c11af61
+  bundle: entry_page
+  default_langcode: de
+  depends:
+    68b997c3-9b21-4a81-a06f-37b41b3cbe87: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Die Lage der IT-Sicherheit in Deutschland 2025'
+  created:
+    -
+      value: 1777540811
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Berichtszeitraum: 01.07.2024 - 30.06.2025'
+      format: plain_text
+      summary: 'Der Jahreslagebericht für das Jahr 2025'
+  field_links_title:
+    -
+      value: more_information
+  field_media:
+    -
+      entity: 68b997c3-9b21-4a81-a06f-37b41b3cbe87
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 238f2654-8c89-434e-a2e9-b43628107177
+          bundle: introduction
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778149056
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_section_text:
+            -
+              value: '<p>Als die Cybersicherheitsbehörde des Bundes beobachtet das Bundesamt für Sicherheit in der Informationstechnik (BSI) kontinuierlich die Lage der IT‑Sicherheit in Deutschland. Dabei stehen einerseits die Entwicklungen der Bedrohungs‑ und Gefährdungslagen sowie das Wachstum der Angriffsflächen für Cyberangriffe im Fokus des BSI. Andererseits beobachtet das BSI die Entwicklung der gesamtgesellschaftlichen Resilienz gegen Cyberbedrohungen und ‑gefährdungen und treibt Maßnahmen zur Steigerung von Präventions‑, Verteidigungs‑ und Bewältigungsfähigkeiten aktiv voran.</p>'
+              format: basic
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 33f4f44e-d832-4dcc-b88c-948143ddaaa5
+          bundle: text_section
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778148897
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_section_text:
+            -
+              value: '<drupal-media data-entity-type="media" data-entity-uuid="734b5cd9-35c8-437f-a44a-1d2c1084d793" data-align="center">&nbsp;</drupal-media><p><a class="button" href="/node/23" data-entity-type="node" data-entity-uuid="d2c7aaaa-d6d4-4cfa-9bd7-f81bdf7a6c70" data-entity-metadata="{&quot;description&quot;:&quot;by admin on Do. 30 Apr 2026 - 14:00&quot;,&quot;entity_type_id&quot;:&quot;node&quot;,&quot;entity_uuid&quot;:&quot;d2c7aaaa-d6d4-4cfa-9bd7-f81bdf7a6c70&quot;,&quot;group&quot;:&quot;Inhalt - Report Page&quot;,&quot;label&quot;:&quot;Vorworte und Fazit&quot;,&quot;path&quot;:&quot;/node/23&quot;,&quot;value&quot;:&quot;Vorworte und Fazit&quot;}">Vorworte und Fazit</a></p>'
+              format: advanced
+          field_section_title:
+            -
+              value: Einleitung
+  layout_builder__layout:
+    -
+      section:
+        layout_id: layout_onecol
+        layout_settings:
+          label: 'Content Before'
+          context_mapping: {  }
+        components:
+          5623007f-726e-4af5-8506-f235a73bc7b8:
+            uuid: 5623007f-726e-4af5-8506-f235a73bc7b8
+            region: content
+            configuration:
+              id: 'views_exposed_filter_block:search_yearly_report-block_search_yearly_reports'
+              label: ''
+              label_display: 0
+              provider: views
+              views_label: ''
+              context_mapping: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+    -
+      section:
+        layout_id: layout_onecol
+        layout_settings:
+          label: Content
+          context_mapping: {  }
+        components:
+          63f4f82a-9466-4ef3-9d07-e0f780eda76f:
+            uuid: 63f4f82a-9466-4ef3-9d07-e0f780eda76f
+            region: content
+            configuration:
+              id: 'field_block:node:entry_page:field_paragraphs'
+              label: Paragraphs
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+    -
+      section:
+        layout_id: layout_onecol
+        layout_settings:
+          label: 'Content After'
+          context_mapping: {  }
+        components: {  }
+        third_party_settings: {  }

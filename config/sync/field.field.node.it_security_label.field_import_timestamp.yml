@@ -1,0 +1,21 @@
+uuid: bcbb4b1b-3335-415e-bfa5-f71c948f3d40
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_import_timestamp
+    - node.type.it_security_label
+  module:
+    - datetime
+id: node.it_security_label.field_import_timestamp
+field_name: field_import_timestamp
+entity_type: node
+bundle: it_security_label
+label: 'Import timestamp'
+description: 'Import timestamp.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

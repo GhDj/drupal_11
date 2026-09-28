@@ -1,0 +1,86 @@
+_meta:
+  version: '1.0'
+  entity_type: config_pages
+  uuid: 71a36ada-d124-4525-be2d-39e9b3dd1e8f
+  bundle: page_frame
+default:
+  label:
+    -
+      value: 'Page frame'
+  type:
+    -
+      target_id: page_frame
+  context:
+    -
+      value: 'a:1:{i:0;a:1:{s:8:"language";s:2:"en";}}'
+  field_certificate:
+    -
+      target_id: 'bsi_cert_images:Logo_Zertifizierung-ISO27001_IT-Grundschutz'
+  field_certificate_url:
+    -
+      uri: 'internal:#TBD'
+      resolvable_uri: '#TBD'
+      title: ''
+      options: {  }
+  field_contact:
+    -
+      uri: 'internal:/service/contact'
+      resolvable_uri: /service/contact
+      title: 'Contact us'
+      options: {  }
+  field_copyright:
+    -
+      value: 'Federal Office for Information Security'
+  field_newsletter:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: d94ddd3c-4e91-4abc-a2d6-895776ca36e9
+          bundle: teaser_single
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1779806849
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: en
+          content_translation_outdated:
+            -
+              value: false
+          field_display_variant:
+            -
+              value: image_left
+          field_link:
+            -
+              uri: 'route:<none>'
+              resolvable_uri: ''
+              title: 'Sign up for our newsletter'
+              options: {  }
+          field_section_title:
+            -
+              value: 'Our newsletter'
+  field_suggestions:
+    -
+      uri: 'internal:#TBD'
+      resolvable_uri: '#TBD'
+      title: 'Technical Guidelines'
+      options: {  }
+    -
+      uri: 'internal:#TBD'
+      resolvable_uri: '#TBD'
+      title: 'German IT Security Act 2.0'
+      options: {  }
+    -
+      uri: 'internal:#TBD'
+      resolvable_uri: '#TBD'
+      title: 'Artificial Intelligence'
+      options: {  }

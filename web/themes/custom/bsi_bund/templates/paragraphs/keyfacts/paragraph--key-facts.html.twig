@@ -1,0 +1,53 @@
+{#
+/**
+ * Keyfacts paragraph
+ */
+#}
+{%
+  set classes = [
+    'bsi-block',
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+{% block paragraph %}
+ <div{{ attributes.addClass(classes) }} >
+  <div class="bsi-grid bsi-facts-box" data-theme='{{ content.field_display_variant.0 }}'>
+    {% block content %}
+
+      {# icon #}
+      {% if paragraph.field_display_icon.value %}
+        <div class="bsi-facts-box__icon-wrap">
+          {% include '@bsi_bund/components/icon.twig' with {
+            name: "info-circle",
+            decorative: true,
+            extra_classes: 'bsi-facts-box__icon',
+          } only %}
+        </div>
+      {% endif %}
+
+      <div class="bsi-facts-box__content">
+
+        {# heading #}
+        <div class="bsi-heading__wrapper">
+          <div class="bsi-heading bsi-heading--5 bsi-facts-box__title">
+            {{ content.field_section_title }}
+          </div>
+        </div>
+
+        {# intro #}
+        {% if content.field_section_text %}
+          <div class="bsi-facts-box__intro-text">{{ content.field_section_text }}</div>
+        {% endif %}
+
+        {# facts #}
+        <dl class="bsi-facts-box__list">
+          {{ content.field_items }}
+        </dl>
+      </div>
+    {% endblock %}
+    </div>
+  </div>
+{% endblock paragraph %}

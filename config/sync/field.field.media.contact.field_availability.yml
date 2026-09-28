@@ -1,0 +1,21 @@
+uuid: bdbbb11f-7bf2-43e7-93ae-b551234898c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_availability
+    - media.type.contact
+  module:
+    - office_hours
+id: media.contact.field_availability
+field_name: field_availability
+entity_type: media
+bundle: contact
+label: Availability
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: office_hours

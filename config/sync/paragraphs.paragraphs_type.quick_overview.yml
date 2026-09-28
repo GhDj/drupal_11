@@ -1,0 +1,10 @@
+uuid: 45761d40-308a-410a-8e73-0a1513ffc569
+langcode: en
+status: true
+dependencies: {  }
+id: quick_overview
+label: 'In 60 seconds'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

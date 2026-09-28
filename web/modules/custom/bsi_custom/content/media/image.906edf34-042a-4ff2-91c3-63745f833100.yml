@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 906edf34-042a-4ff2-91c3-63745f833100
+  bundle: image
+  default_langcode: de
+  depends:
+    d9295bd3-f07e-4de6-8271-3d7e11b6aa78: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Opener Mediathek'
+  created:
+    -
+      value: 1780045144
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: d9295bd3-f07e-4de6-8271-3d7e11b6aa78
+      alt: 'Verschiedene Medien-Symbole kreisen auf dunkelblauem Hintergrund.'
+      title: ''
+      width: 4784
+      height: 1760

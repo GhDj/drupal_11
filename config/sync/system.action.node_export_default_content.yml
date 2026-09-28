@@ -1,0 +1,12 @@
+uuid: 47430452-871c-4ff6-99ef-33530cecf1b5
+langcode: en
+status: true
+dependencies:
+  module:
+    - default_content
+id: node_export_default_content
+label: 'Export default content'
+type: node
+plugin: 'entity:export_default_content:node'
+configuration:
+  module: bsi_custom

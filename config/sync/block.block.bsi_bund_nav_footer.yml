@@ -1,0 +1,30 @@
+uuid: 286e0ade-1528-4d4b-8dee-7f591da097dc
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - menu_multilingual
+    - system
+  theme:
+    - bsi_bund
+third_party_settings:
+  menu_multilingual:
+    only_translated_labels: false
+    only_translated_content: true
+id: bsi_bund_nav_footer
+theme: bsi_bund
+region: legal
+weight: -9
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: Footer
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

@@ -1,0 +1,38 @@
+title: Benutzerregistrierung
+description: '<p><span style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);display:inline !important;float:none;font-family:system-ui, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-line;widows:2;word-spacing:0px;">Ermöglicht es Benutzern, sich selbst als Administratoren zu registrieren, wobei die Registrierung noch genehmigt werden muss.</span></p>'
+elements: |
+  which_group_do_you_belong_to:
+    '#title': 'Zu welcher Gruppe gehörst du?'
+    '#options':
+      federation: Verband
+      country: Land
+      municipality: Gemeinde
+    '#required_error': 'Bitte wählen Sie eine Gruppe aus.'
+  last_name:
+    '#title': Nachname
+    '#required_error': 'Bitte geben Sie Ihren Nachnamen an.'
+  first_name:
+    '#title': Vorname
+    '#required_error': 'Bitte geben Sie Ihren Vornamen an.'
+  email:
+    '#title': E-Mail
+    '#required_error': 'Bitte geben Sie Ihre E-Mail-Adresse an.'
+  authority:
+    '#title': Behörde
+    '#required_error': 'Bitte geben Sie die Quelle an.'
+  upload_sealed_application_in_pdf_format:
+    '#title': 'Bitte laden Sie die versiegelte Bewerbung im PDF-Format hoch'
+  country:
+    '#title': Land
+  municipality:
+    '#title': Gemeinde
+  confirmation_of_data_protection_terms_and_conditions_or_similar:
+    '#title': 'Bestätigung der Datenschutzbestimmungen/Allgemeinen Geschäftsbedingungen oder Ähnliches'
+    '#required_error': 'Bitte bestätigen Sie, dass Sie die Allgemeinen Geschäftsbedingungen gelesen haben.'
+  subscribe_to_the_newsletter:
+    '#title': 'Den Newsletter abonnieren'
+  user_name:
+    '#title': Benutzername
+settings:
+  confirmation_title: 'Ihre Anmeldung wurde erfolgreich übermittelt'
+  confirmation_message: '<p><span style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);display:inline !important;float:none;font-family:system-ui, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-line;widows:2;word-spacing:0px;">Ihre Anmeldung wurde übermittelt und wird nun von einem Mitglied unseres Teams geprüft.</span></p><p><span style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);display:inline !important;float:none;font-family:system-ui, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-line;widows:2;word-spacing:0px;">Sobald die Prüfung abgeschlossen ist, werden Sie über den Status Ihrer Anmeldung informiert.</span></p>'

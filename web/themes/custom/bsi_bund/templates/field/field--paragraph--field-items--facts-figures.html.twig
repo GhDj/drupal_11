@@ -1,0 +1,10 @@
+{% extends "@bsi_bund/field/no-wrapper/field--no-wrapper.html.twig" %}
+{% block items %}
+    <ul class="bsi-facts-group__items">
+        {% for item in items %}
+            <li class="bsi-facts-group__item">
+            {{ item.content }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

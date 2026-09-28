@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 71b3c831-4d59-4479-941e-4dfd2c76a12d
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Opener-Audio.png
+  uri:
+    -
+      value: 'private://image/2026-05/Opener-Audio.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 3739879
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1780044276

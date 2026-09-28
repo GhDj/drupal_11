@@ -1,0 +1,24 @@
+uuid: d39bbe6c-ef9e-46ef-9809-b7ee2a5008d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.menu_link_content.field_icon
+  module:
+    - menu_link_content
+    - ui_icons_field
+    - menu_item_fields
+id: menu_link_content.menu_link_content.field_icon
+field_name: field_icon
+entity_type: menu_link_content
+bundle: menu_link_content
+label: Icon
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_icon_pack:
+    bsi_icons: bsi_icons
+field_type: ui_icon

@@ -1,0 +1,11 @@
+uuid: 1f88b9e4-e64f-41f7-8d44-b69c0761d90b
+langcode: de
+status: true
+dependencies:
+  module:
+    - media
+id: media.sticky
+label: Sticky
+description: null
+targetEntityType: media
+cache: true

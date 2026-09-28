@@ -1,0 +1,21 @@
+uuid: 1a259edf-a871-43ca-8a7d-d52ceb07c9ae
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_video_mobile
+label: 'BSI Video (mobile)'
+effects:
+  578c19fa-0d63-4235-8563-1d4714209e26:
+    uuid: 578c19fa-0d63-4235-8563-1d4714209e26
+    id: image_convert_avif
+    weight: -7
+    data:
+      extension: webp
+  0544e272-c108-4931-bebf-4207a440d8bc:
+    uuid: 0544e272-c108-4931-bebf-4207a440d8bc
+    id: image_scale_and_crop
+    weight: -8
+    data:
+      width: 544
+      height: 308
+      anchor: center-center

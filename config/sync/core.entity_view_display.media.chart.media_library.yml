@@ -1,0 +1,42 @@
+uuid: 42192bd7-d7ef-4f6e-943f-2b78a960d7a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.chart.field_media_chart
+    - field.field.media.chart.field_source
+    - field.field.media.chart.field_unit
+    - image.style.media_library
+    - media.type.chart
+  module:
+    - image
+id: media.chart.media_library
+targetEntityType: media
+bundle: chart
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: media_library
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_media_chart: true
+  field_source: true
+  field_unit: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  uid: true

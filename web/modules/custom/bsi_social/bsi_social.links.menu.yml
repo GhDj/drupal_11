@@ -1,0 +1,6 @@
+bsi_social.settings:
+  title: Social Media settings
+  description: Administer social media settings.
+  parent: system.admin_config_media
+  route_name: bsi_social.settings
+  weight: 10

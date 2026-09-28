@@ -1,0 +1,25 @@
+uuid: 32b97b6c-cb72-41eb-bc57-f5cdfabd961e
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - webform_entity_cart
+  theme:
+    - bsi_bund
+id: bsi_bund_basket
+theme: bsi_bund
+region: content
+weight: -14
+provider: null
+plugin: webform_entity_cart_basket_block
+settings:
+  id: webform_entity_cart_basket_block
+  label: Basket
+  label_display: '0'
+  provider: webform_entity_cart
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: /cart

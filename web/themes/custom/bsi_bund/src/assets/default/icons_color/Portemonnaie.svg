@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: #004b76;
+      }
+
+      .st0, .st1 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+
+      .st1 {
+        stroke: #00a4b9;
+      }
+    </style>
+  </defs>
+  <g id="Ebene_1" inkscape:version="0.92.4 (5da689c313, 2019-01-14)" sodipodi:docname="Grafik-19_1200055680_opt.svg">
+    <path class="st1" d="M49,21.1l-10.2-10.2c-.8-.8-2.2-.8-3.1,0l-10.2,10.2" inkscape:connector-curvature="0"/>
+    <path class="st1" d="M56,21.1l-3.4-9.4c-.4-1.1-1.7-1.7-2.8-1.3l-8.5,3.1" inkscape:connector-curvature="0"/>
+    <sodipodi:namedview id="base" bordercolor="#666666" borderopacity="1.0" inkscape:current-layer="layer2" inkscape:cx="17.67224" inkscape:cy="6.0885382" inkscape:document-units="mm" inkscape:guide-bbox="true" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:showpageshadow="false" inkscape:window-height="1113" inkscape:window-maximized="1" inkscape:window-width="1920" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:zoom="3.959798" pagecolor="#ffffff" showgrid="false" showguides="true" units="px">
+      <sodipodi:guide inkscape:locked="false" orientation="1,0" position="2.9399648,4.2763124"/>
+      <sodipodi:guide inkscape:locked="false" orientation="1,0" position="16.437075,-12.361216"/>
+      <sodipodi:guide inkscape:locked="false" orientation="1,0" position="9.8221548,4.7440342"/>
+    </sodipodi:namedview>
+    <path class="st0" d="M61.1,51.4v4.3c0,2.4-1.9,4.3-4.3,4.3H15.5c-2.4,0-4.3-1.9-4.3-4.3V17.8c0,1.8,1.5,3.3,3.3,3.3h42.3c2.4,0,4.3,1.9,4.3,4.3v8.7" inkscape:connector-curvature="0"/>
+    <path class="st0" d="M63.3,47.1h-10.8c-3.6,0-6.5-2.9-6.5-6.5s2.9-6.5,6.5-6.5h10.8c1.2,0,2.2,1,2.2,2.2v8.7c0,1.2-1,2.2-2.2,2.2h0Z" inkscape:connector-curvature="0"/>
+    <circle class="st0" cx="52.4" cy="40.6" r="2.2" transform="translate(0 0)"/>
+    <path class="st0" d="M11.2,17.8c0-1.8,1.5-3.3,3.3-3.3h11.9" inkscape:connector-curvature="0"/>
+  </g>
+</svg>

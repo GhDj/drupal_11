@@ -1,0 +1,22 @@
+<div{{ attributes.addClass('bsi-accordion__item') }}>
+    <div class="bsi-accordion__title">
+        {{ content.field_section_title }}
+        <button
+            type="button"
+            class="bsi-button bsi-button--tertiary bsi-button--icon-only bsi-accordion__trigger"
+            aria-expanded="false"
+            data-bsi-accordion-trigger="false"
+        >
+        {% block icon -%}
+            {% include '@bsi_bund/components/icon.twig' with {
+                name: "chevron-down",
+                decorative: true,
+                extra_classes: 'bsi-button__icon',
+            } only %}
+        {%- endblock %}
+        </button>
+    </div>
+    <div class="bsi-accordion__panel" role="region" hidden>
+        {{ content.field_section_text }}
+    </div>
+</div>

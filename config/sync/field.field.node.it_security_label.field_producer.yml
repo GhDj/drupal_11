@@ -1,0 +1,19 @@
+uuid: 326fd2e8-80dc-4282-bc4d-b71c1371942c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_producer
+    - node.type.it_security_label
+id: node.it_security_label.field_producer
+field_name: field_producer
+entity_type: node
+bundle: it_security_label
+label: Manufacturer
+description: "Manufacturer's specs multilingual."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

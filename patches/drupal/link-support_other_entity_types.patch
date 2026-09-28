@@ -1,0 +1,39 @@
+--- a/core/modules/link/src/Plugin/Field/FieldWidget/LinkWidget.php
++++ b/core/modules/link/src/Plugin/Field/FieldWidget/LinkWidget.php
+@@ -77,7 +77,7 @@
+       // Show the 'entity:' URI as the entity autocomplete would.
+       // @todo Support entity types other than 'node'. Will be fixed in
+       //   https://www.drupal.org/node/2423093.
+-      if ($entity_type == 'node' && $entity = \Drupal::entityTypeManager()->getStorage($entity_type)->load($entity_id)) {
++      if ($entity = \Drupal::entityTypeManager()->getStorage($entity_type)->load($entity_id)) {
+         $displayable_string = EntityAutocomplete::getEntityLabels([$entity]);
+       }
+     }
+@@ -105,7 +105,7 @@
+    *
+    * @see static::getUriAsDisplayableString()
+    */
+-  protected static function getUserEnteredStringAsUri($string) {
++  protected static function getUserEnteredStringAsUri($string, ?array $element = []) {
+     // By default, assume the entered string is a URI.
+     $uri = trim($string);
+
+@@ -114,7 +114,8 @@
+     if ($entity_id !== NULL) {
+       // @todo Support entity types other than 'node'. Will be fixed in
+       //   https://www.drupal.org/node/2423093.
+-      $uri = 'entity:node/' . $entity_id;
++      $entity_type_id = $element['#autocomplete_route_parameters']['target_type'] ?? 'node';
++      $uri = 'entity:' . $entity_type_id . '/' . $entity_id;
+     }
+     // Support linking to nothing.
+     elseif (in_array($string, ['<nolink>', '<none>', '<button>'], TRUE)) {
+@@ -141,7 +142,7 @@
+    * Disallows saving inaccessible or untrusted URLs.
+    */
+   public static function validateUriElement($element, FormStateInterface $form_state, $form) {
+-    $uri = static::getUserEnteredStringAsUri($element['#value']);
++    $uri = static::getUserEnteredStringAsUri($element['#value'], $element);
+     $form_state->setValueForElement($element, $uri);
+
+     // If getUserEnteredStringAsUri() mapped the entered value to an 'internal:'

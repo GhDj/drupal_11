@@ -1,0 +1,14 @@
+uuid: 893b8b9d-37c8-4eda-90ad-32ff939643c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.it_sik_categories
+id: taxonomy_vocabulary_it_sik_categories
+entity_type_id: taxonomy_vocabulary
+entity_id: it_sik_categories
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

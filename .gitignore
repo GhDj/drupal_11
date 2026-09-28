@@ -1,0 +1,21 @@
+# Transfer utilities
+pack.py
+unpack.py
+TRANSFER.md
+pack_transfer/
+.pack_transfer/
+
+# Claude
+.claude/
+CLAUDE.md
+
+# Images
+seach.jpg
+search_box.jpg
+
+# OS
+.DS_Store
+
+# Dependencies (not packed)
+vendor/
+node_modules/

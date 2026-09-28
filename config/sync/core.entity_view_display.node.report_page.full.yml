@@ -1,0 +1,65 @@
+uuid: 8c8b50e9-d35b-4abd-91b6-7ba5bb51c3ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.report_page.body
+    - field.field.node.report_page.field_audiences
+    - field.field.node.report_page.field_downloads
+    - field.field.node.report_page.field_downloads_title
+    - field.field.node.report_page.field_links
+    - field.field.node.report_page.field_links_title
+    - field.field.node.report_page.field_media
+    - field.field.node.report_page.field_metatags
+    - field.field.node.report_page.field_paragraphs
+    - field.field.node.report_page.field_subtitle
+    - field.field.node.report_page.field_tags
+    - field.field.node.report_page.field_topics
+    - node.type.report_page
+  module:
+    - entity_reference_revisions
+id: node.report_page.full
+targetEntityType: node
+bundle: report_page
+mode: full
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  body: true
+  book_navigation: true
+  book_navigation_without_tree: true
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audiences: true
+  field_downloads: true
+  field_downloads_title: true
+  field_links: true
+  field_links_title: true
+  field_media: true
+  field_metatags: true
+  field_subtitle: true
+  field_tags: true
+  field_topics: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  title: true
+  uid: true

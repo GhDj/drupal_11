@@ -1,0 +1,20 @@
+uuid: 981b6d92-d6ad-4a18-a43c-3dbade1a30ad
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_link_content
+    - ui_icons_field
+    - menu_item_fields
+id: menu_link_content.field_icon
+field_name: field_icon
+entity_type: menu_link_content
+type: ui_icon
+settings: {  }
+module: ui_icons_field
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,92 @@
+uuid: 7d5f6ca0-138a-42e5-b6f3-5069bf72de96
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.audio
+    - media.type.bits
+    - media.type.chart
+    - media.type.contact
+    - media.type.download
+    - media.type.gallery
+    - media.type.image
+    - media.type.publication
+    - media.type.video
+    - node.type.article
+    - node.type.entry_page
+    - node.type.event
+    - node.type.inventory
+    - node.type.it_security_label
+    - node.type.job
+    - node.type.page
+    - node.type.report_page
+    - workflows.workflow.nodes
+  module:
+    - content_moderation
+    - contextual
+    - duplicate_node
+    - editoria11y
+    - media
+    - node
+    - paragraphs_type_permissions
+    - path
+    - system
+    - tablefield
+    - toolbar
+id: editor
+label: Editor
+weight: -8
+is_admin: false
+permissions:
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access media overview'
+  - 'access toolbar'
+  - 'addrow tablefield'
+  - 'create article content'
+  - 'create audio media'
+  - 'create bits media'
+  - 'create chart media'
+  - 'create contact media'
+  - 'create download media'
+  - 'create event content'
+  - 'create gallery media'
+  - 'create image media'
+  - 'create inventory content'
+  - 'create it_security_label content'
+  - 'create job content'
+  - 'create page content'
+  - 'create paragraph content view'
+  - 'create publication media'
+  - 'create report_page content'
+  - 'create url aliases'
+  - 'create video media'
+  - 'delete all revisions'
+  - 'duplicate article content'
+  - 'duplicate entry_page content'
+  - 'duplicate event content'
+  - 'duplicate inventory content'
+  - 'duplicate it_security_label content'
+  - 'duplicate job content'
+  - 'duplicate page content'
+  - 'duplicate report_page content'
+  - 'edit any article content'
+  - 'edit any entry_page content'
+  - 'edit any event content'
+  - 'edit any inventory content'
+  - 'edit any it_security_label content'
+  - 'edit any job content'
+  - 'edit any page content'
+  - 'edit any report_page content'
+  - 'export tablefield'
+  - 'import tablefield'
+  - 'revert all revisions'
+  - 'update paragraph content view'
+  - 'use nodes transition create_new_draft'
+  - 'use nodes transition request_approval'
+  - 'use nodes transition revise'
+  - 'use nodes transition withdraw'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view editoria11y checker'
+  - 'view the administration theme'

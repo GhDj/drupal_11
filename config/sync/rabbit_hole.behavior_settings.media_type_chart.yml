@@ -1,0 +1,14 @@
+uuid: 609912da-7496-4745-a7f9-19e25529dee2
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.chart
+id: media_type_chart
+entity_type_id: media_type
+entity_id: chart
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

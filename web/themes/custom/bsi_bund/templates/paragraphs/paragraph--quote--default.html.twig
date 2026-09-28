@@ -1,0 +1,60 @@
+{% block paragraph %}
+
+{% set hasImage = content.field_media[0] is not empty %}
+{% set hasQuote = content.field_section_text[0] is not empty %}
+{% set hasAuthor = content.field_author[0] is not empty or content.field_byline is not empty %}
+{% set hasLink = content.field_link[0] is not empty %}
+
+<div class="bsi-grid bsi-block">
+  <article class="bsi-quote {{ not hasImage ? 'bsi-quote--no-image' }}">
+
+    {# Media #}
+    {% if hasImage %}
+      <div class="bsi-quote__media">
+        <div class="bsi-image bsi-quote__image">
+          {{ content.field_media }}
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="bsi-quote__content">
+
+      {# Quote #}
+      {% if hasQuote %}
+        <blockquote class="bsi-quote__blockquote">
+          {{ content.field_section_text.0 }}
+        </blockquote>
+      {% endif %}
+
+      {# Author #}
+      {% if hasAuthor %}
+        <div class="bsi-quote__author">
+
+          {% if content.field_author is not empty %}
+            <span class="bsi-quote__author-name">
+              {{ content.field_author.0 }}
+            </span>
+          {% endif %}
+
+          {% if content.field_byline is not empty %}
+            <span class="bsi-quote__author-role">
+              {{ content.field_byline.0 }}
+            </span>
+          {% endif %}
+
+        </div>
+      {% endif %}
+
+      {# Link #}
+      {% if hasLink %}
+        <div class="bsi-quote__link-box">
+          {{ content.field_link|merge({
+            '#extra_classes': ['bsi-quote__link-button']
+          }) }}
+        </div>
+      {% endif %}
+
+    </div>
+  </article>
+</div>
+{% endblock paragraph %}

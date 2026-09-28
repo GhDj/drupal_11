@@ -1,0 +1,19 @@
+uuid: 9dab618e-d32e-4035-9643-4173e4fafe74
+langcode: en
+status: true
+dependencies:
+  module:
+    - config_pages
+    - ui_icons_field
+id: config_pages.field_certificate
+field_name: field_certificate
+entity_type: config_pages
+type: ui_icon
+settings: {  }
+module: ui_icons_field
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

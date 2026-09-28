@@ -1,0 +1,5 @@
+short_url.settings:
+  title: 'Short URL'
+  route_name: short_url.settings
+  base_route: redirect.list
+  weight: 50

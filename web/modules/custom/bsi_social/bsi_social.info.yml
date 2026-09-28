@@ -1,0 +1,5 @@
+name: 'BSI Social'
+type: module
+description: 'Integrations for social media.'
+package: BSI
+core_version_requirement: ^10 || ^11

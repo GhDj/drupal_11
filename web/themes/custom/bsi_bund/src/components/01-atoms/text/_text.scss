@@ -1,0 +1,428 @@
+// -----------------------------------------------------------------------------
+// Text
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/typography" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-bodytext {
+  --#{$nsp}-text-element-space: 40px;
+  --#{$nsp}-link-color: var(--#{$nsp}-color-blue-800);
+
+  /* Richtext mit Drupal Wrapper */
+  > .field__item > :last-child {
+    --bsi-text-element-space: 0;
+  }
+
+  /* Bodytext ohne Wrapper */
+  > :last-child:not(.field__item) {
+    --bsi-text-element-space: 0;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    clear: both;
+    hyphens: auto;
+    margin-block-end: var(--#{$nsp}-text-element-space);
+    overflow-wrap: break-word;
+    text-wrap: balance;
+  }
+
+  h2 {
+    @include typography("heading-2");
+  }
+
+  h3 {
+    @include typography("heading-3");
+  }
+
+  h4 {
+    @include typography("heading-4");
+  }
+
+  h5 {
+    @include typography("heading-5");
+  }
+
+  h6 {
+    @include typography("heading-6");
+  }
+
+  //----------------------------------------------------------------------------
+  // Spacing before headings
+  // ---------------------------------------------------------------------------
+  p {
+    @include typography("body");
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0;
+    margin-block-end: var(--#{$nsp}-text-element-space);
+  }
+
+  table {
+    margin-block-end: var(--#{$nsp}-text-element-space);
+  }
+
+  table,
+  blockquote,
+  figure + figure {
+    clear: both;
+  }
+
+  ul,
+  ol {
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin-block-end: var(--#{$nsp}-text-element-space);
+    padding-left: var(--#{$nsp}-space-xl);
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+    ol {
+      list-style: lower-latin;
+      ol {
+        list-style: lower-roman;
+      }
+    }
+  }
+
+  li + li {
+    margin-bottom: 0;
+    margin-top: var(--#{$nsp}-space-2xs);
+  }
+
+  li > ul,
+  li > ol {
+    margin-bottom: 0;
+    margin-top: var(--#{$nsp}-space-2xs);
+  }
+
+  dl {
+    display: grid;
+    gap: var(--#{$nsp}-space-2xs) var(--#{$nsp}-space-sm);
+    grid-template-columns: max-content 1fr;
+    margin-block-end: var(--#{$nsp}-text-element-space);
+  }
+
+  dt {
+    font-weight: 700;
+  }
+
+  q::before {
+    content: "„";
+  }
+
+  q::after {
+    content: "“";
+  }
+
+  blockquote {
+    @include typography("body-lead");
+    border-left: var(--#{$nsp}-space-4xs) solid var(--#{$nsp}-color-blue-750);
+    clear: both;
+    color: var(--#{$nsp}-color-blue-900);
+    font-style: italic;
+    inset-inline-start: 0;
+    margin-block-end: var(--#{$nsp}-text-element-space);
+    padding-left: var(--#{$nsp}-space-lg);
+    position: relative;
+    quotes: auto;
+    p {
+      display: inline;
+      font-style: italic;
+    }
+
+    &::before,
+    &::after {
+      color: var(--#{$nsp}-color-blue-750);
+      font-family: var(--font-family-serif);
+      font-size: 2em;
+      inset-inline-start: 0;
+      line-height: 0;
+      position: relative;
+    }
+
+    &::before {
+      content: open-quote;
+      margin-right: var(--#{$nsp}-space-2xs);
+    }
+
+    &::after {
+      content: close-quote;
+      vertical-align: -0.25em;
+    }
+    html[lang|="en"] & {
+      &::before {
+        top: var(--bsi-space-2xs);
+      }
+    }
+  }
+
+  pre,
+  code {
+    clear: both;
+    font-family: monospace;
+    margin-block-end: var(--#{$nsp}-text-element-space);
+  }
+
+  code {
+    background-color: var(--#{$nsp}-color-neutral-100);
+    border: none;
+    padding: var(--#{$nsp}-space-5xs) var(--#{$nsp}-space-4xs);
+  }
+
+  pre {
+    background-color: var(--#{$nsp}-color-neutral-100);
+    overflow-x: auto;
+    padding: var(--#{$nsp}-space-sm);
+
+    code {
+      padding: 0;
+    }
+  }
+
+  abbr[title] {
+    cursor: help;
+    text-decoration: underline dotted;
+    text-underline-offset: 0.2em;
+  }
+
+  //----------------------------------------------------------------------------
+  // Images
+  // ---------------------------------------------------------------------------
+  .#{$nsp}-image {
+    margin-bottom: var(--#{$nsp}-text-element-space);
+    width: fit-content;
+
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+
+    &.align-left {
+      @include breakpoint-lg {
+        float: left;
+        max-width: 40%;
+        padding-right: var(--#{$nsp}-space-xl);
+      }
+
+      @include breakpoint-xl {
+        max-width: 50%;
+      }
+    }
+
+    &.align-right {
+      @include breakpoint-lg {
+        float: right;
+        max-width: 40%;
+        padding-left: var(--#{$nsp}-space-xl);
+      }
+
+      @include breakpoint-xl {
+        max-width: 50%;
+      }
+    }
+  }
+
+  //----------------------------------------------------------------------------
+  // LINKS
+  // ---------------------------------------------------------------------------
+  a {
+    align-items: flex-start;
+    color: var(--#{$nsp}-link-color);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: var(--font-family-base);
+    font-style: normal;
+    font-weight: 400;
+    gap: var(--#{$nsp}-space-4xs);
+    justify-content: flex-start;
+    line-height: 100%;
+    max-width: 100%;
+    text-decoration: none;
+    text-decoration-color: var(--#{$nsp}-link-underline-color);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--#{$nsp}-link-color-hover);
+      text-decoration: underline;
+      text-decoration-color: var(--#{$nsp}-link-color-hover);
+    }
+
+    // externe links
+    &:not(:has(svg))[href^="https://"]::before {
+      background-color: currentColor;
+      content: "";
+      height: 16px;
+      margin-left: 2px;
+      margin-top: 2px;
+      mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22black%22%3E%3Cpath%20d%3D%22M11.1953%204.19531C11.4556%203.93497%2011.8776%203.93497%2012.138%204.19531C12.3983%204.45565%2012.3983%204.87767%2012.138%205.13802L5.13797%2012.138C4.87762%2012.3984%204.45561%2012.3984%204.19526%2012.138C3.93491%2011.8777%203.93491%2011.4557%204.19526%2011.1953L11.1953%204.19531Z%22%2F%3E%3Cpath%20d%3D%22M10.9999%208.75V5.33333H7.58328C7.21509%205.33333%206.91662%205.03486%206.91662%204.66667C6.91662%204.29848%207.21509%204%207.58328%204H11.6666C12.0348%204%2012.3333%204.29848%2012.3333%204.66667V8.75C12.3333%209.11819%2012.0348%209.41667%2011.6666%209.41667C11.2984%209.41667%2010.9999%209.11819%2010.9999%208.75Z%22%2F%3E%3C%2Fsvg%3E");
+      width: 16px;
+    }
+
+    // interne links
+    &:not(:has(svg))::before {
+      background-color: currentColor;
+      content: "";
+      height: 16px;
+      margin-left: 4px;
+      margin-top: 2px;
+      mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.4141 12L9.70703 18.707L8.29297 17.293L13.5859 12L8.29297 6.70703L9.70703 5.29297L16.4141 12Z' fill='black'/%3E%3C/svg%3E");
+      width: 16px;
+    }
+
+    // download links
+    &:not(:has(svg)).#{$nsp}-link--download-richtext::before {
+      background-color: currentColor;
+      content: "";
+      height: 16px;
+      margin-left: 2px;
+      margin-top: 2px;
+      mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22currentColor%22%3E%3Cpath%20d%3D%22M0.666687%2013.1849V10.9629C0.666687%2010.5947%200.965164%2010.2963%201.33335%2010.2963C1.70154%2010.2963%202.00002%2010.5947%202.00002%2010.9629V13.1849C2.00002%2013.6353%202.3648%2014%202.81512%2014H13.1849C13.6352%2014%2014%2013.6353%2014%2013.1849V10.9629C14%2010.5947%2014.2985%2010.2963%2014.6667%2010.2963C15.0349%2010.2963%2015.3334%2010.5947%2015.3334%2010.9629V13.1849C15.3334%2014.3716%2014.3716%2015.3334%2013.1849%2015.3334H2.81512C1.62842%2015.3334%200.666687%2014.3716%200.666687%2013.1849Z%22%2F%3E%3Cpath%20d%3D%22M7.33335%2010.222V1.33329C7.33335%200.965103%207.63183%200.666626%208.00002%200.666626C8.36821%200.666626%208.66669%200.965103%208.66669%201.33329V10.222C8.66669%2010.5902%208.36821%2010.8886%208.00002%2010.8886C7.63183%2010.8886%207.33335%2010.5902%207.33335%2010.222Z%22%2F%3E%3Cpath%20d%3D%22M11.2325%206.04712C11.4929%205.78685%2011.9149%205.7868%2012.1752%206.04712C12.4355%206.30746%2012.4355%206.7295%2012.1752%206.98983L8.47145%2010.6936C8.21112%2010.9539%207.78909%2010.9539%207.52874%2010.6936L3.82496%206.98983C3.56461%206.72948%203.56461%206.30747%203.82496%206.04712C4.08531%205.78677%204.50732%205.78677%204.76767%206.04712L8.00009%209.27955L11.2325%206.04712Z%22%2F%3E%3C%2Fsvg%3E");
+      width: 16px;
+    }
+  }
+
+  //----------------------------------------------------------------------------
+  // Buttons
+  // ---------------------------------------------------------------------------
+  a {
+    &.button {
+      --#{$nsp}-link-button-border-color: var(--#{$nsp}-color-blue-750);
+      --#{$nsp}-link-button-background: var(--#{$nsp}-color-blue-750);
+      --#{$nsp}-link-button-text-color: var(--#{$nsp}-color-neutral-50);
+      --#{$nsp}-link-button-border-color-hover: var(--#{$nsp}-color-blue-750);
+      --#{$nsp}-link-button-background-hover: var(--#{$nsp}-color-base-white);
+      --#{$nsp}-link-button-text-color-hover: var(--#{$nsp}-color-blue-750);
+      --#{$nsp}-link-button-border-color-active: var(--#{$nsp}-color-blue-750);
+      --#{$nsp}-link-button-background-active: var(--#{$nsp}-color-base-white);
+      --#{$nsp}-link-button-text-color-active: var(--#{$nsp}-color-blue-750);
+      --#{$nsp}-link-button-border-color-disabled: var(
+        --#{$nsp}-color-neutral-150
+      );
+      --#{$nsp}-link-button-background-disabled: var(
+        --#{$nsp}-color-neutral-100
+      );
+      --#{$nsp}-link-button-text-color-disabled: var(
+        --#{$nsp}-color-neutral-400
+      );
+      background: var(--#{$nsp}-link-button-background);
+      border: var(--#{$nsp}-link-button-border-width) solid
+        var(--#{$nsp}-link-button-border-color);
+      border-radius: 4px;
+      box-shadow: none;
+      color: var(--#{$nsp}-color-base-white);
+      font-family: var(--font-family-base);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      height: 48px;
+      margin-block: 0;
+      padding: var(--#{$nsp}-size-sm) var(--#{$nsp}-size-lg);
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background: var(--#{$nsp}-link-button-background-hover);
+        border-color: var(--#{$nsp}-link-button-border-color-hover);
+        color: var(--#{$nsp}-link-button-text-color-hover);
+      }
+      &:active {
+        background: var(--#{$nsp}-link-button-background-active);
+        border-color: var(--#{$nsp}-link-button-border-color-active);
+        border-width: var(--#{$nsp}-link-button-border-width-active);
+        color: var(--#{$nsp}-link-button-text-color-active);
+      }
+      &:focus-visible {
+        outline: 2px solid;
+        outline-color: var(--#{$nsp}-color-base-focus);
+        outline-offset: 2px;
+      }
+
+      // icon
+      &:not(:has(svg)):not([href^="https://"])::before {
+        background-color: currentColor;
+        content: "";
+        height: 16px;
+        margin: 0;
+        mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.4141 12L9.70703 18.707L8.29297 17.293L13.5859 12L8.29297 6.70703L9.70703 5.29297L16.4141 12Z' fill='black'/%3E%3C/svg%3E");
+        width: 16px;
+      }
+      &:not(:has(svg))::before {
+        background-color: currentColor;
+        content: "";
+        height: 16px;
+        margin: 0;
+        mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.4141 12L9.70703 18.707L8.29297 17.293L13.5859 12L8.29297 6.70703L9.70703 5.29297L16.4141 12Z' fill='currentColor'/%3E%3C/svg%3E");
+        width: 16px;
+      }
+    }
+
+    // Secondary Button
+    &.#{$nsp}-link--secondary-button {
+      align-items: self-end;
+      text-decoration: none;
+
+      &:hover {
+        --#{$nsp}-link-color-hover: var(--bsi-color-blue-750);
+      }
+    }
+  }
+
+  //----------------------------------------------------------------------------
+  // Highlights and Border
+  // ---------------------------------------------------------------------------
+  //blauer rahmen um paragraph
+  .border {
+    border: var(--#{$nsp}-space-4xs) solid var(--#{$nsp}-color-blue-750);
+    padding: var(--#{$nsp}-space-sm);
+  }
+  //grauer balken links
+  .highlight {
+    border-left: var(--#{$nsp}-space-4xs) solid var(--#{$nsp}-color-neutral-300);
+    padding-left: var(--#{$nsp}-space-sm);
+  }
+  //grauer balken links
+  .highlight.secondary {
+    border-left: var(--#{$nsp}-space-4xs) solid var(--#{$nsp}-color-blue-750);
+    padding-left: var(--#{$nsp}-space-sm);
+  }
+  // gelbe box
+  .box,
+  &__paragraph--highlight {
+    background-color: var(--#{$nsp}-color-yellow-100);
+    padding: var(--#{$nsp}-space-sm);
+  }
+  // graue box weiße schrift
+  .box.secondary {
+    background-color: var(--#{$nsp}-color-neutral-300);
+    color: var(--#{$nsp}-color-typo-tertiary);
+    padding: var(--#{$nsp}-space-sm);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Themes
+// -----------------------------------------------------------------------------
+
+// Text on dark background
+// -----------------------------------------------
+
+[data-theme="blue-900"] .#{$nsp}-bodytext,
+.#{$nsp}-theme-bg--blue .#{$nsp}-bodytext,
+.#{$nsp}-theme-bg--blue .#{$nsp}-text {
+  --#{$nsp}-c-text: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-color: var(--#{$nsp}-color-base-white);
+}

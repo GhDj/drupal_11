@@ -1,0 +1,47 @@
+import { Meta, IconGallery, IconItem } from "@storybook/addon-docs/blocks";
+import { iconMap, iconNames } from "./icon-map";
+
+<Meta title="Base/Icons" />
+
+# Icons
+
+All available SVG icons in the component library. Icons are automatically
+imported from `src/assets/**/icons/`. File names from Figma are normalized to
+kebab-case names for code usage.
+
+## Icon Gallery
+
+<IconGallery>
+  {iconNames.map(name => (
+    <IconItem name={name} key={name}>
+      <div
+        style={{
+          width: "32px",
+          height: "32px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+        dangerouslySetInnerHTML={{
+          __html: iconMap[name]?.replace(
+            /<svg([^>]*)>/,
+            '<svg$1 width="32" height="32" style="display: block;">'
+          )
+        }}
+      />
+    </IconItem>
+  ))}
+</IconGallery>
+
+## Usage
+
+Icons can be used via the `iconTemplate` function from the icons component:
+
+```typescript
+import { iconTemplate } from "@atoms/icon/icon.template";
+
+iconTemplate({
+  iconName: "arrow-right",
+  iconTitle: "Next page"
+});
+```

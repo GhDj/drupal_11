@@ -1,0 +1,35 @@
+// -----------------------------------------------------------------------------
+// Spaces Storybook Styles
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+
+#storybook-docs .#{$nsp}-spaces-loader {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__item {
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+  }
+
+  &__variable {
+    font-family: monospace;
+    font-size: 14px;
+    width: 250px;
+  }
+
+  &__visual {
+    background-color: #4a90e2;
+    border: 1px solid #2c5aa0;
+    height: 20px;
+  }
+
+  &__value {
+    font-family: monospace;
+    font-size: 12px;
+  }
+}

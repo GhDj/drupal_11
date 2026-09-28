@@ -1,0 +1,29 @@
+--- a/modules/views_rss_core/views_rss_core.inc
++++ b/modules/views_rss_core/views_rss_core.inc
+@@ -8,6 +8,7 @@
+ use Drupal\Component\Utility\Html;
+ use Drupal\Component\Utility\UrlHelper;
+ use Drupal\Core\Url;
++use Drupal\file\Entity\File;
+ use Drupal\file\FileInterface;
+ use Drupal\taxonomy\Entity\Term;
+ use Drupal\taxonomy\TermInterface;
+@@ -297,6 +298,18 @@
+       $file = $item['rendered']['#item']->entity;
+     }
+
++    else {
++      /** @var \Symfony\Component\Mime\MimeTypeGuesserInterface $guesser */
++      $guesser = \Drupal::service('file.mime_type.guesser');
++      if (($uri = $item['value']) && ($mimetype = $guesser->guessMimeType($uri))) {
++        $file = File::create([
++          'uri' => $uri,
++          'filesize' => NULL,
++          'filemime' => $mimetype,
++        ]);
++      }
++    }
++
+     // Start building RSS element.
+     $element = [
+       'key' => 'enclosure',

@@ -1,0 +1,6 @@
+administer short_url:
+  title: 'Administer Short URL'
+  description: 'Configure the Short URL module'
+
+edit short_url:
+  title: 'Edit short URLs on content'

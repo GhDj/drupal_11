@@ -1,0 +1,29 @@
+uuid: a319600d-466f-4a46-aca7-4bf763fb3e7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_type
+    - media.type.publication
+    - taxonomy.vocabulary.media_types
+id: media.publication.field_media_type
+field_name: field_media_type
+entity_type: media
+bundle: publication
+label: 'Publication type'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      media_types: media_types
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

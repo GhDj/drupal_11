@@ -1,0 +1,10 @@
+{% extends 'field--link.html.twig' %}
+
+{% block item %}
+  {% set modifiers = ['button', 'button--secondary'] %}
+  {% set icon_position = 'after' %}
+
+    <li>
+        {{ parent() }}
+    </li>
+{% endblock %}

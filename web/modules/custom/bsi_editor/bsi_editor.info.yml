@@ -1,0 +1,11 @@
+name: 'BSI Editor Experience'
+description: 'Enhancements for CKEditor and general editor experience'
+type: module
+package: BSI
+
+core_version_requirement: ^10 || ^11
+
+dependencies:
+  - drupal:ckeditor5
+  - drupal:filter
+  - ckeditor_abbreviation:ckeditor_abbreviation

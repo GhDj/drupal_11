@@ -1,0 +1,70 @@
+display:
+  default:
+    display_options:
+      title: Inhalte
+      fields:
+        title:
+          label: Titel
+        type:
+          label: Inhaltstyp
+        status:
+          settings:
+            format_custom_false: 'Nicht veröffentlicht'
+            format_custom_true: Veröffentlicht
+        changed:
+          label: Aktualisiert
+        view_group_relationship:
+          text: 'Zuordnung ansehen'
+        edit_group_relationship:
+          text: 'Zuordnung bearbeiten'
+        delete_group_relationship:
+          text: 'Zuordnung löschen'
+        edit_node:
+          text: 'Inhalt bearbeiten'
+        delete_node:
+          text: 'Inhalt löschen'
+        dropbutton:
+          label: Aktionen
+      pager:
+        options:
+          tags:
+            first: '« Anfang'
+            last: 'Ende »'
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: Sortierung
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      empty:
+        area_text_custom:
+          content: 'Kein Inhalt verfügbar.'
+      arguments:
+        gid:
+          exception:
+            title: Alle
+          title: '{{ arguments.gid|placeholder }} Inhalte'
+      filters:
+        status:
+          expose:
+            label: Veröffentlichungsstatus
+          group_info:
+            label: Veröffentlichungsstatus
+            group_items:
+              1:
+                title: Veröffentlicht
+              2:
+                title: 'Nicht veröffentlicht'
+        type:
+          expose:
+            label: Typ
+  page_1:
+    display_title: Seite
+    display_options:
+      menu:
+        title: Inhalte

@@ -1,0 +1,88 @@
+{#
+/**
+ * @file
+ * Default template for a CERT teaser list.
+ *
+ * Available variables:
+ * - source:   machine name of the CERT source (e.g. 'citizen', 'federal').
+ * - label:    human-readable label of the source.
+ * - items:    list of items, each with:
+ *     - timestamp: timestamp of the record
+ *     - title:     string
+ *     - link:      absolute URL to the advisory detail page
+ * - more_link:     renderable link for more results
+ */
+#}
+
+{% if items is not empty %}
+  <div class="bsi-cert-teaserlist bsi-cert-teaserlist--{{ source }}">
+    <ul class="bsi-cert-teaserlist__grid">
+        {% for item in items %}
+
+          {% if source == 'federal' %}
+            {% set badgetype = item.severity %}
+          {% else %}
+            {% set badgetype = 'transparent' %}
+          {% endif %}
+
+          <li class="bsi-border-card bsi-border-card--{{ badgetype }} bsi-border-card--small">
+            {% if item.timestamp %}
+              <div class="bsi-border-card__meta">
+                <time class="bsi-badge bsi-badge--date" datetime="{{ item.timestamp|format_date('html_date') }}">
+                    {{- item.timestamp|format_date('date_short') -}}
+                </time>
+                {# Federals have additional tags #}
+                {% if source == 'federal' %}
+                  <div class="bsi-border-card__badges">
+                    <span class="bsi-badge bsi-badge--date"> {{ item.tag|lower }} </span>
+                    <span class="bsi-badge bsi-badge--{{ item.severity }}"> {{ item.severity }} </span>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            <div class="bsi-heading__wrapper">
+                <h3 class="bsi-heading bsi-heading--4 bsi-border-card__title">
+                    <span class="bsi-cert-teaser__title">{{ item.title }}</span>
+                </h3>
+            </div>
+
+            {% include '@bsi_bund/elements/link.html.twig' with {
+              url: item.url.toString(),
+              title: 'Learn more'|t,
+              title_attr: 'Opens in new browser window'|t ~ ': ' ~ item.title,
+              extra_classes: 'bsi-card__link',
+              link_type: item.url.isExternal() ? 'external' : 'internal',
+              target: item.url.isExternal() ? '_blank' : 'self',
+              icon_position: 'before'
+            } only %}
+
+          </li>
+        {% endfor %}
+    </ul>
+
+    {% if more_link %}
+    <div class="more-link">
+      {% include '@bsi_bund/elements/link.html.twig' with {
+        base_class: 'bsi-link',
+        url: more_link['#url'],
+        link_type: more_link['#url'].isExternal() ? 'external' : 'internal',
+        title: more_link['#title'],
+        attributes: create_attribute().addClass([
+        'bsi-link--button',
+        'bsi-link--secondary-button',
+        'bsi-link--cta'
+        ]),
+        icon_position: 'before'
+        } only %}
+    {% endif %}
+    </div>
+  </div>
+
+
+
+{% else %}
+  <p class="bsi-cert-teaserlist bsi-cert-teaserlist--empty">
+    {{- 'There are currently no security announcements.'|t -}}
+  </p>
+{% endif %}

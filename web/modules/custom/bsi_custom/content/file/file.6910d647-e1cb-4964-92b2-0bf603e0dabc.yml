@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 6910d647-e1cb-4964-92b2-0bf603e0dabc
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: 400x200.jpg
+  uri:
+    -
+      value: 'private://2026-03/400x200.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 2841
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1774001533

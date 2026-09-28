@@ -1,0 +1,40 @@
+settings:
+  confirmation_title: 'Vielen Dank für Ihre Nachricht!'
+  confirmation_message: '<p>Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden.<br>Bitte prüfen Sie auch Ihren Spam-Ordner, falls Sie keine Antwort erhalten.</p>'
+title: Kontakt
+description: '<p>Kontakt-Formular</p>'
+elements: |
+  subject:
+    '#title': 'Anfrage zu'
+    '#empty_option': 'Bitte auswählen'
+  message:
+    '#title': 'Meine Anfrage'
+    '#test': 'Bitte ignorieren Sie diese E-Mail.'
+  name_first:
+    '#title': Vorname
+    '#placeholder': 'Bitte eingeben'
+  name_last:
+    '#title': Nachname
+    '#placeholder': 'Bitte eingeben'
+  phone:
+    '#title': Telefon
+    '#placeholder': 'Bitte eingeben'
+  email:
+    '#title': E-Mail
+    '#placeholder': 'Bitte eingeben'
+  help_required:
+    '#markup': '<p>Pflichtfelder sind mit einem Stern (*) markiert.</p>'
+  terms_conditions:
+    '#title': 'Ich habe die <a href="#">Einwilligungserklärung</a> gelesen und stimme ihr zu.'
+  actions:
+    '#submit__label': Absenden
+handlers:
+  email_confirmation:
+    settings:
+      subject: 'Contact request [webform_submission:values:subject:entity:name]'
+      body: _default
+  email_notification:
+    settings:
+      from_name: 'Webform [webform:title]'
+      subject: 'Contact request [webform_submission:values:subject:entity:name]'
+      body: _default

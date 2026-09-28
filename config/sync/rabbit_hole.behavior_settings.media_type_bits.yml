@@ -1,0 +1,14 @@
+uuid: 09a85137-face-49f2-87c4-6fc39f1a9b4a
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.bits
+id: media_type_bits
+entity_type_id: media_type
+entity_id: bits
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

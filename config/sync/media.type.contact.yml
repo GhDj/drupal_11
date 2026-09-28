@@ -1,0 +1,16 @@
+uuid: 47293890-7fff-4af7-80ac-18ec13153cf8
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_media
+id: contact
+label: Contact
+description: ''
+source: address
+queue_thumbnail_downloads: false
+new_revision: true
+source_configuration:
+  source_field: field_address
+field_map:
+  name: name

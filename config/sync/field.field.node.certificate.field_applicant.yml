@@ -1,0 +1,19 @@
+uuid: 2a4c5cc5-e6a2-442e-ab92-3ffbae9fee22
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_applicant
+    - node.type.certificate
+id: node.certificate.field_applicant
+field_name: field_applicant
+entity_type: node
+bundle: certificate
+label: Applicants
+description: 'Organization that applied for the certificate.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

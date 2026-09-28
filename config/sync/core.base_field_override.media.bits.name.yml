@@ -1,0 +1,20 @@
+uuid: d2d408e5-0f58-40aa-a206-a6dbc554d5a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.bits
+id: media.bits.name
+field_name: name
+entity_type: media
+bundle: bits
+label: Title
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string

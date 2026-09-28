@@ -1,0 +1,17 @@
+diff --git a/src/BookManager.php b/src/BookManager.php
+index d68b25bc187e2125c4e1e03b5a0f82a5fd250e2c..92e6760a62b6a706eef8acc0bccfa0bd1c5ea527 100644
+--- a/src/BookManager.php
++++ b/src/BookManager.php
+@@ -311,10 +311,8 @@ class BookManager implements BookManagerInterface {
+       '#description' => $this->t('Pages at a given level are ordered first by weight and then by title.'),
+       '#states' => [
+         'visible' => [
+-          ':input[name="book[create_new_book]"]' => ['checked' => TRUE],
+-        ],
+-        [
+-          ':input[name="bid"]' => ['filled' => TRUE],
++          [':input[name="book[create_new_book]"]' => ['checked' => TRUE]],
++          [':input[name="book[bid]"]' => ['filled' => TRUE, '!value' => 0]],
+         ],
+       ],
+     ];

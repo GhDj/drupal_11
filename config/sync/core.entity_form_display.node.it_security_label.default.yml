@@ -1,0 +1,344 @@
+uuid: 8b0c65db-0ee4-4eb6-b5be-6800ac15bdc3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.it_security_label.field_audiences
+    - field.field.node.it_security_label.field_category
+    - field.field.node.it_security_label.field_code
+    - field.field.node.it_security_label.field_import_status
+    - field.field.node.it_security_label.field_import_timestamp
+    - field.field.node.it_security_label.field_import_uuid
+    - field.field.node.it_security_label.field_label_image
+    - field.field.node.it_security_label.field_label_markup
+    - field.field.node.it_security_label.field_metatags
+    - field.field.node.it_security_label.field_producer
+    - field.field.node.it_security_label.field_security_info
+    - field.field.node.it_security_label.field_tags
+    - field.field.node.it_security_label.field_timespan
+    - field.field.node.it_security_label.field_topics
+    - node.type.it_security_label
+    - workflows.workflow.nodes
+  module:
+    - content_moderation
+    - datetime
+    - datetime_range
+    - field_group
+    - file
+    - metatag
+    - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_labels
+        - group_security_label
+        - group_info
+        - group_import
+        - group_terms
+      label: Tabs
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: horizontal
+        width_breakpoint: 640
+    group_labels:
+      children:
+        - title
+        - field_code
+        - field_producer
+        - field_category
+      label: 'Basic information'
+      region: content
+      parent_name: group_tabs
+      weight: 3
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_terms:
+      children:
+        - field_topics
+        - field_audiences
+        - field_tags
+      label: Begriffe
+      region: content
+      parent_name: group_tabs
+      weight: 7
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_workflow:
+      children:
+        - status
+        - moderation_state
+      label: Workflow
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: true
+        description: ''
+        required_fields: true
+        weight: 0
+    group_language:
+      children:
+        - langcode
+      label: Language
+      region: content
+      parent_name: ''
+      weight: 3
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
+        description: ''
+        required_fields: true
+        weight: 0
+    group_security_label:
+      children:
+        - field_label_markup
+        - field_label_image
+      label: 'Security label'
+      region: content
+      parent_name: group_tabs
+      weight: 4
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_info:
+      children:
+        - field_timespan
+        - field_security_info
+      label: 'Additional information'
+      region: content
+      parent_name: group_tabs
+      weight: 5
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_import:
+      children:
+        - field_import_uuid
+        - field_import_timestamp
+        - field_import_status
+      label: Import
+      region: content
+      parent_name: group_tabs
+      weight: 6
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_url:
+      children:
+        - short_url
+      label: URL
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
+        description: ''
+        required_fields: true
+        weight: 0
+id: node.it_security_label.default
+targetEntityType: node
+bundle: it_security_label
+mode: default
+content:
+  field_audiences:
+    type: options_buttons
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_category:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_code:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 12
+      placeholder: ''
+    third_party_settings: {  }
+  field_import_status:
+    type: options_select
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_import_timestamp:
+    type: datetime_default
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_import_uuid:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_label_image:
+    type: file_generic
+    weight: 12
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+  field_label_markup:
+    type: text_textarea
+    weight: 11
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_metatags:
+    type: metatag_firehose
+    weight: 4
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  field_producer:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_security_info:
+    type: text_textarea
+    weight: 8
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_tags:
+    type: entity_reference_autocomplete_tags
+    weight: 11
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_timespan:
+    type: daterange_default
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_topics:
+    type: options_buttons
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 0
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  short_url:
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  alias_keeper: true
+  changed: true
+  created: true
+  keeper_machine_name: true
+  menu_entity_index: true
+  node_keeper: true
+  path: true
+  promote: true
+  simple_sitemap: true
+  sticky: true
+  translation: true
+  uid: true
+  url_redirects: true

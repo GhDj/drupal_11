@@ -1,0 +1,83 @@
+{#
+/**
+ * @file
+ * Theme override for an item list.
+ *
+ * Available variables:
+ * - items: A list of items. Each item contains:
+ *   - attributes: HTML attributes to be applied to each list item.
+ *   - value: The content of the list element.
+ * - title: The title of the list.
+ * - list_type: The tag for list element ("ul" or "ol").
+ * - wrapper_attributes: HTML attributes to be applied to the list wrapper.
+ * - attributes: HTML attributes to be applied to the list.
+ * - empty: A message to display when there are no items. Allowed value is a
+ *   string or render array.
+ * - context: A list of contextual data associated with the list. May contain:
+ *   - list_style: The custom list style.
+ *
+ * @see \Drupal\Core\Theme\ThemePreprocess::preprocessItemList()
+ */
+#}
+
+<div class="bsi-page-grid__anchors">
+  <nav class="bsi-anchors" aria-label="{{ title }}" data-bsi-anchors>
+    <div class="bsi-anchors__inner">
+      <p class="bsi-anchors__title">{{ title }}</p>
+
+      <!-- Dropdown (mobile / laptop, < breakpoint-lg) -->
+      <div class="bsi-anchors__dropdown">
+        <div class="bsi-dropdown" data-js-dropdown>
+          <!-- Trigger button -->
+          <button
+            type="button"
+            class="bsi-button bsi-button--primary bsi-dropdown__trigger"
+            data-js-dropdown-trigger="true"
+            aria-expanded="false"
+            aria-controls="bsi-anchors-list-mobile"
+          >
+            <span class="bsi-button__text">{{ items.0.value['#title'] }}</span>
+            {% include '@bsi_bund/components/icon.twig' with {
+              name: "chevron-down",
+              decorative: true,
+              extra_classes: 'bsi-icon bsi-button__icon bsi-button__icon--chevron-down',
+            } only %}
+          </button>
+
+          <!-- Popover list -->
+          <ul
+            id="bsi-anchors-list-mobile"
+            class="bsi-dropdown__list"
+            data-js-dropdown-list
+            hidden
+          >
+            {%- for item in items -%}
+              <li {{ attributes.addClass("bsi-dropdown__item") }}>
+                {% include '@bsi_bund/elements/link.html.twig' with {
+                  url: item.value['#url'],
+                  title: item.value['#title'],
+                  extra_classes: 'bsi-dropdown__link bsi-anchors__link',
+                  attributes: item.attributes,
+                } only %}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Horizontal list (≥ breakpoint-lg) -->
+      <ul class="bsi-anchors__list">
+        {%- for item in items -%}
+          <li class="bsi-anchors__item">
+            {% include '@bsi_bund/elements/link.html.twig' with {
+              url: item.value['#url'],
+              title: item.value['#title'],
+              extra_classes: 'bsi-anchors__link',
+              attributes: item.attributes,
+            } only %}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </nav>
+</div>

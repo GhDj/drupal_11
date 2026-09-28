@@ -1,0 +1,176 @@
+diff --git a/src/Plugin/Action/ExportDefaultContent.php b/src/Plugin/Action/ExportDefaultContent.php
+new file mode 100644
+--- /dev/null
++++ b/src/Plugin/Action/ExportDefaultContent.php
+@@ -0,0 +1,130 @@
++<?php
++
++namespace Drupal\default_content\Plugin\Action;
++
++use Drupal\Core\Access\AccessResult;
++use Drupal\Core\Access\AccessResultInterface;
++use Drupal\Core\Action\Attribute\Action;
++use Drupal\Core\Action\ConfigurableActionBase;
++use Drupal\Core\Entity\ContentEntityInterface;
++use Drupal\Core\Extension\Extension;
++use Drupal\Core\Extension\ModuleHandlerInterface;
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
++use Drupal\Core\Session\AccountInterface;
++use Drupal\Core\StringTranslation\TranslatableMarkup;
++use Drupal\default_content\ExporterInterface;
++use Drupal\menu_link_content\Entity\MenuLinkContent;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++
++/**
++ * Exports an entity into file storage, for import via default_content.
++ */
++#[Action(
++  id: 'entity:export_default_content',
++  label: new TranslatableMarkup('Export default content'),
++  action_label: new TranslatableMarkup('Export as default'),
++  deriver: ExportDefaultContentActionDeriver::class,
++)]
++class ExportDefaultContent extends ConfigurableActionBase implements ContainerFactoryPluginInterface {
++
++  /**
++   * Constructs a \Drupal\Component\Plugin\PluginBase object.
++   *
++   * @param array $configuration
++   *   A configuration array containing information about the plugin instance.
++   * @param string $plugin_id
++   *   The plugin_id for the plugin instance.
++   * @param mixed $plugin_definition
++   *   The plugin implementation definition.
++   * @param \Drupal\default_content\ExporterInterface $exporter
++   *   The default_content exporter.
++   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
++   *   The module handler.
++   */
++  public function __construct(
++    array $configuration,
++    string $plugin_id,
++    mixed $plugin_definition,
++    protected readonly ExporterInterface $exporter,
++    protected readonly ModuleHandlerInterface $moduleHandler,
++  ) {
++    parent::__construct($configuration, $plugin_id, $plugin_definition);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
++    return new static(
++      $configuration,
++      $plugin_id,
++      $plugin_definition,
++      $container->get('default_content.exporter'),
++      $container->get('module_handler'),
++    );
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function defaultConfiguration(): array {
++    return [
++      'module' => NULL,
++    ];
++  }
++
++  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
++    $form['module'] = [
++      '#type' => 'select',
++      '#title' => t('Module'),
++      '#options' => array_map(
++        static fn (Extension $extension): string => $extension->getName(),
++        $this->moduleHandler->getModuleList(),
++      ),
++      '#default_value' => $this->configuration['module'],
++      '#required' => TRUE,
++    ];
++
++    return $form;
++  }
++
++  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
++    $this->setConfiguration($form_state->getValues());
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function execute(?ContentEntityInterface $entity = NULL): void {
++    if (!$entity) {
++      return;
++    }
++
++    $bundle = $entity->bundle();
++    if ($entity instanceof MenuLinkContent) {
++      $bundle = $entity->getMenuName();
++    }
++
++    $modulePath = $this->moduleHandler->getModule($this->configuration['module'])->getPath();
++    $filePath = implode(DIRECTORY_SEPARATOR, [
++      $modulePath,
++      'content',
++      $entity->getEntityTypeId(),
++      $bundle . '.' . $entity->uuid() . '.yml',
++    ]);
++
++    $this->exporter->exportContent($entity->getEntityTypeId(), $entity->id(), $filePath);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function access($object, ?AccountInterface $account = NULL, $return_as_object = FALSE): AccessResultInterface|bool {
++    $result = AccessResult::allowedIfHasPermission($account, 'administer site configuration')
++      ->andIf($object->access('update', $account, TRUE));
++
++    return $return_as_object ? $result : $result->isAllowed();
++  }
++
++}
+
+diff --git a/src/Plugin/Action/ExportDefaultContentActionDeriver.php b/src/Plugin/Action/ExportDefaultContentActionDeriver.php
+new file mode 100644
+--- /dev/null
++++ b/src/Plugin/Action/ExportDefaultContentActionDeriver.php
+@@ -0,0 +1,35 @@
++<?php
++
++namespace Drupal\default_content\Plugin\Action;
++
++use Drupal\Component\Plugin\Derivative\DeriverBase;
++use Drupal\Core\Entity\ContentEntityInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++
++class ExportDefaultContentActionDeriver extends DeriverBase implements ContainerDeriverInterface {
++
++  public function __construct(
++    protected readonly EntityTypeManagerInterface $entityTypeManager,
++  ) {}
++
++  public static function create(ContainerInterface $container, $base_plugin_id): static {
++    return new static(
++      $container->get('entity_type.manager'),
++    );
++  }
++
++  public function getDerivativeDefinitions($base_plugin_definition): array {
++    foreach ($this->entityTypeManager->getDefinitions() as $entityType) {
++      if ($entityType->entityClassImplements(ContentEntityInterface::class)) {
++        $this->derivatives[$entityType->id()] = [
++          'type' => $entityType->id(),
++        ] + $base_plugin_definition;
++      }
++    }
++
++    return $this->derivatives;
++  }
++
++}

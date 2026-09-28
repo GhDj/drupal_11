@@ -1,0 +1,90 @@
+field.formatter.settings.plain_text_formatted:
+  type: field.formatter.settings.string
+  label: 'Text with text format'
+  mapping:
+    text_format:
+      type: string
+      label: 'Text format'
+
+field.formatter.settings.phone_link:
+  type: field.formatter.settings.phone_label
+  label: 'Link'
+  mapping:
+    title_tooltip:
+      type: boolean
+      label: 'Show title as hover tooltip'
+
+condition.plugin.request_route_name:
+  type: condition.plugin
+  label: 'Request Route Name condition'
+  mapping:
+    route_names:
+      type: string
+
+field.field.*.*.*.third_party.bsi_custom:
+  type: config_entity
+  label: 'BSI Custom settings'
+  mapping:
+    preset_options:
+      type: sequence
+      label: 'Preset options'
+      sequence:
+        type: label
+        label: 'Option'
+    preset_other:
+      type: label
+      label: 'Other label'
+
+block.settings.config_pages_field:
+  type: block.settings.config_pages_block
+  label: 'ConfigPages field block settings'
+  mapping:
+    field_name:
+      type: string
+      label: Field name
+
+block.settings.bsi_custom_press_contact:
+  type: block_settings
+  label: 'Press contact block settings'
+  mapping:
+    press_contact:
+      type: integer
+      label: Press contact
+
+block.settings.bsi_custom_sticky_contact:
+  type: block_settings
+  label: 'Sticky Contact block'
+  mapping:
+    default:
+      type: integer
+      label: Default contact
+
+block.settings.bsi_custom_tiles_two_columns:
+  type: block_settings
+  label: 'Tiles (2 columns) block settings'
+  mapping:
+    variant:
+      type: string
+      label: 'Variant'
+    headline:
+      type: text
+      label: 'Headline'
+    body:
+      type: text
+      label: 'Body'
+    metric:
+      type: string
+      label: 'Metric'
+    media_id:
+      type: integer
+      label: 'Media ID'
+    ctas:
+      type: mapping
+      label: 'CTA'
+      mapping:
+        title:
+          type: string
+          label: 'Link text'
+        url:
+          type: uri
+          label: 'Link URL'

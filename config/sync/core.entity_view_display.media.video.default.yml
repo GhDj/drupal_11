@@ -1,0 +1,38 @@
+uuid: ac355ec5-0751-4d4c-987e-7ba4c88349bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.video.field_body
+    - field.field.media.video.field_media_source
+    - field.field.media.video.field_tracks
+    - media.type.video
+  module:
+    - bsi_custom
+id: media.video.default
+targetEntityType: media
+bundle: video
+mode: default
+content:
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_body: true
+  field_media_source: true
+  field_tracks: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

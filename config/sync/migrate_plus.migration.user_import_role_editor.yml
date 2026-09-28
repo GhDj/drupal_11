@@ -1,0 +1,83 @@
+uuid: 00bedbc5-1aca-478c-8c04-984b196b3288
+langcode: de
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: iYvdXKcHb7rEkS5EmpAsqZwNgypCZ_jirRrHlQXmbrk
+id: user_import_role_editor
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: user_imports
+label: 'Import users (role: editor) from CSV'
+source:
+  plugin: csv
+  path: modules/custom/user_import_migrate/import/editors.csv
+  delimiter: ;
+  header_row_count: 1
+  ids:
+    E-Mail: E-Mail
+  fields:
+    -
+      name: Vorname
+      label: Vorname
+    -
+      name: Nachname
+      label: Nachname
+    -
+      name: E-Mail
+      label: E-Mail
+process:
+  _existing_uid:
+    plugin: entity_lookup
+    entity_type: user
+    value_key: mail
+    source: E-Mail
+  _skip_existing:
+    plugin: skip_on_value
+    source: '@_existing_uid'
+    method: row
+    not_equals: true
+    value: null
+  mail: E-Mail
+  _initial:
+    plugin: substr
+    source: Vorname
+    start: 0
+    length: 1
+  _username_base:
+    plugin: concat
+    source:
+      - '@_initial'
+      - Nachname
+  name:
+    -
+      plugin: callback
+      callable: mb_strtolower
+      source: '@_username_base'
+    -
+      plugin: str_replace
+      regex: true
+      search: /\s+/
+      replace: ''
+  pass:
+    -
+      plugin: default_value
+      default_value: bsi2026
+    -
+      plugin: service
+      service: password
+      method: hash
+  status:
+    plugin: default_value
+    default_value: 1
+  roles:
+    plugin: default_value
+    default_value:
+      - editor
+destination:
+  plugin: 'entity:user'
+idMap: {  }
+migration_dependencies: {  }
+include: null

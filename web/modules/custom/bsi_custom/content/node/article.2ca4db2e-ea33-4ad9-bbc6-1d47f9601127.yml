@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 2ca4db2e-ea33-4ad9-bbc6-1d47f9601127
+  bundle: article
+  default_langcode: de
+  depends:
+    734b5cd9-35c8-437f-a44a-1d2c1084d793: media
+translations:
+  en:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    title:
+      -
+        value: 'Example Cybernation Blog'
+    created:
+      -
+        value: 1778575810
+    path:
+      -
+        alias: ''
+        langcode: en
+        pathauto: 1
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    field_link:
+      -
+        uri: 'route:<none>'
+        resolvable_uri: ''
+        title: 'Mehr zur Cybernation'
+        options: {  }
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Beispiel-Inhalt Cybernation-Blog'
+  created:
+    -
+      value: 1778575665
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: /newsroom/blog/2026-05-12-beispiel-inhalt-cybernation-blog
+      langcode: de
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.'
+      format: plain_text
+      summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
+  field_article_type:
+    -
+      value: cybernation
+  field_link:
+    -
+      uri: 'route:<none>'
+      resolvable_uri: ''
+      title: 'Mehr zur Cybernation'
+      options: {  }
+  field_media:
+    -
+      entity: 734b5cd9-35c8-437f-a44a-1d2c1084d793

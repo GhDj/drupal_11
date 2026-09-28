@@ -1,0 +1,21 @@
+uuid: ba7b2c3b-86d5-4eca-901c-f5df11d833be
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_opener_image_standard
+label: 'BSI Opener Image (standard)'
+effects:
+  7a10c614-9cb9-48e1-885a-a8be525287f6:
+    uuid: 7a10c614-9cb9-48e1-885a-a8be525287f6
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 363
+      height: 257
+      anchor: center-center
+  d19d8b2b-904e-4ada-b597-06ff2abf1f20:
+    uuid: d19d8b2b-904e-4ada-b597-06ff2abf1f20
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

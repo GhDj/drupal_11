@@ -1,0 +1,103 @@
+// -----------------------------------------------------------------------------
+// 60 Sec
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Tokens
+// -----------------------------------------------------------------------------
+:root {
+  --#{$nsp}-60-sec-background: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-60-sec-color: var(--#{$nsp}-color-neutral-1000);
+}
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-60-sec {
+  @include typography("body");
+
+  background: var(--#{$nsp}-60-sec-background);
+  color: var(--#{$nsp}-60-sec-color);
+  display: grid;
+  gap: var(--#{$nsp}-space-lg);
+  max-width: none;
+  width: 100%;
+
+  @include breakpoint-md {
+    gap: var(--#{$nsp}-space-xl);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  &__summary {
+    min-width: 0;
+  }
+
+  &__questions {
+    display: grid;
+    gap: var(--#{$nsp}-space-2xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__question-item {
+    margin: 0;
+  }
+
+  &__question {
+    @include typography("body");
+
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    display: block;
+    font-weight: 400;
+    padding: 0;
+    text-align: left;
+
+    &:focus-visible {
+      outline: 2px solid;
+      outline-color: var(--#{$nsp}-color-base-focus);
+      outline-offset: 2px;
+    }
+
+    &[aria-selected="true"] {
+      font-weight: 700;
+    }
+  }
+
+  &__content {
+    min-width: 0;
+  }
+
+  &__panel {
+    display: grid;
+    gap: var(--#{$nsp}-space-xs);
+
+    &:focus {
+      outline: none;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+
+    > :last-child {
+      --bsi-text-element-space: 0;
+    }
+  }
+
+  &__text {
+    @include typography("body");
+
+    margin: 0;
+    .#{$nsp}-bodytext & {
+      --bsi-text-element-space: 0;
+    }
+  }
+}

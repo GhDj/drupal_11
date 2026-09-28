@@ -1,0 +1,31 @@
+uuid: 4147b528-fc5a-4b54-a5a1-365bae4dfc0d
+langcode: en
+status: true
+dependencies: {  }
+id: multimedia
+label: Multimedia
+description: 'Multimedia content hosted by the BSI.'
+default: true
+purposes:
+  - external_content
+cookies:
+  -
+    regex: '.*'
+    path: /
+    domain: multimedia.gsb.bund.de
+required: false
+opt_out: false
+only_once: false
+contextual_consent_only: false
+contextual_consent_text: ''
+info_url: ''
+privacy_policy_url: ''
+javascripts:
+  - 'https://multimedia.gsb.bund.de'
+callback_code: ''
+on_init: ''
+on_accept: ''
+on_decline: ''
+wrapper_identifier: {  }
+attachments: {  }
+weight: 0

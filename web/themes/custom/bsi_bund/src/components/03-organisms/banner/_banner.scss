@@ -1,0 +1,70 @@
+// -----------------------------------------------------------------------------
+// Banner
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+.#{$nsp}-banner {
+  --bsi-image-width: 100%;
+  --bsi-image-height: 100%;
+  display: inline-block;
+  overflow: clip;
+  position: relative;
+  width: 100%;
+
+  &__image {
+    bottom: 0;
+    left: 0;
+    min-height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &__content {
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-lg);
+    margin: var(--#{$nsp}-space-4xl) var(--#{$nsp}-space-sm);
+    max-width: 775px;
+    padding: var(--#{$nsp}-space-lg);
+    position: relative;
+
+    @include breakpoint-lg {
+      left: var(--#{$nsp}-space-sm);
+      right: var(--#{$nsp}-space-sm);
+    }
+
+    @include breakpoint-lg {
+      left: var(--#{$nsp}-space-5xl);
+    }
+  }
+
+  &__title {
+    font-size: 32px;
+
+    @include breakpoint-lg {
+      font-size: 36px;
+    }
+  }
+
+  &__text {
+    --bsi-paragraph-spacing: 0;
+    font-size: 18px;
+    line-height: 1.4;
+
+    @include breakpoint-lg {
+      font-size: 20px;
+    }
+  }
+
+  &__text .#{$nsp}-bodytext p {
+    line-height: 1.4;
+  }
+
+  &__cta {
+    align-self: flex-start;
+  }
+}

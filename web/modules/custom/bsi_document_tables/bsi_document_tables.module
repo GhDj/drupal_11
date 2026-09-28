@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @file
+ * BSI Document Tables module.
+ */
+
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function bsi_document_tables_help($route_name, RouteMatchInterface $route_match): string {
+  switch ($route_name) {
+    case 'help.page.bsi_document_tables':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('BSI Document Tables provides a structured way to create documents with flexible table support using Paragraphs.') . '</p>';
+      return $output;
+  }
+
+  return '';
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function bsi_document_tables_preprocess_paragraph(&$variables): void {
+  $paragraph = $variables['paragraph'];
+
+  if ($paragraph->bundle() == 'table_section') {
+    $variables['attributes']['class'][] = 'bsi-table-section';
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function bsi_document_tables_preprocess_node(&$variables): void {
+  if ($variables['node']->bundle() == 'inventory') {
+    $variables['attributes']['class'][] = 'bsi-document';
+    $variables['attributes']['class'][] = 'document-with-tables';
+
+    /** @var \Drupal\Core\Entity\ContentEntityInterface $node */
+    $node = $variables['node'];
+    $variables['document_revision'] = $node->hasField('field_document_revision') ? $node->get('field_document_revision')->value : '';
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function bsi_document_tables_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
+  if (strpos($form_id, 'node_') !== FALSE || strpos($form_id, 'paragraph') !== FALSE) {
+    $form['#attached']['library'][] = 'bsi_document_tables/backend';
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view() for node.
+ */
+function bsi_document_tables_node_view(array &$build, EntityInterface $entity, EntityViewDisplay $display, $view_mode): void {
+  if ($entity->bundle() != 'inventory' || $view_mode != 'full') {
+    return;
+  }
+  $build = [
+    'inventory_toc' => [
+      '#type' => 'markup',
+      '#markup' => '<div class="js-paragraphs-toc"></div>',
+      '#attached' => [
+        'library' => [
+          'bsi_document_tables/frontend',
+        ],
+      ],
+    ],
+  ] + $build;
+}

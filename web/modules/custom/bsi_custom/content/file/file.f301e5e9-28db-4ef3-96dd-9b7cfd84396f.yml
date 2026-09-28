@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: f301e5e9-28db-4ef3-96dd-9b7cfd84396f
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: 600x400.png
+  uri:
+    -
+      value: 'private://2026-03/600x400.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 7347
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1773675043

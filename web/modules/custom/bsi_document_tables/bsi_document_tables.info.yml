@@ -1,0 +1,20 @@
+name: 'BSI Document Tables'
+type: module
+description: 'Umfangreiche BSI-Dokumente mit flexiblen Paragraph-Tabellenstrukturen für Drupal 11 - Nur Frontend Anzeige'
+package: 'BSI'
+version: '2.0'
+core_version_requirement: ^10 || ^11
+
+dependencies:
+  - drupal:node
+  - drupal:field
+  - drupal:text
+  - drupal:datetime
+  - drupal:options
+  - drupal:path
+  - drupal:user
+  - paragraphs:paragraphs
+  - field_group:field_group
+
+configure: bsi_document_tables.settings
+

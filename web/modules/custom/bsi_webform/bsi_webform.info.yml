@@ -1,0 +1,7 @@
+name: 'BSI Webform'
+type: module
+description: 'Customizations for the Webforms'
+package: BSI
+core_version_requirement: ^10 || ^11
+dependencies:
+  - webform:webform

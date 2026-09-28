@@ -1,0 +1,12 @@
+uuid: 2757f133-e623-469d-9d6a-a2c07928e31f
+langcode: de
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: PMdUb5QkoXCzqPQ_Dl0xuUwW52zW1X5nN1YpYItfSKY
+id: user_imports
+label: 'User imports'
+description: 'CSV-based user imports'
+source_type: null
+module: null
+shared_configuration: null

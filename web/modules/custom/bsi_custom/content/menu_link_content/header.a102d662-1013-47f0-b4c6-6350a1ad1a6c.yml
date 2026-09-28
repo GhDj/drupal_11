@@ -1,0 +1,72 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: a102d662-1013-47f0-b4c6-6350a1ad1a6c
+  bundle: menu_link_content
+  default_langcode: de
+translations:
+  en:
+    title:
+      -
+        value: 'BSI Portal'
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_id: 1
+    content_translation_status:
+      -
+        value: true
+    content_translation_created:
+      -
+        value: 1778163906
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: BSI-Portal
+  menu_name:
+    -
+      value: header
+  link:
+    -
+      uri: 'https://portal.bsi.bund.de/'
+      resolvable_uri: 'https://portal.bsi.bund.de/'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -45
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1778161097
+  field_icon:
+    -
+      target_id: 'bsi_icons:external-link'

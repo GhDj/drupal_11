@@ -1,0 +1,17 @@
+uuid: 9e6cb990-ae32-481f-ba66-40ba7a49fcab
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: rpwvgyEURXLz_JjgMCrkS1rUv-0k3L79BpO-ReN7fDI
+id: node
+label: Content
+tags:
+  canonical_url: '[node:url]'
+  description: '[node:summary]'
+  og_updated_time: '[node:changed:custom:c]'
+  title: '[site:name] - [node:title]'
+  twitter_cards_description: '[node:summary]'
+  twitter_cards_image: '[node:field_media:entity:url:absolute]]'
+  twitter_cards_title: '[node:title]'
+  twitter_cards_type: summary_large_image

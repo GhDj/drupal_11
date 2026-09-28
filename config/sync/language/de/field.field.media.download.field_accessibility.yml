@@ -1,0 +1,4 @@
+label: 'Informationen zur Barrierefreiheit'
+settings:
+  on_label: 'Datei ist barrierefrei/barrierearm'
+  off_label: 'Datei ist nicht barrierefrei'

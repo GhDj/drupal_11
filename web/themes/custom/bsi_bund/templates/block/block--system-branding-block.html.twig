@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Theme override for a branding block.
+ *
+ * Each branding element variable (logo, name, slogan) is only available if
+ * enabled in the block configuration.
+ *
+ * Available variables:
+ * - site_logo: Logo for site as defined in Appearance or theme settings.
+ */
+#}
+{% block content %}
+  {% if site_logo %}
+    <div class="bsi-header__logo">
+      <div class="bsi-header__logo--desktop">
+        <a href="{{ path('<front>') }}" rel="home" class="site-logo">
+          <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" fetchpriority="high" />
+        </a>
+      </div>
+      <div class="bsi-header__logo--mobile">
+        <a href="{{ path('<front>') }}" rel="home" class="site-logo">
+          <img src="/{{ directory }}/logo_mobile.svg" alt="{{ 'Home'|t }}" fetchpriority="high" />
+        </a>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

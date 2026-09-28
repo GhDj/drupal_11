@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Theme override of an image.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the img tag.
+ * - style_name: (optional) The name of the image style applied.
+ *
+ * @see \Drupal\Core\Theme\ImagePreprocess::preprocessImage()
+ */
+#}
+{%
+set classes = [
+  'bsi-image__image',
+  style_name ? 'image-style-' ~ style_name|clean_class,
+]
+%}
+<img{{ attributes.setAttribute(title ? 'title', title).addClass(classes) }} />

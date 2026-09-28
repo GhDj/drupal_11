@@ -1,0 +1,116 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a book tree.
+ *
+ * Returns HTML for a wrapper for a book sub-tree.
+ *
+ * Available variables:
+ * - items: A nested list of book items. Each book item contains:
+ *   - attributes: HTML attributes for the book item.
+ *   - below: The book item child items.
+ *   - title: The book link title.
+ *   - url: The book link URL, instance of \Drupal\Core\Url.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     book tree.
+ *   - is_collapsed: TRUE if the link has children within the current book tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ *
+ * @ingroup themeable
+ */
+#}
+{% import _self as book_tree %}
+
+{#
+  Renders navigation items recursively.
+  parent_id: ID prefix used to generate unique submenu IDs at each level.
+#}
+{% macro sidemenu_items(items, parent_id) %}
+  {% import _self as book_tree %}
+  {% if items %}
+    <ul class="bsi-sidemenu__list">
+      {% for item in items %}
+        {% if item.below %}
+          {% set submenu_id = parent_id ~ '-' ~ loop.index0 %}
+
+          <li class="bsi-sidemenu__item bsi-sidemenu__item--parent">
+            {% include '@bsi_bund/elements/link.html.twig' with {
+              url: item.url,
+              title: item.title,
+              extra_classes: 'bsi-sidemenu__link',
+            } only %}
+
+            <button type="button" class="bsi-button bsi-button--tertiary bsi-button--icon-only bsi-sidemenu__toggle" aria-label="Open submenu" aria-controls="{{ submenu_id }}" aria-expanded="false" data-js-sidemenu-toggle>
+              {% include '@bsi_bund/components/icon.twig' with {
+                name: 'chevron-down',
+                decorative: true,
+                extra_classes: 'bsi-button__icon bsi-button__icon--chevron-down',
+              } only %}
+            </button>
+
+            <div id="{{ submenu_id }}" class="bsi-sidemenu__submenu" data-js-sidemenu-panel="submenu" hidden>
+              {{ book_tree.sidemenu_items(item.below, submenu_id) }}
+            </div>
+          </li>
+        {% else %}
+          <li class="bsi-sidemenu__item">
+            {% include '@bsi_bund/elements/link.html.twig' with {
+              url: item.url,
+              title: item.title,
+              extra_classes: 'bsi-sidemenu__link',
+            } only %}
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+
+<aside id="sidemenu" class="bsi-sidemenu__panel" aria-label="{{'Side navigation'|t}}" data-js-sidemenu-panel="root" hidden>
+  <header class="bsi-sidemenu__header">
+    <div class="bsi-sidemenu__header-content">
+      {# close label #}
+      {% include '@bsi_bund/elements/link.html.twig' with {
+        'url': '#',
+        'title': 'Close'|t,
+        'extra_classes': ['bsi-sidemenu__title'],
+        'attributes': create_attribute().setAttribute('data-js-sidemenu-close', '')
+      } only %}
+
+      {# phone link #}
+      {% include '@bsi_bund/elements/link.html.twig' with {
+        'url': 'tel:0228999582-6388',
+        'title': '0228 99 9582-6388',
+        'extra_classes': ['bsi-sidemenu__tel']
+      } only %}
+    </div>
+
+    {# close button #}
+    <button type="button" class="bsi-button bsi-button--tertiary bsi-button--icon-only bsi-sidemenu__close" aria-label="{{ 'Close navigation'|t }}" data-js-sidemenu-close>
+      {% include '@bsi_bund/components/icon.twig' with {
+        name: "cross",
+        decorative: true,
+        extra_classes: "bsi-button__icon bsi-button__icon--cross"
+      } %}
+    </button>
+  </header>
+
+  <nav class="bsi-sidemenu__navigation" aria-label="{{'Sidenavigation'|t}}">
+    {% for item in items %}
+      <section class="bsi-sidemenu__group">
+        <h2 class="bsi-sidemenu__heading">
+          {% include '@bsi_bund/elements/link.html.twig' with {
+            url: item.url,
+            title: item.title,
+            extra_classes: ['bsi-sidemenu__heading-link'],
+          } only %}
+        </h2>
+
+        {% if item.below %}
+          {{ book_tree.sidemenu_items(item.below, 'sideMenuPanel-group-' ~ loop.index0) }}
+        {% endif %}
+      </section>
+    {% endfor %}
+  </nav>
+</aside>

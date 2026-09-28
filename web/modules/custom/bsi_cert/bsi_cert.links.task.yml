@@ -1,0 +1,4 @@
+bsi_cert.settings:
+  title: 'CERT settings'
+  route_name: bsi_cert.settings
+  base_route: bsi_cert.settings

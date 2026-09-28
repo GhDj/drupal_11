@@ -1,0 +1,52 @@
+uuid: 9fa150fe-404b-4283-83fb-c13cc3d87e41
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.bits
+    - media.type.download
+    - media.type.publication
+    - search_api_autocomplete.search.search
+  module:
+    - bsi_media
+    - klaro
+    - media
+    - media_entity_download
+    - paragraphs_type_permissions
+    - search_api_autocomplete
+    - system
+    - webform_entity_cart
+_core:
+  default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
+id: anonymous
+label: 'Anonymous user'
+weight: -10
+is_admin: false
+permissions:
+  - 'access content'
+  - 'download bits media'
+  - 'download download media'
+  - 'download media'
+  - 'download publication media'
+  - 'use entity cart'
+  - 'use klaro'
+  - 'use search_api_autocomplete for search'
+  - 'view media'
+  - 'view paragraph content accordion'
+  - 'view paragraph content banner'
+  - 'view paragraph content contact'
+  - 'view paragraph content definition_item'
+  - 'view paragraph content downloads'
+  - 'view paragraph content facts_figures'
+  - 'view paragraph content introduction'
+  - 'view paragraph content key_facts'
+  - 'view paragraph content media'
+  - 'view paragraph content quick_overview'
+  - 'view paragraph content quote'
+  - 'view paragraph content sequence'
+  - 'view paragraph content sequence_item'
+  - 'view paragraph content table_section'
+  - 'view paragraph content tabs'
+  - 'view paragraph content teaser_single'
+  - 'view paragraph content text_section'
+  - 'view paragraph content view'

@@ -1,0 +1,20 @@
+uuid: 8079c745-05a3-4f56-a26e-ec763bca19fa
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_archivation_date
+field_name: field_archivation_date
+entity_type: node
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

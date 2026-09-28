@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 5a741514-ee7f-400e-81b5-699149146b4e
+  bundle: image
+  default_langcode: de
+  depends:
+    5d53f4ce-0eac-4649-a565-c47cd0afdfdc: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'JLB: 01 Bedrohungen'
+  created:
+    -
+      value: 1778149357
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: 5d53f4ce-0eac-4649-a565-c47cd0afdfdc
+      alt: Illustration
+      title: ''
+      width: 960
+      height: 400

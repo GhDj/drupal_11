@@ -1,0 +1,24 @@
+{#
+/**
+ * Renders the short_url extra field.
+ *
+ * Variables:
+ * - title: the extra field label
+ * - url: the short url object
+ * - url.options:
+ *   short_url_base: Base URL to which prefix and short code are appended.
+ *   short_url_prefix: URL prefix, e.g. "/dok/"
+ *   short_url_code: Unique short code, e.g. "kzf3d"
+ *   short_url: Generated relative path of the short URL, e.g. "/dok/kzf3d"
+ */
+#}
+{% extends "@bsi_bund/field/no-wrapper/field--no-wrapper.html.twig" %}
+
+{% block content %}
+  {% include '@bsi_bund/elements/link.html.twig' with {
+    'base_class': base_class,
+    'url': url,
+    'title': url.toString(),
+  } only %}
+{% endblock %}
+

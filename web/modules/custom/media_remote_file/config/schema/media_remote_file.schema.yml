@@ -1,0 +1,85 @@
+field.formatter.settings.remote_file_video:
+  type: mapping
+  label: 'Remote video file display format settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    controls:
+      type: boolean
+      label: 'Show playback controls'
+    autoplay:
+      type: boolean
+      label: 'Autoplay'
+    loop:
+      type: boolean
+      label: 'Loop'
+    # @see \Drupal\file\Plugin\Field\FieldFormatter\FileMediaFormatterBase::settingsForm
+    multiple_file_display_type:
+      type: string
+      label: 'Display of multiple files'
+      constraints:
+        # @see \Drupal\file\Plugin\Field\FieldFormatter\FileMediaFormatterBase::settingsSummary()
+        Choice:
+          choices:
+            # Multiple file display: Multiple HTML tags
+            - tags
+            # Multiple file display: One HTML tag with multiple sources
+            - sources
+    muted:
+      type: boolean
+      label: 'Muted'
+    playsinline:
+      type: boolean
+      label: 'Plays inline'
+      requiredKey: false
+    width:
+      type: integer
+      label: 'Width'
+      nullable: true
+      constraints:
+        Range:
+          min: 1
+    height:
+      type: integer
+      label: 'Height'
+      nullable: true
+      constraints:
+        Range:
+          min: 1
+    poster_field:
+      type: string
+      label: Poster image
+    track_field:
+      type: string
+      label: Tracks
+
+field.formatter.settings.remote_file_audio:
+  type: mapping
+  label: 'Remote audio file display format settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    controls:
+      type: boolean
+      label: 'Show playback controls'
+    autoplay:
+      type: boolean
+      label: 'Autoplay'
+    loop:
+      type: boolean
+      label: 'Loop'
+    # @see \Drupal\file\Plugin\Field\FieldFormatter\FileMediaFormatterBase::settingsForm
+    multiple_file_display_type:
+      type: string
+      label: 'Display of multiple files'
+      constraints:
+        # @see \Drupal\file\Plugin\Field\FieldFormatter\FileMediaFormatterBase::settingsSummary()
+        Choice:
+          choices:
+            # Multiple file display: Multiple HTML tags
+            - tags
+            # Multiple file display: One HTML tag with multiple sources
+            - sources
+    track_field:
+      type: string
+      label: Tracks

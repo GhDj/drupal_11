@@ -1,0 +1,29 @@
+uuid: 873e5129-474a-44a0-8e62-3846ea05d5a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_assurance
+    - node.type.certificate
+    - taxonomy.vocabulary.assurance
+id: node.certificate.field_assurance
+field_name: field_assurance
+entity_type: node
+bundle: certificate
+label: 'Depth of inspection'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      assurance: assurance
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

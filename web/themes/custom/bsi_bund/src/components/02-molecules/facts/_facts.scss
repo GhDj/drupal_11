@@ -1,0 +1,48 @@
+// -----------------------------------------------------------------------------
+// Facts and Figures
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-facts {
+  align-items: center;
+  background: var(--#{$nsp}-color-blue-100);
+  border-radius: 4px;
+  color: var(--#{$nsp}-color-blue-800);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family-base);
+  gap: var(--#{$nsp}-space-lg);
+  padding: 16px;
+  text-align: center;
+  width: 100%;
+
+  @include breakpoint-lg {
+    padding: 40px;
+  }
+
+  &__figure {
+    display: inline-flex;
+    font-size: 56px;
+    gap: 10px;
+    justify-content: center;
+    line-height: 110%;
+    margin-bottom: 0;
+    padding: 10px;
+  }
+
+  &__text {
+    @include typography("body-lead");
+    letter-spacing: -0.1px;
+    margin-block-end: 16px;
+
+    @include breakpoint-lg {
+      margin-block-end: 0;
+    }
+  }
+}

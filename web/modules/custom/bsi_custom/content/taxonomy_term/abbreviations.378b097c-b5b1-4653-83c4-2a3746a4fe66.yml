@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 378b097c-b5b1-4653-83c4-2a3746a4fe66
+  bundle: abbreviations
+  default_langcode: de
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  name:
+    -
+      value: BSI
+  description:
+    -
+      value: 'Bundesamt für Sicherheit in der Informationstechnik'
+      format: ''
+  weight:
+    -
+      value: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: de
+      alias: null
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1

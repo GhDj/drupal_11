@@ -1,0 +1,120 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: d0465cc8-cd8c-4bdf-8d75-883edb4835a1
+  bundle: entry_page
+  default_langcode: de
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Mediathek
+  created:
+    -
+      value: 1779984328
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  node_keeper:
+    -
+      value: false
+  alias_keeper:
+    -
+      value: false
+  path:
+    -
+      alias: /service/mediathek
+      langcode: de
+      pathauto: 0
+  sae_exclude:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: ''
+      format: plain_text
+      summary: 'Lorem ipsum dolor sit amet.'
+  layout_builder__layout:
+    -
+      section:
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          c55d81b5-f6f2-4767-b429-5c638bdae9fe:
+            uuid: c55d81b5-f6f2-4767-b429-5c638bdae9fe
+            region: content
+            configuration:
+              id: 'views_exposed_filter_block:search_media-block_media'
+              label: ''
+              label_display: 0
+              provider: views
+              views_label: ''
+              context_mapping: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+    -
+      section:
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          63f4f82a-9466-4ef3-9d07-e0f780eda76f:
+            uuid: 63f4f82a-9466-4ef3-9d07-e0f780eda76f
+            region: content
+            configuration:
+              id: 'field_block:node:entry_page:field_paragraphs'
+              label: Seitenabschnitte
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          8b61aa64-d13d-49e4-a604-fcb7580eb7e1:
+            uuid: 8b61aa64-d13d-49e4-a604-fcb7580eb7e1
+            region: content
+            configuration:
+              id: 'views_block:search_media-block_media'
+              label: ''
+              label_display: 0
+              provider: views
+              views_label: ''
+              items_per_page: null
+              exposed_sort:
+                sort_by: title
+                sort_order: DESC
+              pager_id:
+                enabled: false
+                value: 0
+              context_mapping: {  }
+            weight: 2
+            additional: {  }
+        third_party_settings: {  }

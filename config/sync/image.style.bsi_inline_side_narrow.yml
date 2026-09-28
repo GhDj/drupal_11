@@ -1,0 +1,21 @@
+uuid: 446275c0-72aa-4a76-ab7e-3414eb1d1214
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_inline_side_narrow
+label: 'BSI Inline side (narrow)'
+effects:
+  ce03ae40-7337-47d4-9a6d-fd6c17b142dc:
+    uuid: ce03ae40-7337-47d4-9a6d-fd6c17b142dc
+    id: image_scale
+    weight: 1
+    data:
+      width: 327
+      height: null
+      upscale: true
+  2f6d3c59-f4a8-4e24-b9e0-b3995d839441:
+    uuid: 2f6d3c59-f4a8-4e24-b9e0-b3995d839441
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

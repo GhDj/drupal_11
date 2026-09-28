@@ -1,0 +1,30 @@
+{#
+/**
+ * Custom block template for News Overview
+ */
+#}
+
+{# ---------------------------------------------------------------------------
+   Setup
+--------------------------------------------------------------------------- #}
+
+<div {{ attributes.addClass('bsi-block', 'bsi-block--news', 'bsi-grid') }}>
+  {{ title_prefix }}
+  <div class="bsi-block__wrapper">
+    {# TITLE #}
+    {% if label %}
+      <h2 class="bsi-heading bsi-heading--2 bsi-block__title">
+        {{ label }}
+      </h2>
+    {% endif %}
+
+    {# LINK #}
+    {% if hasOverviewLink %}
+      {# TODO: add link to news overview-page #}
+    {% endif %}
+  </div>
+  {{ title_suffix }}
+
+  {# CONTENT  #}
+  {{ content }}
+</div>

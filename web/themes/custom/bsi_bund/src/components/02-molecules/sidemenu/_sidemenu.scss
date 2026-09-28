@@ -1,0 +1,154 @@
+// -----------------------------------------------------------------------------
+// Sidemenu
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+
+.#{$nsp}-sidemenu {
+  --#{$nsp}-link-decoration-style: none;
+  --#{$nsp}-link-decoration-line: none;
+  --#{$nsp}-icon-width: var(--#{$nsp}-size-2xl);
+  --#{$nsp}-sidemenu-top: calc(
+    var(--#{$nsp}-header-height) + var(--#{$nsp}-breadcrumb-height) +
+      var(--drupal-toolbar-height, 0px) +
+      var(--drupal-environment-indicator-height, 0px)
+  );
+  bottom: 0;
+  position: fixed;
+  right: 0;
+  top: var(--#{$nsp}-sidemenu-top);
+  z-index: 1000;
+
+  @include breakpoint-xl {
+    margin-block: 20px;
+  }
+
+  &__trigger {
+    --#{$nsp}-button-background: var(--#{$nsp}-color-blue-100);
+    --#{$nsp}-button-background-hover: var(--#{$nsp}-color-blue-100);
+    --#{$nsp}-button-background-active: var(--#{$nsp}-color-blue-100);
+    align-items: flex-start;
+    border: none;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    height: 80px;
+    padding: 20px;
+    position: relative;
+    transform: translateX(5px);
+    width: 80px;
+    will-change: transform;
+    z-index: 1;
+
+    @include breakpoint-lg {
+      height: 100%;
+    }
+
+    &:hover,
+    &:focus-visible {
+      transform: translateX(1px);
+    }
+
+    &:focus-visible {
+      outline: 0.125rem solid;
+      outline-color: var(--#{$nsp}-color-base-focus);
+      outline-offset: 0.125rem;
+    }
+  }
+
+  // Navigation panel
+  &__panel {
+    background: var(--#{$nsp}-color-blue-100);
+    border-radius: var(--#{$nsp}-size-3xs) 0 0 var(--#{$nsp}-size-3xs);
+    box-shadow: 0 0 var(--#{$nsp}-size-3xs) var(--#{$nsp}-color-shadow-soft);
+    display: flex;
+    flex-direction: column;
+    inset: 0 0 0 auto;
+    bottom: 0;
+    max-width: 100vw;
+    padding: var(--#{$nsp}-space-2xl) var(--#{$nsp}-space-lg);
+    position: absolute;
+    transform: translateX(100%);
+    transition: transform 150ms ease;
+    width: 400px;
+    z-index: 2;
+
+    &:not([hidden]) {
+      transform: translateX(0);
+    }
+  }
+
+  // Header
+  &__header {
+    --#{$nsp}-link-color: var(--#{$nsp}-color-blue-800);
+    align-items: center;
+    display: flex;
+    gap: var(--#{$nsp}-space-2xs);
+    justify-content: flex-end;
+    margin-bottom: var(--#{$nsp}-space-4xl);
+  }
+
+  &__header-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-2xs);
+  }
+
+  &__tel {
+    font-weight: 700;
+  }
+
+  // Navigation
+  &__navigation {
+    overflow-y: auto;
+    padding-right: var(--#{$nsp}-space-lg);
+  }
+
+  // Section heading
+  &__heading {
+    @include typography("heading-5");
+    font-weight: 700;
+    margin-bottom: var(--#{$nsp}-space-sm);
+
+    &-link {
+      font: inherit;
+    }
+  }
+
+  // Lists
+  &__list {
+    margin-top: var(--#{$nsp}-space-sm);
+    padding-left: var(--#{$nsp}-space-sm);
+  }
+
+  &__item {
+    margin-bottom: var(--#{$nsp}-space-lg);
+  }
+
+  &__group {
+    margin-bottom: var(--#{$nsp}-space-4xl);
+  }
+
+  // Links
+  &__link[aria-current="page"] {
+    font-weight: 700;
+  }
+
+  // Toggle
+  &__toggle {
+    --#{$nsp}-icon-width: 16px;
+    height: 32px;
+    width: 32px;
+  }
+
+  // Nested navigation
+  &__submenu {
+    --#{$nsp}-link-color: var(--#{$nsp}-color-typo-secondary);
+    padding-left: var(--#{$nsp}-space-lg);
+  }
+}

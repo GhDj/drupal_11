@@ -1,0 +1,15 @@
+uuid: 9188cec4-de20-4ef6-868e-99aa84c93d57
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.csn
+    - user.role.anonymous
+id: csn-anonymous
+label: Anonymous
+weight: -102
+admin: false
+scope: outsider
+global_role: anonymous
+group_type: csn
+permissions: {  }

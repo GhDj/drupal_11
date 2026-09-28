@@ -1,0 +1,20 @@
+uuid: a181d4f1-827f-42e8-9614-0907d78e6b69
+langcode: en
+status: false
+dependencies: {  }
+id: development
+label: Development
+description: ''
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/development
+module:
+  devel: 0
+  devel_generate: 0
+theme: {  }
+complete_list:
+  - devel.settings
+partial_list:
+  - search_api.server.default

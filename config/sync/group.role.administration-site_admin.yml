@@ -1,0 +1,15 @@
+uuid: 71d12551-2236-4c7e-8498-a78300f8b596
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.administration
+    - user.role.admin
+id: administration-site_admin
+label: 'Site Admin'
+weight: -6
+admin: true
+scope: outsider
+global_role: admin
+group_type: administration
+permissions: {  }

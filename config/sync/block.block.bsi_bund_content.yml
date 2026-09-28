@@ -1,0 +1,22 @@
+uuid: 145da2b8-5f79-4af0-82ec-c1efbc6d2a7b
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - bsi_bund
+_core:
+  default_config_hash: a0Yyx1GeyKarZ4T_yXQBR_ZFKnXiFLtxAb6gWLd8nr0
+id: bsi_bund_content
+theme: bsi_bund
+region: content
+weight: -12
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

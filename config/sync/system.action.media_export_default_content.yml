@@ -1,0 +1,12 @@
+uuid: d86090d4-88ff-4356-aca7-ffbf97669c12
+langcode: en
+status: true
+dependencies:
+  module:
+    - default_content
+id: media_export_default_content
+label: 'Export default content'
+type: media
+plugin: 'entity:export_default_content:media'
+configuration:
+  module: bsi_custom

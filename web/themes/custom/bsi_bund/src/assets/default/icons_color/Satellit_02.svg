@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="svg626" xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: #004b76;
+      }
+
+      .st0, .st1 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+
+      .st1 {
+        stroke: #00a4b9;
+      }
+    </style>
+  </defs>
+  <sodipodi:namedview id="namedview628" bordercolor="#666666" borderopacity="1" gridtolerance="10" guidetolerance="10" inkscape:current-layer="svg626" inkscape:cx="37" inkscape:cy="37" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="480" inkscape:window-maximized="0" inkscape:window-width="640" inkscape:window-x="0" inkscape:window-y="0" inkscape:zoom="3.1891892" objecttolerance="10" pagecolor="#ffffff" showgrid="false"/>
+  <path id="rect564" class="st0" d="M44,46.4h0c2.6-1.5,4.3-3.5,3.7-4.4l-6-10.1c-.5-.9-3.1-.4-5.6,1.2h0c-2.6,1.5-4.3,3.5-3.7,4.4l6,10.1c.5.9,3.1.4,5.6-1.2Z"/>
+  <path id="path568" class="st0" d="M40.9,21.8c-.9,3.6-3.2,6.7-6.4,8.6-3.2,1.9-7,2.4-10.6,1.5"/>
+  <path id="path570" class="st0" d="M40.9,21.8c-.9,3.6-3.2,6.7-6.4,8.6-3.2,1.9-7,2.4-10.6,1.5"/>
+  <path id="path572" class="st0" d="M36.1,32.9l-1.5-2.5"/>
+  <path id="path574" class="st0" d="M45.7,49.3l-1.5-2.5"/>
+  <path id="path584" class="st0" d="M29.4,22.1l3.8,6.4"/>
+  <rect id="rect588" class="st0" x="14.1" y="43.5" width="20.1" height="10.7" transform="translate(-21.5 19.1) rotate(-30.6)"/>
+  <g id="g598">
+    <path id="path590" class="st0" d="M35,42.3l-2.5,1.5"/>
+    <path id="path592" class="st0" d="M17.8,46.8l5,8.5"/>
+    <path id="path594" class="st0" d="M25.2,42.5l5,8.5"/>
+    <path id="path596" class="st0" d="M15.7,53.8l16.8-10"/>
+  </g>
+  <g id="g612">
+    <rect id="rect600" class="st0" x="45.6" y="24.8" width="20.1" height="10.7" transform="translate(-7.6 32.7) rotate(-30.8)"/>
+    <g id="g610">
+      <path id="path602" class="st0" d="M44.7,36.6l2.5-1.5"/>
+      <path id="path604" class="st0" d="M56.8,23.6l5,8.5"/>
+      <path id="path606" class="st0" d="M49.6,28l5,8.5"/>
+      <path id="path608" class="st0" d="M64,25.1l-16.8,10"/>
+    </g>
+  </g>
+  <g id="g622">
+    <path id="path616" class="st1" d="M31.7,13.8c-2.2-.5-4.4-.1-6.4,1-2,1.2-3.4,3-4,5.1"/>
+    <path id="path618" class="st1" d="M31.1,16c-1.6-.4-3.3-.1-4.7.7-1.4.8-2.4,2.2-2.9,3.8"/>
+    <path id="path620" class="st1" d="M30.5,18.1c-1-.2-2.1,0-3,.5s-1.6,1.4-1.8,2.4"/>
+  </g>
+</svg>

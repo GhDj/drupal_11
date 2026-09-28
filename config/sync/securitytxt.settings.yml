@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: yRnN4BtLboouVJ_N3D7ytzGw7nhoyfk8QhVjuXYB3Tw
+enabled: true
+enabled_signature: false
+contact_email: vulnerability@bsi.bund.de
+contact_phone: ''
+contact_page_url: 'https://www.bsi.bund.de/Security-Contact'
+encryption_key_url: 'https://www.bsi.bund.de/CERT-Bund-Kontakt'
+expiry_date: 2556097200
+policy_url: 'https://www.bsi.bund.de/DE/IT-Sicherheitsvorfall/IT-Schwachstellen/it-schwachstellen_node.html'
+acknowledgments_url: 'https://www.bsi.bund.de/DE/IT-Sicherheitsvorfall/IT-Schwachstellen/Hall_of_Fame/Hall_of_Fame_node.html'
+signature_text: ''
+preferred_languages: 'de, en'
+canonical_urls: 'https://bsi.bund.de/.well-known/security.txt'
+hiring_url: 'https://www.bsi.bund.de/Jobs'

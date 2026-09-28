@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Install, uninstall and update hooks for BSI Charts module.
+ */
+
+use Drupal\Core\File\Exception\FileException;
+use Drupal\Core\File\FileExists;
+use Drupal\Core\File\FileSystemInterface;
+
+/**
+ * Implements hook_install().
+ */
+function bsi_charts_install(): void {
+  $source = \Drupal::service('extension.list.module')->getPath('bsi_charts') . '/images/icons';
+  $destination = \Drupal::config('media.settings')->get('icon_base_uri');
+
+  /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+  $file_system = \Drupal::service('file_system');
+  $file_system->prepareDirectory($destination, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+
+  $icon = $source . DIRECTORY_SEPARATOR . 'chart.png';
+  if (!file_exists($destination . DIRECTORY_SEPARATOR . 'chart.png')) {
+    try {
+      $file_system->copy($icon, $destination, FileExists::Error);
+    }
+    catch (FileException) {
+      // Ignore and continue.
+    }
+  }
+}

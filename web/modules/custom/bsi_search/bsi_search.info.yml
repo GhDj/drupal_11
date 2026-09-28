@@ -1,0 +1,9 @@
+name: 'BSI Search'
+type: module
+description: 'Customizations for the BSI Search functionality'
+package: BSI
+core_version_requirement: ^10 || ^11
+
+dependencies:
+  - search_api:search_api
+  - drupal:views

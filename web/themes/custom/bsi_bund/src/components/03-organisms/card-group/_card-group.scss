@@ -1,0 +1,72 @@
+// -----------------------------------------------------------------------------
+// Card Group
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/grid" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-card-group {
+  --bsi-grid-row-gap: 0;
+
+  &__heading {
+    margin-block-end: 32px;
+  }
+
+  &__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__items {
+    display: grid;
+    gap: var(--#{$nsp}-space-xl);
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include breakpoint-md {
+      @include grid-columns(2);
+    }
+
+    @include breakpoint-lg {
+      @include grid-columns(3);
+    }
+  }
+
+  &__item {
+    > .#{$nsp}-card {
+      height: 100%;
+      max-width: none;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Variants
+// -----------------------------------------------------------------------------
+
+// Two Columns
+// ----------------------------------------------
+.#{$nsp}-card-group--two-columns {
+  .#{$nsp}-card-group__items {
+    @include breakpoint-lg {
+      @include grid-columns(2);
+    }
+  }
+}
+
+// Four Columns
+// ----------------------------------------------
+.#{$nsp}-card-group--four-columns {
+  .#{$nsp}-card-group__items {
+    @include breakpoint-lg {
+      @include grid-columns(4);
+    }
+  }
+}

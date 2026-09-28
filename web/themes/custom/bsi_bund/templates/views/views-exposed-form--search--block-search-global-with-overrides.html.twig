@@ -1,0 +1,20 @@
+{#
+Custom exposed form template for separating filters and sort in a block display.
+#}
+
+<div class="views-exposed-form-wrapper">
+    {# Filters Section #}
+    <div class="filters-wrapper">
+        {{ form|without('sort_bef_combine') }}
+    </div>
+
+    {# Sort Section — can be styled or moved separately #}
+    <div class="sort-wrapper">
+        {% if form.sort_bef_combine is defined %}
+            <div class="sort-bef-combined">
+                {{ form.sort_bef_combine }}
+            </div>
+        {% endif %}
+    </div>
+
+</div>

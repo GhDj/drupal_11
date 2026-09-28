@@ -1,0 +1,99 @@
+uuid: f0d44709-8526-423c-b98d-a4105cdd82c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.opener
+    - field.field.node.certificate.field_applicant
+    - field.field.node.certificate.field_applicant_address
+    - field.field.node.certificate.field_applicant_information
+    - field.field.node.certificate.field_archivation_date
+    - field.field.node.certificate.field_assurance
+    - field.field.node.certificate.field_audiences
+    - field.field.node.certificate.field_certificate_type
+    - field.field.node.certificate.field_certification_date
+    - field.field.node.certificate.field_certification_documents
+    - field.field.node.certificate.field_certification_validation
+    - field.field.node.certificate.field_description
+    - field.field.node.certificate.field_evaluation_basics
+    - field.field.node.certificate.field_evaluation_facility
+    - field.field.node.certificate.field_evaluation_scope
+    - field.field.node.certificate.field_further_details_2
+    - field.field.node.certificate.field_further_details_3
+    - field.field.node.certificate.field_further_details_4
+    - field.field.node.certificate.field_information_network
+    - field.field.node.certificate.field_metatags
+    - field.field.node.certificate.field_name
+    - field.field.node.certificate.field_protection_profile
+    - field.field.node.certificate.field_protection_profile_issuer
+    - field.field.node.certificate.field_publication_date
+    - field.field.node.certificate.field_tags
+    - field.field.node.certificate.field_technical_guideline
+    - field.field.node.certificate.field_test_item
+    - field.field.node.certificate.field_topics
+    - node.type.certificate
+  module:
+    - bsi_custom
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.certificate.opener
+targetEntityType: node
+bundle: certificate
+mode: opener
+content:
+  field_name:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  content_moderation_control: true
+  created: true
+  field_applicant: true
+  field_applicant_address: true
+  field_applicant_information: true
+  field_archivation_date: true
+  field_assurance: true
+  field_audiences: true
+  field_certificate_type: true
+  field_certification_date: true
+  field_certification_documents: true
+  field_certification_validation: true
+  field_description: true
+  field_evaluation_basics: true
+  field_evaluation_facility: true
+  field_evaluation_scope: true
+  field_further_details_2: true
+  field_further_details_3: true
+  field_further_details_4: true
+  field_information_network: true
+  field_metatags: true
+  field_protection_profile: true
+  field_protection_profile_issuer: true
+  field_publication_date: true
+  field_tags: true
+  field_technical_guideline: true
+  field_test_item: true
+  field_topics: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  uid: true

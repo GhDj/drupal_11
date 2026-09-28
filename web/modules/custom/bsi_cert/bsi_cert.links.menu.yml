@@ -1,0 +1,5 @@
+bsi_cert.settings:
+  title: 'CERT Security Announcements'
+  description: 'Administer sources and display of CERT security announcements'
+  parent: system.admin_config_services
+  route_name: bsi_cert.settings

@@ -1,0 +1,31 @@
+uuid: 797ce5b8-3a13-48a4-8513-346ec37c9b9d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_phone
+    - media.type.contact
+  module:
+    - bsi_custom
+    - phone_label
+third_party_settings:
+  bsi_custom:
+    preset_options:
+      - 'Phone number'
+      - 'Service number'
+      - 'Fax number'
+      - 'Mobile number'
+    preset_other: Other…
+id: media.contact.field_phone
+field_name: field_phone
+entity_type: media
+bundle: contact
+label: Phone
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: '1'
+field_type: phone_label

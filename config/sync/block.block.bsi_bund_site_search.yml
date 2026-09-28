@@ -1,0 +1,21 @@
+uuid: f75f0716-5e84-4efc-aa01-241d35a32ba1
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_search
+  theme:
+    - bsi_bund
+id: bsi_bund_site_search
+theme: bsi_bund
+region: header
+weight: 0
+provider: null
+plugin: block_search_topic
+settings:
+  id: block_search_topic
+  label: 'Global site search'
+  label_display: '0'
+  provider: bsi_search
+  topic_tid: ''
+visibility: {  }

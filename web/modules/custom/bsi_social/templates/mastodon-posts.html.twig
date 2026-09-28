@@ -1,0 +1,33 @@
+{% for item in items %}
+  {% set media_attachments = item.media_attachments|default([]) %}
+  {% set media = media_attachments|first %}
+
+  <div
+    class="mastodon-posts"
+    data-name="mastodon_module"
+    data-klaro-block="true"
+    data-type="service"
+  >
+
+    {% if media %}
+      <img src="{{ media.url }}"
+      {% if media.meta.small.width is defined %}
+        width="{{ media.meta.small.width }}"
+      {% endif %}
+      {% if media.meta.small.height is defined %}
+        height="{{ media.meta.small.height }}"
+      {% endif %}
+        {% if media.description %}
+          alt="{{ media.description }}"
+        {% endif %}
+      />
+    {% endif %}
+
+    <div class="post-summary">
+      {{ item.content|raw }}
+    </div>
+    <a href="{{ item.url }}">
+      {{ 'View the full post'|t }}
+    </a>
+  </div>
+{% endfor %}

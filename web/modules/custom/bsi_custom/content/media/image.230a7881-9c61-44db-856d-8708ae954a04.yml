@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 230a7881-9c61-44db-856d-8708ae954a04
+  bundle: image
+  default_langcode: de
+  depends:
+    238176c2-cc67-4cce-9be3-092ef6a2dad3: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Opener Bildstrecke'
+  created:
+    -
+      value: 1780044177
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: 238176c2-cc67-4cce-9be3-092ef6a2dad3
+      alt: 'Verschiedene Medien-Symbole kreisen auf dunkelblauem Hintergrund. Im Fokus: Ein stilisiertes Landschaftsbild.'
+      title: ''
+      width: 4784
+      height: 1760

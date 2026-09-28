@@ -1,0 +1,19 @@
+uuid: 95413b25-a2a8-468a-b03d-b5161db8315a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_applicant_address
+    - node.type.certificate
+id: node.certificate.field_applicant_address
+field_name: field_applicant_address
+entity_type: node
+bundle: certificate
+label: 'Applicant address'
+description: 'Address of the applicant.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

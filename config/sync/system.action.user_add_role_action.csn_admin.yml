@@ -1,0 +1,14 @@
+uuid: 64b27572-6a8f-4620-aa35-ab6e420241cf
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.csn_admin
+  module:
+    - user
+id: user_add_role_action.csn_admin
+label: 'Add the CSN Admin role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: csn_admin

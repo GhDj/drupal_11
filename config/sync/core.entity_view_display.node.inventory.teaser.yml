@@ -1,0 +1,56 @@
+uuid: 9d64b588-ac06-4587-a4b9-9089a06a7fb7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.inventory.body
+    - field.field.node.inventory.field_audiences
+    - field.field.node.inventory.field_metatags
+    - field.field.node.inventory.field_paragraphs
+    - field.field.node.inventory.field_tags
+    - field.field.node.inventory.field_topics
+    - node.type.inventory
+  module:
+    - bsi_custom
+    - text
+id: node.inventory.teaser
+targetEntityType: node
+bundle: inventory
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  content_moderation_control: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audiences: true
+  field_metatags: true
+  field_paragraphs: true
+  field_tags: true
+  field_topics: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  uid: true

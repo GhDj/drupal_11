@@ -1,0 +1,220 @@
+diff --git a/src/Form/CreateFormEnhancer.php b/src/Form/CreateFormEnhancer.php
+index 7efe00dca6771bee2ee7cdd726e90505466587aa..04f430c77774c2b39e36050938cf47dded988aab 100644
+--- a/src/Form/CreateFormEnhancer.php
++++ b/src/Form/CreateFormEnhancer.php
+@@ -4,6 +4,7 @@ declare(strict_types=1);
+
+ namespace Drupal\group\Form;
+
++use Drupal\Core\DependencyInjection\DependencySerializationTrait;
+ use Drupal\Core\Entity\Entity\EntityFormDisplay;
+ use Drupal\Core\Entity\EntityFormInterface;
+ use Drupal\Core\Entity\EntityInterface;
+@@ -26,6 +27,7 @@ use Drupal\group\Entity\Storage\GroupRelationshipTypeStorageInterface;
+  */
+ class CreateFormEnhancer implements CreateFormEnhancerInterface {
+
++  use DependencySerializationTrait;
+   use StringTranslationTrait;
+
+   /**
+@@ -295,6 +297,18 @@ class CreateFormEnhancer implements CreateFormEnhancerInterface {
+     assert($form_object instanceof EntityFormInterface);
+
+     $entity = $form_object->getEntity();
++
++    // The entity form's save handler may catch a storage exception instead of
++    // rethrowing it (for example \Drupal\node\Form\NodeForm::save(), which
++    // logs it and requests a form rebuild), so this submit handler can run
++    // even when the entity was never persisted. Saving a relationship for
++    // such an entity would create an orphaned relationship, so skip entities
++    // that never received an ID or whose form is being rebuilt instead of
++    // having completed its submission.
++    if ($entity->isNew() || $form_state->isRebuilding()) {
++      return;
++    }
++
+     $group_relationship = $form_state->get(self::GR_STORAGE_KEY);
+     $group_relationship->set($base_field, $entity->id());
+     $this->getGroupRelationshipStorage()->save($group_relationship);
+diff --git a/tests/modules/group_test/src/Hook/EntityHooks.php b/tests/modules/group_test/src/Hook/EntityHooks.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..2ac28f85aa75b0123e3a8832090e8e2d10dcfce9
+--- /dev/null
++++ b/tests/modules/group_test/src/Hook/EntityHooks.php
+@@ -0,0 +1,28 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\group_test\Hook;
++
++use Drupal\Core\Entity\EntityInterface;
++use Drupal\Core\Hook\Attribute\Hook;
++use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
++
++/**
++ * Entity hook implementations for Group test.
++ */
++final class EntityHooks {
++
++  public function __construct(protected KeyValueFactoryInterface $keyValueFactory) {}
++
++  /**
++   * Implements hook_node_insert().
++   */
++  #[Hook('node_insert')]
++  public function nodeInsert(EntityInterface $node): void {
++    if ($this->keyValueFactory->get('group_test')->get('throw_on_node_insert')) {
++      throw new \RuntimeException('Node insert failure requested by the test.');
++    }
++  }
++
++}
+diff --git a/tests/src/Functional/CreateFormEnhancerTest.php b/tests/src/Functional/CreateFormEnhancerTest.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..f5502195abb4e3391e026a46398556967bf925bb
+--- /dev/null
++++ b/tests/src/Functional/CreateFormEnhancerTest.php
+@@ -0,0 +1,120 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Tests\group\Functional;
++
++use Drupal\group\Entity\GroupInterface;
++use Drupal\group\Entity\Storage\GroupRelationshipStorageInterface;
++use Drupal\group\Entity\Storage\GroupRelationshipTypeStorageInterface;
++use Drupal\group\PermissionScopeInterface;
++use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
++use Drupal\user\RoleInterface;
++
++/**
++ * Tests the submission of entity forms enhanced by the create form enhancer.
++ *
++ * @group group
++ *
++ * @coversDefaultClass \Drupal\group\Form\CreateFormEnhancer
++ */
++class CreateFormEnhancerTest extends GroupBrowserTestBase {
++
++  use ContentTypeCreationTrait;
++
++  /**
++   * {@inheritdoc}
++   */
++  protected static $modules = ['gnode', 'group_test', 'node'];
++
++  /**
++   * The group to create nodes in.
++   */
++  protected GroupInterface $group;
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setUp(): void {
++    parent::setUp();
++    $this->setUpAccount();
++
++    $group_type = $this->createGroupType();
++
++    // Install the page node plugin on the group type.
++    $this->createContentType(['type' => 'page']);
++    $storage = $this->entityTypeManager->getStorage('group_relationship_type');
++    assert($storage instanceof GroupRelationshipTypeStorageInterface);
++    $storage->save($storage->createFromPlugin($group_type, 'group_node:page'));
++
++    // Allow members to create nodes through the create form.
++    $this->createGroupRole([
++      'group_type' => $group_type->id(),
++      'scope' => PermissionScopeInterface::INSIDER_ID,
++      'global_role' => RoleInterface::AUTHENTICATED_ID,
++      'permissions' => ['create group_node:page entity'],
++    ]);
++
++    $this->group = $this->createGroup(['type' => $group_type->id()]);
++    $this->group->addMember($this->groupCreator);
++  }
++
++  /**
++   * Tests that an entity is only added to the group when its save succeeded.
++   */
++  public function testRelationshipCreation(): void {
++    // Submit the create form while the node insert fails: neither the node
++    // nor a relationship for it may be created.
++    \Drupal::keyValue('group_test')->set('throw_on_node_insert', TRUE);
++
++    $this->drupalGet('group/' . $this->group->id() . '/content/create/group_node:page');
++    $this->assertSession()->statusCodeEquals(200);
++    $this->submitForm(['title[0][value]' => 'Failed save'], 'Save');
++    $this->assertSession()->pageTextContains('The content could not be saved.');
++
++    $this->assertCount(0, $this->loadCreatedNodes('Failed save'));
++    $this->assertCount(0, $this->loadCreatedRelationships());
++
++    // Submit the create form again with saves working: both the node and its
++    // relationship are created.
++    \Drupal::keyValue('group_test')->set('throw_on_node_insert', FALSE);
++
++    $this->drupalGet('group/' . $this->group->id() . '/content/create/group_node:page');
++    $this->submitForm(['title[0][value]' => 'Regular save'], 'Save');
++
++    $nodes = $this->loadCreatedNodes('Regular save');
++    $this->assertCount(1, $nodes);
++    $relationships = $this->loadCreatedRelationships();
++    $this->assertCount(1, $relationships);
++    $this->assertEquals(reset($nodes)->id(), reset($relationships)->getEntityId());
++  }
++
++  /**
++   * Loads the nodes that were created through the create form.
++   *
++   * @param string $title
++   *   The title the node was submitted with.
++   *
++   * @return \Drupal\node\NodeInterface[]
++   *   The loaded nodes.
++   */
++  protected function loadCreatedNodes(string $title): array {
++    return $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => $title]);
++  }
++
++  /**
++   * Loads the node relationships that were created through the create form.
++   *
++   * @return \Drupal\group\Entity\GroupRelationshipInterface[]
++   *   The loaded relationships.
++   */
++  protected function loadCreatedRelationships(): array {
++    $storage = $this->entityTypeManager->getStorage('group_relationship');
++    assert($storage instanceof GroupRelationshipStorageInterface);
++    // Reset the static caches so that relationships created in the child site
++    // after a previous call to this method are found as well.
++    $storage->resetCache();
++    return $storage->loadByPluginId('group_node:page');
++  }
++
++}
+diff --git a/tests/src/Kernel/CreateFormEnhancerTest.php b/tests/src/Kernel/CreateFormEnhancerTest.php
+index 7615aa49cc06f4080c8b22116cd752681d7ef769..ff8c45e08e5755459cfeab7059a491eec5da5ec6 100644
+--- a/tests/src/Kernel/CreateFormEnhancerTest.php
++++ b/tests/src/Kernel/CreateFormEnhancerTest.php
+@@ -119,4 +119,16 @@ class CreateFormEnhancerTest extends GroupKernelTestBase {
+     $this->assertTrue($this->createFormEnhancer->isFormEnhanced($form));
+   }
+
++  /**
++   * Tests that the enhancer survives a serialization round trip.
++   *
++   * The enhancer attaches itself to enhanced forms as a validate and submit
++   * callable, so it ends up in the form cache whenever such a form is cached,
++   * for example when it is rebuilt after a failed entity save.
++   */
++  public function testSerialization(): void {
++    $enhancer = unserialize(serialize($this->createFormEnhancer));
++    $this->assertInstanceOf(CreateFormEnhancerInterface::class, $enhancer);
++  }
++
+ }

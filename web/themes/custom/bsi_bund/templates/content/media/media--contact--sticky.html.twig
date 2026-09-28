@@ -1,0 +1,73 @@
+{#
+Template for the contact media type. This template is used to render the contact information in a toolbar format with buttons for phone and mail, each opening a popover with the respective details.
+#}
+
+{% set has_address = elements['#media'].field_address.address_line1|default(null) and true or false %}
+{% set organization = elements['#media'].field_address.organization|default(null) %}
+{% set contact_label = elements['#media'].field_address.family_name|default(media.name.0) %}
+
+<div class="bsi-toolbar">
+  {# phone button #}
+  <button type="button" class="bsi-button bsi-button--secondary bsi-button--icon-only bsi-toolbar__button bsi-toolbar__button--phone" aria-label="{{'open contact information'|t}}" popovertarget="toolbar-phone">
+    {% include '@bsi_bund/components/icon.twig' with {
+      name: "phone",
+      decorative: true,
+      extra_classes: 'bsi-button__icon bsi-button__icon--phone',
+    } only %}
+  </button>
+
+  <!-- phone popover -->
+  <div popover="" id="toolbar-phone" class="bsi-toolbar__popover bsi-toolbar__popover--phone">
+
+    {# popover icon #}
+    {% include '@bsi_bund/components/icon.twig' with {
+      name: "phone",
+      decorative: true
+    } only %}
+
+    {# popover content #}
+    <div class="bsi-toolbar__popover-content">
+
+      {# phone numbers #}
+      {% for key, phone in content.field_phone %}
+        {% if key|first != '#' %}
+          <p class="bsi-toolbar__label"><strong>{{ phone['#title'] }}</strong></p>
+
+          {% include '@bsi_bund/elements/link.html.twig' with {
+            url: phone['#url'],
+            title: content.field_phone['#items'][key].value,
+          } only %}
+        {% endif %}
+      {% endfor %}
+
+      {# availability #}
+      {{ content.field_availability }}
+    </div>
+  </div>
+
+  <!-- mail button -->
+  <button type="button" class="bsi-button bsi-button--secondary bsi-button--icon-only bsi-toolbar__button bsi-toolbar__button--mail" aria-label="{{'open address information'|t}}" popovertarget="toolbar-mail">
+    {% include '@bsi_bund/components/icon.twig' with {
+      name: "mail",
+      decorative: true,
+      extra_classes: 'bsi-button__icon bsi-button__icon--mail',
+    } only %}
+  </button>
+
+  <!-- mail popover -->
+  <div popover="" id="toolbar-mail" class="bsi-toolbar__popover bsi-toolbar__popover--mail">
+
+    {# popover icon #}
+    {% include '@bsi_bund/components/icon.twig' with {
+      name: "mail",
+      decorative: true,
+    } only %}
+
+    <div class="bsi-toolbar__popover-content">
+      <p class="bsi-toolbar__label"><strong>{{ content.field_address['#title'] }}</strong></p>
+
+      {# address #}
+      {{ content.field_address.0 }}
+    </div>
+  </div>
+</div>

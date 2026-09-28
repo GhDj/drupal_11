@@ -1,0 +1,60 @@
+uuid: 2f04f1e5-2421-463d-a21c-280af93b2ec5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.menu_link_content.tile
+    - field.field.menu_link_content.menu_link_content.field_icon
+    - field.field.menu_link_content.menu_link_content.field_menu_extra
+  module:
+    - layout_builder
+    - link
+    - menu_link_content
+    - ui_icons_field
+    - menu_item_fields
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: menu_link_content.menu_link_content.tile
+targetEntityType: menu_link_content
+bundle: menu_link_content
+mode: tile
+content:
+  field_icon:
+    type: icon_formatter
+    label: hidden
+    settings:
+      icon_settings:
+        bsi_icons:
+          size: '140'
+          color: '#000000'
+          alt: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  changed: true
+  description: true
+  enabled: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  expanded: true
+  field_menu_extra: true
+  langcode: true
+  search_api_excerpt: true
+  title: true
+  weight: true

@@ -1,0 +1,34 @@
+uuid: aa6e44c7-c972-46e6-8a72-8bd0c0ee5d26
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_view
+    - paragraphs.paragraphs_type.view
+  module:
+    - viewsreference
+id: paragraph.view.field_view
+field_name: field_view
+entity_type: paragraph
+bundle: view
+label: 'Dynamic list'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:view'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+  plugin_types:
+    embed: embed
+  preselect_views:
+    search_lists: search_lists
+  enabled_settings:
+    argument_override: argument_override
+    field_select: field_select
+    sort_select: sort_select
+    limit: limit
+field_type: viewsreference

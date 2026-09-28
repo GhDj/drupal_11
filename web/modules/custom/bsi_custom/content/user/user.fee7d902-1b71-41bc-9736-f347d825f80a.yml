@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: fee7d902-1b71-41bc-9736-f347d825f80a
+  default_langcode: de
+default:
+  preferred_langcode:
+    -
+      value: de
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: 'Test BSI Admin'
+  pass:
+    -
+      value: $2y$10$HhYAVTGeEpht/BUOcB.qluDj3dLE9os5VVm/2kQE3ORnuFPN2fHhu
+      existing: ''
+      pre_hashed: false
+  mail:
+    -
+      value: test-admin@init.de
+  timezone:
+    -
+      value: Europe/Berlin
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1784040206
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: test-admin@init.de
+  roles:
+    -
+      target_id: bsi_admin
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0

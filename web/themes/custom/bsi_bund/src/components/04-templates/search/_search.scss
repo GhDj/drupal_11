@@ -1,0 +1,69 @@
+// -----------------------------------------------------------------------------
+// Opener Searchbar
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-search-page {
+  @include breakpoint-lg {
+    .#{$nsp}-search-page__title {
+      padding: var(--#{$nsp}-space-2xl) 0;
+    }
+
+    &__search {
+      padding: var(--#{$nsp}-space-lg) var(--#{$nsp}-space-6xl);
+    }
+  }
+
+  &__search {
+    padding: var(--#{$nsp}-space-lg) var(--#{$nsp}-space-sm);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Yearly report search block (placed via Layout Builder on entry_page)
+// -----------------------------------------------------------------------------
+.#{$nsp}-search-page__search {
+  position: relative;
+
+  // Autocomplete dropdown inside the report search
+  .search-api-autocomplete-search {
+    background-color: var(--#{$nsp}-color-base-white);
+    border: 1px solid var(--#{$nsp}-color-neutral-250);
+    border-top: none;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+
+    .ui-menu-item-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--#{$nsp}-space-xs) var(--#{$nsp}-space-md);
+
+      &.ui-state-active {
+        background: var(--#{$nsp}-color-neutral-50);
+      }
+    }
+
+    .search-api-autocomplete-suggestion {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      .autocomplete-suggestion-label {
+        color: var(--#{$nsp}-color-typo-primary);
+      }
+
+      .autocomplete-suggestion-description {
+        color: var(--#{$nsp}-color-typo-secondary);
+        font-size: 14px;
+      }
+    }
+  }
+}

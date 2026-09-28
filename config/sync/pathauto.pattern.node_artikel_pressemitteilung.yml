@@ -1,0 +1,44 @@
+uuid: 60af60cd-56c6-4a5d-8759-1fffcd52af92
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.article
+  module:
+    - entity_field_condition
+    - language
+    - node
+id: node_artikel_pressemitteilung
+label: 'Node: Artikel - Pressemitteilung'
+type: 'canonical_entities:node'
+pattern: '/aktuelles/presse/[node:created:html_date]-[node:title]'
+selection_criteria:
+  ff00b72c-c359-42b7-88a4-0d5249d67c54:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      article: article
+  c159286d-0dc1-40c8-a1c9-968139e02315:
+    id: language
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    langcodes:
+      de: de
+  b275df71-e67b-43c6-ba8e-b23f60385a3a:
+    id: node_field
+    negate: false
+    context_mapping:
+      node: node
+    entity_type_id: node
+    entity_bundle: article
+    field: field_article_type
+    value_source: specified
+    value: press_release
+selection_logic: and
+weight: -8
+relationships:
+  'node:langcode:language':
+    label: Language

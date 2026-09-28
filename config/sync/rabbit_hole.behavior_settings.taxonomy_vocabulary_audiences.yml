@@ -1,0 +1,14 @@
+uuid: c2c6dab7-667e-4797-825e-eaf3063b4fdf
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.audiences
+id: taxonomy_vocabulary_audiences
+entity_type_id: taxonomy_vocabulary
+entity_id: audiences
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

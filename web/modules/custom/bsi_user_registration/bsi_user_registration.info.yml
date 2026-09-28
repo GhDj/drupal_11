@@ -1,0 +1,8 @@
+name: 'BSI User Registration'
+type: module
+description: 'Customizations for the BSI User Registration functionality'
+package: BSI
+core_version_requirement: ^10 || ^11
+
+dependencies:
+  - webform:webform

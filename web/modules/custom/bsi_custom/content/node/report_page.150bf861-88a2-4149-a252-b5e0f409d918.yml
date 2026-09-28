@@ -1,0 +1,80 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 150bf861-88a2-4149-a252-b5e0f409d918
+  bundle: report_page
+  default_langcode: de
+  depends:
+    5a741514-ee7f-400e-81b5-699149146b4e: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: '01 Bedrohungen'
+  created:
+    -
+      value: 1777550439
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_links_title:
+    -
+      value: more_information
+  field_media:
+    -
+      entity: 5a741514-ee7f-400e-81b5-699149146b4e
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: a88f73aa-5c44-48d8-bf8a-e8effb57444d
+          bundle: introduction
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778149402
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_highlight:
+            -
+              value: '<p>Stabilisierung auf hohem Niveau: Im Cybercrime-Bereich führten internationale Strafverfolgungsmaßnahmen zur Stabilisierung der Bedrohungslage. Zwei vormals sehr aktive Angreifergruppen haben ihre Aktivitäten nahezu vollständig eingestellt.</p>'
+              format: basic
+          field_section_text:
+            -
+              value: '<p>Demgegenüber war im Kontext geopolitischer Konflikte eine Zunahme an APT-Aktivitäten in den betreffenden Regionen zu verzeichnen. Zudem wurden im aktuellen Berichtszeitraum neue Angriffsinfrastrukturen bekannt. Insbesondere zwei neue, große IoT-Botnetze fielen durch Schadsoftware auf, die bereits im Produktionsprozess auf die Geräte gelangt war. Da die Geräte bereits vorinfiziert in den Handel kamen und auch nicht nachträglich bereinigt werden konnten, gab es für Nutzende keine wirksamen Gegenmaßnahmen. Betroffen waren rund 40.000 IoT-Geräte.</p>'
+              format: basic

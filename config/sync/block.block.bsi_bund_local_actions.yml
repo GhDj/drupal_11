@@ -1,0 +1,20 @@
+uuid: 2686f12f-b772-4922-9a12-008661a0d21e
+langcode: en
+status: true
+dependencies:
+  theme:
+    - bsi_bund
+_core:
+  default_config_hash: CdXfDmRgAvms7EQovxxWPdYi0GitxeRbVtScYK16ZH0
+id: bsi_bund_local_actions
+theme: bsi_bund
+region: content
+weight: -13
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

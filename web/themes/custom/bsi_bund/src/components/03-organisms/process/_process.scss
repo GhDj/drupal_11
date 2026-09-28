@@ -1,0 +1,89 @@
+// -----------------------------------------------------------------------------
+// Process
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+.#{$nsp}-process {
+  &__title {
+    @include typography("heading-5");
+    font-weight: 700;
+  }
+
+  &__content {
+    display: grid;
+    gap: var(--#{$nsp}-space-2xl);
+  }
+
+  &__addition {
+    background-color: var(--#{$nsp}-color-blue-100);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-left: auto;
+    padding: var(--#{$nsp}-space-sm);
+    width: 100%;
+
+    @include breakpoint-lg {
+      width: 200px;
+    }
+  }
+
+  &__text {
+    color: var(--#{$nsp}-color-neutral-750);
+  }
+
+  p:last-child {
+    --bsi-text-element-space: 0;
+  }
+
+  &__label {
+    color: var(--#{$nsp}-color-blue-750);
+    display: block;
+    flex-shrink: 0;
+    font-size: 32px;
+    line-height: 1;
+
+    @include breakpoint-lg {
+      margin-left: -80px;
+    }
+  }
+
+  ol {
+    counter-reset: section;
+    list-style: none;
+  }
+
+  li {
+    border-top: solid 1px var(--#{$nsp}-color-neutral-150);
+    counter-increment: section;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-lg);
+    margin-block-end: var(--#{$nsp}-space-2xl);
+    padding-top: var(--#{$nsp}-space-sm);
+    position: relative;
+
+    @include breakpoint-lg {
+      flex-direction: row;
+      padding-left: var(--#{$nsp}-space-6xl);
+    }
+
+    // style of counter numbers if no label is provided
+    &:not(:has(> .#{$nsp}-process__label))::before {
+      color: var(--#{$nsp}-color-blue-750);
+      content: counter(section);
+      display: block;
+      font-size: 64px;
+      line-height: 1;
+
+      @include breakpoint-lg {
+        left: 0;
+        position: absolute;
+        top: 10px;
+      }
+    }
+  }
+}

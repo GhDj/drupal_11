@@ -1,0 +1,192 @@
+// -----------------------------------------------------------------------------
+// Footer
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/typography" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/grid" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-footer {
+  --#{$nsp}-link-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-color-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-hover-border-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-decoration-style: none;
+  --#{$nsp}-link-decoration-line: none;
+  --#{$nsp}-link-underline-color-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-grid-module-padding: var(--#{$nsp}-space-2xl);
+  --#{$nsp}-space-module: 0;
+  --#{$nsp}-grid-row-gap: 0;
+  --#{$nsp}-ruler-margin: var(--#{$nsp}-space-2xl);
+  --#{$nsp}-ruler-color: var(--#{$nsp}-color-alpha-light-80);
+
+  background-color: var(--#{$nsp}-color-blue-900);
+  color: var(--#{$nsp}-color-base-white);
+
+  &__top {
+    @include breakpoint-lg {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @include breakpoint-xl {
+      padding-inline: var(--#{$nsp}-space-6xl);
+    }
+  }
+
+  &__nav-list {
+    display: grid;
+    gap: var(--#{$nsp}-space-xs);
+    grid-template-columns: 1fr 1fr;
+    margin-block-end: var(--#{$nsp}-space-2xl);
+    min-width: 300px;
+
+    @include breakpoint-lg {
+      gap: var(--#{$nsp}-space-lg);
+      grid-template-columns: 1fr;
+      margin-block-end: 0;
+      padding-inline-end: 80px;
+    }
+  }
+
+  &__link {
+    @include typography("heading-4");
+  }
+
+  &__link-button {
+    padding-block: var(--#{$nsp}-space-4xs);
+  }
+
+  &__copyright {
+    @include typography("body-small-compact");
+    flex-shrink: 1;
+    order: 1;
+
+    @include breakpoint-lg {
+      order: 0;
+    }
+
+    &::before {
+      content: "©";
+      float: left;
+      margin-right: var(--#{$nsp}-space-4xs);
+    }
+
+    * {
+      display: inline;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+  }
+
+  &__scroll-top {
+    --#{$nsp}-link-icon-width: 32px;
+  }
+
+  &__heading {
+    font-family: var(--font-family-serif);
+  }
+
+  &__content {
+    max-width: 700px;
+    padding-top: var(--#{$nsp}-space-module);
+    row-gap: var(--#{$nsp}-space-module);
+
+    @include breakpoint-md {
+      display: flex;
+      justify-content: space-between;
+      place-items: normal;
+    }
+  }
+
+  &__social-links {
+    @include grid-columns(3);
+    display: grid;
+    flex-wrap: wrap;
+    row-gap: var(--#{$nsp}-space-lg);
+
+    @include breakpoint-lg {
+      display: flex;
+      gap: var(--#{$nsp}-space-lg);
+    }
+  }
+
+  &__newsletter,
+  &__social {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__newsletter {
+    align-items: start;
+    margin-block-end: var(--#{$nsp}-space-2xl);
+  }
+
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoint-lg {
+      align-items: center;
+      flex-direction: row;
+      gap: var(--#{$nsp}-space-lg);
+      justify-content: space-between;
+    }
+  }
+
+  &__buttons {
+    @include grid-columns(2);
+    --#{$nsp}-link-color-hover: var(--#{$nsp}-color-blue-750);
+    align-items: center;
+    display: flex;
+    gap: var(--#{$nsp}-space-lg);
+    justify-content: space-between;
+    margin-block-end: var(--#{$nsp}-space-2xl);
+    white-space: nowrap;
+
+    @include breakpoint-lg {
+      align-items: center;
+      display: flex;
+      margin-block-end: 0;
+    }
+  }
+
+  &__service-nav {
+    @include grid-columns(2);
+    display: grid;
+    gap: var(--#{$nsp}-space-md);
+    margin-block-end: var(--#{$nsp}-space-2xl);
+    white-space: nowrap;
+
+    @include breakpoint-md {
+      display: flex;
+    }
+
+    @include breakpoint-lg {
+      margin-block-end: 0;
+    }
+  }
+
+  &__image {
+    margin-block-end: var(--#{$nsp}-space-2xl);
+    margin-inline: auto;
+    max-width: 259px;
+    min-width: 259px;
+
+    @include breakpoint-md {
+      margin-block-end: 0;
+      margin-inline: initial;
+    }
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

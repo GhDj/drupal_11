@@ -1,0 +1,16 @@
+// -----------------------------------------------------------------------------
+// THESE STYLES ARE ONLY USED IN STORYBOOK
+// -----------------------------------------------------------------------------
+
+// Parent-theme (Claro) CSS is glob-imported from .storybook/preview.ts.
+
+// Storybook styles
+@use "@base/spaces/spaces.storybook";
+@use "@base/placeholder/placeholder";
+@use "@atoms/text/text.storybook";
+@use "@molecules/date-box/date-box.storybook";
+@use "@organisms/tabs/tabs.storybook";
+@use "@organisms/cookie-modal/cookie-modal.storybook";
+@use "@organisms/table/table.storybook";
+@use "@organisms/timeline/timeline.storybook";
+@use "@templates/page-grid/page-grid.storybook";

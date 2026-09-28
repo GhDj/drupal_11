@@ -1,0 +1,32 @@
+third_party_settings:
+  field_group:
+    group_workflow:
+      label: Arbeitsablauf
+    group_language:
+      label: Sprache
+    group_stage:
+      label: Bühne
+    group_terms:
+      label: Begriffe
+content:
+  field_paragraphs:
+    settings:
+      title: Seitenabschnitt
+      title_plural: Seitenabschnitte
+  field_links_title:
+    settings:
+      other_option: Andere…
+      other_field_label: 'Eigene Überschrift'
+  field_downloads_title:
+    settings:
+      other_option: Andere…
+      other_field_label: 'Eigene Überschrift'
+  body:
+    third_party_settings:
+      maxlength:
+        maxlength_js_label: 'Eingabe begrenzt auf @limit Zeichen, verbleibend: <strong>@remaining</strong>'
+        maxlength_js_label_summary: 'Eingabe begrenzt auf @limit Zeichen, verbleibend: <strong>@remaining</strong>'
+  title:
+    third_party_settings:
+      maxlength:
+        maxlength_js_label: 'Eingabe begrenzt auf @limit Zeichen, verbleibend: <strong>@remaining</strong>'

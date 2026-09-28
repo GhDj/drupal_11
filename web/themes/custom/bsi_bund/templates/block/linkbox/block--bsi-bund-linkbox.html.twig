@@ -1,0 +1,64 @@
+{#
+  Linkbox-Template
+#}
+{%
+  set classes = [
+    'bsi-linkbox',
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% block content %}
+
+    {# icon #}
+    <div class="bsi-linkbox__icon">
+        {% include '@bsi_bund/components/icon.twig' with {
+            name: "documents",
+            decorative: true
+        } %}
+    </div>
+
+    <div class="bsi-linkbox__content">
+      {# download links #}
+      {% if content.downloads["#items"].0 %}
+        <div class="bsi-linklist">
+          <h2 class="bsi-heading bsi-heading--5 bsi-linklist__heading">{{ content.downloads["#title"]}}</h2>
+
+            <ul class="bsi-linklist__list">
+              {% for item in content.downloads["#items"] %}
+                <li class="bsi-linklist__list-item">
+                  {{ item }}
+                </li>
+              {% endfor %}
+            </ul>
+        </div>
+      {% endif %}
+
+      {# mixed links #}
+      {% if content.links["#items"].0 %}
+        <div class="bsi-linklist">
+          <h2 class="bsi-heading bsi-heading--5 bsi-linklist__heading">{{ content.links["#title"]}}</h2>
+
+            <ul class="bsi-linklist__list">
+              {% for item in content.links["#items"] %}
+
+                {# add component-classes to links #}
+                {% set link_classes = item['#url'].isExternal() ? 'bsi-linklist__link--external' : 'bsi-linklist__link--internal' %}
+                {% set item = item|merge({'#extra_classes': ['bsi-linklist__link', link_classes]}) %}
+
+                <li class="bsi-linklist__list-item">{{ item }}</li>
+              {% endfor %}
+            </ul>
+        </div>
+      {% endif %}
+    </div>
+  {% endblock %}
+</div>

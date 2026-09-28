@@ -1,0 +1,16 @@
+uuid: b9e4ef76-9864-481a-8c4a-87057ef1b624
+langcode: en
+status: true
+dependencies: {  }
+id: openstreetmap
+label: OpenStreetMap
+plugin: openstreetmap
+configuration:
+  throttle:
+    period: 2
+    limit: 1
+  geocoder:
+    locale: ''
+  rootUrl: 'https://nominatim.openstreetmap.org'
+  userAgent: bsi.bund.de
+  referer: 'https://www.bsi.bund.de'

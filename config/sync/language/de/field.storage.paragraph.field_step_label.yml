@@ -1,0 +1,18 @@
+settings:
+  allowed_values:
+    0:
+      label: Januar
+    1:
+      label: Februar
+    2:
+      label: März
+    4:
+      label: Mai
+    5:
+      label: Juni
+    6:
+      label: Juli
+    9:
+      label: Oktober
+    11:
+      label: Dezember

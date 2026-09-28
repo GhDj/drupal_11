@@ -1,0 +1,46 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 734b5cd9-35c8-437f-a44a-1d2c1084d793
+  bundle: image
+  default_langcode: de
+  depends:
+    f301e5e9-28db-4ef3-96dd-9b7cfd84396f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Beispiel-Medium Bild 600x400px'
+  created:
+    -
+      value: 1773675043
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_caption:
+    -
+      value: '<p>Dies ist ein Platzhalter für die Bildunterschrift des obigen Bildes.</p>'
+      format: basic
+  field_copyright:
+    -
+      value: Placehold.it
+  field_media_image:
+    -
+      entity: f301e5e9-28db-4ef3-96dd-9b7cfd84396f
+      alt: 'Einfarbig hellgrauer Hintergrund mit zentrierter Aufschrift "600 x 400"'
+      title: ''
+      width: 600
+      height: 400

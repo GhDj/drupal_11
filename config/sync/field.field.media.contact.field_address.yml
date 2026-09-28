@@ -1,0 +1,58 @@
+uuid: aa4ef143-59e6-4f30-bb49-8a518b6ba65d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_address
+    - media.type.contact
+  module:
+    - address
+    - content_translation
+third_party_settings:
+  content_translation:
+    translation_sync:
+      langcode: langcode
+      administrative_area: administrative_area
+      locality: locality
+      organization: organization
+      family_name: family_name
+      country_code: '0'
+      dependent_locality: '0'
+      postal_code: '0'
+      sorting_code: '0'
+      address_line1: '0'
+      address_line2: '0'
+      address_line3: '0'
+      given_name: '0'
+      additional_name: '0'
+id: media.contact.field_address
+field_name: field_address
+entity_type: media
+bundle: contact
+label: Address
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  available_countries:
+    DE: DE
+  langcode_override: de
+  field_overrides:
+    givenName:
+      override: optional
+    addressLine1:
+      override: optional
+    addressLine2:
+      override: optional
+    addressLine3:
+      override: hidden
+    postalCode:
+      override: optional
+    locality:
+      override: optional
+    administrativeArea:
+      override: optional
+  fields: {  }
+field_type: address

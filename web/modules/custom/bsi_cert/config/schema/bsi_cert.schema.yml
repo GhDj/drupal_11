@@ -1,0 +1,54 @@
+bsi_cert.settings:
+  type: config_object
+  label: 'CERT teaser lists'
+  mapping:
+    sources:
+      type: mapping
+      label: 'Sources'
+      mapping:
+        citizen:
+          type: bsi_cert.source
+          label: 'Citizen CERT'
+        federal:
+          type: bsi_cert.source
+          label: 'Federal CERT'
+    cron_interval:
+      type: integer
+      label: 'Fetch interval'
+    cache_max_age:
+      type: integer
+      label: 'Cache lifetime'
+    request_timeout:
+      type: integer
+      label: 'Request timeout'
+
+bsi_cert.source:
+  type: mapping
+  label: 'CERT source'
+  mapping:
+    label:
+      type: label
+      label: 'Label'
+    source_url:
+      type: string
+      label: 'Data source URL'
+    source_format:
+      type: string
+      label: 'Format'
+    teaser_count:
+      type: integer
+      label: 'Teaser count'
+    cta_url:
+      type: string
+      label: 'CTA link target'
+    cta_text:
+      type: label
+      label: 'CTA link text'
+
+block.settings.bsi_cert_teaserlist:
+  type: block_settings
+  label: 'CERT teaser list block'
+  mapping:
+    source:
+      type: string
+      label: 'CERT source key'

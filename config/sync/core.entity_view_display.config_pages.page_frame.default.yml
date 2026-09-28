@@ -1,0 +1,79 @@
+uuid: c915e062-8700-465c-99a0-ea4ef050e6ea
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.page_frame
+    - field.field.config_pages.page_frame.field_certificate
+    - field.field.config_pages.page_frame.field_certificate_url
+    - field.field.config_pages.page_frame.field_contact
+    - field.field.config_pages.page_frame.field_copyright
+    - field.field.config_pages.page_frame.field_newsletter
+    - field.field.config_pages.page_frame.field_suggestions
+  module:
+    - entity_reference_revisions
+    - link
+    - ui_icons_field
+id: config_pages.page_frame.default
+targetEntityType: config_pages
+bundle: page_frame
+mode: default
+content:
+  field_certificate:
+    type: icon_formatter
+    label: hidden
+    settings:
+      icon_settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_contact:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_copyright:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_newsletter:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_suggestions:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_certificate_url: true
+  label: true
+  search_api_excerpt: true

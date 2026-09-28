@@ -1,0 +1,15 @@
+short_url.generate:
+  path: '/ajax/short-url/generate'
+  defaults:
+    _title: 'Generate short URL'
+    _controller: '\Drupal\short_url\Controller\ShortCodeGenerator'
+  requirements:
+    _permission: 'edit short_url'
+
+short_url.settings:
+  path: '/admin/config/search/redirect/short-url'
+  defaults:
+    _title: 'Short URL settings'
+    _form: 'Drupal\short_url\Form\SettingsForm'
+  requirements:
+    _permission: 'administer short_url'

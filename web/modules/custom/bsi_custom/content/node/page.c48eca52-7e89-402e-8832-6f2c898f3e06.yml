@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: c48eca52-7e89-402e-8832-6f2c898f3e06
+  bundle: page
+  default_langcode: de
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Geschützter Inhalt: Inhaltsseite Bund'
+  created:
+    -
+      value: 1782467152
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Dieser Inhalt ist nur für Mitglieder der Gruppe "Bundesverwaltung" verfügbar.'
+      format: plain_text
+      summary: ''

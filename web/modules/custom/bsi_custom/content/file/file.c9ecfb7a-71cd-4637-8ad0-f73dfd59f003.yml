@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: c9ecfb7a-71cd-4637-8ad0-f73dfd59f003
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Opener-Stellenanzeige.jpg
+  uri:
+    -
+      value: 'private://image/2026-07/Opener-Stellenanzeige.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 1320060
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1784282962

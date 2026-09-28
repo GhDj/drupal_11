@@ -1,0 +1,21 @@
+uuid: 1bcdb70c-0c0a-471b-85df-f6695c2d8f67
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_security_label_wide_2x
+label: 'BSI Security Label (wide, 2x)'
+effects:
+  4f9ac9b5-6c36-466e-aefb-898f9474a981:
+    uuid: 4f9ac9b5-6c36-466e-aefb-898f9474a981
+    id: image_scale
+    weight: 1
+    data:
+      width: 270
+      height: null
+      upscale: true
+  f0c2498a-161d-436b-bfca-12280ab1ad3b:
+    uuid: f0c2498a-161d-436b-bfca-12280ab1ad3b
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

@@ -1,0 +1,42 @@
+From e3f2aa335e9ad4aea69f71f6f6b7ca91a3a322bf Mon Sep 17 00:00:00 2001
+From: Florent Torregrosa <florent.torregrosa@gmail.com>
+Date: Fri, 29 May 2026 19:28:54 +0200
+Subject: [PATCH] Issue #29: From Core 11.4, compatibility with new boot
+ method.
+
+---
+ composer.json     | 3 +++
+ src/Installer.php | 6 ++++++
+ 2 files changed, 9 insertions(+)
+
+diff --git a/composer.json b/composer.json
+index 19c1e93..5bae638 100755
+--- a/composer.json
++++ b/composer.json
+@@ -7,6 +7,9 @@
+       "php": ">=5.4.5",
+       "composer-plugin-api": "^1.1 || ^2"
+   },
++  "conflict": {
++    "drupal/core": "<11.4"
++  },
+   "autoload": {
+       "psr-4": {
+           "DrupalComposer\\DrupalParanoia\\": "src/"
+diff --git a/src/Installer.php b/src/Installer.php
+index e16ce89..7c8d3f8 100755
+--- a/src/Installer.php
++++ b/src/Installer.php
+@@ -394,6 +394,12 @@ public function createStubPhpFile($path) {
+ chdir('$relativePath');
+ require './$filename';
+ 
++use Drupal\Core\DrupalKernel;
++
++return static function () {
++  return new DrupalKernel('prod', require 'autoload.php');
++};
++
+ EOF;
+ 
+     $fs->dumpFile($webDir . '/' . $path, $content);

@@ -1,0 +1,51 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see \Drupal\media\MediaThemeHooks::preprocessMedia
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'bsi-image-slider',
+    'bsi-grid',
+    'media',
+    'media--type-' ~ media.bundle()|clean_class,
+    not media.isPublished() ? 'media--unpublished',
+    view_mode ? 'media--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+<div{{ attributes.addClass(classes) }} data-once="bsi-image-slider">
+    <div class="splide" data-bsi-image-slider>
+        <div class="splide__track">
+            {{ content.field_media_items }}
+        </div>
+
+        <div class="bsi-image-slider__controls">
+            <button type="button" class="bsi-button bsi-button--primary bsi-button--icon-only bsi-image-slider__prev"
+            aria-label="{{ 'Previous slide'|t }}">
+            {% include '@bsi_bund/templates/components/icon.twig' with {
+            name: "chevron-left",
+            decorative: true,
+            extra_classes: base_class ~ '__icon'
+            } %}
+        </button>
+            <button type="button" class="bsi-button bsi-button--primary bsi-button--icon-only bsi-image-slider__next"
+            aria-label="{{ 'Next slide'|t }}">
+            {% include '@bsi_bund/templates/components/icon.twig' with {
+            name: "chevron-right",
+            decorative: true,
+            extra_classes: base_class ~ '__icon'
+            } %}
+        </div>
+
+        <ul class="splide__pagination bsi-image-slider__pagination bsi-grid"></ul>
+    </div>
+</div>

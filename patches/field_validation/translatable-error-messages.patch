@@ -1,0 +1,470 @@
+--- a/config/schema/field_validation.schema.yml
++++ b/config/schema/field_validation.schema.yml
+@@ -41,7 +41,7 @@
+             type: string
+             label: 'Field column'
+           error_message:
+-            type: string
++            type: label
+             label: 'Error message'
+           roles:
+             type: sequence
+@@ -57,7 +57,7 @@
+                 type: string
+                 label: 'Operator'
+               value:
+-                type: string
++                type: label
+                 label: 'Value'
+
+ field_validation.rule.*:
+@@ -78,13 +78,13 @@
+       type: string
+       label: 'Max'
+     maxMessage:
+-      type: string
++      type: label
+       label: 'Max message'
+     minMessage:
+-      type: string
++      type: label
+       label: 'Min message'
+     exactMessage:
+-      type: string
++      type: label
+       label: 'Exact message'
+
+ field_validation.rule.regex_constraint_rule:
+@@ -98,7 +98,7 @@
+       type: string
+       label: 'Pattern'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.email_constraint_rule:
+@@ -109,7 +109,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.null_constraint_rule:
+@@ -120,7 +120,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.not_null_constraint_rule:
+@@ -131,7 +131,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.unique_field_constraint_rule:
+@@ -142,7 +142,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.range_constraint_rule:
+@@ -159,16 +159,16 @@
+       type: string
+       label: 'Max'
+     maxMessage:
+-      type: string
++      type: label
+       label: 'Max message'
+     minMessage:
+-      type: string
++      type: label
+       label: 'Min message'
+     invalidMessage:
+-      type: string
++      type: label
+       label: 'Invalid message'
+     notInRangeMessage:
+-      type: string
++      type: label
+       label: 'Not in range message'
+
+ field_validation.rule.count_constraint_rule:
+@@ -185,13 +185,13 @@
+       type: string
+       label: 'Max'
+     maxMessage:
+-      type: string
++      type: label
+       label: 'Max message'
+     minMessage:
+-      type: string
++      type: label
+       label: 'Min message'
+     exactMessage:
+-      type: string
++      type: label
+       label: 'Exact message'
+
+ field_validation.rule.blank_constraint_rule:
+@@ -202,7 +202,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.not_blank_constraint_rule:
+@@ -213,7 +213,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.uuid_constraint_rule:
+@@ -224,7 +224,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.true_constraint_rule:
+@@ -235,7 +235,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.false_constraint_rule:
+@@ -246,7 +246,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.expression_constraint_rule:
+@@ -260,7 +260,7 @@
+       type: string
+       label: 'Expression'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.css_color_constraint_rule:
+@@ -276,7 +276,7 @@
+       sequence:
+         type: string
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.hostname_constraint_rule:
+@@ -287,7 +287,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.json_constraint_rule:
+@@ -298,7 +298,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.ip_constraint_rule:
+@@ -312,7 +312,7 @@
+       type: string
+       label: 'Version'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.cidr_constraint_rule:
+@@ -326,7 +326,7 @@
+       type: string
+       label: 'Version'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+     netmaskRangeViolationMessage:
+       type: string
+@@ -340,7 +340,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.not_equal_to_constraint_rule:
+@@ -354,7 +354,7 @@
+       type: string
+       label: 'Value'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.equal_to_constraint_rule:
+@@ -368,7 +368,7 @@
+       type: string
+       label: 'Value'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.callback_constraint_rule:
+@@ -393,7 +393,7 @@
+       type: string
+       label: 'Value'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.not_identical_to_constraint_rule:
+@@ -407,7 +407,7 @@
+       type: string
+       label: 'Value'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.less_than_constraint_rule:
+@@ -421,7 +421,7 @@
+       type: string
+       label: 'Value'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.less_than_or_equal_constraint_rule:
+@@ -435,7 +435,7 @@
+       type: string
+       label: 'Value'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.greater_than_constraint_rule:
+@@ -449,7 +449,7 @@
+       type: string
+       label: 'Value'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.greater_than_or_equal_constraint_rule:
+@@ -463,7 +463,7 @@
+       type: string
+       label: 'Value'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.divisible_by_constraint_rule:
+@@ -477,7 +477,7 @@
+       type: string
+       label: 'Value'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.positive_constraint_rule:
+@@ -488,7 +488,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.positive_or_zero_constraint_rule:
+@@ -499,7 +499,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.negative_constraint_rule:
+@@ -510,7 +510,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.negative_or_zero_constraint_rule:
+@@ -521,7 +521,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.date_constraint_rule:
+@@ -532,7 +532,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.date_time_constraint_rule:
+@@ -546,7 +546,7 @@
+       type: string
+       label: 'Format'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.time_constraint_rule:
+@@ -557,7 +557,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.language_constraint_rule:
+@@ -571,7 +571,7 @@
+       type: boolean
+       label: 'Alpha3'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.country_constraint_rule:
+@@ -585,7 +585,7 @@
+       type: boolean
+       label: 'Alpha3'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.locale_constraint_rule:
+@@ -596,7 +596,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.bic_constraint_rule:
+@@ -607,7 +607,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.card_scheme_constraint_rule:
+@@ -623,7 +623,7 @@
+       sequence:
+         type: string
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.currency_constraint_rule:
+@@ -634,7 +634,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.luhn_constraint_rule:
+@@ -645,7 +645,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.iban_constraint_rule:
+@@ -656,7 +656,7 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.isbn_constraint_rule:
+@@ -670,7 +670,7 @@
+       type: string
+       label: 'Type'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.issn_constraint_rule:
+@@ -687,7 +687,7 @@
+       type: boolean
+       label: 'Require Hyphen'
+     message:
+-      type: string
++      type: label
+       label: 'Message'
+
+ field_validation.rule.isin_constraint_rule:
+@@ -698,5 +698,5 @@
+       type: string
+       label: 'Validate mode'
+     message:
+-      type: string
+-      label: 'Message'
++      type: label
++      label: 'Message'

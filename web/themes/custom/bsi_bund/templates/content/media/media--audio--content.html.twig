@@ -1,0 +1,46 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see \Drupal\media\MediaThemeHooks::preprocessMedia
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'media',
+    'media--type-' ~ media.bundle()|clean_class,
+    not media.isPublished() ? 'media--unpublished',
+    view_mode ? 'media--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+
+<div class="bsi-audio">
+  <div class="bsi-audio__content">
+    <div class="bsi-card bsi-card--image-left bsi-card--small-image bsi-audio__card"    data-theme="blue-100">
+      <div class="bsi-card__image">
+        {{ content.thumbnail }}
+      </div>
+      <div class="bsi-card__content">
+        <div class="bsi-card__text">
+          <div class="bsi-card__heading-wrapper">
+          <div class="bsi-card__topline"> {{ content.created }} </div>
+              <h3 class="bsi-heading bsi-heading--4 bsi-card__heading">
+                {{ content.name }}
+              </h3>
+          </div>
+          <div class="bsi-card__body">
+            {{ content.field_body }}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{ content.field_media_source }}
+  </div>
+</div>

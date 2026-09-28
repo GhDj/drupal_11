@@ -1,0 +1,1192 @@
+uuid: 493998ff-8323-4e10-8cbf-f230734a41bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date_range
+    - search_api.index.default
+  module:
+    - calendar_view
+    - datetime_range
+    - facets_exposed_filters
+    - search_api
+    - user
+id: search_events
+label: 'Search: Events'
+module: views
+description: ''
+tag: search_api
+base_table: search_api_index_default
+base_field: search_api_id
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      fields: {  }
+      pager:
+        type: full
+        options:
+          offset: 0
+          pagination_heading_level: h4
+          items_per_page: 8
+          total_pages: null
+          id: 0
+          tags:
+            next: ›
+            previous: ‹
+            first: ''
+            last: ''
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: search_api_tag
+        options: {  }
+      empty: {  }
+      sorts: {  }
+      arguments: {  }
+      filters:
+        node_status:
+          id: node_status
+          table: search_api_index_default
+          field: node_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        search_api_language:
+          id: search_api_language
+          table: search_api_index_default
+          field: search_api_language
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      style:
+        type: calendar_month
+        options:
+          row_class: ''
+          default_row_class: true
+          calendar_fields: {  }
+          calendar_display_rows: false
+          calendar_weekday_start: true
+          calendar_timestamp: 'this month'
+          calendar_title: '[date:custom:F Y]'
+          calendar_row_title: ''
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:media':
+              ':default': default
+              audio: ':default'
+              bits: ':default'
+              chart: ':default'
+              contact: ':default'
+              download: ':default'
+              gallery: ':default'
+              image: ':default'
+              publication: ':default'
+              video: ':default'
+            'entity:node':
+              ':default': default
+              article: ':default'
+              certificate: ':default'
+              entry_page: ':default'
+              event: ':default'
+              inventory: ':default'
+              it_security_label: ':default'
+              job: ':default'
+              page: ':default'
+              report_page: ':default'
+            'entity:paragraph':
+              ':default': default
+              accordion: ':default'
+              banner: ':default'
+              contact: ':default'
+              definition_item: ':default'
+              downloads: ':default'
+              facts_figures: ':default'
+              introduction: ':default'
+              key_facts: ':default'
+              media: ':default'
+              quick_overview: ':default'
+              quote: ':default'
+              sequence: ':default'
+              sequence_item: ':default'
+              tabs: ':default'
+              teaser_single: ':default'
+              text_section: ':default'
+              view: ':default'
+      query:
+        type: search_api_query
+        options:
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: false
+          query_tags: {  }
+      relationships: {  }
+      header: {  }
+      footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:search_api.index.default'
+        - 'search_api_list:default'
+  attachment_events_next_month:
+    id: attachment_events_next_month
+    display_title: 'Events - Attachment next month'
+    display_plugin: attachment
+    position: 6
+    display_options:
+      fields:
+        field_date_range:
+          id: field_date_range
+          table: search_api_datasource_default_entity_node
+          field: field_date_range
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: daterange_default
+          settings:
+            timezone_override: ''
+            format_type: medium
+            from_to: both
+            separator: '-'
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+      pager:
+        type: calendar_month
+        options:
+          offset: 0
+          display_reset: 1
+          use_previous_next: 1
+          label_format: F
+      filters:
+        node_status:
+          id: node_status
+          table: search_api_index_default
+          field: node_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        search_api_language:
+          id: search_api_language
+          table: search_api_index_default
+          field: search_api_language
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        node_bundle:
+          id: node_bundle
+          table: search_api_index_default
+          field: node_bundle
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value:
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: calendar_month
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+          calendar_fields:
+            field_date_range: field_date_range
+          calendar_display_rows: false
+          calendar_weekday_start: true
+          calendar_timestamp: 'next month'
+          calendar_title: '[date:custom:F Y]'
+          calendar_row_title: ''
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:media':
+              ':default': default
+              audio: ':default'
+              bits: ':default'
+              chart: ':default'
+              contact: ':default'
+              download: ':default'
+              gallery: ':default'
+              image: ':default'
+              publication: ':default'
+              video: ':default'
+            'entity:node':
+              ':default': search_result
+              article: ':default'
+              entry_page: ':default'
+              event: ':default'
+              inventory: ':default'
+              it_security_label: ':default'
+              job: ':default'
+              page: ':default'
+              report_page: ':default'
+            'entity:paragraph':
+              ':default': default
+              accordion: ':default'
+              banner: ':default'
+              contact: ':default'
+              definition_item: ':default'
+              downloads: ':default'
+              facts_figures: ':default'
+              introduction: ':default'
+              key_facts: ':default'
+              media: ':default'
+              quick_overview: ':default'
+              quote: ':default'
+              sequence: ':default'
+              sequence_item: ':default'
+              table_section: ':default'
+              tabs: ':default'
+              teaser_single: ':default'
+              text_section: ':default'
+              view: ':default'
+      defaults:
+        pager: false
+        style: false
+        row: false
+        fields: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      displays:
+        block_events: block_events
+      attachment_position: after
+      inherit_exposed_filters: true
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_date_range'
+        - 'config:search_api.index.default'
+        - 'search_api_list:default'
+  attachment_events_two_months:
+    id: attachment_events_two_months
+    display_title: 'Events - Attachment +2 months'
+    display_plugin: attachment
+    position: 6
+    display_options:
+      fields:
+        field_date_range:
+          id: field_date_range
+          table: search_api_datasource_default_entity_node
+          field: field_date_range
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: daterange_default
+          settings:
+            timezone_override: ''
+            format_type: medium
+            from_to: both
+            separator: '-'
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+      pager:
+        type: calendar_month
+        options:
+          offset: 0
+          display_reset: 1
+          use_previous_next: 1
+          label_format: F
+      filters:
+        node_status:
+          id: node_status
+          table: search_api_index_default
+          field: node_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        search_api_language:
+          id: search_api_language
+          table: search_api_index_default
+          field: search_api_language
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        node_bundle:
+          id: node_bundle
+          table: search_api_index_default
+          field: node_bundle
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value:
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: calendar_month
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+          calendar_fields:
+            field_date_range: field_date_range
+          calendar_display_rows: false
+          calendar_weekday_start: true
+          calendar_timestamp: '+2 months'
+          calendar_title: '[date:custom:F Y]'
+          calendar_row_title: ''
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:media':
+              ':default': default
+              audio: ':default'
+              bits: ':default'
+              chart: ':default'
+              contact: ':default'
+              download: ':default'
+              gallery: ':default'
+              image: ':default'
+              publication: ':default'
+              video: ':default'
+            'entity:node':
+              ':default': search_result
+              article: ':default'
+              entry_page: ':default'
+              event: ':default'
+              inventory: ':default'
+              it_security_label: ':default'
+              job: ':default'
+              page: ':default'
+              report_page: ':default'
+            'entity:paragraph':
+              ':default': default
+              accordion: ':default'
+              banner: ':default'
+              contact: ':default'
+              definition_item: ':default'
+              downloads: ':default'
+              facts_figures: ':default'
+              introduction: ':default'
+              key_facts: ':default'
+              media: ':default'
+              quick_overview: ':default'
+              quote: ':default'
+              sequence: ':default'
+              sequence_item: ':default'
+              table_section: ':default'
+              tabs: ':default'
+              teaser_single: ':default'
+              text_section: ':default'
+              view: ':default'
+      defaults:
+        pager: false
+        style: false
+        row: false
+        fields: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      displays:
+        block_events: block_events
+      attachment_position: after
+      inherit_exposed_filters: true
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_date_range'
+        - 'config:search_api.index.default'
+        - 'search_api_list:default'
+  block_events:
+    id: block_events
+    display_title: 'Events - Block'
+    display_plugin: block
+    position: 6
+    display_options:
+      fields:
+        field_date_range:
+          id: field_date_range
+          table: search_api_datasource_default_entity_node
+          field: field_date_range
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: daterange_default
+          settings:
+            timezone_override: ''
+            format_type: medium
+            from_to: both
+            separator: '-'
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+      pager:
+        type: calendar_month
+        options:
+          offset: 0
+          display_reset: 1
+          use_previous_next: 1
+          label_format: F
+      filters:
+        node_status:
+          id: node_status
+          table: search_api_index_default
+          field: node_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        search_api_language:
+          id: search_api_language
+          table: search_api_index_default
+          field: search_api_language
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        node_bundle:
+          id: node_bundle
+          table: search_api_index_default
+          field: node_bundle
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value:
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        facets_field_event_type:
+          id: facets_field_event_type
+          table: search_api_index_default
+          field: facets_field_event_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: facets_filter
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Event type'
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: event_type
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          hierarchy: false
+          label_display: visible
+          facet:
+            query_operator: or
+            hard_limit: 0
+            min_count: 1
+            missing: false
+            missing_label: others
+            show_numbers: false
+            show_only_one_result: false
+            depends_on_exposed_filter: ''
+            processor_configs:
+              list_item:
+                processor_id: list_item
+                weights:
+                  build: 5
+                settings: {  }
+              display_value_widget_order:
+                processor_id: display_value_widget_order
+                weights:
+                  sort: 40
+                settings:
+                  sort: ASC
+              active_widget_order:
+                processor_id: active_widget_order
+                weights:
+                  sort: 20
+                settings:
+                  sort: DESC
+              count_widget_order:
+                processor_id: count_widget_order
+                weights:
+                  sort: 30
+                settings:
+                  sort: DESC
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: calendar_month
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+          calendar_fields:
+            field_date_range: field_date_range
+          calendar_display_rows: false
+          calendar_weekday_start: true
+          calendar_timestamp: 'this month'
+          calendar_title: '[date:custom:F Y]'
+          calendar_row_title: ''
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:media':
+              ':default': default
+              audio: ':default'
+              bits: ':default'
+              chart: ':default'
+              contact: ':default'
+              download: ':default'
+              gallery: ':default'
+              image: ':default'
+              publication: ':default'
+              video: ':default'
+            'entity:node':
+              ':default': search_result
+              article: ':default'
+              entry_page: ':default'
+              event: ':default'
+              inventory: ':default'
+              it_security_label: ':default'
+              job: ':default'
+              page: ':default'
+              report_page: ':default'
+            'entity:paragraph':
+              ':default': default
+              accordion: ':default'
+              banner: ':default'
+              contact: ':default'
+              definition_item: ':default'
+              downloads: ':default'
+              facts_figures: ':default'
+              introduction: ':default'
+              key_facts: ':default'
+              media: ':default'
+              quick_overview: ':default'
+              quote: ':default'
+              sequence: ':default'
+              sequence_item: ':default'
+              table_section: ':default'
+              tabs: ':default'
+              teaser_single: ':default'
+              text_section: ':default'
+              view: ':default'
+      defaults:
+        pager: false
+        style: false
+        row: false
+        fields: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      block_description: 'Events (calendar)'
+      block_category: 'BSI Search'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_date_range'
+        - 'config:search_api.index.default'
+        - 'search_api_list:default'

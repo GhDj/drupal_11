@@ -1,0 +1,21 @@
+uuid: dff0d3bc-a632-42fd-aff8-2cb0390ad197
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_teaser_highlight_standard
+label: 'BSI Teaser Highlight (standard)'
+effects:
+  99c88040-25c4-4fa0-a5b8-4b9504263c97:
+    uuid: 99c88040-25c4-4fa0-a5b8-4b9504263c97
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 526
+      height: 263
+      anchor: center-center
+  9d569502-3585-4d98-9a0a-088cc181c114:
+    uuid: 9d569502-3585-4d98-9a0a-088cc181c114
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

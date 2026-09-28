@@ -1,0 +1,47 @@
+{#
+/**
+ * Contact Teaser
+ */
+#}
+{%
+  set classes = [
+    'bsi-block',
+    'bsi-grid',
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <div class="bsi-heading__wrapper">
+        <h2 class="bsi-heading bsi-heading--2 bsi-block__title">
+          {{ content.field_section_title.0 }}
+        </h2>
+      </div>
+
+      <div class="bsi-block__content">
+        {% if content.field_section_text %}
+          <div class="bsi-block__intro-text">{{ content.field_section_text }}</div>
+        {% endif %}
+
+        {% if content.field_media_items.0 %}
+          <div class="bsi-grid bsi-grid--two-items">
+            {{ content.field_media_items}}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if content.field_link %}
+        <div class="more-link">
+          {{ content.field_link|merge({
+            '#modifiers': [],
+            '#extra_classes': ['bsi-link--button', 'bsi-link--secondary-button', 'bsi-link--cta'],
+          }) }}
+        </div>
+      {% endif %}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

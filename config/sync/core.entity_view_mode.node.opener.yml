@@ -1,0 +1,11 @@
+uuid: eb916fd7-b40e-4d7c-b5cc-b63c267e394b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.opener
+label: Opener
+description: null
+targetEntityType: node
+cache: true

@@ -1,0 +1,19 @@
+uuid: 7d380ac4-29d7-41cf-895f-6cffe2648627
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_code
+    - node.type.job
+id: node.job.field_code
+field_name: field_code
+entity_type: node
+bundle: job
+label: Code
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

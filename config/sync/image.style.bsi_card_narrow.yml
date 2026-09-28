@@ -1,0 +1,21 @@
+uuid: b303f179-8737-4abe-94b6-0d8dec5d2eaf
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_card_narrow
+label: 'BSI Card (narrow)'
+effects:
+  2410adcc-5dc8-4668-80c9-07392944b447:
+    uuid: 2410adcc-5dc8-4668-80c9-07392944b447
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 289
+      height: 217
+      anchor: center-center
+  98d46679-5803-43f1-a193-64d8227f492f:
+    uuid: 98d46679-5803-43f1-a193-64d8227f492f
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

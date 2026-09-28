@@ -1,0 +1,9 @@
+uuid: e1e968bb-0a61-44de-b43a-1683afda0e26
+langcode: en
+status: true
+dependencies: {  }
+id: csn_deh
+label: 'Digital First-Aider'
+weight: -6
+is_admin: false
+permissions: {  }

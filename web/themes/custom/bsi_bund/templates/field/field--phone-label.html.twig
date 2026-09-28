@@ -1,0 +1,7 @@
+{#
+/**
+ * @file
+ * Theme override for a phone_label field.
+ */
+#}
+{% extends element['#formatter'] == 'phone_link' ? 'field--link.html.twig' : 'field.html.twig' %}

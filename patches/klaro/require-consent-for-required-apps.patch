@@ -1,0 +1,11 @@
+--- a/src/Utility/KlaroHelper.php
++++ b/src/Utility/KlaroHelper.php
+@@ -201,7 +201,7 @@
+    *   TRUE, if at least one enabled app requires consent.
+    */
+   public function consentManagementRequired(): bool {
+-    return (bool) $this->getApps(TRUE, TRUE);
++    return (bool) $this->getApps(TRUE);
+   }
+
+   /**

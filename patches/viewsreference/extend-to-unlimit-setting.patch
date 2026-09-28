@@ -1,0 +1,33 @@
+--- a/src/Plugin/ViewsReferenceSetting/ViewsReferenceLimit.php
++++ b/src/Plugin/ViewsReferenceSetting/ViewsReferenceLimit.php
+@@ -24,17 +24,29 @@
+    * {@inheritdoc}
+    */
+   public function alterFormField(array &$form_field) {
++    $description = [];
++    $description[] = $this->t('Override the number of results to display.');
++    $description[] = $this->t('Set to <code>0</code> to display all.');
++    $description[] = $this->t('Leave empty to use the default.');
++
+     $form_field['#title'] = $this->t('Items per page');
+     $form_field['#type'] = 'number';
+     $form_field['#weight'] = 25;
+     $form_field['#min'] = 0;
++    $form_field['#description'] = array_map(
++      static fn ($text) => ['#markup' => $text, '#suffix' => ' '],
++      $description,
++    );
+   }
+
+   /**
+    * {@inheritdoc}
+    */
+   public function alterView(ViewExecutable $view, $value) {
+-    if ('' !== $value) {
++    if ($value === '0') {
++      $view->display_handler->setOption('pager', ['type' => 'none']);
++    }
++    elseif ('' !== $value) {
+       $view->setItemsPerPage($value);
+     }
+   }

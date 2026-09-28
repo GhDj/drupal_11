@@ -1,0 +1,46 @@
+uuid: 83d9e6db-9d12-4d7d-8e97-fc0a8ac51adf
+langcode: en
+status: false
+dependencies:
+  module:
+    - book
+    - bsi_custom
+    - node
+  theme:
+    - claro
+id: claro_book_navigation
+theme: claro
+region: header
+weight: -4
+provider: null
+plugin: book_navigation
+settings:
+  id: book_navigation
+  label: 'Book navigation'
+  label_display: visible
+  provider: book
+  block_mode: 'book pages'
+  show_top_item: false
+  use_top_level_title: true
+  starting_level: 1
+  max_depth: 0
+  book_select: 0
+  expanded: true
+visibility:
+  book:
+    id: book
+    books: {  }
+    negate: 1
+    context_mapping:
+      node: '@node.node_route_context:node'
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      report_page: report_page
+  request_route_name:
+    id: request_route_name
+    negate: false
+    route_names: entity.node.canonical

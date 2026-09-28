@@ -1,0 +1,21 @@
+uuid: ec13a4fa-a3e9-45a0-9bc2-ebb229c3efea
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_opener_static_wide
+label: 'BSI Opener Static (wide)'
+effects:
+  4171d481-06ef-486d-afce-016ead972b90:
+    uuid: 4171d481-06ef-486d-afce-016ead972b90
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1196
+      height: 340
+      anchor: right-center
+  35583467-d049-4d46-9412-70c785bbbbe8:
+    uuid: 35583467-d049-4d46-9412-70c785bbbbe8
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

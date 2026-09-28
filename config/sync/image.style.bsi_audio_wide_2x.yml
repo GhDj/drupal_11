@@ -1,0 +1,21 @@
+uuid: e5e3151f-77f4-44f8-938c-9de434b49398
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_audio_wide_2x
+label: 'BSI Audio (wide, 2x)'
+effects:
+  c6a5d7b1-4f8f-4b77-84b2-2195c60cbfaa:
+    uuid: c6a5d7b1-4f8f-4b77-84b2-2195c60cbfaa
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 320
+      anchor: center-center
+  a7b09ca7-1778-40fb-9051-00c164f0cbf3:
+    uuid: a7b09ca7-1778-40fb-9051-00c164f0cbf3
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

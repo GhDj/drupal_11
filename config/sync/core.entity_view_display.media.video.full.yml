@@ -1,0 +1,88 @@
+uuid: 40cdea2c-7b9a-4aa8-af6f-713a7909191f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.full
+    - field.field.media.video.field_body
+    - field.field.media.video.field_media_source
+    - field.field.media.video.field_tracks
+    - media.type.video
+    - responsive_image.styles.bsi_video
+  module:
+    - layout_builder
+    - media_remote_file
+    - responsive_image
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.video.full
+targetEntityType: media
+bundle: video
+mode: full
+content:
+  created:
+    type: timestamp
+    label: hidden
+    settings:
+      date_format: date_short
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: ''
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+        description: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_media_source:
+    type: remote_file_video
+    label: visually_hidden
+    settings:
+      controls: true
+      autoplay: false
+      loop: false
+      multiple_file_display_type: sources
+      muted: false
+      playsinline: false
+      poster_field: thumbnail
+      track_field: field_tracks
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  thumbnail:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: bsi_video
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_tracks: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  uid: true

@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 1b2cf637-f8e1-46a7-8302-e127d59ae62c
+  bundle: bits
+  default_langcode: de
+  depends:
+    c066a9ba-5f00-4637-9c43-3b423c75a393: file
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Beispiel-Medium BITS Sehr hoch'
+  created:
+    -
+      value: 1778583207
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_criticality:
+    -
+      value: 3
+  field_media_file:
+    -
+      entity: c066a9ba-5f00-4637-9c43-3b423c75a393
+      display: true
+      description: ''

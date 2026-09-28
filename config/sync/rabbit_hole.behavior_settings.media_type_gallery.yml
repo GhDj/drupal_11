@@ -1,0 +1,14 @@
+uuid: 8079ed5f-b1eb-4902-863c-b14bcc1ddf76
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.gallery
+id: media_type_gallery
+entity_type_id: media_type
+entity_id: gallery
+action: page_not_found
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

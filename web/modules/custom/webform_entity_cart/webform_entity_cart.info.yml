@@ -1,0 +1,9 @@
+name: 'Webform Entity Cart'
+description: 'Provides a cart for webform where entities can be stored.'
+type: module
+package: Webform
+
+core_version_requirement: ^10 || ^11
+
+dependencies:
+  - webform:webform

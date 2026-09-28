@@ -1,0 +1,19 @@
+uuid: e8892a8d-9577-4dc9-a08b-5d2a1defb592
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_evaluation_facility
+    - node.type.certificate
+id: node.certificate.field_evaluation_facility
+field_name: field_evaluation_facility
+entity_type: node
+bundle: certificate
+label: 'Testing Body / Auditor'
+description: 'Testing centre (name of testing centre)'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

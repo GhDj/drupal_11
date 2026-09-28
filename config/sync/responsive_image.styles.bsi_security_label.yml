@@ -1,0 +1,24 @@
+uuid: ea3647b7-5cf8-42d2-9979-c610dfba324f
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.bsi_security_label_mobile
+    - image.style.bsi_security_label_wide_2x
+  theme:
+    - bsi_bund
+id: bsi_security_label
+label: 'BSI Security Label'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_security_label_wide_2x
+    breakpoint_id: bsi_custom.wide
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_security_label_mobile
+    breakpoint_id: bsi_custom.mobile
+    multiplier: 1x
+breakpoint_group: bsi_bund
+fallback_image_style: bsi_security_label_mobile

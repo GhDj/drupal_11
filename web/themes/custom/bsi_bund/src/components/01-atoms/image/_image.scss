@@ -1,0 +1,30 @@
+// -----------------------------------------------------------------------------
+// Image
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-image {
+  display: block;
+
+  &__image {
+    aspect-ratio: var(--#{$nsp}-image-ratio);
+    display: block;
+    height: var(--#{$nsp}-image-height, auto);
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center center;
+    width: var(--#{$nsp}-image-width, auto);
+  }
+
+  &__caption {
+    color: var(--#{$nsp}-color-typo-secondary);
+    margin-top: var(--#{$nsp}-space-sm);
+    p {
+      margin-bottom: 0;
+    }
+  }
+}

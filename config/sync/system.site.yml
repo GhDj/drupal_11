@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI
+langcode: en
+uuid: 6255bd03-ae1f-4827-9160-addfcf720a92
+name: 'BSI - Bundesamt für Sicherheit in der Informationstechnik'
+mail: Joerg.Berchez@init.de
+slogan: 'Wir bauen gemeinsam die Cybernation Deutschland.'
+page:
+  403: ''
+  404: ''
+  front: /node/1
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en
+mail_notification: ''

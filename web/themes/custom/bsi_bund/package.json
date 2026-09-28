@@ -1,0 +1,97 @@
+{
+  "name": "storybook-js-blueprint",
+  "version": "1.0.0",
+  "description": "TypeScript-based component library blueprint with Storybook and Atomic Design",
+  "main": "./dist/index.js",
+  "type": "module",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./styles": "./dist/index.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build && node scripts/build-icons.js",
+    "build:watch": "vite build --watch",
+    "build-icons": "node scripts/build-icons.js",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "node scripts/build-icons.js && storybook build",
+    "test:storybook": "test-storybook --testTimeout=60000",
+    "test:components": "npm run build-storybook && npm run test:storybook",
+    "test:visual:approve": "bash scripts/approve-snapshots.sh",
+    "tokens:generate": "npx tsx src/globals/config/generate-all.ts",
+    "prebuild": "npm run tokens:generate",
+    "lint": "npm run lint:ts && npm run lint:scss && npm run lint:types && npm run lint:format",
+    "lint:ts": "eslint \"src/**/*.{js,ts,jsx,tsx,mdx}\" --fix",
+    "lint:scss": "stylelint \"src/**/*.scss\" --fix",
+    "lint:format": "prettier --write \"src/**/*.{js,ts,jsx,tsx,scss,yml,json,mdx,md}\"",
+    "lint:types": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.init.de:bsi1/bsi_bund.git"
+  },
+  "keywords": [],
+  "engines": {
+    "node": "^22"
+  },
+  "author": "]init[ AG",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "@modyfi/vite-plugin-yaml": "^1.1.1",
+    "@storybook/addon-a11y": "^10.3.1",
+    "@storybook/addon-docs": "^10.3.1",
+    "@storybook/addon-vitest": "^10.3.1",
+    "@storybook/html-vite": "^10.3.1",
+    "@storybook/test-runner": "^0.24.4",
+    "@types/jest-image-snapshot": "^6.4.1",
+    "@types/node": "^25.9.1",
+    "@types/postcss-pxtorem": "^6.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.60.1",
+    "@typescript-eslint/parser": "^8.60.1",
+    "@vitest/browser": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.8",
+    "autoprefixer": "^10.5.0",
+    "baseline-browser-mapping": "^2.10.33",
+    "core-js": "^3.49.0",
+    "eslint": "^9.7.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-mdx": "^3.8.1",
+    "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-storybook": "^10.4.2",
+    "jest-image-snapshot": "^6.5.2",
+    "normalize.css": "^8.0.1",
+    "playwright": "1.61.1",
+    "postcss": "^8.5.15",
+    "postcss-pxtorem": "^6.1.0",
+    "prettier": "^3.8.3",
+    "sass-embedded": "^1.100.0",
+    "storybook": "^10.4.2",
+    "storybook-addon-grid": "^0.7.1",
+    "stylelint": "^17.12.0",
+    "stylelint-config-recommended": "^18.0.0",
+    "stylelint-config-recommended-scss": "^17.0.1",
+    "stylelint-order": "^8.1.1",
+    "stylelint-prettier": "^5.0.3",
+    "stylelint-scss": "^7.2.0",
+    "svg-sprite": "^2.0.4",
+    "terser": "^5.49.0",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.60.1",
+    "vitest": "^4.1.8"
+  },
+  "dependencies": {
+    "@init/linkeffects": "^2.1.4",
+    "@splidejs/splide": "^4.1.4",
+    "countup.js": "^2.10.0",
+    "plyr": "^3.8.4"
+  }
+}

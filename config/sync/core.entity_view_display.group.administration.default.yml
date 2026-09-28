@@ -1,0 +1,26 @@
+uuid: f7438973-91d4-4f05-8dd8-c1224fb98b85
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.administration
+id: group.administration.default
+targetEntityType: group
+bundle: administration
+mode: default
+content:
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: -5
+    region: content
+hidden:
+  changed: true
+  created: true
+  langcode: true
+  search_api_excerpt: true
+  uid: true

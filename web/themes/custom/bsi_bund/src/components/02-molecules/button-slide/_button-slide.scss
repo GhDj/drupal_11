@@ -1,0 +1,145 @@
+// -----------------------------------------------------------------------------
+// Button Slide
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+
+// -----------------------------------------------------------------------------
+// Tokens
+// -----------------------------------------------------------------------------
+:root {
+  --#{$nsp}-border-radius: 4px;
+  --#{$nsp}-button-slide-track-default: var(--#{$nsp}-color-neutral-100);
+  --#{$nsp}-button-slide-handle-default: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-button-slide-background-success: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-button-slide-handle-success: var(--#{$nsp}-color-neutral-100);
+}
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-button-slide {
+  --#{$nsp}-button-slide-handle-size: var(--#{$nsp}-size-3xl);
+  --#{$nsp}-button-slide-offset: 0px;
+  --#{$nsp}-button-slide-progress: 0%;
+  --#{$nsp}-button-slide-width: 100%;
+
+  align-items: center;
+  background: var(--#{$nsp}-button-slide-track-default);
+  border: 0;
+  border-radius: var(--#{$nsp}-border-radius);
+  color: var(--#{$nsp}-color-neutral-1000);
+  cursor: grab;
+  display: flex;
+  font-family: var(--font-family-base);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  height: var(--#{$nsp}-size-3xl);
+  justify-content: center;
+  letter-spacing: -0.1px;
+  line-height: 100%;
+  max-width: 356px;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  touch-action: none;
+  user-select: none;
+  width: 100%;
+
+  &:focus-visible {
+    outline: 2px solid var(--#{$nsp}-color-base-focus);
+    outline-offset: var(--#{$nsp}-space-4xs);
+  }
+
+  &.is-dragging {
+    cursor: grabbing;
+  }
+
+  &__fill {
+    background: var(--#{$nsp}-button-slide-background-success);
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: var(--#{$nsp}-button-slide-progress);
+    z-index: 1;
+  }
+
+  &__handle {
+    align-items: center;
+    background: var(--#{$nsp}-button-slide-handle-default);
+    color: var(--#{$nsp}-color-neutral-50);
+    display: inline-flex;
+    height: var(--#{$nsp}-button-slide-handle-size);
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: translateX(var(--#{$nsp}-button-slide-offset));
+    width: var(--#{$nsp}-button-slide-handle-size);
+    z-index: 3;
+  }
+
+  &__icon {
+    --#{$nsp}-icon-height: var(--#{$nsp}-size-lg);
+    --#{$nsp}-icon-width: var(--#{$nsp}-size-lg);
+  }
+
+  &__label {
+    align-items: center;
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+  }
+
+  &__fill-label {
+    align-items: center;
+    color: var(--#{$nsp}-color-neutral-50);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    pointer-events: none;
+    position: relative;
+    width: var(--#{$nsp}-button-slide-width);
+  }
+
+  &__success-icon {
+    align-items: center;
+    background: var(--#{$nsp}-button-slide-handle-success);
+    color: var(--#{$nsp}-color-neutral-1000);
+    display: none;
+    height: var(--#{$nsp}-button-slide-handle-size);
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: var(--#{$nsp}-button-slide-handle-size);
+    z-index: 4;
+  }
+
+  &--success,
+  &.is-success {
+    color: var(--#{$nsp}-color-neutral-50);
+    cursor: default;
+  }
+
+  &--success &__fill,
+  &.is-success &__fill {
+    width: 100%;
+  }
+
+  &--success &__handle,
+  &.is-success &__handle {
+    display: none;
+  }
+
+  &--success &__success-icon,
+  &.is-success &__success-icon {
+    display: inline-flex;
+  }
+}

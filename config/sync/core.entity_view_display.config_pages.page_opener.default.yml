@@ -1,0 +1,28 @@
+uuid: 108e96b8-b232-4f17-bba0-83a9454257a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.page_opener
+    - field.field.config_pages.page_opener.field_media
+id: config_pages.page_opener.default
+targetEntityType: config_pages
+bundle: page_opener
+mode: default
+content:
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: opener_static
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  label: true
+  search_api_excerpt: true

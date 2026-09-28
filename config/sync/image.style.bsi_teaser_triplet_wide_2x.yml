@@ -1,0 +1,21 @@
+uuid: f8bf83cb-7899-4481-9e50-74f3e61287d5
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_teaser_triplet_wide_2x
+label: 'BSI Teaser Triplet (wide, 2x)'
+effects:
+  4603c084-3ebb-4820-a869-e6fd531c63d8:
+    uuid: 4603c084-3ebb-4820-a869-e6fd531c63d8
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 690
+      height: 218
+      anchor: center-center
+  4f335c65-1437-4a10-b1d8-f0d8e6157a3f:
+    uuid: 4f335c65-1437-4a10-b1d8-f0d8e6157a3f
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

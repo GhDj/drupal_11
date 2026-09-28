@@ -1,0 +1,15 @@
+uuid: beffc018-0e8a-4d94-9ef8-28356a5caa41
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.administration
+    - user.role.authenticated
+id: administration-outsider
+label: Outsider
+weight: -9
+admin: false
+scope: outsider
+global_role: authenticated
+group_type: administration
+permissions: {  }

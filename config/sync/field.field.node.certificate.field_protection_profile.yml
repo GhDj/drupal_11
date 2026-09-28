@@ -1,0 +1,24 @@
+uuid: 9a7fa3fc-0f02-40d8-9f3a-dd95869228df
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_protection_profile
+    - filter.format.advanced
+    - node.type.certificate
+  module:
+    - text
+id: node.certificate.field_protection_profile
+field_name: field_protection_profile
+entity_type: node
+bundle: certificate
+label: 'Protection profile'
+description: 'Name of the protection profile, the protection profiles'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - advanced
+field_type: text_long

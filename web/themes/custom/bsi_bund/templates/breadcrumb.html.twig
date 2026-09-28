@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Theme override for a breadcrumb trail.
+ *
+ * Available variables:
+ * - breadcrumb: Breadcrumb trail items.
+ */
+#}
+{% if breadcrumb %}
+  <nav class="bsi-breadcrumb" aria-labelledby="system-breadcrumb">
+    <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
+    <ol class="bsi-breadcrumb__list">
+      {% for item in breadcrumb %}
+
+        {# last unlinked item #}
+        {% if loop.last and not loop.first %}
+          <li class="bsi-breadcrumb__list-item" aria-current="page">
+              {{ item.text }}
+          </li>
+
+        {% else %}
+
+          <li class="bsi-breadcrumb__list-item">
+            {# home link #}
+            {% if loop.first %}
+              {% include '@bsi_bund/elements/link.html.twig' with {
+                url: item.url,
+                attributes: create_attribute().addClass([
+                  'bsi-link',
+                  'bsi-breadcrumb__home'
+                ]),
+                link_type: 'internal',
+                icon: 'home',
+                icon_position: 'before'
+              } only %}
+            {% else %}
+                {# general links #}
+                {% include '@bsi_bund/elements/link.html.twig' with {
+                  url: item.url,
+                  title: item.text,
+                  icon: '',
+                  attributes: create_attribute().addClass([
+                    'bsi-link',
+                    'bsi-breadcrumb__link'
+                  ]),
+                  link_type: 'internal',
+                } only %}
+            {% endif %}
+          </li>
+
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </nav>
+{% endif %}

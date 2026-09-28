@@ -1,0 +1,125 @@
+// -----------------------------------------------------------------------------
+// Drupal tabs
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+@use "@globals/mixins/grid" as *;
+
+body {
+  .horizontal-tabs {
+    background-color: var(--#{$nsp}-color-base-white);
+    border: none;
+
+    // hide tabs before js is finished
+    @media (min-width: 639px) {
+      visibility: hidden;
+    }
+
+    &:has([data-horizontal-tabs-panes].horizontal-tabs-panes) {
+      visibility: visible;
+    }
+
+    .horizontal-tabs-list {
+      background-color: transparent;
+      border-bottom: 1px solid var(--#{$nsp}-color-alpha-dark-90);
+      display: flex;
+      flex-wrap: nowrap;
+      margin-bottom: var(--#{$nsp}-space-lg);
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      .horizontal-tab-button {
+        flex: 0 0 auto;
+
+        a {
+          display: block;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .horizontal-tab-button {
+      background-color: transparent;
+      border-bottom: 2px solid transparent;
+      border-radius: 4px 4px 0 0;
+      border-right: 0;
+
+      a {
+        @include typography("label-strong");
+        color: var(--#{$nsp}-color-typo-secondary);
+
+        strong {
+          font-weight: 400;
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+          color: var(--#{$nsp}-color-typo-primary);
+        }
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: var(--#{$nsp}-color-blue-100);
+        border-bottom: 3px solid var(--#{$nsp}-color-border);
+      }
+
+      &.selected {
+        background-color: var(--#{$nsp}-color-blue-100);
+        border-bottom: 3px solid var(--#{$nsp}-color-blue-750);
+        margin-bottom: 0;
+
+        a {
+          color: var(--#{$nsp}-color-blue-750);
+
+          &:hover,
+          &:focus,
+          &:active {
+            background-color: var(--#{$nsp}-color-blue-100);
+            color: var(--#{$nsp}-color-blue-750);
+          }
+        }
+      }
+    }
+
+    .horizontal-tabs-panes {
+      .horizontal-tabs-pane {
+        margin-block: 0;
+        padding: 0;
+      }
+    }
+
+    .claro-details {
+      background-color: var(--color-white);
+      border: none;
+      border-radius: var(--details-border-size-radius);
+      box-shadow: none;
+      margin-block: 0;
+    }
+
+    .claro-details__wrapper {
+      margin: 0;
+      margin-bottom: var(--#{$nsp}-space-sm);
+    }
+
+    .claro-details__summary {
+      background-color: var(--#{$nsp}-color-neutral-50);
+      margin-bottom: var(--#{$nsp}-space-sm);
+    }
+
+    .claro-details[open] .claro-details__summary {
+      background-color: var(--#{$nsp}-color-blue-100);
+      border-bottom: 2px solid var(--#{$nsp}-color-blue-750);
+    }
+
+    @media screen and (min-width: 40.0625rem) {
+      .claro-details__wrapper {
+        margin: 0;
+      }
+    }
+  }
+}

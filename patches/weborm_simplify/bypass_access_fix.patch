@@ -1,0 +1,22 @@
+--- a/webform_simplify.module
++++ b/webform_simplify.module
+@@ -64,19 +64,6 @@ function webform_simplify_local_tasks_alter(array &$localTasks): void {
+  */
+ function webform_simplify_can_bypass(?AccountInterface $user = NULL): bool {
+   $user = $user ?? \Drupal::currentUser();
+-  $isAdministrator = in_array('administrator', $user->getRoles());
+-  $enableUser1 = !\Drupal::getContainer()->hasParameter('security.enable_super_user')
+-    || \Drupal::getContainer()->getParameter('security.enable_super_user') !== FALSE;
+-  $isUser1 = FALSE;
+-
+-  if ($enableUser1) {
+-    $isUser1 = $user->id() == 1;
+-  }
+-
+-  if ($isUser1 || $isAdministrator) {
+-    $simplifyConfig = \Drupal::config('webform_simplify.settings');
+-    return !$simplifyConfig->get('simplify_super_user');
+-  }
+
+   return $user->hasPermission('bypass webform simplification');
+ }

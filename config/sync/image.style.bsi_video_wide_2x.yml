@@ -1,0 +1,21 @@
+uuid: e16ff9cb-bbfe-4d90-b95f-e03d18202cf8
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_video_wide_2x
+label: 'BSI Video (wide, 2x)'
+effects:
+  8589db6b-1b24-4016-ba80-f3eb7bc432d1:
+    uuid: 8589db6b-1b24-4016-ba80-f3eb7bc432d1
+    id: image_convert_avif
+    weight: -9
+    data:
+      extension: webp
+  9325a55d-b816-43b2-a6d9-15c620a9a086:
+    uuid: 9325a55d-b816-43b2-a6d9-15c620a9a086
+    id: image_scale_and_crop
+    weight: -10
+    data:
+      width: 2392
+      height: 1346
+      anchor: center-center

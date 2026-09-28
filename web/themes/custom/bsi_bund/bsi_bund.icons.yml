@@ -1,0 +1,84 @@
+# This file provides "Icon packs" which can be selected in content using the UI
+# or rendered manually where needed.
+# @see https://www.drupal.org/docs/develop/drupal-apis/icon-api#s-icon-pack-declaration-examples
+bsi_icons:
+  enabled: true
+  label: "BSI Icons"
+  description: "Icons for the BSI custom theme"
+  extractor: svg_sprite
+  config:
+    sources:
+      - dist/icons.svg
+  settings:
+    size:
+      title: "Size"
+      type: "integer"
+      default: 32
+    color:
+      title: "Color"
+      type: "string"
+      format: "color"
+    alt:
+      title: "Alt text"
+      type: "string"
+      description: "Accessibility alternative text, leave empty for decorative icon."
+  template: >-
+    <svg xmlns="http://www.w3.org/2000/svg"
+      class="bsi-icon bsi-icon-{{ icon_id|clean_class }}"
+      height="{{ size|default(32) }}"
+      width="{{ size|default(32) }}"
+      fill="{{ color|default('currentColor') }}"
+      {% if alt is empty %}
+        aria-hidden="true"
+        focusable="false"
+      {% else %}
+        aria-label="{{ alt }}"
+      {% endif %}
+    >
+      <use href="{{ source }}#{{ icon_id }}"/>
+    </svg>
+bsi_icons_color:
+  enabled: true
+  label: "BSI Color Icons"
+  description: "Icons used for content in navigation tiles"
+  extractor: svg
+  config:
+    sources:
+      # @todo Switch to sprite or something, add missing icons.
+      - src/assets/default/icons_color/*
+  settings:
+    size:
+      title: "Size"
+      type: "integer"
+      default: 140
+    alt:
+      title: "Alt text"
+      type: "string"
+      description: "Accessibility alternative text, leave empty for decorative icon."
+  template: >-
+    <img src="{{ source }}"
+      height="{{ size|default(140) }}" width="{{ size|default(140) }}"
+      {{ attributes|without('src', 'height', 'width', 'alt') }}
+      alt="{{ alt|default(icon_id) }}">
+bsi_cert_images:
+  enabled: true
+  label: "BSI Certificate Images"
+  description: "Icons for static certificates displayed on the site."
+  extractor: svg
+  config:
+    sources:
+      - Logo_Zertifizierung-ISO27001_IT-Grundschutz.svg
+  settings:
+    size:
+      title: "Size"
+      type: "integer"
+      default: 32
+    alt:
+      title: "Alt text"
+      type: "string"
+      description: "Accessibility alternative text, leave empty for decorative icon."
+  template: >-
+    <img src="{{ source }}"
+      height="{{ size|default(32) }}" width="{{ size|default(32) }}"
+      {{ attributes|without('src', 'height', 'width', 'alt') }}
+      alt="{{ alt|default(icon_id) }}">

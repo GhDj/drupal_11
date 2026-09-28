@@ -1,0 +1,36 @@
+--- config/schema/select_or_other.schema.yml
++++ config/schema/select_or_other.schema.yml
+@@ -9,13 +9,13 @@ field.widget.settings.select_or_other_reference:
+       type: string
+       label: 'Chosen sorting of options'
+     other_placeholder:
+-      type: string
++      type: label
+       label: 'Other placeholder'
+     other_option:
+-      type: string
++      type: label
+       label: 'Other option'
+     other_field_label:
+-      type: string
++      type: label
+       label: 'Label of the other field'
+
+ field.widget.settings.select_or_other_list:
+@@ -29,13 +29,13 @@ field.widget.settings.select_or_other_list:
+       type: string
+       label: 'Chosen sorting of options'
+     other_placeholder:
+-      type: string
++      type: label
+       label: 'Other placeholder'
+     other_option:
+-      type: string
++      type: label
+       label: 'Other option'
+     other_field_label:
+-      type: string
++      type: label
+       label: 'Label of the other field'
+     add_other_value_to_allowed_values:
+       type: boolean

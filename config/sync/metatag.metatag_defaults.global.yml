@@ -1,0 +1,42 @@
+uuid: 321cbf88-8d5f-4cb8-89db-422bce55a57a
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: sL588ui1E_8-2c_UupwyYxcqX2OVyMFp3HTLbbFqvPc
+id: global
+label: Global
+tags:
+  apple_mobile_web_app_title: BSIWEB
+  canonical_url: '[current-page:url:absolute]'
+  description: '[site:slogan]'
+  generator: 'Drupal 11 (https://www.drupal.org)'
+  google_site_verification: PQGOwbYQDXCrOHMoHTFCh1I3b_OXc7qOYH8RsROhtQk
+  msapplication_square150x150logo: '/SiteGlobals/Frontend/Images/favicons/mstile-144x144.png?__blob=normal&v=3'
+  msapplication_square310x310logo: '/SiteGlobals/Frontend/Images/favicons/mstile-270x270.png?__blob=normal&v=3'
+  msapplication_square70x70logo: '/SiteGlobals/Frontend/Images/favicons/mstile-144x144.png?__blob=normal&v=3 Maße: square128x128, square144x144, square270x270, square558x558, wide558x270'
+  msapplication_tilecolor: '#066c94'
+  msapplication_tileimage: '/SiteGlobals/Frontend/Images/favicons/mstile-144x144.png?__blob=normal&v=3'
+  msapplication_wide310x150logo: '/SiteGlobals/Frontend/Images/favicons/mstile-558x270.png?__blob=normal&v=3'
+  og_image: 'https://www.bsi.bund.de/_config/DefaultSocialMediaImage.jpg?__blob=value&v=4'
+  og_image_height: '781'
+  og_image_type: image/jpeg
+  og_image_width: '1388'
+  og_locale: '[language:langcode]'
+  og_site_name: '[site:name]'
+  og_title: '[current-page:title]'
+  og_type: Website
+  og_url: '[current-page:url:absolute]'
+  referrer: unsafe-url
+  rights: 'Federal Office for Information Security'
+  schema_organization_address: 'a:6:{s:5:"@type";s:13:"PostalAddress";s:13:"streetAddress";s:20:"Godesberger Allee 87";s:15:"addressLocality";s:4:"Bonn";s:13:"addressRegion";s:3:"NRW";s:10:"postalCode";s:5:"53175";s:14:"addressCountry";s:2:"DE";}'
+  schema_organization_contact_point: 'a:5:{s:5:"@type";s:12:"ContactPoint";s:9:"telephone";s:17:"+49 228 99 9582-0";s:5:"email";s:15:"bsi@bsi.bund.de";s:9:"faxnumber";s:23:"+49 228 99 10 9582-5400";s:3:"url";s:23:"https://www.bsi.bund.de";}'
+  schema_organization_description: 'The Federal Office for Information Security is a senior federal authority within the remit of the Federal Ministry of the Interior, Building and Community, based in Bonn, which is responsible for matters relating to IT security.'
+  schema_organization_name: 'Federal Office for Information Security'
+  schema_organization_same_as: 'https://www.facebook.com/bsi.fuer.buerger,https://social.bund.de/@bsi/,https://bsky.app/profile/bsi.bund.de,https://www.xing.com/companies/bundesamtf%C3%9Crsicherheitinderinformationstechnik,https://www.youtube.com/Bundesamtf%C3%BCrSicherheitinderInformat'
+  schema_organization_telephone: '+49 228 99 9582-0'
+  schema_organization_type: GovernmentOrganization
+  schema_organization_url: 'https://www.bsi.bund.de'
+  schema_web_page_breadcrumb: 'Yes'
+  schema_web_page_type: WebPage
+  title: '[site:name] - [current-page:title]'

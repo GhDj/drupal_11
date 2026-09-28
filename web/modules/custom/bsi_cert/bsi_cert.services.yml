@@ -1,0 +1,8 @@
+services:
+  bsi_cert.feed_client:
+    class: Drupal\bsi_cert\Service\BsiCertFeedClient
+    autowire: true
+
+  bsi_cert.teaser_builder:
+    class: Drupal\bsi_cert\Service\BsiCertTeaserBuilder
+    autowire: true

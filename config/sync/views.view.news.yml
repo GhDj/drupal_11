@@ -1,0 +1,429 @@
+uuid: 914162ab-39a1-4b8d-acb9-f50de5f78ea3
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.default
+  module:
+    - search_api
+id: news
+label: 'Search: News'
+module: views
+description: 'Search API'
+tag: search_api
+base_table: search_api_index_default
+base_field: search_api_id
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: News
+      fields:
+        node_grants:
+          id: node_grants
+          table: search_api_index_default
+          field: node_grants
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: null
+          entity_field: null
+          plugin_id: search_api
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          link_to_item: false
+          use_highlighting: false
+          multi_type: separator
+          multi_separator: ', '
+      pager:
+        type: some
+        options:
+          offset: 1
+          items_per_page: 3
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: none
+        options: {  }
+      cache:
+        type: search_api_none
+        options: {  }
+      empty: {  }
+      sorts:
+        node_created:
+          id: node_created
+          table: search_api_index_default
+          field: node_created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: 'Authored on'
+            field_identifier: node_created
+          exposed: true
+      arguments: {  }
+      filters:
+        node_bundle:
+          id: node_bundle
+          table: search_api_index_default
+          field: node_bundle
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value:
+            article: article
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        node_status:
+          id: node_status
+          table: search_api_index_default
+          field: node_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        node_promote:
+          id: node_promote
+          table: search_api_index_default
+          field: node_promote
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        search_api_language:
+          id: search_api_language
+          table: search_api_index_default
+          field: search_api_language
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: html_list
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:media':
+              ':default': default
+              audio: ':default'
+              video: ':default'
+            'entity:node':
+              ':default': teaser_triplet
+              document_with_tables: ':default'
+              page: ':default'
+            'entity:paragraph':
+              ':default': default
+              accordion: ':default'
+              accordion_item: ':default'
+              table_section: ':default'
+              text_section: ':default'
+      query:
+        type: search_api_query
+        options:
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: false
+          query_tags: {  }
+      relationships: {  }
+      use_ajax: true
+      use_more: true
+      use_more_always: true
+      use_more_text: 'Show all news'
+      link_display: custom_url
+      link_url: /news
+      header: {  }
+      footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - 'url.query_args:sort_by'
+        - 'url.query_args:sort_order'
+        - 'user.node_grants:view'
+      tags:
+        - 'config:search_api.index.default'
+        - 'search_api_list:default'
+  block_front:
+    id: block_front
+    display_title: Front
+    display_plugin: block
+    position: 1
+    display_options:
+      pager:
+        type: some
+        options:
+          offset: 1
+          items_per_page: 3
+      defaults:
+        pager: false
+      display_description: ''
+      display_extenders: {  }
+      block_description: 'Front: News'
+      block_category: BSI
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - 'url.query_args:sort_by'
+        - 'url.query_args:sort_order'
+        - 'user.node_grants:view'
+      tags:
+        - 'config:search_api.index.default'
+        - 'search_api_list:default'
+  front_highlight:
+    id: front_highlight
+    display_title: 'Front (Highlight)'
+    display_plugin: attachment
+    position: 2
+    display_options:
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 1
+      style:
+        type: html_list
+        options: {  }
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:media':
+              ':default': default
+              audio: ':default'
+              bits: ':default'
+              chart: ':default'
+              contact: ':default'
+              download: ':default'
+              gallery: ':default'
+              image: ':default'
+              publication: ':default'
+              video: ':default'
+            'entity:node':
+              ':default': teaser_highlight
+              article: ':default'
+              entry_page: ':default'
+              event: ':default'
+              inventory: ':default'
+              job: ':default'
+              page: ':default'
+              report_page: ':default'
+            'entity:paragraph':
+              ':default': default
+              accordion: ':default'
+              banner: ':default'
+              definition_item: ':default'
+              downloads: ':default'
+              facts_figures: ':default'
+              introduction: ':default'
+              key_facts: ':default'
+              media: ':default'
+              quick_overview: ':default'
+              quote: ':default'
+              table_section: ':default'
+              teaser_single: ':default'
+              text_section: ':default'
+              view: ':default'
+      defaults:
+        use_more: false
+        use_more_always: false
+        use_more_text: false
+        style: false
+        row: false
+      display_description: ''
+      use_more: false
+      use_more_always: true
+      use_more_text: 'Show all news'
+      display_extenders: {  }
+      displays:
+        block_front: block_front
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - 'url.query_args:sort_by'
+        - 'url.query_args:sort_order'
+        - 'user.node_grants:view'
+      tags:
+        - 'config:search_api.index.default'
+        - 'search_api_list:default'

@@ -1,0 +1,38 @@
+filter_settings.decorate_markup:
+  type: filter
+  label: 'Markup decorator'
+  mapping:
+    rules:
+      type: string
+      label: Rules
+
+filter_settings.decorate_external_link:
+  type: filter
+  label: 'External link decorator'
+  mapping:
+    class:
+      type: string
+      label: CSS class
+    target:
+      type: string
+      label: Target
+    custom_target:
+      type: string
+      label: Custom target
+    rel:
+      type: sequence
+      label: Relationship with the linked document
+
+filter_settings.decorate_download_link:
+  type: filter
+  label: 'Download link decorator'
+  mapping:
+    class:
+      type: string
+      label: CSS class
+    title:
+      type: string
+      label: Title
+    custom_title:
+      type: string
+      label: Custom title

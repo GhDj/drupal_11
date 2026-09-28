@@ -1,0 +1,21 @@
+uuid: 896de6db-e90a-444d-a6d7-df6952131495
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_certification_date
+    - node.type.certificate
+  module:
+    - datetime
+id: node.certificate.field_certification_date
+field_name: field_certification_date
+entity_type: node
+bundle: certificate
+label: 'Date of issue'
+description: 'Date the certificate was issued.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

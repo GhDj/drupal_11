@@ -1,0 +1,30 @@
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+@use "@molecules/link/link" as *;
+
+.#{$nsp}-cert-teaserlist__grid {
+  display: grid;
+  gap: 16px;
+  margin-block-end: 32px;
+
+  @include breakpoint-md {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include breakpoint-lg {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.#{$nsp}-cert-teaser {
+  background-color: var(--bsi-color-blue-100);
+  border-radius: 3px;
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    text-align: left;
+  }
+}

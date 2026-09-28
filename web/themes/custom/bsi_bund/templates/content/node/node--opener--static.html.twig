@@ -1,0 +1,154 @@
+{#
+  node of article opener
+#}
+{% set entity = elements['#' ~ (elements['#entity_type'])] %}
+{% set entity_type_id = entity.getEntityTypeId() %}
+{%
+  set classes = [
+    'bsi-opener',
+    'bsi-opener--left-inside',
+    entity_type_id,
+    entity_type_id ~ '--type-' ~ entity.bundle()|clean_class,
+    not entity.isPublished() ? entity_type_id ~ '--unpublished',
+    view_mode ? entity_type_id ~ '--view-mode-' ~ view_mode|clean_class,
+
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+  ]
+%}
+
+{# job facts #}
+{% set job_facts = [
+  { icon: "pin",            field: "field_location" },
+  { icon: "diploma",        field: "field_degree" },
+  { icon: "calendar-date",  field: "field_start_date" },
+  { icon: "document",       field: "field_duration" },
+  { icon: "job",            field: "field_employment_model" },
+  { icon: "money",          field: "field_salary_group" },
+  { icon: "calendar-event", field: "field_deadline" },
+  { icon: "hash-mark",      field: "field_code" },
+] %}
+
+{% if entity_type_id == 'node' %}
+  {{ attach_library('claro/classy.node') }}
+{% endif %}
+
+{% if content.field_media.0 %}
+
+  <div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {% if label and view_mode != "full" %}
+      <h2{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h2>
+    {% endif %}
+    {{ title_suffix }}
+
+    <div class="bsi-opener__content-wrapper">
+      <figure class="bsi-image bsi-opener__image">
+        {{ content.field_media }}
+      </figure>
+
+
+      <div class="bsi-opener__content-grid">
+        <div class="bsi-opener__content">
+
+          {% if content.title.0 %}
+            <h1 class="bsi-heading bsi-heading--2 bsi-opener__title">
+              {{ content.title.0 }}
+            </h1>
+          {% endif %}
+
+          {% if content.field_article_type.0 %}
+            <div class="bsi-opener__text">
+              {{ content.field_article_type.0 }}
+            </div>
+          {% endif %}
+
+          {% if content.body.0['#text'] %}
+            <div class="bsi-opener__text">
+              {{ content.body.0 }}
+            </div>
+          {% endif %}
+          {{ content|without('title', 'field_media', 'body', 'field_article_type', 'group_tagline') }}
+        </div>
+      </div>
+    </div>
+
+    {# job facts #}
+    {% if content.group_header.field_location.0 %}
+      <div class="bsi-job-facts">
+        <div class="bsi-job-facts__content">
+          <ul class="bsi-job-facts__list">
+            {% for fact in job_facts %}
+              <li class="bsi-job-facts__item">
+                <div class="bsi-job-facts__icon">
+                  {% include '@bsi_bund/templates/components/icon.twig' with {
+                    name: fact.icon,
+                    decorative: true
+                  } %}
+                </div>
+                <div class="bsi-job-facts__content">
+                  <div class="bsi-job-facts__label">{{ content.group_header[fact.field]["#title"] }}</div>
+                  <div class="bsi-job-facts__value">{{ content.group_header[fact.field].0 }}</div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  {# tagline #}
+  {% if content.group_tagline.field_location.0 or content.group_tagline.created.0 or content.group_tagline.field_date_range.0 %}
+    <ul class="bsi-opener__badges">
+      {# article type #}
+      {% if content.field_article_type.0 %}
+        <li class="bsi-opener__badge-item">
+          <span class="bsi-opener__badge-prefix">{{ "Type"|t }}</span>
+          <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ content.field_article_type.0 }}</span>
+        </li>
+      {% endif %}
+
+      {# date (range) #}
+      {% if content.group_tagline.field_date_range.0 %}
+        <li class="bsi-opener__badge-item">
+          <span class="bsi-opener__badge-prefix">{{ "Begin"|t }}</span>
+          <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ content.group_tagline.field_date_range.0.start_date }}</span>
+        </li>
+
+        <li class="bsi-opener__badge-item">
+          <span class="bsi-opener__badge-prefix">{{ "End"|t }}</span>
+          <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ content.group_tagline.field_date_range.0.end_date }}</span>
+        </li>
+      {% endif %}
+
+      {# location #}
+      {% if content.group_tagline.field_location.0 %}
+        <li class="bsi-opener__badge-item">
+          <span class="bsi-opener__badge-prefix">{{ "Location"|t }}</span>
+          <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ content.group_tagline.field_location.0 }}</span>
+        </li>
+      {% endif %}
+
+      {# date (single) #}
+      {% if content.group_tagline.created.0 %}
+        <li class="bsi-opener__badge-item">
+          <span class="bsi-opener__badge-prefix">{{ "Date"|t }}</span>
+          <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ content.group_tagline.created.0 }}</span>
+        </li>
+      {% endif %}
+    </ul>
+  {% endif %}
+
+{% else %}
+
+  <div class="bsi-grid">
+    <h1 class="bsi-heading bsi-heading--1">
+      {{ content.title.0 }}
+    </h1>
+    {{ content|without('title', 'field_media', 'body') }}
+  </div>
+
+{% endif %}

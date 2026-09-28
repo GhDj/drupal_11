@@ -1,0 +1,33 @@
+uuid: 80458aa4-a830-4ae6-9e68-626f2abeac36
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.it_security_label
+  module:
+    - language
+    - node
+id: node_sicherheitskennzeichen
+label: 'Node: IT-Sicherheitskennzeichen'
+type: 'canonical_entities:node'
+pattern: '/it-sicherheitskennzeichen/[node:created:html_date]-[node:title]'
+selection_criteria:
+  ff00b72c-c359-42b7-88a4-0d5249d67c54:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      it_security_label: it_security_label
+  c159286d-0dc1-40c8-a1c9-968139e02315:
+    id: language
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    langcodes:
+      de: de
+selection_logic: and
+weight: -7
+relationships:
+  'node:langcode:language':
+    label: Language

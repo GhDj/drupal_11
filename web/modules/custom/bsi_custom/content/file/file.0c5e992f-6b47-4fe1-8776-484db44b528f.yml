@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 0c5e992f-6b47-4fe1-8776-484db44b528f
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Opener-Video.png
+  uri:
+    -
+      value: 'private://image/2026-05/Opener-Video.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 3485080
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1780044028

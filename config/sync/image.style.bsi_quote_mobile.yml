@@ -1,0 +1,21 @@
+uuid: caf58c1b-f88a-4abd-8324-81ea4a0a5e3a
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_quote_mobile
+label: 'BSI Quote (mobile)'
+effects:
+  78b4ab72-6c16-44cd-bfc3-6d5f29d5608b:
+    uuid: 78b4ab72-6c16-44cd-bfc3-6d5f29d5608b
+    id: image_convert_avif
+    weight: -8
+    data:
+      extension: webp
+  2482bfae-99e5-41ab-a063-902d9c2c5f3b:
+    uuid: 2482bfae-99e5-41ab-a063-902d9c2c5f3b
+    id: image_scale
+    weight: -9
+    data:
+      width: 503
+      height: null
+      upscale: true

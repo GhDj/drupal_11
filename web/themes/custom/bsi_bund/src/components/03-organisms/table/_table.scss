@@ -1,0 +1,87 @@
+// -----------------------------------------------------------------------------
+// Table
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.tablesaw.tablesaw-stack {
+  --#{$nsp}-thead-row-background-color: var(--#{$nsp}-color-blue-200);
+  --#{$nsp}-tr-row-background-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-row-border-color: var(--#{$nsp}-color-alpha-dark-90);
+  --#{$nsp}-tr-row-background-color-hover: var(--#{$nsp}-color-alpha-dark-95);
+
+  tr {
+    background-color: var(--#{$nsp}-tr-row-background-color);
+    border: 1px solid var(--#{$nsp}-row-border-color);
+    border-radius: 4px;
+    box-shadow: var(--#{$nsp}-shadow-12);
+    display: inline-block;
+    @include breakpoint-md {
+      border: 1px solid transparent;
+      border-bottom: 1px solid var(--#{$nsp}-row-border-color);
+      display: table-row;
+    }
+    &:nth-child(even),
+    &.even {
+      @include breakpoint-md {
+        --#{$nsp}-tr-row-background-color: var(--#{$nsp}-color-neutral-50);
+      }
+    }
+    td {
+      height: auto;
+    }
+    th,
+    td {
+      padding: 0;
+
+      .tablesaw-cell-label {
+        @include typography("heading-5");
+        background-color: var(--#{$nsp}-thead-row-background-color);
+        font-family: var(--font-family-serif);
+        padding: var(--#{$nsp}-space-2xs) var(--#{$nsp}-space-sm);
+        width: 100%;
+      }
+    }
+    &:hover {
+      td {
+        background-color: var(--#{$nsp}-tr-row-background-color-hover);
+      }
+    }
+  }
+
+  //hide first label in mobile
+  .col_0 .tablesaw-cell-label {
+    display: none;
+    @include breakpoint-md {
+      display: table-cell;
+    }
+  }
+
+  thead {
+    display: none;
+    @include breakpoint-md {
+      display: table-header-group;
+    }
+    th {
+      @include breakpoint-md {
+        @include typography("heading-5");
+        background-color: var(--#{$nsp}-thead-row-background-color);
+        font-family: var(--font-family-serif);
+        padding: var(--#{$nsp}-space-2xs) var(--#{$nsp}-space-sm);
+      }
+    }
+  }
+
+  //mobile table content
+  .tablesaw-cell-content {
+    display: block;
+    max-width: 100%;
+    padding: var(--#{$nsp}-space-sm) var(--#{$nsp}-space-2xs);
+    width: 100%;
+  }
+}

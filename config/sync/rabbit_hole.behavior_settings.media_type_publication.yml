@@ -1,0 +1,14 @@
+uuid: 1a686566-10a8-48ed-b420-da4f6bddec03
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.publication
+id: media_type_publication
+entity_type_id: media_type
+entity_id: publication
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

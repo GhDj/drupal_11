@@ -1,0 +1,42 @@
+uuid: db16a9fb-1fde-4a5d-8fa3-6cd6f9f9de26
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.bsi_opener_stage_mobile
+    - image.style.bsi_opener_stage_narrow
+    - image.style.bsi_opener_stage_standard
+    - image.style.bsi_opener_stage_wide
+    - image.style.bsi_opener_stage_wide_2x
+  theme:
+    - bsi_bund
+id: bsi_opener_stage
+label: 'BSI Opener Stage'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_opener_stage_wide
+    breakpoint_id: bsi_custom.wide
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_opener_stage_wide_2x
+    breakpoint_id: bsi_custom.wide
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_opener_stage_standard
+    breakpoint_id: bsi_custom.standard
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_opener_stage_narrow
+    breakpoint_id: bsi_custom.narrow
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_opener_stage_mobile
+    breakpoint_id: bsi_custom.mobile
+    multiplier: 1x
+breakpoint_group: bsi_bund
+fallback_image_style: bsi_opener_stage_standard

@@ -1,0 +1,47 @@
+{#
+* Entry Page – Opener = Hero Slider Container
+#}
+
+{% if content.field_stage_items[0] %}
+  {%
+    set classes = [
+      'node',
+      'node--type-' ~ node.bundle|clean_class,
+      node.isPromoted() ? 'node--promoted',
+      node.isSticky() ? 'node--sticky',
+      'splide',
+      'bsi-hero-slider',
+      not node.isPublished() ? 'node--unpublished',
+      view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    ]
+  %}
+  {{ attach_library('claro/classy.node') }}
+
+  <section{{ attributes.addClass(classes) }}  aria-label="{{label}}" data-bsi-hero-slider>
+    <div class="splide__track">
+        {{ content.field_stage_items }}
+    </div>
+    <ul class="splide__pagination bsi-hero-slider__pagination bsi-grid"></ul>
+
+    <div class="bsi-hero-slider__controls">
+      <button type="button" class="bsi-button bsi-button--primary bsi-button--icon-only bsi-hero-slider__prev">
+        {% include '@bsi_bund/templates/components/icon.twig' with {
+        name: "chevron-left",
+        decorative: true,
+        extra_classes: base_class ~ '__icon'
+        } %}
+      </button>
+        <button type="button" class="bsi-button bsi-button--primary bsi-button--icon-only bsi-hero-slider__next">
+          {% include '@bsi_bund/templates/components/icon.twig' with {
+          name: "chevron-right",
+          decorative: true,
+          extra_classes: base_class ~ '__icon'
+          } %}
+      </button>
+    </div>
+
+    {% if content.field_stage_extra %}
+      {{ content.field_stage_extra }}
+    {% endif %}
+  </section>
+{% endif %}

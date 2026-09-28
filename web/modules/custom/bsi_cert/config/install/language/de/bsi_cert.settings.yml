@@ -1,0 +1,7 @@
+sources:
+  citizen:
+    label: Bürger-CERT
+    cta_text: 'Bürger-CERT RSS Feed'
+  federal:
+    label: CERT-Bund
+    cta_text: 'CERT-Bund RSS Feed'

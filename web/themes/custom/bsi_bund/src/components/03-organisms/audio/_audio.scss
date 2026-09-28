@@ -1,0 +1,122 @@
+@use "plyr/dist/plyr.css";
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/grid" as *;
+
+.#{$nsp}-audio {
+  background-color: var(--#{$nsp}-color-blue-100);
+  margin-block: var(--#{$nsp}-space-module);
+  padding: var(--#{$nsp}-space-sm);
+
+  &__card {
+    padding: 0;
+  }
+
+  // PLYR CUSTOMIZATIONS
+  .plyr {
+    --plyr-color-main: var(--#{$nsp}-color-blue-800);
+    --plyr-audio-progress-buffered-background: #a7c1d0;
+    --plyr-audio-controls-background: var(--#{$nsp}-color-blue-100);
+    --plyr-control-spacing: var(--#{$nsp}-space-2xs);
+    --plyr-control-icon-size: 24px;
+    --plyr-focus-visible-color: var(--#{$nsp}-color-base-focus);
+  }
+
+  .plyr--audio .plyr__controls {
+    padding-block-end: var(--#{$nsp}-space-lg);
+    padding-block-start: 75px;
+    padding-inline: var(--#{$nsp}-space-lg);
+
+    @include breakpoint-md {
+      padding: var(--#{$nsp}-space-lg);
+    }
+  }
+
+  .plyr__control[data-plyr="rewind"],
+  .plyr__control[data-plyr="play"],
+  .plyr__control[data-plyr="fast-forward"] {
+    left: 50%;
+    position: absolute;
+    top: 24px;
+    transform: translateX(-50%);
+
+    @include breakpoint-md {
+      position: static;
+    }
+  }
+
+  .plyr__control[data-plyr="rewind"] {
+    margin-left: -40px;
+
+    @include breakpoint-md {
+      margin-left: 0;
+    }
+  }
+
+  .plyr__control[data-plyr="fast-forward"] {
+    margin-left: 40px;
+
+    @include breakpoint-md {
+      margin-left: 0;
+    }
+  }
+
+  .plyr__control:focus-visible,
+  .plyr--full-ui
+    input[type="range"]:focus-visible::-webkit-slider-runnable-track {
+    outline-style: solid;
+  }
+
+  .plyr__time + .plyr__time--duration {
+    &:before {
+      margin-inline: 3px;
+    }
+  }
+
+  .plyr__progress-container {
+    flex: 1;
+    margin-right: var(--#{$nsp}-space-md);
+
+    @include breakpoint-md {
+      margin-left: var(--#{$nsp}-space-md);
+    }
+  }
+
+  .plyr__volume-toggle {
+    anchor-name: --anchor-volume;
+    margin-left: 12px;
+  }
+
+  .plyr__volume {
+    max-width: initial;
+    min-width: initial;
+    position: relative;
+    width: auto;
+
+    // The actual volume input range
+    input[data-plyr="volume"] {
+      background-color: var(--#{$nsp}-color-neutral-100);
+      border-radius: 0;
+      left: 50%;
+      margin: 0;
+      max-width: none;
+      opacity: 0;
+      padding: 16px;
+      position: absolute;
+      top: -16px;
+      transform: rotate(-90deg);
+      transform-origin: left;
+      transition: all 0.2s ease;
+      width: 120px;
+      z-index: -1;
+    }
+
+    // Show the slider on hover
+    &:hover input[data-plyr="volume"],
+    &:focus-within input[data-plyr="volume"] {
+      opacity: 1;
+      top: -1rem; // Adjust based on height of slider
+      z-index: 2;
+    }
+  }
+}

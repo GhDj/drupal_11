@@ -1,0 +1,21 @@
+uuid: 4eeb3190-bc08-4eab-aea4-88393ff76c4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_step_label
+    - paragraphs.paragraphs_type.sequence_item
+  module:
+    - options
+id: paragraph.sequence_item.field_step_label
+field_name: field_step_label
+entity_type: paragraph
+bundle: sequence_item
+label: 'Step label'
+description: 'Select "- None -" to use automatic numbering.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

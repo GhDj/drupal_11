@@ -1,0 +1,80 @@
+// -----------------------------------------------------------------------------
+// Anchors — sticky Sprungmarken-Navigation
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+
+.#{$nsp}-anchors {
+  --#{$nsp}-link-underline-color: var(--#{$nsp}-color-typo-tertiary);
+  --#{$nsp}-link-decoration-line: none;
+
+  background-color: var(--#{$nsp}-color-blue-100);
+
+  @at-root .#{$nsp}-page-grid__anchors {
+    position: sticky;
+    top: var(--drupal-toolbar-height, 0px);
+    width: 100%;
+    z-index: 10;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-lg);
+    margin-inline: auto;
+    max-width: var(--#{$nsp}-grid-max-width);
+    padding: var(--#{$nsp}-space-lg) var(--#{$nsp}-grid-padding);
+
+    @include breakpoint-lg {
+      flex-direction: row;
+      gap: var(--#{$nsp}-space-lg);
+      padding-block: var(--#{$nsp}-space-lg);
+    }
+  }
+
+  &__title {
+    @include typography("heading-4");
+    color: var(--#{$nsp}-color-typo-primary);
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  &__link {
+    font-size: 18px;
+    line-height: 1;
+
+    &--active {
+      --#{$nsp}-link-color: var(--#{$nsp}-color-typo-tertiary);
+      --#{$nsp}-link-decoration-line: underline;
+    }
+  }
+
+  // Dropdown molecule wrapper — hidden above breakpoint-lg
+  &__dropdown {
+    width: 100%;
+
+    @include breakpoint-lg {
+      display: none;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Desktop list
+  // ---------------------------------------------------------------------------
+  &__list {
+    display: none;
+
+    @include breakpoint-lg {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--#{$nsp}-space-2xs) var(--#{$nsp}-space-4xl);
+      padding: 0 40px;
+    }
+  }
+}

@@ -1,0 +1,3 @@
+use entity cart:
+  title: 'Use entity cart'
+  description: 'Allows the user to manage items in their cart'

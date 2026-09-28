@@ -1,0 +1,51 @@
+// -----------------------------------------------------------------------------
+// Facts and Figures Group
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/grid" as *;
+
+// -----------------------------------------------------------------------------
+// Tokens
+// -----------------------------------------------------------------------------
+:root {
+  --#{$nsp}-facts-group-gap: var(--#{$nsp}-space-lg);
+}
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-facts-group {
+  &__items {
+    @include grid($is-nested: true);
+    grid-auto-rows: 1fr;
+    list-style: none;
+    row-gap: var(--#{$nsp}-facts-group-gap);
+  }
+
+  &__item {
+    @include grid-span-col-full;
+
+    > .#{$nsp}-facts {
+      height: 100%;
+      max-width: none;
+    }
+  }
+}
+
+@include breakpoint-md {
+  .#{$nsp}-facts-group {
+    &__item {
+      @include grid-span-col(3);
+    }
+  }
+}
+
+@include breakpoint-lg {
+  .#{$nsp}-facts-group {
+    &__item {
+      @include grid-span-col(4);
+    }
+  }
+}

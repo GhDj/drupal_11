@@ -1,0 +1,136 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 04ae4b28-b584-47d9-bcf1-c272af272704
+  bundle: menu_link_content
+  default_langcode: de
+  depends:
+    77ba3211-f7a2-4db1-b706-39dcd719f04f: node
+translations:
+  en:
+    title:
+      -
+        value: 'The BSI'
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_id: 1
+    content_translation_status:
+      -
+        value: true
+    content_translation_created:
+      -
+        value: 1779442639
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Das BSI'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      uri: 'entity:node/96'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_status:
+    -
+      value: true
+  field_menu_extra:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: eaf0e399-1f08-487e-a49f-6dd71ef3a046
+          bundle: teaser_single
+          default_langcode: de
+        translations:
+          en:
+            status:
+              -
+                value: true
+            created:
+              -
+                value: 1778683132
+            content_translation_source:
+              -
+                value: de
+            content_translation_outdated:
+              -
+                value: false
+            field_byline:
+              -
+                value: '2019 - 2022'
+            field_link:
+              -
+                uri: 'internal:/media/11'
+                title: 'Download Environmental Statement'
+                options: {  }
+            field_section_text:
+              -
+                value: '<p>A short teaser text could go here.</p>'
+                format: basic
+            field_section_title:
+              -
+                value: 'First Environmental Statement under EMAS'
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1778683132
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_byline:
+            -
+              value: '2019 - 2022'
+          field_display_variant:
+            -
+              value: image_left
+          field_link:
+            -
+              uri: 'internal:/media/11'
+              title: 'Umwelterklärung herunterladen'
+              options: {  }
+          field_section_text:
+            -
+              value: '<p>Hier könnte ein kurzer Anrisstext stehen.</p>'
+              format: basic
+          field_section_title:
+            -
+              value: 'Erste Umwelterklärung nach EMAS'

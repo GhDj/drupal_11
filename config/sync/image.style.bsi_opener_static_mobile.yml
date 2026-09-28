@@ -1,0 +1,21 @@
+uuid: 6ea6d2ac-abe3-4394-b3e1-7af86807e613
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_opener_static_mobile
+label: 'BSI Opener Static (mobile)'
+effects:
+  c079e054-df7f-4f7d-acfd-46867eb392d9:
+    uuid: c079e054-df7f-4f7d-acfd-46867eb392d9
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 575
+      height: 300
+      anchor: right-center
+  e3d7cd59-b4bf-466a-a461-0b44daefe314:
+    uuid: e3d7cd59-b4bf-466a-a461-0b44daefe314
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

@@ -1,0 +1,10 @@
+type: module
+name: 'Markup Decorator'
+description: 'Decorate user-provided markup'
+package: Input filters
+
+core_version_requirement: ^10 || ^11
+configure: filter.admin_overview
+
+dependencies:
+  - drupal:filter

@@ -1,0 +1,43 @@
+uuid: f143b72b-1d61-4bab-b40a-8ff7f91509d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_items
+    - paragraphs.paragraphs_type.accordion
+    - paragraphs.paragraphs_type.definition_item
+  module:
+    - entity_reference_revisions
+id: paragraph.accordion.field_items
+field_name: field_items
+entity_type: paragraph
+bundle: accordion
+label: Elements
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      definition_item: definition_item
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 7
+        enabled: false
+      definition_item:
+        weight: 9
+        enabled: true
+      facts_figures:
+        weight: 10
+        enabled: false
+      table_section:
+        weight: 11
+        enabled: false
+      text_section:
+        weight: 12
+        enabled: false
+field_type: entity_reference_revisions

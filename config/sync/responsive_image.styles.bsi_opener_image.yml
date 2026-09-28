@@ -1,0 +1,42 @@
+uuid: f0003cf3-3b56-4cea-9299-7b26b192ce6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.bsi_opener_image_mobile
+    - image.style.bsi_opener_image_narrow
+    - image.style.bsi_opener_image_standard
+    - image.style.bsi_opener_image_wide
+    - image.style.bsi_opener_image_wide_2x
+  theme:
+    - bsi_bund
+id: bsi_opener_image
+label: 'BSI Opener Image'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_opener_image_wide
+    breakpoint_id: bsi_custom.wide
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_opener_image_wide_2x
+    breakpoint_id: bsi_custom.wide
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_opener_image_standard
+    breakpoint_id: bsi_custom.standard
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_opener_image_narrow
+    breakpoint_id: bsi_custom.narrow
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_opener_image_mobile
+    breakpoint_id: bsi_custom.mobile
+    multiplier: 1x
+breakpoint_group: bsi_bund
+fallback_image_style: bsi_opener_image_standard

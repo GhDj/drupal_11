@@ -1,0 +1,48 @@
+{#
+/**
+ * Media with "Inline (center)" viewtype
+ */
+#}
+{%
+  set classes = [
+    'bsi-downloads__item',
+    'media',
+    'media--type-' ~ media.bundle()|clean_class,
+    not media.isPublished() ? 'media--unpublished',
+    view_mode ? 'media--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+  {{ title_suffix.contextual_links }}
+  {% if content %}
+    <div class="bsi-downloads__media">
+      <div class="bsi-downloads__media-frame">
+        {% block fileImage %}
+          {{ content.thumbnail }}
+        {% endblock %}
+      </div>
+    </div>
+
+    <div class="bsi-downloads__body">
+      {% if content.field_media_file.0['#description'] %}
+        <div class="bsi-heading__wrapper">
+          <h3 class="bsi-heading bsi-heading--5 bsi-downloads__title">
+            {{ content.field_media_file.0['#description'] }}
+          </h3>
+        </div>
+      {% endif %}
+
+      {% if content.field_body.0 %}
+        <div class="bsi-downloads__text">{{ content.field_body }}</div>
+      {% endif %}
+
+      <div class="bsi-downloads__actions">
+        {{ content.field_media_file }}
+
+        {% if content.field_use_cart.0 %}
+          {{ content.field_use_cart }}
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</article>

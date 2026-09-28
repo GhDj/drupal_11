@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0, .st1 {
+        stroke: #004b76;
+      }
+
+      .st0, .st1, .st2 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .st0, .st2 {
+        stroke-width: 1.2px;
+      }
+
+      .st1 {
+        stroke-width: 1.5px;
+      }
+
+      .st2 {
+        stroke: #00a4b9;
+      }
+    </style>
+  </defs>
+  <path class="st0" d="M22.8,34.6l6.2-4.9M35,29.4l5,3M46.5,30.5l4.4-4.4M56.4,20.4l4.2-4.3"/>
+  <path class="st0" d="M23.5,37.1c0,2.1-1.6,3.6-3.6,3.6s-3.6-1.7-3.6-3.6,1.6-3.6,3.6-3.6,1.9.4,2.6,1.1,1,1.6,1,2.5h0Z"/>
+  <path class="st0" d="M35.4,27.4c0,2.1-1.6,3.6-3.6,3.6s-3.6-1.7-3.6-3.6,1.6-3.6,3.6-3.6c2.1-.2,3.6,1.6,3.6,3.6Z"/>
+  <path class="st0" d="M47.3,33.1c0,2.1-1.6,3.6-3.6,3.6s-3.6-1.7-3.6-3.6,1.6-3.6,3.6-3.6,3.6,1.6,3.6,3.6Z"/>
+  <polyline class="st1" points="10.6 11.6 10.6 64 63 64"/>
+  <polyline class="st0" points="55.2 15.4 61.4 15.4 61.6 21.2"/>
+  <path class="st2" d="M19.9,48.6v11.3"/>
+  <g>
+    <path class="st2" d="M31.8,41.7v18.2"/>
+    <path class="st2" d="M43.7,45.1v14.8"/>
+    <path class="st2" d="M54.3,38.3v21.7"/>
+  </g>
+  <path class="st0" d="M57.5,23.2c0,2.1-1.6,3.6-3.6,3.6s-3.6-1.7-3.6-3.6,1.6-3.6,3.6-3.6,3.6,1.6,3.6,3.6Z"/>
+</svg>

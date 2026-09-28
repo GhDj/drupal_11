@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 0972124c-46d3-43a5-a7d6-cfd80b0d5989
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Opener-Formular.jpg
+  uri:
+    -
+      value: 'private://image/2026-07/Opener-Formular.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 127360
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1783579367

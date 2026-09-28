@@ -1,0 +1,16 @@
+uuid: b3ca9c3e-fcdf-4039-bb96-376e10c2d77d
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.administration
+    - node.type.page
+  module:
+    - gnode
+    - node
+id: administration-group_node-page
+group_type: administration
+content_plugin: 'group_node:page'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1

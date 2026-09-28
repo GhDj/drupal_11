@@ -1,0 +1,21 @@
+uuid: ad4fe248-d742-427e-a2ba-c41e48841238
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_video_standard
+label: 'BSI Video (standard)'
+effects:
+  99f0b896-fde8-4852-8ec9-cbb1ecc17bcf:
+    uuid: 99f0b896-fde8-4852-8ec9-cbb1ecc17bcf
+    id: image_convert_avif
+    weight: -9
+    data:
+      extension: webp
+  b7a89e54-21d3-41a4-b22f-48bac0adb909:
+    uuid: b7a89e54-21d3-41a4-b22f-48bac0adb909
+    id: image_scale_and_crop
+    weight: -10
+    data:
+      width: 1024
+      height: 576
+      anchor: center-center

@@ -1,0 +1,115 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 7465ee7c-8769-4b26-93ef-8d136ca3daa3
+  bundle: contact
+  default_langcode: de
+translations:
+  en:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    name:
+      -
+        value: 'Example contact'
+    created:
+      -
+        value: 1779117533
+    path:
+      -
+        alias: ''
+        langcode: en
+        pathauto: 0
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    field_address:
+      -
+        langcode: de
+        country_code: DE
+        administrative_area: ''
+        locality: Berlin
+        dependent_locality: ''
+        postal_code: ''
+        sorting_code: ''
+        address_line1: ''
+        address_line2: ''
+        organization: ''
+        given_name: ''
+        additional_name: ''
+        family_name: Meier
+    field_phone:
+      -
+        title: 'Imaginary customer service'
+        value: '0123456789'
+      -
+        title: 'Service number'
+        value: '+49 115'
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Beispiel-Medium Kontakt'
+  created:
+    -
+      value: 1777386274
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_address:
+    -
+      langcode: de
+      country_code: DE
+      administrative_area: ''
+      locality: Berlin
+      dependent_locality: ''
+      postal_code: ''
+      sorting_code: ''
+      address_line1: ''
+      address_line2: ''
+      organization: ''
+      given_name: ''
+      additional_name: ''
+      family_name: Meier
+  field_availability:
+    -
+      day: 1
+      all_day: false
+      starthours: 800
+      endhours: 1000
+      comment: ''
+  field_icon:
+    -
+      target_id: 'bsi_icons:address'
+  field_mail:
+    -
+      value: email@example.org
+  field_phone:
+    -
+      title: 'Imaginärer Kundendienst'
+      value: '0123456789'
+    -
+      title: Servicenummer
+      value: '+49 115'

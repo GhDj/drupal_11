@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: d9295bd3-f07e-4de6-8271-3d7e11b6aa78
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Opener-Mediathek.png
+  uri:
+    -
+      value: 'private://image/2026-05/Opener-Mediathek.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 3814720
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1780045144

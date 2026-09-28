@@ -1,0 +1,2 @@
+label: Textkörper
+description: 'Bühnenelemente und Textkörper schließen einander aus. Das Opener-Element der Seite zeigt den Textkörper nur an, wenn keine Bühnenelemente hinterlegt sind.'

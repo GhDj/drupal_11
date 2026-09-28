@@ -1,0 +1,74 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: fa2dcc55-3691-474a-81de-04cd91b33123
+  bundle: menu_link_content
+  default_langcode: de
+  depends:
+    95096f58-7d0b-4041-a8a2-6c4d73091b0d: node
+translations:
+  en:
+    title:
+      -
+        value: Contact
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_id: 1
+    content_translation_status:
+      -
+        value: true
+    content_translation_created:
+      -
+        value: 1778163895
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Kontakt
+  menu_name:
+    -
+      value: header
+  link:
+    -
+      target_uuid: 95096f58-7d0b-4041-a8a2-6c4d73091b0d
+      resolvable_uri: /service/contact
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -46
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1778161086
+  field_icon:
+    -
+      target_id: 'bsi_icons:mail'

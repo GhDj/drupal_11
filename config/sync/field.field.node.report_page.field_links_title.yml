@@ -1,0 +1,23 @@
+uuid: 5881fb65-6511-4c43-a6fd-06df5a389cf9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_links_title
+    - node.type.report_page
+  module:
+    - options
+id: node.report_page.field_links_title
+field_name: field_links_title
+entity_type: node
+bundle: report_page
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: more_information
+default_value_callback: ''
+settings: {  }
+field_type: list_string

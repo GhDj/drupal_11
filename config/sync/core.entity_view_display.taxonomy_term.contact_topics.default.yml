@@ -1,0 +1,32 @@
+uuid: e05a42dd-340d-438e-b703-e4cd96b21811
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.contact_topics.field_contact
+    - taxonomy.vocabulary.contact_topics
+  module:
+    - bsi_custom
+id: taxonomy_term.contact_topics.default
+targetEntityType: taxonomy_term
+bundle: contact_topics
+mode: default
+content:
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  description: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_contact: true
+  langcode: true
+  search_api_excerpt: true

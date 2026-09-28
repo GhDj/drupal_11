@@ -1,0 +1,7 @@
+{#
+/**
+ * @file
+ * Theme override for an email field.
+ */
+#}
+{% extends element['#formatter'] == 'email_mailto' ? 'field--link.html.twig' : 'field.html.twig' %}

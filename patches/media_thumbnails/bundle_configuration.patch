@@ -1,0 +1,64 @@
+--- a/media_thumbnails.module
++++ a/media_thumbnails.module
+@@ -6,6 +6,7 @@
+  */
+
+ use Drupal\Core\Entity\EntityTypeInterface;
++use Drupal\Core\Form\FormStateInterface;
+ use Drupal\Core\Routing\RouteMatchInterface;
+ use Drupal\Core\Url;
+ use Drupal\media\MediaInterface;
+@@ -36,12 +37,52 @@
+ }
+
+ /**
++ * Implements hook_form_BASE_FORM_ID_alter() for media_type.
++ */
++function media_thumbnails_form_media_type_form_alter(array &$form, FormStateInterface $form_state): void {
++  /** @var \Drupal\media\MediaTypeInterface $entity */
++  $entity = $form_state->getFormObject()->getEntity();
++
++  $form['third_party_settings'] ??= [
++    '#tree' => TRUE,
++  ];
++  $form['third_party_settings']['media_thumbnails'] = [
++    '#type' => 'details',
++    '#title' => t('Media Thumbnails'),
++    '#open' => TRUE,
++    '#tree' => TRUE,
++    '#element_validate' => [
++      'media_thumbnails_third_party_settings_validate',
++    ],
++  ];
++  $form['third_party_settings']['media_thumbnails']['create_thumbnails'] = [
++    '#type' => 'checkbox',
++    '#title' => t('Create thumbnails'),
++    '#description' => t('Enable to generate thumbnails using the %module module.', [
++      '%module' => 'media_thumbnails',
++    ]),
++    '#default_value' => $entity->getThirdPartySetting('media_thumbnails', 'create_thumbnails'),
++  ];
++}
++
++/**
++ * Validation callback for the media_thumbnails third_party_settings.
++ */
++function media_thumbnails_third_party_settings_validate(array $element, FormStateInterface $form_state): void {
++  $parents = $element['#parents'];
++  $form_state->setValue($parents, array_filter($form_state->getValue($parents, [])));
++  // Remove empty third_party_settings providers.
++  array_pop($parents);
++  $form_state->setValue($parents, (array_filter($form_state->getValue($parents))));
++}
++
++/**
+  * Implements hook_ENTITY_TYPE_presave().
+  */
+ function media_thumbnails_media_presave(MediaInterface $entity) {
+   /** @var \Drupal\media_thumbnails\Plugin\MediaThumbnailManager $manager */
+   $manager = \Drupal::service('plugin.manager.media_thumbnail');
+-  if ($manager->hasPlugin($entity)) {
++  if ($manager->hasPlugin($entity) && $entity->getBundleEntity()->getThirdPartySetting('media_thumbnails', 'create_thumbnails')) {
+     if ($entity->isNew()) {
+       // Get the filename default thumbnnail that would be shown.
+       $default_filename = $entity->getSource()

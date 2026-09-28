@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b3c00240-3831-4d88-95f8-326704bbb4ac
+  bundle: image
+  default_langcode: de
+  depends:
+    dd1f644e-924a-4903-b19d-410cd233e8de: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: Opener-Cybernation.jpg
+  created:
+    -
+      value: 1784616510
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: dd1f644e-924a-4903-b19d-410cd233e8de
+      alt: 'Netzwerkartige Deutschlandkarte auf türkisem Hintergrund. Einzelne Orte sind untereinander verbunden, wodurch ein Netz entsteht. Mittig auf der Karte steht "Cybernation Deutschland" in Großbuchstaben.'
+      title: ''
+      width: 2392
+      height: 881

@@ -1,0 +1,92 @@
+// -----------------------------------------------------------------------------
+// Contact
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-contact {
+  --#{$nsp}-link-underline-style: dotted;
+  --#{$nsp}-link-color: var(--#{$nsp}-color-neutral-750);
+  --#{$nsp}-icon-color: var(--#{$nsp}-color-black);
+  --#{$nsp}-icon-width: var(--#{$nsp}-size-2xl);
+  background: var(--#{$nsp}-color-blue-100);
+  display: flex;
+  gap: var(--#{$nsp}-space-sm);
+  padding: var(--#{$nsp}-space-sm);
+
+  @include breakpoint-lg {
+    --#{$nsp}-icon-width: var(--#{$nsp}-size-7xl);
+  }
+
+  &__content {
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-sm);
+  }
+
+  &__title {
+    border-bottom: 1px solid var(--#{$nsp}-color-neutral-350);
+    font-size: 24px;
+    font-weight: 700;
+    padding-bottom: var(--#{$nsp}-space-sm);
+    text-wrap: wrap;
+    width: 100%;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__details {
+    --#{$nsp}-link-icon-width: var(--#{$nsp}-size-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-size-3xs);
+  }
+
+  &__link {
+    align-items: center;
+  }
+
+  &__detail-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-size-2xs);
+    .#{$nsp}-list__item {
+      align-items: center;
+      display: flex;
+      gap: var(--#{$nsp}-size-sm);
+    }
+  }
+
+  &__value {
+    color: var(--#{$nsp}-color-neutral-750);
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  &__label {
+    display: inline-block;
+    min-width: 103px;
+  }
+
+  &__icon {
+    --#{$nsp}-icon-width: var(--#{$nsp}-size-2xl);
+
+    @include breakpoint-lg {
+      --#{$nsp}-icon-width: var(--#{$nsp}-size-7xl);
+    }
+  }
+
+  &--teaser {
+    .#{$nsp}-contact__info-row--person {
+      font-weight: 700;
+    }
+  }
+}

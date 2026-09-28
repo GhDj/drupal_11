@@ -1,0 +1,39 @@
+uuid: 4a9c3731-555e-49cb-bdd0-5681adf63b51
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.chart.field_media_chart
+    - field.field.media.chart.field_source
+    - field.field.media.chart.field_unit
+    - media.type.chart
+  module:
+    - bsi_custom
+id: media.chart.default
+targetEntityType: media
+bundle: chart
+mode: default
+content:
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_media_chart: true
+  field_source: true
+  field_unit: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

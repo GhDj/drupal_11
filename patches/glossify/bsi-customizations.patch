@@ -1,0 +1,37 @@
+--- a/src/GlossifyBase.php
++++ b/src/GlossifyBase.php
+@@ -119,15 +119,15 @@
+     }
+     $term_patterns = [];
+     foreach ($terms as $term) {
+-      // Matches when preceded by: start or whitespace.
++      // Matches when preceded by: start, whitespace or non-word character.
+       // Matches when followed by: end, whitespace, or punctuation.
+-      $pattern_parts[$term->name] = '/(?<=^|\s)(' . preg_quote($term->name, '/') . ')(?=\s|$|[^\w\s])/' . $options;
++      $pattern_parts[$term->name] = '/(?<!\w)(' . preg_quote($term->name, '/') . ')(?!\w)/' . $options;
+       $term_patterns[$term->name] = $term;
+
+       // Add patterns for synonyms if they exist.
+       if (!empty($term->synonyms)) {
+         foreach ($term->synonyms as $synonym) {
+-          $pattern_parts[$synonym] = '/(?<=^|\s)(' . preg_quote($synonym, '/') . ')(?=\s|$|[^\w\s])/' . $options;
++          $pattern_parts[$synonym] = '/(?<!\w)(' . preg_quote($synonym, '/') . ')(?!\w)/' . $options;
+           $term_patterns[$synonym] = $term;
+         }
+       }
+@@ -269,6 +269,7 @@
+                 '#tip' => $tip,
+                 '#tip_raw' => $tip_raw,
+                 '#tipurl' => $tipurl,
++                '#term' => $term,
+               ];
+               $replacementTextOrHtml = $this->renderLink($word_link);
+             }
+@@ -284,6 +285,7 @@
+                 '#tip' => $tip,
+                 '#tip_raw' => $tip_raw,
+                 '#langcode' => $langcode,
++                '#term' => $term,
+               ];
+               $replacementTextOrHtml = $this->renderTip($word_tip);
+             }

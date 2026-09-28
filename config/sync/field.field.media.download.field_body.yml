@@ -1,0 +1,24 @@
+uuid: a4d3dcf0-61f6-4931-95bf-d5cb92ec98bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_body
+    - media.type.download
+  module:
+    - text
+id: media.download.field_body
+field_name: field_body
+entity_type: media
+bundle: download
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

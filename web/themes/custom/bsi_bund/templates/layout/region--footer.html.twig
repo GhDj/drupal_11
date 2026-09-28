@@ -1,0 +1,30 @@
+{#
+/**
+* @file
+* Theme override to display a region.
+*
+* Available variables:
+* - content: The content for this region, typically blocks.
+* - attributes: HTML attributes for the region <div>.
+* - region: The name of the region variable as defined in the theme's
+*   .info.yml file.
+*
+* @see \Drupal\Core\Theme\ThemePreprocess::preprocessRegion()
+*/
+#}
+{%
+set classes = [
+  'region',
+  'region-' ~ region|clean_class,
+]
+%}
+
+{{elements.bsi_bund_quick_navigation}}
+<div class="bsi-footer__content-wrapper">
+  <div class="bsi-footer__content">
+    {% for key, child in elements|without('bsi_bund_quick_navigation')|without('bsi_bund_social_navigation')|filter((v, k) => k|first != '#') %}
+      {{child}}
+    {% endfor %}
+  </div>
+   {{elements.bsi_bund_social_navigation}}
+</div>

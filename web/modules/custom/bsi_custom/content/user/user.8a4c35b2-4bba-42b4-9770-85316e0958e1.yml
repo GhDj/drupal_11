@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 8a4c35b2-4bba-42b4-9770-85316e0958e1
+  default_langcode: de
+default:
+  preferred_langcode:
+    -
+      value: de
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: 'Test DEH'
+  pass:
+    -
+      value: $2y$10$pbVeCwxmphRIc2yJI3ZXM.dwcoEw2jUdx7AYjmed8Is5JeUdD8EFW
+      existing: ''
+      pre_hashed: false
+  mail:
+    -
+      value: test-deh@init.de
+  timezone:
+    -
+      value: Europe/Berlin
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1784040234
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: test-deh@init.de
+  roles:
+    -
+      target_id: csn_deh
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0

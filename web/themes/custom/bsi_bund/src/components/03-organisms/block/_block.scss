@@ -1,0 +1,81 @@
+// -----------------------------------------------------------------------------
+// Block
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/grid" as *;
+
+.#{$nsp}-block {
+  --#{$nsp}-margin-block: var(--#{$nsp}-size-lg);
+  --#{$nsp}-padding-block: var(--#{$nsp}-space-lg);
+  margin-block: var(--#{$nsp}-margin-block);
+  padding-block: var(--#{$nsp}-padding-block);
+  width: 100%;
+
+  @include breakpoint-md {
+    --#{$nsp}-margin-block: var(--#{$nsp}-size-4xl);
+  }
+
+  &:first-of-type {
+    --#{$nsp}-margin-block: 0;
+    --#{$nsp}-padding-block: 0;
+  }
+
+  &__wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-2xs);
+
+    @include breakpoint-lg {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-xl);
+  }
+
+  &__link {
+    padding-left: 0;
+
+    @include breakpoint-lg {
+      padding-left: var(--#{$nsp}-space-lg);
+    }
+  }
+
+  &__content--indented {
+    @include breakpoint-md {
+      @include grid-indented();
+    }
+
+    .#{$nsp}-image--large {
+      @include breakpoint-lg {
+        margin-block: 40px;
+        margin-left: calc(var(--bsi-grid-max-width) / 12 * -1);
+        width: calc(var(--bsi-grid-max-width) - var(--#{$nsp}-space-3xl));
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  &__content--indented-richtext {
+    @include breakpoint-lg {
+      h2,
+      h3 {
+        margin-left: calc(var(--bsi-grid-max-width) / 12 * -1);
+      }
+      li h2,
+      li h3 {
+        margin-left: 0;
+      }
+    }
+  }
+}

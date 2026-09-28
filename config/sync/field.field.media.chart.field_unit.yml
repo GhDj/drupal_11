@@ -1,0 +1,24 @@
+uuid: 6aeda326-3793-445a-977d-94191c1dda70
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_unit
+    - filter.format.basic
+    - media.type.chart
+  module:
+    - text
+id: media.chart.field_unit
+field_name: field_unit
+entity_type: media
+bundle: chart
+label: Unit
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic
+field_type: text

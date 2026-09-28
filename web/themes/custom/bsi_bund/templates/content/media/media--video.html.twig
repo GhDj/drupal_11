@@ -1,0 +1,9 @@
+{#
+/**
+ * Neutral media image template.
+ */
+#}
+<figure{{ attributes.addClass('bsi-video') }}>
+  {# Thumbnail is rendered as part of the video player. #}
+  {{ content|without('field_media_source' in content|keys ? 'thumbnail') }}
+</figure>

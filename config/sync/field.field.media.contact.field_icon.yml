@@ -1,0 +1,23 @@
+uuid: 9f44885b-2bf0-4e83-90de-af2e412366ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_icon
+    - media.type.contact
+  module:
+    - ui_icons_field
+id: media.contact.field_icon
+field_name: field_icon
+entity_type: media
+bundle: contact
+label: Icon
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_icon_pack:
+    bsi_icons: bsi_icons
+field_type: ui_icon

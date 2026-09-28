@@ -1,0 +1,22 @@
+uuid: 90db5b50-d52e-4505-a2d9-52f1036dd6fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_text
+    - paragraphs.paragraphs_type.sequence_item
+  module:
+    - text
+id: paragraph.sequence_item.field_section_text
+field_name: field_section_text
+entity_type: paragraph
+bundle: sequence_item
+label: Introduction
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

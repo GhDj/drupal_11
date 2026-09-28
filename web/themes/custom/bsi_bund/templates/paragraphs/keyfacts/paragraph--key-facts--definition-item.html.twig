@@ -1,0 +1,30 @@
+{#
+/**
+ * Keyfacts Item paragraph
+ */
+#}
+{%
+  set classes = [
+    'bsi-facts-box__item',
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+        <dt class="bsi-facts-box__item-title">
+          <div class="bsi-heading__wrapper">
+            <div class="bsi-heading bsi-heading--6 bsi-facts-box__item-heading">
+              {{ content.field_section_title }}
+            </div>
+          </div>
+        </dt>
+        <dd class="bsi-facts-box__item-value">
+          {{ content.field_section_text }}
+        </dd>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

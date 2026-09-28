@@ -1,0 +1,35 @@
+// -----------------------------------------------------------------------------
+// Metanaviagation
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+.#{$nsp}-metanav {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-lg);
+    justify-content: space-between;
+
+    @include breakpoint-lg {
+      flex-direction: row;
+      gap: var(--#{$nsp}-space-xl);
+    }
+  }
+
+  &__item {
+    line-height: 1;
+  }
+
+  &__link {
+    @include typography("label-strong");
+    --#{$nsp}-link-decoration-line: none;
+    --#{$nsp}-link-decoration-line-hover: underline;
+
+    @include breakpoint-lg {
+      @include typography("body-small");
+    }
+  }
+}

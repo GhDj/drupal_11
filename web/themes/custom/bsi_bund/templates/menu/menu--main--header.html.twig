@@ -1,0 +1,139 @@
+{# Main-Navigation #}
+
+{% import _self as menus %}
+
+{{ menus.level1(items) }}
+
+{% macro level1(items) %}
+  {% import _self as menus %}
+  {% if items %}
+    <ul class="bsi-mainmenu__list">
+      {% for item in items %}
+        {% set l1Index = loop.index0 %}
+        <li class="bsi-mainmenu__list-item">
+          {% if item.below %}
+            {% set panelId = 'mainMenuL2-' ~ l1Index %}
+            <button type="button"
+                    class="bsi-button bsi-button--primary bsi-mainmenu__collapse-toggle"
+                    aria-controls="{{ panelId }}"
+                    aria-expanded="false"
+                    data-js-mainmenu-toggle="l1">
+              <span class="bsi-button__text">{{ item.title }}</span>
+            </button>
+            {{ menus.l2_panel(item, item.below, panelId, l1Index) }}
+          {% else %}
+            {% include '@bsi_bund/elements/link.html.twig' with {
+              url: item.url,
+              title: item.title,
+              extra_classes: 'bsi-mainmenu__link',
+            } only %}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+
+{% macro l2_panel(parent, items, panelId, l1Index) %}
+  {% import _self as menus %}
+  <div class="bsi-mainmenu__panel bsi-mainmenu__panel--l2"
+       id="{{ panelId }}"
+       data-js-mainmenu-panel="l2"
+       hidden>
+    <button type="button"
+            class="bsi-button bsi-button--inline-action bsi-mainmenu__back"
+            data-js-mainmenu-back=""
+            aria-label="{{ 'Back to main menu'|t }}">
+      {% include '@bsi_bund/components/icon.twig' with {
+        name: 'chevron-left',
+        decorative: true,
+        extra_classes: 'bsi-button__icon',
+      } only %}
+      <span class="bsi-button__text">{{ parent.title }}</span>
+    </button>
+
+    {# Overview link is rendered twice: --mobile variant is visible on small screens,
+       the column variant is visible on large screens. Both are in the DOM at all times. #}
+    {% include '@bsi_bund/elements/link.html.twig' with {
+      url: parent.url,
+      title: 'Overview: @title'|t({'@title': parent.title}),
+      extra_classes: 'bsi-mainmenu__overview-link bsi-mainmenu__overview-link--mobile',
+    } only %}
+
+    <div class="bsi-mainmenu__overview-column">
+      {% include '@bsi_bund/elements/link.html.twig' with {
+        url: parent.url,
+        title: 'Overview: @title'|t({'@title': parent.title}),
+        extra_classes: 'bsi-mainmenu__overview-link',
+      } only %}
+    </div>
+
+    <ul class="bsi-mainmenu__submenu">
+      {% for item in items %}
+        {{ menus.l2_item(item, l1Index, loop.index0) }}
+      {% endfor %}
+    </ul>
+
+    {# menu teaser #}
+    {% if parent.content %}
+      <div class="bsi-mainmenu__card">
+        {{ parent.content }}
+      </div>
+    {% endif %}
+
+  </div>
+{% endmacro %}
+
+{% macro l2_item(item, l1Index, l2Index) %}
+  {% import _self as menus %}
+  <li class="bsi-mainmenu__submenu-item">
+    {% if item.below %}
+      {% set panelId = 'mainMenuL3-' ~ l1Index ~ '-' ~ l2Index %}
+      <button type="button"
+              class="bsi-button bsi-button--primary bsi-mainmenu__collapse-toggle"
+              aria-controls="{{ panelId }}"
+              aria-expanded="false"
+              data-js-mainmenu-toggle="l2">
+        <span class="bsi-button__text">{{ item.title }}</span>
+        {% include '@bsi_bund/components/icon.twig' with {
+          name: 'chevron-down',
+          decorative: true,
+          extra_classes: 'bsi-button__icon',
+        } only %}
+      </button>
+      {{ menus.l3_panel(item, item.below, panelId) }}
+    {% else %}
+      {% include '@bsi_bund/elements/link.html.twig' with {
+        url: item.url,
+        title: item.title,
+        extra_classes: 'bsi-mainmenu__link',
+      } only %}
+    {% endif %}
+  </li>
+{% endmacro %}
+
+{% macro l3_panel(parent, items, panelId) %}
+  <div class="bsi-mainmenu__panel bsi-mainmenu__panel--l3"
+       id="{{ panelId }}"
+       data-js-mainmenu-panel="l3"
+       hidden>
+    <ul class="bsi-mainmenu__submenu">
+      <li class="bsi-mainmenu__submenu-item bsi-mainmenu__submenu-item--overview">
+        {% include '@bsi_bund/elements/link.html.twig' with {
+          url: parent.url,
+          title: parent.title,
+          extra_classes: 'bsi-mainmenu__link bsi-mainmenu__link--overview',
+        } only %}
+      </li>
+      {% for item in items %}
+        <li class="bsi-mainmenu__submenu-item">
+          {% include '@bsi_bund/elements/link.html.twig' with {
+            url: item.url,
+            title: item.title,
+            extra_classes: 'bsi-mainmenu__link',
+          } only %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endmacro %}

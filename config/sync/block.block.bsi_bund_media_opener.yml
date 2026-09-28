@@ -1,0 +1,38 @@
+uuid: b7118560-b207-4a7d-b793-5aca149b8cdd
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - ctools
+    - media
+  theme:
+    - bsi_bund
+id: bsi_bund_media_opener
+theme: bsi_bund
+region: pre_content
+weight: -14
+provider: null
+plugin: 'entity_view:media'
+settings:
+  id: 'entity_view:media'
+  label: 'Opener (Media)'
+  label_display: '0'
+  provider: ctools
+  context_mapping:
+    entity: '@bsi_media.media_route_context:media'
+  view_mode: opener
+visibility:
+  request_route_name:
+    id: request_route_name
+    negate: false
+    route_names: "entity.media.canonical\r\nentity.media.revision\r\nentity.media.latest_version"
+  'entity_bundle:media':
+    id: 'entity_bundle:media'
+    negate: false
+    context_mapping:
+      media: '@bsi_media.media_route_context:media'
+    bundles:
+      audio: audio
+      gallery: gallery
+      video: video

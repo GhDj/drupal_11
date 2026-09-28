@@ -1,0 +1,59 @@
+uuid: 90bdbb7c-f6ff-4e69-8c95-0d9c312e8a18
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.audio.field_body
+    - field.field.media.audio.field_copyright
+    - field.field.media.audio.field_media_source
+    - field.field.media.audio.field_tags
+    - media.type.audio
+  module:
+    - link
+id: media.audio.media_library
+targetEntityType: media
+bundle: audio
+mode: media_library
+content:
+  field_copyright:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_media_source:
+    type: link_default
+    weight: 1
+    region: content
+    settings:
+      placeholder_url: 'https://multimedia.gsb.bund.de/...'
+      placeholder_title: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 3
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  changed: true
+  created: true
+  field_body: true
+  field_tags: true
+  path: true
+  status: true
+  thumbnail: true
+  translation: true
+  uid: true

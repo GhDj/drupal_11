@@ -1,0 +1,19 @@
+uuid: 2ed509c0-3397-4a82-950e-fb237f8a48ea
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_protection_profile
+field_name: field_protection_profile
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

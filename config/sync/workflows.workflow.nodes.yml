@@ -1,0 +1,114 @@
+uuid: bc61c451-e4e6-420b-8ee0-ad33c24bd182
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.article
+    - node.type.certificate
+    - node.type.entry_page
+    - node.type.event
+    - node.type.inventory
+    - node.type.it_security_label
+    - node.type.job
+    - node.type.page
+    - node.type.report_page
+  module:
+    - content_moderation
+id: nodes
+label: Nodes
+type: content_moderation
+type_settings:
+  states:
+    deletion_request:
+      label: 'Deletion request'
+      weight: 1
+      published: false
+      default_revision: false
+    draft:
+      label: Draft
+      weight: -2
+      published: false
+      default_revision: false
+    in_release:
+      label: 'In Release'
+      weight: -1
+      published: false
+      default_revision: false
+    published:
+      label: Published
+      weight: 0
+      published: true
+      default_revision: true
+    unpublished:
+      label: Unpublished
+      weight: 2
+      published: false
+      default_revision: true
+  transitions:
+    create_new_draft:
+      label: 'Create New Draft'
+      from:
+        - draft
+        - published
+        - unpublished
+      to: draft
+      weight: -4
+    publish:
+      label: Publish
+      from:
+        - draft
+        - in_release
+        - published
+        - unpublished
+      to: published
+      weight: -1
+    reject:
+      label: Reject
+      from:
+        - deletion_request
+      to: published
+      weight: 2
+    request_approval:
+      label: 'Request Approval'
+      from:
+        - draft
+        - unpublished
+      to: in_release
+      weight: -3
+    request_deletion:
+      label: 'Request Deletion'
+      from:
+        - published
+        - unpublished
+      to: deletion_request
+      weight: 1
+    revise:
+      label: Revise
+      from:
+        - deletion_request
+      to: draft
+      weight: 3
+    unpublish:
+      label: Unpublish
+      from:
+        - published
+      to: unpublished
+      weight: 0
+    withdraw:
+      label: Withdraw
+      from:
+        - in_release
+      to: draft
+      weight: -2
+  entity_types:
+    node:
+      - article
+      - certificate
+      - entry_page
+      - event
+      - inventory
+      - it_security_label
+      - job
+      - page
+      - report_page
+  default_moderation_state: draft

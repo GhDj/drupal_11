@@ -1,0 +1,31 @@
+uuid: 843eca2d-a9ef-4577-a9c6-ca167129ac25
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_items
+    - media.type.download
+    - media.type.publication
+    - paragraphs.paragraphs_type.downloads
+id: paragraph.downloads.field_media_items
+field_name: field_media_items
+entity_type: paragraph
+bundle: downloads
+label: 'Media items'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      download: download
+      publication: publication
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: download
+field_type: entity_reference

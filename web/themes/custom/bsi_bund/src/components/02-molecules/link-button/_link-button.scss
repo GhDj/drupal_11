@@ -1,0 +1,196 @@
+// ##############################################################################################################################################
+// ⚠️ DEPRECATED: USE THE BUTTON-STYLES VARIANTS OF THE LINK COMPONENT INSTEAD: http://localhost:6006/?path=/story/molecules-link--button-styles
+// ##############################################################################################################################################
+
+// ##############################################################################################################################################
+// ⚠️ DEPRECATED: USE THE BUTTON-STYLES VARIANTS OF THE LINK COMPONENT INSTEAD: http://localhost:6006/?path=/story/molecules-link--button-styles
+// ##############################################################################################################################################
+
+// ##############################################################################################################################################
+// ⚠️ DEPRECATED: USE THE BUTTON-STYLES VARIANTS OF THE LINK COMPONENT INSTEAD: http://localhost:6006/?path=/story/molecules-link--button-styles
+// ##############################################################################################################################################
+
+@use "@globals/foundation/variables" as *;
+
+// -----------------------------------------------------------------------------
+// Tokens
+// -----------------------------------------------------------------------------
+:root {
+  --#{$nsp}-link-button-border-radius: 4px;
+  --#{$nsp}-link-button-border-width: 1px;
+  --#{$nsp}-link-button-border-width-active: 2px;
+  --#{$nsp}-link-button-small-font-size: 14px;
+  --#{$nsp}-link-button-small-line-height: 100%;
+}
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-link-button {
+  align-items: center;
+  background: var(--#{$nsp}-link-button-background);
+  border: var(--#{$nsp}-link-button-border-width) solid
+    var(--#{$nsp}-link-button-border-color);
+  border-radius: var(--#{$nsp}-link-button-border-radius);
+  box-sizing: border-box;
+  color: var(--#{$nsp}-link-button-text-color);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-family-base);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  gap: var(--#{$nsp}-size-2xs);
+  justify-content: center;
+  letter-spacing: -0.1px;
+  line-height: 100%;
+  min-height: 48px;
+  padding: var(--#{$nsp}-size-sm) var(--#{$nsp}-size-lg);
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &--state-hover {
+    background: var(--#{$nsp}-link-button-background-hover);
+    border-color: var(--#{$nsp}-link-button-border-color-hover);
+    color: var(--#{$nsp}-link-button-text-color-hover);
+  }
+
+  &:active,
+  &--state-active {
+    background: var(--#{$nsp}-link-button-background-active);
+    border-color: var(--#{$nsp}-link-button-border-color-active);
+    border-width: var(--#{$nsp}-link-button-border-width-active);
+    color: var(--#{$nsp}-link-button-text-color-active);
+  }
+
+  &:focus-visible,
+  &--state-focused {
+    outline: 2px solid;
+    outline-color: var(--#{$nsp}-color-base-focus);
+    outline-offset: 2px;
+  }
+
+  &[aria-disabled="true"],
+  &--state-disabled {
+    background: var(--#{$nsp}-link-button-background-disabled);
+    border-color: var(--#{$nsp}-link-button-border-color-disabled);
+    color: var(--#{$nsp}-link-button-text-color-disabled);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &--icon-only {
+    --#{$nsp}-icon-width: 24px;
+    padding: 0;
+    width: 48px;
+  }
+
+  .#{$nsp}-link__text,
+  &__text {
+    display: inline-block;
+
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    text-decoration: none;
+  }
+}
+
+.#{$nsp}-link-button--size-sm {
+  font-size: var(--#{$nsp}-link-button-small-font-size);
+  gap: var(--#{$nsp}-size-3xs);
+  height: var(--#{$nsp}-size-xl);
+  line-height: var(--#{$nsp}-link-button-small-line-height);
+  padding: var(--#{$nsp}-size-2xs) var(--#{$nsp}-size-xs);
+
+  .#{$nsp}-link-button__icon {
+    --#{$nsp}-icon-height: var(--#{$nsp}-size-sm);
+    --#{$nsp}-icon-width: var(--#{$nsp}-size-sm);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Themes
+// -----------------------------------------------------------------------------
+
+.#{$nsp}-link-button--primary {
+  --#{$nsp}-link-button-border-color: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-background: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-text-color: var(--#{$nsp}-color-neutral-50);
+  --#{$nsp}-link-button-border-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-background-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-button-text-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-border-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-background-active: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-button-text-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-border-color-disabled: var(--#{$nsp}-color-neutral-150);
+  --#{$nsp}-link-button-background-disabled: var(--#{$nsp}-color-neutral-100);
+  --#{$nsp}-link-button-text-color-disabled: var(--#{$nsp}-color-neutral-400);
+}
+
+.#{$nsp}-link-button--secondary {
+  --#{$nsp}-link-button-border-color: var(--#{$nsp}-color-blue-150);
+  --#{$nsp}-link-button-background: var(--#{$nsp}-color-blue-150);
+  --#{$nsp}-link-button-text-color: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-border-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-background-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-button-text-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-border-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-background-active: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-button-text-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-border-color-disabled: var(--#{$nsp}-color-neutral-150);
+  --#{$nsp}-link-button-background-disabled: var(--#{$nsp}-color-neutral-100);
+  --#{$nsp}-link-button-text-color-disabled: var(--#{$nsp}-color-neutral-400);
+}
+
+.#{$nsp}-link-button--tertiary {
+  --#{$nsp}-link-button-border-color: transparent;
+  --#{$nsp}-link-button-background: transparent;
+  --#{$nsp}-link-button-text-color: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-border-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-text-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-border-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-text-color-active: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-button-border-color-disabled: var(--#{$nsp}-color-neutral-150);
+  --#{$nsp}-link-button-background-disabled: var(--#{$nsp}-color-neutral-100);
+  --#{$nsp}-link-button-text-color-disabled: var(--#{$nsp}-color-neutral-400);
+
+  &:focus-visible,
+  &.#{$nsp}-link-button--state-focused {
+    border-color: var(--#{$nsp}-color-base-focus);
+    border-width: var(--#{$nsp}-link-button-border-width);
+    outline: none;
+    padding: var(--#{$nsp}-size-sm) var(--#{$nsp}-size-lg);
+  }
+}
+
+.#{$nsp}-link-button--destructive {
+  --#{$nsp}-link-button-border-color: var(--#{$nsp}-color-red-750);
+  --#{$nsp}-link-button-background: var(--#{$nsp}-color-red-750);
+  --#{$nsp}-link-button-text-color: var(--#{$nsp}-color-neutral-50);
+  --#{$nsp}-link-button-border-color-hover: var(--#{$nsp}-color-red-750);
+  --#{$nsp}-link-button-background-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-button-text-color-hover: var(--#{$nsp}-color-red-750);
+  --#{$nsp}-link-button-border-color-active: var(--#{$nsp}-color-red-750);
+  --#{$nsp}-link-button-background-active: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-button-text-color-active: var(--#{$nsp}-color-red-750);
+  --#{$nsp}-link-button-border-color-disabled: var(--#{$nsp}-color-neutral-150);
+  --#{$nsp}-link-button-background-disabled: var(--#{$nsp}-color-neutral-100);
+  --#{$nsp}-link-button-text-color-disabled: var(--#{$nsp}-color-neutral-400);
+}
+
+.#{$nsp}-link-button--success {
+  --#{$nsp}-link-button-border-color: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-link-button-background: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-link-button-text-color: var(--#{$nsp}-color-neutral-50);
+  --#{$nsp}-link-button-border-color-hover: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-link-button-background-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-button-text-color-hover: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-link-button-border-color-active: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-link-button-background-active: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-button-text-color-active: var(--#{$nsp}-color-green-750);
+  --#{$nsp}-link-button-border-color-disabled: var(--#{$nsp}-color-neutral-150);
+  --#{$nsp}-link-button-background-disabled: var(--#{$nsp}-color-neutral-100);
+  --#{$nsp}-link-button-text-color-disabled: var(--#{$nsp}-color-neutral-400);
+}

@@ -1,0 +1,7 @@
+bsi_cert.settings:
+  path: '/admin/config/services/bsi-cert'
+  defaults:
+    _form: 'Drupal\bsi_cert\Form\SettingsForm'
+    _title: 'CERT Security Announcements'
+  requirements:
+    _permission: 'administer site configuration'

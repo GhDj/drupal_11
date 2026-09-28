@@ -1,0 +1,75 @@
+// -----------------------------------------------------------------------------
+// Grids Variables
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+:root {
+  --#{$nsp}-grid-columns: 4;
+  --#{$nsp}-grid-gutter: 16px; //column gap
+  --#{$nsp}-grid-padding: 16px;
+  --#{$nsp}-grid-width: 100%;
+  --#{$nsp}-grid-max-width: 100%;
+  --#{$nsp}-grid-row-gap: var(--#{$nsp}-grid-gutter);
+
+  --#{$nsp}-grid-module-padding: 24px;
+  --#{$nsp}-grid-gutter-total: calc(
+    (var(--#{$nsp}-grid-columns) + 1) * var(--#{$nsp}-grid-gutter)
+  );
+  --#{$nsp}-grid-width-without-gutters: calc(
+    var(--#{$nsp}-grid-width) - var(--#{$nsp}-grid-gutter-total)
+  );
+  --#{$nsp}-grid-width-column: calc(
+    var(--#{$nsp}-grid-width-without-gutters) / var(--#{$nsp}-grid-columns)
+  );
+
+  --#{$nsp}-grid-two-columns: calc(
+    (var(--#{$nsp}-grid-width-column) * 2) + var(--#{$nsp}-grid-gutter)
+  );
+  --#{$nsp}-grid-three-columns: calc(
+    (var(--#{$nsp}-grid-width-column) * 3) + (var(--#{$nsp}-grid-gutter) * 2)
+  );
+  --#{$nsp}-grid-four-columns: calc(
+    (var(--#{$nsp}-grid-width-column) * 4) + (var(--#{$nsp}-grid-gutter) * 3)
+  );
+  --#{$nsp}-grid-five-columns: calc(
+    (var(--#{$nsp}-grid-width-column) * 5) + (var(--#{$nsp}-grid-gutter) * 4)
+  );
+  --#{$nsp}-grid-six-columns: calc(
+    (var(--#{$nsp}-grid-width-column) * 6) + (var(--#{$nsp}-grid-gutter) * 5)
+  );
+  --#{$nsp}-grid-seven-columns: calc(
+    (var(--#{$nsp}-grid-width-column) * 7) + (var(--#{$nsp}-grid-gutter) * 6)
+  );
+  --#{$nsp}-grid-eight-columns: calc(
+    (var(--#{$nsp}-grid-width-column) * 8) + (var(--#{$nsp}-grid-gutter) * 7)
+  );
+  --#{$nsp}-grid-nine-columns: calc(
+    (var(--#{$nsp}-grid-width-column) * 9) + (var(--#{$nsp}-grid-gutter) * 8)
+  );
+  --#{$nsp}-grid-ten-columns: calc(
+    (var(--#{$nsp}-grid-width-column) * 10) + (var(--#{$nsp}-grid-gutter) * 9)
+  );
+  --#{$nsp}-grid-eleven-columns: calc(
+    (var(--#{$nsp}-grid-width-column) * 11) + (var(--#{$nsp}-grid-gutter) * 10)
+  );
+  --#{$nsp}-grid-twelve-columns: var(--#{$nsp}-grid-width);
+
+  @include breakpoint-md {
+    --#{$nsp}-grid-columns: 6;
+    --#{$nsp}-grid-gutter: 24px;
+  }
+
+  @include breakpoint-lg {
+    --#{$nsp}-grid-columns: 12;
+    --#{$nsp}-grid-max-width: calc(1024px + 2 * (var(--#{$nsp}-grid-padding)));
+    --#{$nsp}-grid-padding: 24px;
+  }
+
+  @include breakpoint-xl {
+    --#{$nsp}-grid-columns: 12;
+    --#{$nsp}-grid-max-width: calc(1196px + 2 * (var(--#{$nsp}-grid-padding)));
+    --#{$nsp}-grid-gutter: 32px;
+  }
+}

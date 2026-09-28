@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: ac6f3611-c0dd-42f1-a672-19eb63bec90b
+  bundle: menu_link_content
+  default_langcode: de
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: LinkedIn
+  menu_name:
+    -
+      value: social-media
+  link:
+    -
+      uri: 'https://de.linkedin.com/company/bsibund'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -48
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1779451765

@@ -1,0 +1,8 @@
+third_party_settings:
+  layout_builder:
+    sections:
+      -
+        components:
+          63f4f82a-9466-4ef3-9d07-e0f780eda76f:
+            configuration:
+              label: Seitenabschnitte

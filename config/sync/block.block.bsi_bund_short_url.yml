@@ -1,0 +1,22 @@
+uuid: 62c2a793-8180-4a4a-a8a4-01d122542550
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  theme:
+    - bsi_bund
+id: bsi_bund_short_url
+theme: bsi_bund
+region: content
+weight: -9
+provider: null
+plugin: 'short_url:node'
+settings:
+  id: 'short_url:node'
+  label: 'Short URL'
+  label_display: visible
+  provider: node
+  context_mapping:
+    entity: '@node.node_route_context:node'
+visibility: {  }

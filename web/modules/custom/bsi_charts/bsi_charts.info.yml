@@ -1,0 +1,10 @@
+type: module
+name: 'BSI Charts'
+description: 'Support for media entities based on charts field'
+package: BSI
+
+core_version_requirement: ^10 || ^11
+
+dependencies:
+  - drupal:media
+  - charts:charts

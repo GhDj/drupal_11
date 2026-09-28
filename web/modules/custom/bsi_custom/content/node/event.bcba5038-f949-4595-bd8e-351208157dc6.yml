@@ -1,0 +1,182 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: bcba5038-f949-4595-bd8e-351208157dc6
+  bundle: event
+  default_langcode: de
+  depends:
+    734b5cd9-35c8-437f-a44a-1d2c1084d793: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Testinhalt: Termin'
+  created:
+    -
+      value: 1776343525
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: /termine/2026-04-16-testinhalt-termin
+      langcode: de
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Dies ist der Textkörper des Testinhalts "Termin".'
+      format: plain_text
+      summary: Zusammenfassung
+  field_date_range:
+    -
+      value: '2026-08-01T12:00:00'
+      end_value: '2026-08-01T16:00:00'
+    -
+      value: '2026-08-24T07:00:00'
+      end_value: '2026-08-26T10:00:00'
+  field_location:
+    -
+      value: Online
+  field_media:
+    -
+      entity: 734b5cd9-35c8-437f-a44a-1d2c1084d793
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ab6ea56b-f83a-4bd4-8027-3b823b721325
+          bundle: text_section
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1776345886
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_section_text:
+            -
+              value: '<p>Dies ist der Textinhalt des Seitenabschnittes "Text-Abschnitt".</p>'
+              format: basic
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 58c18703-22f8-4a52-bc8f-24fa45172e74
+          bundle: accordion
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1776347379
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_items:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 05564545-719f-4654-a440-a71cb57e94f1
+                  bundle: definition_item
+                  default_langcode: de
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1776844320
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_section_text:
+                    -
+                      value: '<p><span>Weitere Details zu Überschrift</span></p>'
+                      format: advanced
+                  field_section_title:
+                    -
+                      value: Überschrift
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 1b215300-1446-4f79-a6bd-eb44fb1e7c49
+                  bundle: definition_item
+                  default_langcode: de
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1776844323
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_section_text:
+                    -
+                      value: '<p><span>Analog zu weiterer Überschrift</span></p>'
+                      format: advanced
+                  field_section_title:
+                    -
+                      value: 'Weitere Überschrift'
+          field_section_text:
+            -
+              value: '<p>Es folgt ein Akkordeon.</p>'
+              format: basic
+          field_section_title:
+            -
+              value: Test-Akkordeon

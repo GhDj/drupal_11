@@ -1,0 +1,119 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 71ebfc2b-7b78-41b4-833c-ff81bad4f39a
+  bundle: contact
+  default_langcode: de
+translations:
+  en:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    name:
+      -
+        value: 'Press contact'
+    created:
+      -
+        value: 1780916425
+    path:
+      -
+        alias: ''
+        langcode: en
+        pathauto: 0
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    field_address:
+      -
+        langcode: de
+        country_code: DE
+        administrative_area: ''
+        locality: ''
+        dependent_locality: ''
+        postal_code: ''
+        sorting_code: ''
+        address_line1: ''
+        address_line2: ''
+        organization: 'Federal Office for Information Security'
+        given_name: ''
+        additional_name: ''
+        family_name: 'Press Office'
+    field_phone:
+      -
+        title: 'Phone number'
+        value: 0228-999582-5777
+    field_social_media:
+      -
+        uri: 'https://www.bsi.bund.de/DE/Service-Navi/Abonnements/SocialMedia/socialmedia_node.html'
+        title: 'The BSI on Social Media'
+        options: {  }
+    field_website:
+      -
+        uri: 'https://www.bsi.bund.de'
+        title: ''
+        options: {  }
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: Pressekontakt
+  created:
+    -
+      value: 1780906161
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_address:
+    -
+      langcode: de
+      country_code: DE
+      administrative_area: ''
+      locality: ''
+      dependent_locality: ''
+      postal_code: ''
+      sorting_code: ''
+      address_line1: ''
+      address_line2: ''
+      organization: 'Bundesamt für Sicherheit in der Informationstechnik'
+      given_name: ''
+      additional_name: ''
+      family_name: Pressestelle
+  field_mail:
+    -
+      value: presse@bsi.bund.de
+  field_phone:
+    -
+      title: Telefonnummer
+      value: 0228-999582-5777
+  field_social_media:
+    -
+      uri: 'https://www.bsi.bund.de/DE/Service-Navi/Abonnements/SocialMedia/socialmedia_node.html'
+      title: 'Das BSI in Social Media'
+      options: {  }
+  field_website:
+    -
+      uri: 'https://www.bsi.bund.de'
+      title: ''
+      options: {  }

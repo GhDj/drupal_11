@@ -1,0 +1,13 @@
+--- a/core/modules/options/options.module
++++ b/core/modules/options/options.module
+@@ -48,6 +48,10 @@
+       $values = $function($definition, $entity, $cacheable);
+     }
+     else {
++      if ($definition->isTranslatable() && $definition instanceof \Drupal\Core\Config\Entity\ConfigEntityInterface) {
++        // Load translated field definition.
++        $definition = $definition->load($definition->id());
++      }
+       $values = $definition->getSetting('allowed_values');
+     }
+

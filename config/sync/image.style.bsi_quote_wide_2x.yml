@@ -1,0 +1,21 @@
+uuid: 7d8c3c40-5868-4512-b1bb-8ce882fdf9a7
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_quote_wide_2x
+label: 'BSI Quote (wide, 2x)'
+effects:
+  68eaddc5-84e5-4936-9e2b-ae7c506dbe55:
+    uuid: 68eaddc5-84e5-4936-9e2b-ae7c506dbe55
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 610
+      height: 610
+      anchor: center-center
+  f091dda2-d7b2-41ce-bf3b-7f2ca6889f2e:
+    uuid: f091dda2-d7b2-41ce-bf3b-7f2ca6889f2e
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

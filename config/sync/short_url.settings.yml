@@ -1,0 +1,3 @@
+prefix: /dok/
+entity_types:
+  - node

@@ -1,0 +1,34 @@
+uuid: 72fda41e-cdc9-4ac8-93ef-e655f25cc4ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_tracks
+    - media.type.video
+  module:
+    - content_translation
+    - file
+third_party_settings:
+  content_translation:
+    translation_sync:
+      target_id: target_id
+      display: display
+      description: description
+id: media.video.field_tracks
+field_name: field_tracks
+entity_type: media
+bundle: video
+label: Tracks
+description: 'Subtitle files in WebVTT-Format (Web Video Text Tracks)'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: video/tracks
+  file_extensions: vtt
+  max_filesize: '3 MB'
+  description_field: true
+field_type: file

@@ -1,0 +1,86 @@
+/* stylelint-disable scss/no-global-function-names */
+// -----------------------------------------------------------------------------
+// Typography Mixins
+// -----------------------------------------------------------------------------
+
+// Inspiration: https://gist.github.com/fabricelejeune/bcdd3d4725d4e4cea672
+
+@use "sass:map";
+@use "sass:meta";
+@use "sass:list";
+@use "sass:string";
+@use "@globals/foundation/variables" as *;
+
+/**
+ * Apply typography styles from design tokens
+ *
+ * @param {string} $variant - Typography variant key (e.g., "small", "medium", "large")
+ * @param {number} $font-weight - Font weight (default: 400)
+ * @param {string} $font-style - Font style (default: normal)
+ * @param {list} $properties - List of properties to apply (default: font-size line-height letter-spacing)
+ *
+ * @example
+ *   @include typography("medium", 700, italic);
+ */
+
+@mixin typography(
+  $variant,
+  $font-weight: 400,
+  $font-style: normal,
+  $properties: font-size line-height letter-spacing font-family
+) {
+  $font-properties: map-deep-get($typography, $variant);
+
+  @if $font-properties {
+    @if contains($properties, font-size) and
+      map.has-key($font-properties, "font-size-min") and
+      map.has-key($font-properties, "font-size-max")
+    {
+      font-size: clamp(
+        map.get($font-properties, "font-size-min"),
+        5vw,
+        map.get($font-properties, "font-size-max")
+      );
+    }
+
+    @each $property, $values in $font-properties {
+      @if contains($properties, $property) {
+        @if $property == "letter-spacing" {
+          /* stylelint-disable-next-line scss/function-unquote-no-unquoted-strings-inside */
+          #{$property}: string.unquote(map.get($font-properties, $property));
+        } @else {
+          #{$property}: map.get($font-properties, $property);
+        }
+      }
+    }
+
+    font-style: $font-style;
+    font-weight: $font-weight;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Helper Functions
+// -----------------------------------------------------------------------------
+
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    @if meta.type-of($map) != "map" {
+      @warn "`#{$map}` is not a map.";
+      @return false;
+    }
+    $map: map.get($map, $key);
+  }
+
+  @return $map;
+}
+
+@function contains($list, $values...) {
+  @each $value in $values {
+    @if meta.type-of(list.index($list, $value)) != "number" {
+      @return false;
+    }
+  }
+
+  @return true;
+}

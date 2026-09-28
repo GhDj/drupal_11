@@ -1,0 +1,157 @@
+// -----------------------------------------------------------------------------
+// Timeline
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+@use "@globals/mixins/grid" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-sequence {
+  display: flex;
+  flex-direction: column;
+  gap: var(--#{$nsp}-space-md);
+}
+
+.#{$nsp}-timeline {
+  @include grid();
+
+  &__content {
+    margin: 0 auto;
+    max-width: 856px;
+    position: relative;
+    width: 100%;
+
+    &::before {
+      border: dashed 1px var(--#{$nsp}-color-neutral-350);
+      content: "";
+      height: 100%;
+      left: var(--#{$nsp}-space-2xs);
+      position: absolute;
+      top: 0;
+      width: 1px;
+
+      @include breakpoint-lg {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  &__progress {
+    background: var(--#{$nsp}-color-blue-800);
+    height: 0;
+    left: var(--#{$nsp}-space-2xs);
+    position: absolute;
+    top: 0;
+    transition: height 80ms linear;
+    width: 2px;
+    will-change: height;
+    z-index: 1;
+
+    @include breakpoint-lg {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__marker {
+    background: var(--#{$nsp}-color-base-white);
+    border: 1px solid var(--#{$nsp}-color-neutral-1000);
+    border-radius: 50%;
+    height: var(--#{$nsp}-space-2xs);
+    left: var(--#{$nsp}-space-2xs);
+    margin-left: -4px;
+    outline: solid var(--#{$nsp}-space-3xs) var(--#{$nsp}-color-base-white);
+    position: absolute;
+    top: 25px;
+    width: var(--#{$nsp}-space-2xs);
+    z-index: 2;
+
+    @include breakpoint-lg {
+      left: 50%;
+    }
+  }
+
+  &__year-title {
+    @include typography("heading-5");
+    background-color: var(--#{$nsp}-color-blue-750);
+    border-radius: 2px;
+    color: var(--#{$nsp}-color-neutral-50);
+    font-weight: bold;
+    margin-bottom: 60px;
+    outline: solid var(--#{$nsp}-space-3xs) var(--#{$nsp}-color-base-white);
+    padding: var(--#{$nsp}-space-4xs) var(--#{$nsp}-space-sm);
+    position: relative;
+    width: fit-content;
+    z-index: 2;
+
+    @include breakpoint-lg {
+      margin: 0 auto var(--#{$nsp}-space-md);
+    }
+  }
+
+  &__month-title {
+    @include typography("heading-5");
+    background-color: var(--#{$nsp}-color-blue-100);
+    border-radius: 2px;
+    color: var(--#{$nsp}-color-blue-750);
+    font-weight: 700;
+    margin-block: var(--#{$nsp}-space-2xl);
+    outline: solid var(--#{$nsp}-space-3xs) var(--#{$nsp}-color-base-white);
+    padding: var(--#{$nsp}-space-4xs) var(--#{$nsp}-space-sm);
+    position: relative;
+    width: fit-content;
+    z-index: 2;
+
+    @include breakpoint-lg {
+      margin: 35px auto;
+    }
+  }
+
+  &__item {
+    display: flex;
+    margin-bottom: var(--#{$nsp}-space-md);
+    padding-inline-start: var(--#{$nsp}-space-xl);
+    position: relative;
+
+    @include breakpoint-lg {
+      padding-inline-start: 0;
+    }
+  }
+
+  &__month--align-left &__item {
+    @include breakpoint-lg {
+      justify-content: flex-start;
+    }
+  }
+
+  &__month--align-right &__item {
+    @include breakpoint-lg {
+      justify-content: flex-end;
+    }
+  }
+
+  &__card {
+    background-color: var(--#{$nsp}-color-blue-100);
+    border-radius: 3px;
+    line-height: 1.6;
+    max-width: 400px;
+    padding: var(--#{$nsp}-space-lg);
+    width: 100%;
+
+    @include breakpoint-lg {
+      width: 45%;
+    }
+  }
+
+  &__card-title {
+    @include typography("heading-5");
+    color: var(--#{$nsp}-color-neutral-1000);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+}

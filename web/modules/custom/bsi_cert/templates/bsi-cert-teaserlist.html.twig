@@ -1,0 +1,65 @@
+{#
+/**
+ * @file
+ * Default template for a CERT teaser list.
+ *
+ * Available variables:
+ * - source:   machine name of the CERT source (e.g. 'citizen', 'federal').
+ * - label:    human-readable label of the source.
+ * - items:    list of items, each with:
+ *     - timestamp: timestamp of the record
+ *     - title:     string, cleaned of the [TAG] [severity] prefix
+ *     - tag:       'NEU' or 'UPDATE', or NULL if not present in the title
+ *     - severity:  'niedrig', 'mittel', 'hoch', 'kritisch', or NULL
+ *     - link:      absolute URL to the advisory detail page
+ * - more_link:     renderable link for more results
+ */
+#}
+{% if items is not empty %}
+  <div class="bsi-cert-teaserlist bsi-cert-teaserlist--{{ source }}">
+    <ul class="bsi-cert-teaserlist__grid">
+      {% for item in items %}
+        <li class="bsi-cert-teaser">
+          <a class="bsi-link bsi-cert-teaser__link" href="{{ item.url }}"
+             target="_blank" rel="noopener noreferrer" title="{{ 'Open security announcement in a new browser window: @title (source: @label)'|trans({
+                '@title': item.title,
+                '@label': label,
+              }) }}">
+            {% if item.timestamp %}
+              <time class="bsi-cert-teaser__date" datetime="{{ item.timestamp|format_date('html_date') }}">
+                {{- item.timestamp|format_date('date_short') -}}
+              </time>
+            {% endif %}
+            {% if item.tag %}
+              <span class="bsi-cert-teaser__tag bsi-cert-teaser__tag--{{ item.tag|lower }}">{{ item.tag }}</span>
+            {% endif %}
+            {% if item.severity %}
+              <span class="bsi-cert-teaser__severity bsi-cert-teaser__severity--{{ item.severity }}">{{ item.severity }}</span>
+            {% endif %}
+            <span class="bsi-cert-teaser__title">{{ item.title }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {% if more_link %}
+      <div class="bsi-cert-teaserlist__cta">
+        {% if more_link['#url'].isExternal() %}
+          {{ more_link|merge({'#attributes': cta['#attributes']|default(create_attribute())
+            .addClass('bsi-link', 'bsi-link--button', 'bsi-link--secondary-button', 'bsi-link--cta')
+            .setAttribute('target', '_blank')
+            .setAttribute('rel', 'noopener noreferrer')
+            .setAttribute('title', 'Opens in new browser window'|t)
+            .toArray()
+          }) }}
+        {% else %}
+          {{ more_link }}
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+{% else %}
+  <p class="bsi-cert-teaserlist bsi-cert-teaserlist--empty">
+    {{- 'There are currently no security announcements.'|t -}}
+  </p>
+{% endif %}

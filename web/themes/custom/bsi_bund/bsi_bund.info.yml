@@ -1,0 +1,29 @@
+name: BSI Bund
+type: theme
+base theme: claro
+description: A flexible theme with a responsive, mobile-first layout.
+package: Custom
+core_version_requirement: ^10 || ^11
+libraries:
+  - bsi_bund/global
+regions:
+  header: "Header"
+  breadcrumb: "Breadcrumb"
+  pre_content: "Pre-content"
+  highlighted: "Highlighted"
+  #help: "Help"
+  content: "Content"
+  footer: "Footer"
+  legal: "Legal"
+  # Hidden regions.
+  page_top: "Page top"
+  page_bottom: "Page bottom"
+  sidebar_first: "Sidebar first"
+regions_hidden:
+  - sidebar_first
+
+libraries-override:
+  claro/global-styling:
+    css:
+      base:
+        css/base/elements.css: {}

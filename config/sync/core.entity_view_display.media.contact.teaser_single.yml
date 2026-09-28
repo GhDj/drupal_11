@@ -1,0 +1,77 @@
+uuid: 47f38bac-94d2-4b1e-a4c9-91203b3c135b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.teaser_single
+    - field.field.media.contact.field_address
+    - field.field.media.contact.field_availability
+    - field.field.media.contact.field_geolocation
+    - field.field.media.contact.field_icon
+    - field.field.media.contact.field_mail
+    - field.field.media.contact.field_phone
+    - field.field.media.contact.field_social_media
+    - field.field.media.contact.field_vat_number
+    - field.field.media.contact.field_website
+    - media.type.contact
+  module:
+    - bsi_custom
+    - layout_builder
+    - ui_icons_field
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.contact.teaser_single
+targetEntityType: media
+bundle: contact
+mode: teaser_single
+content:
+  field_icon:
+    type: icon_formatter
+    label: hidden
+    settings:
+      icon_settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_mail:
+    type: email_mailto
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_phone:
+    type: phone_link
+    label: inline
+    settings:
+      title_tooltip: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_address: true
+  field_availability: true
+  field_geolocation: true
+  field_social_media: true
+  field_vat_number: true
+  field_website: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

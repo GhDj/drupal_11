@@ -1,0 +1,22 @@
+uuid: 54c034db-b75b-4742-a72e-8fda3376c896
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_text
+    - paragraphs.paragraphs_type.teaser_single
+  module:
+    - text
+id: paragraph.teaser_single.field_section_text
+field_name: field_section_text
+entity_type: paragraph
+bundle: teaser_single
+label: Introduction
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: be1dbedf-500f-4bcb-9e15-5dbc9f9b5bae
+  bundle: contact_topics
+  default_langcode: de
+  depends:
+    7465ee7c-8769-4b26-93ef-8d136ca3daa3: media
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Serviceleistungen
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1777386458
+  field_contact:
+    -
+      entity: 7465ee7c-8769-4b26-93ef-8d136ca3daa3

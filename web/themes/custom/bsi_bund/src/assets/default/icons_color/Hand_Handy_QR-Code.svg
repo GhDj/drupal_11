@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: #004b76;
+      }
+
+      .st0, .st1 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+
+      .st2 {
+        fill: #00a4b9;
+      }
+
+      .st1 {
+        stroke: #004f80;
+      }
+    </style>
+  </defs>
+  <g>
+    <g>
+      <path class="st0" d="M24,20.6c-1.3-3.9-6.2-4.8-7.6-4-1.6,1,1.9,7-1.9,18.3-1.6,4.6-3,9.2-3.3,13.1-1.2,14.9,13.1,22.5,22.5,18.4l13.9-6"/>
+      <path class="st0" d="M54.1,33.3V13.4c0-2-1.4-3.7-3.3-4-4.2-.4-8-.6-11.7-.6s-7.5.2-11.8.6c-1.8.2-3.3,2-3.3,4v42.7c0,2,1.4,3.7,3.3,4,4.2.4,8.3.6,12.4.6s6.4-.1,10.7-.5c1.9-.3,4-1.6,4-3.5"/>
+      <path class="st0" d="M55.2,56.5l3.2-1.4c1.5-.7,2.2-2.4,1.6-4-.5-1.3-1.7-1.9-2.8-1.9s-.8.1-1.1.2l-3.2,1.4c-1.5.6-2.2,2.4-1.6,4,.5,1.3,1.7,1.9,2.8,1.9s.8-.1,1.1-.2Z"/>
+      <line class="st0" x1="35.4" y1="55.8" x2="42.6" y2="55.8"/>
+      <line class="st0" x1="37.8" y1="12.9" x2="40.3" y2="12.9"/>
+    </g>
+    <line class="st0" x1="24" y1="51.5" x2="51.9" y2="51.5"/>
+    <line class="st0" x1="24" y1="16.7" x2="54.1" y2="16.7"/>
+    <path class="st0" d="M54.1,29.5l6.4-2.8c1.9-.8,2.8-3.1,2-5-.6-1.6-2-2.7-4.4-2.1-.6.2-3.3,1.1-4.1,1.5"/>
+    <path class="st0" d="M60.4,42.7c-.6-1.4-1.8-2.1-3.1-2.1s-.9.1-1.2.3l-3.5,1.5c-1.7.7-2.5,2.7-1.8,4.4.6,1.4,1.8,2.1,3.1,2.1s.9-.1,1.2-.3l3.5-1.5c1.8-.7,2.5-2.7,1.8-4.4Z"/>
+  </g>
+  <g>
+    <path class="st2" d="M35.3,28.3h-7.4v-7.4h7.4v7.4ZM28.9,21.9v5.3h5.3v-5.3h-5.3Z"/>
+    <path class="st2" d="M50.2,20.9v7.4h-7.4v-7.4h7.4ZM43.9,21.9v5.3h5.3v-5.3h-5.3Z"/>
+    <path class="st2" d="M27.9,43.2v-7.4h7.4v7.4s-7.4,0-7.4,0ZM34.2,42.2v-5.3h-5.3v5.3h5.3Z"/>
+    <g>
+      <path class="st2" d="M38.5,26.2v1.1h1.1v1.1h-1.1v1.1h-1.1v-1.1h-1.1v-1.1h1.1v-1.1h1.1Z"/>
+      <path class="st2" d="M39.6,37.9v2.1h-2.1v1.1h-1.1v-2.1h2.1v-1.1h1.1Z"/>
+      <path class="st2" d="M43.8,40v-2.1h-1.1v-1.1h2.1v3.2h-1Z"/>
+      <path class="st2" d="M47,37.9h1.1v-1.1h2.1v1.1h-1.1v1.1h-2.1v-1.1Z"/>
+      <path class="st2" d="M30,33.6h-1.1v1.1h-1.1v-3.2h1v1.1h1.1c0,.3,0,.7,0,1h0,0Z"/>
+      <path class="st2" d="M43.8,40v3.2h-1.1v-1.1h-1.1v-1.1h1.1v-1.1c.4.1.8.1,1.1.1h0Z"/>
+      <path class="st2" d="M49.2,32.6v1.1h1.1v2.1h-1v-1.1h-1.1v-2.1h1Z"/>
+      <path class="st2" d="M37.4,23h-1.1v-2.1h2.1v1h-1.1c0,.4,0,.7,0,1.1h0Z"/>
+      <path class="st2" d="M38.5,37.9h-2.1v-2.1h1.1v1.1h1.1c0,.3,0,.7,0,1h0Z"/>
+      <path class="st2" d="M39.6,31.5h2.1v1.1h-1.1v1.1h-1.1c.1-.8.1-1.5.1-2.2Z"/>
+      <path class="st2" d="M39.6,25.1v-2.1h2.1v1.1h-1.1v1.1c-.3,0-.7,0-1,0h0Z"/>
+      <path class="st2" d="M32.1,32.6h-1.1v-1.1h-1.1v-1.1h2.1c0,.8,0,1.5.1,2.2Z"/>
+      <path class="st2" d="M42.8,31.5h2.1v2.1h-1.1v-1.1h-1.1c.1-.3.1-.6.1-1Z"/>
+      <path class="st2" d="M47,41.1v2.1h-2.1v-1.1h1.1v-1.1c.3.1.7.1,1,.1Z"/>
+      <path class="st2" d="M41.7,30.4h-1.1v-3.2h1.1v3.2h0Z"/>
+      <path class="st2" d="M37.4,34.7h-2.1v-2.1h1.1v1.1h1.1c0,.3,0,.7,0,1h0Z"/>
+      <path class="st2" d="M49.2,41.1h1.1v2.1h-2.1v-1.1h1v-1Z"/>
+      <path class="st2" d="M46,31.5h2.1v1.1h-1.1v1.1h-1.1c.1-.8.1-1.5.1-2.2Z"/>
+      <path class="st2" d="M41.7,20.9v1h-2.1v-1h2.1Z"/>
+      <path class="st2" d="M49.2,40v1.1h-2.1v-1.1h2.1Z"/>
+      <path class="st2" d="M37.5,24.1v2.1h-1.1v-2.1h.4c.2,0,.4,0,.7,0Z"/>
+      <path class="st2" d="M38.5,42.2v1.1h-2.1v-1.1h2.1Z"/>
+      <path class="st2" d="M30,30.4h-2.1v-1.1h2.1v1.1Z"/>
+      <path class="st2" d="M34.3,30.4v-1.1h2.1v1.1h-2.1Z"/>
+      <path class="st2" d="M38.5,29.4h1.1v2.1h-1.1v-2.1Z"/>
+      <path class="st2" d="M44.9,31.5v-2.1h1.1v2.1h-1.1Z"/>
+      <path class="st2" d="M49.2,30.5h-2.1v-1.1h2.1v1.1h0Z"/>
+      <path class="st2" d="M37.4,35.8v-1.1h2.1v1.1h-2.1Z"/>
+      <path class="st2" d="M41.7,42.2v1.1h-2.1v-1.1h2.1Z"/>
+      <path class="st2" d="M32.1,33.6v1.1h-2.1v-1.1h2.1,0Z"/>
+      <path class="st2" d="M37.4,31.5h1.1v2.1h-1.1v-2.1Z"/>
+      <path class="st2" d="M49.2,30.5h1.1v2.1h-1.1v-2h0q0-.1,0,0Z"/>
+      <path class="st2" d="M42.8,37.9v1.1h-2.1v-1.1h2.1Z"/>
+      <path class="st2" d="M37.5,24.1v-1.1h1.1v1.1h-1.1Z"/>
+      <path class="st2" d="M38.5,26.2v-1.1h1.1v1.1h-1.1Z"/>
+      <path class="st2" d="M40.6,37.9h-1.1v-1.1h1.1v1.1Z"/>
+      <path class="st2" d="M32.1,33.6v-1.1h1.1v1.1h-1.1Z"/>
+      <path class="st2" d="M36.4,30.4h1.1v1.1h-1.1v-1.1Z"/>
+      <path class="st2" d="M41.7,41.1h-1.1v-1.1h1.1v1.1Z"/>
+      <path class="st2" d="M41.7,31.5v-1.1h1.1v1.1h-1.1Z"/>
+      <path class="st2" d="M46,41.1h-1.1v-1.1h1.1v1.1Z"/>
+      <path class="st2" d="M40.6,25.1h1.1v1h-1.1v-1Z"/>
+      <path class="st2" d="M38.5,42.2v-1.1h1.1v1.1h-1.1Z"/>
+      <path class="st2" d="M33.2,33.6h1.1v1.1h-1.1v-1.1Z"/>
+      <path class="st2" d="M42.8,30.4v-1.1h1.1v1.1h-1.1Z"/>
+      <path class="st2" d="M32.1,30.4v-1.1h1.1v1.1h-1.1Z"/>
+      <path class="st2" d="M48.1,34.7v1.1h-1.1v-1.1h1.1Z"/>
+      <path class="st2" d="M49.2,39h1.1v1.1h-1.1v-1.1Z"/>
+      <path class="st2" d="M48.1,34.7h-1.1v1.1h-2.1v1.1h-2.1v-1.1h1.1v-2.1h1.1v1.1h1.1v-1.1h1.1v-1.1h1.1c-.2.7-.2,1.4-.2,2.1h0Z"/>
+      <path class="st2" d="M32.1,30.4h1.1v2.1h-1.1v-2.1Z"/>
+      <path class="st2" d="M46,41.1v-1.1h1.1v1.1h-1.1Z"/>
+      <path class="st2" d="M30,23h3.2v3.2h-3.2v-3.2Z"/>
+      <path class="st2" d="M44.9,23h3.2v3.2h-3.2v-3.2Z"/>
+    </g>
+    <path class="st2" d="M33.2,37.9v3.2h-3.2v-3.2h3.2Z"/>
+    <g>
+      <path class="st2" d="M40.6,33.6h1.1v2.1h1.1v1.1h-2.1c-.1-1-.1-2.1-.1-3.2h0Z"/>
+      <path class="st2" d="M42.8,35.8v-2.1h1.1v2.1h-1.1Z"/>
+      <path class="st2" d="M47,40h-1.1v-1.1h1.1v1.1Z"/>
+    </g>
+  </g>
+  <path class="st1" d="M50.9,38.4c.6,1.4,1.9,2.1,3.1,2.1s.9-.1,1.2-.3l2.4-1.1c1.7-.7,2.5-2.7,1.8-4.4-.6-1.4-1.8-2.1-3.1-2.1s-.9.1-1.2.3l-2.4,1.1c-1.7.6-2.5,2.6-1.8,4.4h0Z"/>
+</svg>

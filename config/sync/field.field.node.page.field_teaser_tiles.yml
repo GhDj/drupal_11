@@ -1,0 +1,36 @@
+uuid: 068fdd40-b015-41d2-aa0f-efa8fe72e493
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_teaser_tiles
+    - node.type.article
+    - node.type.entry_page
+    - node.type.event
+    - node.type.job
+    - node.type.page
+id: node.page.field_teaser_tiles
+field_name: field_teaser_tiles
+entity_type: node
+bundle: page
+label: 'Teaser tiles override'
+description: 'When provided, these will override the automatically displayed menu-based tiles.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      article: article
+      entry_page: entry_page
+      page: page
+      job: job
+      event: event
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: article
+field_type: entity_reference

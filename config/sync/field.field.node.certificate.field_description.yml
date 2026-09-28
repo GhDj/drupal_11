@@ -1,0 +1,24 @@
+uuid: a26bb7ec-75be-4e17-a50d-9b83b671f078
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - filter.format.advanced
+    - node.type.certificate
+  module:
+    - text
+id: node.certificate.field_description
+field_name: field_description
+entity_type: node
+bundle: certificate
+label: 'Short description'
+description: 'Information about the certified product'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - advanced
+field_type: text_long

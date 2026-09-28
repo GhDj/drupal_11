@@ -1,0 +1,11 @@
+uuid: 84528d82-681f-4e0b-8358-d30af6b2b880
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.inline_center
+label: 'Inline (center)'
+description: 'A media element within a CKEditor textfield to be displayed centered in its own line.'
+targetEntityType: media
+cache: true

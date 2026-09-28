@@ -1,0 +1,36 @@
+{# Entry Page – Slider Opener = Hero Slider Container #}
+
+<div class="bsi-opener__content-wrapper">
+  {# IMAGE #}
+  <figure class="bsi-image bsi-opener__image">
+    {{ content.field_media }}
+  </figure>
+
+  <div class="bsi-opener__content-grid">
+    <div class="bsi-opener__content">
+
+      {# TITLE #}
+      {% if content.field_section_title %}
+        <h2 class="bsi-heading bsi-heading--4 bsi-opener__title">
+         {{ content.field_section_title.0 }}
+        </h2>
+      {% endif %}
+
+      {# TEXT #}
+      {% if content.field_section_text %}
+        <div class="bsi-opener__text bsi-bodytext">
+          {{ content.field_section_text }}
+        </div>
+      {% endif %}
+
+      {# CTA #}
+      {% if content.field_link %}
+        <div class="bsi-opener__button-box">
+          {{ content.field_link|merge({
+            '#modifiers': ['button', 'button--secondary']
+          }) }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

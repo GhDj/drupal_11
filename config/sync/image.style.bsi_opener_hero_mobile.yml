@@ -1,0 +1,21 @@
+uuid: 93c4fb5f-0ec3-42b7-8f24-0290f974114a
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_opener_hero_mobile
+label: 'BSI Opener Hero (mobile)'
+effects:
+  38611657-164e-41cb-ba4e-35789591c222:
+    uuid: 38611657-164e-41cb-ba4e-35789591c222
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 575
+      height: 360
+      anchor: center-center
+  e1810eca-753c-4af0-931b-aacdc663c0be:
+    uuid: e1810eca-753c-4af0-931b-aacdc663c0be
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

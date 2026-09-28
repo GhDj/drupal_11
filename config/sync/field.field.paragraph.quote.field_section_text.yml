@@ -1,0 +1,24 @@
+uuid: cc30f8b0-e49a-4909-8067-f7fa502e2641
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_text
+    - filter.format.basic
+    - paragraphs.paragraphs_type.quote
+  module:
+    - text
+id: paragraph.quote.field_section_text
+field_name: field_section_text
+entity_type: paragraph
+bundle: quote
+label: Quote
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic
+field_type: text_long

@@ -1,0 +1,21 @@
+uuid: c391fd39-60d1-445c-812b-a70f296634c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_employment_model
+    - node.type.job
+  module:
+    - options
+id: node.job.field_employment_model
+field_name: field_employment_model
+entity_type: node
+bundle: job
+label: 'Employment model'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

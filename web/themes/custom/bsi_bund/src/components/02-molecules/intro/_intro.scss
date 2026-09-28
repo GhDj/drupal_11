@@ -1,0 +1,36 @@
+// -----------------------------------------------------------------------------
+// Intro
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+@use "@globals/mixins/grid" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-intro {
+  &__content {
+    @include grid(true);
+    border-bottom: 1px solid var(--#{$nsp}-color-neutral-150);
+    border-top: 1px solid var(--#{$nsp}-color-neutral-150);
+    padding-block: var(--#{$nsp}-space-module);
+  }
+
+  &__lead {
+    @include typography("heading-4");
+    @include breakpoint-lg {
+      grid-column: 1 / span 4;
+    }
+  }
+
+  &__body {
+    font-size: 18px;
+
+    @include breakpoint-lg {
+      font-size: 20px;
+      grid-column: 6 / span 7;
+    }
+  }
+}

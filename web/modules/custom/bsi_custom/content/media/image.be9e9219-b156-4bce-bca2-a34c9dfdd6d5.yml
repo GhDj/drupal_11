@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: be9e9219-b156-4bce-bca2-a34c9dfdd6d5
+  bundle: image
+  default_langcode: de
+  depends:
+    1dfe816a-7b1f-4b24-b0c5-ac6c8bd85fdf: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Opener Katalog-Liste'
+  created:
+    -
+      value: 1780044433
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: 1dfe816a-7b1f-4b24-b0c5-ac6c8bd85fdf
+      alt: 'Verschiedene Meldungen-Symbole kreisen auf dunkelblauem Hintergrund. Im Fokus: Ein Dokument mit Checkliste.'
+      title: ''
+      width: 4784
+      height: 1760

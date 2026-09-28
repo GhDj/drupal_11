@@ -1,0 +1,99 @@
+// -----------------------------------------------------------------------------
+// Header
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+
+:root {
+  --#{$nsp}-header-height: 88px;
+
+  @include breakpoint-lg {
+    --#{$nsp}-header-height: 172px;
+  }
+}
+
+.#{$nsp}-header {
+  height: var(--#{$nsp}-header-height);
+
+  // header grid-wrapper
+  &__grid {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    margin-inline: auto;
+    max-width: var(--#{$nsp}-grid-max-width);
+    padding: var(--#{$nsp}-space-md) var(--#{$nsp}-grid-padding);
+  }
+
+  // logo
+  &__logo {
+    align-items: center;
+    display: flex;
+
+    &--desktop {
+      display: none;
+      height: 81px;
+
+      @include breakpoint-lg {
+        display: block;
+      }
+    }
+
+    // mobile logo
+    &--mobile {
+      height: 28px;
+
+      @include breakpoint-lg {
+        display: none;
+      }
+    }
+  }
+
+  // right header section
+  &__right {
+    display: flex;
+    gap: var(--#{$nsp}-space-xs);
+    justify-content: space-between;
+
+    @include breakpoint-lg {
+      flex-direction: column;
+    }
+  }
+
+  // search button
+  &__search-button {
+    order: 1;
+
+    @include breakpoint-lg {
+      --#{$nsp}-button-text-color: var(--#{$nsp}-color-black);
+      --#{$nsp}-icon-width: 16px;
+      height: 32px;
+      width: 32px;
+    }
+  }
+
+  // metanavigation (desktop)
+  &__meta-navigation {
+    display: none;
+    padding: var(--#{$nsp}-space-4xs) 0;
+
+    @include breakpoint-lg {
+      display: block;
+    }
+  }
+
+  // mainnavigation
+  &__navigation {
+    display: flex;
+    gap: var(--#{$nsp}-space-sm);
+
+    .#{$nsp}-metanav__list {
+      padding: 0 var(--#{$nsp}-space-sm);
+
+      @include breakpoint-lg {
+        display: none;
+      }
+    }
+  }
+}

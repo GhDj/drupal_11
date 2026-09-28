@@ -1,0 +1,10 @@
+services:
+  bsi_media.download_route_subscriber:
+    class: Drupal\bsi_media\EventSubscriber\MediaDownloadAccessRouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  bsi_media.media_route_context:
+    class: Drupal\bsi_media\ContextProvider\MediaRouteContext
+    autowire: true
+    tags:
+      - { name: 'context_provider' }

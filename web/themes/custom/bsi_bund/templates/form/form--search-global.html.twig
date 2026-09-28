@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see \Drupal\Core\Form\FormPreprocess::preprocessForm()
+ *
+ * @ingroup themeable
+ */
+#}
+<form{{ attributes.removeClass('views-exposed-form') }}>
+  <div class="bsi-searchbar">
+    {% block form_items %}
+      {{ element|without('actions', '#children') }}
+    {% endblock %}
+
+    {% block actions %}
+      <div{{ create_attribute(element.actions['#attributes']|default([]))
+        .addClass(has_parent ? 'js-form-wrapper')
+      }}>{{ element.actions }}</div>
+    {% endblock %}
+  </div>
+</form>

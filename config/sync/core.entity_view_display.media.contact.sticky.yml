@@ -1,0 +1,134 @@
+uuid: 48bcced3-4d63-4bcc-929a-37371b885114
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.sticky
+    - field.field.media.contact.field_address
+    - field.field.media.contact.field_availability
+    - field.field.media.contact.field_geolocation
+    - field.field.media.contact.field_icon
+    - field.field.media.contact.field_mail
+    - field.field.media.contact.field_phone
+    - field.field.media.contact.field_social_media
+    - field.field.media.contact.field_vat_number
+    - field.field.media.contact.field_website
+    - media.type.contact
+  module:
+    - address
+    - layout_builder
+    - link
+    - office_hours
+    - phone_label
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.contact.sticky
+targetEntityType: media
+bundle: contact
+mode: sticky
+content:
+  field_address:
+    type: address_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_availability:
+    type: office_hours
+    label: above
+    settings:
+      day_format: short
+      time_format: H
+      compress: false
+      grouped: true
+      show_empty: false
+      show_closed: open
+      closed_format: Geschlossen
+      all_day_format: 'Ganztägig geöffnet'
+      separator:
+        days: '<br />'
+        grouped_days: ' - '
+        day_hours: ': '
+        hours_hours: '-'
+        more_hours: ', '
+      current_status:
+        position: ''
+        open_text: Geöffnet
+        closed_text: Geschlossen
+      exceptions:
+        title: Ausnahmen
+        replace_exceptions: false
+        restrict_exceptions_to_num_days: 7
+        restrict_seasons_to_num_days: 366
+        date_format: long
+        all_day_format: 'Ganztägig geöffnet'
+      timezone_field: ''
+      office_hours_first_day: ''
+      schema:
+        enabled: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_mail:
+    type: email_mailto
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_phone:
+    type: phone_label
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_social_media:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_vat_number:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_website:
+    type: link
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_geolocation: true
+  field_icon: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

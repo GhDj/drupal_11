@@ -1,0 +1,30 @@
+{#
+/**
+* Theme override to display news card intro page.
+*/
+#}
+
+{{ attach_library('claro/classy.node') }}
+
+{% set node_classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+] %}
+
+{% include '@bsi_bund/components/card.twig' with {
+  attributes: attributes.addClass(node_classes),
+  theme: 'blue-100',
+  image: content.field_media,
+  topline: content.created,
+  heading: content.title,
+  body: content.body,
+  link: content.field_link is not empty
+    ? content.field_link|merge({
+        '#extra_classes': ['bsi-card__link'],
+      })
+    : null,
+} %}

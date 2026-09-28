@@ -1,0 +1,31 @@
+{#
+/**
+* @file
+* Default theme implementation to display the file entity as an audio tag.
+*
+* Available variables:
+* - attributes: An array of HTML attributes, intended to be added to the
+*   audio tag.
+* - sources: And array of items to be added as sources for the video tag. Each
+*   element is an array with the following elements:
+*   - url: A url object.
+*   - attributes: A Drupal attributes object to be added to the source tag.
+* - tracks: And array of items to be added as source tracks for the video tag. Each
+*   element is an array with the following elements:
+*   - url: A url object.
+*   - attributes: A Drupal attributes object to be added to the track tag.
+*
+* @ingroup themeable
+*/
+#}
+<audio {{ attributes }}>
+  {% for source in sources %}
+    <source {{ source.attributes }} />
+  {% endfor %}
+  {% for track in tracks %}
+    <track {{ track.attributes }}{% if loop.index == 1 %} default{% endif %}/>
+  {% endfor %}
+  {# {{ 'Your browser does not support the audio tag. Alternatively, you may <a href=":download_url">download the audio file</a>.'|trans({
+    ':download_url': sources.0.url,
+  }) #}
+</audio>

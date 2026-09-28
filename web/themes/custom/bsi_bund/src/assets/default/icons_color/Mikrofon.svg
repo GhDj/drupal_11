@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" width="26.1mm" height="26.1mm" version="1.1" viewBox="0 0 74 74">
+  <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: #004b76;
+      }
+
+      .st0, .st1 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+
+      .st1 {
+        stroke: #00a4b9;
+      }
+    </style>
+  </defs>
+  <g>
+    <path class="st0" d="M23.4,59.6h27.3c.8,0,1.5.6,1.5,1.5v1.7c0,.8-.6,1.5-1.5,1.5h-27.3c-.8,0-1.5-.6-1.5-1.5v-1.7c0-.8.6-1.5,1.5-1.5Z"/>
+    <path class="st0" d="M28.2,30.5h5.1"/>
+    <g>
+      <g>
+        <path class="st0" d="M40.5,30.5h5.1"/>
+        <path class="st0" d="M41,25.3h4.6"/>
+        <path class="st0" d="M41.1,35.7h4.5"/>
+      </g>
+      <path class="st0" d="M36.6,15.1h.5c4.7,0,8.5,3.8,8.5,8.5v16.3c0,4.7-3.8,8.5-8.5,8.5h-.5c-4.7,0-8.5-3.8-8.5-8.5v-16.3c0-4.7,3.8-8.5,8.5-8.5Z"/>
+      <path class="st0" d="M49.2,45.1v.3c0,4.7-5.3,8.5-11.9,8.5h-.7c-6.6,0-11.9-3.8-11.9-8.5v-.3"/>
+      <g>
+        <path class="st0" d="M37,54.4v4.5"/>
+        <path class="st0" d="M28.2,25.3h4.6"/>
+        <path class="st0" d="M28.2,35.7h4.5"/>
+      </g>
+    </g>
+  </g>
+  <g>
+    <path class="st1" d="M18,9.6c-3.2,3.2-5.2,7.7-5.6,12.8s.9,9.9,3.5,13.8"/>
+    <path class="st1" d="M20.6,13.5c-2.4,2.4-3.9,5.7-4.1,9.3s.6,7.3,2.6,10.1"/>
+    <path class="st1" d="M23.3,17.4c-1.5,1.5-2.5,3.6-2.7,5.9s.4,4.7,1.7,6.4"/>
+  </g>
+  <g>
+    <path class="st1" d="M55.3,9.6c3.2,3.2,5.2,7.7,5.6,12.8s-.9,9.9-3.5,13.8"/>
+    <path class="st1" d="M52.7,13.5c2.4,2.4,3.9,5.7,4.1,9.3s-.6,7.3-2.6,10.1"/>
+    <path class="st1" d="M50,17.4c1.5,1.5,2.5,3.6,2.7,5.9s-.4,4.7-1.7,6.4"/>
+  </g>
+</svg>

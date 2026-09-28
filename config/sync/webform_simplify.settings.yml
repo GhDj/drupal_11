@@ -1,0 +1,29 @@
+_core:
+  default_config_hash: ONlrXNUNd4fK7pI4qOinjFfavMAf4bi3m2Va4V1xeYA
+disable_help: false
+simplify_super_user: false
+webform_settings:
+  disabled_access_settings:
+    - administer
+    - test
+    - configuration
+  disabled_access_autocomplete_settings: {  }
+  disabled_access_roles_settings: {  }
+  disabled_confirmation_types: null
+  disabled_form_settings:
+    - form_behaviors
+    - access_denied
+    - wizard_settings
+    - file_settings
+    - custom_settings
+  disabled_submissions_settings:
+    - submission_behaviors
+    - submission_user_settings
+    - submission_access
+    - access_denied
+    - submission_limits
+    - purge_settings
+    - draft_settings
+    - autofill_settings
+    - views_settings
+element_settings: {  }

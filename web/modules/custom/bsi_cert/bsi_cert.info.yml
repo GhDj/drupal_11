@@ -1,0 +1,12 @@
+type: module
+name: 'CERT Security Announcements'
+description: 'Integrates CERT security announcements into the site.'
+package: BSI
+
+core_version_requirement: ^10.3 || ^11
+
+dependencies:
+  - drupal:block
+  - bsi_custom:bsi_custom
+
+configure: bsi_cert.settings

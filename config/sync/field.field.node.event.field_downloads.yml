@@ -1,0 +1,23 @@
+uuid: 1ee87d21-893d-4518-ba9d-13f07c42f06a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_downloads
+    - node.type.event
+  module:
+    - link
+id: node.event.field_downloads
+field_name: field_downloads
+entity_type: node
+bundle: event
+label: Downloads
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 1
+field_type: link

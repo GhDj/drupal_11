@@ -1,0 +1,164 @@
+uuid: 9fba424b-3296-447d-8e85-dda0acf8e784
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.entry_page.body
+    - field.field.node.entry_page.field_audiences
+    - field.field.node.entry_page.field_downloads
+    - field.field.node.entry_page.field_downloads_title
+    - field.field.node.entry_page.field_links
+    - field.field.node.entry_page.field_links_title
+    - field.field.node.entry_page.field_media
+    - field.field.node.entry_page.field_metatags
+    - field.field.node.entry_page.field_paragraphs
+    - field.field.node.entry_page.field_stage_extra
+    - field.field.node.entry_page.field_stage_items
+    - field.field.node.entry_page.field_tags
+    - field.field.node.entry_page.field_topics
+    - field.field.node.entry_page.layout_builder__layout
+    - field.field.node.entry_page.layout_builder__translation
+    - node.type.entry_page
+    - views.view.search_yearly_report
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - views
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          63f4f82a-9466-4ef3-9d07-e0f780eda76f:
+            uuid: 63f4f82a-9466-4ef3-9d07-e0f780eda76f
+            region: content
+            configuration:
+              id: 'field_block:node:entry_page:field_paragraphs'
+              label: Seitenabschnitte
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          a2286e42-9664-4ac9-a50f-08674accb627:
+            uuid: a2286e42-9664-4ac9-a50f-08674accb627
+            region: content
+            configuration:
+              id: 'extra_field_block:node:entry_page:content_moderation_control'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 0
+            additional: {  }
+          b7e3a1f2-5d84-4c9e-a2b1-8f6d4e3c7a90:
+            uuid: b7e3a1f2-5d84-4c9e-a2b1-8f6d4e3c7a90
+            region: content
+            configuration:
+              id: 'views_block:search_yearly_report-block_search_yearly_reports'
+              label: 'Search Yearly Report'
+              label_display: '0'
+              provider: views
+              views_label: ''
+              items_per_page: none
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories:
+      - '@entity'
+      - BSI
+      - 'BSI Bericht'
+      - 'BSI Search'
+      - 'Chaos Tools'
+      - 'Config Pages'
+      - Content
+      - 'Content fields'
+      - Editoria11y
+      - Facets
+      - Forms
+      - Help
+      - 'Lists (Views)'
+      - 'Menu item Fields'
+      - Menus
+      - System
+      - Views
+      - Webform
+      - core
+    entity_view_mode_restriction:
+      allowed_layouts:
+        - layout_onecol
+      denylisted_blocks: {  }
+      allowlisted_blocks:
+        'Lists (Views)':
+          - 'views_block:search_yearly_report-block_search_yearly_reports'
+        Webform:
+          - webform_block
+      restricted_categories:
+        - '@entity'
+        - 'Chaos Tools'
+        - 'Config Pages'
+        - Content
+        - 'Content fields'
+        - Editoria11y
+        - Forms
+        - Help
+        - 'Menu item Fields'
+        - Menus
+        - System
+        - core
+id: node.entry_page.full
+targetEntityType: node
+bundle: entry_page
+mode: full
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+hidden:
+  access_restrictions: true
+  body: true
+  book_navigation: true
+  book_navigation_without_tree: true
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audiences: true
+  field_downloads: true
+  field_downloads_title: true
+  field_links: true
+  field_links_title: true
+  field_media: true
+  field_metatags: true
+  field_paragraphs: true
+  field_stage_extra: true
+  field_stage_items: true
+  field_tags: true
+  field_topics: true
+  langcode: true
+  layout_builder__layout: true
+  layout_builder__translation: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  title: true
+  uid: true

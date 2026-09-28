@@ -1,0 +1,105 @@
+uuid: 796d62b7-d43d-43e6-9349-962ad6d97e22
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.content
+    - field.field.media.audio.field_body
+    - field.field.media.audio.field_copyright
+    - field.field.media.audio.field_media_source
+    - field.field.media.audio.field_tags
+    - media.type.audio
+    - responsive_image.styles.bsi_audio
+  module:
+    - bsi_custom
+    - layout_builder
+    - media_remote_file
+    - responsive_image
+    - text_summary_formatter
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.audio.content
+targetEntityType: media
+bundle: audio
+mode: content
+content:
+  created:
+    type: timestamp
+    label: hidden
+    settings:
+      date_format: date_short
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: ''
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+        description: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_body:
+    type: text_summary_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_copyright:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_media_source:
+    type: remote_file_audio
+    label: hidden
+    settings:
+      controls: true
+      autoplay: false
+      loop: false
+      multiple_file_display_type: sources
+      track_field: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  thumbnail:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: bsi_audio
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_tags: true
+  langcode: true
+  search_api_excerpt: true
+  uid: true

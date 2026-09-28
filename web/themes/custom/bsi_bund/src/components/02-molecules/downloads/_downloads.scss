@@ -1,0 +1,117 @@
+// -----------------------------------------------------------------------------
+// Downloads
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Tokens
+// -----------------------------------------------------------------------------
+:root {
+  --#{$nsp}-downloads-item-gap: var(--#{$nsp}-space-xl);
+  --#{$nsp}-downloads-body-gap: var(--#{$nsp}-space-lg);
+  --#{$nsp}-downloads-media-size: 200px;
+  --#{$nsp}-downloads-media-padding: var(--#{$nsp}-space-sm);
+  --#{$nsp}-downloads-media-background: var(--#{$nsp}-color-neutral-100);
+  --#{$nsp}-downloads-media-frame-background: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-downloads-media-border-radius: var(--#{$nsp}-space-4xs);
+  --#{$nsp}-downloads-media-icon-size: 96px;
+  --#{$nsp}-downloads-text-color: var(--#{$nsp}-color-neutral-1000);
+}
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-downloads {
+  display: grid;
+  gap: var(--#{$nsp}-space-3xl);
+  width: 100%;
+
+  &__item {
+    color: var(--#{$nsp}-downloads-text-color);
+    display: grid;
+    gap: var(--#{$nsp}-space-lg);
+    width: 100%;
+
+    @include breakpoint-md {
+      align-items: start;
+      gap: var(--#{$nsp}-downloads-item-gap);
+      grid-template-columns: var(--#{$nsp}-downloads-media-size) minmax(0, 1fr);
+    }
+  }
+
+  &__media {
+    align-items: stretch;
+    background: var(--#{$nsp}-downloads-media-background);
+    display: flex;
+    height: var(--#{$nsp}-downloads-media-size);
+    padding: var(--#{$nsp}-downloads-media-padding);
+    width: var(--#{$nsp}-downloads-media-size);
+  }
+
+  &__media-frame {
+    align-items: center;
+    background: var(--#{$nsp}-downloads-media-frame-background);
+    border-radius: var(--#{$nsp}-downloads-media-border-radius);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &__media-icon {
+    --#{$nsp}-icon-height: var(--#{$nsp}-downloads-media-icon-size);
+    --#{$nsp}-icon-width: var(--#{$nsp}-downloads-media-icon-size);
+  }
+
+  &__thumbnail,
+  &__thumbnail .#{$nsp}-image {
+    height: 100%;
+    width: 100%;
+  }
+
+  &__thumbnail .#{$nsp}-image {
+    object-fit: contain;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-downloads-body-gap);
+  }
+
+  &__title {
+    font-weight: 700;
+  }
+
+  &__text {
+    @include typography("body");
+  }
+
+  &__actions {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--#{$nsp}-space-sm) var(--#{$nsp}-space-3xs);
+
+    .#{$nsp}-link + .#{$nsp}-link {
+      color: var(--#{$nsp}-color-neutral-750);
+
+      .#{$nsp}-link__icon {
+        display: none;
+      }
+
+      .#{$nsp}-link__text {
+        text-decoration: none;
+
+        &:focus-visible,
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

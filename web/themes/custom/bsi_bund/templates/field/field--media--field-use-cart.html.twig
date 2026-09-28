@@ -1,0 +1,26 @@
+{#
+/**
+* @file
+* Renders a publication media entity's field_use_cart to add an item to the cart.
+*/
+#}
+{% extends 'field--link.html.twig' %}
+
+{% block item %}
+  {% if element['#items'].get(_key).value %}
+    {% set url = path('webform_entity_cart.update', {
+      'operation': 'add',
+      'entity_type_id': entity_type,
+      'entity_id': element['#object'].id(),
+      'count': constant('\\Drupal\\webform_entity_cart\\WebformEntityCartInterface::COUNT_ANY'),
+    }) %}
+    {% include '@bsi_bund/elements/link.html.twig' with {
+      'base_class': 'bsi-link',
+      'url': url,
+      'title': label,
+      'icon': 'printer',
+      'icon_position': 'before',
+      'extra_classes': ['use-ajax'],
+    } only %}
+  {% endif %}
+{% endblock %}

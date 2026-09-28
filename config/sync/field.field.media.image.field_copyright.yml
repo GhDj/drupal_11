@@ -1,0 +1,19 @@
+uuid: 8c312f70-895f-40b1-a8cb-eca971bb6314
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_copyright
+    - media.type.image
+id: media.image.field_copyright
+field_name: field_copyright
+entity_type: media
+bundle: image
+label: Copyright
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

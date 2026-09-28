@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 1e54d19b-aae9-4482-b8a0-18e4c54a5216
+  bundle: image
+  default_langcode: de
+  depends:
+    71b3c831-4d59-4479-941e-4dfd2c76a12d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Opener Audio'
+  created:
+    -
+      value: 1780044276
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: 71b3c831-4d59-4479-941e-4dfd2c76a12d
+      alt: 'Verschiedene Medien-Symbole kreisen auf dunkelblauem Hintergrund. Im Fokus: Eine Dokument mit Lautsprecher-Symbol.'
+      title: ''
+      width: 4784
+      height: 1760

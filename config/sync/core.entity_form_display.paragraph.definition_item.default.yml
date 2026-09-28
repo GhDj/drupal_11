@@ -1,0 +1,46 @@
+uuid: 4b6e9709-6d66-4510-9df6-5aa29c702027
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.definition_item.field_jumplink
+    - field.field.paragraph.definition_item.field_link
+    - field.field.paragraph.definition_item.field_section_text
+    - field.field.paragraph.definition_item.field_section_title
+    - paragraphs.paragraphs_type.definition_item
+  module:
+    - text
+id: paragraph.definition_item.default
+targetEntityType: paragraph
+bundle: definition_item
+mode: default
+content:
+  field_jumplink:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_text:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_link: true
+  status: true
+  translation: true

@@ -1,0 +1,14 @@
+uuid: 16d9046e-b602-4e8e-95f2-ba4f443f9958
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.csn_deh
+  module:
+    - user
+id: user_add_role_action.csn_deh
+label: 'Add the Digital First-Aider role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: csn_deh

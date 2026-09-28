@@ -1,0 +1,304 @@
+diff --git a/drush.services.yml b/drush.services.yml
+index 441ae0c3a481128e5f264ae5ad579ba38e3e6144..a02bba6579a1fa3a0be15dfd2283405e2edd09f7 100644
+--- a/drush.services.yml
++++ b/drush.services.yml
+@@ -1,6 +1,6 @@
+ services:
+   default_content.commands:
+-    class: \Drupal\default_content\Commands\DefaultContentCommands
+-    arguments: ['@default_content.exporter']
++    class: Drupal\default_content\Commands\DefaultContentCommands
++    arguments: ['@default_content.exporter', '@default_content.importer', '%container.modules%']
+     tags:
+       - { name: drush.command }
+diff --git a/src/Commands/DefaultContentCommands.php b/src/Commands/DefaultContentCommands.php
+index 19b858aa04dbaf4760dacf5c02dd4ffa65bda066..00146abf54c4f443011b9f8aa64a5b10c639c7fd 100644
+--- a/src/Commands/DefaultContentCommands.php
++++ b/src/Commands/DefaultContentCommands.php
+@@ -2,13 +2,13 @@
+
+ namespace Drupal\default_content\Commands;
+
++use Drupal\Core\StringTranslation\PluralTranslatableMarkup;
+ use Drupal\default_content\ExporterInterface;
++use Drupal\default_content\ImporterInterface;
+ use Drush\Commands\DrushCommands;
+
+ /**
+- * Class DefaultContentCommands.
+- *
+- * @package Drupal\default_content
++ * Provides Drush commands for 'Default content' module.
+  */
+ class DefaultContentCommands extends DrushCommands {
+
+@@ -20,13 +20,34 @@ class DefaultContentCommands extends DrushCommands {
+   protected $defaultContentExporter;
+
+   /**
+-   * SimplesitemapController constructor.
++   * The default content importer.
++   *
++   * @var \Drupal\default_content\ImporterInterface
++   */
++  protected $defaultContentImporter;
++
++  /**
++   * A full list of installed modules plus the active profile.
++   *
++   * @var string[]
++   */
++  protected $installedExtensions;
++
++  /**
++   * DefaultContentCommands constructor.
+    *
+    * @param \Drupal\default_content\ExporterInterface $default_content_exporter
+    *   The default content exporter.
++   * @param \Drupal\default_content\ImporterInterface $default_content_importer
++   *   The default content importer.
++   * @param array[] $installed_modules
++   *   Installed modules list from the 'container.modules' container parameter.
+    */
+-  public function __construct(ExporterInterface $default_content_exporter) {
++  public function __construct(ExporterInterface $default_content_exporter, ImporterInterface $default_content_importer, array $installed_modules) {
++    parent::__construct();
+     $this->defaultContentExporter = $default_content_exporter;
++    $this->defaultContentImporter = $default_content_importer;
++    $this->installedExtensions = array_keys($installed_modules);
+   }
+
+   /**
+@@ -85,12 +106,75 @@ class DefaultContentCommands extends DrushCommands {
+    * @aliases dcem
+    */
+   public function contentExportModule($module) {
++    $this->checkExtensions([$module]);
+     $module_folder = \Drupal::service('extension.list.module')
+       ->get($module)
+       ->getPath() . '/content';
+     $this->defaultContentExporter->exportModuleContent($module, $module_folder);
+   }
+
++  /**
++   * Imports default content from installed modules or active profile.
++   *
++   * @param string[] $extensions
++   *   Space-delimited list of module which may contain also the active profile.
++   *
++   * @option update Overwrite existing entities with values from the default
++   *   content.
++   *
++   * @usage drush default-content:import
++   *   Imports default content from all installed modules, including the active
++   *   profile.
++   * @usage drush dcim my_module other_module custom_profile
++   *   Imports default content from <info>my_module</info>,
++   *   <info>other_module<info> modules and <info>custom_profile<info> active
++   *   profile. Does not overwrite content that was already imported before.
++   * @usage drush default-content:import my_module --update
++   *   Imports all default content from <info>my_module</info> module, including
++   *   content that has already been imported.
++   *
++   * @command default-content:import
++   * @aliases dcim
++   */
++  public function import(array $extensions, array $options = ['update' => FALSE]): void {
++    $count = 0;
++    $import_from_extensions = [];
++    foreach ($this->checkExtensions($extensions) as $extension) {
++      if ($extension_count = count($this->defaultContentImporter->importContent($extension, $options['update']))) {
++        $import_from_extensions[] = $extension;
++        $count += $extension_count;
++      }
++    }
++    if ($count) {
++      $this->logger()->notice(new PluralTranslatableMarkup($count, '1 entity imported from @modules', '@count entities imported from @modules', [
++        '@modules' => implode(', ', $import_from_extensions),
++      ]));
++      return;
++    }
++    $this->logger()->warning(dt('No content has been imported.'));
++  }
++
++  /**
++   * Checks and returns a list of extension given the user input.
++   *
++   * @param array $extensions
++   *   An array of modules and/or the active profile.
++   *
++   * @return array
++   *   A list of modules and/or the active profile.
++   */
++  protected function checkExtensions(array $extensions): array {
++    if (!$extensions) {
++      return $this->installedExtensions;
++    }
++
++    if ($invalid_extensions = array_diff($extensions, $this->installedExtensions)) {
++      throw new \InvalidArgumentException(sprintf('Invalid modules or profile passed: %s', implode(', ', $invalid_extensions)));
++    }
++
++    return $extensions;
++  }
++
+   /**
+    * Exports all the content and references defined in a module info file.
+    *
+@@ -102,8 +186,8 @@ class DefaultContentCommands extends DrushCommands {
+    */
+   public function contentExportModuleWithReferences($module) {
+     $module_folder = \Drupal::moduleHandler()
+-        ->getModule($module)
+-        ->getPath() . '/content';
++      ->getModule($module)
++      ->getPath() . '/content';
+     $this->defaultContentExporter->exportModuleContentWithReferences($module, $module_folder);
+   }
+
+diff --git a/src/Importer.php b/src/Importer.php
+index 423c8ffb15eda57151a21ce45e393ac9ac85bea2..a4fc9be40e95a935aa3ed3f72f8a2881b016ef69 100644
+--- a/src/Importer.php
++++ b/src/Importer.php
+@@ -179,7 +179,7 @@ class Importer implements ImporterInterface {
+   /**
+    * {@inheritdoc}
+    */
+-  public function importContent($module) {
++  public function importContent($module, bool $update_existing = FALSE) {
+     $created = [];
+     $folder = $this->extensionList->getPath($module) . "/content";
+
+@@ -285,10 +285,13 @@ class Importer implements ImporterInterface {
+             $entity = $this->serializer->deserialize($contents, $class, 'hal_json', ['request_method' => 'POST']);
+           }
+           else {
+-            $entity = $this->contentEntityNormalizer->denormalize(Yaml::decode($contents));
++            $entity = $this->contentEntityNormalizer->denormalize(Yaml::decode($contents), $update_existing);
++          }
++
++          if (!$entity->isNew() && !$update_existing) {
++            continue;
+           }
+
+-          $entity->enforceIsNew(TRUE);
+           // Ensure that the entity is not owned by the anonymous user.
+           if ($entity instanceof EntityOwnerInterface && empty($entity->getOwnerId())) {
+             $entity->setOwner($root_user);
+diff --git a/src/ImporterInterface.php b/src/ImporterInterface.php
+index 0d300a31a259081e6a2ee297834243b5182d69d6..25fdcac7c8537b8be08f558edc5b042a34bce830 100644
+--- a/src/ImporterInterface.php
++++ b/src/ImporterInterface.php
+@@ -12,10 +12,13 @@ interface ImporterInterface {
+    *
+    * @param string $module
+    *   The module to create the default content from.
++   * @param bool $update_existing
++   *   Whether to update already existing entities with the imported values.
++   *   Defaults to FALSE.
+    *
+    * @return \Drupal\Core\Entity\EntityInterface[]
+    *   An array of created entities keyed by their UUIDs.
+    */
+-  public function importContent($module);
++  public function importContent($module, bool $update_existing = FALSE);
+
+ }
+diff --git a/src/Normalizer/ContentEntityNormalizer.php b/src/Normalizer/ContentEntityNormalizer.php
+index 4d5a932f7678b25b2f137074c66b109068d3da05..30f9d67a640f6fecc40fe9ae8b0e612cdb667243 100644
+--- a/src/Normalizer/ContentEntityNormalizer.php
++++ b/src/Normalizer/ContentEntityNormalizer.php
+@@ -150,7 +150,7 @@ class ContentEntityNormalizer implements ContentEntityNormalizerInterface {
+   /**
+    * {@inheritdoc}
+    */
+-  public function denormalize(array $data) {
++  public function denormalize(array $data, bool $update_existing = FALSE) {
+     if (!isset($data['_meta']['entity_type'])) {
+       throw new UnexpectedValueException('The entity type metadata must be specified.');
+     }
+@@ -178,18 +178,40 @@ class ContentEntityNormalizer implements ContentEntityNormalizerInterface {
+       $values[$entity_type->getKey('langcode')] = $data['_meta']['default_langcode'];
+     }
+
++    // Load the entity by UUID and check if it exists.
++    $existing = $this->entityTypeManager->getStorage($entity_type->id())->loadByProperties(['uuid' => $values['uuid']]);
+     /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
+-    $entity = $this->entityTypeManager->getStorage($entity_type->id())->create($values);
++    if (!empty($existing)) {
++      $entity = reset($existing);
++      if (!$update_existing) {
++        // Do not override the existing entity.
++        return $entity;
++      }
++      elseif (method_exists($entity, 'setNeedsSave')) {
++        // Ensure ERR entity will be saved.
++        // @todo Use instanceof EntityNeedSaveInterface once
++        // https://www.drupal.org/project/entity_reference_revisions/issues/3336752
++        // is fixed.
++        $entity->setNeedsSave(TRUE);
++      }
++    }
++    else {
++      $entity = $this->entityTypeManager->getStorage($entity_type->id())->create($values);
++      $entity->enforceIsNew(TRUE);
++    }
++
+     foreach ($data['default'] as $field_name => $values) {
+-      $this->setFieldValues($entity, $field_name, $values);
++      $this->setFieldValues($entity, $field_name, $values, $update_existing);
+     }
+
+     if (!empty($data['translations'])) {
+       foreach ($data['translations'] as $langcode => $translation_data) {
+         if ($this->languageManager->getLanguage($langcode)) {
+-          $translation = $entity->addTranslation($langcode, $entity->toArray());
++          $translation = $entity->hasTranslation($langcode)
++            ? $entity->getTranslation($langcode)
++            : $entity->addTranslation($langcode, $entity->toArray());
+           foreach ($translation_data as $field_name => $values) {
+-            $this->setFieldValues($translation, $field_name, $values);
++            $this->setFieldValues($translation, $field_name, $values, $update_existing);
+           }
+         }
+       }
+@@ -211,8 +233,10 @@ class ContentEntityNormalizer implements ContentEntityNormalizerInterface {
+    *   The name of the field.
+    * @param array $values
+    *   The normalized data for the field.
++   * @param bool $update_existing
++   *   Whether to update already existing entities with the imported values.
+    */
+-  protected function setFieldValues(ContentEntityInterface $entity, string $field_name, array $values) {
++  protected function setFieldValues(ContentEntityInterface $entity, string $field_name, array $values, bool $update_existing = FALSE) {
+     if (!$entity->hasField($field_name)) {
+       return;
+     }
+@@ -246,7 +270,7 @@ class ContentEntityNormalizer implements ContentEntityNormalizerInterface {
+
+         if ($property instanceof EntityReference) {
+           if (is_array($value)) {
+-            $target_entity = $this->denormalize($value);
++            $target_entity = $this->denormalize($value, $update_existing);
+           }
+           else {
+             $target_entity = $this->loadEntityDependency($value);
+diff --git a/src/Normalizer/ContentEntityNormalizerInterface.php b/src/Normalizer/ContentEntityNormalizerInterface.php
+index fa78b79545786772df49b110d6f72fa442c38aa9..1587248f3872226ddac1cdd90e0ecb1e995d9d31 100644
+--- a/src/Normalizer/ContentEntityNormalizerInterface.php
++++ b/src/Normalizer/ContentEntityNormalizerInterface.php
+@@ -27,10 +27,13 @@ interface ContentEntityNormalizerInterface {
+    *
+    * @param array $data
+    *   The normalized data.
++   * @param bool $update_existing
++   *   Whether to update an already existing entity with the imported values.
++   *   Defaults to FALSE.
+    *
+    * @return \Drupal\Core\Entity\ContentEntityInterface
+    *   The denormalized content entity.
+    */
+-  public function denormalize(array $data);
++  public function denormalize(array $data, bool $update_existing = FALSE);
+
+ }

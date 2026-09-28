@@ -1,0 +1,85 @@
+{#
+/**
+ * @file
+ * This is a template applied via preprocessing or parent templates only.
+ *
+ * @see \Drupal\bsi_custom\Hook\ThemeHooks::preRenderLink
+ */
+#}
+{% set base_class = base_class|default('bsi-link') %}
+{% set icon_position = icon_position|default('before') %}
+{% set icon = icon is defined and icon is not null ? icon : {
+  'internal': 'chevron-right',
+  'external': 'external-link',
+  'download': 'download',
+  '': false,
+}[link_type|default('')] %}
+
+{% if link_type in ['span', 'button'] %}
+  {% set base_class = 'bsi-nolink' %}
+{% endif %}
+
+{% set link_title = title_attr ?: title %}
+
+{% set attributes = attributes|default(create_attribute())
+  .addClass(base_class, extra_classes)
+  .setAttribute(target ? 'target', target)
+  .setAttribute(link_title ? 'title', link_title|render)
+  .setAttribute(link_type == 'button' ? 'type', link_type)
+%}
+
+{% if modifiers %}
+  {# @fixme BEM modifiers use `--` prefix! https://getbem.com/naming/ #}
+  {% set attributes = attributes.addClass(
+    modifiers|map(m => base_class ~ '-' ~ m)
+  ) %}
+{% endif %}
+
+{% if link_type in ['span', 'button'] %}
+  <{{ link_type }} {{ attributes }}>
+{% else %}
+  <a href="{{ url }}" {{ attributes }}>
+{% endif %}
+
+  {# ICON BEFORE #}
+  {% if icon and icon_position == 'before' %}
+    {% block icon -%}
+      {% include '@bsi_bund/components/icon.twig' with {
+        name: icon,
+        decorative: true,
+        extra_classes: base_class ~ '__icon',
+      } only %}
+    {%- endblock %}
+  {% endif %}
+
+  {% if title or add_on or (icon and icon_position == 'after')  %}
+    <span class="{{ base_class }}__content">
+      {# LINK TEXT #}
+      {% if title %}
+        <span class="{{ base_class }}__text">
+          {{- title -}}
+        </span>
+        {% if file_size %}
+          {{ file_size }}
+        {% endif %}
+        {% if file_extension %}
+          {{ file_extension }}
+        {% endif %}
+      {% endif %}
+
+      {# ADD-ON TEXT #}
+      {% if add_on %}
+        <span class="{{ base_class }}__add-on">{{ add_on }}</span>
+      {% endif %}
+
+      {# ICON AFTER #}
+      {% if icon and icon_position == 'after' %}
+        {{ block('icon') }}
+      {% endif %}
+    </span>
+  {% endif %}
+{% if link_type not in ['span', 'button'] %}
+</a>
+{% else %}
+</{{ link_type }}>
+{% endif %}

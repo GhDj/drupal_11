@@ -1,0 +1,148 @@
+// -----------------------------------------------------------------------------
+// Cookie Banner
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+@use "@globals/mixins/grid" as *;
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.klaro-theme-bsi_bund.klaro.learn-more-as-button
+  .cookie-notice:not(.cookie-modal-notice) {
+  @include typography("body-compact");
+  background-color: var(--#{$nsp}-color-neutral-100);
+  box-sizing: border-box;
+  font-family: var(--font-family-base);
+  left: 0;
+  max-width: 100%;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 9999;
+
+  * {
+    box-sizing: border-box !important;
+  }
+
+  .cn-body {
+    @include grid-container;
+    color: var(--#{$nsp}-color-typo-primary);
+    column-gap: var(--#{$nsp}-space-lg);
+    display: grid;
+    grid-template-areas:
+      "svg cookietitle"
+      "svg cookienotice"
+      "svg cookiebtns";
+    grid-template-columns: 34px auto;
+    padding: var(--bsi-grid-padding);
+    @include breakpoint-md {
+      grid-template-columns: 66px auto;
+    }
+
+    &::before {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 80 80' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M43.3283 76.6667C38.7179 76.6667 34.3852 75.7932 30.3303 74.0463C26.2753 72.2995 22.7481 69.9287 19.7485 66.934C16.749 63.9394 14.3743 60.4179 12.6246 56.3696C10.8749 52.3213 10 47.9956 10 43.3927C10 38.9008 10.9304 34.5336 12.7912 30.2911C14.6521 26.0487 17.235 22.3193 20.5401 19.1028C23.8451 15.8863 27.7751 13.4462 32.3299 11.7825C36.8848 10.1188 41.8841 9.61973 47.3277 10.2852C48.1609 10.3961 48.7997 10.7427 49.2441 11.325C49.6884 11.9073 49.9384 12.6976 49.9939 13.6958C50.105 17.245 51.4243 20.2812 53.9517 22.8045C56.4791 25.3278 59.4925 26.6449 62.992 26.7558C64.1585 26.8113 65.0472 27.144 65.6582 27.754C66.2692 28.364 66.6025 29.3068 66.6581 30.5823C66.7692 32.9115 67.4774 34.8247 68.7828 36.322C70.0881 37.8194 71.9073 38.9562 74.2403 39.7326C75.0179 40.0099 75.6151 40.412 76.0317 40.9388C76.4483 41.4656 76.6566 42.1172 76.6566 42.8936C76.7677 47.4965 75.9622 51.8499 74.2403 55.9537C72.5183 60.0574 70.1575 63.6482 67.158 66.7261C64.1585 69.8039 60.6034 72.2301 56.493 74.0048C52.3825 75.7794 47.9942 76.6667 43.3283 76.6667ZM43.3283 70.0119C50.105 70.0119 56.118 67.6827 61.3672 63.0244C66.6164 58.366 69.491 52.4322 69.9909 45.2228C67.2136 44.0028 65.0333 42.3391 63.4502 40.2317C61.8671 38.1244 60.7979 35.7675 60.2424 33.161C55.9653 32.551 52.2991 30.7209 49.2441 27.6708C46.189 24.6207 44.3004 20.9606 43.5782 16.6904C39.1345 16.5795 35.2323 17.3836 31.8717 19.1028C28.5111 20.8219 25.706 23.0263 23.4563 25.716C21.2066 28.4056 19.5124 31.331 18.3737 34.492C17.235 37.653 16.6657 40.6199 16.6657 43.3927C16.6657 50.7685 19.2625 57.0489 24.4561 62.2341C29.6498 67.4193 35.9405 70.0119 43.3283 70.0119ZM38.329 36.738C39.7177 36.738 40.8981 36.2527 41.8702 35.2822C42.8422 34.3117 43.3283 33.1333 43.3283 31.7469C43.3283 30.3605 42.8422 29.182 41.8702 28.2115C40.8981 27.241 39.7177 26.7558 38.329 26.7558C36.9404 26.7558 35.76 27.241 34.7879 28.2115C33.8158 29.182 33.3298 30.3605 33.3298 31.7469C33.3298 33.1333 33.8158 34.3117 34.7879 35.2822C35.76 36.2527 36.9404 36.738 38.329 36.738ZM31.6634 53.3749C33.0521 53.3749 34.2324 52.8897 35.2045 51.9192C36.1766 50.9487 36.6626 49.7702 36.6626 48.3838C36.6626 46.9974 36.1766 45.819 35.2045 44.8485C34.2324 43.878 33.0521 43.3927 31.6634 43.3927C30.2747 43.3927 29.0943 43.878 28.1223 44.8485C27.1502 45.819 26.6641 46.9974 26.6641 48.3838C26.6641 49.7702 27.1502 50.9487 28.1223 51.9192C29.0943 52.8897 30.2747 53.3749 31.6634 53.3749ZM53.3268 56.7023C54.2711 56.7023 55.0626 56.3834 55.7014 55.7457C56.3402 55.1079 56.6596 54.3177 56.6596 53.3749C56.6596 52.4322 56.3402 51.6419 55.7014 51.0042C55.0626 50.3664 54.2711 50.0475 53.3268 50.0475C52.3825 50.0475 51.5909 50.3664 50.9521 51.0042C50.3133 51.6419 49.9939 52.4322 49.9939 53.3749C49.9939 54.3177 50.3133 55.1079 50.9521 55.7457C51.5909 56.3834 52.3825 56.7023 53.3268 56.7023Z' fill='currentColor'/%3E%3C/svg%3E%0A");
+      background-position: center;
+
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: "";
+      display: block;
+      grid-area: svg;
+      height: 34px;
+      width: 34px;
+
+      @include breakpoint-md {
+        height: 66px;
+        width: 66px;
+      }
+    }
+
+    #id-cookie-title {
+      @include typography("heading-5");
+      font-weight: 700;
+      line-height: 1.2em;
+      margin-bottom: var(--#{$nsp}-space-2xl);
+      margin-top: 0;
+      width: 100%;
+    }
+    #id-cookie-notice {
+      margin-block-end: 0;
+      margin-top: 0;
+      padding: 0;
+      padding-bottom: var(--#{$nsp}-space-sm);
+    }
+    .cn-buttons,
+    .cn-ok {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--#{$nsp}-size-sm);
+      justify-content: start;
+    }
+
+    a.cn-learn-more.cm-link,
+    .cn-buttons .cn-decline {
+      --#{$nsp}-btn-background-color: var(--#{$nsp}-color-blue-150);
+      --#{$nsp}-btn-background-color-hover: var(--#{$nsp}-color-base-white);
+
+      --#{$nsp}-btn-text-color: var(--#{$nsp}-color-blue-800);
+      --#{$nsp}-btn-text-color-hover: var(--#{$nsp}-color-blue-800);
+
+      --#{$nsp}-btn-border-color: var(--#{$nsp}-color-blue-150);
+      --#{$nsp}-btn-border-color-hover: var(--#{$nsp}-color-blue-800);
+      --#{$nsp}-btn-button-border-width-active: 2px;
+      --#{$nsp}-btn-button-border-width: 1px;
+    }
+    .cm-btn-success {
+      --#{$nsp}-btn-background-color: var(--#{$nsp}-color-blue-800);
+      --#{$nsp}-btn-background-color-hover: var(--#{$nsp}-color-base-white);
+      --#{$nsp}-btn-text-color-hover: var(--#{$nsp}-color-blue-800);
+      --#{$nsp}-btn-text-color: var(--#{$nsp}-color-base-white);
+      --#{$nsp}-btn-border-color: var(--#{$nsp}-color-blue-800);
+      --#{$nsp}-btn-button-border-width-active: 2px;
+      --#{$nsp}-btn-button-border-width: 1px;
+    }
+
+    .cm-btn,
+    a.cn-learn-more.cn-learn-more {
+      align-items: center;
+      background: var(--#{$nsp}-btn-background-color);
+      border: var(--#{$nsp}-link-button-border-width) solid
+        var(--#{$nsp}-btn-background-color);
+      border-radius: 4px;
+      box-shadow: none;
+      color: var(--#{$nsp}-btn-text-color);
+      display: inline-flex;
+      font-family: var(--font-family-base);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      height: 48px;
+      line-height: 1em;
+      margin-block: 0;
+      margin-right: 0;
+      margin-top: 0;
+      padding: var(--#{$nsp}-size-sm) var(--#{$nsp}-size-lg);
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background: var(--#{$nsp}-btn-background-color-hover);
+        border-color: var(--#{$nsp}-btn-border-color-hover);
+        color: var(--#{$nsp}-btn-text-color-hover);
+      }
+      &:active {
+        background: var(--#{$nsp}-btn-background-color-hover);
+        border-color: var(--#{$nsp}-btn-border-color-hover);
+        border-width: var(--#{$nsp}-btn-button-border-width-active);
+        color: var(--#{$nsp}-btn-text-color-hover);
+      }
+      &:focus-visible {
+        outline: 2px solid;
+        outline-color: var(--#{$nsp}-color-base-focus);
+        outline-offset: 2px;
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+--- a/src/Element/ElementBase.php
++++ b/src/Element/ElementBase.php
+@@ -183,12 +183,12 @@
+     }
+
+     $values = [];
+-    if ($input !== FALSE && !empty($input['select'])) {
++    if ($input !== FALSE && strlen($input['select']) > 0) {
+
+       if ($element['#multiple']) {
+         $values = [
+           'select' => (array) $input['select'],
+-          'other' => !empty($input['other']) ? (array) $input['other'] : [],
++          'other' => strlen($input['other']) > 0 ? (array) $input['other'] : [],
+         ];
+
+         if (in_array('select_or_other', $values['select'])) {
+@@ -199,7 +199,7 @@
+         }
+
+         if (isset($element['#merged_values']) && $element['#merged_values']) {
+-          if (!empty($values['other'])) {
++          if (strlen($values['other']) > 0) {
+             if (is_array($values['select']) && array_key_exists('select_or_other', $values['select'])) {
+               $select = array_pop($values['select']) ?? [];
+               $values = array_values(array_merge($select, $values['other']));

@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: e8ec5dea-6bd4-45e4-ba68-024bc200d493
+  bundle: image
+  default_langcode: de
+  depends:
+    ed256f19-e60e-484e-8166-a4836372b451: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Opener Termin'
+  created:
+    -
+      value: 1780044455
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: ed256f19-e60e-484e-8166-a4836372b451
+      alt: 'Verschiedene Meldungen-Symbole kreisen auf dunkelblauem Hintergrund. Im Fokus: Ein Kalenderblatt.'
+      title: ''
+      width: 4784
+      height: 1760

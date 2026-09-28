@@ -1,0 +1,12 @@
+settings:
+  allowed_values:
+    -
+      label: Deutsch
+    -
+      label: Englisch
+    -
+      label: Französisch
+    -
+      label: Japanisch
+    -
+      label: Spanisch

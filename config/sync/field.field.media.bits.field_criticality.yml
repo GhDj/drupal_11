@@ -1,0 +1,21 @@
+uuid: 3f5bd222-32df-44f3-bf7a-8a1057b534f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_criticality
+    - media.type.bits
+  module:
+    - options
+id: media.bits.field_criticality
+field_name: field_criticality
+entity_type: media
+bundle: bits
+label: Criticality
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

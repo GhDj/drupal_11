@@ -1,0 +1,461 @@
+// -----------------------------------------------------------------------------
+// Main Menu
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+// ---------------------------------------------------------------------------
+// Mixins
+// ---------------------------------------------------------------------------
+
+// re-usable divider for the mainmenu
+@mixin divider {
+  &::before {
+    background-color: var(--#{$nsp}-color-neutral-350);
+    content: "";
+    height: 1px;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    width: 100vw;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// General mainmenu styles
+// ---------------------------------------------------------------------------
+
+.#{$nsp}-mainmenu {
+  --#{$nsp}-link-color: var(--#{$nsp}-color-neutral-1000);
+  --#{$nsp}-link-color-hover: var(--#{$nsp}-color-blue-750);
+  --#{$nsp}-link-decoration-line: none;
+  --#{$nsp}-link-decoration-line-hover: underline;
+  --#{$nsp}-button-decoration-line: none;
+  --#{$nsp}-button-decoration-line-hover: underline;
+  --#{$nsp}-button-border-width-active: 0;
+  bottom: 0;
+  display: none;
+  height: calc(100% - var(--#{$nsp}-header-height));
+  left: 0;
+  padding: var(--#{$nsp}-space-md) var(--#{$nsp}-grid-padding);
+  right: 0;
+  top: calc(
+    var(--#{$nsp}-header-height) + var(--drupal-toolbar-height, 0px) +
+      var(--drupal-environment-indicator-height, 0px)
+  );
+  width: 100%;
+
+  @include breakpoint-lg {
+    align-items: center;
+    display: flex;
+    height: auto;
+    padding: 0;
+  }
+
+  // handle popover
+  @at-root html {
+    &:has(#mainmenu:popover-open) {
+      overflow: hidden;
+    }
+
+    // switch button icons if menu is opened/closed
+    &:has(#mainmenu:popover-open) {
+      .#{$nsp}-mainmenu__menu-button {
+        .#{$nsp}-button__icon--menu-burger {
+          display: none;
+        }
+
+        .#{$nsp}-button__icon--cross {
+          display: block;
+        }
+      }
+    }
+  }
+
+  // mainmenu button
+  &__menu-button {
+    order: 2;
+
+    @include breakpoint-lg {
+      display: none;
+    }
+
+    .#{$nsp}-button__icon--cross {
+      display: none;
+    }
+  }
+
+  &:popover-open {
+    @include divider;
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-xl);
+    height: calc(
+      100dvh -
+        (
+          var(--#{$nsp}-header-height) + var(--drupal-toolbar-height, 0px) +
+            var(--drupal-environment-indicator-height, 0px)
+        )
+    );
+    justify-content: space-between;
+    overflow: hidden auto;
+
+    @include breakpoint-lg {
+      display: block;
+    }
+  }
+
+  // first-level item list
+  &__list {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-sm);
+    padding: 0 var(--#{$nsp}-space-sm);
+    width: 100%;
+
+    @include breakpoint-lg {
+      align-items: center;
+      flex-direction: row;
+      gap: var(--#{$nsp}-space-xl);
+      justify-content: flex-end;
+      padding: 0;
+    }
+
+    &-item {
+      width: 100%;
+
+      @include breakpoint-lg {
+        width: auto;
+      }
+    }
+  }
+
+  // general menu links/buttons
+  &__link {
+    display: block;
+    font-size: 20px;
+    line-height: 120%;
+    white-space: normal;
+    width: 100%;
+
+    @include breakpoint-lg {
+      font-size: 18px;
+      justify-content: center;
+      line-height: 100%;
+    }
+  }
+
+  // general submenu toggle button
+  &__collapse-toggle {
+    @include typography("button", 500);
+    --#{$nsp}-button-border-width: 0;
+    --bsi-icon-width: 24px;
+    background-color: transparent;
+    color: var(--#{$nsp}-color-black);
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    height: auto;
+    justify-content: space-between;
+    line-height: 120%;
+    padding: 0;
+    text-align: left;
+    white-space: normal;
+    width: 100%;
+
+    @include breakpoint-lg {
+      font-size: 18px;
+      justify-content: center;
+      line-height: 100%;
+    }
+
+    &:hover,
+    &[aria-expanded="true"] {
+      .#{$nsp}-button__text {
+        color: var(--#{$nsp}-button-text-color-hover);
+        text-decoration: var(--#{$nsp}-button-decoration-line-hover);
+        text-decoration-thickness: var(--#{$nsp}-text-decoration-thickness);
+        text-underline-offset: var(--#{$nsp}-space-3xs);
+        text-underline-position: from-font;
+      }
+    }
+  }
+
+  // submenu back-button
+  &__back {
+    color: var(--#{$nsp}-color-blue-750);
+    justify-content: flex-start;
+
+    @include breakpoint-lg {
+      display: none;
+    }
+  }
+
+  // submenu card
+  &__card {
+    display: none;
+
+    @include breakpoint-lg {
+      display: block;
+      margin-left: auto;
+      max-width: 330px;
+    }
+  }
+
+  // overview links
+  &__overview {
+    // overview link
+    &-link {
+      --#{$nsp}-link-decoration-line-hover: underline;
+      font-size: 24px;
+      line-height: 120%;
+
+      @include breakpoint-lg {
+        font-size: 28px;
+      }
+
+      // mobile overview link
+      &--mobile {
+        @include breakpoint-lg {
+          display: none;
+        }
+      }
+    }
+
+    // desktop overview link column
+    &-column {
+      display: none;
+
+      @include breakpoint-lg {
+        display: block;
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Level 2 submenu
+  // ---------------------------------------------------------------------------
+  &__panel--l2 {
+    --#{$nsp}-link-decoration-line-hover: none;
+    --#{$nsp}-button-decoration-line-hover: none;
+    background-color: var(--#{$nsp}-color-base-white);
+    bottom: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-2xl);
+    left: 0;
+    padding: var(--#{$nsp}-space-md) var(--#{$nsp}-grid-padding);
+    position: fixed;
+    right: 0;
+    top: calc(
+      var(--#{$nsp}-header-height) + var(--drupal-toolbar-height, 0px) +
+        var(--drupal-environment-indicator-height, 0px)
+    );
+    transform: translateX(100%);
+    transition: transform 0.2s ease;
+    z-index: 1;
+
+    @include breakpoint-lg {
+      @include divider;
+      --#{$nsp}-link-decoration-line-hover: underline;
+      --#{$nsp}-button-decoration-line-hover: underline;
+      background-color: var(--#{$nsp}-color-base-white);
+      display: none;
+      gap: var(--#{$nsp}-space-2xl);
+      grid-template-columns: fit-content(33%) 1fr 1fr;
+      left: 0;
+      margin-inline: auto;
+      margin-bottom: 0;
+      max-width: var(--bsi-grid-max-width);
+      padding: var(--#{$nsp}-space-2xl) var(--#{$nsp}-grid-padding);
+      position: absolute;
+      right: 0;
+      transform: translateX(0);
+      z-index: 99;
+
+      &::after {
+        background-color: inherit;
+        bottom: 0;
+        content: "";
+        left: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        position: absolute;
+        right: 50%;
+        top: 0;
+        z-index: -1;
+      }
+    }
+
+    &.#{$nsp}-mainmenu__panel--open {
+      @include divider;
+      transform: translateX(0);
+
+      @include breakpoint-lg {
+        display: grid;
+      }
+    }
+
+    // more level 2 elements
+    .#{$nsp}-mainmenu {
+      // level 2 submenu list
+      &__submenu {
+        display: flex;
+        flex-direction: column;
+        gap: var(--#{$nsp}-space-2xs);
+
+        @include breakpoint-lg {
+          align-items: flex-start;
+          gap: var(--#{$nsp}-space-lg);
+          grid-column: 2;
+          padding: 0 var(--#{$nsp}-space-sm);
+        }
+
+        // level 2 submenu list
+        &-item {
+          align-items: center;
+          border-bottom: 1px solid var(--#{$nsp}-color-neutral-350);
+          display: flex;
+          flex-direction: column;
+
+          @include breakpoint-lg {
+            border: 0;
+            flex-direction: row;
+            min-height: 34px;
+          }
+
+          &:hover {
+            border-color: var(--#{$nsp}-color-blue-800);
+          }
+        }
+      }
+
+      // level 2 submenu toggle button
+      &__collapse-toggle {
+        padding: var(--#{$nsp}-space-2xs) 0;
+
+        @include breakpoint-lg {
+          padding: 0;
+        }
+
+        &:hover {
+          .#{$nsp}-button__icon {
+            background-color: var(--#{$nsp}-color-base-white);
+            color: var(--#{$nsp}-color-blue-800);
+          }
+        }
+
+        // level 2 toggle button icon (closed)
+        .#{$nsp}-button__icon {
+          background-color: var(--#{$nsp}-color-blue-800);
+          border: 1px solid var(--#{$nsp}-color-blue-800);
+          border-radius: 4px;
+          color: var(--#{$nsp}-color-base-white);
+          height: 48px;
+          padding: var(--#{$nsp}-space-xs);
+          width: 48px;
+
+          @include breakpoint-lg {
+            --bsi-icon-width: 16px;
+            background-color: transparent;
+            border: 0;
+            color: var(--#{$nsp}-color-black);
+            height: 16px;
+            padding: 0;
+            transform: rotate(-90deg);
+            width: 16px;
+          }
+        }
+
+        // level 2 toggle button icon (opened)
+        &[aria-expanded="true"] .#{$nsp}-button__icon {
+          transform: rotate(180deg);
+
+          @include breakpoint-lg {
+            transform: rotate(-90deg);
+          }
+        }
+      }
+
+      // level 2 menu links
+      &__link {
+        padding: var(--#{$nsp}-space-md) 0;
+
+        @include breakpoint-lg {
+          align-items: center;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Level 3 submenu
+  // ---------------------------------------------------------------------------
+  &__panel--l3 {
+    --#{$nsp}-link-decoration-line-hover: underline;
+    --#{$nsp}-link-color: var(--#{$nsp}-color-neutral-750);
+    --#{$nsp}-link-color-hover: var(--#{$nsp}-color-blue-750);
+
+    @include breakpoint-lg {
+      bottom: 0;
+      left: var(--mainmenu-l3-left, 66%);
+      position: absolute;
+      right: 0;
+      top: var(--#{$nsp}-space-2xl);
+    }
+
+    // more level 3 elements
+    .#{$nsp}-mainmenu {
+      // level 3 submenu list
+      &__submenu {
+        display: flex;
+        flex-direction: column;
+        gap: var(--#{$nsp}-space-lg);
+        padding: var(--#{$nsp}-space-2xs) var(--#{$nsp}-space-sm)
+          var(--#{$nsp}-space-lg);
+
+        @include breakpoint-lg {
+          padding: 0 var(--#{$nsp}-space-2xs) var(--#{$nsp}-space-2xs);
+        }
+
+        // level 2 submenu list
+        &-item {
+          border: 0;
+
+          @include breakpoint-lg {
+            min-height: auto;
+            padding-left: var(--#{$nsp}-space-sm);
+          }
+
+          &--overview {
+            padding-left: 0;
+          }
+        }
+      }
+
+      // level 3 menu links
+      &__link {
+        font-size: 16px;
+        padding: var(--#{$nsp}-space-2xs) 0;
+
+        @include breakpoint-lg {
+          font-size: 18px;
+          padding: 0;
+        }
+
+        &--overview {
+          @include breakpoint-lg {
+            @include typography("body-lead", 400);
+            --#{$nsp}-link-color: var(--#{$nsp}-color-neutral-1000);
+            --#{$nsp}-link-color-hover: var(--#{$nsp}-color-blue-750);
+          }
+        }
+      }
+    }
+  }
+}

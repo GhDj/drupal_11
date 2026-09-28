@@ -1,0 +1,104 @@
+uuid: 53a0b5fa-98ab-4a79-9a20-cb8ff3113e8d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.search_result
+    - field.field.media.bits.field_criticality
+    - field.field.media.bits.field_media_file
+    - media.type.bits
+  module:
+    - field_group
+    - layout_builder
+    - media_entity_download
+    - options
+third_party_settings:
+  field_group:
+    group_tagline:
+      children:
+        - created
+        - field_criticality
+      label: Tagline
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: bsi-tagline
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.bits.search_result
+targetEntityType: media
+bundle: bits
+mode: search_result
+content:
+  created:
+    type: timestamp
+    label: hidden
+    settings:
+      date_format: date_short
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: ''
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+        description: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_criticality:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_media_file:
+    type: media_entity_download_download_link
+    label: visually_hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: _blank
+      title: custom
+      custom_title: 'View security announcement'
+      disposition: inline
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  changed: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

@@ -1,0 +1,55 @@
+// -----------------------------------------------------------------------------
+// Heading
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-heading {
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+// Primary
+// -----------------------------------------------
+
+.#{$nsp}-heading--1 {
+  @include typography("heading-1");
+}
+
+.#{$nsp}-heading--2 {
+  @include typography("heading-2");
+}
+
+.#{$nsp}-heading--3 {
+  @include typography("heading-3");
+}
+
+.#{$nsp}-heading--4 {
+  @include typography("heading-4");
+}
+
+.#{$nsp}-heading--5 {
+  @include typography("heading-5");
+}
+
+.#{$nsp}-heading--6 {
+  @include typography("heading-6");
+}
+
+.#{$nsp}-heading--linked {
+  a {
+    color: currentColor;
+    text-decoration: none;
+
+    &:hover,
+    &:visited,
+    &:active {
+      color: currentColor;
+      text-decoration: none;
+    }
+  }
+}

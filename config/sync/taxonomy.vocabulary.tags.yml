@@ -1,0 +1,9 @@
+uuid: 40c5bb46-2db3-42f4-b0c8-e89d86c8abca
+langcode: en
+status: true
+dependencies: {  }
+name: Tags
+vid: tags
+description: 'Free tagging vocabulary, used when searching.'
+weight: 0
+new_revision: false

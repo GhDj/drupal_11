@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: fe0ef6af-bb2a-4536-9524-10088862d781
+  bundle: report_page
+  default_langcode: de
+default:
+  revision_uid:
+    -
+      target_id: 1
+  revision_log:
+    -
+      value: 'Der Titel wurde von <em class="placeholder">Cybercrime-Gruppen (Ebene21)</em> zu <em class="placeholder">Cybercrime-Gruppen</em> geändert.'
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Cybercrime-Gruppen
+  created:
+    -
+      value: 1777994213
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_links_title:
+    -
+      value: more_information

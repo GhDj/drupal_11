@@ -1,0 +1,25 @@
+filter_settings.bsi_media_view_mode_align:
+  type: filter
+  label: 'Media View Mode by Alignment filter'
+  mapping:
+    view_mode_override:
+      type: mapping
+      label: View Mode Override
+      mapping:
+        left:
+          type: string
+          label: 'Left alignment'
+        center:
+          type: string
+          label: 'Center alignment'
+        right:
+          type: string
+          label: 'Right alignment'
+
+filter_settings.bsi_editor_figcaption:
+  type: filter
+  label: 'Caption images via existing figcaption'
+  mapping:
+    remove_empty:
+      type: boolean
+      label: Remove empty

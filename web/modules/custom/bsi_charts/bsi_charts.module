@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for BSI Charts module.
+ */
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function bsi_charts_element_info_alter(array &$info): void {
+  if (isset($info['charts_settings'])) {
+    $info['charts_settings']['#pre_render'][] = ['\Drupal\bsi_charts\Element\ChartsSettingsAlter', 'preRender'];
+    $info['charts_settings']['#process'][] = ['\Drupal\bsi_charts\Element\ChartsSettingsAlter', 'process'];
+  }
+}
+
+/**
+ * Implements hook_chart_alter().
+ */
+function bsi_charts_chart_alter(array &$element, $chart_id) {
+  $element['#accessible_table_button_class'] = 'bsi-button bsi-button--primary';
+}

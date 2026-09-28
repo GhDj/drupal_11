@@ -1,0 +1,11 @@
+uuid: 8a3f240f-9a5e-4d9c-ba5f-dc409cafc864
+langcode: en
+status: true
+dependencies: {  }
+id: administration
+label: 'Public Administration'
+description: ''
+new_revision: true
+creator_membership: true
+creator_roles:
+  - administration-admin

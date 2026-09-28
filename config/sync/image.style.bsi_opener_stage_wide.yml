@@ -1,0 +1,21 @@
+uuid: 77083190-617a-4a66-ad27-835e0a83e539
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_opener_stage_wide
+label: 'BSI Opener Stage (wide)'
+effects:
+  189b742e-4b81-49f4-a4bb-6c44ba3dec54:
+    uuid: 189b742e-4b81-49f4-a4bb-6c44ba3dec54
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 1920
+      height: 580
+      anchor: center-center
+  212c5b1e-e52a-42b0-98d6-8bdd4ed73aff:
+    uuid: 212c5b1e-e52a-42b0-98d6-8bdd4ed73aff
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

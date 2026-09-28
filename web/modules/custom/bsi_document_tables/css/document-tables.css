@@ -1,0 +1,132 @@
+/**
+ * BSI Document Tables - Basic Styling
+ */
+
+/* Frontend Table of Contents */
+.bsi-frontend-table-of-contents {
+  background-color: #f8f9fa;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+}
+
+.bsi-frontend-table-of-contents h2 {
+  color: #495057;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #007bff;
+}
+
+.bsi-frontend-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bsi-frontend-toc-list li {
+  margin: 10px 0;
+  padding: 0;
+}
+
+.bsi-frontend-toc-link {
+  display: block;
+  color: #007bff;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  border-left: 4px solid transparent;
+}
+
+.bsi-frontend-toc-link:hover {
+  background-color: #e3f2fd;
+  color: #0056b3;
+  text-decoration: none;
+  border-left-color: #007bff;
+  transform: translateX(8px);
+}
+
+.bsi-frontend-toc-link:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* Basic document structure */
+.bsi-document {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Document title */
+.field--name-field-document-title .field__item {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Section titles */
+.section-title,
+.field--name-field-section-title .field__item {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  color: #333;
+}
+
+/* Basic table styling */
+.bsi-table-container {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #333;
+  margin: 1rem 0;
+}
+
+.bsi-table-container th,
+.bsi-table-container td {
+  padding: 8px 12px;
+  border: 1px solid #333;
+  text-align: left;
+}
+
+/* Header cells - Blue background */
+.bsi-table-container th,
+.row-type-header th,
+.cell-type-header {
+  background-color: #2E74B5;
+  color: white;
+  font-weight: bold;
+}
+
+/* Data cells - Alternating rows */
+.bsi-table-container tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+/* Text sections */
+.paragraph--type--text-section {
+  margin: 1rem 0;
+}
+
+.paragraph--type--text-section .field--name-field-section-text {
+  margin: 0.5rem 0;
+}
+
+/* Basic responsive */
+@media (max-width: 768px) {
+  .bsi-table-container {
+    font-size: 0.9rem;
+  }
+
+  .bsi-table-container th,
+  .bsi-table-container td {
+    padding: 6px 8px;
+  }
+}

@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: edb5938a-94cc-4544-af73-c5464469907a
+  bundle: gallery
+  default_langcode: de
+  depends:
+    734b5cd9-35c8-437f-a44a-1d2c1084d793: media
+    68b997c3-9b21-4a81-a06f-37b41b3cbe87: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Beispiel-Medium Bildstrecke'
+  created:
+    -
+      value: 1776853714
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  rh_action:
+    -
+      value: display_page
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_items:
+    -
+      entity: 734b5cd9-35c8-437f-a44a-1d2c1084d793
+    -
+      entity: 68b997c3-9b21-4a81-a06f-37b41b3cbe87
+    -
+      entity: 68b997c3-9b21-4a81-a06f-37b41b3cbe87

@@ -1,0 +1,14 @@
+uuid: 3b24ad2e-de26-4742-9351-bc0c1cd6d3a0
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.assurance
+id: taxonomy_vocabulary_assurance
+entity_type_id: taxonomy_vocabulary
+entity_id: assurance
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

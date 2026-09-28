@@ -1,0 +1,44 @@
+uuid: 2687c656-c2a2-4537-8aff-0c4bf5ef79e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.bits
+  module:
+    - content_translation
+    - image
+third_party_settings:
+  content_translation:
+    translation_sync:
+      alt: alt
+      title: title
+      file: '0'
+id: media.bits.thumbnail
+field_name: thumbnail
+entity_type: media
+bundle: bits
+label: Miniaturbild
+description: 'Das Miniaturbild des Mediums.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+  file_directory: 'preview/bits/[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg webp'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

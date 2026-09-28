@@ -1,0 +1,89 @@
+uuid: 8506a34e-5da9-46d8-9b43-727a7204661f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser_triplet
+    - field.field.node.entry_page.body
+    - field.field.node.entry_page.field_audiences
+    - field.field.node.entry_page.field_downloads
+    - field.field.node.entry_page.field_downloads_title
+    - field.field.node.entry_page.field_links
+    - field.field.node.entry_page.field_links_title
+    - field.field.node.entry_page.field_media
+    - field.field.node.entry_page.field_metatags
+    - field.field.node.entry_page.field_paragraphs
+    - field.field.node.entry_page.field_stage_extra
+    - field.field.node.entry_page.field_stage_items
+    - field.field.node.entry_page.field_tags
+    - field.field.node.entry_page.field_topics
+    - field.field.node.entry_page.layout_builder__layout
+    - field.field.node.entry_page.layout_builder__translation
+    - node.type.entry_page
+  module:
+    - bsi_custom
+    - layout_builder
+    - text_summary_formatter
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.entry_page.teaser_triplet
+targetEntityType: node
+bundle: entry_page
+mode: teaser_triplet
+content:
+  body:
+    type: text_summary_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser_triplet
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  access_restrictions: true
+  book_navigation: true
+  book_navigation_without_tree: true
+  changed: true
+  content_moderation_control: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_audiences: true
+  field_downloads: true
+  field_downloads_title: true
+  field_links: true
+  field_links_title: true
+  field_metatags: true
+  field_paragraphs: true
+  field_stage_extra: true
+  field_stage_items: true
+  field_tags: true
+  field_topics: true
+  langcode: true
+  layout_builder__layout: true
+  layout_builder__translation: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  uid: true

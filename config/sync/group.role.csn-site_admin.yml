@@ -1,0 +1,15 @@
+uuid: 3d9823c5-6408-46ef-a2f1-7a36d0035350
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.csn
+    - user.role.admin
+id: csn-site_admin
+label: 'Site Admin'
+weight: 101
+admin: true
+scope: outsider
+global_role: admin
+group_type: csn
+permissions: {  }

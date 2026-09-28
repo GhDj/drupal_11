@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for BSI Document Tables module.
+ */
+
+use Drupal\Core\Database\Database;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_install().
+ */
+function bsi_document_tables_install(): void {
+  // Set module weight to run after paragraphs.
+  module_set_weight('bsi_document_tables', 10);
+
+  // Create default permissions for authenticated users.
+  $role = Role::load('authenticated');
+  if ($role) {
+    $role->grantPermission('create document_with_tables content');
+    $role->grantPermission('edit own document_with_tables content');
+    $role->grantPermission('view document_with_tables revisions');
+    $role->save();
+  }
+
+  // Create default permissions for content editors (if role exists).
+  $editor_role = Role::load('editor');
+  if ($editor_role) {
+    $editor_role->grantPermission('create document_with_tables content');
+    $editor_role->grantPermission('edit any document_with_tables content');
+    $editor_role->grantPermission('delete any document_with_tables content');
+    $editor_role->grantPermission('revert document_with_tables revisions');
+    $editor_role->grantPermission('use entity print');
+    $editor_role->save();
+  }
+
+  \Drupal::messenger()->addStatus(t('BSI Document Tables module has been successfully installed. You can now create structured documents at <a href=":url">Content → Add content → Document with Tables</a>.', [
+    ':url' => '/node/add/document_with_tables',
+  ]));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function bsi_document_tables_uninstall(): void {
+  // Clean up any module-specific configuration.
+  $config_factory = \Drupal::configFactory();
+
+  // Remove pathauto patterns.
+  $pattern = $config_factory->getEditable('pathauto.pattern.bsi_document_tables_pattern');
+  if (!$pattern->isNew()) {
+    $pattern->delete();
+  }
+
+  // Clean up field data with logging (will be handled by field deletion).
+  \Drupal::logger('bsi_document_tables')->info('BSI Document Tables module uninstalled. All content and configuration removed.');
+}
+
+/**
+ * Update 8001: Add database indexes for better performance.
+ */
+function bsi_document_tables_update_8001(): ?TranslatableMarkup {
+  $schema = Database::getConnection()->schema();
+
+  // Add index on publication date for sorting.
+  if ($schema->tableExists('node__field_publication_date')) {
+    if (!$schema->indexExists('node__field_publication_date', 'field_publication_date_value')) {
+      $schema->addIndex('node__field_publication_date', 'field_publication_date_value', ['field_publication_date_value']);
+    }
+  }
+
+  return t('Database indexes added for better performance.');
+}

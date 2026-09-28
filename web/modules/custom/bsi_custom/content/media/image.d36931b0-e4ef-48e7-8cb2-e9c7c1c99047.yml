@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d36931b0-e4ef-48e7-8cb2-e9c7c1c99047
+  bundle: image
+  default_langcode: de
+  depends:
+    c9ecfb7a-71cd-4637-8ad0-f73dfd59f003: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: Opener-Stellenanzeige.png
+  created:
+    -
+      value: 1784209591
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: c9ecfb7a-71cd-4637-8ad0-f73dfd59f003
+      alt: 'Zwei schemenhafte Personen (links, junger Mann mit Brille, rechts junge Frau mit welligem Haar) auf dunkelblauem Hintergrund'
+      title: ''
+      width: 2392
+      height: 880

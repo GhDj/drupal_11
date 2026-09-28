@@ -1,0 +1,39 @@
+uuid: ee390d80-0d94-4607-b0c5-020114e5ac2a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.tabs.field_items
+    - field.field.paragraph.tabs.field_jumplink
+    - field.field.paragraph.tabs.field_section_title
+    - paragraphs.paragraphs_type.tabs
+  module:
+    - bsi_custom
+    - entity_reference_revisions
+id: paragraph.tabs.default
+targetEntityType: paragraph
+bundle: tabs
+mode: default
+content:
+  field_items:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_section_title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_jumplink: true
+  search_api_excerpt: true

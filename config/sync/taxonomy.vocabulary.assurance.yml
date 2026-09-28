@@ -1,0 +1,9 @@
+uuid: e355efd6-3dd1-43c0-a265-f0b9a8fc2a37
+langcode: en
+status: true
+dependencies: {  }
+name: Assurance
+vid: assurance
+description: null
+weight: 0
+new_revision: false

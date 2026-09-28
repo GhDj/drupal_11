@@ -1,0 +1,18 @@
+# German translations for BSI custom code.
+# Copyright (C) BSI
+# This file is distributed under the same license as the BSI project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bsi-custom\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
+
+msgid "Search annual report"
+msgstr "Lagebericht durchsuchen"
+
+msgid "Enter a search term"
+msgstr "Suchbegriff eingeben"

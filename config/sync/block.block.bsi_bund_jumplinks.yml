@@ -1,0 +1,22 @@
+uuid: a170daa7-0124-4e2a-a554-93cc93024f1d
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+  theme:
+    - bsi_bund
+id: bsi_bund_jumplinks
+theme: bsi_bund
+region: pre_content
+weight: -11
+provider: null
+plugin: bsi_custom_jump_links
+settings:
+  id: bsi_custom_jump_links
+  label: 'Sticky Jump Links'
+  label_display: '0'
+  provider: bsi_custom
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility: {  }

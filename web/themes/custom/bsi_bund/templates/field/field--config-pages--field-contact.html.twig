@@ -1,0 +1,14 @@
+{#
+/**
+ * @file
+ * Theme override for the contact link inside the footer
+ */
+#}
+
+{% include '@bsi_bund/elements/link.html.twig' with {
+  'url': items.0.content['#url'],
+  'title': items.0.content['#title'],
+  'icon': 'chevron-right',
+  'icon_position': 'before',
+  'extra_classes': ['bsi-link--button', 'bsi-link--secondary-button'],
+} only %}

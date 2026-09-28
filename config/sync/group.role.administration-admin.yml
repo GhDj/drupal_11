@@ -1,0 +1,14 @@
+uuid: 5d5589b6-3acb-4675-a161-09767c232ffb
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.administration
+id: administration-admin
+label: 'Group Admin'
+weight: -7
+admin: true
+scope: individual
+global_role: null
+group_type: administration
+permissions: {  }

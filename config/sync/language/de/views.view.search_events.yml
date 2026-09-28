@@ -1,0 +1,33 @@
+label: 'Suche: Veranstaltungen'
+display:
+  default:
+    display_options:
+      pager:
+        options:
+          tags:
+            first: '« Erste'
+            last: 'Letzte »'
+          expose:
+            items_per_page_label: 'Ergebnisse pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: Sortieren
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+  block_events:
+    display_options:
+      filters:
+        facets_field_event_type:
+          expose:
+            label: Veranstaltungstyp
+          facet:
+            missing_label: andere
+      block_description: 'Veranstaltungen (Kalender)'
+  attachment_events_next_month:
+    display_title: 'Veranstaltungen – Anhang im nächsten Monat'
+  attachment_events_two_months:
+    display_title: 'Veranstaltungen – Anhang +2 Monate'

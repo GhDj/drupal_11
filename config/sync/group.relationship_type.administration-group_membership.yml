@@ -1,0 +1,14 @@
+uuid: 739bfa76-6cc0-4059-8d22-b59a4b9ffca1
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.administration
+  module:
+    - user
+id: administration-group_membership
+group_type: administration
+content_plugin: group_membership
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1

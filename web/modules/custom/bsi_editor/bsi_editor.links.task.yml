@@ -1,0 +1,5 @@
+bsi_custom.content.books:
+  title: 'Books'
+  parent_id: system.admin_content
+  route_name: view.content.page_book
+  weight: 1

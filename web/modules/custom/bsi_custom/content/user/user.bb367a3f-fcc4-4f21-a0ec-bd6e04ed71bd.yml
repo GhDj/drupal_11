@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: bb367a3f-fcc4-4f21-a0ec-bd6e04ed71bd
+  default_langcode: de
+default:
+  preferred_langcode:
+    -
+      value: de
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: 'Test Editor'
+  pass:
+    -
+      value: $2y$10$SdXcQRrLAcIGbdtiWfcQzusSLLp5zeo0/Ss3aka8i/kwRXOi2YaVe
+      existing: ''
+      pre_hashed: false
+  mail:
+    -
+      value: test-editor@init.de
+  timezone:
+    -
+      value: Europe/Berlin
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1784040180
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: test-editor@init.de
+  roles:
+    -
+      target_id: editor
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0

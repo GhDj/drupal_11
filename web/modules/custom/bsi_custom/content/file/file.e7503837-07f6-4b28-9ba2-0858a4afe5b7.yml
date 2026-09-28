@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: e7503837-07f6-4b28-9ba2-0858a4afe5b7
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: tiny.pdf
+  uri:
+    -
+      value: 'private://download/2026-07/tiny.pdf'
+  filemime:
+    -
+      value: application/pdf
+  filesize:
+    -
+      value: 67
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1784022570

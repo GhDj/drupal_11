@@ -1,0 +1,33 @@
+uuid: de0f6aff-ce0c-4e2f-b6f9-c47a557e65f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.administration
+  module:
+    - group
+    - language
+id: group_verwaltung
+label: 'Gruppe: Verwaltung'
+type: 'canonical_entities:group'
+pattern: '/interner-bereich/[group:title]'
+selection_criteria:
+  e5bd7ec5-ef1f-4428-be8e-d1f9cf6284be:
+    id: 'entity_bundle:group'
+    negate: false
+    context_mapping:
+      group: group
+    bundles:
+      administration: administration
+  3df7d678-2371-4e91-93a1-659cfcc98c3a:
+    id: language
+    negate: false
+    context_mapping:
+      language: 'group:langcode:language'
+    langcodes:
+      de: de
+selection_logic: and
+weight: -4
+relationships:
+  'group:langcode:language':
+    label: Language

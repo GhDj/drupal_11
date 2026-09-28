@@ -1,0 +1,154 @@
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/typography" as *;
+
+body {
+  @include typography("body");
+}
+
+//-----------------------------------------------
+// bold
+//-----------------------------------------------
+strong,
+b {
+  font-weight: bold;
+}
+
+//-----------------------------------------------
+// italic
+//-----------------------------------------------
+i,
+em,
+q {
+  font-style: italic;
+}
+
+//-----------------------------------------------
+// Subscript / Superscript
+//-----------------------------------------------
+sub,
+sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+//-----------------------------------------------
+// underline
+//-----------------------------------------------
+u,
+.underline {
+  text-decoration: underline;
+}
+
+//-----------------------------------------------
+// strike
+//-----------------------------------------------
+s,
+.strike {
+  text-decoration: line-through;
+}
+
+//--------------------------------------------------------------------------
+// paragraphs
+//--------------------------------------------------------------------------
+p {
+  &:where(:not(:last-child)) {
+    margin-block-end: var(--#{$nsp}-paragraph-spacing, var(--#{$nsp}-space-md));
+  }
+}
+
+//--------------------------------------------------------------------------
+// lists
+//--------------------------------------------------------------------------
+.rte--list {
+  margin-block-end: var(--#{$nsp}-space-sm);
+  margin-block-start: var(--#{$nsp}-space-sm);
+  padding-inline-start: var(--#{$nsp}-space-xl);
+}
+
+ul.rte--list {
+  list-style: disc;
+
+  &-with-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-inline-start: 0;
+
+    > li {
+      list-style: none;
+      padding-inline-start: var(--#{$nsp}-space-xl);
+      position: relative;
+
+      &::before {
+        background-color: currentColor;
+        content: "";
+        display: inline-block;
+        height: 24px;
+        inset-inline-start: 0;
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M21 6.38125L20.317 7.07187L10.1518 17.3094L9.46875 18L8.78571 17.3094L3.68304 12.1906L3 11.5L4.36607 10.1187L5.04911 10.8094L9.46875 15.2375L18.9509 5.69062L19.6339 5L21 6.38125Z' fill='currentColor'/%3E%3C/svg%3E");
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        position: absolute;
+        top: 2px;
+        width: 24px;
+      }
+    }
+  }
+}
+
+ol.rte--list {
+  list-style-type: decimal;
+}
+
+//--------------------------------------------------------------------------
+// table
+//--------------------------------------------------------------------------
+.table-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+table {
+  caption-side: bottom;
+  width: 100%;
+
+  tr:hover {
+    background-color: var(--#{$nsp}-color-primary-100);
+  }
+
+  td,
+  th {
+    border-bottom: 1px solid var(--#{$nsp}-color-neutral-400);
+    padding: var(--#{$nsp}-space-xs) var(--#{$nsp}-space-sm);
+    text-align: left;
+  }
+
+  th {
+    font-weight: 500;
+  }
+
+  caption {
+    margin-top: var(--#{$nsp}-space-sm);
+  }
+}
+
+//--------------------------------------------------------------------------
+// colored text
+//--------------------------------------------------------------------------
+.color--beuthRed {
+  color: var(--#{$nsp}-color-error);
+}
+
+.color--beuthGreen {
+  color: var(--#{$nsp}-color-success-600);
+}

@@ -1,0 +1,65 @@
+uuid: 4731e0e5-96d0-43b0-87c0-cc839759e607
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.paragraph.tab
+    - field.field.paragraph.definition_item.field_jumplink
+    - field.field.paragraph.definition_item.field_link
+    - field.field.paragraph.definition_item.field_section_text
+    - field.field.paragraph.definition_item.field_section_title
+    - paragraphs.paragraphs_type.definition_item
+  module:
+    - linkit
+    - maxlength
+    - text
+id: paragraph.definition_item.tab
+targetEntityType: paragraph
+bundle: definition_item
+mode: tab
+content:
+  field_jumplink:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_link:
+    type: linkit
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings:
+      maxlength:
+        maxlength_js: null
+        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+  field_section_text:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

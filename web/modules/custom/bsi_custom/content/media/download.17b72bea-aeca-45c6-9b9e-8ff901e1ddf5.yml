@@ -1,0 +1,50 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 17b72bea-aeca-45c6-9b9e-8ff901e1ddf5
+  bundle: download
+  default_langcode: de
+  depends:
+    15a81aef-1c28-4e5c-861c-5a1c8c19feb8: file
+    fd91821c-ded2-4779-874b-a6402e21f836: taxonomy_term
+    e045d4be-3344-45ef-b085-2ce6562ec246: taxonomy_term
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Beispiel-Medium Download'
+  created:
+    -
+      value: 1779365523
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_accessibility:
+    -
+      value: false
+  field_media_file:
+    -
+      entity: 15a81aef-1c28-4e5c-861c-5a1c8c19feb8
+      display: true
+      description: ''
+  field_tags:
+    -
+      entity: fd91821c-ded2-4779-874b-a6402e21f836
+    -
+      entity: e045d4be-3344-45ef-b085-2ce6562ec246

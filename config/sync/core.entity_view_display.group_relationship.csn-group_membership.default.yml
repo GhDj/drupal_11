@@ -1,0 +1,28 @@
+uuid: b99740ed-3557-49a1-80b5-33d7a2807ff1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group_relationship.csn-group_membership.group_roles
+    - group.relationship_type.csn-group_membership
+id: group_relationship.csn-group_membership.default
+targetEntityType: group_relationship
+bundle: csn-group_membership
+mode: default
+content:
+  group_roles:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_id: true
+  label: true
+  langcode: true
+  search_api_excerpt: true
+  uid: true

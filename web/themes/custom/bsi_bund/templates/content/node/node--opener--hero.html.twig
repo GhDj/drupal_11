@@ -1,0 +1,109 @@
+{#
+  node of article opener
+#}
+{{ attach_library('claro/classy.node') }}
+
+{# Genral opener classes #}
+{%
+  set default_classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+
+{# Default Opener #}
+{% if content.field_media.0 %}
+  {% set variant_classes = ['bsi-opener', 'bsi-opener--centered'] %}
+
+  <div{{ attributes.addClass(default_classes|merge(variant_classes)) }}>
+    {{ title_prefix }}
+    {% if label and view_mode != "full" %}
+      <h2{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h2>
+    {% endif %}
+    {{ title_suffix }}
+
+    <div class="bsi-opener__content-wrapper">
+      <figure class="bsi-image bsi-opener__image">
+        {{ content.field_media }}
+      </figure>
+
+      <div class="bsi-opener__content-grid">
+        <div class="bsi-opener__content">
+          {% if content.title.0 %}
+            <h1 class="bsi-heading bsi-heading--2 bsi-opener__title">
+              {{ content.title.0 }}
+            </h1>
+          {% endif %}
+
+          {% if content.field_subtitle.0 %}
+            <p class="bsi-opener__subtitle">
+              {{ content.field_subtitle.0 }}
+            </p>
+          {% endif %}
+
+          {% if content.body.0 %}
+            <div class="bsi-opener__text">
+              {{ content.body.0 }}
+            </div>
+          {% endif %}
+
+          {{ content|without('title', 'field_media', 'field_subtitle', 'body', 'field_article_type', 'group_tagline') }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{# Opener Slider (multiple stage-items) #}
+{% elseif content.field_stage_items.1 %}
+  {% set variant_classes = ['bsi-opener', 'bsi-opener--slider'] %}
+
+  <div{{ attributes.addClass(default_classes|merge(variant_classes)) }}>
+    {{ title_prefix }}
+    <h1 class="bsi-heading bsi-heading--1 bsi-opener__page-title">
+      {{ content.title.0 }}
+    </h1>
+    {{ title_suffix }}
+
+    <div class="splide" data-bsi-opener-slider>
+      <div class="splide__track">
+        {{ content.field_stage_items }}
+      </div>
+
+      <div class="bsi-opener__controls">
+        {% for direction in ['left', 'right'] %}
+          {% set is_prev = direction == 'left' %}
+          <button type="button"
+            class="bsi-button bsi-button--primary bsi-button--icon-only {{ is_prev ? 'bsi-opener__prev' : 'bsi-opener__next' }}"
+            aria-label="{{ is_prev ? 'Previous slide'|t : 'Next slide'|t }}">
+            {% include '@bsi_bund/templates/components/icon.twig' with {
+              name: 'chevron-' ~ direction,
+              decorative: true,
+              extra_classes: base_class ~ '__icon'
+            } %}
+          </button>
+        {% endfor %}
+      </div>
+
+      <ul class="splide__pagination"></ul>
+    </div>
+  </div>
+
+{# Opener Teaser (one or no stage-item) #}
+{% else %}
+  {% set is_single_stage = content.field_stage_items.0 %}
+  {% set variant_classes = is_single_stage ? ['bsi-opener--slider'] : ['bsi-grid'] %}
+  {% set title_classes = is_single_stage ? 'bsi-heading bsi-heading--1 bsi-opener__page-title' : 'bsi-heading bsi-heading--1' %}
+
+  <div{{ attributes.addClass(default_classes|merge(variant_classes)) }}>
+    <h1 class="{{ title_classes }}">
+      {{ content.title.0 }}
+    </h1>
+    {{ content|without('title', 'field_media', 'body') }}
+  </div>
+{% endif %}

@@ -1,0 +1,51 @@
+uuid: b659cced-69ee-411b-b56d-f209c869cbc2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.download.field_accessibility
+    - field.field.media.download.field_body
+    - field.field.media.download.field_copyright
+    - field.field.media.download.field_media_file
+    - field.field.media.download.field_tags
+    - media.type.download
+id: media.download.media_library
+targetEntityType: media
+bundle: download
+mode: media_library
+content:
+  field_copyright:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  access_restrictions: true
+  changed: true
+  created: true
+  field_accessibility: true
+  field_body: true
+  field_media_file: true
+  field_tags: true
+  langcode: true
+  path: true
+  status: true
+  thumbnail: true
+  uid: true

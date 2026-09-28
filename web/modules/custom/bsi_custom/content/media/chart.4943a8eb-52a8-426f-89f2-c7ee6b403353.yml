@@ -1,0 +1,149 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 4943a8eb-52a8-426f-89f2-c7ee6b403353
+  bundle: chart
+  default_langcode: de
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Beispiel-Medium Diagramm'
+  created:
+    -
+      value: 1774010256
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_chart:
+    -
+      config:
+        library: chartjs
+        display:
+          title: Beispiel-Diagramm
+          subtitle: ''
+          figure_caption: ''
+          chart_summary: ''
+          accessible_table: disabled
+          accessible_table_button_text: ''
+          accessible_table_button_class: ''
+          title_position: out
+          tooltips: '1'
+          legend_position: right
+          background: ''
+          dimensions:
+            width: ''
+            width_units: '%'
+            height: ''
+            height_units: ''
+          gauge:
+            max: '100'
+            min: '0'
+            green_from: '85'
+            green_to: '100'
+            yellow_from: '50'
+            yellow_to: '85'
+            red_from: '0'
+            red_to: '50'
+          data_labels: 0
+          data_markers: 0
+          connect_nulls: 0
+          three_dimensional: 0
+          polar: 0
+          stacking: 0
+          color_changer: 0
+        type: line
+        series:
+          table_categories_identifier: first_column
+          data_collector_table:
+            -
+              -
+                data: Tageszeiten
+              -
+                data: Vormittag
+                color: '#006fb0'
+              -
+                data: Nachmittag
+                color: '#f07c33'
+            -
+              -
+                data: Montag
+              -
+                data: '3.4'
+              -
+                data: '5'
+            -
+              -
+                data: Dienstag
+              -
+                data: '5'
+              -
+                data: '10'
+            -
+              -
+                data: Mittwoch
+              -
+                data: '7'
+              -
+                data: '12.3'
+            -
+              -
+                data: Donnerstag
+              -
+                data: '12'
+              -
+                data: '10'
+            -
+              -
+                data: Freitag
+              -
+                data: '8'
+              -
+                data: '8'
+        xaxis:
+          title: ''
+          labels_rotation: '0'
+        yaxis:
+          title: ''
+          min: ''
+          max: ''
+          prefix: ''
+          suffix: ''
+          decimal_count: ''
+          labels_rotation: '0'
+          secondary:
+            title: ''
+            min: ''
+            max: ''
+            prefix: ''
+            suffix: ''
+            decimal_count: ''
+            labels_rotation: '0'
+          inherit: 0
+        library_configs: {  }
+        preview: {  }
+      library: chartjs
+      type: line
+  field_source:
+    -
+      uri: 'route:<nolink>'
+      resolvable_uri: ''
+      title: Zufallsdaten
+      options: {  }
+  field_unit:
+    -
+      value: 'Zufälle am Tag (<em>geschätzt</em>)'
+      format: basic

@@ -1,0 +1,30 @@
+label: Beiträge
+type_settings:
+  states:
+    deletion_request:
+      label: Löschantrag
+    draft:
+      label: Entwurf
+    in_release:
+      label: 'In der Veröffentlichung'
+    published:
+      label: Veröffentlicht
+    unpublished:
+      label: Unveröffentlicht
+  transitions:
+    create_new_draft:
+      label: 'Neuen Entwurf erstellen'
+    reject:
+      label: Ablehnen
+    request_approval:
+      label: 'Veröffentlichung anfragen'
+    request_deletion:
+      label: 'Löschung anfragen'
+    revise:
+      label: Überarbeiten
+    withdraw:
+      label: Zurückziehen
+    publish:
+      label: Veröffentlichen
+    unpublish:
+      label: 'Veröffentlichung rückgängig machen'

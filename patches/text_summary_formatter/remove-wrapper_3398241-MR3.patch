@@ -1,0 +1,21 @@
+diff --git a/src/Plugin/Field/FieldFormatter/TextSummaryFormatter.php b/src/Plugin/Field/FieldFormatter/TextSummaryFormatter.php
+index dd2a4c6dddd537d5f2ba40746f4f7a320159df08..1f49fe303010ea8215b2bdf3fe6fc67f166b7c2a 100644
+--- a/src/Plugin/Field/FieldFormatter/TextSummaryFormatter.php
++++ b/src/Plugin/Field/FieldFormatter/TextSummaryFormatter.php
+@@ -2,7 +2,6 @@
+
+ namespace Drupal\text_summary_formatter\Plugin\Field\FieldFormatter;
+
+-use Drupal\Core\Render\Markup;
+ use Drupal\Core\Field\FieldItemListInterface;
+ use Drupal\Core\Field\FormatterBase;
+
+@@ -35,7 +34,7 @@ class TextSummaryFormatter extends FormatterBase {
+
+       $elements[$delta] = [
+         '#type' => 'processed_text',
+-        '#text' => Markup::create("<div class='summary-only'>$item->summary</div>"),
++        '#text' => $item->summary,
+         '#format' => $item->format,
+         '#langcode' => $item->getLangcode(),
+       ];

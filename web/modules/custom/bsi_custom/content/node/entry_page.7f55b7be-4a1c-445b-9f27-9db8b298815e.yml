@@ -1,0 +1,300 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 7f55b7be-4a1c-445b-9f27-9db8b298815e
+  bundle: entry_page
+  default_langcode: de
+  depends:
+    68b997c3-9b21-4a81-a06f-37b41b3cbe87: media
+    c48eca52-7e89-402e-8832-6f2c898f3e06: node
+    734b5cd9-35c8-437f-a44a-1d2c1084d793: media
+    d5232aaf-3521-4e7d-8f7b-58adc0ca272e: node
+    e3f4cce5-3e03-4eef-9b71-a22ddaeae3db: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Geschützter Inhalt: Einstiegsseite Land & Bund'
+  created:
+    -
+      value: 1784023479
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  node_keeper:
+    -
+      value: false
+  alias_keeper:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  sae_exclude:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: 'Dies ist ein Inhalt, welcher nach dem Erstellen den Gruppen "Landes- und Kommunalverwaltung" und "Bundesverwaltung" zugeordnet wurde. '
+      format: plain_text
+      summary: ''
+  field_media:
+    -
+      entity: 68b997c3-9b21-4a81-a06f-37b41b3cbe87
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 5bbdd9a5-b0c0-40d6-b9e5-97944eccbc32
+          bundle: accordion
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1784023659
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_items:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: e71e49a9-662a-4fac-96f5-4cd8f0e8749e
+                  bundle: definition_item
+                  default_langcode: de
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1784023675
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_section_text:
+                    -
+                      value: '<p>Inhalte können wie gewohnt erstellt werden:</p><ul><li data-list-item-id="ee05c8f4493e93a7f6aed2cc131d931e1"><a href="/node/add">Allgemeine Seite "Inhalt erstellen"</a></li><li data-list-item-id="e696fdefb9b60390655afed28d6cee08f"><a href="/node/add/entry_page">Einstiegsseite erstellen</a></li><li data-list-item-id="efa83869021856735a6a3de94b7453a3e"><a href="/node/add/page">Inhaltsseite erstellen</a></li></ul><p>Zudem können Inhalte gezielt im Kontext einer Gruppe erstellt werden. In diesem Fall entfällt das manuelle Hinzufügen zu dieser:</p><ul><li data-list-item-id="e4e97015b91a8c2276da43cfcf4f7a47f"><a href="/group/1/node/create">Inhalt erstellen</a> in Gruppe "Bundesverwaltung"<ul><li data-list-item-id="e00592032a448d317ca07e5204328df83"><a href="/group/1/content/create/group_node:entry_page">Einstiegsseite erstellen</a></li><li data-list-item-id="eafd304223092df1202e2392574f938fc"><a href="/group/1/content/create/group_node:page">Inhaltsseite erstellen</a></li></ul></li><li data-list-item-id="e2875301f16b006e839c889e50b62c5b4"><a href="/group/2/node/create">Inhalt erstellen</a> in Gruppe "Landes- und Kommunalverwaltung"<ul><li data-list-item-id="e8f161205b15d96b84e9680766b09d47c"><a href="/group/2/content/create/group_node:entry_page">Einstiegsseite erstellen</a></li><li data-list-item-id="efc6fc27c67938cf61321a412a6e4d1a2"><a href="/group/2/content/create/group_node:page">Inhaltsseite erstellen</a></li></ul></li></ul>'
+                      format: basic
+                  field_section_title:
+                    -
+                      value: 'Inhalt erstellen'
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: d8b58e9c-573f-4534-9068-e8981269b7d3
+                  bundle: definition_item
+                  default_langcode: de
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1784023682
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_section_text:
+                    -
+                      value: '<ul><li data-list-item-id="e6176c0666466db1280b7e6c536d5d61b"><a href="/group/1/node/add">Inhalt hinzufügen</a> zur Gruppe "Bundesverwaltung"</li><li data-list-item-id="e958552cc953f3982a5beae2cfc86cb1e"><a href="/group/2/node/add">Inhalt hinzufügen</a> zur Gruppe "Landes- und Kommunalverwaltung"</li></ul>'
+                      format: basic
+                  field_section_title:
+                    -
+                      value: 'Inhalt der Gruppe zuweisen'
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: b010073e-eea6-48c2-8283-b41809800f6f
+                  bundle: definition_item
+                  default_langcode: de
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1784023802
+                  behavior_settings:
+                    -
+                      value: {  }
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_section_text:
+                    -
+                      value: '<p>Erstellte Medien mit Kennzeichnung "Veröffentlicht" sind <strong>initial für alle Webseiten-Besucher verfügbar</strong>.</p><p>Soll ein Download geschützt werden und nur bestimmten Gruppen zur Verfügung stehen, muss dieses <u>explizit</u> den gewünschten Gruppen hinzugefügt werden.</p><ul><li data-list-item-id="e3532c065ae249546e6148381a64165fb"><a href="/group/1/content/add/group_media:download">Download hinzufügen</a> zur Gruppe "Bundesverwaltung"</li><li data-list-item-id="e37f931b069d28312998aa055964428f0"><a href="/group/2/content/add/group_media:download">Download hinzufügen</a> zur Gruppe "Landes- und Kommunalverwaltung"</li></ul>'
+                      format: basic
+                  field_section_title:
+                    -
+                      value: 'Geschützte Medien'
+          field_section_title:
+            -
+              value: 'Wie geht das?'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 0f0734c5-a9c0-4e5c-8e70-6167664a55da
+          bundle: teaser_single
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1784025505
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_display_variant:
+            -
+              value: image_right
+          field_link:
+            -
+              target_uuid: c48eca52-7e89-402e-8832-6f2c898f3e06
+              resolvable_uri: /node/43
+              title: 'Geschützter Inhalt "Bund"'
+              options: {  }
+          field_media:
+            -
+              entity: 734b5cd9-35c8-437f-a44a-1d2c1084d793
+          field_section_text:
+            -
+              value: '<p>Hier findet sich eine geschützte Inhaltsseite, welche nur der Gruppe "<a href="/group/1">Bundesverwaltung</a>" zugeordnet ist.</p>'
+              format: basic
+          field_section_title:
+            -
+              value: '1. Beispiel für eine Inhaltsseite'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: b6d0c9f8-47e3-4330-89b5-5d5a9aac56b6
+          bundle: teaser_single
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1784025428
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_display_variant:
+            -
+              value: image_left
+          field_link:
+            -
+              target_uuid: d5232aaf-3521-4e7d-8f7b-58adc0ca272e
+              resolvable_uri: /node/45
+              title: 'Geschützter Inhalt "Land"'
+              options: {  }
+          field_media:
+            -
+              entity: 734b5cd9-35c8-437f-a44a-1d2c1084d793
+          field_section_text:
+            -
+              value: '<p>Hier findet sich eine geschützte Inhaltsseite, welche nur der Gruppe "<a href="/group/2">Landes- und Kommunalverwaltung</a>" zugeordnet ist.</p>'
+              format: basic
+          field_section_title:
+            -
+              value: '2. Beispiel für eine Inhaltsseite'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 4e9ea3ff-098f-4328-97bc-f611cab57293
+          bundle: downloads
+          default_langcode: de
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1784025826
+          behavior_settings:
+            -
+              value: {  }
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_media_items:
+            -
+              entity: e3f4cce5-3e03-4eef-9b71-a22ddaeae3db
+          field_section_title:
+            -
+              value: Downloads

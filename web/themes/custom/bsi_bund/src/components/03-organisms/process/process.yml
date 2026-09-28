@@ -1,0 +1,65 @@
+showAdditionalColumn: true
+steps:
+  - title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    content: >
+      <p><strong>Sed fermentum justo felis, in semper ante pretium vitae. </strong></p>
+      <p>Cras convallis metus nisi, at feugiat ante molestie ut. Maecenas ullamcorper finibus
+      lacus ac faucibus. Cras eget eleifend metus. Mauris nec turpis ornare, efficitur ex eu,
+      vehicula nisl. In in enim posuere, ultrices quam et, sagittis massa. Interdum et malesuada
+      fames ac ante ipsum primis in faucibus.</p>
+      <p><strong>Sed fermentum justo felis, in semper ante pretium vitae. </strong></p>
+      <p>Cras convallis metus nisi, at feugiat ante molestie ut. Maecenas ullamcorper finibus
+      lacus ac faucibus. Cras eget eleifend metus. Mauris nec turpis ornare, efficitur ex eu,
+      vehicula nisl. In in enim posuere, ultrices quam et, sagittis massa. Interdum et malesuada
+      fames ac ante ipsum primis in faucibus.</p>
+      <figure class="bsi-image">
+        <img src="demo-image-4_3.jpg" alt="" class="bsi-image__image" loading="lazy">
+        <figcaption class="bsi-image__caption">
+          <div class="bsi-copyright bsi-image__copyright">
+            <span class="bsi-copyright__text">
+              Quelle: © BSI
+            </span>
+          </div>
+          <span class="bsi-image__caption-text">Darstellung typischer IT-Störungen</span>
+          </figcaption>
+      </figure>
+      <p>Maecenas eros lectus, venenatis ut massa in, fermentum sollicitudin tellus. Phasellus
+      eu sapien eu ex elementum rutrum id sed nulla.</p>
+      <p><a href="#" class="button">Kontakt aufnehmen</a></p>
+    addition: >
+      <p>
+        <strong>Hilfsmittel:</strong><br>
+        <a class="bsi-link" href="#">Video zu Modul 1.1</a><br>
+        <a class="bsi-link" href="#">Video zu Modul 1.2</a>
+      </p>
+  - title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    content: >
+      <p><strong>Sed fermentum justo felis, in semper ante pretium vitae. </strong></p>
+      <p>Cras convallis metus nisi, at feugiat ante molestie ut. Maecenas ullamcorper finibus
+      lacus ac faucibus. Cras eget eleifend metus. Mauris nec turpis ornare, efficitur ex eu,
+      vehicula nisl. In in enim posuere, ultrices quam et, sagittis massa. Interdum et malesuada
+      fames ac ante ipsum primis in faucibus.</p>
+      <p><strong>Sed fermentum justo felis, in semper ante pretium vitae. </strong></p>
+      <p>Cras convallis metus nisi, at feugiat ante molestie ut. Maecenas ullamcorper finibus
+      lacus ac faucibus. Cras eget eleifend metus. Mauris nec turpis ornare, efficitur ex eu,
+      vehicula nisl. In in enim posuere, ultrices quam et, sagittis massa. Interdum et malesuada
+      fames ac ante ipsum primis in faucibus.</p>
+    addition: >
+      <p>
+        <strong>Hilfsmittel:</strong><br>
+        <a class="bsi-link" href="#">Video zu Modul 1.1</a><br>
+        <a class="bsi-link" href="#">Video zu Modul 1.2</a>
+      </p>
+  - label: "Custom"
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    content: >
+      <p>Cras convallis metus nisi, at feugiat ante molestie ut. Maecenas ullamcorper finibus
+      lacus ac faucibus. Cras eget eleifend metus. Mauris nec turpis ornare, efficitur ex eu,
+      vehicula nisl. In in enim posuere, ultrices quam et, sagittis massa. Interdum et malesuada
+      fames ac ante ipsum primis in faucibus.</p>
+    addition: >
+      <p>
+        <strong>Hilfsmittel:</strong><br>
+        <a class="bsi-link" href="#">Video zu Modul 1.1</a><br>
+        <a class="bsi-link" href="#">Video zu Modul 1.2</a>
+      </p>

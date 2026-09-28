@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b830c644-d0e4-4ae3-b166-3021640a1cd9
+  bundle: image
+  default_langcode: de
+  depends:
+    0c5e992f-6b47-4fe1-8776-484db44b528f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Opener Video'
+  created:
+    -
+      value: 1780044028
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: 0c5e992f-6b47-4fe1-8776-484db44b528f
+      alt: 'Verschiedene Medien-Symbole kreisen auf dunkelblauem Hintergrund. Im Fokus: Eine Videoklappe mit Play-Button.'
+      title: ''
+      width: 4784
+      height: 1760

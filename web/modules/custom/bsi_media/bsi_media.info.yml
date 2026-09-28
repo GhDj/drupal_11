@@ -1,0 +1,10 @@
+type: module
+name: 'BSI Media'
+description: 'Media types and customization for BSI'
+package: BSI
+
+core_version_requirement: ^10 || ^11
+
+dependencies:
+  - media:media
+  - media_entity_download:media_entity_download

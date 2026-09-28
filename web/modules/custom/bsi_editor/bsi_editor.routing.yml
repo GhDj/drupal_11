@@ -1,0 +1,7 @@
+bsi_editor.abbreviations_autocomplete:
+  path: '/ajax/abbreviations/{input}'
+  defaults:
+    _controller: '\Drupal\bsi_editor\Controller\AbbreviationsAutocompleteController'
+    input: null
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,92 @@
+uuid: bb8e7508-fde4-4186-96ea-2533dab217d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.full
+    - field.field.media.publication.field_accessibility
+    - field.field.media.publication.field_body
+    - field.field.media.publication.field_copyright
+    - field.field.media.publication.field_media_file
+    - field.field.media.publication.field_media_type
+    - field.field.media.publication.field_tags
+    - field.field.media.publication.field_use_cart
+    - media.type.publication
+    - responsive_image.styles.bsi_inline_side
+  module:
+    - file
+    - responsive_image
+    - text
+id: media.publication.full
+targetEntityType: media
+bundle: publication
+mode: full
+content:
+  created:
+    type: timestamp
+    label: inline
+    settings:
+      date_format: date_short
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: ''
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+        description: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_copyright:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_media_file:
+    type: file_default
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  thumbnail:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: bsi_inline_side
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  changed: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_accessibility: true
+  field_media_type: true
+  field_tags: true
+  field_use_cart: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  uid: true

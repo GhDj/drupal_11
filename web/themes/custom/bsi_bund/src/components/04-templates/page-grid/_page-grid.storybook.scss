@@ -1,0 +1,23 @@
+@use "@globals/foundation/variables" as *;
+
+.page-grid-decorator {
+  .#{$nsp}-placeholder {
+    background-color: var(--#{$nsp}-color-alpha-dark-90);
+  }
+
+  .#{$nsp}-page-grid__breadcrumb {
+    height: 70px;
+  }
+
+  .#{$nsp}-page-grid__stage {
+    height: 400px;
+  }
+
+  .#{$nsp}-page-grid__anchors {
+    height: 86px;
+  }
+
+  .#{$nsp}-page-grid__main {
+    height: 600px;
+  }
+}

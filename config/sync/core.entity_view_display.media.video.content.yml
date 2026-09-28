@@ -1,0 +1,69 @@
+uuid: d1bc732f-04c7-42d6-bf06-67f0b363d705
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.content
+    - field.field.media.video.field_body
+    - field.field.media.video.field_media_source
+    - field.field.media.video.field_tracks
+    - media.type.video
+    - responsive_image.styles.bsi_video
+  module:
+    - layout_builder
+    - media_remote_file
+    - responsive_image
+    - text_summary_formatter
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.video.content
+targetEntityType: media
+bundle: video
+mode: content
+content:
+  field_body:
+    type: text_summary_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_media_source:
+    type: remote_file_video
+    label: hidden
+    settings:
+      controls: true
+      autoplay: false
+      loop: false
+      multiple_file_display_type: sources
+      muted: false
+      playsinline: false
+      poster_field: thumbnail
+      track_field: field_tracks
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  thumbnail:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: bsi_video
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_tracks: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  uid: true

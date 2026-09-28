@@ -1,0 +1,24 @@
+uuid: 449f301e-57be-4527-bddd-e90de3ada2a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.bsi_audio_standard
+    - image.style.bsi_audio_wide_2x
+  theme:
+    - bsi_bund
+id: bsi_audio
+label: 'BSI Audio'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_audio_wide_2x
+    breakpoint_id: bsi_custom.wide
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_audio_standard
+    breakpoint_id: bsi_custom.mobile
+    multiplier: 1x
+breakpoint_group: bsi_bund
+fallback_image_style: bsi_audio_standard

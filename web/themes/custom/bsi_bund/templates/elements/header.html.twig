@@ -1,0 +1,20 @@
+<header class="bsi-header">
+    <div class="bsi-header__grid">
+        {{ page.header|without('bsi_bund_nav_header', 'bsi_bund_mainnavigation', 'bsi_bund_site_search') }}
+
+        <div class="bsi-header__right">
+            {% if page.header.bsi_bund_nav_header %}
+                <div class="bsi-header__meta-navigation">
+                    {{ page.header.bsi_bund_nav_header }}
+                </div>
+            {% endif %}
+
+            {% if page.header.bsi_bund_mainnavigation %}
+                <div class="bsi-header__navigation">
+                    {{ page.header.bsi_bund_mainnavigation }}
+                    {{ page.header.bsi_bund_site_search }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</header>

@@ -1,0 +1,93 @@
+// -----------------------------------------------------------------------------
+// Border Card
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+
+.#{$nsp}-border-card {
+  background-color: var(--#{$nsp}-color-base-white);
+  border-left: 2px solid var(--#{$nsp}-color-neutral-100);
+  border-radius: var(--#{$nsp}-space-4xs);
+  box-shadow: 0 0 4px var(--#{$nsp}-color-shadow-soft);
+  margin-bottom: var(--#{$nsp}-space-sm);
+  padding: var(--#{$nsp}-space-sm);
+  position: relative;
+
+  &__meta {
+    @include typography("text-support");
+    align-items: center;
+    display: flex;
+  }
+
+  &--mittel,
+  &--neutral {
+    border-color: var(--#{$nsp}-color-yellow-100);
+  }
+
+  &--hoch,
+  &--high {
+    border-color: var(--#{$nsp}-color-orange-100);
+  }
+
+  &--kritisch,
+  &--critical {
+    border-color: var(--#{$nsp}-color-red-100);
+  }
+
+  &--info {
+    border-color: var(--#{$nsp}-color-neutral-100);
+  }
+
+  &--niedrig,
+  &--success {
+    border-color: var(--#{$nsp}-color-green-100);
+  }
+
+  &--transparent {
+    border-color: transparent;
+  }
+
+  .#{$nsp}-badge {
+    margin-right: var(--#{$nsp}-space-2xs);
+
+    &--date {
+      margin-right: var(--#{$nsp}-space-module);
+    }
+  }
+
+  &__title {
+    @include typography("heading-5");
+    font-weight: 700;
+    padding: var(--#{$nsp}-space-sm) 0;
+  }
+
+  .#{$nsp}-link {
+    &__text,
+    &__icon {
+      color: var(--#{$nsp}-color-typo-tertiary);
+    }
+
+    &__icon {
+      $size: var(--#{$nsp}-space-sm);
+      height: $size;
+      width: $size;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Variant
+// -----------------------------------------------------------------------------
+.#{$nsp}-border-card--small {
+  .#{$nsp}-border-card__meta {
+    justify-content: space-between;
+  }
+  .#{$nsp}-badge--date {
+    margin-right: var(--bsi-space-2xs);
+  }
+}

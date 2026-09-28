@@ -1,0 +1,23 @@
+uuid: a49cca20-7f57-4936-a1e5-309afef8d396
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_downloads
+    - node.type.article
+  module:
+    - link
+id: node.article.field_downloads
+field_name: field_downloads
+entity_type: node
+bundle: article
+label: Downloads
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 1
+field_type: link

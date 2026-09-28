@@ -1,0 +1,157 @@
+uuid: 593711d2-173b-4f25-bcdd-8b7a43227b65
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic
+    - filter.format.webform_default
+    - media.type.bits
+    - media.type.download
+    - media.type.publication
+    - search_api_autocomplete.search.search
+    - taxonomy.vocabulary.abbreviations
+    - taxonomy.vocabulary.audiences
+    - taxonomy.vocabulary.contact_topics
+    - taxonomy.vocabulary.dictionary
+    - taxonomy.vocabulary.it_sik_categories
+    - taxonomy.vocabulary.media_types
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.topics
+  module:
+    - bsi_media
+    - captcha
+    - content_moderation
+    - content_translation
+    - editoria11y
+    - file
+    - filter
+    - honeypot
+    - klaro
+    - media
+    - media_entity_download
+    - node
+    - paragraphs_type_permissions
+    - search_api_autocomplete
+    - system
+    - taxonomy
+    - webform
+    - webform_entity_cart
+_core:
+  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+id: authenticated
+label: 'Authenticated user'
+weight: -9
+is_admin: false
+permissions:
+  - 'access content'
+  - 'bypass honeypot protection'
+  - 'create paragraph content accordion'
+  - 'create paragraph content banner'
+  - 'create paragraph content contact'
+  - 'create paragraph content definition_item'
+  - 'create paragraph content downloads'
+  - 'create paragraph content facts_figures'
+  - 'create paragraph content introduction'
+  - 'create paragraph content key_facts'
+  - 'create paragraph content media'
+  - 'create paragraph content quick_overview'
+  - 'create paragraph content quote'
+  - 'create paragraph content sequence'
+  - 'create paragraph content sequence_item'
+  - 'create paragraph content table_section'
+  - 'create paragraph content tabs'
+  - 'create paragraph content teaser_single'
+  - 'create paragraph content text_section'
+  - 'delete media'
+  - 'delete own files'
+  - 'delete paragraph content accordion'
+  - 'delete paragraph content banner'
+  - 'delete paragraph content contact'
+  - 'delete paragraph content definition_item'
+  - 'delete paragraph content downloads'
+  - 'delete paragraph content facts_figures'
+  - 'delete paragraph content introduction'
+  - 'delete paragraph content key_facts'
+  - 'delete paragraph content media'
+  - 'delete paragraph content quick_overview'
+  - 'delete paragraph content quote'
+  - 'delete paragraph content sequence'
+  - 'delete paragraph content sequence_item'
+  - 'delete paragraph content table_section'
+  - 'delete paragraph content tabs'
+  - 'delete paragraph content teaser_single'
+  - 'delete paragraph content text_section'
+  - 'delete paragraph content view'
+  - 'delete term revisions in abbreviations'
+  - 'delete term revisions in audiences'
+  - 'delete term revisions in contact_topics'
+  - 'delete term revisions in dictionary'
+  - 'delete term revisions in it_sik_categories'
+  - 'delete term revisions in media_types'
+  - 'delete term revisions in tags'
+  - 'delete term revisions in topics'
+  - 'download bits media'
+  - 'download download media'
+  - 'download media'
+  - 'download publication media'
+  - 'edit own webform'
+  - 'edit own webform submission'
+  - 'mark as hidden in editoria11y'
+  - 'revert term revisions in abbreviations'
+  - 'revert term revisions in audiences'
+  - 'revert term revisions in contact_topics'
+  - 'revert term revisions in dictionary'
+  - 'revert term revisions in it_sik_categories'
+  - 'revert term revisions in media_types'
+  - 'revert term revisions in tags'
+  - 'revert term revisions in topics'
+  - 'skip CAPTCHA'
+  - 'translate editable entities'
+  - 'update media'
+  - 'update paragraph content accordion'
+  - 'update paragraph content banner'
+  - 'update paragraph content contact'
+  - 'update paragraph content definition_item'
+  - 'update paragraph content downloads'
+  - 'update paragraph content facts_figures'
+  - 'update paragraph content introduction'
+  - 'update paragraph content key_facts'
+  - 'update paragraph content media'
+  - 'update paragraph content quick_overview'
+  - 'update paragraph content quote'
+  - 'update paragraph content sequence'
+  - 'update paragraph content sequence_item'
+  - 'update paragraph content table_section'
+  - 'update paragraph content tabs'
+  - 'update paragraph content teaser_single'
+  - 'update paragraph content text_section'
+  - 'use entity cart'
+  - 'use klaro'
+  - 'use search_api_autocomplete for search'
+  - 'use text format basic'
+  - 'use text format webform_default'
+  - 'view all media revisions'
+  - 'view latest version'
+  - 'view media'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view own webform submission'
+  - 'view paragraph content accordion'
+  - 'view paragraph content banner'
+  - 'view paragraph content contact'
+  - 'view paragraph content definition_item'
+  - 'view paragraph content downloads'
+  - 'view paragraph content facts_figures'
+  - 'view paragraph content introduction'
+  - 'view paragraph content key_facts'
+  - 'view paragraph content media'
+  - 'view paragraph content quick_overview'
+  - 'view paragraph content quote'
+  - 'view paragraph content sequence'
+  - 'view paragraph content sequence_item'
+  - 'view paragraph content table_section'
+  - 'view paragraph content tabs'
+  - 'view paragraph content teaser_single'
+  - 'view paragraph content text_section'
+  - 'view paragraph content view'
+  - 'view vocabulary labels'

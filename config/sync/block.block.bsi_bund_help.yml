@@ -1,0 +1,22 @@
+uuid: f4ebd7ba-c04b-4af4-b5e2-e8c4bbad754f
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - bsi_bund
+_core:
+  default_config_hash: jccFSSVqV0WCDb6NtML1VWAWTtDbZ-zn5YgTRMgMrIM
+id: bsi_bund_help
+theme: bsi_bund
+region: highlighted
+weight: -5
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

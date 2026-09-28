@@ -1,0 +1,90 @@
+// -----------------------------------------------------------------------------
+// Quote
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-quote {
+  --#{$nsp}-link-decoration-line: none;
+  --#{$nsp}-link-color: var(--#{$nsp}-color-typo-tertiary);
+
+  background: var(--#{$nsp}-color-base-white);
+  border: 1px solid var(--#{$nsp}-color-neutral-150);
+  border-radius: var(--#{$nsp}-space-4xs);
+  box-shadow: var(--#{$nsp}-shadow-12);
+  box-sizing: border-box;
+  color: var(--#{$nsp}-color-neutral-900);
+  display: flex;
+  flex-direction: column;
+  gap: var(--#{$nsp}-space-2xl);
+  padding: var(--#{$nsp}-space-sm);
+  width: 100%;
+
+  @include breakpoint-lg {
+    align-items: flex-start;
+    flex-direction: row;
+  }
+
+  &__media {
+    .#{$nsp}-image {
+      --#{$nsp}-image-ratio: 4 / 3;
+      object-fit: cover;
+
+      @include breakpoint-lg {
+        --#{$nsp}-image-ratio: 1 / 1;
+        width: 305px;
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__blockquote {
+    @include typography("heading-5");
+    font-style: italic;
+    margin: 0 0 var(--#{$nsp}-space-sm);
+    quotes: auto;
+
+    @include breakpoint-lg {
+      @include typography("heading-4");
+      font-style: italic;
+    }
+
+    &::before {
+      content: open-quote;
+      margin-left: -10px;
+      margin-right: -5px;
+    }
+
+    &::after {
+      content: close-quote;
+      margin-left: -8px;
+    }
+
+    p {
+      display: inline;
+
+      + p {
+        display: inline-block;
+      }
+    }
+  }
+
+  &__author {
+    @include typography("table-body-strong");
+    color: var(--#{$nsp}-color-neutral-900);
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 var(--#{$nsp}-space-sm);
+  }
+}

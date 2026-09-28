@@ -1,0 +1,21 @@
+uuid: 870763b7-f66e-4618-b558-cf219b6735a8
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_card_mobile
+label: 'BSI Card (mobile)'
+effects:
+  d43b1a2c-cc85-4885-bdd6-effae2098bf3:
+    uuid: d43b1a2c-cc85-4885-bdd6-effae2098bf3
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 544
+      height: 408
+      anchor: center-center
+  27e9daa3-7a6b-41c4-914b-d4c6267c67f5:
+    uuid: 27e9daa3-7a6b-41c4-914b-d4c6267c67f5
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

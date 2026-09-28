@@ -1,0 +1,52 @@
+{#
+/**
+ * Content of Quickoverview Teaser
+ */
+#}
+{% block content %}
+    {% block items %}
+        {% block item %}
+            <div class="bsi-60-sec__summary">
+                <ul
+                    class="bsi-60-sec__questions"
+                    role="tablist"
+                    aria-orientation="vertical"
+                >
+                    {% for item in items %}
+                        <li class="bsi-60-sec__question-item" role="presentation">
+                            <button
+                                class="bsi-60-sec__question"
+                                id="sixty-sec-2-tab-{{ item.content['#paragraph'].id() }}"
+                                type="button"
+                                role="tab"
+                                data-bsi-60-sec-question
+                                data-bsi-60-sec-target="sixty-sec-2-panel-{{ item.content['#paragraph'].id() }}"
+                                aria-controls="sixty-sec-2-panel-{{ item.content['#paragraph'].id() }}"
+                                aria-selected="false"
+                                tabindex="{{ loop.first ? 0 : -1 }}"
+                            >
+                                {{ item.content['#paragraph'].field_section_title.value }}
+                            </button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="bsi-60-sec__content bsi-bodytext" data-bsi-60-sec-content>
+                {% for item in items %}
+                    <section
+                        class="bsi-60-sec__panel"
+                        id="sixty-sec-2-panel-{{ item.content['#paragraph'].id() }}"
+                        role="tabpanel"
+                        data-bsi-60-sec-panel
+                        aria-labelledby="sixty-sec-2-tab-{{ item.content['#paragraph'].id() }}"
+                        tabindex="{{ loop.first ? 0 : -1 }}"
+                        {{ loop.first ? "" : "hidden" }}
+                    >
+                        {{ item.content['#paragraph'].field_section_text.processed }}
+                    </section>
+                {% endfor %}
+            </div>
+        {% endblock %}
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,56 @@
+uuid: af179f58-8466-4b4e-a09e-130cc5031de5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.publication.field_accessibility
+    - field.field.media.publication.field_body
+    - field.field.media.publication.field_copyright
+    - field.field.media.publication.field_media_file
+    - field.field.media.publication.field_media_type
+    - field.field.media.publication.field_tags
+    - field.field.media.publication.field_use_cart
+    - media.type.publication
+id: media.publication.media_library
+targetEntityType: media
+bundle: publication
+mode: media_library
+content:
+  field_copyright:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  changed: true
+  created: true
+  field_accessibility: true
+  field_body: true
+  field_media_file: true
+  field_media_type: true
+  field_tags: true
+  field_use_cart: true
+  path: true
+  status: true
+  thumbnail: true
+  translation: true
+  uid: true

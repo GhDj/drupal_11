@@ -1,0 +1,55 @@
+_meta:
+  version: '1.0'
+  entity_type: group
+  uuid: 24903483-c6ac-4bda-ada0-0f1912a3325b
+  bundle: administration
+  default_langcode: de
+translations:
+  en:
+    status:
+      -
+        value: true
+    label:
+      -
+        value: 'State and Local Administration'
+    created:
+      -
+        value: 1783951313
+    path:
+      -
+        alias: ''
+        langcode: en
+        pathauto: 0
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  label:
+    -
+      value: 'Landes- und Kommunalverwaltung'
+  created:
+    -
+      value: 1783950003
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false

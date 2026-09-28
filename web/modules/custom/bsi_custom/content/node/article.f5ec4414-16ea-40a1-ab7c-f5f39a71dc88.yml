@@ -1,0 +1,95 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: f5ec4414-16ea-40a1-ab7c-f5f39a71dc88
+  bundle: article
+  default_langcode: de
+  depends:
+    734b5cd9-35c8-437f-a44a-1d2c1084d793: media
+translations:
+  en:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    title:
+      -
+        value: 'Example Press Release'
+    created:
+      -
+        value: 1778575285
+    path:
+      -
+        alias: ''
+        langcode: en
+        pathauto: 1
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    field_link:
+      -
+        uri: 'route:<none>'
+        resolvable_uri: ''
+        title: 'Mehr zur Pressemitteilung'
+        options: {  }
+    field_location:
+      -
+        value: Online
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Beispiel-Inhalt Pressemitteilung'
+  created:
+    -
+      value: 1778575024
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: /aktuelles/presse/2026-05-12-beispiel-inhalt-pressemitteilung
+      langcode: de
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: ''
+      format: plain_text
+      summary: 'Lorem Ipsum'
+  field_article_type:
+    -
+      value: press_release
+  field_link:
+    -
+      uri: 'route:<none>'
+      resolvable_uri: ''
+      title: 'Mehr zur Pressemitteilung'
+      options: {  }
+  field_location:
+    -
+      value: Online
+  field_media:
+    -
+      entity: 734b5cd9-35c8-437f-a44a-1d2c1084d793

@@ -1,0 +1,119 @@
+label: Suchlisten
+display:
+  default:
+    display_options:
+      pager:
+        options:
+          tags:
+            first: '« Erste'
+            last: 'Letzte »'
+          expose:
+            items_per_page_label: 'Ergebnisse pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: Sortieren
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+  publications:
+    display_title: Publikationen
+    display_options:
+      fields:
+        thumbnail:
+          label: Bild
+        name:
+          label: Titel
+        media_created:
+          label: Datum
+      arguments:
+        media_type:
+          admin_label: 'Begriff: Publikationsart'
+          exception:
+            title: Alle
+      sorts:
+        media_created:
+          expose:
+            label: Datum
+  jobs:
+    display_title: Stellenanzeigen
+    display_options:
+      fields:
+        title:
+          label: Titel
+        field_location:
+          label: Ort
+        field_deadline:
+          label: Bewerbungsfrist
+      arguments:
+        node_degree:
+          exception:
+            title: Alle
+          admin_label: Abschluss
+  nodes:
+    display_title: 'Allgemeine Inhalte'
+    display_options:
+      fields:
+        node_created:
+          label: 'Verfasst am'
+        title:
+          label: Titel
+        node_summary:
+          label: Zusammenfassung
+        field_media:
+          label: Bild
+        field_date_range:
+          label: Zeitraum
+        field_location:
+          label: Standort
+        field_deadline:
+          label: Frist
+      sorts:
+        node_created:
+          expose:
+            label: Datum
+  block_search_lists_jobs:
+    display_options:
+      block_description: 'Stellenausschreibungen (Tabelle)'
+      empty:
+        area_text_custom:
+          content: 'Zur Zeit keine Stellenangebote.'
+  block_search_lists_publications:
+    display_options:
+      block_description: 'Publikationen (Tabelle)'
+      empty:
+        area_text_custom:
+          content: 'Es wurden keine Ergebnisse gefunden.'
+      sorts:
+        media_created:
+          expose:
+            label: Datum
+  block_search_certificates:
+    display_title: 'Zertifikate – Block'
+    display_options:
+      block_description: 'Zertifikate (Tabelle)'
+  certificates:
+    display_title: Zertifikate
+  block_search_lists_keywords:
+    display_title: 'Schlagworte – Block'
+    display_options:
+      block_description: 'Schlagworte (Tabelle)'
+      empty:
+        area_text_custom:
+          content: 'Es wurden keine Ergebnisse gefunden.'
+  keywords:
+    display_title: Schlüsselwörter
+    display_options:
+      fields:
+        title:
+          label: Titel
+        node_summary:
+          label: Beschreibung
+        node_created:
+          label: Datum
+        media_summary:
+          label: Beschreibung
+        media_created:
+          label: Datum

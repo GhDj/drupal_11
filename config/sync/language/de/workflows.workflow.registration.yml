@@ -1,0 +1,20 @@
+label: Registrierung
+type_settings:
+  states:
+    canceled:
+      label: Abgebrochen
+    complete:
+      label: Abgeschlossen
+    pending:
+      label: Wartend
+    waitlist:
+      label: Warteliste
+    held:
+      label: Vorgemerkt
+  transitions:
+    cancel:
+      label: Abbrechen
+    complete:
+      label: Abschließen
+    hold:
+      label: Vormerken

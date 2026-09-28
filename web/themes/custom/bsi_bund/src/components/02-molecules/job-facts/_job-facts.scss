@@ -1,0 +1,98 @@
+// -----------------------------------------------------------------------------
+// Job facts
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+@use "@globals/mixins/grid" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-job-facts {
+  @include grid();
+  max-width: var(--bsi-grid-max-width);
+
+  &__content {
+    background-color: var(--#{$nsp}-color-blue-100);
+  }
+
+  &__list {
+    column-gap: var(--bsi-grid-gutter);
+    display: grid;
+    grid-template-columns: repeat(var(--bsi-grid-columns), minmax(0, 1fr));
+    padding: var(--#{$nsp}-space-sm);
+    row-gap: var(--#{$nsp}-space-2xs);
+
+    // Tablet: 2 Columns
+    @include breakpoint-md {
+      background: repeating-linear-gradient(
+          to bottom,
+          var(--#{$nsp}-color-neutral-350) 0 2px,
+          transparent 2px 5px
+        )
+        calc(50% - 8px) center / 1px calc(100% - 32px) no-repeat;
+    }
+
+    // Desktop: 4 Columns
+    @include breakpoint-lg {
+      background:
+        repeating-linear-gradient(
+            to bottom,
+            var(--#{$nsp}-color-neutral-350) 0 2px,
+            transparent 2px 5px
+          )
+          calc(25% - 8px) center / 1px calc(100% - 32px) no-repeat,
+        repeating-linear-gradient(
+            to bottom,
+            var(--#{$nsp}-color-neutral-350) 0 2px,
+            transparent 2px 5px
+          )
+          calc(50% - 8px) center / 1px calc(100% - 32px) no-repeat,
+        repeating-linear-gradient(
+            to bottom,
+            var(--#{$nsp}-color-neutral-350) 0 2px,
+            transparent 2px 5px
+          )
+          calc(75% - 8px) center / 1px calc(100% - 32px) no-repeat;
+      row-gap: var(--#{$nsp}-space-sm);
+    }
+  }
+
+  &__item {
+    @include grid-span-col-full;
+    align-items: center;
+    border-bottom: 1px dotted var(--#{$nsp}-color-neutral-350);
+    display: flex;
+    gap: var(--#{$nsp}-space-2xs);
+    padding: var(--#{$nsp}-space-4xs) var(--#{$nsp}-space-4xs)
+      var(--#{$nsp}-space-xs);
+
+    @include breakpoint-md {
+      @include grid-span-col(3);
+      border-bottom: none;
+    }
+
+    @include breakpoint-lg {
+      padding: var(--#{$nsp}-space-4xs);
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__icon {
+    --#{$nsp}-icon-width: 48px;
+  }
+
+  &__label {
+    @include typography("body-small");
+    color: var(--#{$nsp}-color-typo-secondary);
+  }
+
+  &__value {
+    @include typography("body");
+  }
+}

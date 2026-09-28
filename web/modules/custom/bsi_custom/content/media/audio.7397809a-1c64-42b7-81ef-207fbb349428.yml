@@ -1,0 +1,58 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 7397809a-1c64-42b7-81ef-207fbb349428
+  bundle: audio
+  default_langcode: de
+  depends:
+    652eb563-480a-46c3-8c56-8710424a96cb: taxonomy_term
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Beispiel-Medium Audio'
+  created:
+    -
+      value: 1774368858
+  path:
+    -
+      alias: /media/podcast/update-verfuegbar-64
+      langcode: de
+      pathauto: 0
+  rh_action:
+    -
+      value: display_page
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_body:
+    -
+      value: '<p>Kurzbeschreibung zu dieser Podcast-Folge.</p>'
+      format: basic
+      summary: 'Zusammenfassung der Kurzbeschreibung zu dieser Podcast-Folge.'
+  field_copyright:
+    -
+      value: BSI
+  field_media_source:
+    -
+      uri: 'https://multimedia.gsb.bund.de/BSI/Podcast/Folgen_Update_verfuegbar/BSI_Podcast_64_DigitaleBarrierefreiheit_Final.mp3'
+      resolvable_uri: 'https://multimedia.gsb.bund.de/BSI/Podcast/Folgen_Update_verfuegbar/BSI_Podcast_64_DigitaleBarrierefreiheit_Final.mp3'
+      title: ''
+      options: {  }
+  field_tags:
+    -
+      entity: 652eb563-480a-46c3-8c56-8710424a96cb

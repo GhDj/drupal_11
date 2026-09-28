@@ -1,0 +1,31 @@
+uuid: a00a6243-7d3b-4127-92ca-6670278fbd93
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.bsi_lightbox_narrow
+    - image.style.bsi_quote_mobile
+    - image.style.bsi_quote_narrow
+    - image.style.bsi_quote_wide_2x
+  theme:
+    - bsi_bund
+id: bsi_quote
+label: 'BSI Quote'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_quote_wide_2x
+    breakpoint_id: bsi_custom.wide
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_lightbox_narrow
+    breakpoint_id: bsi_custom.narrow
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_quote_mobile
+    breakpoint_id: bsi_custom.mobile
+    multiplier: 1x
+breakpoint_group: bsi_bund
+fallback_image_style: bsi_quote_narrow

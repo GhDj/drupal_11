@@ -1,0 +1,12 @@
+uuid: 473bdfb1-ea70-4b54-af26-b857240b6b49
+langcode: en
+status: true
+dependencies:
+  module:
+    - default_content
+id: taxonomy_term_export_default_content
+label: 'Export default content'
+type: taxonomy_term
+plugin: 'entity:export_default_content:taxonomy_term'
+configuration:
+  module: bsi_custom

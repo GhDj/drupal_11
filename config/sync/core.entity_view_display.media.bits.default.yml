@@ -1,0 +1,36 @@
+uuid: 67a5f0f5-5bfe-4b58-b69c-827cd1ab0f94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.bits.field_criticality
+    - field.field.media.bits.field_media_file
+    - media.type.bits
+  module:
+    - bsi_custom
+id: media.bits.default
+targetEntityType: media
+bundle: bits
+mode: default
+content:
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_criticality: true
+  field_media_file: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

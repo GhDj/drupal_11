@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Install, uninstall and update hooks for BSI media module.
+ */
+
+use Drupal\Core\File\Exception\FileException;
+use Drupal\Core\File\FileExists;
+use Drupal\Core\File\FileSystemInterface;
+
+/**
+ * Implements hook_install().
+ */
+function bsi_media_install(): void {
+  $source = \Drupal::service('extension.list.module')->getPath('bsi_media') . '/images/icons';
+  $destination = \Drupal::config('media.settings')->get('icon_base_uri');
+
+  /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+  $file_system = \Drupal::service('file_system');
+  $icons = $file_system->scanDirectory($source, '/.*\.(svg|png|jpg|jpeg|gif)$/');
+  foreach ($icons as $file) {
+    _bsi_media_install_new_media_icon($source . DIRECTORY_SEPARATOR . $file->filename, $destination);
+  }
+}
+
+/**
+ * Install the provided file in the provided destination directory.
+ */
+function _bsi_media_install_new_media_icon(string $filePath, $destination): void {
+  /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+  $file_system = \Drupal::service('file_system');
+  $file_system->prepareDirectory($destination, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+
+  if (!file_exists($destination . DIRECTORY_SEPARATOR . basename($filePath))) {
+    try {
+      $file_system->copy($filePath, $destination, FileExists::Error);
+    }
+    catch (FileException) {
+      // Ignore and continue.
+    }
+  }
+}

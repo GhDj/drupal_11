@@ -1,0 +1,58 @@
+display:
+  default:
+    display_title: Standard
+    display_options:
+      fields:
+        title:
+          label: Titel
+          separator: ', '
+        status:
+          label: Status
+          separator: ', '
+        capacity:
+          label: Kapazität
+          separator: ', '
+        count:
+          label: Verwendung
+        open:
+          label: Eröffnungsdatum
+          separator: ', '
+        close:
+          label: Enddatum
+          separator: ', '
+        settings_operations:
+          label: Aktionen
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« Anfang'
+            last: 'Ende »'
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          submit_button: Filter
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: Sortierung
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      filters:
+        title:
+          expose:
+            label: Titel
+        status_1:
+          expose:
+            label: Status
+          group_info:
+            label: Status
+            group_items:
+              1:
+                title: Aktiviert
+              2:
+                title: Deaktiviert
+  page_1:
+    display_title: Seite

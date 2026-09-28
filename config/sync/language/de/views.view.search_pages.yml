@@ -1,0 +1,127 @@
+display:
+  default:
+    display_options:
+      pager:
+        options:
+          tags:
+            first: '« Erste'
+            last: 'Letzte »'
+          expose:
+            items_per_page_label: 'Einträge pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: Sortieren
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      empty:
+        area_text_custom:
+          content: 'Ihre Suche ergab keine Treffer.'
+      header:
+        result:
+          content: '@start bis @end von @total Ergebnissen'
+  block_search_article:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: 'Alle Filter zurücksetzen'
+          exposed_sorts_label: Sortieren
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+          text_input_required: 'Wählen Sie einen beliebigen Filter aus und klicken Sie auf Anwenden, um die Ergebnisse anzuzeigen'
+      block_description: 'Suche: Artikel'
+      filters:
+        facets_field_article_type:
+          facet:
+            missing_label: andere
+        facets_field_topics:
+          expose:
+            label: Themen
+          facet:
+            missing_label: andere
+        facets_field_year:
+          expose:
+            label: Jahr
+          facet:
+            missing_label: andere
+  block_search_bits:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: 'Alle Filter zurücksetzen'
+          exposed_sorts_label: Sortieren
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+          text_input_required: 'Wählen Sie einen beliebigen Filter aus und klicken Sie auf Anwenden, um die Ergebnisse anzuzeigen'
+      block_description: 'Suche: BITS'
+      filters:
+        facets_media_created:
+          expose:
+            label: Datum
+          facet:
+            missing_label: andere
+        facets_field_year:
+          expose:
+            label: Jahr
+          facet:
+            missing_label: andere
+  block_search_publication:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: 'Alle Filter zurücksetzen'
+          exposed_sorts_label: Sortieren
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+          text_input_required: 'Wählen Sie einen beliebigen Filter aus und klicken Sie auf Anwenden, um die Ergebnisse anzuzeigen'
+      block_description: 'Suche: Publikationen'
+      filters:
+        facets_field_audiences:
+          expose:
+            label: Zielgruppe
+          facet:
+            missing_label: andere
+        facets_field_media_type:
+          facet:
+            missing_label: andere
+        facets_field_use_cart:
+          expose:
+            label: 'Art der Veröffentlichung'
+          facet:
+            missing_label: andere
+        facets_field_year:
+          expose:
+            label: Jahr
+          facet:
+            missing_label: andere
+  block_search_security_label:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: 'Alle Filter zurücksetzen'
+          exposed_sorts_label: Sortieren
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+          text_input_required: 'Wählen Sie einen beliebigen Filter aus und klicken Sie auf Anwenden, um die Ergebnisse anzuzeigen'
+      block_description: 'Suche: IT-Sicherheitskennzeichnungen'
+      filters:
+        facets_field_category:
+          expose:
+            label: Kategorie
+          facet:
+            missing_label: andere
+        facets_field_producer:
+          expose:
+            label: Hersteller
+          facet:
+            missing_label: andere
+        facets_field_import_status:
+          facet:
+            missing_label: andere

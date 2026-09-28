@@ -1,0 +1,183 @@
+diff --git a/src/Plugin/Field/FieldWidget/ParagraphsWidget.php b/src/Plugin/Field/FieldWidget/ParagraphsWidget.php
+index c40afea6667c7080231348ccfaaa0648a8dfa534..23ef26896af927e63c6d7e85d8b3167fce4ee23a 100644
+--- a/src/Plugin/Field/FieldWidget/ParagraphsWidget.php
++++ b/src/Plugin/Field/FieldWidget/ParagraphsWidget.php
+@@ -8,6 +8,7 @@ use Drupal\Core\Entity\ContentEntityInterface;
+ use Drupal\Core\Entity\Entity\EntityFormDisplay;
+ use Drupal\Core\Entity\EntityFieldManagerInterface;
+ use Drupal\Core\Entity\FieldableEntityInterface;
++use Drupal\Core\Entity\RevisionableInterface;
+ use Drupal\Core\Field\Attribute\FieldWidget;
+ use Drupal\Core\Field\FieldDefinitionInterface;
+ use Drupal\Core\Field\FieldFilteredMarkup;
+@@ -2627,6 +2628,18 @@ class ParagraphsWidget extends WidgetBase {
+         /** @var \Drupal\paragraphs\ParagraphInterface $paragraphs_entity */
+         $paragraphs_entity = $widget_state['paragraphs'][$item['_original_delta']]['entity'];
+
++        // Fix isDefaultRevision flag before validation fires. Content
++        // Moderation sets FALSE on form prepare, but only corrects the node,
++        // not the paragraphs. This in-memory correction is safe because the
++        // save process recalculates the flag independently.
++        // @see https://www.drupal.org/project/entity_reference_revisions/issues/3150084
++        if ($paragraphs_entity instanceof RevisionableInterface
++          && !$paragraphs_entity->isNew()
++          && $paragraphs_entity->isTranslatable()
++          && !$paragraphs_entity->isDefaultRevision()) {
++          $paragraphs_entity->isDefaultRevision(TRUE);
++        }
++
+         /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $display */
+         $display = $widget_state['paragraphs'][$item['_original_delta']]['display'];
+         if ($widget_state['paragraphs'][$item['_original_delta']]['mode'] == 'edit') {
+diff --git a/tests/src/Functional/WidgetStable/ParagraphsContentModerationValidationTest.php b/tests/src/Functional/WidgetStable/ParagraphsContentModerationValidationTest.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..43c09355e65d2fd76709231f025d06881c4b331f
+--- /dev/null
++++ b/tests/src/Functional/WidgetStable/ParagraphsContentModerationValidationTest.php
+@@ -0,0 +1,146 @@
++<?php
++
++namespace Drupal\Tests\paragraphs\Functional\WidgetStable;
++
++use Drupal\Tests\paragraphs\Traits\ParagraphsCoreVersionUiTestTrait;
++use Drupal\Tests\paragraphs\Traits\ParagraphsLastEntityQueryTrait;
++use Drupal\language\Entity\ConfigurableLanguage;
++use PHPUnit\Framework\Attributes\Group;
++use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
++
++/**
++ * Tests paragraphs validation with Content Moderation and translations.
++ *
++ * @group paragraphs
++ *
++ * @see https://www.drupal.org/project/paragraphs/issues/3582767
++ * @see https://www.drupal.org/project/entity_reference_revisions/issues/3150084
++ */
++#[RunTestsInSeparateProcesses]
++#[Group('paragraphs')]
++class ParagraphsContentModerationValidationTest extends ParagraphsTestBase {
++
++  use ParagraphsLastEntityQueryTrait, ParagraphsCoreVersionUiTestTrait;
++
++  /**
++   * Modules to enable.
++   *
++   * @var array
++   */
++  protected static $modules = [
++    'node',
++    'paragraphs_test',
++    'paragraphs',
++    'field',
++    'field_ui',
++    'block',
++    'link',
++    'content_moderation',
++    'content_translation',
++  ];
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setUp(): void {
++    parent::setUp();
++    $this->placeDefaultBlocks();
++
++    $this->addParagraphedContentType('paragraphed_test');
++
++    ConfigurableLanguage::createFromLangcode('de')->save();
++
++    $this->createEditorialWorkflow('paragraphed_test');
++
++    $this->loginAsAdmin([
++      'access administration pages',
++      'view any unpublished content',
++      'view all revisions',
++      'view latest version',
++      'use ' . $this->workflow->id() . ' transition create_new_draft',
++      'use ' . $this->workflow->id() . ' transition publish',
++      'administer nodes',
++      'bypass node access',
++      'administer content translation',
++      'translate any entity',
++      'create content translations',
++      'administer languages',
++      'administer content types',
++      'administer node form display',
++      'edit any paragraphed_test content',
++      'create paragraphed_test content',
++    ]);
++
++    // Add a paragraph type with a translatable and a non-translatable field.
++    $this->addParagraphsType('text');
++    static::fieldUIAddNewField('admin/structure/paragraphs_type/text', 'text', 'Text', 'text_long', [], []);
++    static::fieldUIAddNewField('admin/structure/paragraphs_type/text', 'untranslatable', 'Untranslatable', 'string', [], []);
++
++    // Enable translation on the paragraph type. Do NOT hide untranslatable
++    // fields so that the EntityUntranslatableFieldsConstraintValidator
++    // inspects them during validation.
++    $edit = [
++      'entity_types[paragraph]' => TRUE,
++      'entity_types[node]' => TRUE,
++      'settings[node][paragraphed_test][translatable]' => TRUE,
++      'settings[node][paragraphed_test][fields][field_paragraphs]' => FALSE,
++      'settings[node][paragraphed_test][settings][language][language_alterable]' => TRUE,
++      'settings[paragraph][text][translatable]' => TRUE,
++      'settings[paragraph][text][settings][content_translation][untranslatable_fields_hide]' => FALSE,
++      'settings[paragraph][text][fields][field_text]' => TRUE,
++      'settings[paragraph][text][fields][field_untranslatable]' => FALSE,
++    ];
++    $this->drupalGet('admin/config/regional/content-language');
++    $this->submitForm($edit, 'Save configuration');
++  }
++
++  /**
++   * Tests saving a node does not trigger an untranslatable fields error.
++   *
++   * Content Moderation sets isDefaultRevision=FALSE on all paragraph entities
++   * during form prepare. The fix in ParagraphsWidget::massageFormValues()
++   * corrects this flag before validation fires.
++   */
++  public function testSaveDoesNotTriggerUntranslatableFieldsError() {
++    $session = $this->getSession();
++    $page = $session->getPage();
++    $assert_session = $this->assertSession();
++
++    // Create a published node with a paragraph.
++    $this->drupalGet('node/add/paragraphed_test');
++    $page->fillField('title[0][value]', 'Test node');
++    $page->pressButton('Add text');
++    $page->fillField('field_paragraphs[0][subform][field_text][0][value]', 'Translatable text');
++    $page->fillField('field_paragraphs[0][subform][field_untranslatable][0][value]', 'Untranslatable text');
++    $page->selectFieldOption('moderation_state[0][state]', 'published');
++    $page->pressButton('Save');
++    $assert_session->pageTextContains('paragraphed_test Test node has been created.');
++
++    $node = $this->getLastEntityOfType('node', TRUE);
++
++    // Edit the existing node and save as published. Without the fix, this
++    // triggers "Non-translatable fields can only be changed when updating the
++    // current revision." because Content Moderation sets isDefaultRevision
++    // to FALSE during form prepare and the paragraphs still carry that flag
++    // when validation fires.
++    $this->drupalGet("node/{$node->id()}/edit");
++    $page->fillField('field_paragraphs[0][subform][field_text][0][value]', 'Updated text');
++    $page->fillField('field_paragraphs[0][subform][field_untranslatable][0][value]', 'Changed untranslatable');
++    $page->selectFieldOption('moderation_state[0][state]', 'published');
++    $page->pressButton('Save');
++    $assert_session->pageTextNotContains('Non-translatable fields can only be changed when updating the current revision.');
++    $assert_session->pageTextContains('paragraphed_test Test node has been updated.');
++    $assert_session->pageTextContains('Changed untranslatable');
++
++    // Edit the node, change the non-translatable field and save as draft.
++    $this->drupalGet("node/{$node->id()}/edit");
++    $page->fillField('field_paragraphs[0][subform][field_text][0][value]', 'Draft text');
++    $page->fillField('field_paragraphs[0][subform][field_untranslatable][0][value]', 'Draft untranslatable');
++    $page->selectFieldOption('moderation_state[0][state]', 'draft');
++    $page->pressButton('Save');
++    $assert_session->pageTextNotContains('Non-translatable fields can only be changed when updating the current revision.');
++    $assert_session->pageTextContains('paragraphed_test Test node has been updated.');
++    $assert_session->pageTextContains('Draft untranslatable');
++  }
++
++}

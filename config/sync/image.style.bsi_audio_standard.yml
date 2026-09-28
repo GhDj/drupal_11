@@ -1,0 +1,21 @@
+uuid: ccc3251b-fc7a-47f5-ba9e-276e8754c78c
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_audio_standard
+label: 'BSI Audio (standard)'
+effects:
+  544e4def-9fee-4f1e-b3d9-b8d8ba44d1a4:
+    uuid: 544e4def-9fee-4f1e-b3d9-b8d8ba44d1a4
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 160
+      height: 160
+      anchor: center-center
+  c8ffc7be-d024-4337-b334-4720b7637823:
+    uuid: c8ffc7be-d024-4337-b334-4720b7637823
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

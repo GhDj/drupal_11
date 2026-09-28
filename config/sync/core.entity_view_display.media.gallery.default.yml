@@ -1,0 +1,36 @@
+uuid: e98c510b-b6d7-4751-bd73-54315193c1a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.gallery.field_body
+    - field.field.media.gallery.field_media_items
+    - media.type.gallery
+  module:
+    - bsi_custom
+id: media.gallery.default
+targetEntityType: media
+bundle: gallery
+mode: default
+content:
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_body: true
+  field_media_items: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

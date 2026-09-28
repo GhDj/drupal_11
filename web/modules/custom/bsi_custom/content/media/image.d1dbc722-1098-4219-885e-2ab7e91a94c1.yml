@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d1dbc722-1098-4219-885e-2ab7e91a94c1
+  bundle: image
+  default_langcode: de
+  depends:
+    0972124c-46d3-43a5-a7d6-cfd80b0d5989: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Opener Formular'
+  created:
+    -
+      value: 1783579367
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: 0972124c-46d3-43a5-a7d6-cfd80b0d5989
+      alt: 'Verschiedene Symbole kreisen auf dunkelblauem Hintergrund. Im Fokus: Eine Eingabemaske.'
+      title: ''
+      width: 1196
+      height: 400
