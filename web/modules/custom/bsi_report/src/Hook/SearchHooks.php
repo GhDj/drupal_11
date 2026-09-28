@@ -31,6 +31,12 @@ class SearchHooks {
       return;
     }
 
+    // The search view uses a contextual argument (node_book) to scope results
+    // to the current book. Without a book ID, the view cannot function.
+    if (empty($node->book['bid'])) {
+      return;
+    }
+
     $build['yearly_report_search'] = [
       '#type' => 'container',
       '#attributes' => [
