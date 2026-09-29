@@ -2,12 +2,14 @@
 
 namespace Drupal\bsi_report\Hook;
 
+use Drupal\book\BookManagerInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\node\NodeInterface;
 use Drupal\views\Views;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 /**
  * Hooks for injecting the annual report search into report pages.
@@ -16,11 +18,16 @@ class SearchHooks {
 
   use StringTranslationTrait;
 
+  public function __construct(
+    #[Autowire(service: 'book.manager')]
+    protected readonly BookManagerInterface $bookManager,
+  ) {}
+
   /**
    * Implements hook_ENTITY_TYPE_view() for node entities.
    *
-   * Injects the yearly report search view into report_page nodes
-   * that are part of a book. The search is scoped to the current
+   * Injects the yearly report search view into entry_page and report_page
+   * nodes that are part of a book. The search is scoped to the current
    * book via the view's contextual argument.
    */
   #[Hook('node_view')]
@@ -33,13 +40,27 @@ class SearchHooks {
       return;
     }
 
-    // The search view uses a contextual argument (node_book) to scope results
-    // to the current book. Without a book ID, the view cannot function.
-    if (empty($node->book['bid'])) {
+    // Load book link via book manager since $node->book may not be populated.
+    $bookLink = $this->bookManager->loadBookLink($node->id());
+    if (empty($bookLink['bid'])) {
       return;
     }
 
-    $bid = (string) $node->book['bid'];
+    $bid = (string) $bookLink['bid'];
+
+    $view = Views::getView('search_yearly_report');
+    if (!$view) {
+      return;
+    }
+
+    $view->setDisplay('block_search_yearly_reports');
+    $view->setArguments([$bid]);
+    $view->execute();
+
+    $render = $view->render();
+    if (!is_array($render)) {
+      return;
+    }
 
     $build['yearly_report_search'] = [
       '#type' => 'container',
@@ -50,12 +71,7 @@ class SearchHooks {
       'heading' => [
         '#markup' => '<span class="bsi-searchbar__title">' . $this->t('Search annual report') . '</span>',
       ],
-      'view' => [
-        '#type' => 'view',
-        '#name' => 'search_yearly_report',
-        '#display_id' => 'default',
-        '#arguments' => [$bid],
-      ],
+      'view' => $render,
     ];
   }
 
