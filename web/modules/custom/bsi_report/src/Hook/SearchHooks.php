@@ -3,16 +3,15 @@
 namespace Drupal\bsi_report\Hook;
 
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
-use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\node\NodeInterface;
-use Drupal\views\ViewExecutable;
 
 /**
  * Hooks for injecting the annual report search into report pages.
  */
-class SearchHooks implements TrustedCallbackInterface {
+class SearchHooks {
 
   use StringTranslationTrait;
 
@@ -57,41 +56,24 @@ class SearchHooks implements TrustedCallbackInterface {
   }
 
   /**
-   * Implements hook_views_pre_render().
+   * Implements hook_form_views_exposed_form_alter().
    *
-   * Applies search form theming to the yearly report search view so the
-   * exposed form uses the searchbar template (magnifying glass icon instead
-   * of "Apply" button).
+   * Applies searchbar theming to the yearly report search exposed form:
+   * wraps form in bsi-searchbar, replaces input with search-styled input,
+   * and replaces "Apply" button with magnifying glass icon.
    */
-  #[Hook('views_pre_render')]
-  public function viewsPreRender(ViewExecutable $view): void {
-    if ($view->id() !== 'search_yearly_report') {
+  #[Hook('form_views_exposed_form_alter')]
+  public function formAlter(array &$form, FormStateInterface $form_state): void {
+    $storage = $form_state->getStorage();
+    $view = $storage['view'] ?? NULL;
+
+    if (!$view || $view->id() !== 'search_yearly_report') {
       return;
     }
 
-    $view->element['#pre_render'][] = [static::class, 'preRenderSearchForm'];
-  }
-
-  /**
-   * Pre-render callback to theme the exposed form as a searchbar.
-   */
-  public static function preRenderSearchForm(array $build): array {
-    if (empty($build['#exposed'])) {
-      return $build;
-    }
-
-    $build['#exposed']['#theme_wrappers'] = ['form__search_global'];
-    $build['#exposed']['search']['#theme'] = 'input__search';
-    $build['#exposed']['actions']['submit']['#theme_wrappers'] = ['input__submit_search'];
-
-    return $build;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function trustedCallbacks(): array {
-    return ['preRenderSearchForm'];
+    $form['#theme_wrappers'] = ['form__search_global'];
+    $form['search']['#theme'] = 'input__search';
+    $form['actions']['submit']['#theme_wrappers'] = ['input__submit_search'];
   }
 
 }
