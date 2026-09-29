@@ -190,6 +190,24 @@ All patches defined in `composer.json` `extra.patches` using `cweagans/composer-
 
 ---
 
+## Custom Features
+
+### Annual Report Search
+
+Search bar on annual report pages (`entry_page` and `report_page`) that allows
+visitors to search within a specific annual report. See
+[docs/search-situation-report.md](docs/search-situation-report.md) for full
+technical documentation.
+
+- **Module:** `bsi_report` (`SearchHooks.php`)
+- **View:** `search_yearly_report` (Solr-backed, book-scoped)
+- **Visibility:** Only on nodes that are part of a book
+- **Theming:** Full-width searchbar with magnifying glass icon, autocomplete
+- **Placement on `entry_page`:** Also available via Layout Builder under
+  "Lists (Views)" > "Search Yearly Report"
+
+---
+
 ## Key Infrastructure
 
 - **Solr search** with autocomplete, facets, and custom processors
