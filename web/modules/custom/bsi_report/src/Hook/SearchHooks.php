@@ -48,20 +48,6 @@ class SearchHooks {
 
     $bid = (string) $bookLink['bid'];
 
-    $view = Views::getView('search_yearly_report');
-    if (!$view) {
-      return;
-    }
-
-    $view->setDisplay('block_search_yearly_reports');
-    $view->setArguments([$bid]);
-    $view->execute();
-
-    $render = $view->render();
-    if (!is_array($render)) {
-      return;
-    }
-
     $build['yearly_report_search'] = [
       '#type' => 'container',
       '#attributes' => [
@@ -71,7 +57,8 @@ class SearchHooks {
       'heading' => [
         '#markup' => '<span class="bsi-searchbar__title">' . $this->t('Search annual report') . '</span>',
       ],
-      'view' => $render,
+      'view' => Views::getView('search_yearly_report')
+        ?->buildRenderable('block_search_yearly_reports', [$bid]) ?? [],
     ];
   }
 
