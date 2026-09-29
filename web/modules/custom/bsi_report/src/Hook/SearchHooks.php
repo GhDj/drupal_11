@@ -51,6 +51,7 @@ class SearchHooks {
         '#type' => 'view',
         '#name' => 'search_yearly_report',
         '#display_id' => 'block_search_yearly_reports',
+        '#arguments' => [$node->book['bid']],
       ],
     ];
   }
