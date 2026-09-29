@@ -7,6 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\node\NodeInterface;
+use Drupal\views\Views;
 
 /**
  * Hooks for injecting the annual report search into report pages.
@@ -38,6 +39,19 @@ class SearchHooks {
       return;
     }
 
+    $view = Views::getView('search_yearly_report');
+    if (!$view) {
+      return;
+    }
+
+    $view->setDisplay('block_search_yearly_reports');
+    $view->setArguments([$node->book['bid']]);
+
+    $render = $view->render();
+    if (!is_array($render)) {
+      return;
+    }
+
     $build['yearly_report_search'] = [
       '#type' => 'container',
       '#attributes' => [
@@ -47,12 +61,7 @@ class SearchHooks {
       'heading' => [
         '#markup' => '<span class="bsi-searchbar__title">' . $this->t('Search annual report') . '</span>',
       ],
-      'view' => [
-        '#type' => 'view',
-        '#name' => 'search_yearly_report',
-        '#display_id' => 'block_search_yearly_reports',
-        '#arguments' => [$node->book['bid']],
-      ],
+      'view' => $render,
     ];
   }
 
