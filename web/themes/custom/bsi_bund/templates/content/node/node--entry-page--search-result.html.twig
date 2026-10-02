@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Theme override for entry_page nodes in search_result view mode.
+ *
+ * Renders as a bsi-card--search component matching the Storybook
+ * search result design pattern.
+ */
+#}
+<div class="bsi-card bsi-card--search">
+  <div class="bsi-card__content">
+    <div class="bsi-card__text">
+      <div class="bsi-card__heading-wrapper">
+        {% if content.created %}
+          <p class="bsi-card__topline">{{ content.created }}</p>
+        {% endif %}
+        {% if label %}
+          <h3 class="bsi-heading bsi-heading--h3 bsi-heading--style-h4 bsi-card__heading">
+            <a href="{{ url }}" class="bsi-heading__link" rel="bookmark">{{ label }}</a>
+          </h3>
+        {% endif %}
+      </div>
+      {% if content.search_api_excerpt %}
+        <div class="bsi-card__body">
+          {{ content.search_api_excerpt }}
+        </div>
+      {% elseif content.body %}
+        <div class="bsi-card__body">
+          {{ content.body }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

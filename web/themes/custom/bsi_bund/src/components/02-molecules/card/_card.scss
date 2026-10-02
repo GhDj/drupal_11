@@ -64,7 +64,6 @@
   &__link {
     --#{$nsp}-link-color: var(--#{$nsp}-color-blue-750);
     --#{$nsp}-link-decoration-line: none;
-    display: block;
     margin-block-end: var(--#{$nsp}-space-xs);
 
     &::after {
@@ -177,6 +176,31 @@
       background: var(--#{$nsp}-color-base-white);
       border-radius: var(--#{$nsp}-space-4xs);
       padding: var(--bsi-space-2xs);
+    }
+  }
+}
+
+// Search
+// ----------------------------------------------
+.#{$nsp}-card--search {
+  padding: var(--#{$nsp}-space-md) var(--#{$nsp}-space-sm);
+
+  .#{$nsp}-card {
+    &__topline {
+      font-size: 22px;
+    }
+
+    &__text {
+      gap: 16px;
+    }
+
+    &__body {
+      --bsi-card-body-color: var(--bsi-color-black);
+    }
+
+    &__link {
+      --#{$nsp}-link-color: var(--bsi-color-black);
+      --#{$nsp}-link-decoration-line: underline;
     }
   }
 }

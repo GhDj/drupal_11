@@ -1,0 +1,63 @@
+// -----------------------------------------------------------------------------
+// Searchfilter
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+@use "@globals/mixins/grid" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+
+.#{$nsp}-search-result {
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-inline: auto;
+    max-width: 960px;
+    width: 100%;
+  }
+
+  &__head {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__list-item {
+    border-top: solid 1px var(--#{$nsp}-color-blue-200);
+  }
+
+  .form-type--select {
+    position: relative;
+
+    label {
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    select {
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: var(--#{$nsp}-color-blue-150);
+      border: 0;
+      border-radius: 4px;
+      color: var(--#{$nsp}-color-blue-800);
+      cursor: pointer;
+      font-size: 16px;
+      padding-block: var(--#{$nsp}-space-sm);
+      padding-inline: var(--#{$nsp}-space-lg) 50px;
+      width: 100%;
+
+      &:focus-visible {
+        outline: 2px solid;
+        outline-color: var(--#{$nsp}-color-base-focus);
+        outline-offset: 2px;
+      }
+    }
+  }
+}

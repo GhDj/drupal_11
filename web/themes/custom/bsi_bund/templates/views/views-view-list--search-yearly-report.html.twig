@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Theme override for the Search Yearly Report HTML list style.
+ *
+ * Uses bsi-search-result__list pattern for the results list.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the list element.
+ * - items: A list of rows for the list.
+ * - title: The title of this group of rows (optional).
+ * - list: Contains attributes for the list element.
+ *   - type: The type of list (e.g., ul, ol).
+ *   - attributes: HTML attributes for the list element.
+ *
+ * @see template_preprocess_views_view_list()
+ */
+#}
+{% if title %}
+  <h3>{{ title }}</h3>
+{% endif %}
+<{{ list.type }}{{ list.attributes.addClass('bsi-search-result__list') }}>
+  {% for row in rows %}
+    <li{{ row.attributes.addClass('bsi-search-result__list-item') }}>
+      {{ row.content }}
+    </li>
+  {% endfor %}
+</{{ list.type }}>

@@ -4,7 +4,7 @@
  * Theme override for the Search Yearly Report block display.
  *
  * Renders the exposed search form and, after AJAX submission,
- * the search results below it.
+ * the search results in the bsi-search-result design pattern.
  */
 #}
 {%
@@ -24,23 +24,27 @@
     </div>
   {% endif %}
 
-  {% if header %}
-    <div class="view-header">
-      {{ header }}
-    </div>
-  {% endif %}
+  {% if rows or empty %}
+    <div class="bsi-search-result">
+      <div class="bsi-search-result__inner">
+        {% if header %}
+          <div class="bsi-search-result__head">
+            {{ header }}
+          </div>
+        {% endif %}
 
-  {% if rows %}
-    <div class="view-content">
-      {{ rows }}
-    </div>
-  {% elseif empty %}
-    <div class="view-empty">
-      {{ empty }}
-    </div>
-  {% endif %}
+        {% if rows %}
+          {{ rows }}
+        {% elseif empty %}
+          <div class="view-empty">
+            {{ empty }}
+          </div>
+        {% endif %}
 
-  {% if pager %}
-    {{ pager }}
+        {% if pager %}
+          {{ pager }}
+        {% endif %}
+      </div>
+    </div>
   {% endif %}
 </div>
