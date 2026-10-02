@@ -5,26 +5,32 @@
  *
  * Renders as a bsi-card--search component matching the Storybook
  * search result design pattern.
+ *
+ * Available variables:
+ * - node: The node entity.
+ * - label: The node title.
+ * - url: Direct URL of the node.
+ * - content: All rendered fields (created, body, search_api_excerpt, etc.).
  */
 #}
+{% set bundle_label = node.type.entity.label %}
+{% set date = node.getCreatedTime()|date('d.m.Y') %}
 <div class="bsi-card bsi-card--search">
   <div class="bsi-card__content">
     <div class="bsi-card__text">
       <div class="bsi-card__heading-wrapper">
-        {% if content.created %}
-          <p class="bsi-card__topline">{{ content.created }}</p>
-        {% endif %}
+        <p class="bsi-card__topline">{{ bundle_label }} &middot; {{ date }}</p>
         {% if label %}
           <h3 class="bsi-heading bsi-heading--h3 bsi-heading--style-h4 bsi-card__heading">
             <a href="{{ url }}" class="bsi-heading__link" rel="bookmark">{{ label }}</a>
           </h3>
         {% endif %}
       </div>
-      {% if content.search_api_excerpt %}
+      {% if content.search_api_excerpt.0 %}
         <div class="bsi-card__body">
           {{ content.search_api_excerpt }}
         </div>
-      {% elseif content.body %}
+      {% elseif content.body.0 %}
         <div class="bsi-card__body">
           {{ content.body }}
         </div>
