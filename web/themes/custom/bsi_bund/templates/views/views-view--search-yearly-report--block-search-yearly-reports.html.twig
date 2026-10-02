@@ -3,8 +3,10 @@
  * @file
  * Theme override for the Search Yearly Report block display.
  *
- * Renders the exposed search form and, after AJAX submission,
- * the search results in the bsi-search-result design pattern.
+ * Based on views--search.html.twig but wraps results in the
+ * bsi-search-result design pattern from the search-result component.
+ *
+ * @see views--search.html.twig
  */
 #}
 {%
@@ -16,12 +18,20 @@
     dom_id ? 'js-view-dom-id-' ~ dom_id,
   ]
 %}
-
 <div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if title %}
+    {{ title }}
+  {% endif %}
+  {{ title_suffix }}
+
   {% if exposed %}
     <div class="view-filters">
-      {{ exposed }}
+      {{ exposed|without('sort_bef_combine') }}
     </div>
+    {% if exposed['sort_bef_combine'] %}
+      {{ exposed['sort_bef_combine'] }}
+    {% endif %}
   {% endif %}
 
   {% if rows or empty %}
@@ -34,7 +44,9 @@
         {% endif %}
 
         {% if rows %}
-          {{ rows }}
+          <div class="view-content">
+            {{ rows }}
+          </div>
         {% elseif empty %}
           <div class="view-empty">
             {{ empty }}
