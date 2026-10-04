@@ -27,11 +27,11 @@
           </h3>
         {% endif %}
       </div>
-      {% if content.search_api_excerpt.0 %}
+      {% if content.search_api_excerpt is not empty %}
         <div class="bsi-card__body">
           {{ content.search_api_excerpt }}
         </div>
-      {% elseif content.body.0 %}
+      {% elseif content.body is not empty %}
         <div class="bsi-card__body">
           {{ content.body }}
         </div>
