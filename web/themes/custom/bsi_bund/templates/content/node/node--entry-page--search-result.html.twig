@@ -20,9 +20,10 @@
     <div class="bsi-card__text">
       <div class="bsi-card__heading-wrapper">
         <p class="bsi-card__topline">{{ bundle_label }} &middot; {{ date }}</p>
-        {% if label %}
+        {% set title = label ? label : node.label() %}
+        {% if title %}
           <h3 class="bsi-heading bsi-heading--h3 bsi-heading--style-h4 bsi-card__heading">
-            <a href="{{ url }}" class="bsi-heading__link" rel="bookmark">{{ label }}</a>
+            <a href="{{ url }}" class="bsi-heading__link" rel="bookmark">{{ title }}</a>
           </h3>
         {% endif %}
       </div>
