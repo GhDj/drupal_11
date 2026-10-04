@@ -22,7 +22,7 @@
         <p class="bsi-card__topline">{{ bundle_label }} &middot; {{ date }}</p>
         {% set title = label ? label : node.label() %}
         {% if title %}
-          <h3 class="bsi-heading bsi-heading--h3 bsi-heading--style-h4 bsi-card__heading">
+          <h3 class="bsi-heading bsi-heading--4 bsi-heading--linked bsi-card__heading">
             <a href="{{ url }}" class="bsi-heading__link" rel="bookmark">{{ title }}</a>
           </h3>
         {% endif %}
