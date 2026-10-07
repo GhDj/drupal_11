@@ -29,11 +29,15 @@
 // -----------------------------------------------------------------------------
 // Annual report search injected via hook_node_view.
 .#{$nsp}-report-search {
-  margin-inline: auto;
-  max-width: 960px;
   padding: var(--#{$nsp}-space-lg) 0;
   position: relative;
   width: 100%;
+
+  .#{$nsp}-searchbar__title,
+  .view-filters {
+    margin-inline: auto;
+    max-width: 960px;
+  }
 
   // Autocomplete dropdown
   .search-api-autocomplete-search {
