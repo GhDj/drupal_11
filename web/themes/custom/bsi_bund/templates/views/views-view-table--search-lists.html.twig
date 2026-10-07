@@ -1,0 +1,90 @@
+{%
+  set classes = [
+    'views-table',
+    'cols-' ~ header|length,
+  ]
+%}
+{% if responsive %}
+  <div class="table-responsive">
+{% endif %}
+<table{{ attributes.addClass(classes) }}>
+  {% if caption_needed %}
+    <caption>
+      {% if caption %}
+        {{ caption }}
+      {% else %}
+        {{ title }}
+      {% endif %}
+      {% if (accessibility_description or accessibility_summary) %}
+        <details>
+          {% if accessibility_summary %}
+            <summary>{{ accessibility_summary }}</summary>
+          {% endif %}
+          {% if accessibility_description %}
+            {{ accessibility_description }}
+          {% endif %}
+        </details>
+      {% endif %}
+    </caption>
+  {% endif %}
+  {% if header %}
+    <thead>
+      <tr>
+        {% for key, column in header %}
+          {% if column.default_classes %}
+            {%
+              set column_classes = [
+                'views-field',
+                'views-field-' ~ fields[key],
+              ]
+            %}
+          {% endif %}
+          <th{{ column.attributes.addClass(column_classes).setAttribute('scope', 'col') }}>
+            {%- if column.url -%}
+              <a href="{{ column.url }}" title="{{ column.title }}" rel="nofollow">
+                {{- column.content -}}
+                {{- column.sort_indicator -}}
+              </a>
+            {%- else -%}
+              {{- column.content -}}
+            {%- endif -%}
+          </th>
+        {% endfor %}
+      </tr>
+    </thead>
+  {% endif %}
+  <tbody>
+    {% for row in rows %}
+      <tr{{ row.attributes.addClass(cycle(['odd', 'even'], loop.index0)) }}>
+        {% for key, column in row.columns %}
+          {% if column.default_classes %}
+            {%
+              set column_classes = [
+                'views-field',
+              ]
+            %}
+            {% for field in column.fields %}
+              {% set column_classes = column_classes|merge(['views-field-' ~ field]) %}
+            {% endfor %}
+          {% endif %}
+          <td{{ column.attributes.addClass(column_classes) }}>
+            {%- if column.wrapper_element -%}
+              <{{ column.wrapper_element }}>
+                {% for content in column.content %}
+                  {{ content.separator }}{{ content.field_output }}
+                {% endfor %}
+              </{{ column.wrapper_element }}>
+            {%- else -%}
+              {% for content in column.content %}
+                {{- content.separator }}{{ content.field_output -}}
+              {% endfor %}
+            {%- endif %}
+          </td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if responsive %}
+  </div>
+{% endif %}

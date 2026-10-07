@@ -195,7 +195,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
           group: 1
           exposed: false
           expose:
@@ -236,6 +236,7 @@ display:
           default: '-1'
           info:
             search_api_url:
+              sortable: false
               align: ''
               separator: ''
               empty_column: false
@@ -1439,7 +1440,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
           group: 1
           exposed: false
           expose:
@@ -1533,46 +1534,64 @@ display:
           default: '-1'
           info:
             title:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_name:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_location:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_test_item:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_protection_profile:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_applicant:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_protection_profile_issuer:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_information_network:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_certification_date:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -2070,7 +2089,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
           group: 1
           exposed: false
           expose:
@@ -2164,21 +2183,29 @@ display:
           default: '-1'
           info:
             title:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_location:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_deadline:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_degree:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -2659,7 +2686,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
           group: 1
           exposed: false
           expose:
@@ -2800,6 +2827,8 @@ display:
           default: '-1'
           info:
             title:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -2812,13 +2841,15 @@ display:
               empty_column: false
               responsive: ''
             effective_date:
-              sortable: false
+              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             name:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -3601,7 +3632,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
           group: 1
           exposed: false
           expose:
@@ -3694,11 +3725,14 @@ display:
           default: '-1'
           info:
             thumbnail:
+              sortable: false
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             name:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -3711,6 +3745,7 @@ display:
               empty_column: false
               responsive: ''
             field_media_file:
+              sortable: false
               align: ''
               separator: ''
               empty_column: false
@@ -3730,7 +3765,7 @@ display:
               empty_column: false
               responsive: ''
             media_created:
-              sortable: false
+              sortable: true
               default_sort_order: desc
               align: ''
               separator: ''
@@ -4670,7 +4705,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
           group: 1
           exposed: false
           expose:
@@ -4764,46 +4799,64 @@ display:
           default: '-1'
           info:
             title:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_name:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_location:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_test_item:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_protection_profile:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_applicant:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_protection_profile_issuer:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_information_network:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_certification_date:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -5281,7 +5334,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
           group: 1
           exposed: false
           expose:
@@ -5375,21 +5428,29 @@ display:
           default: '-1'
           info:
             title:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_location:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_deadline:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_degree:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -5848,7 +5909,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
           group: 1
           exposed: false
           expose:
@@ -5989,6 +6050,8 @@ display:
           default: '-1'
           info:
             title:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -6001,13 +6064,15 @@ display:
               empty_column: false
               responsive: ''
             effective_date:
-              sortable: false
+              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             name:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -6783,7 +6848,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
           group: 1
           exposed: false
           expose:
@@ -6834,13 +6899,15 @@ display:
           default: '-1'
           info:
             node_created:
-              sortable: false
+              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             title:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -6853,21 +6920,28 @@ display:
               empty_column: false
               responsive: ''
             field_media:
+              sortable: false
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_date_range:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_location:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_deadline:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -7631,7 +7705,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
           group: 1
           exposed: false
           expose:
@@ -7724,11 +7798,14 @@ display:
           default: '-1'
           info:
             thumbnail:
+              sortable: false
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             name:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -7741,6 +7818,7 @@ display:
               empty_column: false
               responsive: ''
             field_media_file:
+              sortable: false
               align: ''
               separator: ''
               empty_column: false
@@ -7760,7 +7838,7 @@ display:
               empty_column: false
               responsive: ''
             media_created:
-              sortable: false
+              sortable: true
               default_sort_order: desc
               align: ''
               separator: ''

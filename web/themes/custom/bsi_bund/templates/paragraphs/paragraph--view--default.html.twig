@@ -1,6 +1,20 @@
-{% extends 'paragraph.html.twig' %}
+{%
+  set classes = [
+    'bsi-block',
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
     {% block content %}
-        <div class="bsi-block__content">
-        {{ parent() }}
-        </div>
+      {{ content.field_section_title }}
+
+      <div class="bsi-block__content">
+        {{ content|without('field_section_title') }}
+      </div>
     {% endblock %}
+  </div>
+{% endblock paragraph %}
