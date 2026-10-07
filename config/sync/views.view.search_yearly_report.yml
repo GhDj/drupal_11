@@ -367,7 +367,7 @@ display:
           admin_label: ''
           plugin_id: result
           empty: false
-          content: '<strong>@start to @end</strong> of <strong>@total</strong> results'
+          content: '<strong>@start to @end</strong>&nbsp;of&nbsp;<strong>@total</strong>&nbsp;results'
       footer: {  }
       display_extenders: {  }
     cache_metadata:

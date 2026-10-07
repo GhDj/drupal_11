@@ -27,4 +27,4 @@ display:
             title: Alle
       header:
         result:
-          content: '<strong>@start bis @end</strong> von <strong>@total</strong> Ergebnissen'
+          content: '<strong>@start bis @end</strong>&nbsp;von&nbsp;<strong>@total</strong>&nbsp;Ergebnissen'
