@@ -1,0 +1,19 @@
+<div class="chart-lightbox">
+
+  {% if section_title %}
+    <h2 class="chart-lightbox__title">
+      {{ section_title }}
+    </h2>
+  {% endif %}
+
+  <div class="chart-lightbox__media">
+    {{ media_view }}
+  </div>
+
+  {% if body %}
+    <div class="chart-lightbox__body">
+      {{ body }}
+    </div>
+  {% endif %}
+
+</div>

@@ -37,13 +37,14 @@
         "drupal-composer/drupal-paranoia": "~1",
         "drupal/address": "^2.0",
         "drupal/admin_toolbar": "^3.5",
+        "drupal/anchor_link": "^3.0",
         "drupal/asset_injector": "^2.21",
         "drupal/base_field_override_ui": "^1.2",
         "drupal/better_exposed_filters": "^7.0",
         "drupal/book": "^3.0",
         "drupal/calendar_view": "^2.1",
         "drupal/captcha": "^2.0.7",
-        "drupal/charts": "^5.1",
+        "drupal/charts": "^5.2",
         "drupal/ckeditor5_inline_quote": "^1.1",
         "drupal/ckeditor_abbreviation": "^5.0",
         "drupal/config_ignore": "^3.4",
@@ -63,16 +64,17 @@
         "drupal/environment_indicator": "^4.0",
         "drupal/facets": "^3.0",
         "drupal/field_group": "^4.0",
-        "drupal/field_validation": "^3.0@beta",
+        "drupal/field_validation": "^3.0@RC",
         "drupal/friendly_captcha_challenge": "^0.9",
         "drupal/friendlycaptcha": "^1.1",
-        "drupal/geocoder": "^4.34",
+        "drupal/geocoder": "^4.37",
         "drupal/geofield": "^10.3",
         "drupal/glossify": "^3.1",
-        "drupal/group": "4.0.0-alpha1 as 3.99.99",
+        "drupal/group": "4.0.0-alpha2 as 3.99.99",
         "drupal/group_relationship_tokens": "^1.2",
         "drupal/groupmedia": "^4.0",
         "drupal/honeypot": "^2.1",
+        "drupal/key": "^1.22",
         "drupal/klaro": "^3.0",
         "drupal/klaro_js": "^3.0",
         "drupal/layout_builder_restrictions": "^3.0",
@@ -101,6 +103,7 @@
         "drupal/phone_label": "^1.2",
         "drupal/prevent_version_disclosure": "^1.0",
         "drupal/rabbit_hole": "^1.2",
+        "drupal/real_aes": "^2.6",
         "drupal/redirect": "^1.13",
         "drupal/registration": "^3.4",
         "drupal/responsive_tables_filter": "^2.1",
@@ -116,13 +119,14 @@
         "drupal/tablefield": "^3.0",
         "drupal/taxonomy_import": "^2.1",
         "drupal/text_summary_formater": "^1.5",
+        "drupal/tfa": "^1.13",
         "drupal/token": "^1.13",
         "drupal/ui_icons": "^1.1",
         "drupal/views_block_override": "^1.2",
         "drupal/views_rss": "^2.4",
         "drupal/viewsreference": "^2.0@beta",
         "drupal/viewsreference_filter": "^1.0",
-        "drupal/webform": "^6.3@beta",
+        "drupal/webform": "^6.3",
         "drupal/webform_simplify": "^1.3",
         "drush/drush": "^13.0.0-beta1",
         "geocoder-php/nominatim-provider": "^5.8",
@@ -226,10 +230,6 @@
                 "Visibility states for book[weight] do not work with old book selector (3595869-MR187)":
                     "patches/book/fix-legacy-weight-visibility-3595869.patch"
             },
-            "drupal/charts": {
-                "Chart.js remote libraries need updating (3616599!225)":
-                    "patches/charts/chartjs_remote_libraries_update-3616599.patch"
-            },
             "drupal/core": {
                 "Entity view/form mode formatter/widget settings have no translation UI (2546212-336.patch)":
                     "patches/drupal/config_translation-entity-mode-translation-2546212-336.patch",
@@ -244,7 +244,9 @@
                 "Media library CSS styles":
                     "patches/drupal/media_library_styles.patch",
                 "Skip empty values in text_default formatter":
-                    "patches/drupal/text_default-formatter-skip-empty.patch"
+                    "patches/drupal/text_default-formatter-skip-empty.patch",
+                "Media: Retain thumbnail alt text if thumbnail is unchanged":
+                    "patches/drupal/media-retain_thumbnail_alt.patch"
             },
             "drupal/default_content": {
                 "Add export action plugin":
@@ -271,14 +273,16 @@
                     "patches/glossify/bsi-customizations.patch"
             },
             "drupal/group": {
-                "Whitepage on GroupType permissions form":
-                    "patches/group/whitepage-on-grouptype-permissions-form.patch",
-                "Relationship is still created when the entity create form fails to save the entity\n (3595517, !305)":
+                "Relationship is still created when the entity create form fails to save the entity (3595517, !305)":
                     "patches/group/relationship-created-on-failed-save_3595517.patch",
                 "Views argument does not translate the title (3490670-MR198)":
                     "patches/group/views_argument_translate_title-3490670.patch",
                 "Group permissions role order according to weight":
-                    "patches/group/group_permissions_role_order.patch"
+                    "patches/group/group_permissions_role_order.patch",
+                "Make group_update_11401 more robust":
+                    "patches/group/more_robust_update_hook.patch",
+                "Group updb error (3620824)":
+                    "patches/group/group_updb_error.patch"
             },
             "drupal/groupmedia": {
                 "Allow installation on Group 4.x (3591655-MR47)":

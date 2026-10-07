@@ -73,7 +73,7 @@ export function openerSliderTemplate({
                           item.title
                             ? headingTemplate({
                                 headingText: item.title,
-                                layout: 4,
+                                layout: 2,
                                 style: 4,
                                 headingExtraClasses: "opener__title"
                               })

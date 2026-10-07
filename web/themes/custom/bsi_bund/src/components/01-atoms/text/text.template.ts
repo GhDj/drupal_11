@@ -27,7 +27,7 @@ export function textTemplate({
   // rich text block
   if (bodytext) {
     return `
-      <div class="${nsp("bodytext", "text", bodytextExtraClasses, textExtraClasses)}">
+      <div class="${nsp("text", bodytextExtraClasses, textExtraClasses)}">
         ${bodytext}
       </div>
     `;

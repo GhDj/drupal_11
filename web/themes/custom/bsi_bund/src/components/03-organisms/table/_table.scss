@@ -14,6 +14,7 @@
   --#{$nsp}-tr-row-background-color: var(--#{$nsp}-color-base-white);
   --#{$nsp}-row-border-color: var(--#{$nsp}-color-alpha-dark-90);
   --#{$nsp}-tr-row-background-color-hover: var(--#{$nsp}-color-alpha-dark-95);
+  --color-text: var(--#{$nsp}-color-base-black);
 
   tr {
     background-color: var(--#{$nsp}-tr-row-background-color);
@@ -55,7 +56,7 @@
   }
 
   //hide first label in mobile
-  .col_0 .tablesaw-cell-label {
+  tr > td:first-of-type .tablesaw-cell-label {
     display: none;
     @include breakpoint-md {
       display: table-cell;
@@ -81,7 +82,7 @@
   .tablesaw-cell-content {
     display: block;
     max-width: 100%;
-    padding: var(--#{$nsp}-space-sm) var(--#{$nsp}-space-2xs);
+    padding: var(--#{$nsp}-space-sm);
     width: 100%;
   }
 }

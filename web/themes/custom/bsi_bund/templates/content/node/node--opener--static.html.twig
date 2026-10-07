@@ -70,7 +70,12 @@
               {{ content.body.0 }}
             </div>
           {% endif %}
-          {{ content|without('title', 'field_media', 'body', 'field_article_type', 'group_tagline') }}
+          {# Titel as h1 in single view media #}
+          {% if entity_type_id == 'media' %}
+            <h1 class="bsi-heading bsi-heading--2">{{ name }}</h1>
+          {% else %}
+            {{ content|without('title', 'field_media', 'body', 'field_article_type', 'group_tagline', 'group_header') }}
+          {% endif %}
         </div>
       </div>
     </div>

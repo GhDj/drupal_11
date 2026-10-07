@@ -1,0 +1,10 @@
+uuid: 736abd8a-fd45-4a50-a774-a85460e36a61
+langcode: en
+status: true
+dependencies: {  }
+id: explorer_content_types
+label: 'Explorer - Content types'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

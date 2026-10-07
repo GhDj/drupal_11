@@ -1,0 +1,15 @@
+--- a/core/modules/media/src/Entity/Media.php
++++ b/core/modules/media/src/Entity/Media.php
+@@ -184,9 +184,11 @@
+     $media_source = $this->getSource();
+     $plugin_definition = $media_source->getPluginDefinition();
+
+-    $this->thumbnail->alt = '';
+     if (!empty($plugin_definition['thumbnail_alt_metadata_attribute'])) {
+       $this->thumbnail->alt = $media_source->getMetadata($this, $plugin_definition['thumbnail_alt_metadata_attribute']);
+     }
++    elseif ($this->getOriginal()?->thumbnail->target_id !== $this->thumbnail->target_id) {
++      $this->thumbnail->alt = '';
++    }
+
+     return $this;

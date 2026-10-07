@@ -1,0 +1,23 @@
+uuid: f21b21fa-724e-4772-aedd-5a4c31654aac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_show_explorer_images
+    - paragraphs.paragraphs_type.explorer_content_types
+id: paragraph.explorer_content_types.field_show_explorer_images
+field_name: field_show_explorer_images
+entity_type: paragraph
+bundle: explorer_content_types
+label: 'Show explorer images'
+description: 'Tick the checkbox if you want to show the respective explorer image on each page teaser.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

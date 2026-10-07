@@ -54,11 +54,9 @@ display:
           label: Titel
         type:
           label: Inhaltstyp
-          separator: ', '
         name:
           label: Autor
         status:
-          label: Status
           settings:
             format_custom_false: 'Nicht veröffentlicht'
             format_custom_true: Veröffentlicht
@@ -66,7 +64,6 @@ display:
           label: Aktualisiert
         langcode:
           label: Sprache
-          separator: ', '
         operations:
           label: Aktionen
       pager:
@@ -78,7 +75,6 @@ display:
             last: 'Ende »'
       exposed_form:
         options:
-          submit_button: Filter
           reset_button_label: Zurücksetzen
           exposed_sorts_label: Sortierung
           sort_asc_label: Aufsteigend
@@ -94,8 +90,7 @@ display:
           expose:
             label: Inhaltstyp
         status:
-          expose:
-            label: Status
+          expose: {  }
           group_info:
             label: Veröffentlichungsstatus
             group_items:
@@ -114,5 +109,12 @@ display:
       tab_options:
         title: Inhalt
         description: 'Inhalte finden und verwalten'
+      filters:
+        uid:
+          expose:
+            label: Autor
+        field_tags_target_id:
+          expose:
+            label: Schlagworte
 label: Inhalt
 description: 'Inhalte finden und verwalten.'

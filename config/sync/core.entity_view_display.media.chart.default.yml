@@ -3,17 +3,26 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.chart.field_explanation
     - field.field.media.chart.field_media_chart
     - field.field.media.chart.field_source
     - field.field.media.chart.field_unit
     - media.type.chart
   module:
     - bsi_custom
+    - text
 id: media.chart.default
 targetEntityType: media
 bundle: chart
 mode: default
 content:
+  field_explanation:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
   name:
     type: plain_text_formatted
     label: hidden

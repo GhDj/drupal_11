@@ -3,7 +3,7 @@ third_party_settings:
   bsi_custom:
     preset_other: Andere…
     preset_options:
-      - Telefonnummer
-      - Servicenummer
-      - Faxnummer
-      - Mobilnummer
+      phone: Telefonnummer
+      service: Servicenummer
+      fax: Faxnummer
+      mobile: Mobilnummer

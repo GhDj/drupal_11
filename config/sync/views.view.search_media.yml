@@ -64,10 +64,10 @@ display:
         options: {  }
       empty: {  }
       sorts:
-        media_created:
-          id: media_created
+        effective_date:
+          id: effective_date
           table: search_api_index_default
-          field: media_created
+          field: effective_date
           relationship: none
           group_type: group
           admin_label: ''

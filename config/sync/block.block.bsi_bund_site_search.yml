@@ -14,8 +14,9 @@ provider: null
 plugin: block_search_topic
 settings:
   id: block_search_topic
-  label: 'Global site search'
-  label_display: '0'
+  label: Search
+  label_display: visible
   provider: bsi_search
   topic_tid: ''
+  use_node_topic: 0
 visibility: {  }

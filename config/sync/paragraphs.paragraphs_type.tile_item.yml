@@ -1,0 +1,10 @@
+uuid: add29970-703b-45fe-b531-c3f936a58f4d
+langcode: en
+status: true
+dependencies: {  }
+id: tile_item
+label: 'Tile Item'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

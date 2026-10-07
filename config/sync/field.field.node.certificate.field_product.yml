@@ -1,0 +1,24 @@
+uuid: c99ba76d-fb76-4c33-b08a-49100561a829
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_product
+    - filter.format.plain_text
+    - node.type.certificate
+  module:
+    - text
+id: node.certificate.field_product
+field_name: field_product
+entity_type: node
+bundle: certificate
+label: 'Product name'
+description: 'Name of the certified product, e.g. <em>CardOS DI V5.4 QES version 1.0</em> or the certified site (for site certification)'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - plain_text
+field_type: text_long

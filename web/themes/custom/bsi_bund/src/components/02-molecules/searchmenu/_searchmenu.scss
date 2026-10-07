@@ -15,6 +15,10 @@
   );
   width: 100%;
 
+  &--header {
+    --bsi-grid-row-gap: var(--bsi-size-2xl);
+  }
+
   &[popover] {
     display: none;
 
@@ -25,7 +29,7 @@
   }
 
   &__title {
-    margin-block-end: var(--#{$nsp}-space-xs);
+    margin-block-end: var(--#{$nsp}-space-sm);
   }
 
   &__list {

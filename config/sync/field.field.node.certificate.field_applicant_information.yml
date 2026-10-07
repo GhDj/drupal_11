@@ -9,8 +9,8 @@ id: node.certificate.field_applicant_information
 field_name: field_applicant_information
 entity_type: node
 bundle: certificate
-label: 'Short text on the applicant'
-description: 'Brief information about the applicant.'
+label: 'Applicant information'
+description: "Brief information about the applicant.\r\nProvide both German and English texts within the same text field."
 required: false
 translatable: true
 default_value: {  }

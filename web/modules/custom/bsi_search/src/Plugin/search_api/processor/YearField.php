@@ -65,11 +65,30 @@ class YearField extends ProcessorPluginBase {
 
     $timestamp = NULL;
 
-    // Get created time for the entity.
-    // Both Node and Media entities have getCreatedTime() method defined.
-    // If we need to expand this to other entities we might need to revisit
-    // this.
-    if ($entity instanceof NodeInterface || ($entity instanceof MediaInterface)) {
+    if ($entity instanceof MediaInterface) {
+
+      // Fallback.
+      $timestamp = $entity->getCreatedTime();
+
+      $translated_media = $entity;
+
+      $langcode = $item->getLanguage();
+
+      if ($langcode && $entity->hasTranslation($langcode)) {
+        $translated_media = $entity->getTranslation($langcode);
+      }
+
+      if (
+        $translated_media->hasField('field_publication_date')
+        && !$translated_media->get('field_publication_date')->isEmpty()
+      ) {
+        $timestamp = $translated_media
+          ->get('field_publication_date')
+          ->date
+          ->getTimestamp();
+      }
+    }
+    elseif ($entity instanceof NodeInterface) {
       $timestamp = $entity->getCreatedTime();
     }
 

@@ -19,7 +19,7 @@
     {{ content.field_media_image }}
 
     {% if content.field_copyright.0 or content.field_caption.0 or view_mode starts with 'inline_' %}
-      <figcaption class="bsi-image__caption">
+      <figcaption class="bsi-image__caption bsi-bodytext">
         {% if content.field_copyright.0 %}
           <div class="bsi-copyright bsi-image__copyright">
             <span class="bsi-copyright__text">{{ content.field_copyright }}</span>

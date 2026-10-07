@@ -30,16 +30,18 @@
 .#{$nsp}-badge--niedrig,
 .#{$nsp}-badge--low {
   --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-green-100);
-  color: var(--#{$nsp}-color-base-white);
 }
+
 .#{$nsp}-badge--mittel,
 .#{$nsp}-badge--medium {
   --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-yellow-100);
 }
+
 .#{$nsp}-badge--hoch,
 .#{$nsp}-badge--high {
   --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-orange-100);
 }
+
 .#{$nsp}-badge--kritisch,
 .#{$nsp}-badge--critical {
   --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-red-100);

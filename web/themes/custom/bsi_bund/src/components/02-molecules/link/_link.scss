@@ -140,7 +140,7 @@
   --#{$nsp}-link-decoration-line: none;
   --#{$nsp}-link-decoration-line-hover: none;
   --#{$nsp}-link-border-width: 1px;
-  border-radius: 2px;
+  border-radius: var(--#{$nsp}-link-button-border-radius);
   padding: var(--#{$nsp}-space-sm) var(--#{$nsp}-space-lg);
 }
 

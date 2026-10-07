@@ -1,0 +1,24 @@
+uuid: 53c43d51-ca6a-4738-b49e-d513ac15f12a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_evaluation_scopes
+    - filter.format.plain_text
+    - node.type.certificate
+  module:
+    - text
+id: node.certificate.field_evaluation_scopes
+field_name: field_evaluation_scopes
+entity_type: node
+bundle: certificate
+label: 'Evaluation scopes'
+description: 'The audit areas evaluated in the certification'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - plain_text
+field_type: text_long

@@ -4,6 +4,10 @@ unpack.py
 TRANSFER.md
 pack_transfer/
 .pack_transfer/
+pack_transfer.zip
+storybook_packed.txt
+storybook_src.txt
+storybook-static/
 
 # Claude
 .claude/

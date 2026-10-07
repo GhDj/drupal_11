@@ -8,6 +8,7 @@ dependencies:
     - field.field.media.download.field_body
     - field.field.media.download.field_copyright
     - field.field.media.download.field_media_file
+    - field.field.media.download.field_publication_date
     - field.field.media.download.field_tags
     - media.type.download
 id: media.download.media_library
@@ -43,6 +44,7 @@ hidden:
   field_accessibility: true
   field_body: true
   field_media_file: true
+  field_publication_date: true
   field_tags: true
   langcode: true
   path: true

@@ -1,0 +1,11 @@
+uuid: 3ad4d4aa-6ca8-4bb0-8b91-09eb644ece80
+langcode: en
+status: true
+dependencies:
+  module:
+    - registration
+id: registration_settings.registration_settings
+target_entity_type_id: registration_settings
+target_bundle: registration_settings
+default_langcode: site_default
+language_alterable: false

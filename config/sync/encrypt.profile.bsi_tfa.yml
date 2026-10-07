@@ -1,0 +1,13 @@
+uuid: f65e855d-af51-4285-8825-0f94d770494a
+langcode: de
+status: true
+dependencies:
+  config:
+    - key.key.bsi_tfa_key
+  module:
+    - real_aes
+id: bsi_tfa
+label: 'BSI TFA'
+encryption_method: real_aes
+encryption_method_configuration: {  }
+encryption_key: bsi_tfa_key

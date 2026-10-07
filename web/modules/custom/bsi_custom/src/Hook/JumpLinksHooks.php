@@ -13,9 +13,10 @@ use Drupal\Core\Hook\Attribute\Hook;
 class JumpLinksHooks {
 
   /**
-   * Implements hook_preprocess_HOOK() for field--paragraph--field-section-title.html.twig.
+   * Implements hook_preprocess_HOOK() for field--paragraph--field-section-title.html.twig and field--paragraph--field-section-title--key-facts.html.twig.
    */
   #[Hook('preprocess_field__paragraph__field_section_title')]
+  #[Hook('preprocess_field__paragraph__field_section_title__key_facts')]
   public function preprocessTitle(array &$variables): void {
     /** @var \Drupal\paragraphs\ParagraphInterface $entity */
     $entity = $variables['element']['#object'];

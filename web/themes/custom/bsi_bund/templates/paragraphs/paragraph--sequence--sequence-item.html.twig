@@ -12,19 +12,24 @@
   {% block content %}
     {# timeline #}
     {% if is_timeline %}
-
       <div{{ attributes.addClass(classes) }}>
 
         {# timeline marker #}
-        <div class="bsi-timeline__marker"></div>
+        {% include '@bsi_bund/templates/components/icon.twig' with {
+          name: "circle-big",
+          decorative: true,
+          extra_classes: 'bsi-timeline__marker'
+        } %}
 
         {# cards #}
         <div class="bsi-timeline__card">
           {# section title #}
-          <h3 class="bsi-timeline__card-title">{{ content.field_section_title.0 }}</h3>
+          {% if content.field_section_title.0 %}
+            <h3 class="bsi-timeline__card-title">{{ content.field_section_title.0 }}</h3>
+          {% endif %}
 
           {# section text #}
-          {{ content|without('field_step_label') }}
+          {{ content|without('field_step_label', 'field_section_title') }}
         </div>
       </div>
 

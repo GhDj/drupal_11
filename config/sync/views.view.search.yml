@@ -92,23 +92,10 @@ display:
             label: Relevance
             field_identifier: search_api_relevance
           exposed: false
-        node_created:
-          id: node_created
+        effective_date:
+          id: effective_date
           table: search_api_index_default
-          field: node_created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-        media_created:
-          id: media_created
-          table: search_api_index_default
-          field: media_created
+          field: effective_date
           relationship: none
           group_type: group
           admin_label: ''
@@ -735,23 +722,10 @@ display:
             label: Relevance
             field_identifier: relevance
           exposed: true
-        node_created:
-          id: node_created
+        effective_date:
+          id: effective_date
           table: search_api_index_default
-          field: node_created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-        media_created:
-          id: media_created
-          table: search_api_index_default
-          field: media_created
+          field: effective_date
           relationship: none
           group_type: group
           admin_label: ''
@@ -916,7 +890,6 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-        - 'facets_filter:f'
         - 'languages:language_interface'
         - url
         - url.query_args
@@ -925,9 +898,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:facets.facet.audiences'
-        - 'config:facets.facet.topics'
-        - 'config:facets.facet.year_node_and_media_only'
         - 'config:search_api.index.default'
         - 'search_api_list:default'
   block_search_slot:
@@ -952,23 +922,10 @@ display:
             label: Relevance
             field_identifier: search_api_relevance
           exposed: false
-        node_created:
-          id: node_created
+        effective_date:
+          id: effective_date
           table: search_api_index_default
-          field: node_created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-        media_created:
-          id: media_created
-          table: search_api_index_default
-          field: media_created
+          field: effective_date
           relationship: none
           group_type: group
           admin_label: ''

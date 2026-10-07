@@ -16,10 +16,10 @@ dependencies:
     - media.type.contact
   module:
     - address
+    - bsi_custom
     - layout_builder
     - link
     - office_hours
-    - phone_label
 third_party_settings:
   layout_builder:
     enabled: false
@@ -80,9 +80,10 @@ content:
     weight: 2
     region: content
   field_phone:
-    type: phone_label
+    type: phone_link
     label: inline
-    settings: {  }
+    settings:
+      title_tooltip: false
     third_party_settings: {  }
     weight: 3
     region: content

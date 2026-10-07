@@ -30,7 +30,6 @@ export function tabsTemplate() {
             </a>
           </li>
         </ul>
-
         <!-- PANES -->
         <div data-horizontal-tabs-panes class="horizontal-tabs-panes">
           <!-- ACTIVE TAB -->

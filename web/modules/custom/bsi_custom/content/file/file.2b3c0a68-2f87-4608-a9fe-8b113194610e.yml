@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 2b3c0a68-2f87-4608-a9fe-8b113194610e
+  default_langcode: de
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Opener-Zertifikat.jpg
+  uri:
+    -
+      value: 'private://image/2026-09/Opener-Zertifikat.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 227669
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1789737021

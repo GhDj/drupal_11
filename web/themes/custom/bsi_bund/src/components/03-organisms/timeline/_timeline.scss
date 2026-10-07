@@ -51,34 +51,35 @@
     width: 2px;
     will-change: height;
     z-index: 1;
-
     @include breakpoint-lg {
       left: 50%;
       transform: translateX(-50%);
+    }
+    [data-static] & {
+      height: 100%;
     }
   }
 
   &__marker {
     background: var(--#{$nsp}-color-base-white);
-    border: 1px solid var(--#{$nsp}-color-neutral-1000);
-    border-radius: 50%;
-    height: var(--#{$nsp}-space-2xs);
-    left: var(--#{$nsp}-space-2xs);
-    margin-left: -4px;
+    height: var(--#{$nsp}-space-sm);
+    width: var(--#{$nsp}-space-sm);
+    left: 0;
+    margin-left: 1px;
     outline: solid var(--#{$nsp}-space-3xs) var(--#{$nsp}-color-base-white);
     position: absolute;
-    top: 25px;
-    width: var(--#{$nsp}-space-2xs);
+    top: calc(50% - var(--#{$nsp}-space-2xs));
     z-index: 2;
 
     @include breakpoint-lg {
       left: 50%;
+      margin-left: -8px;
     }
   }
 
   &__year-title {
     @include typography("heading-5");
-    background-color: var(--#{$nsp}-color-blue-750);
+    background-color: var(--#{$nsp}-color-blue-800);
     border-radius: 2px;
     color: var(--#{$nsp}-color-neutral-50);
     font-weight: bold;
@@ -90,7 +91,7 @@
     z-index: 2;
 
     @include breakpoint-lg {
-      margin: 0 auto var(--#{$nsp}-space-md);
+      margin: 0 auto var(--#{$nsp}-space-7xl);
     }
   }
 

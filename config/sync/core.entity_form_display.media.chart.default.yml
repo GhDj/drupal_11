@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.chart.field_explanation
     - field.field.media.chart.field_media_chart
     - field.field.media.chart.field_source
     - field.field.media.chart.field_unit
@@ -22,7 +23,7 @@ third_party_settings:
       label: Workflow
       region: content
       parent_name: ''
-      weight: 5
+      weight: 8
       format_type: details_sidebar
       format_settings:
         classes: ''
@@ -39,7 +40,7 @@ third_party_settings:
       label: Language
       region: content
       parent_name: ''
-      weight: 6
+      weight: 9
       format_type: details_sidebar
       format_settings:
         classes: ''
@@ -55,6 +56,14 @@ targetEntityType: media
 bundle: chart
 mode: default
 content:
+  field_explanation:
+    type: text_textarea
+    weight: 6
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_media_chart:
     type: chart_config_default
     weight: 4

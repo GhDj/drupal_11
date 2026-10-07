@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_protection_profile
-    - filter.format.advanced
+    - filter.format.basic
     - node.type.certificate
   module:
     - text
@@ -13,12 +13,12 @@ field_name: field_protection_profile
 entity_type: node
 bundle: certificate
 label: 'Protection profile'
-description: 'Name of the protection profile, the protection profiles'
+description: 'Name of the protection profile or profiles'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
   allowed_formats:
-    - advanced
+    - basic
 field_type: text_long

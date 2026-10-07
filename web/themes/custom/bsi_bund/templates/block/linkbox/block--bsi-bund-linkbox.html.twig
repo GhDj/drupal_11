@@ -4,6 +4,7 @@
 {%
   set classes = [
     'bsi-linkbox',
+    'bsi-block',
     'block',
     'block-' ~ configuration.provider|clean_class,
     'block-' ~ plugin_id|clean_class,
@@ -52,6 +53,7 @@
 
                 {# add component-classes to links #}
                 {% set link_classes = item['#url'].isExternal() ? 'bsi-linklist__link--external' : 'bsi-linklist__link--internal' %}
+
                 {% set item = item|merge({'#extra_classes': ['bsi-linklist__link', link_classes]}) %}
 
                 <li class="bsi-linklist__list-item">{{ item }}</li>

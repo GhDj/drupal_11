@@ -8,7 +8,7 @@ dependencies:
     - field.field.media.image.field_copyright
     - field.field.media.image.field_media_image
     - media.type.image
-    - responsive_image.styles.bsi_inline_center
+    - responsive_image.styles.bsi_content
   module:
     - layout_builder
     - responsive_image
@@ -34,6 +34,7 @@ content:
     label: inline
     settings:
       link_to_entity: false
+      link_rel: canonical
     third_party_settings: {  }
     weight: 1
     region: content
@@ -41,7 +42,7 @@ content:
     type: responsive_image
     label: visually_hidden
     settings:
-      responsive_image_style: bsi_inline_center
+      responsive_image_style: bsi_content
       image_link: ''
       image_loading:
         attribute: lazy

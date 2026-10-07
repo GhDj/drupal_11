@@ -9,12 +9,14 @@ dependencies:
     - field.field.media.publication.field_copyright
     - field.field.media.publication.field_media_file
     - field.field.media.publication.field_media_type
+    - field.field.media.publication.field_publication_date
     - field.field.media.publication.field_tags
     - field.field.media.publication.field_use_cart
     - media.type.publication
-    - responsive_image.styles.bsi_inline_center
+    - responsive_image.styles.bsi_content
   module:
     - bsi_custom
+    - datetime
     - file
     - responsive_image
     - text_summary_formatter
@@ -23,26 +25,6 @@ targetEntityType: media
 bundle: publication
 mode: inline_center
 content:
-  created:
-    type: timestamp
-    label: inline
-    settings:
-      date_format: date_short
-      custom_date_format: ''
-      timezone: ''
-      tooltip:
-        date_format: ''
-        custom_date_format: ''
-      time_diff:
-        enabled: false
-        future_format: '@interval hence'
-        past_format: '@interval ago'
-        granularity: 2
-        refresh: 60
-        description: ''
-    third_party_settings: {  }
-    weight: 5
-    region: content
   field_body:
     type: text_summary_formatter
     label: hidden
@@ -57,6 +39,15 @@ content:
       use_description_as_link_text: true
     third_party_settings: {  }
     weight: 3
+    region: content
+  field_publication_date:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: date_short
+    third_party_settings: {  }
+    weight: 5
     region: content
   field_use_cart:
     type: boolean
@@ -82,7 +73,7 @@ content:
     type: responsive_image
     label: hidden
     settings:
-      responsive_image_style: bsi_inline_center
+      responsive_image_style: bsi_content
       image_link: ''
       image_loading:
         attribute: lazy
@@ -91,6 +82,7 @@ content:
     region: content
 hidden:
   changed: true
+  created: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true

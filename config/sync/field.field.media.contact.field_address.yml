@@ -42,6 +42,8 @@ settings:
   field_overrides:
     givenName:
       override: optional
+    familyName:
+      override: optional
     addressLine1:
       override: optional
     addressLine2:

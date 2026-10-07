@@ -15,31 +15,12 @@ charts_default_settings:
     background: ''
     three_dimensional: 0
     colors:
-      - '#006fb0'
-      - '#f07c33'
-      - '#342e9c'
-      - '#579b17'
-      - '#3f067a'
-      - '#cbde67'
-      - '#7643b6'
-      - '#738d00'
-      - '#c157c7'
-      - '#02dab1'
-      - '#ed56b4'
-      - '#d8d981'
-      - '#004695'
-      - '#736000'
-      - '#a5a5ff'
-      - '#833a00'
-      - '#ff9ee9'
-      - '#684507'
-      - '#fe4f85'
-      - '#5d0011'
-      - '#ffa67b'
-      - '#88005c'
-      - '#ff9b8f'
-      - '#85000f'
-      - '#ff7581'
+      - '#ff6c76'
+      - '#336f91'
+      - '#7975bf'
+      - '#00a669'
+      - '#89b31c'
+      - '#ffa600'
     polar: 0
     tooltips: true
     dimensions:
@@ -75,14 +56,14 @@ charts_default_settings:
     labels_rotation: '0'
   library_config:
     xaxis:
-      autoskip: false
+      autoskip: true
       horizontal_axis_title_align: center
     yaxis:
       vertical_axis_title_align: center
   library_configs:
     chartjs:
       xaxis:
-        autoskip: false
+        autoskip: true
         horizontal_axis_title_align: center
       yaxis:
         vertical_axis_title_align: center

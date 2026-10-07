@@ -7,6 +7,7 @@ dependencies:
     - field.storage.media.field_body
     - field.storage.media.field_media_source
     - field.storage.media.field_media_type
+    - field.storage.media.field_publication_date
     - field.storage.media.field_tags
     - field.storage.media.field_use_cart
     - field.storage.node.body
@@ -103,6 +104,10 @@ field_settings:
     label: 'Aggregated paragraph text (boost 1.5)'
     property_path: aggregated_paragraph_text_boost_1.5
     type: string
+  effective_date:
+    label: 'Effective date'
+    property_path: effective_date
+    type: date
   field_accessibility:
     label: Accessibility
     datasource_id: 'entity:media'
@@ -175,6 +180,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_producer
+  field_publication_date:
+    label: 'Publication date'
+    datasource_id: 'entity:media'
+    property_path: field_publication_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.media.field_publication_date
   field_topics:
     label: Topics
     datasource_id: 'entity:node'
@@ -524,6 +537,7 @@ processor_settings:
     weights:
       preprocess_query: -30
   custom_value: {  }
+  effective_date: {  }
   entity_status: {  }
   entity_type: {  }
   highlight:

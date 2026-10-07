@@ -1,0 +1,11 @@
+--- a/group.install
++++ b/group.install
+@@ -47,7 +47,7 @@
+
+     $plugin_id = $relationship_type->get('content_plugin');
+     $relationship_type->clear('content_plugin');
+-    $relationship_type->set('relation_type', $plugin_id);
++    $relationship_type->set('relation_type', $plugin_id ?? $relationship_type->get('relation_type'));
+
+     $relationship_type->save();
+   }

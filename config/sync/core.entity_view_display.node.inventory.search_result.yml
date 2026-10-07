@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.search_result
     - field.field.node.inventory.body
     - field.field.node.inventory.field_audiences
+    - field.field.node.inventory.field_explorer_image
     - field.field.node.inventory.field_metatags
     - field.field.node.inventory.field_paragraphs
     - field.field.node.inventory.field_tags
@@ -88,6 +89,7 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_explorer_image: true
   field_metatags: true
   field_paragraphs: true
   field_tags: true

@@ -1,0 +1,8 @@
+chart.js:
+  js:
+    js/chart.js: {  }
+  dependencies:
+    - core/drupal
+    - core/once
+    - charts_chartjs/chartjs
+    #- charts/global

@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.article.field_audiences
     - field.field.node.article.field_downloads
     - field.field.node.article.field_downloads_title
+    - field.field.node.article.field_explorer_image
     - field.field.node.article.field_link
     - field.field.node.article.field_links
     - field.field.node.article.field_links_title
@@ -34,6 +35,26 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  changed:
+    type: timestamp
+    label: hidden
+    settings:
+      date_format: date_short
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: long
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+        description: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
@@ -49,7 +70,6 @@ content:
     weight: 2
     region: content
 hidden:
-  changed: true
   created: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -58,6 +78,7 @@ hidden:
   field_audiences: true
   field_downloads: true
   field_downloads_title: true
+  field_explorer_image: true
   field_link: true
   field_links: true
   field_links_title: true

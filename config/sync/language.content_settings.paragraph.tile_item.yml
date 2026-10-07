@@ -1,0 +1,18 @@
+uuid: 983bcdc5-d4e8-4872-818c-7bfe4b815c4a
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.tile_item
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: paragraph.tile_item
+target_entity_type_id: paragraph
+target_bundle: tile_item
+default_langcode: de
+language_alterable: true

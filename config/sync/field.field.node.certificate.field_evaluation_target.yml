@@ -1,0 +1,24 @@
+uuid: 26deaf8a-1eb1-4198-9ea2-b3c7a261508c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_evaluation_target
+    - filter.format.plain_text
+    - node.type.certificate
+  module:
+    - text
+id: node.certificate.field_evaluation_target
+field_name: field_evaluation_target
+entity_type: node
+bundle: certificate
+label: 'Evaluation target'
+description: 'Test object of products and systems certified according to technical guidelines'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - plain_text
+field_type: text_long

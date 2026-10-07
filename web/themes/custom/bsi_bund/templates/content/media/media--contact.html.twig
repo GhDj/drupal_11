@@ -34,7 +34,7 @@
 
     {% block title %}
       {% if content.name.0 -%}
-        <h2{{ title_attributes.addClass('bsi-heading', 'bsi-heading--2', 'bsi-contact__title') }}>
+        <h2{{ title_attributes.addClass('bsi-heading', 'bsi-heading--5', 'bsi-contact__title') }}>
           {{ content.name.0 }}
         </h2>
       {%- endif %}
@@ -43,32 +43,38 @@
     {{ title_suffix }}
 
     {% block info %}
-      <div class="bsi-contact__info">
-        {% set address_data = media.field_address.0 %}
+    {% set address_data = media.field_address.0 %}
+      {% if address_data.organization
+        or address_data.given_name
+        or address_data.family_name
+        or address_data.additional_name %}
+          <div class="bsi-contact__info">
 
-        {% if address_data.organization %}
-          <span class="bsi-contact__info-row">
-            {{ address_data.organization }}
-          </span>
-        {% endif %}
 
-        {% if address_data.given_name or address_data.family_name %}
-          <span class="bsi-contact__info-row bsi-contact__info-row--person">
-            {{ address_data.given_name }}
-            {{ address_data.family_name }}
-          </span>
-        {% else %}
-          <span class="bsi-contact__info-row">
-            {{ address_data.family_name }}
-          </span>
-        {% endif %}
+            {% if address_data.organization %}
+              <span class="bsi-contact__info-row">
+                {{ address_data.organization }}
+              </span>
+            {% endif %}
 
-        {% if address_data.additional_name %}
-          <span class="bsi-contact__info-row">
-            {{ address_data.additional_name }}
-          </span>
-        {% endif %}
-      </div>
+            {% if address_data.given_name or address_data.family_name %}
+              <span class="bsi-contact__info-row bsi-contact__info-row--person">
+                {{ address_data.given_name }}
+                {{ address_data.family_name }}
+              </span>
+            {% else %}
+              <span class="bsi-contact__info-row">
+                {{ address_data.family_name }}
+              </span>
+            {% endif %}
+
+            {% if address_data.additional_name %}
+              <span class="bsi-contact__info-row">
+                {{ address_data.additional_name }}
+              </span>
+            {% endif %}
+          </div>
+      {% endif %}
     {% endblock %}
 
     {% block details %}
@@ -158,16 +164,14 @@
 {% macro data_label(items) %}
   {# Must match keys on /admin/structure/media/manage/contact/fields/media.contact.field_phone #}
   {% set phone_label_map = {
-    0: 'Phone'|trans({}, {context: 'Phone label abbreviation'}),
-    1: 'Service'|trans({}, {context: 'Phone label abbreviation'}),
-    2: 'Fax'|trans({}, {context: 'Phone label abbreviation'}),
-    3: 'Mobile'|trans({}, {context: 'Phone label abbreviation'}),
+    'phone': 'Phone'|trans({}, {context: 'Phone label abbreviation'}),
+    'service': 'Service'|trans({}, {context: 'Phone label abbreviation'}),
+    'fac': 'Fax'|trans({}, {context: 'Phone label abbreviation'}),
+    'mobile': 'Mobile'|trans({}, {context: 'Phone label abbreviation'}),
   } %}
 
   {% if items['#field_name'] == 'field_phone' %}
-    {{- phone_label_map[items.0['#preset_option']]|default(
-      'Phone'|trans({}, {context: 'Phone label abbreviation'})
-    ) -}}
+    {{- phone_label_map[items.0['#preset_option']|default('phone')] -}}
   {% else %}
     {{ items['#title'] }}
   {% endif %}

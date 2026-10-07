@@ -14,8 +14,10 @@ use Drupal\media\MediaSourceBase;
   id: 'chart',
   label: new TranslatableMarkup('Chart'),
   description: new TranslatableMarkup('Use charts configuration as reusable media.'),
-  default_thumbnail_filename: 'chart.png',
   allowed_field_types: ['chart_config'],
+  default_thumbnail_filename: 'chart.png',
+  thumbnail_uri_metadata_attribute: 'thumbnail_uri',
+  thumbnail_alt_metadata_attribute: 'thumbnail_alt',
 )]
 class Chart extends MediaSourceBase {
 
@@ -59,6 +61,14 @@ class Chart extends MediaSourceBase {
 
       case static::METADATA_ATTRIBUTE_TYPE:
         return $field->type;
+
+      case 'thumbnail_uri':
+        // Reuse existing image. Clear on the form to re-apply default.
+        return $media->get('thumbnail')->entity?->getFileUri();
+
+      case 'thumbnail_alt':
+        // Reuse alt text of existing image.
+        return $media->get('thumbnail')->alt;
 
       default:
         return parent::getMetadata($media, $attribute_name);

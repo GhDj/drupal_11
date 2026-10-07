@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.job.field_downloads_title
     - field.field.node.job.field_duration
     - field.field.node.job.field_employment_model
+    - field.field.node.job.field_explorer_image
     - field.field.node.job.field_links
     - field.field.node.job.field_links_title
     - field.field.node.job.field_location
@@ -29,6 +30,7 @@ dependencies:
     - field_group
     - link
     - maxlength
+    - media_library
     - metatag
     - paragraphs
     - path
@@ -77,6 +79,7 @@ third_party_settings:
         - group_teaser
         - group_linkbox
         - group_terms
+        - group_teaser_explorer
       label: Tabs
       region: content
       parent_name: ''
@@ -183,6 +186,22 @@ third_party_settings:
         description: ''
         required_fields: true
         weight: 0
+    group_teaser_explorer:
+      children:
+        - field_explorer_image
+      label: 'Teaser - Explorer'
+      region: content
+      parent_name: group_tabs
+      weight: 27
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
 id: node.job.default
 targetEntityType: node
 bundle: job
@@ -261,6 +280,13 @@ content:
     weight: 3
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_explorer_image:
+    type: media_library_widget
+    weight: 7
+    region: content
+    settings:
+      media_types: {  }
     third_party_settings: {  }
   field_links:
     type: link_default

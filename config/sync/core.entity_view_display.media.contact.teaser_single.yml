@@ -40,7 +40,7 @@ content:
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 2
     region: content
   field_phone:
     type: phone_link
@@ -48,14 +48,15 @@ content:
     settings:
       title_tooltip: true
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   name:
-    type: string
+    type: plain_text_formatted
     label: hidden
     settings:
       link_to_entity: false
       link_rel: canonical
+      text_format: plain_text
     third_party_settings: {  }
     weight: 1
     region: content

@@ -1,0 +1,32 @@
+{#
+/**
+* @file
+* Theme override to display a media item.
+*
+* Available variables:
+* - name: Name of the media.
+* - content: Media content.
+*
+* @see \Drupal\media\MediaThemeHooks::preprocessMedia
+*
+* @ingroup themeable
+*/
+#}
+{{ attach_library('core/drupal.ajax') }}
+{{ attach_library('core/drupal.dialog.ajax') }}
+
+<div{{ attributes }}>
+
+    <a
+      class="use-ajax button"
+      href="{{ lightbox_url }}"
+      data-dialog-type="modal"
+    >
+      {{ content }}
+    </a>
+
+</div>
+
+
+
+

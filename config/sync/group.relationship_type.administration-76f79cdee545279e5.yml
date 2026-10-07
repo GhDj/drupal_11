@@ -10,7 +10,7 @@ dependencies:
     - media
 id: administration-76f79cdee545279e5
 group_type: administration
-content_plugin: 'group_media:download'
+relation_type: 'group_media:download'
 plugin_config:
   group_cardinality: 0
   entity_cardinality: 1

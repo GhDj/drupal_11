@@ -1,0 +1,70 @@
+// -----------------------------------------------------------------------------
+// Searchfilter
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+@use "@globals/mixins/grid" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+
+.#{$nsp}-searchfilter {
+  @include grid;
+  --#{$nsp}-paragraph-spacing: 0;
+  --#{$nsp}-ruler-margin: 0;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0 rgba(33, 35, 40, 0.25);
+
+  padding: 24px;
+  width: 100%;
+
+  @include breakpoint-lg {
+    padding: 40px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-self: center;
+    max-width: 960px;
+    width: 100%;
+  }
+
+  &__top {
+    display: grid;
+    gap: var(--#{$nsp}-space-sm);
+
+    @include breakpoint-md {
+      @include grid-columns(2);
+    }
+
+    @include breakpoint-lg {
+      @include grid-columns(4);
+    }
+  }
+
+  &__bottom {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-sm);
+    justify-content: space-between;
+    margin-top: var(--#{$nsp}-space-sm);
+
+    @include breakpoint-md {
+      align-items: center;
+      flex-direction: row;
+    }
+  }
+
+  &__pills {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--#{$nsp}-space-2xs);
+  }
+}

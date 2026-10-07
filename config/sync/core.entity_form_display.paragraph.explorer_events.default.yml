@@ -1,0 +1,25 @@
+uuid: 06d7efaa-7630-465e-bc9d-94546519e089
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.explorer_events.field_events
+    - paragraphs.paragraphs_type.explorer_events
+id: paragraph.explorer_events.default
+targetEntityType: paragraph
+bundle: explorer_events
+mode: default
+content:
+  field_events:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -45,7 +45,6 @@ permissions:
   - 'view paragraph content quote'
   - 'view paragraph content sequence'
   - 'view paragraph content sequence_item'
-  - 'view paragraph content table_section'
   - 'view paragraph content tabs'
   - 'view paragraph content teaser_single'
   - 'view paragraph content text_section'

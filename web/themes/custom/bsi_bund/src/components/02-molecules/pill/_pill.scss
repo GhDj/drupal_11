@@ -1,0 +1,70 @@
+// -----------------------------------------------------------------------------
+// Pill
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/typography" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+:root {
+  --#{$nsp}-badge-bg-color: var(--#{$nsp}-color-neutral-300);
+}
+
+.#{$nsp}-pill {
+  @include typography("text-support");
+  --bsi-icon-width: 12px;
+  --bsi-icon-color: var(--#{$nsp}-color-neutral-750);
+  --bsi-button-border-radius: 99px;
+  --bsi-button-text-color: var(--#{$nsp}-color-typo-secondary);
+  --bsi-button-background: var(--#{$nsp}-color-neutral-50);
+  --bsi-button-border-color: var(--#{$nsp}-color-neutral-300);
+  --bsi-button-border-color-hover: var(--#{$nsp}-color-blue-750);
+  --bsi-button-text-color-hover: var(--#{$nsp}-color-typo-secondary);
+  --bsi-button-background-hover: var(--#{$nsp}-color-neutral-100);
+  height: unset;
+  padding: var(--#{$nsp}-space-3xs) var(--#{$nsp}-space-xs);
+
+  &:hover {
+    --bsi-icon-color: var(--#{$nsp}-color-black);
+  }
+
+  &:focus-visible {
+    outline: 2px solid;
+    outline-color: var(--#{$nsp}-color-base-focus);
+    outline-offset: 2px;
+    padding: var(--#{$nsp}-space-3xs) var(--#{$nsp}-space-xs);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Variants
+// -----------------------------------------------------------------------------
+.#{$nsp}-pill--selected {
+  --bsi-icon-color: var(--#{$nsp}-color-neutral-50);
+  --bsi-button-text-color: var(--#{$nsp}-color-neutral-50);
+  --bsi-button-background: var(--#{$nsp}-color-neutral-900);
+  --bsi-button-border-color: var(--#{$nsp}-color-border);
+  --bsi-button-text-color-hover: var(--#{$nsp}-color-neutral-50);
+  --bsi-button-background-hover: var(--#{$nsp}-color-black);
+
+  &:hover {
+    --bsi-icon-color: var(--#{$nsp}-color-neutral-50);
+  }
+}
+
+.#{$nsp}-pill--read-only {
+  --bsi-button-text-color-disabled: var(--#{$nsp}-color-neutral-900);
+  --bsi-button-background-disabled: var(--#{$nsp}-color-neutral-50);
+  --bsi-button-border-color-disabled: var(--#{$nsp}-color-neutral-300);
+}
+
+.#{$nsp}-pill--brand {
+  --bsi-button-text-color: var(--#{$nsp}-color-neutral-50);
+  --bsi-button-background: var(--#{$nsp}-color-blue-750);
+  --bsi-button-border-color: var(--#{$nsp}-color-blue-750);
+  --bsi-button-text-color-hover: var(--#{$nsp}-color-typo-tertiary);
+  --bsi-button-background-hover: var(--#{$nsp}-color-blue-100);
+  --bsi-button-border-color-hover: var(--#{$nsp}-color-blue-200);
+}

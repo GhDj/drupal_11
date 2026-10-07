@@ -1,0 +1,87 @@
+uuid: 462e20d7-d18f-4a6e-bc8d-1d524cd92459
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.search_result
+    - field.field.media.publication.field_accessibility
+    - field.field.media.publication.field_body
+    - field.field.media.publication.field_copyright
+    - field.field.media.publication.field_media_file
+    - field.field.media.publication.field_media_type
+    - field.field.media.publication.field_publication_date
+    - field.field.media.publication.field_tags
+    - field.field.media.publication.field_use_cart
+    - media.type.publication
+  module:
+    - bsi_custom
+    - datetime
+    - layout_builder
+    - text_summary_formatter
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.publication.search_result
+targetEntityType: media
+bundle: publication
+mode: search_result
+content:
+  field_body:
+    type: text_summary_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_media_type:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_publication_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: date_short
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_use_cart:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_accessibility: true
+  field_copyright: true
+  field_media_file: true
+  field_tags: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

@@ -39,6 +39,10 @@ steps:
       lacus ac faucibus. Cras eget eleifend metus. Mauris nec turpis ornare, efficitur ex eu,
       vehicula nisl. In in enim posuere, ultrices quam et, sagittis massa. Interdum et malesuada
       fames ac ante ipsum primis in faucibus.</p>
+      <p><ol><li>orderd list</li>
+      <li>step 2</li></ol></p>
+      <p><ul><li>unorderd list</li>
+      <li>step 2</li></ul></p>
       <p><strong>Sed fermentum justo felis, in semper ante pretium vitae. </strong></p>
       <p>Cras convallis metus nisi, at feugiat ante molestie ut. Maecenas ullamcorper finibus
       lacus ac faucibus. Cras eget eleifend metus. Mauris nec turpis ornare, efficitur ex eu,

@@ -19,11 +19,13 @@
 
     {# set sequence variant #}
     {% set variant = element['#object'].field_display_variant.value %}
+    {% set animate = element['#object'].field_display_animate.value %}
+
 
     {% block items %}
       {# timeline #}
       {% if variant == 'timeline' %}
-        <div class="bsi-timeline bsi-grid">
+        <div class="bsi-timeline bsi-grid" {% if animate == 0 %}data-static{% endif %}>
           <div class="bsi-timeline__content">
 
             {# progress bar #}
@@ -62,7 +64,7 @@
             <ol>
               {% for item in items %}
                 {% block item %}
-                  <li{{ item.attributes.addClass(base_name ~ '__item') }}>
+                  <li{{ item.attributes.addClass(base_name ~ '__item', 'bsi-process__step') }}>
                     {{ item.content }}
                   </li>
                 {% endblock %}

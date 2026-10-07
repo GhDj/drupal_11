@@ -9,7 +9,7 @@ dependencies:
     - field.field.media.audio.field_media_source
     - field.field.media.audio.field_tags
     - media.type.audio
-    - responsive_image.styles.bsi_inline_center
+    - responsive_image.styles.bsi_content
   module:
     - media_remote_file
     - responsive_image
@@ -31,6 +31,7 @@ content:
     label: inline
     settings:
       link_to_entity: false
+      link_rel: canonical
     third_party_settings: {  }
     weight: 2
     region: content
@@ -50,7 +51,7 @@ content:
     type: responsive_image
     label: hidden
     settings:
-      responsive_image_style: bsi_inline_center
+      responsive_image_style: bsi_content
       image_link: ''
       image_loading:
         attribute: lazy

@@ -61,4 +61,22 @@ class ViewsHooks {
     }
   }
 
+  /**
+   * Implements hook_views_data().
+   */
+  #[Hook('views_data')]
+  public function viewsData(): array {
+    $data = [];
+
+    $data['node_field_data']['effective_publication_date'] = [
+      'title' => $this->t('Effective publication date'),
+      'help' => $this->t('Sort using publication date, media created date or node created date.'),
+      'sort' => [
+        'id' => 'effective_publication_date',
+      ],
+    ];
+
+    return $data;
+  }
+
 }

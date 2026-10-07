@@ -10,7 +10,7 @@ purposes:
   - external_content
 cookies:
   -
-    regex: '.*'
+    regex: AL_BALANCE-S
     path: /
     domain: multimedia.gsb.bund.de
 required: false

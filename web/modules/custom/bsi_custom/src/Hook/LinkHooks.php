@@ -7,7 +7,7 @@ namespace Drupal\bsi_custom\Hook;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\Core\StringTranslation\ByteSizeMarkup;
-use Drupal\media\Entity\Media;
+use Drupal\file\FileInterface;
 
 /**
  * Hooks related to link theming.
@@ -112,20 +112,11 @@ class LinkHooks implements TrustedCallbackInterface {
     }
 
     if ($variables['link_type'] === 'download') {
-      if (!empty($variables['url'])) {
-        $url = $variables['url'];
-        $route_parameters = $url->getRouteParameters();
-        if (!empty($route_parameters['media'])) {
-          /** @var \Drupal\media\MediaInterface|null $media */
-          $media = Media::load($route_parameters['media']);
-          if ($media) {
-            $source_field = $media->getSource()->getConfiguration()['source_field'];
-            $file = $media->get($source_field)->entity;
-            if ($file) {
-              $variables['file_size'] = (string) ByteSizeMarkup::create($file->getSize());
-              $variables['file_extension'] = strtoupper(pathinfo($file->getFilename(), PATHINFO_EXTENSION));
-            }
-          }
+      if ($media = $variables['element']['#url']->getOption('entity')) {
+        $source_field = $media->getSource()->getConfiguration()['source_field'];
+        if (($file = $media->get($source_field)->entity) instanceof FileInterface) {
+          $variables['file_size'] = (string) ByteSizeMarkup::create($file->getSize());
+          $variables['file_extension'] = strtoupper(pathinfo($file->getFilename(), PATHINFO_EXTENSION));
         }
       }
     }

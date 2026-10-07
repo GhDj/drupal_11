@@ -1,0 +1,26 @@
+uuid: 28e19ab9-b76f-4d7a-9f68-87664ed91a98
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_body
+    - filter.format.advanced
+    - paragraphs.paragraphs_type.tile_item
+  module:
+    - text
+id: paragraph.tile_item.field_body
+field_name: field_body
+entity_type: paragraph
+bundle: tile_item
+label: Body
+description: "Optional, max. 300 characters.\r\nWhen Summary is filled: output a \"more\" link to open the lightbox"
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats:
+    - advanced
+field_type: text_with_summary

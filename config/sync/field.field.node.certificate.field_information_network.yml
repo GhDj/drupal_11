@@ -1,24 +1,19 @@
-uuid: 7fa13c04-0568-4418-be8c-768b3c008dd3
+uuid: 0e31fdcd-1caf-45fa-9350-3b5b5d4b6ef6
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_information_network
-    - filter.format.advanced
     - node.type.certificate
-  module:
-    - text
 id: node.certificate.field_information_network
 field_name: field_information_network
 entity_type: node
 bundle: certificate
-label: 'Information Network'
-description: 'Description of the tasks of the information network for which an applicant has received a specific certificate (e.g. B. ISO 27001 certificate).'
+label: 'Information network'
+description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  allowed_formats:
-    - advanced
-field_type: text_long
+settings: {  }
+field_type: string

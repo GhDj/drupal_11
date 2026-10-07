@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.media.media_library
+    - field.field.media.chart.field_explanation
     - field.field.media.chart.field_media_chart
     - field.field.media.chart.field_source
     - field.field.media.chart.field_unit
@@ -29,6 +30,7 @@ content:
 hidden:
   changed: true
   created: true
+  field_explanation: true
   field_media_chart: true
   field_source: true
   field_unit: true

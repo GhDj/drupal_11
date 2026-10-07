@@ -1,0 +1,42 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a fieldgroup html element.
+ *
+ * Available variables:
+ * - title: Title of the group.
+ * - title_element: Element to wrap the title.
+ * - children: The children of the group.
+ * - wrapper_element: The html element to use
+ * - attributes: A list of HTML attributes for the group wrapper.
+ *
+ * @see template_preprocess_field_group_html_element()
+ *
+ * @ingroup themeable
+ */
+#}
+
+<{{ wrapper_element }} {{ attributes }}>
+{% if title %}
+  <{{ title_element }}{{ title_attributes }}>{{ title }}</{{ title_element }}>
+{% endif %}
+  {% set needs_close = false %}
+  {% for field_name, field in element|filter((v, k) => k|first != '#' and v.0 is defined) %}
+    {# Rely on formatter configuration to decide if a new row should start. #}
+    {% if field['#label_display'] == 'hidden' %}
+      {{ field }}
+    {% else %}
+      {% if needs_close %}</td></tr>{% endif %}
+      {% set needs_close = true %}
+      <tr>
+        <th scope="col">
+          {# DE/EN labels are present in #title_{langcode} #}
+          <span lang="de">{{- field['#title_de'] -}}</span><br>
+          <em lang="en">{{- field['#title_en'] -}}</em>
+        </th>
+        <td>
+          {{ field|without('#markup', '#children')|merge({ '#label_display': 'hidden' }) }}
+    {% endif %}
+  {% endfor %}
+  {% if needs_close %}</td></tr>{% endif %}
+</{{ wrapper_element }}>

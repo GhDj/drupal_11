@@ -19,7 +19,11 @@
   {% set base_class = 'bsi-nolink' %}
 {% endif %}
 
-{% set link_title = title_attr ?: title %}
+{% if link_type == 'external' %}
+  {% set target = '_blank' %}
+{% endif %}
+
+{% set link_title = title_attr|default(attributes.title)|default(null) %}
 
 {% set attributes = attributes|default(create_attribute())
   .addClass(base_class, extra_classes)

@@ -1,0 +1,5 @@
+field_validation_rules:
+  18e0f580-026e-4f9a-b59f-f3b340f56ac2:
+    title: 'Es muss entweder Medium oder Highlight angegeben werden.'
+  8709226c-8d5d-4319-a225-9156dded7fb6:
+    title: 'Es muss entweder Medium oder Highlight angegeben werden.'

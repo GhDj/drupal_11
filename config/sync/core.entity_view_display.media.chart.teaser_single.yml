@@ -1,0 +1,44 @@
+uuid: 366d4185-6522-4e63-bf5f-8d2507d3b7b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.teaser_single
+    - field.field.media.chart.field_explanation
+    - field.field.media.chart.field_media_chart
+    - field.field.media.chart.field_source
+    - field.field.media.chart.field_unit
+    - media.type.chart
+  module:
+    - charts
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.chart.teaser_single
+targetEntityType: media
+bundle: chart
+mode: teaser_single
+content:
+  field_media_chart:
+    type: chart_config_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_explanation: true
+  field_source: true
+  field_unit: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

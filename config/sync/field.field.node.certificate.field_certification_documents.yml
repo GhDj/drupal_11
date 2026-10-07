@@ -13,7 +13,7 @@ field_name: field_certification_documents
 entity_type: node
 bundle: certificate
 label: 'Certification Reports / Security Specifications'
-description: 'Central certification documents that can be linked here'
+description: "Central certification documents can be linked here. Provide both German and English texts within the same text field.\r\nYou may use \"add another\" to report on re-certifications."
 required: false
 translatable: true
 default_value: {  }

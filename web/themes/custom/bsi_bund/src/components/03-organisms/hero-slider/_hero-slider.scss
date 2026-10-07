@@ -47,10 +47,8 @@
     @include breakpoint-lg {
       align-items: center;
       gap: var(--#{$nsp}-space-7xl);
-
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
+      grid-template-columns: minmax(0, 605px) minmax(320px, 400px);
       padding-bottom: var(--#{$nsp}-space-xl);
-
       padding-top: var(--#{$nsp}-space-2xl);
     }
   }
@@ -59,6 +57,7 @@
     background-color: var(--#{$nsp}-color-blue-900);
     color: var(--#{$nsp}-color-neutral-50);
     padding: var(--#{$nsp}-space-sm);
+    border-radius: var(--#{$nsp}-space-4xs);
 
     @include breakpoint-md {
       padding: var(--#{$nsp}-space-lg);
@@ -113,6 +112,7 @@
     @include breakpoint-lg {
       max-width: 400px;
       pointer-events: all;
+      width: 100%;
     }
   }
 

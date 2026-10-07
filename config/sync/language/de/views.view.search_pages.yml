@@ -48,6 +48,15 @@ display:
             label: Jahr
           facet:
             missing_label: andere
+      title: 'Suche: Nachrichten'
+      sorts:
+        search_api_relevance:
+          expose:
+            label: Relevanz
+        node_created:
+          expose:
+            label: Datum
+    display_title: Nachrichten
   block_search_bits:
     display_options:
       exposed_form:
@@ -70,6 +79,13 @@ display:
             label: Jahr
           facet:
             missing_label: andere
+      sorts:
+        search_api_relevance:
+          expose:
+            label: Relevanz
+        effective_date:
+          expose:
+            label: Datum
   block_search_publication:
     display_options:
       exposed_form:
@@ -90,16 +106,20 @@ display:
         facets_field_media_type:
           facet:
             missing_label: andere
-        facets_field_use_cart:
-          expose:
-            label: 'Art der Veröffentlichung'
-          facet:
-            missing_label: andere
         facets_field_year:
           expose:
             label: Jahr
           facet:
             missing_label: andere
+      title: 'Suche: Veröffentlichungen'
+      sorts:
+        search_api_relevance:
+          expose:
+            label: Relevanz
+        effective_date:
+          expose:
+            label: Datum
+    display_title: Veröffentlichungen
   block_search_security_label:
     display_options:
       exposed_form:
@@ -125,3 +145,8 @@ display:
         facets_field_import_status:
           facet:
             missing_label: andere
+      sorts:
+        node_created:
+          expose:
+            label: 'Verfasst am'
+label: 'Suche: Seiten'

@@ -9,10 +9,12 @@
 // -----------------------------------------------------------------------------
 // Core
 // -----------------------------------------------------------------------------
+
 .klaro-theme-bsi_bund.klaro.learn-more-as-button
   .cookie-notice:not(.cookie-modal-notice) {
   @include typography("body-compact");
   background-color: var(--#{$nsp}-color-neutral-100);
+  bottom: unset;
   box-sizing: border-box;
   font-family: var(--font-family-base);
   left: 0;
@@ -21,7 +23,6 @@
   top: 0;
   width: 100vw;
   z-index: 9999;
-
   * {
     box-sizing: border-box !important;
   }
@@ -126,6 +127,7 @@
       padding: var(--#{$nsp}-size-sm) var(--#{$nsp}-size-lg);
       text-decoration: none;
       transition: all 0.2s ease-in-out;
+      width: auto;
 
       &:hover {
         background: var(--#{$nsp}-btn-background-color-hover);

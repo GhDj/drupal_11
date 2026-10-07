@@ -1,0 +1,95 @@
+uuid: be81534d-ef74-4645-99bb-318f48021bc9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.explorer
+    - field.field.node.it_security_label.field_audiences
+    - field.field.node.it_security_label.field_category
+    - field.field.node.it_security_label.field_code
+    - field.field.node.it_security_label.field_explorer_image
+    - field.field.node.it_security_label.field_import_status
+    - field.field.node.it_security_label.field_import_timestamp
+    - field.field.node.it_security_label.field_import_uuid
+    - field.field.node.it_security_label.field_label_image
+    - field.field.node.it_security_label.field_label_markup
+    - field.field.node.it_security_label.field_metatags
+    - field.field.node.it_security_label.field_producer
+    - field.field.node.it_security_label.field_security_info
+    - field.field.node.it_security_label.field_tags
+    - field.field.node.it_security_label.field_timespan
+    - field.field.node.it_security_label.field_topics
+    - node.type.it_security_label
+  module:
+    - bsi_custom
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.it_security_label.explorer
+targetEntityType: node
+bundle: it_security_label
+mode: explorer
+content:
+  created:
+    type: timestamp
+    label: hidden
+    settings:
+      date_format: date_short
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: long
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+        description: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_explorer_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser_triplet
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  changed: true
+  content_moderation_control: true
+  field_audiences: true
+  field_category: true
+  field_code: true
+  field_import_status: true
+  field_import_timestamp: true
+  field_import_uuid: true
+  field_label_image: true
+  field_label_markup: true
+  field_metatags: true
+  field_producer: true
+  field_security_info: true
+  field_tags: true
+  field_timespan: true
+  field_topics: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  uid: true

@@ -3,6 +3,8 @@
 // -----------------------------------------------------------------------------
 
 @use "@globals/foundation/variables" as *;
+@use "@globals/mixins/typography" as *;
+@use "@globals/mixins/breakpoints" as *;
 
 // -----------------------------------------------------------------------------
 // Core
@@ -11,7 +13,36 @@
   max-height: 672px;
 }
 
-.charts-figure-caption,
-.charts-accordion-trigger {
-  margin-bottom: var(--#{$nsp}-space-sm);
+.media--type-chart {
+  .field--label-inline {
+    .field__label {
+      font-size: 20px;
+
+      &:after {
+        content: none;
+      }
+    }
+  }
+
+  .field__label, .bsi-link__text {
+    @include typography("text-support");
+    color: var(--#{$nsp}-color-typo-secondary);
+    font-size: 14px;
+    font-weight: normal;
+    padding: var(--#{$nsp}-space-5xs) var(--#{$nsp}-space-4xs);
+  }
+
+  .charts-figure-caption,
+  .charts-accordion-trigger {
+    margin: var(--#{$nsp}-space-sm) 0;
+  }
+
+  .charts-figure-caption {
+    @include typography("body");
+    color: var(--#{$nsp}-color-typo-secondary);
+
+    @include breakpoint-lg {
+      padding-inline: var(--#{$nsp}-space-6xl);
+    }
+  }
 }

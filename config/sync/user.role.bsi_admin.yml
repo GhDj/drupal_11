@@ -59,6 +59,7 @@ dependencies:
     - paragraphs_type_permissions
     - path
     - pathauto
+    - rabbit_hole
     - redirect
     - registration
     - role_delegation
@@ -224,6 +225,8 @@ permissions:
   - 'manage editoria11y results'
   - 'mark as ok in editoria11y'
   - 'paste tablefield'
+  - 'rabbit hole bypass media'
+  - 'rabbit hole bypass taxonomy_term'
   - 'reorder book pages'
   - 'revert all revisions'
   - 'revert all taxonomy revisions'

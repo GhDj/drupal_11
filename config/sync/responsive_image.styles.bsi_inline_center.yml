@@ -13,6 +13,11 @@ label: 'BSI Inline (center)'
 image_style_mappings:
   -
     image_mapping_type: image_style
+    image_mapping: bsi_inline_center_narrow
+    breakpoint_id: bsi_custom.wide
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
     image_mapping: bsi_inline_center_wide_2x
     breakpoint_id: bsi_custom.wide
     multiplier: 2x

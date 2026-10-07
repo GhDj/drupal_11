@@ -327,18 +327,18 @@ display:
             label: Relevance
             field_identifier: search_api_relevance
           exposed: false
-        media_created:
-          id: media_created
+        node_created:
+          id: node_created
           table: search_api_index_default
-          field: media_created
+          field: node_created
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: search_api
           order: DESC
           expose:
-            label: Created
-            field_identifier: created
+            label: Date
+            field_identifier: date
           exposed: true
       arguments:
         field_article_type:
@@ -850,18 +850,18 @@ display:
             label: Relevance
             field_identifier: search_api_relevance
           exposed: false
-        media_created:
-          id: media_created
+        effective_date:
+          id: effective_date
           table: search_api_index_default
-          field: media_created
+          field: effective_date
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: search_api
           order: DESC
           expose:
-            label: Created
-            field_identifier: created
+            label: Date
+            field_identifier: date
           exposed: true
       filters:
         search_api_fulltext_1:
@@ -1276,18 +1276,18 @@ display:
             label: Relevance
             field_identifier: search_api_relevance
           exposed: false
-        media_created:
-          id: media_created
+        effective_date:
+          id: effective_date
           table: search_api_index_default
-          field: media_created
+          field: effective_date
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: search_api
           order: DESC
           expose:
-            label: Created
-            field_identifier: created
+            label: Date
+            field_identifier: date
           exposed: true
       arguments:
         field_media_type:
@@ -1460,7 +1460,7 @@ display:
           plugin_id: search_api_options
           operator: or
           value:
-            bits: bits
+            publication: publication
           group: 1
           exposed: false
           expose:
@@ -1615,6 +1615,12 @@ display:
             show_only_one_result: false
             depends_on_exposed_filter: ''
             processor_configs:
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
               display_value_widget_order:
                 processor_id: display_value_widget_order
                 weights:
@@ -1633,10 +1639,10 @@ display:
                   sort: -8
                 settings:
                   sort: DESC
-        facets_field_use_cart:
-          id: facets_field_use_cart
+        facets_field_media_type_1:
+          id: facets_field_media_type_1
           table: search_api_index_default
-          field: facets_field_use_cart
+          field: facets_field_media_type
           relationship: none
           group_type: group
           admin_label: ''
@@ -1683,6 +1689,12 @@ display:
             show_only_one_result: false
             depends_on_exposed_filter: ''
             processor_configs:
+              translate_entity:
+                processor_id: translate_entity
+                weights:
+                  build: 5
+                settings:
+                  skip_access_check: false
               display_value_widget_order:
                 processor_id: display_value_widget_order
                 weights:
@@ -1840,7 +1852,7 @@ display:
             sort:
               plugin_id: default
               advanced:
-                combine: false
+                combine: true
                 combine_rewrite: ''
                 combine_param: sort_bef_combine
                 reset: false
@@ -1862,12 +1874,9 @@ display:
                   is_secondary: false
                   hide_label: false
                   field_classes: ''
-              field_category:
+              facets_field_category:
                 plugin_id: default
                 advanced:
-                  sort_options: false
-                  sort_options_method: alphabetical_asc
-                  sort_options_natural: true
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
@@ -1877,22 +1886,21 @@ display:
                   is_secondary: false
                   hide_label: false
                   field_classes: ''
-              field_producer:
+              facets_field_producer:
                 plugin_id: default
                 advanced:
-                  placeholder_text: ''
+                  rewrite:
+                    filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
                   collapsible: false
                   collapsible_disable_automatic_open: false
                   open_by_default: false
                   is_secondary: false
                   hide_label: false
                   field_classes: ''
-              field_import_status:
+              facets_field_import_status:
                 plugin_id: default
                 advanced:
-                  sort_options: false
-                  sort_options_method: alphabetical_asc
-                  sort_options_natural: true
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
@@ -2047,6 +2055,47 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        node_bundle:
+          id: node_bundle
+          table: search_api_index_default
+          field: node_bundle
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value:
+            it_security_label: it_security_label
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
         node_status:
           id: node_status
           table: search_api_index_default

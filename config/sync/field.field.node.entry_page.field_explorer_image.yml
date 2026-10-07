@@ -1,0 +1,29 @@
+uuid: aec960ce-1c4e-431b-b8af-af4396f6573f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_explorer_image
+    - media.type.image
+    - node.type.entry_page
+id: node.entry_page.field_explorer_image
+field_name: field_explorer_image
+entity_type: node
+bundle: entry_page
+label: 'Explorer Image'
+description: 'Image displayed in the Explorer paragraph.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

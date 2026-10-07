@@ -1,0 +1,41 @@
+uuid: 66903956-fbea-468c-aac3-99463533421c
+langcode: en
+status: true
+dependencies: {  }
+name: paragraph_tile_item
+label: 'paragraph tile_item validation'
+entity_type: paragraph
+bundle: tile_item
+field_validation_rules:
+  18e0f580-026e-4f9a-b59f-f3b340f56ac2:
+    id: not_null_constraint_rule
+    title: 'Media not null'
+    data:
+      validate_mode: default
+      message: 'Media field should not be null.'
+    weight: -9
+    uuid: 18e0f580-026e-4f9a-b59f-f3b340f56ac2
+    field_name: field_media
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_highlight
+      operator: empty
+      value: ''
+  8709226c-8d5d-4319-a225-9156dded7fb6:
+    id: not_null_constraint_rule
+    title: 'Highlight not null'
+    data:
+      validate_mode: default
+      message: 'Highlight field should not be null.'
+    weight: -10
+    uuid: 8709226c-8d5d-4319-a225-9156dded7fb6
+    field_name: field_highlight
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_media
+      operator: empty
+      value: ''

@@ -1,0 +1,24 @@
+uuid: dab01207-bbde-4807-b2a4-c27ac5718131
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_evaluation_basis
+    - filter.format.plain_text
+    - node.type.certificate
+  module:
+    - text
+id: node.certificate.field_evaluation_basis
+field_name: field_evaluation_basis
+entity_type: node
+bundle: certificate
+label: 'Evaluation basis'
+description: 'List document names that are used as basis for the evaluation'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - plain_text
+field_type: text_long

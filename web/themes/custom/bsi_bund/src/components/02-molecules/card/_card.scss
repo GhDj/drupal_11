@@ -179,28 +179,3 @@
     }
   }
 }
-
-// Search
-// ----------------------------------------------
-.#{$nsp}-card--search {
-  padding: var(--#{$nsp}-space-md) var(--#{$nsp}-space-sm);
-
-  .#{$nsp}-card {
-    &__topline {
-      font-size: 22px;
-    }
-
-    &__text {
-      gap: 16px;
-    }
-
-    &__body {
-      --bsi-card-body-color: var(--bsi-color-black);
-    }
-
-    &__link {
-      --#{$nsp}-link-color: var(--bsi-color-black);
-      --#{$nsp}-link-decoration-line: underline;
-    }
-  }
-}

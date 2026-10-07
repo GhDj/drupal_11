@@ -8,7 +8,7 @@ dependencies:
     - user
 id: csn-group_membership
 group_type: csn
-content_plugin: group_membership
+relation_type: group_membership
 plugin_config:
   group_cardinality: 0
   entity_cardinality: 1

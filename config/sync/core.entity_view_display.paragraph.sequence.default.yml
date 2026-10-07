@@ -19,6 +19,16 @@ targetEntityType: paragraph
 bundle: sequence
 mode: default
 content:
+  field_display_animate:
+    type: boolean
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
   field_items:
     type: entity_reference_revisions_entity_view
     label: hidden
@@ -40,13 +50,13 @@ content:
     label: hidden
     settings:
       link_to_entity: false
+      link_rel: canonical
       text_format: plain_text
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
   created: true
-  field_display_animate: true
   field_display_variant: true
   field_jumplink: true
   search_api_excerpt: true

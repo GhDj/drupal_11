@@ -11,7 +11,7 @@ effects:
     weight: 1
     data:
       width: 575
-      height: 360
+      height: 300
       anchor: center-center
   e1810eca-753c-4af0-931b-aacdc663c0be:
     uuid: e1810eca-753c-4af0-931b-aacdc663c0be

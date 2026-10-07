@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.page.field_audiences
     - field.field.node.page.field_downloads
     - field.field.node.page.field_downloads_title
+    - field.field.node.page.field_explorer_image
     - field.field.node.page.field_icon
     - field.field.node.page.field_links
     - field.field.node.page.field_links_title
@@ -74,6 +75,7 @@ third_party_settings:
         - group_linkbox
         - group_tiles
         - group_terms
+        - group_teaser_explorer
       label: Tabs
       region: content
       parent_name: ''
@@ -176,6 +178,22 @@ third_party_settings:
         formatter: closed
         description: 'Teaser tiles are displayed below the content to assist the user in navigating the site.'
         required_fields: true
+    group_teaser_explorer:
+      children:
+        - field_explorer_image
+      label: 'Teaser - Explorer'
+      region: content
+      parent_name: group_tabs
+      weight: 18
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
 id: node.page.default
 targetEntityType: node
 bundle: page
@@ -227,6 +245,13 @@ content:
       other_option: Other…
       other_field_label: 'Custom heading'
       add_other_value_to_allowed_values: false
+    third_party_settings: {  }
+  field_explorer_image:
+    type: media_library_widget
+    weight: 8
+    region: content
+    settings:
+      media_types: {  }
     third_party_settings: {  }
   field_icon:
     type: icon_widget

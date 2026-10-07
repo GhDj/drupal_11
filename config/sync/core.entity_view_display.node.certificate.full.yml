@@ -4,39 +4,39 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.full
+    - field.field.node.certificate.body
     - field.field.node.certificate.field_applicant
     - field.field.node.certificate.field_applicant_address
     - field.field.node.certificate.field_applicant_information
     - field.field.node.certificate.field_archivation_date
-    - field.field.node.certificate.field_assurance
     - field.field.node.certificate.field_audiences
     - field.field.node.certificate.field_certificate_type
     - field.field.node.certificate.field_certification_date
     - field.field.node.certificate.field_certification_documents
-    - field.field.node.certificate.field_certification_validation
-    - field.field.node.certificate.field_description
-    - field.field.node.certificate.field_evaluation_basics
+    - field.field.node.certificate.field_deadline
+    - field.field.node.certificate.field_evaluation_basis
+    - field.field.node.certificate.field_evaluation_depth
     - field.field.node.certificate.field_evaluation_facility
-    - field.field.node.certificate.field_evaluation_scope
-    - field.field.node.certificate.field_further_details_2
-    - field.field.node.certificate.field_further_details_3
-    - field.field.node.certificate.field_further_details_4
+    - field.field.node.certificate.field_evaluation_scopes
+    - field.field.node.certificate.field_evaluation_target
+    - field.field.node.certificate.field_explorer_image
+    - field.field.node.certificate.field_further_details
     - field.field.node.certificate.field_information_network
     - field.field.node.certificate.field_metatags
-    - field.field.node.certificate.field_name
+    - field.field.node.certificate.field_product
     - field.field.node.certificate.field_protection_profile
     - field.field.node.certificate.field_protection_profile_issuer
-    - field.field.node.certificate.field_publication_date
     - field.field.node.certificate.field_tags
-    - field.field.node.certificate.field_technical_guideline
-    - field.field.node.certificate.field_test_item
+    - field.field.node.certificate.field_technical_guildeline
     - field.field.node.certificate.field_topics
     - node.type.certificate
   module:
+    - address
+    - bsi_custom
     - datetime
     - field_group
-    - geocoder_field
     - layout_builder
+    - text
 third_party_settings:
   layout_builder:
     enabled: false
@@ -47,22 +47,21 @@ third_party_settings:
         - field_applicant
         - field_applicant_address
         - field_evaluation_facility
-        - field_technical_guideline
-        - field_evaluation_scope
-        - field_evaluation_basics
+        - field_evaluation_depth
+        - field_protection_profile
         - field_certification_date
-        - field_certification_validation
+        - field_deadline
       label: Table
       parent_name: ''
       region: content
-      weight: 0
+      weight: 1
       format_type: html_element
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
         label_as_html: false
-        element: div
+        element: table
         show_label: false
         label_element: h3
         label_element_classes: ''
@@ -74,22 +73,30 @@ targetEntityType: node
 bundle: certificate
 mode: full
 content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
   field_applicant:
-    type: string
-    label: hidden
+    type: plain_text_formatted
+    label: visually_hidden
     settings:
       link_to_entity: false
       link_rel: canonical
+      text_format: plain_text
     third_party_settings: {  }
     weight: 1
     region: content
   field_applicant_address:
-    type: basic_string
+    type: address_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
@@ -97,43 +104,57 @@ content:
     region: content
   field_certification_date:
     type: datetime_default
-    label: hidden
+    label: visually_hidden
     settings:
       timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 8
-    region: content
-  field_certification_validation:
-    type: datetime_default
-    label: hidden
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 9
-    region: content
-  field_evaluation_basics:
-    type: geocoder_geocode_formatter
-    label: hidden
-    settings:
-      dumper: wkt
-      providers: {  }
+      format_type: date_short
     third_party_settings: {  }
     weight: 6
     region: content
-  field_evaluation_facility:
-    type: string
+  field_certification_documents:
+    type: text_default
     label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_deadline:
+    type: datetime_default
+    label: visually_hidden
+    settings:
+      timezone_override: ''
+      format_type: date_short
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_evaluation_depth:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_evaluation_facility:
+    type: plain_text_formatted
+    label: visually_hidden
     settings:
       link_to_entity: false
       link_rel: canonical
+      text_format: plain_text
     third_party_settings: {  }
     weight: 3
     region: content
-  field_evaluation_scope:
-    type: basic_string
+  field_further_details:
+    type: text_default
     label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_protection_profile:
+    type: text_default
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     weight: 5
@@ -143,23 +164,18 @@ hidden:
   created: true
   field_applicant_information: true
   field_archivation_date: true
-  field_assurance: true
   field_audiences: true
   field_certificate_type: true
-  field_certification_documents: true
-  field_description: true
-  field_further_details_2: true
-  field_further_details_3: true
-  field_further_details_4: true
+  field_evaluation_basis: true
+  field_evaluation_scopes: true
+  field_evaluation_target: true
+  field_explorer_image: true
   field_information_network: true
   field_metatags: true
-  field_name: true
-  field_protection_profile: true
+  field_product: true
   field_protection_profile_issuer: true
-  field_publication_date: true
   field_tags: true
-  field_technical_guideline: true
-  field_test_item: true
+  field_technical_guildeline: true
   field_topics: true
   langcode: true
   links: true

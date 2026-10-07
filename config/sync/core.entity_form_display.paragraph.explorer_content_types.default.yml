@@ -1,0 +1,53 @@
+uuid: bd176f43-c84b-4d0f-b6db-d62ab87a2759
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.explorer_content_types.field_content
+    - field.field.paragraph.explorer_content_types.field_link
+    - field.field.paragraph.explorer_content_types.field_section_title
+    - field.field.paragraph.explorer_content_types.field_show_explorer_images
+    - paragraphs.paragraphs_type.explorer_content_types
+  module:
+    - link
+id: paragraph.explorer_content_types.default
+targetEntityType: paragraph
+bundle: explorer_content_types
+mode: default
+content:
+  field_content:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_link:
+    type: link_default
+    weight: 2
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_section_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_show_explorer_images:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

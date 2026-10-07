@@ -1,18 +1,33 @@
---- src/Plugin/Validation/Constraint/FieldValidationConstraintValidator.php
-+++ src/Plugin/Validation/Constraint/FieldValidationConstraintValidator.php
-@@ -94,6 +94,7 @@
-
-     // Property level validation
+--- a/src/Plugin/Validation/Constraint/FieldValidationConstraintValidator.php
++++ b/src/Plugin/Validation/Constraint/FieldValidationConstraintValidator.php
+@@ -96,6 +96,7 @@
+ 
+     // Property level validation.
      if ($items->count() !== 0) {
 +      $property_path = $this->context->getPropertyPath();
        foreach ($items as $delta => $item) {
          // You can hard code configuration or you load from settings.
          foreach ($rules_property as $rule) {
-@@ -112,6 +113,7 @@
-               $real_constraint = $constraint_manager->createInstance($constraint_name, $constraint_options);
-               $constraint_validator_factory =  new ConstraintValidatorFactory($class_resolver);
-               $validator = $constraint_validator_factory->getInstance($real_constraint);
-+              $this->context->setNode($this->context->getValue(), $this->context->getObject(), $this->context->getMetadata(), $property_path . '.' . $delta . '.' . $column);
-               $validator->initialize($this->context);
-               $validator->validate($value, $real_constraint);
+@@ -111,7 +112,7 @@
+             $constraint_name = $rule->getConstraintName();
+             $constraint_options = $rule->getReplacedConstraintOptions($params);
+             if ($rule->isPropertyConstraint()) {
+-              $this->validatePropertyValue($constraint_name, $constraint_options, $value);
++              $this->validatePropertyValue($constraint_name, $constraint_options, $value, $property_path . '.' . $delta . '.' . $column);
              }
+           }
+           else {
+@@ -191,9 +192,12 @@
+    * @param mixed $value
+    *   The property value to validate; NULL for a missing value.
+    */
+-  protected function validatePropertyValue(string $constraint_name, array $constraint_options, $value): void {
++  protected function validatePropertyValue(string $constraint_name, array $constraint_options, $value, ?string $property_path = NULL): void {
+     $constraint = \Drupal::service('validation.constraint')->createInstance($constraint_name, $constraint_options);
+     $validator = (new ConstraintValidatorFactory(\Drupal::service('class_resolver')))->getInstance($constraint);
++    if ($property_path !== NULL) {
++      $this->context->setNode($this->context->getValue(), $this->context->getObject(), $this->context->getMetadata(), $property_path);
++    }
+     $validator->initialize($this->context);
+     $this->safeValidate($validator, $value, $constraint);
+   }

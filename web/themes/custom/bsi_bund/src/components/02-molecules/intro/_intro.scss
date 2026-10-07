@@ -12,25 +12,31 @@
 // -----------------------------------------------------------------------------
 .#{$nsp}-intro {
   &__content {
-    @include grid(true);
+    display: grid;
     border-bottom: 1px solid var(--#{$nsp}-color-neutral-150);
     border-top: 1px solid var(--#{$nsp}-color-neutral-150);
     padding-block: var(--#{$nsp}-space-module);
+    row-gap: var(--bsi-space-lg);
+
+    @include breakpoint-md {
+      grid-template-columns: 5fr 1fr 6fr;
+    }
   }
 
   &__lead {
     @include typography("heading-4");
-    @include breakpoint-lg {
-      grid-column: 1 / span 4;
+
+    @include breakpoint-md {
+      grid-column: 1;
     }
   }
 
   &__body {
     font-size: 18px;
 
-    @include breakpoint-lg {
+    @include breakpoint-md {
       font-size: 20px;
-      grid-column: 6 / span 7;
+      grid-column: 3;
     }
   }
 }

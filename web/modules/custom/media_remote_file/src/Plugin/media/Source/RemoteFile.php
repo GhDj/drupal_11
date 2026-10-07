@@ -26,7 +26,8 @@ use Symfony\Component\Mime\MimeTypeGuesserInterface;
   description: new TranslatableMarkup('Use remote files for video and audio.'),
   allowed_field_types: ['link'],
   default_thumbnail_filename: 'generic.png',
-  thumbnail_alt_metadata_attribute: 'default_name',
+  thumbnail_uri_metadata_attribute: 'thumbnail_uri',
+  thumbnail_alt_metadata_attribute: 'thumbnail_alt',
 )]
 class RemoteFile extends MediaSourceBase {
 
@@ -94,8 +95,14 @@ class RemoteFile extends MediaSourceBase {
         return $media->getName();
 
       case 'thumbnail_uri':
-        $iconName = $this->getMultimediaType($source_field);
-        return $this->configFactory->get('media.settings')->get('icon_base_uri') . '/' . $iconName;
+        // Reuse existing image. Clear on the form to re-apply default.
+        $default_uri = $this->configFactory->get('media.settings')->get('icon_base_uri')
+          . '/' . $this->getMultimediaType($source_field);
+        return $media->get('thumbnail')->entity?->getFileUri() ?: $default_uri;
+
+      case 'thumbnail_alt':
+        // Reuse alt text of existing image.
+        return $media->get('thumbnail')->alt;
 
       case self::METADATA_ATTRIBUTE_LINK_TARGET:
         return parent::getMetadata($media, $attribute_name)

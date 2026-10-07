@@ -62,7 +62,10 @@ class PhoneLink extends PhoneLabelFormatter {
     foreach ($items as $delta => $item) {
       $element[$delta]['#title'] = $item->value;
       if ($item->title) {
-        $element[$delta]['#options']['attributes']['title'] = $item->title;
+        $element[$delta]['#options']['attributes']['title'] = $this->t('@title: @value', [
+          '@title' => $item->title,
+          '@value' => $item->value,
+        ]);
       }
     }
 

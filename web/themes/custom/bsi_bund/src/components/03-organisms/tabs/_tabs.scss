@@ -20,7 +20,6 @@ body {
     &:has([data-horizontal-tabs-panes].horizontal-tabs-panes) {
       visibility: visible;
     }
-
     .horizontal-tabs-list {
       background-color: transparent;
       border-bottom: 1px solid var(--#{$nsp}-color-alpha-dark-90);
@@ -35,6 +34,7 @@ body {
 
         a {
           display: block;
+          text-align: center;
           white-space: nowrap;
         }
       }
@@ -45,10 +45,12 @@ body {
       border-bottom: 2px solid transparent;
       border-radius: 4px 4px 0 0;
       border-right: 0;
+      margin-bottom: -3px;
 
       a {
         @include typography("label-strong");
         color: var(--#{$nsp}-color-typo-secondary);
+        padding: var(--#{$nsp}-space-sm) !important;
 
         strong {
           font-weight: 400;
@@ -65,21 +67,18 @@ body {
       &:focus,
       &:active {
         background-color: var(--#{$nsp}-color-blue-100);
-        border-bottom: 3px solid var(--#{$nsp}-color-border);
+        box-shadow: inset 0 -3px 0 var(--#{$nsp}-color-border);
       }
 
       &.selected {
         background-color: var(--#{$nsp}-color-blue-100);
-        border-bottom: 3px solid var(--#{$nsp}-color-blue-750);
-        margin-bottom: 0;
-
+        box-shadow: inset 0 -3px 0 var(--#{$nsp}-color-blue-750);
         a {
           color: var(--#{$nsp}-color-blue-750);
 
           &:hover,
           &:focus,
           &:active {
-            background-color: var(--#{$nsp}-color-blue-100);
             color: var(--#{$nsp}-color-blue-750);
           }
         }

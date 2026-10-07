@@ -13,6 +13,7 @@
   }
 
   &__content {
+    align-content: start;
     display: grid;
     gap: var(--#{$nsp}-space-2xl);
   }
@@ -42,7 +43,7 @@
     color: var(--#{$nsp}-color-blue-750);
     display: block;
     flex-shrink: 0;
-    font-size: 32px;
+    font-size: 64px;
     line-height: 1;
 
     @include breakpoint-lg {
@@ -50,39 +51,39 @@
     }
   }
 
-  ol {
+  ol:has(.#{$nsp}-process__step) {
     counter-reset: section;
     list-style: none;
-  }
 
-  li {
-    border-top: solid 1px var(--#{$nsp}-color-neutral-150);
-    counter-increment: section;
+    > .#{$nsp}-process__step {
+      border-top: solid 1px var(--#{$nsp}-color-neutral-150);
+      counter-increment: section;
 
-    display: flex;
-    flex-direction: column;
-    gap: var(--#{$nsp}-space-lg);
-    margin-block-end: var(--#{$nsp}-space-2xl);
-    padding-top: var(--#{$nsp}-space-sm);
-    position: relative;
-
-    @include breakpoint-lg {
-      flex-direction: row;
-      padding-left: var(--#{$nsp}-space-6xl);
-    }
-
-    // style of counter numbers if no label is provided
-    &:not(:has(> .#{$nsp}-process__label))::before {
-      color: var(--#{$nsp}-color-blue-750);
-      content: counter(section);
-      display: block;
-      font-size: 64px;
-      line-height: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--#{$nsp}-space-lg);
+      margin-block-end: var(--#{$nsp}-space-2xl);
+      padding-top: var(--#{$nsp}-space-sm);
+      position: relative;
 
       @include breakpoint-lg {
-        left: 0;
-        position: absolute;
-        top: 10px;
+        flex-direction: row;
+        padding-left: var(--#{$nsp}-space-6xl);
+      }
+
+      // style of counter numbers if no label is provided
+      &:not(:has(> .#{$nsp}-process__label))::before {
+        color: var(--#{$nsp}-color-blue-750);
+        content: counter(section);
+        display: block;
+        font-size: 64px;
+        line-height: 1;
+
+        @include breakpoint-lg {
+          left: 0;
+          position: absolute;
+          top: 10px;
+        }
       }
     }
   }

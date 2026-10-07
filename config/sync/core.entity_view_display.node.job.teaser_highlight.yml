@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.job.field_downloads_title
     - field.field.node.job.field_duration
     - field.field.node.job.field_employment_model
+    - field.field.node.job.field_explorer_image
     - field.field.node.job.field_links
     - field.field.node.job.field_links_title
     - field.field.node.job.field_location
@@ -63,6 +64,7 @@ hidden:
   field_downloads_title: true
   field_duration: true
   field_employment_model: true
+  field_explorer_image: true
   field_links: true
   field_links_title: true
   field_location: true

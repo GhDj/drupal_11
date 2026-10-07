@@ -8,9 +8,8 @@ dependencies:
     - search_api_exclude
 third_party_settings:
   menu_ui:
-    available_menus:
-      - main
-    parent: 'main:'
+    available_menus: {  }
+    parent: ''
   node_keep:
     node_keeper: false
     alias_keeper: false

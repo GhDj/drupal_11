@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.it_security_label.field_audiences
     - field.field.node.it_security_label.field_category
     - field.field.node.it_security_label.field_code
+    - field.field.node.it_security_label.field_explorer_image
     - field.field.node.it_security_label.field_import_status
     - field.field.node.it_security_label.field_import_timestamp
     - field.field.node.it_security_label.field_import_uuid
@@ -25,6 +26,7 @@ dependencies:
     - datetime_range
     - field_group
     - file
+    - media_library
     - metatag
     - text
 third_party_settings:
@@ -36,6 +38,7 @@ third_party_settings:
         - group_info
         - group_import
         - group_terms
+        - group_teaser_explorer
       label: Tabs
       region: content
       parent_name: ''
@@ -189,6 +192,22 @@ third_party_settings:
         description: ''
         required_fields: true
         weight: 0
+    group_teaser_explorer:
+      children:
+        - field_explorer_image
+      label: 'Teaser - Explorer'
+      region: content
+      parent_name: group_tabs
+      weight: 8
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
 id: node.it_security_label.default
 targetEntityType: node
 bundle: it_security_label
@@ -213,6 +232,13 @@ content:
     settings:
       size: 12
       placeholder: ''
+    third_party_settings: {  }
+  field_explorer_image:
+    type: media_library_widget
+    weight: 5
+    region: content
+    settings:
+      media_types: {  }
     third_party_settings: {  }
   field_import_status:
     type: options_select

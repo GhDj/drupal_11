@@ -1,0 +1,24 @@
+uuid: 6bd09e03-bc7d-420d-8694-b98f76c37959
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_further_details
+    - filter.format.basic
+    - node.type.certificate
+  module:
+    - text
+id: node.certificate.field_further_details
+field_name: field_further_details
+entity_type: node
+bundle: certificate
+label: 'Further details'
+description: "Provide both German and English texts within the same text field.\r\nYou may use \"add another\" to add another section."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic
+field_type: text_long

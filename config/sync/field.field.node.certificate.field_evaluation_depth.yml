@@ -1,0 +1,29 @@
+uuid: 9354983f-31bd-4fa3-bd4f-8d8584fb2fc2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_evaluation_depth
+    - node.type.certificate
+    - taxonomy.vocabulary.assurance
+id: node.certificate.field_evaluation_depth
+field_name: field_evaluation_depth
+entity_type: node
+bundle: certificate
+label: 'Evaluation depth'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      assurance: assurance
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

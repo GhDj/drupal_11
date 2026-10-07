@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Theme override for a link to a file in linkbox
+ */
+#}
+{% set title = element['#title'] %}
+
+{% if file_size %}
+  {% set title = file_extension ~ ', ' ~ file_size ~ ' ' ~ 'download'|t %}
+{% endif %}
+
+{% include '@bsi_bund/elements/link.html.twig' with {
+  'url': element['#url'],
+  'title': title,
+  'link_type': 'download',
+  'icon': 'download',
+  'icon_position': 'before',
+  'extra_classes': ['bsi-linkbox__downloadlink', 'bsi-linklist__link'],
+  'add_on': 'Download ' ~ element['#title']
+} only %}

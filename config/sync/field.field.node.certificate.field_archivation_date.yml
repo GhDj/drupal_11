@@ -12,7 +12,7 @@ field_name: field_archivation_date
 entity_type: node
 bundle: certificate
 label: 'Archiving date'
-description: 'Date from which the certificate is considered archived'
+description: 'Date from which the certificate is considered archived.'
 required: false
 translatable: true
 default_value: {  }

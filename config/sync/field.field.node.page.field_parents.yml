@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_parents
+    - node.type.entry_page
     - node.type.page
 id: node.page.field_parents
 field_name: field_parents
@@ -19,10 +20,11 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
+      entry_page: entry_page
       page: page
     sort:
       field: title
       direction: ASC
     auto_create: false
-    auto_create_bundle: ''
+    auto_create_bundle: entry_page
 field_type: entity_reference

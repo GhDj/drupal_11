@@ -5,6 +5,7 @@ import {
   imageTemplate,
   type ImageTemplateArgs
 } from "@atoms/image/image.template";
+import {iconTemplate} from "@atoms/icon/icon.template.ts";
 // Components
 
 interface TimelineItem {
@@ -25,10 +26,14 @@ interface TimelineYear {
 
 export interface TimelineTemplateArgs {
   years?: TimelineYear[];
+  isStatic?: boolean;
 }
 
 // Return the HTML string for the form
-export function timelineTemplate({ years }: TimelineTemplateArgs): string {
+export function timelineTemplate({
+  years,
+  isStatic = false
+}: TimelineTemplateArgs): string {
   let monthIndex = 0;
 
   const timelineContent = years
@@ -54,7 +59,11 @@ export function timelineTemplate({ years }: TimelineTemplateArgs): string {
                     .map(
                       item => html`
                         <div class="${nsp("timeline__item")}">
-                          <div class="${nsp("timeline__marker")}"></div>
+                          ${iconTemplate({
+                            iconName: "circle-big",
+                            iconTitle: item.title ?? "",
+                            iconExtraClasses: "timeline__marker"
+                          })}
 
                           <div class="${nsp("timeline__card")}">
                             <h3 class="${nsp("timeline__card-title")}">
@@ -77,7 +86,7 @@ export function timelineTemplate({ years }: TimelineTemplateArgs): string {
     .join("");
 
   return html`
-    <div class="${nsp("timeline")}">
+    <div class="${nsp("timeline")}" ${isStatic ? "data-static" : ""}>
       <div class="${nsp("timeline__content")}">
         <div class="${nsp("timeline__progress")}"></div>
         ${timelineContent}

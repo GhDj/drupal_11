@@ -18,3 +18,4 @@ complete_list:
   - devel.settings
 partial_list:
   - search_api.server.default
+  - tfa.settings

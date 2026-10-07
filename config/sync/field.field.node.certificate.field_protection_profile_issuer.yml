@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_protection_profile_issuer
-    - filter.format.advanced
+    - filter.format.basic
     - node.type.certificate
   module:
     - text
@@ -12,13 +12,13 @@ id: node.certificate.field_protection_profile_issuer
 field_name: field_protection_profile_issuer
 entity_type: node
 bundle: certificate
-label: Publisher
-description: 'Publisher of the protection profile'
+label: 'Protection profile issuer'
+description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
   allowed_formats:
-    - advanced
+    - basic
 field_type: text_long

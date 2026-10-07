@@ -14,9 +14,8 @@
 %}
 {% block paragraph %}
  <div{{ attributes.addClass(classes) }} >
-  <div class="bsi-grid bsi-facts-box" data-theme='{{ content.field_display_variant.0 }}'>
+  <div class="bsi-grid bsi-facts-box" data-theme='{{ content.field_display_variant.0['#preset_option'] }}'>
     {% block content %}
-
       {# icon #}
       {% if paragraph.field_display_icon.value %}
         <div class="bsi-facts-box__icon-wrap">
@@ -32,9 +31,7 @@
 
         {# heading #}
         <div class="bsi-heading__wrapper">
-          <div class="bsi-heading bsi-heading--5 bsi-facts-box__title">
-            {{ content.field_section_title }}
-          </div>
+            {{ content.field_section_title}}
         </div>
 
         {# intro #}

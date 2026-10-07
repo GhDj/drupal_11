@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.entry_page.field_audiences
     - field.field.node.entry_page.field_downloads
     - field.field.node.entry_page.field_downloads_title
+    - field.field.node.entry_page.field_explorer_image
     - field.field.node.entry_page.field_links
     - field.field.node.entry_page.field_links_title
     - field.field.node.entry_page.field_media
@@ -131,6 +132,7 @@ hidden:
   field_audiences: true
   field_downloads: true
   field_downloads_title: true
+  field_explorer_image: true
   field_links: true
   field_links_title: true
   field_media: true

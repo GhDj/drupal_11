@@ -22,5 +22,13 @@ export default {
 type Story = StoryObj<TimelineTemplateArgs>;
 
 export const Timeline: Story = {
-  args: timelineData as TimelineTemplateArgs
+  args: {
+    ...(timelineData as TimelineTemplateArgs),
+    isStatic: false
+  },
+  argTypes: {
+    isStatic: {
+      control: "boolean"
+    }
+  }
 };

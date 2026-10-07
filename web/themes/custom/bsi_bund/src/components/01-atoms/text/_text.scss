@@ -273,14 +273,19 @@
     }
 
     // interne links
-    &:not(:has(svg))::before {
-      background-color: currentColor;
-      content: "";
-      height: 16px;
-      margin-left: 4px;
-      margin-top: 2px;
-      mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.4141 12L9.70703 18.707L8.29297 17.293L13.5859 12L8.29297 6.70703L9.70703 5.29297L16.4141 12Z' fill='black'/%3E%3C/svg%3E");
-      width: 16px;
+    &:not(:has(svg)) {
+      &::before {
+        background-color: currentColor;
+        content: "";
+        height: 16px;
+        mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.4141 12L9.70703 18.707L8.29297 17.293L13.5859 12L8.29297 6.70703L9.70703 5.29297L16.4141 12Z' fill='black'/%3E%3C/svg%3E");
+        width: 16px;
+      }
+
+      &:not(.bsi-link--button)::before {
+        margin-left: 4px;
+        margin-top: 2px;
+      }
     }
 
     // download links
@@ -309,6 +314,8 @@
       --#{$nsp}-link-button-border-color-active: var(--#{$nsp}-color-blue-750);
       --#{$nsp}-link-button-background-active: var(--#{$nsp}-color-base-white);
       --#{$nsp}-link-button-text-color-active: var(--#{$nsp}-color-blue-750);
+      --#{$nsp}-link-decoration-line-hover: none;
+      --bsi-link-underline-color-hover: none;
       --#{$nsp}-link-button-border-color-disabled: var(
         --#{$nsp}-color-neutral-150
       );

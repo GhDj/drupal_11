@@ -1,0 +1,22 @@
+third_party_settings:
+  field_group:
+    group_url:
+      label: URL
+    group_workflow:
+      label: Arbeitsablauf
+    group_terms:
+      label: Begriffe
+    group_language:
+      label: Sprache
+    group_application:
+      label: Antrag
+    group_evaluation:
+      label: Auswertung
+    group_certification:
+      label: Zertifizierung
+content:
+  body:
+    third_party_settings:
+      maxlength:
+        maxlength_js_label: 'Eingabe begrenzt auf @limit Zeichen, verbleibend: <strong>@remaining</strong>'
+        maxlength_js_label_summary: 'Eingabe begrenzt auf @limit Zeichen, verbleibend: <strong>@remaining</strong>'

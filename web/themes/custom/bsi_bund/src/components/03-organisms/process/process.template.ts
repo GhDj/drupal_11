@@ -24,7 +24,7 @@ export function processTemplate({
           ${steps
             ?.map(step => {
               return `
-                <li>
+                <li class="${nsp("process__step")}">
                   ${step.label ? `<span class="${nsp("process__label")}">${step.label}</span>` : ""}
 
                   <div class="${nsp("process__content")}">

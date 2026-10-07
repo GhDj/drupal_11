@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Drupal\bsi_custom\Hook;
 
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Render\Element;
 use Drupal\Core\Theme\ThemeManagerInterface;
 
 /**
@@ -172,6 +174,37 @@ class ThemeHooks {
           $variables['years'][$year][$month]['title'] = $label;
         }
         $variables['years'][$year][$month][] = &$variables['items'][$delta];
+      }
+    }
+  }
+
+  /**
+   * Implements hook_preprocess_HOOK() for field-group-html-element.html.twig.
+   */
+  #[Hook('preprocess_field_group_html_element')]
+  public function preprocessFieldGroup(array &$variables): void {
+    $entity_type_id = $variables['element']['#entity_type'] ?? NULL;
+    $bundle = $variables['element']['#bundle'] ?? NULL;
+    if ($entity_type_id !== 'node' || $bundle !== 'certificate') {
+      return;
+    }
+
+    $language_manager = \Drupal::languageManager();
+    $config_factory = \Drupal::configFactory();
+
+    $langcodes = array_map(static fn (LanguageInterface $language) => $language->getId(), $language_manager->getLanguages());
+    foreach (Element::children($variables['element']) as $key) {
+      $element = &$variables['element'][$key];
+      if (!($element['#items'] ?? NULL)) {
+        continue;
+      }
+
+      $config_name = $element['#items']->getFieldDefinition()->getConfigDependencyName();
+      $config = $config_factory->getEditable($config_name);
+      foreach ($langcodes as $langcode) {
+        $element['#title_' . $langcode] = $language_manager
+          ->getLanguageConfigOverride($langcode, $config_name)
+          ->get('label') ?? $config->get('label');
       }
     }
   }

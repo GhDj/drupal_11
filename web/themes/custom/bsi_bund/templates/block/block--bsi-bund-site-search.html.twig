@@ -33,6 +33,7 @@
     'block-' ~ configuration.provider|clean_class,
     'block-' ~ plugin_id|clean_class,
     'bsi-grid',
+    'bsi-searchmenu--header',
   ]
 %}
  <button type="button" class="bsi-button bsi-button--tertiary bsi-button--icon-only bsi-header__search-button" aria-label="Suche" popovertarget="header-search">
@@ -44,20 +45,21 @@
 </button>
 <div class="bsi-searchmenu" id="header-search" popover="">
     <div{{ attributes.addClass(classes) }}>
-    {{ title_prefix }}
-    {% if label %}
-        <h2{{ title_attributes }}>{{ label }}</h2>
-    {% endif %}
-    {{ title_suffix }}
-    {% block content %}
-        {{ content|without('suggestions') }}
+        <div class="bsi-searchmenu__searchbar-wrapper">
+            {{ title_prefix }}
+            {% if label %}
+                <h2{{ title_attributes.addClass("bsi-searchbar__title") }}>{{ label }}</h2>
+            {% endif %}
+            {{ title_suffix }}
+
+            {{ content|without('suggestions') }}
+        </div>
         <nav aria-label="{{ 'Quicklinks'|t }}">
-            <p class="bsi-heading bsi-heading--6 bsi-searchmenu__title">{{ 'Popular searches'|t }}</p>
+            <p class="bsi-heading bsi-heading--6 bsi-searchmenu__title">{{ 'Frequently searched'|t }}</p>
             <ul class="bsi-searchmenu__list">
                 {{ content.suggestions }}
             </ul>
         </nav>
 
-    {% endblock %}
     </div>
 </div>

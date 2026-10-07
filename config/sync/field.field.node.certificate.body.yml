@@ -1,0 +1,26 @@
+uuid: d60c15a7-652f-42ee-aeeb-4750c96d4cf9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - filter.format.basic
+    - node.type.certificate
+  module:
+    - text
+id: node.certificate.body
+field_name: body
+entity_type: node
+bundle: certificate
+label: 'Short description'
+description: "Information about the certified product. \r\nProvide both German and English texts within the same text field."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - basic
+field_type: text_with_summary

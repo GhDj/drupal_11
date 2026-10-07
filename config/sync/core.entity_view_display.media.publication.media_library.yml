@@ -9,6 +9,7 @@ dependencies:
     - field.field.media.publication.field_copyright
     - field.field.media.publication.field_media_file
     - field.field.media.publication.field_media_type
+    - field.field.media.publication.field_publication_date
     - field.field.media.publication.field_tags
     - field.field.media.publication.field_use_cart
     - image.style.media_library
@@ -42,6 +43,7 @@ hidden:
   field_copyright: true
   field_media_file: true
   field_media_type: true
+  field_publication_date: true
   field_tags: true
   field_use_cart: true
   langcode: true

@@ -50,17 +50,20 @@
   ]
 %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
-    {% block content %}
-      <div class="bsi-intro__content">
-        <div class="bsi-intro__lead">
-          {{ content.field_highlight }}
-        </div>
 
-        <div class="bsi-intro__body">
-          {{ content.field_section_text }}
+  {% if content.field_highlight.0 or content.field_section_text.0 %}
+    <div{{ attributes.addClass(classes) }}>
+      {% block content %}
+        <div class="bsi-intro__content bsi-grid-indented">
+          <div class="bsi-intro__lead">
+            {{ content.field_highlight.0 }}
+          </div>
+
+          <div class="bsi-intro__body">
+            {{ content.field_section_text.0 }}
+          </div>
         </div>
-      </div>
-    {% endblock %}
-  </div>
+      {% endblock %}
+    </div>
+  {% endif %}
 {% endblock paragraph %}

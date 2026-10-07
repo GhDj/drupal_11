@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.article.field_audiences
     - field.field.node.article.field_downloads
     - field.field.node.article.field_downloads_title
+    - field.field.node.article.field_explorer_image
     - field.field.node.article.field_link
     - field.field.node.article.field_links
     - field.field.node.article.field_links_title
@@ -86,6 +87,7 @@ hidden:
   entity_print_view_word_docx: true
   field_article_type: true
   field_audiences: true
+  field_explorer_image: true
   field_link: true
   field_location: true
   field_media: true

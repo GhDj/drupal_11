@@ -71,6 +71,7 @@ class PlainTextFormattedFormatter extends StringFormatter {
       '#type' => 'processed_text',
       '#text' => $value,
       '#format' => $this->getSetting('text_format'),
+      '#langcode' => $item->getLangcode(),
     ];
   }
 

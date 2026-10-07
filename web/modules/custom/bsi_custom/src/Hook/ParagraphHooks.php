@@ -65,6 +65,9 @@ class ParagraphHooks {
    */
   #[Hook('preprocess_paragraphs_summary')]
   public function preprocessSummary(array &$variables): void {
+    if (!isset($variables['element']['#parents'])) {
+      return;
+    }
     $host_field_name = reset($variables['element']['#parents']);
     if (in_array($host_field_name, [
       'field_stage_items',

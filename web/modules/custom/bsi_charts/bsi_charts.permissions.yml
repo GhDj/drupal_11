@@ -2,10 +2,6 @@ bsi_chart use import csv:
   title: 'Use CSV import'
   description: 'Allow users to utilize the CSV upload and import functionality on charts fields.'
 
-bsi_chart customize chart library:
-  title: 'Customize chart library'
-  description: 'Allow users to select another library when editing charts.'
-
 bsi_chart customize chart axis:
   title: 'Customize chart axis'
   description: 'Allow users to customize the axis settings when editing charts.'

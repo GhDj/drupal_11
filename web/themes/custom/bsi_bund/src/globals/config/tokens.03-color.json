@@ -2,6 +2,7 @@
   "color": {
     "base": {
       "white": "#FFFFFF",
+      "black": "#121419",
       "focus": "#0156F6",
       "focus-inverted": "#FFFFFF"
     },

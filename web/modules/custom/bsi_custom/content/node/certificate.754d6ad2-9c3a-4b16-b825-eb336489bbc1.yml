@@ -1,0 +1,120 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 754d6ad2-9c3a-4b16-b825-eb336489bbc1
+  bundle: certificate
+  default_langcode: de
+  depends:
+    7159252d-08a3-4ac0-b331-397d05cfce48: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: EUCC-3087-2026-0013
+  created:
+    -
+      value: 1789735310
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  node_keeper:
+    -
+      value: false
+  alias_keeper:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  body:
+    -
+      value: '<p>Der Evaluationsgegenstand ist ein integrierter Schaltkreis (IC), der eine Plattform bietet für (IC-) Betriebssysteme und Smartcard-Anwendungsprogramme, aber ebenso in allen anderen Geräten, welche ein hohes Niveau an Widerstandsfähigkeit gegen Angreifer benötigen.</p><p>The TOE is an integrated circuit (IC), providing a platform for an operating system and application software used in smartcards but also in any other device or form factor requiring a high level of resistance against attackers.</p>'
+      format: basic
+      summary: ''
+  field_applicant:
+    -
+      value: 'Infineon Technologies AG'
+  field_applicant_address:
+    -
+      langcode: en
+      country_code: DE
+      administrative_area: ''
+      locality: Neubiberg
+      dependent_locality: ''
+      postal_code: '85579'
+      sorting_code: ''
+      address_line1: 'Am Campeon 1-15'
+      address_line2: ''
+  field_archivation_date:
+    -
+      value: '2045-12-31'
+  field_certificate_type:
+    -
+      entity: 7159252d-08a3-4ac0-b331-397d05cfce48
+  field_certification_date:
+    -
+      value: '2026-08-17'
+  field_certification_documents:
+    -
+      value: '<p>EUCC-3087-2026-0013 / BSI-DSZ-CC-1156-V5-2026<br>(Ausstellungsdatum / <span lang="en-GB" dir="ltr">Certification Date</span> 17.08.2026, gültig bis / <span lang="en-GB" dir="ltr">valid until 23</span>.07.2031)<br><br>Für die Veröffentlichung europäischer Cybersicherheitszertifikate ist die Agentur der Europäischen Union für Cybersicherheit (ENISA) zuständig.Die Zertifizierungsunterlagen zum Verfahren finden Sie auf der <a href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000013-i-00_en"><abbr title="European Network and Information Security Agency"><strong>ENISA</strong></abbr><strong> Website</strong></a>.<br><br>Der Evaluationsgegenstand ist ein integrierter Schaltkreis (<abbr title="Identity Card">IC</abbr>), der eine Plattform bietet für (IC-) Betriebssysteme und <span lang="en-GB" dir="ltr">Smartcard</span>-Anwendungsprogramme, aber ebenso in allen anderen Geräten, welche ein hohes Niveau an Widerstandsfähigkeit gegen Angreifer benötigen. Unter anderem wurde in dieser Re-Zertifizierung folgendes geändert: es erfolgte der Übergang von SOG-IS zu EUCC, die Erweiterung ALC_FLR.3 wurde hinzugefügt, TOE Handbücher wurden geändert und angepasst sowie Standorte in den Umfang der Zertifizierung übernommen.<br><br><span lang="en-GB" dir="ltr">The Agency of the European Union for Cybersecurity (ENISA) is responsible for the publication of European cybersecurity certificates.The certification documents for the procedure are available on the </span><a href="https://certification.enisa.europa.eu/certificates/eucc-3087-2026-000013-i-00_en"><abbr title="European Network and Information Security Agency"><span lang="en-GB" dir="ltr"><strong>ENISA</strong></span></abbr><span lang="en-GB" dir="ltr"><strong> website</strong></span></a><span lang="en-GB" dir="ltr">.</span><br><br><span lang="en-GB" dir="ltr">The TOE is an integrated circuit (IC), providing a platform for an operatingsystem and application software used in smartcards but also in any other device or form factor requiring a high level of resistance against attackers. Besides the transition form SOG-IS to EUCC the augmentation ALC_FLR.3 has been added, guidance were also changed and adapted as well as sites have been added to the scope of the certification.</span></p>'
+      format: advanced
+    -
+      value: '<p>BSI-DSZ-CC-1156-V4-2024-MA-01 (Ausstellungsdatum / <span lang="en-GB" dir="ltr">Certification Date</span> 25.03.2025)</p><p><a href="https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Zertifizierung/Reporte/Reporte1100/1156V4MA01a_pdf.pdf?__blob=publicationFile&amp;v=3"><strong>Maintenancereport /</strong><span lang="en-GB" dir="ltr"><strong>Maintenance Report</strong></span></a><br><a href="https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Zertifizierung/Reporte/Reporte1100/1156V4MA01b_pdf.pdf?__blob=publicationFile&amp;v=4"><strong>Sicherheitsvorgaben /</strong><span lang="en-GB" dir="ltr"><strong>Security Target</strong></span></a></p><p>Die Änderungen im Maintenance bezieht sich auf eine editorische Änderung in der User Guidance.</p><p><span lang="en-GB" dir="ltr">The changes are related to an editorial change in the user guidance.</span></p>'
+      format: advanced
+    -
+      value: '<p>BSI-DSZ-CC-1156-V4-2024<br>(Ausstellungsdatum / <span lang="en-GB" dir="ltr">Certification Date</span> 09.09.2024, gültig bis / <span lang="en-GB" dir="ltr">valid until</span> 08.09.2029)<br><br><a href="https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Zertifizierung/Reporte/Reporte1100/1156V4a_pdf.pdf?__blob=publicationFile&amp;v=5"><strong>Zertifizierungsreport /</strong><span lang="en-GB" dir="ltr"><strong>Certification Report</strong></span></a><br><a href="https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Zertifizierung/Reporte/Reporte1100/1156V4b_pdf.pdf?__blob=publicationFile&amp;v=4"><strong>Sicherheitsvorgaben /</strong><span lang="en-GB" dir="ltr"><strong>Security Target</strong></span></a><br><a href="https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Zertifizierung/Reporte/Reporte1100/1156V4c_pdf.pdf?__blob=publicationFile&amp;v=5"><strong>Zertifikat /</strong><span lang="en-GB" dir="ltr"><strong>Certificate</strong></span></a></p><p>Der Evaluationsgegenstand ist ein integrierter Schaltkreis (IC), der eine Plattform bietet für (IC-) Betriebssysteme und <span lang="en-GB" dir="ltr">Smartcard</span>-Anwendungsprogramme, aber ebenso in allen anderen Geräten, welche ein hohes Niveau an Widerstandsfähigkeit gegen Angreifer benötigen. Unter anderem wurde die Anleitung des TOE in dieser Re-Zertifizierung geändert sowie eine optionale Bibliothek für asymmetrische Kryptographie hinzugefügt.<br><br><span lang="en-GB" dir="ltr">The </span><abbr lang="en-GB">TOE</abbr><span lang="en-GB" dir="ltr"> is an integrated circuit (</span><abbr lang="en-GB">IC</abbr><span lang="en-GB" dir="ltr">), providing a platform for an operating system and application software used in smartcards but also in any other device or form factor requiring a high level of resistance against attackers. Besides adding an optional cryptographic library, guidance were also changed and adapted.</span></p>'
+      format: advanced
+    -
+      value: '<p>BSI-DSZ-CC-1156-V3-2022<br>(Ausstellungsdatum / <span lang="en-GB" dir="ltr">Certification Date</span> 16.05.2022, gültig bis / <span lang="en-GB" dir="ltr">valid until </span>15.05.2027)<br><br><a href="https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Zertifizierung/Reporte/Reporte1100/1156V3a_pdf.pdf?__blob=publicationFile&amp;v=4"><strong>Zertifizierungsreport /</strong><span lang="en-GB" dir="ltr"><strong>Certification Report</strong></span></a><br><a href="https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Zertifizierung/Reporte/Reporte1100/1156V3b_pdf.pdf?__blob=publicationFile&amp;v=3"><strong>Sicherheitsvorgaben /</strong><span lang="en-GB" dir="ltr"><strong>Security Target</strong></span></a><br><a href="https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Zertifizierung/Reporte/Reporte1100/1156V3c_pdf.pdf?__blob=publicationFile&amp;v=4"><strong>Zertifikat /</strong><span lang="en-GB" dir="ltr"><strong>Certificate</strong></span></a></p><p>Der Evaluationsgegenstand ist ein integrierter Schaltkreis (IC), der eine Plattform bietet für (IC-) Betriebssysteme und <span lang="en-GB" dir="ltr">Smartcard</span>-Anwendungsprogramme, aber ebenso in allen anderen Geräten, welche ein hohes Niveau an Widerstandsfähigkeit gegen Angreifer benötigen. Unter anderem wurde die Anleitung des <abbr title="Target of Evaluation">TOE</abbr> in dieser Re-Zertifizierung geändert.<br><br><span lang="en-GB" dir="ltr">The </span><abbr lang="en-GB">TOE</abbr><span lang="en-GB" dir="ltr"> is an integrated circuit (</span><abbr lang="en-GB">IC</abbr><span lang="en-GB" dir="ltr">), providing a platform for an operating system and application software used in smartcards but also in any other device or form factor requiring a high level of resistance against attackers. Besides other aspects, guidance were changed in this recertification.</span></p>'
+      format: advanced
+  field_deadline:
+    -
+      value: '2031-07-23'
+  field_evaluation_basis:
+    -
+      value: 'Some evaluation basis'
+      format: plain_text
+  field_evaluation_facility:
+    -
+      value: 'TÜV Informationstechnik GmbH'
+  field_evaluation_scopes:
+    -
+      value: 'Some evaluation scope'
+      format: plain_text
+  field_evaluation_target:
+    -
+      value: 'Some evaluation target'
+      format: plain_text
+  field_information_network:
+    -
+      value: 'Infineon Technologies AG'
+  field_product:
+    -
+      value: 'IFX_CCI_00004Fh, IFX_CCI_000050h - IFX_CCI_000058h, IFX_CCI_00005Ch design step S11 with firmware 80.310.03.0 & 80.310.03.1, optional NRG™ SW 05.03.4097, opt. HSL v3.52.9708, UMSLC lib v01.30.0564, opt.SCL v2.15.000 and v2.11.003, opt. ACL v3.33.003, and v3.35.001 and v3.02.000, opt. RCL v1.10.007, opt. HCL v1.13.002'
+      format: plain_text
+  field_protection_profile:
+    -
+      value: '<p>Security IC Platform Protection Profile with Augmentation Packages Version 1.0, 13 January 2014, BSI-CC-PP-0084-2014</p>'
+      format: basic

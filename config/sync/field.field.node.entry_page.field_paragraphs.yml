@@ -9,6 +9,8 @@ dependencies:
     - paragraphs.paragraphs_type.banner
     - paragraphs.paragraphs_type.contact
     - paragraphs.paragraphs_type.downloads
+    - paragraphs.paragraphs_type.explorer_content_types
+    - paragraphs.paragraphs_type.explorer_events
     - paragraphs.paragraphs_type.facts_figures
     - paragraphs.paragraphs_type.introduction
     - paragraphs.paragraphs_type.media
@@ -18,6 +20,7 @@ dependencies:
     - paragraphs.paragraphs_type.tabs
     - paragraphs.paragraphs_type.teaser_single
     - paragraphs.paragraphs_type.text_section
+    - paragraphs.paragraphs_type.tiles
   module:
     - entity_reference_revisions
 id: node.entry_page.field_paragraphs
@@ -47,6 +50,9 @@ settings:
       tabs: tabs
       teaser_single: teaser_single
       text_section: text_section
+      tiles: tiles
+      explorer_events: explorer_events
+      explorer_content_types: explorer_content_types
     negate: 0
     target_bundles_drag_drop:
       accordion:
@@ -63,6 +69,12 @@ settings:
         enabled: false
       downloads:
         weight: 0
+        enabled: true
+      explorer_content_types:
+        weight: 27
+        enabled: true
+      explorer_events:
+        weight: 26
         enabled: true
       facts_figures:
         weight: 0
@@ -88,9 +100,6 @@ settings:
       sequence_item:
         weight: 0
         enabled: false
-      table_section:
-        weight: 0
-        enabled: true
       tabs:
         weight: 0
         enabled: true
@@ -98,6 +107,12 @@ settings:
         weight: 0
         enabled: true
       text_section:
+        weight: 0
+        enabled: true
+      tile_item:
+        weight: 0
+        enabled: false
+      tiles:
         weight: 0
         enabled: true
       view:

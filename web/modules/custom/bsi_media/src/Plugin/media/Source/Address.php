@@ -16,6 +16,8 @@ use Drupal\media\MediaSourceBase;
   description: new TranslatableMarkup('Media type based on address field data.'),
   allowed_field_types: ['address'],
   default_thumbnail_filename: 'address.png',
+  thumbnail_uri_metadata_attribute: 'thumbnail_uri',
+  thumbnail_alt_metadata_attribute: 'thumbnail_alt',
 )]
 class Address extends MediaSourceBase {
 
@@ -59,8 +61,15 @@ class Address extends MediaSourceBase {
       case 'default_name':
         return $media->getName();
 
-      case self::METADATA_ATTRIBUTE_LINK_TARGET:
       case 'thumbnail_uri':
+        // Reuse existing image. Clear on the form to re-apply default.
+        return $media->get('thumbnail')->entity?->getFileUri();
+
+      case 'thumbnail_alt':
+        // Reuse alt text of existing image.
+        return $media->get('thumbnail')->alt;
+
+      case self::METADATA_ATTRIBUTE_LINK_TARGET:
       default:
         return parent::getMetadata($media, $attribute_name);
     }

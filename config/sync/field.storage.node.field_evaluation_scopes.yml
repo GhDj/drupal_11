@@ -1,0 +1,19 @@
+uuid: 8ad4ec60-75a5-43b7-9263-470f2357a6e1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_evaluation_scopes
+field_name: field_evaluation_scopes
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

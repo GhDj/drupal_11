@@ -10,7 +10,7 @@ dependencies:
     - node
 id: administration-8ac8e8636de8e472b
 group_type: administration
-content_plugin: 'group_node:entry_page'
+relation_type: 'group_node:entry_page'
 plugin_config:
   group_cardinality: 0
   entity_cardinality: 1

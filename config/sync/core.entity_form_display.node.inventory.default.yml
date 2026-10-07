@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.inventory.body
     - field.field.node.inventory.field_audiences
+    - field.field.node.inventory.field_explorer_image
     - field.field.node.inventory.field_metatags
     - field.field.node.inventory.field_paragraphs
     - field.field.node.inventory.field_tags
@@ -15,6 +16,7 @@ dependencies:
     - content_moderation
     - field_group
     - maxlength
+    - media_library
     - metatag
     - paragraphs
     - path
@@ -78,6 +80,7 @@ third_party_settings:
       children:
         - group_teaser
         - group_terms
+        - group_teaser_explorer
       label: Tabs
       region: content
       parent_name: ''
@@ -123,6 +126,22 @@ third_party_settings:
         description: ''
         required_fields: true
         weight: 0
+    group_teaser_explorer:
+      children:
+        - field_explorer_image
+      label: 'Teaser - Explorer'
+      region: content
+      parent_name: group_tabs
+      weight: 22
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
 id: node.inventory.default
 targetEntityType: node
 bundle: inventory
@@ -149,6 +168,13 @@ content:
     weight: 7
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_explorer_image:
+    type: media_library_widget
+    weight: 7
+    region: content
+    settings:
+      media_types: {  }
     third_party_settings: {  }
   field_metatags:
     type: metatag_firehose

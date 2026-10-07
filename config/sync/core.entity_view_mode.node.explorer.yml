@@ -1,0 +1,11 @@
+uuid: 41c5aa59-56f5-4ac4-bd7a-34e70912d484
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.explorer
+label: Explorer
+description: 'Display mode to be used only for explorer paragraphs.'
+targetEntityType: node
+cache: true

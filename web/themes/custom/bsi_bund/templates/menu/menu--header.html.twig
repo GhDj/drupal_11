@@ -14,10 +14,16 @@
           {% elseif item.original_link.pluginId starts with 'header.language:' %}
             {% set icon = 'globe' %}
           {% endif %}
+
+          {% if item.url.isExternal() %}
+            {% set target = '_blank' %}
+          {% endif %}
+
           {% include '@bsi_bund/elements/link.html.twig' with {
             url: item.url,
             title: item.title,
             extra_classes: 'bsi-metanav__link',
+            target: target ?? null,
             icon: icon,
             icon_position: 'after',
           } only %}

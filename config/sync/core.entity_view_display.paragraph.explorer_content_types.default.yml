@@ -1,0 +1,53 @@
+uuid: 9e01f6c7-439d-4acb-8ef8-aa5bf1637f9e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.explorer_content_types.field_content
+    - field.field.paragraph.explorer_content_types.field_link
+    - field.field.paragraph.explorer_content_types.field_section_title
+    - field.field.paragraph.explorer_content_types.field_show_explorer_images
+    - paragraphs.paragraphs_type.explorer_content_types
+  module:
+    - bsi_custom
+    - link
+id: paragraph.explorer_content_types.default
+targetEntityType: paragraph
+bundle: explorer_content_types
+mode: default
+content:
+  field_content:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: explorer
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_section_title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_show_explorer_images: true
+  search_api_excerpt: true

@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Theme override for the field--paragraph--field-highlight (rich text).
+ *
+ * Extends field.html.twig and adding bsi-bodytext class
+ *
+ * @see field.html.twig
+ */
+#}
+{% extends 'field.html.twig' %}
+    {% block content %}
+      {% set classes = classes|merge(['bsi-bodytext']) %}
+      {{ parent() }}
+    {% endblock %}

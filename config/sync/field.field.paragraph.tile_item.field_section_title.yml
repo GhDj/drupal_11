@@ -1,0 +1,19 @@
+uuid: 693f3233-498b-48b4-99c8-e2bd8ccde8c8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_title
+    - paragraphs.paragraphs_type.tile_item
+id: paragraph.tile_item.field_section_title
+field_name: field_section_title
+entity_type: paragraph
+bundle: tile_item
+label: Heading
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -235,7 +235,11 @@ export default function Timeline(): void {
 
   const timelines = Array.from(document.querySelectorAll(".bsi-timeline"));
 
-  if (!timelines.length) {
+  const animatedTimelines = timelines.filter(
+    timeline => !timeline.hasAttribute("data-static")
+  );
+
+  if (!animatedTimelines.length) {
     return;
   }
 
@@ -252,7 +256,7 @@ export default function Timeline(): void {
 
     const viewportBottom = scrollTop + viewportHeight;
 
-    timelines.forEach(timeline =>
+    animatedTimelines.forEach(timeline =>
       updateProgressLine(timeline, viewportHeight, scrollTop, viewportBottom)
     );
   };
@@ -278,7 +282,7 @@ export default function Timeline(): void {
       ? new ResizeObserver(scheduleUpdate)
       : null;
 
-  timelines.forEach(timeline => {
+  animatedTimelines.forEach(timeline => {
     resizeObserver?.observe(timeline);
   });
 

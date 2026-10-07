@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.article.field_audiences
     - field.field.node.article.field_downloads
     - field.field.node.article.field_downloads_title
+    - field.field.node.article.field_explorer_image
     - field.field.node.article.field_link
     - field.field.node.article.field_links
     - field.field.node.article.field_links_title
@@ -101,6 +102,7 @@ hidden:
   field_audiences: true
   field_downloads: true
   field_downloads_title: true
+  field_explorer_image: true
   field_links: true
   field_links_title: true
   field_location: true

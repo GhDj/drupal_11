@@ -9,7 +9,7 @@ id: node.certificate.field_applicant
 field_name: field_applicant
 entity_type: node
 bundle: certificate
-label: Applicants
+label: Applicant
 description: 'Organization that applied for the certificate.'
 required: false
 translatable: true

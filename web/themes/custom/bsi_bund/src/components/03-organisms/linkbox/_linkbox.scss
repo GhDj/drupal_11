@@ -15,6 +15,13 @@
   gap: var(--#{$nsp}-size-lg);
   padding: var(--#{$nsp}-size-sm);
 
+  &__downloadlink {
+    line-height: 1.5em;
+    svg {
+      margin-top: 5px;
+    }
+  }
+
   &__icon {
     --#{$nsp}-icon-width: var(--#{$nsp}-size-2xl);
 
@@ -22,15 +29,29 @@
       --#{$nsp}-icon-width: var(--#{$nsp}-size-6xl);
     }
   }
-
+  .#{$nsp}-linklist__list-item {
+    line-height: 1;
+  }
   &__content {
     display: flex;
     flex-direction: column;
-    gap: var(--#{$nsp}-size-2xl);
+    gap: 0 var(--#{$nsp}-size-2xl);
     width: 100%;
 
     @include breakpoint-lg {
       flex-direction: row;
+    }
+    .bsi-link__content {
+      display: inline;
+    }
+
+    &:has(.#{$nsp}-linklist + .#{$nsp}-linklist) .#{$nsp}-linklist {
+      @include breakpoint-lg {
+        max-width: 50%;
+      }
+      .#{$nsp}-link__add-on {
+        display: inline;
+      }
     }
   }
 }

@@ -1,0 +1,79 @@
+uuid: 58bcd3b1-7c15-43cd-8220-a28e6c40666a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.lightbox
+    - field.field.media.chart.field_explanation
+    - field.field.media.chart.field_media_chart
+    - field.field.media.chart.field_source
+    - field.field.media.chart.field_unit
+    - media.type.chart
+  module:
+    - bsi_custom
+    - charts
+    - layout_builder
+    - link
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.chart.lightbox
+targetEntityType: media
+bundle: chart
+mode: lightbox
+content:
+  field_explanation:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_media_chart:
+    type: chart_config_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_source:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_unit:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

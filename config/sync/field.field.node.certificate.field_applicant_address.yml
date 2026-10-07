@@ -1,19 +1,35 @@
-uuid: 95413b25-a2a8-468a-b03d-b5161db8315a
+uuid: cd2f5e05-a778-4abe-8a19-4ee7db00e38d
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_applicant_address
     - node.type.certificate
+  module:
+    - address
 id: node.certificate.field_applicant_address
 field_name: field_applicant_address
 entity_type: node
 bundle: certificate
 label: 'Applicant address'
-description: 'Address of the applicant.'
+description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
-settings: {  }
-field_type: string_long
+settings:
+  available_countries: {  }
+  langcode_override: ''
+  field_overrides:
+    givenName:
+      override: hidden
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+    organization:
+      override: hidden
+    addressLine3:
+      override: hidden
+  fields: {  }
+field_type: address

@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 940d9734-7ab4-4270-aaf6-c1d754d5f296
+  bundle: image
+  default_langcode: de
+  depends:
+    2b3c0a68-2f87-4608-a9fe-8b113194610e: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: Opener-Zertifikat.jpg
+  created:
+    -
+      value: 1789737021
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_media_image:
+    -
+      entity: 2b3c0a68-2f87-4608-a9fe-8b113194610e
+      alt: 'Verschiedene Symbole kreisen auf dunkelblauem Hintergrund. Im Fokus: Eine besiegelte Urkunde.'
+      title: ''
+      width: 4096
+      height: 1507

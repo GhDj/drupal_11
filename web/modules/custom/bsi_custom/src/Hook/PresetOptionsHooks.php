@@ -10,15 +10,31 @@ use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\FieldConfigInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
-use Drupal\Core\Render\Element;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\language\Config\LanguageConfigFactoryOverrideInterface;
 
 /**
  * Hooks related to the fields and their formatters.
+ *
+ * Assumptions:
+ * - Presets can be either a key-value map or a list, in which case
+ *   the value of the original field config will be stored as the field value,
+ *   even if they are translated using config_translation.
+ * - Presets may be translated using config_translation on the field.
+ *   This will only affect the displayed value, never the stored value.
+ * - Field values may be translated using content_translation.
+ *   This means, that different presets may be selected per language. If the
+ *   same option is selected, the stored value will be identical.
+ *
+ * In short: Use config translation to change the *display* value, and content
+ *   translation to change the *database* value.
  */
 class PresetOptionsHooks {
 
@@ -28,6 +44,7 @@ class PresetOptionsHooks {
   public function __construct(
     protected readonly LanguageConfigFactoryOverrideInterface $configFactoryOverride,
     protected readonly ConfigFactoryInterface $configFactory,
+    protected readonly LanguageManagerInterface $languageManager,
   ) {}
 
   /**
@@ -116,6 +133,19 @@ class PresetOptionsHooks {
   }
 
   /**
+   * Determine property to which to apply select-or-other.
+   *
+   * Return NULL to not support a field type.
+   */
+  protected function getPresetProperty(FieldDefinitionInterface $field_config): ?string {
+    return match ($field_config->getType()) {
+      'phone_label' => 'title',
+      'list_string' => NULL,
+      default => $field_config->getFieldStorageDefinition()->getMainPropertyName(),
+    };
+  }
+
+  /**
    * Implements hook_field_widget_single_element_form_alter().
    */
   #[Hook('field_widget_single_element_form_alter')]
@@ -126,34 +156,19 @@ class PresetOptionsHooks {
       return;
     }
 
-    $preset_options = $field_config->getThirdPartySetting('bsi_custom', 'preset_options', []);
-    $preset_other = $field_config->getThirdPartySetting('bsi_custom', 'preset_other', NULL);
+    $interface_langcode = $this->languageManager
+      ->getCurrentLanguage()
+      ->getId();
 
     $property = $this->getPresetProperty($field_config);
+    $preset_options = $this->getPresetOptions($field_config, $interface_langcode);
+    $preset_other = $field_config->getThirdPartySetting('bsi_custom', 'preset_other', NULL);
+
     if (!isset($element[$property]) || (count($preset_options) == 0 && strlen($preset_other) === 0)) {
       return;
     }
 
     $default_value = $element[$property]['#default_value'];
-
-    $preset_is_list = $preset_options && array_is_list($preset_options);
-    if ($preset_is_list) {
-      /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
-      $entity = $context['items']->getEntity();
-      if ($field_config->isTranslatable() && $entity->isNewTranslation() && !$entity->isNew()) {
-        // Update default value based on translation source selected value.
-        $translated_options = $this->getPresetOptions(
-          $field_config,
-          $entity->getUntranslated()->language()->getId(),
-        );
-        if (in_array($default_value, $translated_options)) {
-          $default_value = $preset_options[array_search($default_value, $translated_options)];
-        }
-      }
-      if (in_array($default_value, $preset_options, TRUE)) {
-        $default_value = array_search($default_value, $preset_options);
-      }
-    }
     $is_preset_value = array_key_exists($default_value, $preset_options);
 
     // @see \Drupal\select_or_other\Element\Select
@@ -174,7 +189,6 @@ class PresetOptionsHooks {
       '#element_validate' => array_merge([
         [$this, 'validateElement'],
       ], $element[$property]['#element_validate'] ?? []),
-      '#translated_presets' => $preset_is_list && $field_config->isTranslatable(),
       '#field_config' => $field_config,
     ] + $element[$property];
 
@@ -192,35 +206,11 @@ class PresetOptionsHooks {
     unset($values['select']);
     unset($values['other']);
 
-    if ($element['#translated_presets'] === TRUE) {
-      // Store values in entity language.
-      $langcode = $form_state->getValue(['langcode', 0, 'value'])
-        ?? $form_state->getStorage()['langcode']
-        ?? $form_state->getFormObject()->getEntity()->language();
-
-      $translated_options = $this->getPresetOptions($element['#field_config'], $langcode);
-      foreach ($values as $index => $value) {
-        $values[$index] = $translated_options[$value] ?? $value;
-      }
-    }
     if (!$element['#multiple']) {
       $values = $values ? reset($values) : NULL;
     }
 
     $form_state->setValue($element['#parents'], $values);
-  }
-
-  /**
-   * Determine property to which to apply select-or-other.
-   *
-   * Return NULL to not support a field type.
-   */
-  protected function getPresetProperty(FieldConfigInterface $fieldConfig): ?string {
-    return match ($fieldConfig->getType()) {
-      'phone_label' => 'title',
-      'list_string' => NULL,
-      default => $fieldConfig->getFieldStorageDefinition()->getMainPropertyName(),
-    };
   }
 
   /**
@@ -235,14 +225,22 @@ class PresetOptionsHooks {
       );
     }
     else {
-      // Always refer to the original translation before applying overrides.
-      $preset_options = $this->getPresetOptions($field_config, NULL);
+      // Always refer to the original translation, then apply overrides.
+      $base_options = $this->getPresetOptions($field_config, NULL);
       $config_override = $this->configFactoryOverride->getOverride(
         $langcode,
         $field_config->getConfigDependencyName(),
       );
-      foreach ($config_override->get('third_party_settings.bsi_custom.preset_options') ?? [] as $key => $label) {
-        $preset_options[$key] = $label;
+      $translations = $config_override->get('third_party_settings.bsi_custom.preset_options') ?? [];
+
+      $preset_options = [];
+      foreach ($base_options as $key => $label) {
+        $preset_options[$key] = $translations[$key] ?? $label;
+      }
+      if (array_is_list($preset_options)) {
+        // Ensure presets are a map, keyed by storable data. Use base language
+        // values as keys.
+        $preset_options = array_combine($base_options, $preset_options);
       }
     }
     return $preset_options;
@@ -253,9 +251,6 @@ class PresetOptionsHooks {
    */
   #[Hook('entity_view_alter')]
   public function alterEntityView(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) : void {
-    if ($entity->getEntityTypeId() !== 'media' || $entity->bundle() !== 'contact') {
-      return;
-    }
     foreach (array_keys($display->getComponents()) as $field_name) {
       /** @var \Drupal\Core\Field\FieldItemListInterface|null $items */
       $items = $entity->hasField($field_name) ? $entity->get($field_name) : NULL;
@@ -264,19 +259,63 @@ class PresetOptionsHooks {
       }
       $field_config = $items->getFieldDefinition();
       if (!$field_config instanceof FieldConfig
-        || !in_array('bsi_custom', $field_config->getThirdPartyProviders(), TRUE)) {
+        || !in_array('bsi_custom', $field_config->getThirdPartyProviders(), TRUE)
+        || !$this->getPresetProperty($field_config)) {
         continue;
       }
 
-      $preset_options = $this->getPresetOptions($field_config, $items->getLangcode());
+      $this->alterFormatter($build[$field_name], $items, $display->getComponent($field_name));
+    }
+  }
 
-      foreach (Element::children($build[$field_name]) as $key) {
-        $field_item = $items->get($key);
-        $build[$field_name][$key]['#preset_option'] = array_search($field_item->title, $preset_options, TRUE);
-        if ($build[$field_name][$key]['#preset_option'] === FALSE) {
-          $build[$field_name][$key]['#preset_option'] = NULL;
-        }
+  /**
+   * Altering for the display of preset fields.
+   */
+  protected function alterFormatter(array &$element, FieldItemListInterface $items, array $component): void {
+    $field_config = $items->getFieldDefinition();
+    $property = $this->getPresetProperty($field_config);
+    $preset_options = $this->getPresetOptions($field_config, $items->getLangcode());
+
+    foreach ($items as $index => $item) {
+      $value = $item->{$property};
+      if ($value === NULL) {
+        continue;
       }
+
+      $label = $preset_options[$value] ?? $value;
+      $element[$index]['#preset_option'] = array_key_exists($value, $preset_options) ? $value : NULL;
+      $element[$index]['#preset_label'] = $label;
+      if ($element[$index]['#preset_option'] === NULL) {
+        continue;
+      }
+
+      // Update formatter render array for known plugins.
+      if ($component['type'] === 'string') {
+        $this->updateLabel($element[$index]['#context']['value'], $label);
+      }
+      elseif ($component['type'] === 'phone_label') {
+        $this->updateLabel($element[$index]['#title'], $label);
+      }
+      elseif ($component['type'] === 'phone_link') {
+        $this->updateLabel($element[$index]['#options']['attributes']['title'], $label);
+      }
+    }
+  }
+
+  /**
+   * Helper to replace a render array value, accounting for translatable markup.
+   */
+  protected function updateLabel(&$value, $label): void {
+    if ($value instanceof TranslatableMarkup) {
+      $value = new TranslatableMarkup(
+        // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
+        $value->getUntranslatedString(),
+        ['@title' => $label] + $value->getArguments(),
+        $value->getOptions(),
+      );
+    }
+    else {
+      $value = $label;
     }
   }
 

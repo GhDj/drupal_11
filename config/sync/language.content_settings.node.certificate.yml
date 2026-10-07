@@ -8,11 +8,11 @@ dependencies:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: true
+    enabled: false
     bundle_settings:
       untranslatable_fields_hide: '1'
 id: node.certificate
 target_entity_type_id: node
 target_bundle: certificate
 default_langcode: de
-language_alterable: true
+language_alterable: false

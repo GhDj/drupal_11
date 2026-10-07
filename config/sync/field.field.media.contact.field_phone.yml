@@ -11,10 +11,10 @@ dependencies:
 third_party_settings:
   bsi_custom:
     preset_options:
-      - 'Phone number'
-      - 'Service number'
-      - 'Fax number'
-      - 'Mobile number'
+      phone: 'Phone number'
+      service: 'Service number'
+      fax: 'Fax number'
+      mobile: 'Mobile number'
     preset_other: Other…
 id: media.contact.field_phone
 field_name: field_phone

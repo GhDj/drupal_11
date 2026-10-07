@@ -1,0 +1,41 @@
+uuid: 5b0e07eb-b736-410f-bf59-a410c8418d8c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.content
+    - field.field.media.chart.field_explanation
+    - field.field.media.chart.field_media_chart
+    - field.field.media.chart.field_source
+    - field.field.media.chart.field_unit
+    - image.style.thumbnail
+    - media.type.chart
+  module:
+    - image
+id: media.chart.content
+targetEntityType: media
+bundle: chart
+mode: content
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  changed: true
+  created: true
+  field_explanation: true
+  field_media_chart: true
+  field_source: true
+  field_unit: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  uid: true

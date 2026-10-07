@@ -1,0 +1,21 @@
+uuid: e2c62531-ba5b-454a-a867-f4890a60207b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_publication_date
+    - media.type.download
+  module:
+    - datetime
+id: media.download.field_publication_date
+field_name: field_publication_date
+entity_type: media
+bundle: download
+label: 'Publication date'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

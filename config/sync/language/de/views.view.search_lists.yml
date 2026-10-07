@@ -26,15 +26,21 @@ display:
           label: Bild
         name:
           label: Titel
-        media_created:
-          label: Datum
+        media_summary:
+          label: Beschreibung
+        field_media_file:
+          label: Datei
+        field_accessibility:
+          label: Barrierefreiheit
+        field_use_cart:
+          label: 'Druckausgabe bestellen'
       arguments:
         media_type:
           admin_label: 'Begriff: Publikationsart'
           exception:
             title: Alle
       sorts:
-        media_created:
+        field_publication_date:
           expose:
             label: Datum
   jobs:
@@ -80,22 +86,81 @@ display:
       empty:
         area_text_custom:
           content: 'Zur Zeit keine Stellenangebote.'
+      fields:
+        title:
+          label: Titel
+        field_location:
+          label: Standort
+        field_deadline:
+          label: Frist
   block_search_lists_publications:
     display_options:
       block_description: 'Publikationen (Tabelle)'
       empty:
         area_text_custom:
           content: 'Es wurden keine Ergebnisse gefunden.'
+      fields:
+        thumbnail:
+          label: Bild
+        name:
+          label: Titel
+        media_summary:
+          label: Beschreibung
+        field_media_file:
+          label: Datei
+        field_accessibility:
+          label: Barrierefreiheit
+        field_use_cart:
+          label: Druckausgabe
       sorts:
-        media_created:
+        field_publication_date:
           expose:
             label: Datum
   block_search_certificates:
     display_title: 'Zertifikate – Block'
     display_options:
       block_description: 'Zertifikate (Tabelle)'
+      fields:
+        title:
+          label: Zertifikatsnummer
+        field_product_1:
+          label: Produktname
+        field_product_2:
+          label: Standort
+        field_evaluation_target:
+          label: Prüfgegenstand
+        field_protection_profile:
+          label: Schutzprofil
+        field_applicant:
+          label: Antragsteller
+        field_protection_profile_issuer:
+          label: Herausgeber
+        field_information_network:
+          label: Informationsverbund
+        field_certification_date:
+          label: 'zertifiziert am'
+        field_certification_date_1:
+          label: Datum
   certificates:
     display_title: Zertifikate
+    display_options:
+      fields:
+        title:
+          label: Zertifikatsnummer
+        field_location:
+          label: Standort
+        field_protection_profile:
+          label: Schutzprofil
+        field_applicant:
+          label: Antragsteller
+        field_protection_profile_issuer:
+          label: Herausgeber
+        field_certification_date:
+          label: 'zertifiziert am'
+        field_evaluation_target:
+          label: Prüfgegenstand
+        field_information_network:
+          label: Informationsverbund
   block_search_lists_keywords:
     display_title: 'Schlagworte – Block'
     display_options:
@@ -103,6 +168,13 @@ display:
       empty:
         area_text_custom:
           content: 'Es wurden keine Ergebnisse gefunden.'
+      fields:
+        title:
+          label: Titel
+        node_summary:
+          label: Beschreibung
+        media_summary:
+          label: Beschreibung
   keywords:
     display_title: Schlüsselwörter
     display_options:
@@ -111,9 +183,5 @@ display:
           label: Titel
         node_summary:
           label: Beschreibung
-        node_created:
-          label: Datum
         media_summary:
           label: Beschreibung
-        media_created:
-          label: Datum

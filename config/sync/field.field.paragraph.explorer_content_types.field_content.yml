@@ -1,0 +1,45 @@
+uuid: 58b26a78-067c-4248-8834-85b7bd2f7d74
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content
+    - node.type.article
+    - node.type.certificate
+    - node.type.entry_page
+    - node.type.event
+    - node.type.inventory
+    - node.type.it_security_label
+    - node.type.job
+    - node.type.page
+    - node.type.report_page
+    - paragraphs.paragraphs_type.explorer_content_types
+id: paragraph.explorer_content_types.field_content
+field_name: field_content
+entity_type: paragraph
+bundle: explorer_content_types
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      article: article
+      certificate: certificate
+      page: page
+      entry_page: entry_page
+      event: event
+      it_security_label: it_security_label
+      inventory: inventory
+      job: job
+      report_page: report_page
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: article
+field_type: entity_reference

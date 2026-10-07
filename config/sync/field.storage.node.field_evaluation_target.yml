@@ -1,0 +1,19 @@
+uuid: b2eee7e9-39fe-420d-9e36-eca518ffc337
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_evaluation_target
+field_name: field_evaluation_target
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
