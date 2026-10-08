@@ -36,6 +36,16 @@ third_party_settings:
           label: ''
           context_mapping: {  }
         components:
+          d3e4f5a6-b7c8-9012-def0-a34567890123:
+            uuid: d3e4f5a6-b7c8-9012-def0-a34567890123
+            region: content
+            configuration:
+              id: bsi_report_search_slot
+              label: 'Report search slot'
+              label_display: '0'
+              provider: bsi_report
+            weight: 0
+            additional: {  }
           63f4f82a-9466-4ef3-9d07-e0f780eda76f:
             uuid: 63f4f82a-9466-4ef3-9d07-e0f780eda76f
             region: content
@@ -53,7 +63,7 @@ third_party_settings:
                 settings:
                   view_mode: default
                 third_party_settings: {  }
-            weight: 1
+            weight: 2
             additional: {  }
           a2286e42-9664-4ac9-a50f-08674accb627:
             uuid: a2286e42-9664-4ac9-a50f-08674accb627
@@ -63,7 +73,7 @@ third_party_settings:
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-            weight: 0
+            weight: -1
             additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
@@ -92,6 +102,8 @@ third_party_settings:
         - layout_onecol
       denylisted_blocks: {  }
       allowlisted_blocks:
+        'BSI Bericht':
+          - bsi_report_search_slot
         'Lists (Views)':
           - 'views_block:search_yearly_report-block_search_yearly_reports'
         Webform:

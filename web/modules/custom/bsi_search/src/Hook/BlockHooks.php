@@ -18,6 +18,7 @@ class BlockHooks {
   const array SEARCH_YEARLY_REPORTS_VIEW_BLOCKS = [
     'views_block:search_yearly_report-block_search_yearly_reports',
     'views_exposed_filter_block:search_yearly_report-block_search_yearly_reports',
+    'bsi_report_search_slot',
   ];
 
   /**
