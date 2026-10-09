@@ -20,86 +20,6 @@ dependencies:
     - node.type.report_page
   module:
     - entity_reference_revisions
-    - layout_builder
-    - layout_builder_restrictions
-    - layout_discovery
-third_party_settings:
-  layout_builder:
-    enabled: true
-    allow_custom: true
-    sections:
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: ''
-          context_mapping: {  }
-        components:
-          b1a2c3d4-e5f6-7890-abcd-ef1234567890:
-            uuid: b1a2c3d4-e5f6-7890-abcd-ef1234567890
-            region: content
-            configuration:
-              id: bsi_report_search_slot
-              label: 'Report search slot'
-              label_display: '0'
-              provider: bsi_report
-            weight: 0
-            additional: {  }
-          c2b3d4e5-f6a7-8901-bcde-f12345678901:
-            uuid: c2b3d4e5-f6a7-8901-bcde-f12345678901
-            region: content
-            configuration:
-              id: 'field_block:node:report_page:field_paragraphs'
-              label: Seitenabschnitte
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_revisions_entity_view
-                label: hidden
-                settings:
-                  view_mode: default
-                third_party_settings: {  }
-            weight: 1
-            additional: {  }
-          a2286e42-9664-4ac9-a50f-08674accb628:
-            uuid: a2286e42-9664-4ac9-a50f-08674accb628
-            region: content
-            configuration:
-              id: 'extra_field_block:node:report_page:content_moderation_control'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-            weight: -1
-            additional: {  }
-        third_party_settings: {  }
-  layout_builder_restrictions:
-    allowed_block_categories:
-      - '@entity'
-      - BSI
-      - 'BSI Bericht'
-      - 'BSI Search'
-      - 'Content fields'
-      - 'Lists (Views)'
-    entity_view_mode_restriction:
-      allowed_layouts:
-        - layout_onecol
-      denylisted_blocks: {  }
-      allowlisted_blocks:
-        'BSI Bericht':
-          - bsi_report_search_slot
-        'Lists (Views)':
-          - 'views_block:search_yearly_report-block_search_yearly_reports'
-      restricted_categories:
-        - '@entity'
-        - Content
-        - 'Content fields'
-        - Forms
-        - Help
-        - Menus
-        - System
-        - core
 id: node.report_page.full
 targetEntityType: node
 bundle: report_page
@@ -109,6 +29,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   body: true
@@ -127,7 +56,6 @@ hidden:
   field_links_title: true
   field_media: true
   field_metatags: true
-  field_paragraphs: true
   field_subtitle: true
   field_tags: true
   field_topics: true

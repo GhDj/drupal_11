@@ -1,0 +1,27 @@
+uuid: f4a5b6c7-d8e9-0123-abcd-456789abcdef
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_report
+  theme:
+    - bsi_bund
+id: bsi_bund_report_search
+theme: bsi_bund
+region: content
+weight: -12
+provider: null
+plugin: bsi_report_search_slot
+settings:
+  id: bsi_report_search_slot
+  label: 'Report search slot'
+  label_display: '0'
+  provider: bsi_report
+visibility:
+  entity_bundle:node:
+    id: entity_bundle:node
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      report_page: report_page
