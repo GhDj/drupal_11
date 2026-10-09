@@ -8,6 +8,14 @@
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
+  {% if exposed and exposed['sort_bef_combine'] %}
+    <div class="bsi-search-result__head">
+      <div class="bsi-search-dropdown bsi-search-dropdown--sort">
+        {{ exposed['sort_bef_combine'] }}
+      </div>
+    </div>
+  {% endif %}
+
   {% if rows %}
     <div class="bsi-block__content">
       {{ rows }}

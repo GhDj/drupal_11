@@ -164,3 +164,40 @@
     font-weight: 700;
   }
 }
+
+// -----------------------------------------------------------------------------
+// Sort dropdown for Dynamic List (Drupal BEF markup compatibility)
+// Matches the bsi-search-dropdown--sort Storybook component
+// -----------------------------------------------------------------------------
+.#{$nsp}-search-dropdown {
+  .form-type--select {
+    position: relative;
+
+    label {
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    select {
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: var(--#{$nsp}-color-blue-150);
+      border: 0;
+      border-radius: 4px;
+      color: var(--#{$nsp}-color-blue-800);
+      cursor: pointer;
+      font-size: 16px;
+      padding-block: var(--#{$nsp}-space-sm);
+      padding-inline: 48px var(--#{$nsp}-space-sm);
+      width: 100%;
+
+      &:focus-visible {
+        outline: 2px solid;
+        outline-color: var(--#{$nsp}-color-base-focus);
+        outline-offset: 2px;
+      }
+    }
+  }
+}
