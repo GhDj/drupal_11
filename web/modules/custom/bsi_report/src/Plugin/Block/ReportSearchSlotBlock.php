@@ -61,7 +61,7 @@ class ReportSearchSlotBlock extends BlockBase implements ContainerFactoryPluginI
       return NULL;
     }
 
-    $bookLink = $this->bookManager->loadBookLink($node->id());
+    $bookLink = $this->bookManager->loadBookLink((int) $node->id());
     if (empty($bookLink['bid'])) {
       return NULL;
     }
@@ -73,7 +73,7 @@ class ReportSearchSlotBlock extends BlockBase implements ContainerFactoryPluginI
       return NULL;
     }
 
-    $view->setDisplay('block_search_slot');
+    $view->setDisplay('block_search_report_slot');
     $view->setArguments([$bid]);
 
     // Redirect form submission to the entry page (book root node).
