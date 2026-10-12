@@ -47,10 +47,16 @@ that were part of a book.
 - Search result view mode templates for `entry_page` and `report_page`
 - Bold result count: `<strong>@start bis @end</strong>&nbsp;von&nbsp;<strong>@total</strong>&nbsp;Ergebnissen`
 
-### Phase 2 — Refactor to Layout Builder (current)
+### Phase 2 — Refactor to block-based placement (current)
 
-The hook-based injection was replaced with a Layout Builder block approach,
-matching how the global search slot (`TopicExposedFilterBlock`) works.
+The hook-based injection was replaced with a custom block plugin, matching
+how the global search slot (`TopicExposedFilterBlock`) works. The block is
+placed differently depending on the content type:
+
+- **entry_page:** Placed via **Layout Builder** (LB is already enabled)
+- **report_page:** Placed via **Block Layout** (`admin/structure/block`),
+  between "Primary admin actions" and "Main page content" — report_page
+  does NOT use Layout Builder
 
 **What changed:**
 - **Removed:** `hook_node_view()` from `SearchHooks` (the `formAlter` hook
@@ -58,14 +64,20 @@ matching how the global search slot (`TopicExposedFilterBlock`) works.
 - **Added:** `ReportSearchSlotBlock` plugin in `bsi_report` — a custom block
   that renders a form-only search slot and redirects submissions to the
   entry page
-- **Added:** `block_search_slot` display on the `search_yearly_report` view
+- **Added:** `block_search_report_slot` display on the `search_yearly_report`
+  view, with its own filter overrides (node_bundle, language, fulltext,
+  node_status, node_status_1 for unpublished)
 - **Added:** Form-only Twig template for the search slot display
-- **Changed:** Layout Builder enabled on `report_page.full` view mode
-- **Changed:** Search slot block placed at top of both `entry_page.full` and
-  `report_page.full` layouts via Layout Builder
-- **Changed:** LB allowlists updated to include `bsi_report_search_slot`
+- **Added:** Block placement config (`block.block.bsi_bund_report_search.yml`)
+  for report_page via Block Layout, with `entity_bundle:node` visibility
+  restricted to `report_page`
+- **Changed:** Search slot block placed in `entry_page.full` layout via LB
+- **Changed:** LB allowlists on entry_page updated to include
+  `bsi_report_search_slot`
 - **Changed:** `BlockHooks` updated to conditionally show the new block only
-  on book-linked nodes
+  on book-linked nodes in Layout Builder
+- **Changed:** Main page content block weight adjusted from -12 to -11 to
+  make room for the search slot at -12
 
 **What did NOT change (backend, pre-existing):**
 - The `search_yearly_report` view itself (query, filters, sorts, index)
@@ -76,22 +88,27 @@ matching how the global search slot (`TopicExposedFilterBlock`) works.
 - View list template and results wrapper template
 - All frontend components (searchbar, search-result, card--search)
 - The `formAlter` hook for theming the exposed form
+- `report_page.full` view display (no Layout Builder)
 
 ## Architecture
 
 ### Search Slot (report_page → entry_page redirect)
 
 ```
-┌─ report_page (Layout Builder) ──────────────────────┐
+┌─ report_page (Block Layout, NO Layout Builder) ─────┐
+│                                                      │
+│  [Primary admin actions]         (weight -13)        │
 │                                                      │
 │  ┌─ ReportSearchSlotBlock ────────────────────────┐  │
-│  │  Lagebericht durchsuchen                       │  │
+│  │  Lagebericht durchsuchen      (weight -12)     │  │
 │  │  ┌──────────────────────────────────────┬────┐ │  │
 │  │  │ Suchbegriff eingeben                 │ 🔍 │ │  │
 │  │  └──────────────────────────────────────┴────┘ │  │
 │  │  form action → /entry-page-url?search=term     │  │
+│  │  visibility: report_page only                  │  │
 │  └────────────────────────────────────────────────┘  │
 │                                                      │
+│  [Main page content]             (weight -11)        │
 │  ┌─ field_paragraphs ────────────────────────────┐   │
 │  │  (page content sections)                      │   │
 │  └───────────────────────────────────────────────┘   │
@@ -159,7 +176,7 @@ entry_page:  search param → Views exposed filter (search_api_fulltext)
 1. Gets the current node from the route
 2. Loads the book link via `BookManagerInterface::loadBookLink()`
 3. If the node is in a book, loads the `search_yearly_report` view's
-   `block_search_slot` display
+   `block_search_report_slot` display
 4. Passes the book ID as a contextual argument
 5. Sets `$view->override_url` to the entry page URL (book root = `$bid`)
 6. Applies searchbar theming via `preRender` callback
@@ -183,7 +200,9 @@ entry_page:  search param → Views exposed filter (search_api_fulltext)
 - **Base table:** `search_api_index_default` (Solr)
 - **Displays:**
   - `block_search_yearly_reports` — Full results block (form + results + pager)
-  - `block_search_slot` — Form-only search slot (no results rendered)
+  - `block_search_report_slot` — Form-only search slot (no results rendered),
+    with its own filter overrides (node_bundle, language, fulltext,
+    node_status + node_status_1 for unpublished content)
 - **Exposed filter:** `search_api_fulltext` (identifier: `search`, not required)
 - **Contextual argument:** `node_book` — default type `top_level_book`,
   overridden by `ReportSearchSlotBlock` with the resolved book ID
@@ -192,18 +211,21 @@ entry_page:  search param → Views exposed filter (search_api_fulltext)
 - **AJAX:** Enabled on results display
 - **Pager:** Full, 10 items per page
 
-#### Layout Builder Configuration
+#### Block Placement
 
-Both `entry_page` and `report_page` use Layout Builder with custom sections
-allowed. The search slot block is placed at the top of both layouts as a
-default component.
+The search slot is placed differently per content type:
 
-- **Entry page LB config:** `config/sync/core.entity_view_display.node.entry_page.full.yml`
-- **Report page LB config:** `config/sync/core.entity_view_display.node.report_page.full.yml`
+**entry_page — Layout Builder:**
+- **Config:** `config/sync/core.entity_view_display.node.entry_page.full.yml`
+- Placed as a default component at the top of the LB layout
+- Allowlisted blocks: `bsi_report_search_slot`, `views_block:search_yearly_report-block_search_yearly_reports`
 
-**Allowlisted blocks for LB:**
-- `bsi_report_search_slot` (BSI Bericht category)
-- `views_block:search_yearly_report-block_search_yearly_reports` (Lists/Views)
+**report_page — Block Layout:**
+- **Config:** `config/sync/block.block.bsi_bund_report_search.yml`
+- Placed in the `content` region at weight `-12` (between "Primary admin
+  actions" at `-13` and "Main page content" at `-11`)
+- Visibility restricted to `report_page` nodes via `entity_bundle:node`
+- report_page does NOT use Layout Builder
 
 #### Block Visibility
 
@@ -212,6 +234,8 @@ default component.
   only available in Layout Builder on nodes that are linked to a book.
   `hook_plugin_filter_block__layout_builder_alter()` removes them from the
   block list when the entity has no book link.
+- On report_page (Block Layout), the `ReportSearchSlotBlock` itself returns
+  `NULL` if the node has no book link, so it is automatically hidden.
 
 #### Search API Index: `default`
 
@@ -240,7 +264,7 @@ default component.
 
 #### Search Slot Template (form-only)
 
-- **File:** `templates/views/views-view--search-yearly-report--block-search-slot.html.twig`
+- **File:** `templates/views/views-view--search-yearly-report--block-search-report-slot.html.twig`
 - **Purpose:** Renders only `{{ exposed }}` — no results, no pager.
 
 #### Results View Template
@@ -289,10 +313,12 @@ annual report is searched.
 ### Visibility
 
 The search blocks only appear on `entry_page` and `report_page` nodes that
-are part of a book. This is enforced at two levels:
+are part of a book. This is enforced at three levels:
 1. The `ReportSearchSlotBlock` returns `NULL` if the node has no book link
 2. `BlockHooks` removes the blocks from Layout Builder's block list when
-   the entity is not linked to a book
+   the entity is not linked to a book (entry_page only)
+3. Block Layout visibility condition restricts the block to `report_page`
+   nodes (report_page only)
 
 ## Translation
 
@@ -312,15 +338,17 @@ are part of a book. This is enforced at two levels:
 | `web/modules/custom/bsi_report/src/Plugin/Block/ReportSearchSlotBlock.php` | **New** — Search slot block plugin |
 | `web/modules/custom/bsi_report/src/Hook/SearchHooks.php` | **Modified** — Removed `hook_node_view()`, kept `formAlter()` |
 | `web/modules/custom/bsi_search/src/Hook/BlockHooks.php` | **Modified** — Added `bsi_report_search_slot` to book-conditional blocks |
-| `config/sync/views.view.search_yearly_report.yml` | **Modified** — Added `block_search_slot` display |
-| `config/sync/core.entity_view_display.node.report_page.full.yml` | **Modified** — Enabled Layout Builder, placed search slot |
-| `config/sync/core.entity_view_display.node.entry_page.full.yml` | **Modified** — Added search slot block to layout |
+| `config/sync/views.view.search_yearly_report.yml` | **Modified** — Added `block_search_report_slot` display with full filter overrides |
+| `config/sync/block.block.bsi_bund_report_search.yml` | **New** — Block Layout placement for report_page (content region, weight -12) |
+| `config/sync/block.block.bsi_bund_content.yml` | **Modified** — Weight changed from -12 to -11 |
+| `config/sync/language/de/views.view.search_yearly_report.yml` | **Modified** — Added German translation for new display |
+| `config/sync/core.entity_view_display.node.entry_page.full.yml` | **Modified** — Added search slot block to LB layout |
 
 ### Frontend
 
 | File | Status |
 |---|---|
-| `templates/views/views-view--search-yearly-report--block-search-slot.html.twig` | **New** — Form-only template |
+| `templates/views/views-view--search-yearly-report--block-search-report-slot.html.twig` | **New** — Form-only template |
 | `templates/views/views-view--search-yearly-report--block-search-yearly-reports.html.twig` | Unchanged |
 | `templates/views/views-view-list--search-yearly-report.html.twig` | Unchanged |
 | `templates/content/node/node--report-page--search-result.html.twig` | Unchanged |
@@ -330,23 +358,54 @@ are part of a book. This is enforced at two levels:
 
 ## Deployment Steps
 
-1. Import config (or use `drush php:script` for individual items)
-2. Clear caches: `drush cr`
-3. Reindex search: `drush search-api:reset-tracker default && drush search-api:index default`
-4. Verify search slot appears on book-linked report pages
-5. Verify form submission from report_page redirects to entry_page
-6. Verify results display on entry_page
+1. Pull latest code (ensure `ReportSearchSlotBlock.php` is present)
+2. Import config:
+   ```bash
+   # Import individually if full config:import fails:
+   cat > /tmp/import.php << 'EOF'
+   <?php
+   $source = new \Drupal\Core\Config\FileStorage('/var/www/html/config/sync');
+   $configs = [
+     'views.view.search_yearly_report',
+     'block.block.bsi_bund_report_search',
+     'block.block.bsi_bund_content',
+     'core.entity_view_display.node.report_page.full',
+     'core.entity_view_display.node.entry_page.full',
+   ];
+   foreach ($configs as $name) {
+     \Drupal::service('config.storage')->write($name, $source->read($name));
+     echo "Imported: $name\n";
+   }
+   $lang_source = new \Drupal\Core\Config\FileStorage('/var/www/html/config/sync/language/de');
+   \Drupal::languageManager()->getLanguageConfigOverride('de', 'views.view.search_yearly_report')
+     ->setData($lang_source->read('views.view.search_yearly_report'))->save();
+   echo "Imported: de/views.view.search_yearly_report\n";
+   EOF
+   drush php:script /tmp/import.php
+   ```
+3. Clear caches: `drush cr`
+4. Reindex search: `drush search-api:reset-tracker default && drush search-api:index default`
+5. Verify search slot appears on book-linked report pages
+6. Verify form submission from report_page redirects to entry_page
+7. Verify results display on entry_page
 
 ## Testing Checklist
 
-### Search Slot (Layout Builder block)
-- [ ] Search slot appears on `entry_page` nodes that are part of a book
+### Search Slot on report_page (Block Layout)
 - [ ] Search slot appears on `report_page` nodes that are part of a book
-- [ ] Search slot does NOT appear on nodes not part of a book
+- [ ] Search slot does NOT appear on `report_page` nodes not in a book
+- [ ] Search slot does NOT appear on other content types
+- [ ] Block is visible at `admin/structure/block` between "Primary admin
+      actions" and "Main page content"
 - [ ] Heading "Lagebericht durchsuchen" displays (German)
 - [ ] Magnifying glass icon is shown (no "Apply" button)
-- [ ] Submitting from report_page redirects to entry_page with `?search=term`
-- [ ] Submitting from entry_page searches inline (AJAX)
+- [ ] Submitting redirects to entry_page with `?search=term`
+
+### Search Slot on entry_page (Layout Builder)
+- [ ] Search slot appears on `entry_page` nodes that are part of a book
+- [ ] Search slot block is available in LB for book-linked entry pages
+- [ ] Search slot block is NOT available in LB for non-book entry pages
+- [ ] Submitting searches inline (redirects to self with `?search=term`)
 
 ### Search Results (entry_page)
 - [ ] Results appear on entry_page after search
@@ -355,9 +414,4 @@ are part of a book. This is enforced at two levels:
 - [ ] Result headings are clickable links to the report section
 - [ ] Result count shows bold numbers: **1 bis 2** von **10** Ergebnissen
 - [ ] Pagination appears when results exceed 10 items
-
-### Layout Builder
-- [ ] Search slot block is available in LB for book-linked nodes
-- [ ] Search slot block is NOT available in LB for non-book nodes
-- [ ] Block can be repositioned via LB
-- [ ] Results view block can be added via LB on entry_page
+- [ ] Results view block can be added/repositioned via LB on entry_page
