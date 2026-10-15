@@ -365,7 +365,7 @@ display:
             min_count: 1
             missing: false
             missing_label: others
-            show_numbers: false
+            show_numbers: true
             show_only_one_result: false
             depends_on_exposed_filter: ''
             processor_configs:
@@ -439,7 +439,7 @@ display:
             min_count: 1
             missing: false
             missing_label: others
-            show_numbers: false
+            show_numbers: true
             show_only_one_result: false
             depends_on_exposed_filter: ''
             processor_configs:
@@ -513,7 +513,7 @@ display:
             min_count: 1
             missing: false
             missing_label: others
-            show_numbers: false
+            show_numbers: true
             show_only_one_result: false
             depends_on_exposed_filter: ''
             processor_configs:
@@ -581,7 +581,7 @@ display:
             min_count: 1
             missing: false
             missing_label: others
-            show_numbers: false
+            show_numbers: true
             show_only_one_result: false
             depends_on_exposed_filter: ''
             processor_configs:
@@ -750,47 +750,47 @@ display:
                   is_secondary: false
                   hide_label: false
               field_topics:
-                plugin_id: default
+                plugin_id: bef_checkboxes
                 advanced:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: false
-                  collapsible_disable_automatic_open: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: true
                   is_secondary: false
                   hide_label: false
               field_audiences:
-                plugin_id: default
+                plugin_id: bef_checkboxes
                 advanced:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: false
-                  collapsible_disable_automatic_open: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: true
                   is_secondary: false
                   hide_label: false
               year_filter:
-                plugin_id: default
+                plugin_id: bef_checkboxes
                 advanced:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: false
-                  collapsible_disable_automatic_open: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: true
                   is_secondary: false
                   hide_label: false
               node_bundle:
-                plugin_id: default
+                plugin_id: bef_checkboxes
                 advanced:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: false
-                  collapsible_disable_automatic_open: false
+                  collapsible: true
+                  collapsible_disable_automatic_open: true
                   is_secondary: false
                   hide_label: false
       sorts:

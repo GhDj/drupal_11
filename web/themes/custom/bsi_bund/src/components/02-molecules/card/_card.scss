@@ -208,5 +208,23 @@
       --#{$nsp}-link-color: var(--bsi-color-black);
       --#{$nsp}-link-decoration-line: underline;
     }
+
+    &__divider {
+      border: 0;
+      border-top: 1px solid var(--#{$nsp}-color-neutral-250);
+      margin: var(--#{$nsp}-space-sm) 0;
+    }
+
+    &__cta {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--#{$nsp}-space-xs);
+    }
+
+    &__accessibility {
+      color: var(--#{$nsp}-color-typo-secondary);
+      font-size: 14px;
+    }
   }
 }

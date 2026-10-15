@@ -51,6 +51,24 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  field_media_file:
+    type: file_default
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_accessibility:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
   field_use_cart:
     type: boolean
     label: hidden
@@ -77,9 +95,7 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
-  field_accessibility: true
   field_copyright: true
-  field_media_file: true
   field_tags: true
   langcode: true
   search_api_excerpt: true

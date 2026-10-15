@@ -1,0 +1,81 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.search_result
+    - field.field.media.download.field_accessibility
+    - field.field.media.download.field_body
+    - field.field.media.download.field_copyright
+    - field.field.media.download.field_media_file
+    - field.field.media.download.field_publication_date
+    - field.field.media.download.field_tags
+    - media.type.download
+  module:
+    - bsi_custom
+    - text_summary_formatter
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.download.search_result
+targetEntityType: media
+bundle: download
+mode: search_result
+content:
+  field_body:
+    type: text_summary_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_media_file:
+    type: file_default
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_accessibility:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_publication_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: date_short
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: true
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_copyright: true
+  field_tags: true
+  langcode: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

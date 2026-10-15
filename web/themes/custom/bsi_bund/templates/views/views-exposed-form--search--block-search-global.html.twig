@@ -3,7 +3,7 @@
  * @file
  * Exposed form for global search.
  *
- * Renders facet filters as bsi-search-dropdown components.
+ * Renders fulltext search and facet filters (checkboxes with counts).
  * The sort_bef_combine element is excluded here — the parent view template
  * places it separately in the bsi-search-result area.
  */
@@ -16,11 +16,11 @@
   </div>
 {% endif %}
 
-{# Facet filter dropdowns #}
-{% set facet_keys = ['audiences', 'topics', 'year', 'type'] %}
+{# Facet filter checkboxes — each renders as a collapsible fieldset #}
+{% set facet_keys = ['type', 'topics', 'audiences', 'year'] %}
 {% for key in facet_keys %}
   {% if form[key] is defined %}
-    <div class="bsi-search-dropdown">
+    <div class="bsi-searchfilter__filter">
       {{ form[key] }}
     </div>
   {% endif %}

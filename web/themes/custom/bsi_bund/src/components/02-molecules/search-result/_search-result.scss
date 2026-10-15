@@ -103,36 +103,73 @@
       }
     }
 
-    // Style select elements inside the filter dropdown wrappers
-    .#{$nsp}-search-dropdown {
-      position: relative;
-
-      select {
-        -webkit-appearance: none;
-        appearance: none;
-        background-color: var(--#{$nsp}-color-blue-150);
+    // Collapsible checkbox filter sections
+    .#{$nsp}-searchfilter__filter {
+      fieldset {
         border: 0;
+        margin: 0;
+        padding: 0;
+      }
+
+      legend {
+        background-color: var(--#{$nsp}-color-blue-150);
         border-radius: 4px;
         color: var(--#{$nsp}-color-blue-800);
         cursor: pointer;
+        display: block;
         font-size: 16px;
-        padding-block: var(--#{$nsp}-space-sm);
-        padding-inline: var(--#{$nsp}-space-lg) 50px;
+        padding: var(--#{$nsp}-space-sm) var(--#{$nsp}-space-lg);
+        position: relative;
         width: 100%;
 
-        &:focus-visible {
-          outline: 2px solid;
-          outline-color: var(--#{$nsp}-color-base-focus);
-          outline-offset: 2px;
+        &::after {
+          border-bottom: 1.5px solid var(--#{$nsp}-color-blue-800);
+          border-right: 1.5px solid var(--#{$nsp}-color-blue-800);
+          content: "";
+          height: var(--#{$nsp}-space-2xs);
+          pointer-events: none;
+          position: absolute;
+          right: var(--#{$nsp}-space-lg);
+          top: 50%;
+          transform: translateY(-65%) rotate(45deg);
+          transition: transform 0.2s ease;
+          width: var(--#{$nsp}-space-2xs);
         }
       }
 
-      // Visually hide Drupal-generated labels inside filter dropdowns
+      // BEF collapsible: collapsed state
+      .fieldset-wrapper {
+        max-height: 200px;
+        overflow-y: auto;
+        padding: var(--#{$nsp}-space-xs) 0;
+      }
+
+      // Checkbox items
+      .form-item {
+        align-items: center;
+        display: flex;
+        gap: var(--#{$nsp}-space-xs);
+        padding: var(--#{$nsp}-space-3xs) 0;
+      }
+
+      input[type="checkbox"] {
+        accent-color: var(--#{$nsp}-color-blue-800);
+        cursor: pointer;
+        flex-shrink: 0;
+        height: 18px;
+        width: 18px;
+      }
+
       label {
-        overflow: hidden;
-        position: absolute;
-        white-space: nowrap;
-        width: 1px;
+        color: var(--#{$nsp}-color-typo-primary);
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      // Facet count
+      .facet-count {
+        color: var(--#{$nsp}-color-typo-secondary);
+        font-size: 14px;
       }
     }
   }

@@ -1,12 +1,9 @@
 /**
  * Global search filter behavior:
- * - Renders active filter pills from selected facet values
+ * - Renders active filter pills from checked facet checkboxes
  * - Provides "Alle Filter zurücksetzen" reset link
- * - Mobile toggle to show/hide filter dropdowns
+ * - Mobile toggle to show/hide filter sections
  */
-
-const PILL_CLASS = "bsi-pill";
-const PILL_VARIANT = "bsi-pill--default";
 
 export default function SearchFilter(): void {
   const view = document.querySelector(
@@ -22,26 +19,12 @@ function initActiveFilterPills(view: Element): void {
   const bottom = view.querySelector(".js-searchfilter-bottom");
   if (!bottom) return;
 
-  const selects = view.querySelectorAll<HTMLSelectElement>(
-    ".bsi-searchfilter__top .bsi-search-dropdown select"
+  // Collect checked checkboxes from facet filters
+  const checkboxes = view.querySelectorAll<HTMLInputElement>(
+    ".bsi-searchfilter__filter input[type='checkbox']:checked"
   );
 
-  const activeFilters: { label: string; select: HTMLSelectElement; value: string }[] = [];
-
-  selects.forEach(select => {
-    const selectedOptions = Array.from(select.selectedOptions);
-    selectedOptions.forEach(option => {
-      if (option.value && option.value !== "" && option.value !== "All") {
-        activeFilters.push({
-          label: option.textContent?.trim() || option.value,
-          select,
-          value: option.value,
-        });
-      }
-    });
-  });
-
-  if (activeFilters.length === 0) {
+  if (checkboxes.length === 0) {
     bottom.innerHTML = "";
     return;
   }
@@ -54,24 +37,21 @@ function initActiveFilterPills(view: Element): void {
   heading.textContent = "Aktive Filter";
   pillsContainer.appendChild(heading);
 
-  activeFilters.forEach(({ label, select, value }) => {
+  checkboxes.forEach(checkbox => {
+    const label = checkbox.parentElement?.querySelector("label");
+    const labelText = label?.textContent?.replace(/\(\d+\)$/, "").trim() || checkbox.value;
+
     const pill = document.createElement("button");
     pill.type = "button";
-    pill.className = `bsi-button bsi-button--tertiary ${PILL_CLASS} ${PILL_VARIANT}`;
-    pill.setAttribute("aria-label", `${label} entfernen`);
-    pill.innerHTML = `<span class="bsi-button__text">${label}</span>
+    pill.className = "bsi-button bsi-button--tertiary bsi-pill bsi-pill--default";
+    pill.setAttribute("aria-label", `${labelText} entfernen`);
+    pill.innerHTML = `<span class="bsi-button__text">${labelText}</span>
       <span class="bsi-icon bsi-icon--cross bsi-button__icon--after" aria-hidden="true"></span>`;
 
     pill.addEventListener("click", () => {
-      // Deselect the option
-      const option = select.querySelector<HTMLOptionElement>(
-        `option[value="${CSS.escape(value)}"]`
-      );
-      if (option) option.selected = false;
-
-      // Trigger change and submit
-      select.dispatchEvent(new Event("change", { bubbles: true }));
-      const form = select.closest("form");
+      checkbox.checked = false;
+      checkbox.dispatchEvent(new Event("change", { bubbles: true }));
+      const form = checkbox.closest("form");
       if (form) {
         const submit = form.querySelector<HTMLButtonElement>(
           '[data-drupal-selector="edit-submit-search"]'
