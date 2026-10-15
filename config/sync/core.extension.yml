@@ -29,6 +29,7 @@ module:
   ckeditor_abbreviation: 0
   config: 0
   config_ignore: 0
+  config_language_lock: 0
   config_pages: 0
   config_split: 0
   config_translation: 0
@@ -98,6 +99,7 @@ module:
   menu_entity_index: 0
   menu_item_fields: 0
   menu_item_fields_ui: 0
+  menu_link_attributes: 0
   menu_link_content: 0
   menu_multilingual: 0
   menu_ui: 0

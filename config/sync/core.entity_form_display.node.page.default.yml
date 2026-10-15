@@ -102,7 +102,7 @@ third_party_settings:
         show_empty_fields: false
         id: ''
         label_as_html: false
-        formatter: closed
+        formatter: open
         description: ''
         required_fields: true
     group_linkbox:
@@ -165,7 +165,7 @@ third_party_settings:
         - field_icon
         - field_parents
         - field_teaser_tiles
-      label: 'Teaser tiles'
+      label: 'Tiles teaser'
       region: content
       parent_name: group_tabs
       weight: 16
@@ -181,7 +181,7 @@ third_party_settings:
     group_teaser_explorer:
       children:
         - field_explorer_image
-      label: 'Teaser - Explorer'
+      label: 'Explorer teaser'
       region: content
       parent_name: group_tabs
       weight: 18

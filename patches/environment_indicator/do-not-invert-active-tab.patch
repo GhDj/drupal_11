@@ -1,0 +1,18 @@
+--- a/css/environment_indicator.css
++++ b/css/environment_indicator.css
+@@ -72,8 +72,14 @@
+ }
+
+ /*  @todo: Remove everything below this comment in environment_indicator:5.0.0. */
+-.toolbar .toolbar-bar .toolbar-tab > a.toolbar-icon.is-active::before {
++/*.toolbar .toolbar-bar .toolbar-tab > a.toolbar-icon.is-active::before {
+   filter: invert(0%);
++}*/
++.toolbar-icon-system-admin-group::before {
++    background-image: url('/modules/contrib/group/assets/icons/gray.svg');
++}
++.toolbar-icon-system-admin-group.is-active::before {
++    background-image: url('/modules/contrib/group/assets/icons/black.svg');
+ }
+
+ .toolbar .toolbar-bar .toolbar-tab > a.toolbar-icon.is-active {

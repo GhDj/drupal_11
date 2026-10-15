@@ -32,14 +32,16 @@
   .#{$nsp}-linklist__list-item {
     line-height: 1;
   }
+
   &__content {
     display: flex;
     flex-direction: column;
-    gap: 0 var(--#{$nsp}-size-2xl);
+    gap: var(--#{$nsp}-size-2xl) 0;
     width: 100%;
 
     @include breakpoint-lg {
       flex-direction: row;
+      gap: 0 var(--#{$nsp}-size-2xl);
     }
     .bsi-link__content {
       display: inline;

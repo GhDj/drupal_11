@@ -1,0 +1,72 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 95561c7f-e5b0-4a22-a927-21666c442c29
+  bundle: menu_link_content
+  default_langcode: de
+translations:
+  en:
+    title:
+      -
+        value: 'Privacy settings'
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_id: 1
+    content_translation_status:
+      -
+        value: true
+    content_translation_created:
+      -
+        value: 1791809208
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Datenschutzeinstellungen
+  menu_name:
+    -
+      value: footer
+  link:
+    -
+      uri: 'internal:#klaro'
+      resolvable_uri: '#klaro'
+      title: ''
+      options:
+        container_attributes:
+          class:
+            - open-consent-manager
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: -48
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1791809171

@@ -17,7 +17,7 @@ display:
             format_custom_false: Temporär
             format_custom_true: Dauerhaft
         created:
-          label: Upload-Datum
+          label: Hochladedatum
         changed:
           label: Änderungsdatum
         count:

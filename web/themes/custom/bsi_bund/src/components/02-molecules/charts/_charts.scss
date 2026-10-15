@@ -46,3 +46,18 @@
     }
   }
 }
+
+// Chart Lightbox
+// -----------------------------------------------------------------------------
+.#{$nsp}-chart-lightbox {
+
+  &__title {
+    margin-bottom: var(--#{$nsp}-space-2xs);
+  }
+
+  &__body {
+    color: var(--#{$nsp}-color-typo-secondary);
+    margin: 0 auto;
+    max-width: 640px;
+  }
+}

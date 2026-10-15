@@ -23,9 +23,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * redirects to the book's entry page so results are shown there.
  */
 #[Block(
-  id: 'bsi_report_search_slot',
-  admin_label: new TranslatableMarkup('Report search slot'),
-  category: new TranslatableMarkup('BSI Bericht'),
+    id: 'bsi_report_search_slot',
+    admin_label: new TranslatableMarkup('Report search slot'),
+    category: new TranslatableMarkup('BSI Bericht'),
 )]
 class ReportSearchSlotBlock extends BlockBase implements ContainerFactoryPluginInterface, TrustedCallbackInterface {
 
@@ -44,12 +44,12 @@ class ReportSearchSlotBlock extends BlockBase implements ContainerFactoryPluginI
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('book.manager'),
-      $container->get('current_route_match'),
-    );
+          $configuration,
+          $plugin_id,
+          $plugin_definition,
+          $container->get('book.manager'),
+          $container->get('current_route_match'),
+      );
   }
 
   /**
@@ -58,19 +58,25 @@ class ReportSearchSlotBlock extends BlockBase implements ContainerFactoryPluginI
   public function build(): array|null {
     $node = $this->currentRouteMatch->getParameter('node');
     if (!$node instanceof NodeInterface) {
-      return NULL;
+      return [
+        '#plain_text' => $this->t('Not a node.'),
+      ];
     }
 
     $bookLink = $this->bookManager->loadBookLink((int) $node->id());
     if (empty($bookLink['bid'])) {
-      return NULL;
+      return [
+        '#plain_text' => $this->t('No book found.'),
+      ];
     }
 
     $bid = (string) $bookLink['bid'];
 
     $view = Views::getView('search_yearly_report');
     if (!$view) {
-      return NULL;
+      return [
+        '#plain_text' => $this->t('No view found.'),
+      ];
     }
 
     $view->setDisplay('block_search_report_slot');
@@ -85,8 +91,12 @@ class ReportSearchSlotBlock extends BlockBase implements ContainerFactoryPluginI
     $view->execute();
     $render = $view->render();
 
+    // If render() returns NULL, return a safe fallback.
+    // Required by Layout Builder.
     if (!is_array($render)) {
-      return NULL;
+      return [
+        '#plain_text' => $this->t('Unable to render the view.'),
+      ];
     }
 
     $render['#pre_render'][] = [$this, 'preRender'];

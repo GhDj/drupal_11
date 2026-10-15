@@ -14,6 +14,8 @@ third_party_settings:
       label: Auswertung
     group_certification:
       label: Zertifizierung
+    group_teaser_explorer:
+      label: Explorer-Teaser
 content:
   body:
     third_party_settings:

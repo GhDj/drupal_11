@@ -40,7 +40,7 @@ content:
     region: content
   field_source:
     type: link
-    label: hidden
+    label: inline
     settings:
       trim_length: 80
       url_only: false
@@ -61,7 +61,7 @@ content:
     type: plain_text_formatted
     label: hidden
     settings:
-      link_to_entity: true
+      link_to_entity: false
       link_rel: canonical
       text_format: plain_text
     third_party_settings: {  }

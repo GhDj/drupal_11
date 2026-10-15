@@ -1,0 +1,12 @@
+favicon:
+  mimetype: image/vnd.microsoft.icon
+  path: themes/custom/bsi_bund/favicon.ico
+  use_default: false
+features:
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  node_user_picture: false
+logo:
+  path: themes/custom/bsi_bund/logo.svg
+  use_default: false

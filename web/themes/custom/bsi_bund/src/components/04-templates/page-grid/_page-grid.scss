@@ -33,3 +33,15 @@
     }
   }
 }
+
+.#{$nsp}-page-grid--search {
+  .#{$nsp}-page-grid {
+    &__main {
+      padding-top: var(--#{$nsp}-space-md);
+
+      @include breakpoint-lg {
+        padding-top: 0;
+      }
+    }
+  }
+}

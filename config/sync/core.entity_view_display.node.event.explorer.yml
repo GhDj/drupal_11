@@ -24,7 +24,7 @@ dependencies:
     - bsi_custom
     - datetime_range
     - layout_builder
-    - text
+    - text_summary_formatter
 third_party_settings:
   layout_builder:
     enabled: false
@@ -35,7 +35,7 @@ bundle: event
 mode: explorer
 content:
   body:
-    type: text_default
+    type: text_summary_formatter
     label: hidden
     settings: {  }
     third_party_settings: {  }
@@ -52,6 +52,15 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  field_explorer_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser_triplet
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
   field_location:
     type: string
     label: hidden
@@ -60,15 +69,6 @@ content:
       link_rel: canonical
     third_party_settings: {  }
     weight: 2
-    region: content
-  field_media:
-    type: entity_reference_entity_view
-    label: hidden
-    settings:
-      view_mode: teaser_single
-      link: false
-    third_party_settings: {  }
-    weight: 0
     region: content
   title:
     type: plain_text_formatted
@@ -91,9 +91,9 @@ hidden:
   field_downloads: true
   field_downloads_title: true
   field_event_type: true
-  field_explorer_image: true
   field_links: true
   field_links_title: true
+  field_media: true
   field_metatags: true
   field_paragraphs: true
   field_tags: true

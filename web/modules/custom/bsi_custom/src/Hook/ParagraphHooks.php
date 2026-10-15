@@ -112,8 +112,16 @@ class ParagraphHooks {
     }
 
     if (isset($form['field_display_animate'])) {
+      $parents = $form['field_display_variant']['#parents'];
+      $selector = sprintf(
+        ':input[name*="%s[%s][subform][field_display_variant]"]',
+        $parents[0],
+        $parents[1]
+      );
       $form['field_display_animate']['#states']['visible'] = [
-        ':input[name*="[subform][field_display_variant]"]' => ['value' => 'timeline'],
+        $selector => [
+          'value' => 'timeline',
+        ],
       ];
     }
   }

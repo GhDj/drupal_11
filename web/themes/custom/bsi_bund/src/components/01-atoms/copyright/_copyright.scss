@@ -14,4 +14,8 @@
   + .#{$nsp}-image__caption-text {
     margin-top: var(--#{$nsp}-space-sm);
   }
+
+  a {
+    color: var(--#{$nsp}-color-typo-secondary);
+  }
 }

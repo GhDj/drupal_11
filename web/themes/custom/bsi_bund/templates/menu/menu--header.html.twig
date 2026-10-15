@@ -17,6 +17,8 @@
 
           {% if item.url.isExternal() %}
             {% set target = '_blank' %}
+          {% else %}
+            {% set target = '' %}
           {% endif %}
 
           {% include '@bsi_bund/elements/link.html.twig' with {

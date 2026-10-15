@@ -67,7 +67,7 @@ third_party_settings:
         show_empty_fields: false
         id: ''
         label_as_html: false
-        formatter: closed
+        formatter: open
         description: ''
         required_fields: true
     group_terms:
@@ -75,7 +75,7 @@ third_party_settings:
         - field_topics
         - field_audiences
         - field_tags
-      label: Begriffe
+      label: Terms
       region: content
       parent_name: group_tabs
       weight: 7
@@ -195,7 +195,7 @@ third_party_settings:
     group_teaser_explorer:
       children:
         - field_explorer_image
-      label: 'Teaser - Explorer'
+      label: 'Explorer teaser'
       region: content
       parent_name: group_tabs
       weight: 8

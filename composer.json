@@ -48,6 +48,7 @@
         "drupal/ckeditor5_inline_quote": "^1.1",
         "drupal/ckeditor_abbreviation": "^5.0",
         "drupal/config_ignore": "^3.4",
+        "drupal/config_language_lock": "^1.0",
         "drupal/config_pages": "^2.22",
         "drupal/config_split": "^2.0",
         "drupal/core-recipe-unpack": "^11.3",
@@ -89,6 +90,7 @@
         "drupal/menu_breadcrumb": "^2.0",
         "drupal/menu_entity_index": "^1.7",
         "drupal/menu_item_fields": "^2.1",
+        "drupal/menu_link_attributes": "^1.10",
         "drupal/menu_multilingual": "^2.0",
         "drupal/metatag": "^2.2",
         "drupal/migrate_plus": "^6.0",
@@ -246,7 +248,9 @@
                 "Skip empty values in text_default formatter":
                     "patches/drupal/text_default-formatter-skip-empty.patch",
                 "Media: Retain thumbnail alt text if thumbnail is unchanged":
-                    "patches/drupal/media-retain_thumbnail_alt.patch"
+                    "patches/drupal/media-retain_thumbnail_alt.patch",
+                "Wrong language field labels after `drush cr` (3221375-MR13139)":
+                    "patches/drupal/config-translation-overrides-incorrectly-cached.patch"
             },
             "drupal/default_content": {
                 "Add export action plugin":
@@ -257,6 +261,10 @@
                     "patches/default_content/default_content-3160146-layout-builder-support-MR-15-87.patch",
                 "Import should overwrite files (3200212-MR54)":
                     "patches/default_content/import_should_overwrite_files-3200212.patch"
+            },
+            "drupal/environment_indicator": {
+                "Do not invert active tab color + [unrelated] restore group toolbar icon":
+                    "patches/environment_indicator/do-not-invert-active-tab.patch"
             },
             "drupal/field_validation": {
                 "Error messages are not translatable":
@@ -283,10 +291,6 @@
                     "patches/group/more_robust_update_hook.patch",
                 "Group updb error (3620824)":
                     "patches/group/group_updb_error.patch"
-            },
-            "drupal/groupmedia": {
-                "Allow installation on Group 4.x (3591655-MR47)":
-                    "patches/groupmedia/group_4.x_compat-3591655.patch"
             },
             "drupal/klaro": {
                 "Require consent even if all apps are required":

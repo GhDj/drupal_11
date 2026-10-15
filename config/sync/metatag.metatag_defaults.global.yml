@@ -12,16 +12,16 @@ tags:
   description: '[site:slogan]'
   generator: 'Drupal 11 (https://www.drupal.org)'
   google_site_verification: PQGOwbYQDXCrOHMoHTFCh1I3b_OXc7qOYH8RsROhtQk
-  msapplication_square150x150logo: '/SiteGlobals/Frontend/Images/favicons/mstile-144x144.png?__blob=normal&v=3'
-  msapplication_square310x310logo: '/SiteGlobals/Frontend/Images/favicons/mstile-270x270.png?__blob=normal&v=3'
-  msapplication_square70x70logo: '/SiteGlobals/Frontend/Images/favicons/mstile-144x144.png?__blob=normal&v=3 Maße: square128x128, square144x144, square270x270, square558x558, wide558x270'
+  msapplication_square150x150logo: /themes/custom/bsi_bund/src/assets/default/favicon/mstile-150x150.png
+  msapplication_square310x310logo: /themes/custom/bsi_bund/src/assets/default/favicon/mstile-310x310.png
+  msapplication_square70x70logo: /themes/custom/bsi_bund/src/assets/default/favicon/mstile-70x70.png
   msapplication_tilecolor: '#066c94'
-  msapplication_tileimage: '/SiteGlobals/Frontend/Images/favicons/mstile-144x144.png?__blob=normal&v=3'
-  msapplication_wide310x150logo: '/SiteGlobals/Frontend/Images/favicons/mstile-558x270.png?__blob=normal&v=3'
-  og_image: 'https://www.bsi.bund.de/_config/DefaultSocialMediaImage.jpg?__blob=value&v=4'
-  og_image_height: '781'
+  msapplication_tileimage: /themes/custom/bsi_bund/src/assets/default/favicon/mstile-150x150.png
+  msapplication_wide310x150logo: /themes/custom/bsi_bund/src/assets/default/favicon/mstile-310x150.png
+  og_image: /themes/custom/bsi_bund/src/assets/default/favicon/android-chrome-512x512.png
+  og_image_height: '512'
   og_image_type: image/jpeg
-  og_image_width: '1388'
+  og_image_width: '512'
   og_locale: '[language:langcode]'
   og_site_name: '[site:name]'
   og_title: '[current-page:title]'

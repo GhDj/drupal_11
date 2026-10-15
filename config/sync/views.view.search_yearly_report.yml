@@ -184,7 +184,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
           group: 1
           exposed: false
           expose:
@@ -370,27 +370,6 @@ display:
           content: '<strong>@start to @end</strong>&nbsp;of&nbsp;<strong>@total</strong>&nbsp;results'
       footer: {  }
       display_extenders: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:search_api.index.default'
-        - 'search_api_list:default'
-  block_search_yearly_reports:
-    id: block_search_yearly_reports
-    display_title: 'Search Yearly Reports'
-    display_plugin: block
-    position: 1
-    display_options:
-      display_description: ''
-      exposed_block: false
-      display_extenders: {  }
-      block_description: 'Search Yearly Report'
     cache_metadata:
       max-age: -1
       contexts:
@@ -628,6 +607,27 @@ display:
       exposed_block: false
       display_extenders: {  }
       block_description: 'Search Report Slot'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:search_api.index.default'
+        - 'search_api_list:default'
+  block_search_yearly_reports:
+    id: block_search_yearly_reports
+    display_title: 'Search Yearly Reports'
+    display_plugin: block
+    position: 1
+    display_options:
+      display_description: ''
+      exposed_block: false
+      display_extenders: {  }
+      block_description: 'Search Yearly Report'
     cache_metadata:
       max-age: -1
       contexts:

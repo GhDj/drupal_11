@@ -27,3 +27,7 @@ libraries-override:
     css:
       base:
         css/base/elements.css: {}
+  claro/claro.drupal.dialog:
+    css:
+      theme:
+        css/components/dialog.css: false

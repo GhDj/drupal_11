@@ -10,6 +10,8 @@ third_party_settings:
       label: Kachelteaser
       format_settings:
         description: 'Kachelteaser werden unter dem Inhalt ausgespielt, um den Nutzer bei der Navigation durch die Webseite zu unterstützen.'
+    group_teaser_explorer:
+      label: Explorer-Teaser
 content:
   field_downloads_title:
     settings:

@@ -12,3 +12,5 @@ third_party_settings:
       label: Sicherheitskennzeichen
     group_info:
       label: 'Zusätzliche Informationen'
+    group_teaser_explorer:
+      label: Explorer-Teaser

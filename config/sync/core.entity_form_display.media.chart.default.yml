@@ -69,7 +69,7 @@ content:
     weight: 4
     region: content
     settings:
-      change_default_library: true
+      change_default_library: false
     third_party_settings: {  }
   field_source:
     type: link_default

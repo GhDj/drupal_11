@@ -72,8 +72,13 @@
 
   .#{$nsp}-searchbar__title,
   .view-filters {
+    display: block;
     margin-inline: auto;
     max-width: 960px;
+  }
+
+  .#{$nsp}-search-result__head {
+    margin-top: 24px;
   }
 
   // Autocomplete dropdown
@@ -87,9 +92,9 @@
     z-index: 10;
 
     .ui-menu-item-wrapper {
+      align-items: center;
       display: flex;
       justify-content: space-between;
-      align-items: center;
       padding: var(--#{$nsp}-space-xs) var(--#{$nsp}-space-md);
 
       &.ui-state-active {

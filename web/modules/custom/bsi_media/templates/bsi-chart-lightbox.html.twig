@@ -1,19 +1,22 @@
-<div class="chart-lightbox">
-
+<div class="bsi-chart-lightbox">
   {% if section_title %}
-    <h2 class="chart-lightbox__title">
+    <h2 class="bsi-chart-lightbox__title">
       {{ section_title }}
     </h2>
   {% endif %}
 
-  <div class="chart-lightbox__media">
+  <div class="bsi-chart-lightbox__chart">
     {{ media_view }}
   </div>
 
-  {% if body %}
-    <div class="chart-lightbox__body">
-      {{ body }}
+  <div class="bsi-grid">
+    <div class="bsi-grid-indented">
+      {% if body %}
+        <div class="bsi-chart-lightbox__body">
+          {{ body }}
+        </div>
+      {% endif %}
     </div>
-  {% endif %}
+  </div>
 
 </div>

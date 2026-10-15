@@ -121,7 +121,9 @@ class TopicExposedFilterBlock extends BlockBase implements ContainerFactoryPlugi
         $tid = $node->get('field_topics')->target_id;
       }
       else {
-        return NULL;
+        return [
+          '#plain_text' => $this->t('No topic found.'),
+        ];
       }
     }
 

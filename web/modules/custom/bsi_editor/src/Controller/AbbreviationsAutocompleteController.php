@@ -4,6 +4,8 @@ namespace Drupal\bsi_editor\Controller;
 
 use Drupal\Core\Cache\CacheableJsonResponse;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Language\LanguageInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -20,9 +22,13 @@ class AbbreviationsAutocompleteController extends ControllerBase {
    */
   public function __invoke(?string $input = NULL): JsonResponse {
     $storage = $this->entityTypeManager()->getStorage('taxonomy_term');
+    $langcode = $this->languageManager()
+      ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
+      ->getId();
 
     $query = $storage->getQuery()
       ->condition('vid', 'abbreviations')
+      ->condition('langcode', $langcode)
       ->range(0, static::MAX_RESULT_COUNT)
       ->sort('name', 'ASC')
       ->accessCheck(TRUE);
@@ -38,10 +44,13 @@ class AbbreviationsAutocompleteController extends ControllerBase {
     }
 
     $terms = $storage->loadMultiple($query->execute());
+    $terms = array_map(
+      static fn (ContentEntityInterface $entity) => $entity->getTranslation($langcode),
+      $terms,
+    );
 
     $results = [];
     foreach ($terms as $term) {
-      /** @var \Drupal\taxonomy\TermInterface $term */
       $results[$term->label()][] = [
         'abbreviation' => $term->label(),
         'title' => $term->getDescription(),

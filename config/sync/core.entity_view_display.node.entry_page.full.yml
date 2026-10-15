@@ -36,16 +36,6 @@ third_party_settings:
           label: ''
           context_mapping: {  }
         components:
-          d3e4f5a6-b7c8-9012-def0-a34567890123:
-            uuid: d3e4f5a6-b7c8-9012-def0-a34567890123
-            region: content
-            configuration:
-              id: bsi_report_search_slot
-              label: 'Report search slot'
-              label_display: '0'
-              provider: bsi_report
-            weight: 0
-            additional: {  }
           63f4f82a-9466-4ef3-9d07-e0f780eda76f:
             uuid: 63f4f82a-9466-4ef3-9d07-e0f780eda76f
             region: content

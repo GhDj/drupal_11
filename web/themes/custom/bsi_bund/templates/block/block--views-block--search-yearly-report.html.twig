@@ -9,11 +9,11 @@
 #}
 {%
   set classes = [
-    'block',
-    'block-' ~ configuration.provider|clean_class,
-    'block-' ~ plugin_id|clean_class,
-    'bsi-report-search',
-  ]
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  'bsi-report-search',
+]
 %}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}

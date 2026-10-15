@@ -15,6 +15,7 @@ import { sidemenuTemplate } from "@molecules/sidemenu/sidemenu.template";
 
 // Arguments accepted by the template
 export interface PageGridTemplateArgs {
+  extraClass?: string;
   showStage: boolean;
   showAnchors?: boolean;
   showBreadcrumb?: boolean;
@@ -27,6 +28,7 @@ export interface PageGridTemplateArgs {
 
 // Return the HTML string for the Hub page
 export function pageGridTemplate({
+  extraClass = "",
   showStage,
   showAnchors,
   showBreadcrumb = true,
@@ -58,7 +60,7 @@ export function pageGridTemplate({
     mainSlot ?? `${placeholderTemplate({ label: "Main Content" })}`;
 
   return html`
-    <div class="${nsp("page-grid")}">
+    <div class="${nsp("page-grid", extraClass)}">
       <!-- Header-->
       ${headerTemplate({})}
 

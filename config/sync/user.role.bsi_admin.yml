@@ -225,6 +225,7 @@ permissions:
   - 'manage editoria11y results'
   - 'mark as ok in editoria11y'
   - 'paste tablefield'
+  - 'rabbit hole administer media'
   - 'rabbit hole bypass media'
   - 'rabbit hole bypass taxonomy_term'
   - 'reorder book pages'

@@ -20,3 +20,5 @@ third_party_settings:
       label: Sprache
     group_terms:
       label: Begriffe
+    group_teaser_explorer:
+      label: Explorer-Teaser

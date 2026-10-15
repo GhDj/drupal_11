@@ -16,6 +16,7 @@
     _deduplicateLegend(event) {
       const options = event.detail.options;
       const originalGenerateLabels = options.plugins.legend.labels.generateLabels
+        ?? Chart.overrides[event.detail.type]?.plugins?.legend.labels.generateLabels
         ?? Chart.defaults.plugins.legend.labels.generateLabels;
 
       options.plugins.legend.labels.generateLabels = (chart) => {
@@ -23,28 +24,34 @@
         const seen = new Set();
 
         return items.filter((item) => {
-          const dataset = chart.data.datasets[item.datasetIndex];
-          const key = Drupal.behaviors.bsiCharts._datasetKey(dataset);
-
+          const key = Drupal.behaviors.bsiCharts._legendItemKey(item);
           return seen.has(key) ? false : (seen.add(key) && true);
         });
       };
 
       options.plugins.legend.onClick = (event, legendItem, legend) => {
         const chart = legend.chart;
-        const sourceDataset = chart.data.datasets[legendItem.datasetIndex];
-        const visible = chart.isDatasetVisible(legendItem.datasetIndex);
+        const legendItems = originalGenerateLabels(chart);
+        const clickedKey = Drupal.behaviors.bsiCharts._legendItemKey(legendItem);
 
-        chart.data.datasets.forEach((dataset, index) => {
-          if (Drupal.behaviors.bsiCharts._datasetKey(dataset) === Drupal.behaviors.bsiCharts._datasetKey(sourceDataset)) {
-            chart.setDatasetVisibility(index, !visible);
-          }
-        });
-        chart.update();
-      };
+        legendItems
+          .filter((item) =>
+            Drupal.behaviors.bsiCharts._legendItemKey(item) === clickedKey
+          )
+          .forEach((item) => {
+            if (item.datasetIndex !== undefined) {
+              const visible = chart.isDatasetVisible(item.datasetIndex);
+              chart.setDatasetVisibility(item.datasetIndex, !visible);
+            }
+            else if (item.index !== undefined) {
+              chart.toggleDataVisibility(item.index);
+            }
+          });
+          chart.update();
+        };
     },
-    _datasetKey(dataset) {
-      return JSON.stringify([dataset.label, dataset.backgroundColor]);
+    _legendItemKey(item) {
+      return JSON.stringify([ item.text, item.fillStyle ]);
     }
   };
 

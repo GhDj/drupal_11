@@ -39,8 +39,11 @@
 @forward "@molecules/60-sec/60-sec";
 @forward "@molecules/intro/intro";
 @forward "@molecules/downloads/downloads";
+@forward "@molecules/search-dropdown/search-dropdown";
+@forward "@molecules/searchfilter/searchfilter";
 @forward "@molecules/searchbar/searchbar";
 @forward "@molecules/searchmenu/searchmenu";
+@forward "@molecules/search-result/search-result";
 @forward "@molecules/dropdown/dropdown";
 @forward "@molecules/list/list";
 @forward "@molecules/contact/contact";
@@ -50,6 +53,8 @@
 @forward "@molecules/toolbar/toolbar";
 @forward "@molecules/cert-teaserlist/cert-teaserlist";
 @forward "@molecules/date-box/date-box";
+@forward "@molecules/pill/pill";
+@forward "@molecules/pagination/pagination";
 @forward "@molecules/sidemenu/sidemenu";
 
 // Organisms
@@ -78,10 +83,10 @@
 @forward "@organisms/process/process";
 @forward "@organisms/cookie-banner/cookie-banner";
 @forward "@organisms/cookie-modal/cookie-modal";
+@forward "@organisms/dialog/dialog";
 
 // Templates
 // -----------------------------------------------------------------------------
-@forward "@templates/search/search";
 @forward "@templates/page-grid/page-grid";
 
 // Node Modules

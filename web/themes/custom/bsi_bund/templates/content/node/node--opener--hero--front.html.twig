@@ -18,6 +18,7 @@
   {{ attach_library('claro/classy.node') }}
 
   <section{{ attributes.addClass(classes) }}  aria-label="{{label}}" data-bsi-hero-slider>
+    <h1 class="visually-hidden">{{ content.title }}</h1>
     <div class="splide__track">
         {{ content.field_stage_items }}
     </div>

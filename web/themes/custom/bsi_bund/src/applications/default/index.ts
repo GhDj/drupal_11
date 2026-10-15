@@ -14,6 +14,7 @@ import FormValidation from "@organisms/form/FormValidation";
 import Video from "@organisms/video/Video";
 import AutocompletePopover from "@molecules/searchmenu/AutocompletePopover";
 import Timeline from "@organisms/timeline/Timeline";
+import Dialog from "@organisms/dialog/Dialog";
 
 document.addEventListener("DOMContentLoaded", () => {
   AutocompletePopover();
@@ -22,4 +23,5 @@ document.addEventListener("DOMContentLoaded", () => {
   FormValidation();
   Video();
   Timeline();
+  Dialog();
 });
