@@ -750,47 +750,47 @@ display:
                   is_secondary: false
                   hide_label: false
               field_topics:
-                plugin_id: bef_checkboxes
+                plugin_id: default
                 advanced:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: true
-                  collapsible_disable_automatic_open: true
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
               field_audiences:
-                plugin_id: bef_checkboxes
+                plugin_id: default
                 advanced:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: true
-                  collapsible_disable_automatic_open: true
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
               year_filter:
-                plugin_id: bef_checkboxes
+                plugin_id: default
                 advanced:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: true
-                  collapsible_disable_automatic_open: true
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
               node_bundle:
-                plugin_id: bef_checkboxes
+                plugin_id: default
                 advanced:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: ''
                     filter_rewrite_values_key: false
-                  collapsible: true
-                  collapsible_disable_automatic_open: true
+                  collapsible: false
+                  collapsible_disable_automatic_open: false
                   is_secondary: false
                   hide_label: false
       sorts:

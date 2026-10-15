@@ -1,6 +1,6 @@
 /**
  * Global search filter behavior:
- * - Renders active filter pills from checked facet checkboxes
+ * - Renders active filter pills from selected facet values
  * - Provides "Alle Filter zurücksetzen" reset link
  * - Mobile toggle to show/hide filter sections
  */
@@ -19,12 +19,26 @@ function initActiveFilterPills(view: Element): void {
   const bottom = view.querySelector(".js-searchfilter-bottom");
   if (!bottom) return;
 
-  // Collect checked checkboxes from facet filters
-  const checkboxes = view.querySelectorAll<HTMLInputElement>(
-    ".bsi-searchfilter__filter input[type='checkbox']:checked"
+  // Collect selected options from facet select elements
+  const selects = view.querySelectorAll<HTMLSelectElement>(
+    ".bsi-searchfilter__top .bsi-search-dropdown select"
   );
 
-  if (checkboxes.length === 0) {
+  const activeFilters: { label: string; select: HTMLSelectElement; value: string }[] = [];
+
+  selects.forEach(select => {
+    Array.from(select.selectedOptions).forEach(option => {
+      if (option.value && option.value !== "" && option.value !== "All") {
+        activeFilters.push({
+          label: option.textContent?.trim() || option.value,
+          select,
+          value: option.value,
+        });
+      }
+    });
+  });
+
+  if (activeFilters.length === 0) {
     bottom.innerHTML = "";
     return;
   }
@@ -37,21 +51,21 @@ function initActiveFilterPills(view: Element): void {
   heading.textContent = "Aktive Filter";
   pillsContainer.appendChild(heading);
 
-  checkboxes.forEach(checkbox => {
-    const label = checkbox.parentElement?.querySelector("label");
-    const labelText = label?.textContent?.replace(/\(\d+\)$/, "").trim() || checkbox.value;
-
+  activeFilters.forEach(({ label, select, value }) => {
     const pill = document.createElement("button");
     pill.type = "button";
     pill.className = "bsi-button bsi-button--tertiary bsi-pill bsi-pill--default";
-    pill.setAttribute("aria-label", `${labelText} entfernen`);
-    pill.innerHTML = `<span class="bsi-button__text">${labelText}</span>
+    pill.setAttribute("aria-label", `${label} entfernen`);
+    pill.innerHTML = `<span class="bsi-button__text">${label}</span>
       <span class="bsi-icon bsi-icon--cross bsi-button__icon--after" aria-hidden="true"></span>`;
 
     pill.addEventListener("click", () => {
-      checkbox.checked = false;
-      checkbox.dispatchEvent(new Event("change", { bubbles: true }));
-      const form = checkbox.closest("form");
+      const option = select.querySelector<HTMLOptionElement>(
+        `option[value="${CSS.escape(value)}"]`
+      );
+      if (option) option.selected = false;
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+      const form = select.closest("form");
       if (form) {
         const submit = form.querySelector<HTMLButtonElement>(
           '[data-drupal-selector="edit-submit-search"]'
