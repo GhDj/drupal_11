@@ -1,33 +1,92 @@
 {#
 /**
  * @file
- * Theme override for a main view template.
+ * Theme override for the Global Search block display.
  *
- * Available variables:
- * - attributes: Remaining HTML attributes for the element.
- * - css_name: A CSS-safe version of the view name.
- * - css_class: The user-specified classes names, if any.
- * - header: The optional header.
- * - footer: The optional footer.
- * - rows: The results of the view query, if any.
- * - empty: The content to display if there are no rows.
- * - pager: The optional pager next/prev links to display.
- * - exposed: Exposed widget form/info to display.
- * - feed_icons: Optional feed icons to display.
- * - more: An optional link to the next page of results.
- * - title: Title of the view, only used when displaying in the admin preview.
- * - title_prefix: Additional output populated by modules, intended to be
- *   displayed in front of the view title.
- * - title_suffix: Additional output populated by modules, intended to be
- *   displayed after the view title.
- * - attachment_before: An optional attachment view to be displayed before the
- *   view content.
- * - attachment_after: An optional attachment view to be displayed after the
- *   view content.
- * - dom_id: Unique id for every view being printed to give unique class for
- *   JavaScript.
+ * Wires Drupal's views output to the bsi-searchfilter + bsi-search-result
+ * Storybook design patterns.
  *
- * @see template_preprocess_views_view()
+ * @see views--search.html.twig
  */
 #}
-{% extends "@bsi_bund/views/views--search.html.twig" %}
+{%
+  set classes = [
+    'view',
+    'view-' ~ id|clean_class,
+    'view-id-' ~ id,
+    'view-display-id-' ~ display_id,
+    dom_id ? 'js-view-dom-id-' ~ dom_id,
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if title %}
+    {{ title }}
+  {% endif %}
+  {{ title_suffix }}
+
+  {# Filter area: searchfilter pattern #}
+  {% if exposed %}
+    <div class="bsi-searchfilter">
+      <div class="bsi-searchfilter__inner">
+        {# Result count inside filter box #}
+        {% if header %}
+          <p class="bsi-searchfilter__text">
+            {{ header }}
+          </p>
+        {% endif %}
+
+        <hr />
+
+        {# Mobile filter toggle — must precede __top for CSS sibling selector #}
+        <button class="bsi-searchfilter__toggle js-searchfilter-toggle" type="button" aria-expanded="true">
+          {{ 'Filter'|t }}
+        </button>
+
+        {# Filter dropdowns (without sort) #}
+        <div class="bsi-searchfilter__top">
+          {{ exposed|without('sort_bef_combine') }}
+        </div>
+
+        {# Active filter pills + reset #}
+        <div class="bsi-searchfilter__bottom js-searchfilter-bottom"></div>
+      </div>
+    </div>
+  {% endif %}
+
+  {# Results area: search-result pattern #}
+  {% if rows or empty %}
+    <div class="bsi-search-result">
+      <div class="bsi-search-result__inner">
+        {# Sort dropdown in the results head #}
+        {% if exposed['sort_bef_combine'] %}
+          <div class="bsi-search-result__head">
+            <div class="bsi-search-dropdown bsi-search-dropdown--sort">
+              {{ exposed['sort_bef_combine'] }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if rows %}
+          <div class="view-content">
+            {{ rows }}
+          </div>
+        {% elseif empty %}
+          <div class="view-empty">
+            {{ empty }}
+          </div>
+        {% endif %}
+
+        {% if pager %}
+          {{ pager }}
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if footer %}
+    <div class="view-footer">
+      {{ footer }}
+    </div>
+  {% endif %}
+</div>

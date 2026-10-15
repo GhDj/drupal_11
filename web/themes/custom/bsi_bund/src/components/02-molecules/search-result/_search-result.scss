@@ -63,6 +63,174 @@
 }
 
 // -----------------------------------------------------------------------------
+// Global search: wire Drupal exposed form to searchfilter component
+// -----------------------------------------------------------------------------
+.view-display-id-block_search_global {
+  .#{$nsp}-searchfilter {
+    .view-filters {
+      // Remove default Drupal form styling
+      .form-actions {
+        display: flex;
+        gap: var(--#{$nsp}-space-xs);
+        margin-top: var(--#{$nsp}-space-sm);
+      }
+    }
+
+    // The fulltext search input inside filter area
+    .form-item-search {
+      grid-column: 1 / -1;
+
+      input[type="text"] {
+        background-color: var(--#{$nsp}-color-base-white);
+        border: 1px solid var(--#{$nsp}-color-neutral-250);
+        border-radius: 4px;
+        font-size: 16px;
+        padding: var(--#{$nsp}-space-sm) var(--#{$nsp}-space-lg);
+        width: 100%;
+
+        &:focus-visible {
+          outline: 2px solid;
+          outline-color: var(--#{$nsp}-color-base-focus);
+          outline-offset: 2px;
+        }
+      }
+
+      label {
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
+    }
+
+    // Style select elements inside the filter dropdown wrappers
+    .#{$nsp}-search-dropdown {
+      position: relative;
+
+      select {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: var(--#{$nsp}-color-blue-150);
+        border: 0;
+        border-radius: 4px;
+        color: var(--#{$nsp}-color-blue-800);
+        cursor: pointer;
+        font-size: 16px;
+        padding-block: var(--#{$nsp}-space-sm);
+        padding-inline: var(--#{$nsp}-space-lg) 50px;
+        width: 100%;
+
+        &:focus-visible {
+          outline: 2px solid;
+          outline-color: var(--#{$nsp}-color-base-focus);
+          outline-offset: 2px;
+        }
+      }
+
+      // Visually hide Drupal-generated labels inside filter dropdowns
+      label {
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
+    }
+  }
+
+  // Filter actions (Apply / Reset buttons)
+  .#{$nsp}-searchfilter__actions {
+    display: flex;
+    gap: var(--#{$nsp}-space-xs);
+    margin-top: var(--#{$nsp}-space-sm);
+  }
+
+  // Active filter pills area
+  .#{$nsp}-searchfilter__bottom {
+    &:empty {
+      display: none;
+    }
+
+    .#{$nsp}-searchfilter__pills {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--#{$nsp}-space-2xs);
+    }
+
+    .#{$nsp}-searchfilter__pills-label {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .#{$nsp}-searchfilter__reset {
+      white-space: nowrap;
+    }
+  }
+
+  // Mobile filter toggle (placed before __top in DOM for ~ selector)
+  .#{$nsp}-searchfilter__toggle {
+    display: none;
+
+    @media (max-width: 767px) {
+      background: none;
+      border: 1px solid var(--#{$nsp}-color-blue-800);
+      border-radius: 4px;
+      color: var(--#{$nsp}-color-blue-800);
+      cursor: pointer;
+      display: block;
+      font-size: 16px;
+      padding: var(--#{$nsp}-space-xs) var(--#{$nsp}-space-lg);
+      text-align: center;
+      width: 100%;
+
+      &[aria-expanded="false"] ~ .#{$nsp}-searchfilter__top,
+      &[aria-expanded="false"] ~ .#{$nsp}-searchfilter__bottom {
+        display: none;
+      }
+    }
+  }
+
+  // Sort dropdown inside results head
+  .#{$nsp}-search-result__head {
+    .#{$nsp}-search-dropdown--sort {
+      select {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: var(--#{$nsp}-color-blue-150);
+        border: 0;
+        border-radius: 4px;
+        color: var(--#{$nsp}-color-blue-800);
+        cursor: pointer;
+        font-size: 16px;
+        padding-block: var(--#{$nsp}-space-sm);
+        padding-inline: 48px var(--#{$nsp}-space-sm);
+        width: 100%;
+
+        &:focus-visible {
+          outline: 2px solid;
+          outline-color: var(--#{$nsp}-color-base-focus);
+          outline-offset: 2px;
+        }
+      }
+
+      label {
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
+    }
+  }
+
+  // Result list items
+  .view-content {
+    .views-row {
+      border-top: solid 1px var(--#{$nsp}-color-blue-200);
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
 // Annual report search (injected via hook_node_view)
 // -----------------------------------------------------------------------------
 .#{$nsp}-report-search {

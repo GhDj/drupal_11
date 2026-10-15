@@ -1,0 +1,39 @@
+{#
+/**
+ * @file
+ * Exposed form for global search.
+ *
+ * Renders facet filters as bsi-search-dropdown components.
+ * The sort_bef_combine element is excluded here — the parent view template
+ * places it separately in the bsi-search-result area.
+ */
+#}
+
+{# Fulltext search input #}
+{% if form.search is defined %}
+  <div class="form-item-search">
+    {{ form.search }}
+  </div>
+{% endif %}
+
+{# Facet filter dropdowns #}
+{% set facet_keys = ['audiences', 'topics', 'year', 'type'] %}
+{% for key in facet_keys %}
+  {% if form[key] is defined %}
+    <div class="bsi-search-dropdown">
+      {{ form[key] }}
+    </div>
+  {% endif %}
+{% endfor %}
+
+{# Hidden form elements #}
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}
+
+{# Actions (Apply / Reset) #}
+{% if form.actions is defined %}
+  <div class="bsi-searchfilter__actions">
+    {{ form.actions }}
+  </div>
+{% endif %}

@@ -15,6 +15,7 @@ import Video from "@organisms/video/Video";
 import AutocompletePopover from "@molecules/searchmenu/AutocompletePopover";
 import Timeline from "@organisms/timeline/Timeline";
 import Dialog from "@organisms/dialog/Dialog";
+import SearchFilter from "@molecules/searchfilter/SearchFilter";
 
 document.addEventListener("DOMContentLoaded", () => {
   AutocompletePopover();
@@ -24,4 +25,5 @@ document.addEventListener("DOMContentLoaded", () => {
   Video();
   Timeline();
   Dialog();
+  SearchFilter();
 });
