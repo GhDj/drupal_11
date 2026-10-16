@@ -85,7 +85,7 @@
   }
 
   // Searchbar — let the bsi-searchbar component SCSS handle all styling.
-  // Only fix Drupal-specific wrapper issues here.
+  // Only fix Drupal/Claro-specific overrides here.
   .#{$nsp}-searchbar {
     width: 100%;
 
@@ -101,6 +101,14 @@
     .claro-autocomplete {
       min-width: 0;
       width: 100%;
+    }
+
+    // Kill Claro's background search icon and border on the input.
+    // Claro targets .form-autocomplete and .form-element (which JS
+    // may re-add after render). Our search icon is the button.
+    input {
+      background-image: none !important;
+      border: 0 !important;
     }
   }
 
