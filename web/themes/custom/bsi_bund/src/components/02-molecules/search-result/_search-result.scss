@@ -84,11 +84,12 @@
     width: 100%;
   }
 
-  // Searchbar — uses existing bsi-searchbar component styles
+  // Searchbar — let the bsi-searchbar component SCSS handle all styling.
+  // Only fix Drupal-specific wrapper issues here.
   .#{$nsp}-searchbar {
     width: 100%;
 
-    // Hide the Drupal label inside the search input
+    // Hide the Drupal label
     label {
       overflow: hidden;
       position: absolute;
@@ -96,35 +97,10 @@
       width: 1px;
     }
 
-    // Every wrapper between searchbar and the input must stretch
-    > * {
-      flex: 1;
-      min-width: 0;
-    }
-
-    // All nested Drupal wrappers (form-item, autocomplete, claro, etc.)
-    div,
+    // Claro wraps autocomplete in a constraining div
     .claro-autocomplete {
       min-width: 0;
       width: 100%;
-    }
-
-    // The actual input — override Drupal's size="60" attribute
-    input[type="text"],
-    input[type="search"],
-    input.form-text,
-    input.form-autocomplete {
-      background: transparent;
-      border: 0;
-      color: var(--#{$nsp}-color-typo-primary);
-      font-size: 16px;
-      min-width: 0;
-      padding: var(--#{$nsp}-space-sm) 0;
-      width: 100% !important;
-
-      &:focus {
-        outline: none;
-      }
     }
   }
 
