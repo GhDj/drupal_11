@@ -2,13 +2,12 @@
  * Global search filter behavior:
  * - Initializes custom multi-select dropdown filters
  * - Renders active filter pills from selected values
- * - Pill removal and reset via form manipulation + submission
+ * - Pill removal and reset work via URL navigation
  * - Mobile toggle to show/hide filter sections
  */
 
 import MultiSelectDropdown from "./MultiSelectDropdown";
 
-// SVG icon helper — uses the theme's icon sprite
 function svgIcon(name: string): string {
   const existing = document.querySelector<SVGUseElement>(".bsi-icon use");
   const base = existing?.getAttribute("href")?.replace(/#.*$/, "")
@@ -38,30 +37,53 @@ function applySearchFilter(): void {
 }
 
 /**
- * Find and click the form submit button.
+ * Build a search URL from the current select state, optionally
+ * excluding a specific filter value.
  */
-function submitExposedForm(view: Element): void {
-  const form = view.querySelector<HTMLFormElement>("form");
-  if (!form) return;
+function buildSearchUrl(
+  view: Element,
+  excludeKey?: string,
+  excludeValue?: string
+): string {
+  const url = new URL(window.location.pathname, window.location.origin);
 
-  // Find submit button — try multiple selectors
-  const submit = form.querySelector<HTMLElement>(
-    'input[type="submit"][data-drupal-selector="edit-submit-search"],' +
-    'input[type="submit"][id="edit-submit-search"],' +
-    'input[type="submit"]:not([id="edit-reset"]),' +
-    'button[type="submit"]'
+  // Preserve the search term
+  const currentParams = new URLSearchParams(window.location.search);
+  const searchTerm = currentParams.get("search");
+  if (searchTerm) {
+    url.searchParams.set("search", searchTerm);
+  }
+
+  // Preserve sort if present
+  const sortBy = currentParams.get("sort_by");
+  const sortOrder = currentParams.get("sort_order");
+  if (sortBy) url.searchParams.set("sort_by", sortBy);
+  if (sortOrder) url.searchParams.set("sort_order", sortOrder);
+
+  // Preserve page if present (but reset to page 0 when filters change)
+  // Don't preserve page — changing filters should go back to page 1
+
+  // Read current filter state from actual <select> elements
+  const selects = view.querySelectorAll<HTMLSelectElement>(
+    ".bsi-searchfilter__top .js-multiselect select"
   );
 
-  if (submit) {
-    // Use jQuery trigger if available (for Drupal AJAX handlers)
-    if (typeof jQuery !== "undefined") {
-      jQuery(submit).trigger("click");
-    } else {
-      submit.click();
-    }
-  } else {
-    form.submit();
-  }
+  selects.forEach(select => {
+    const container = select.closest<HTMLElement>(".js-multiselect");
+    const key = container?.dataset.filterKey || "";
+    if (!key) return;
+
+    Array.from(select.options).forEach(option => {
+      if (!option.selected || !option.value || option.value === "All") return;
+
+      // Skip the value being removed
+      if (key === excludeKey && option.value === excludeValue) return;
+
+      url.searchParams.append(key, option.value);
+    });
+  });
+
+  return url.toString();
 }
 
 function initActiveFilterPills(view: Element): void {
@@ -72,14 +94,17 @@ function initActiveFilterPills(view: Element): void {
     ".bsi-searchfilter__top .js-multiselect select"
   );
 
-  const activeFilters: { label: string; select: HTMLSelectElement; value: string }[] = [];
+  const activeFilters: { label: string; key: string; value: string }[] = [];
 
   selects.forEach(select => {
+    const container = select.closest<HTMLElement>(".js-multiselect");
+    const key = container?.dataset.filterKey || "";
+
     Array.from(select.options).forEach(option => {
       if (option.selected && option.value && option.value !== "" && option.value !== "All") {
         activeFilters.push({
           label: option.textContent?.trim() || option.value,
-          select,
+          key,
           value: option.value,
         });
       }
@@ -94,7 +119,7 @@ function initActiveFilterPills(view: Element): void {
   const pillsContainer = document.createElement("div");
   pillsContainer.className = "bsi-searchfilter__pills";
 
-  activeFilters.forEach(({ label, select, value }) => {
+  activeFilters.forEach(({ label, key, value }) => {
     const pill = document.createElement("button");
     pill.type = "button";
     pill.className = "bsi-button bsi-button--tertiary bsi-pill bsi-pill--default";
@@ -102,21 +127,8 @@ function initActiveFilterPills(view: Element): void {
     pill.innerHTML = `<span class="bsi-button__text">${label}</span>${svgIcon("cross")}`;
 
     pill.addEventListener("click", () => {
-      // Deselect the option in the native select
-      const option = select.querySelector<HTMLOptionElement>(
-        `option[value="${CSS.escape(value)}"]`
-      );
-      if (option) option.selected = false;
-
-      // Uncheck the corresponding multi-select checkbox
-      const container = select.closest(".js-multiselect");
-      const checkbox = container?.querySelector<HTMLInputElement>(
-        `input[type="checkbox"][value="${CSS.escape(value)}"]`
-      );
-      if (checkbox) checkbox.checked = false;
-
-      // Submit form to apply the change
-      submitExposedForm(view);
+      // Navigate to search URL with this specific filter removed
+      window.location.href = buildSearchUrl(view, key, value);
     });
 
     pillsContainer.appendChild(pill);
@@ -128,14 +140,11 @@ function initActiveFilterPills(view: Element): void {
   resetBtn.innerHTML = `${svgIcon("cross")}<span class="bsi-button__text">Alle Filter zurücksetzen</span>`;
 
   resetBtn.addEventListener("click", () => {
-    // Keep search term, remove all filters by navigating
-    const url = new URL(window.location.href);
-    const searchTerm = url.searchParams.get("search");
-    const newUrl = new URL(window.location.pathname, window.location.origin);
-    if (searchTerm) {
-      newUrl.searchParams.set("search", searchTerm);
-    }
-    window.location.href = newUrl.toString();
+    // Navigate with only the search term, no filters
+    const url = new URL(window.location.pathname, window.location.origin);
+    const searchTerm = new URLSearchParams(window.location.search).get("search");
+    if (searchTerm) url.searchParams.set("search", searchTerm);
+    window.location.href = url.toString();
   });
 
   bottom.innerHTML = "";
@@ -157,5 +166,3 @@ function initMobileToggle(view: Element): void {
 declare const Drupal: {
   behaviors: Record<string, { attach: (context?: Element, settings?: unknown) => void }>;
 };
-
-declare const jQuery: (selector: Element) => { trigger: (event: string) => void };
