@@ -91,7 +91,19 @@
       width: 1px;
     }
 
+    // The Drupal form-item wrapper must stretch to fill
+    .form-item,
+    .form-item-search,
+    .js-form-type-search-api-autocomplete,
+    .form-type--textfield,
+    .form-type--search-api-autocomplete {
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+    }
+
     input[type="text"],
+    input[type="search"],
     input.form-autocomplete {
       background: transparent;
       border: 0;

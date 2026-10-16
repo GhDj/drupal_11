@@ -8,6 +8,13 @@
 
 import MultiSelectDropdown from "./MultiSelectDropdown";
 
+// SVG icon helper — uses the theme's icon sprite
+function svgIcon(name: string): string {
+  const iconPath = document.querySelector<HTMLElement>(".bsi-icon use")
+    ?.getAttribute("href")?.replace(/#.*$/, "") || "/themes/custom/bsi_bund/dist/icons.svg";
+  return `<svg class="bsi-icon" aria-hidden="true" focusable="false"><use href="${iconPath}#${name}"></use></svg>`;
+}
+
 export default function SearchFilter(): void {
   applySearchFilter();
 
@@ -68,8 +75,7 @@ function initActiveFilterPills(view: Element): void {
     pill.type = "button";
     pill.className = "bsi-button bsi-button--tertiary bsi-pill bsi-pill--default";
     pill.setAttribute("aria-label", `${label} entfernen`);
-    pill.innerHTML = `<span class="bsi-button__text">${label}</span>
-      <span class="bsi-icon bsi-icon--cross bsi-button__icon--after" aria-hidden="true"></span>`;
+    pill.innerHTML = `<span class="bsi-button__text">${label}</span>${svgIcon("cross")}`;
 
     pill.addEventListener("click", () => {
       // Deselect the option
@@ -86,13 +92,7 @@ function initActiveFilterPills(view: Element): void {
       if (checkbox) checkbox.checked = false;
 
       // Submit form
-      const form = select.closest("form");
-      if (form) {
-        const submit = form.querySelector<HTMLButtonElement>(
-          '[data-drupal-selector="edit-submit-search"]'
-        );
-        if (submit) submit.click();
-      }
+      submitForm(view);
     });
 
     pillsContainer.appendChild(pill);
@@ -101,23 +101,41 @@ function initActiveFilterPills(view: Element): void {
   const resetBtn = document.createElement("button");
   resetBtn.type = "button";
   resetBtn.className = "bsi-button bsi-button--tertiary bsi-searchfilter__reset";
-  resetBtn.innerHTML = `<span class="bsi-icon bsi-icon--cross bsi-button__icon--before" aria-hidden="true"></span>
-    <span class="bsi-button__text">Alle Filter zurücksetzen</span>`;
+  resetBtn.innerHTML = `${svgIcon("cross")}<span class="bsi-button__text">Alle Filter zurücksetzen</span>`;
+
   resetBtn.addEventListener("click", () => {
-    const form = view.querySelector<HTMLFormElement>("form");
-    if (form) {
-      const resetButton = form.querySelector<HTMLButtonElement>(
-        '[data-drupal-selector="edit-reset"]'
-      );
-      if (resetButton) {
-        resetButton.click();
-      }
-    }
+    // Deselect all options in all facet selects
+    selects.forEach(select => {
+      Array.from(select.options).forEach(opt => { opt.selected = false; });
+    });
+
+    // Uncheck all checkboxes in multi-select panels
+    view.querySelectorAll<HTMLInputElement>(
+      ".js-multiselect input[type='checkbox']"
+    ).forEach(cb => { cb.checked = false; });
+
+    // Submit form to reload with no filters
+    submitForm(view);
   });
 
   bottom.innerHTML = "";
   bottom.appendChild(pillsContainer);
   bottom.appendChild(resetBtn);
+}
+
+function submitForm(view: Element): void {
+  const form = view.querySelector<HTMLFormElement>("form");
+  if (!form) return;
+
+  // Try BEF submit button first, then generic submit
+  const submit = form.querySelector<HTMLElement>(
+    '[data-drupal-selector="edit-submit-search"], [type="submit"]'
+  );
+  if (submit) {
+    (submit as HTMLButtonElement).click();
+  } else {
+    form.submit();
+  }
 }
 
 function initMobileToggle(view: Element): void {
