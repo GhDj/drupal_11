@@ -63,84 +63,163 @@
 }
 
 // -----------------------------------------------------------------------------
-// Global search: wire Drupal exposed form to searchfilter component
+// Global search: Figma-matching layout
 // -----------------------------------------------------------------------------
 .view-display-id-block_search_global {
-  // The Drupal <form> element inside searchfilter__inner must not
-  // break the flex layout — its children should flow naturally.
+  // Flat variant — no shadow box
+  .#{$nsp}-searchfilter--flat {
+    box-shadow: none;
+    padding: 0;
+  }
+
+  // Form must not break flex layout
   .#{$nsp}-searchfilter__inner > form,
-  .#{$nsp}-searchfilter__inner > .view-filters > form {
+  .#{$nsp}-searchfilter__inner > .view-filters > form,
+  .#{$nsp}-searchfilter__inner > .views-exposed-form {
     display: contents;
   }
 
-  .#{$nsp}-searchfilter {
-    // Fulltext search input — full width, above the filter grid
-    .form-item-search {
-      position: relative;
-      width: 100%;
+  // Searchbar — uses existing bsi-searchbar component styles
+  .#{$nsp}-searchbar {
+    width: 100%;
 
-      input[type="text"] {
-        background-color: var(--#{$nsp}-color-base-white);
-        border: 1px solid var(--#{$nsp}-color-neutral-250);
-        border-radius: 4px;
-        font-size: 16px;
-        padding: var(--#{$nsp}-space-sm) var(--#{$nsp}-space-lg);
-        width: 100%;
-
-        &:focus-visible {
-          outline: 2px solid;
-          outline-color: var(--#{$nsp}-color-base-focus);
-          outline-offset: 2px;
-        }
-      }
-
-      label {
-        overflow: hidden;
-        position: absolute;
-        white-space: nowrap;
-        width: 1px;
-      }
+    // Hide the Drupal label inside the search input
+    label {
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
     }
 
-    // Facet dropdowns: Drupal renders bare <select> without the Storybook
-    // __select class, so we apply the same styles here.
-    .#{$nsp}-search-dropdown select {
+    input[type="text"],
+    input.form-autocomplete {
+      background: transparent;
+      border: 0;
+      color: var(--#{$nsp}-color-typo-primary);
+      font-size: 16px;
+      padding: var(--#{$nsp}-space-sm) 0;
+      width: 100%;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  // Result count text
+  .#{$nsp}-searchfilter__text {
+    font-size: 16px;
+    margin-top: var(--#{$nsp}-space-sm);
+  }
+
+  // Dotted separator
+  .#{$nsp}-searchfilter__separator {
+    border: 0;
+    border-top: 1px dashed var(--#{$nsp}-color-neutral-250);
+    margin: var(--#{$nsp}-space-md) 0;
+  }
+
+  // Custom multi-select dropdown
+  .#{$nsp}-multiselect {
+    position: relative;
+
+    &__trigger {
       -webkit-appearance: none;
+      align-items: center;
       appearance: none;
       background-color: var(--#{$nsp}-color-blue-150);
       border: 0;
       border-radius: 4px;
       color: var(--#{$nsp}-color-blue-800);
       cursor: pointer;
+      display: flex;
       font-size: 16px;
-      padding-block: var(--#{$nsp}-space-sm);
-      padding-inline: var(--#{$nsp}-space-lg) 50px;
+      justify-content: space-between;
+      padding: var(--#{$nsp}-space-sm) var(--#{$nsp}-space-lg);
+      text-align: left;
       width: 100%;
 
       &:focus-visible {
-        outline: 2px solid;
-        outline-color: var(--#{$nsp}-color-base-focus);
+        outline: 2px solid var(--#{$nsp}-color-base-focus);
         outline-offset: 2px;
+      }
+
+      &[aria-expanded="true"] {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
       }
     }
 
-    .#{$nsp}-search-dropdown label {
-      overflow: hidden;
+    &__label {
+      font-weight: 400;
+    }
+
+    &__chevron {
+      border-bottom: 1.5px solid var(--#{$nsp}-color-blue-800);
+      border-right: 1.5px solid var(--#{$nsp}-color-blue-800);
+      flex-shrink: 0;
+      height: 8px;
+      transform: rotate(45deg);
+      transition: transform 0.2s ease;
+      width: 8px;
+    }
+
+    &__trigger[aria-expanded="true"] &__chevron {
+      transform: rotate(-135deg);
+    }
+
+    &__panel {
+      background: var(--#{$nsp}-color-base-white);
+      border: 1px solid var(--#{$nsp}-color-neutral-250);
+      border-radius: 0 0 4px 4px;
+      left: 0;
+      max-height: 240px;
+      overflow-y: auto;
+      padding: var(--#{$nsp}-space-xs) 0;
       position: absolute;
-      white-space: nowrap;
-      width: 1px;
+      right: 0;
+      top: 100%;
+      z-index: 10;
+    }
+
+    &__option {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      gap: var(--#{$nsp}-space-xs);
+      padding: var(--#{$nsp}-space-3xs) var(--#{$nsp}-space-lg);
+
+      &:hover {
+        background-color: var(--#{$nsp}-color-neutral-50);
+      }
+    }
+
+    &__checkbox {
+      accent-color: var(--#{$nsp}-color-blue-800);
+      cursor: pointer;
+      flex-shrink: 0;
+      height: 18px;
+      width: 18px;
+    }
+
+    &__option-text {
+      font-size: 14px;
     }
   }
 
-  // Filter actions (Apply / Reset buttons)
-  .#{$nsp}-searchfilter__actions {
-    display: flex;
-    gap: var(--#{$nsp}-space-xs);
-    margin-top: var(--#{$nsp}-space-sm);
-  }
-
-  // Active filter pills area
+  // Active filter pills — Figma: pills left, reset right
   .#{$nsp}-searchfilter__bottom {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-sm);
+    justify-content: space-between;
+
+    @include breakpoint-md {
+      align-items: center;
+      flex-direction: row;
+    }
+
     &:empty {
       display: none;
     }
@@ -150,11 +229,6 @@
       display: flex;
       flex-wrap: wrap;
       gap: var(--#{$nsp}-space-2xs);
-    }
-
-    .#{$nsp}-searchfilter__pills-label {
-      font-size: 14px;
-      font-weight: 700;
     }
 
     .#{$nsp}-searchfilter__reset {
@@ -185,14 +259,11 @@
     }
   }
 
-  // Sort dropdown — uses bsi-search-dropdown--sort variant from
-  // _search-dropdown.scss. Override the base .form-type--select styles
-  // from bsi-search-result so they don't conflict.
+  // Sort — hide BEF inner wrapper, use outer --sort variant
   .#{$nsp}-search-dropdown--sort {
     .form-type--select {
       position: static;
 
-      // No ::after here — the outer --sort wrapper provides the SVG icon
       &::after {
         display: none;
       }
@@ -204,8 +275,6 @@
         width: 1px;
       }
 
-      // Override base search-result select styles: use sort padding
-      // (icon on left, no right padding for chevron)
       select {
         padding-inline: 48px var(--#{$nsp}-space-sm);
         width: auto;

@@ -1,16 +1,17 @@
 /**
  * Global search filter behavior:
- * - Renders active filter pills from selected facet values
+ * - Initializes custom multi-select dropdown filters
+ * - Renders active filter pills from selected values
  * - Provides "Alle Filter zurücksetzen" reset link
  * - Mobile toggle to show/hide filter sections
- *
- * Runs on DOMContentLoaded and re-runs after Drupal AJAX updates.
  */
+
+import MultiSelectDropdown from "./MultiSelectDropdown";
 
 export default function SearchFilter(): void {
   applySearchFilter();
 
-  // Re-apply after Drupal AJAX updates (views ajax, form rebuilds)
+  // Re-apply after Drupal AJAX updates
   if (typeof Drupal !== "undefined" && Drupal.behaviors) {
     Drupal.behaviors.bsiSearchFilter = {
       attach() {
@@ -26,6 +27,7 @@ function applySearchFilter(): void {
   );
   if (!view) return;
 
+  MultiSelectDropdown();
   initActiveFilterPills(view);
   initMobileToggle(view);
 }
@@ -34,16 +36,16 @@ function initActiveFilterPills(view: Element): void {
   const bottom = view.querySelector(".js-searchfilter-bottom");
   if (!bottom) return;
 
-  // Collect selected options from facet select elements
+  // Collect selected options from hidden selects inside multiselect wrappers
   const selects = view.querySelectorAll<HTMLSelectElement>(
-    ".bsi-searchfilter__top .bsi-search-dropdown select"
+    ".bsi-searchfilter__top .js-multiselect select"
   );
 
   const activeFilters: { label: string; select: HTMLSelectElement; value: string }[] = [];
 
   selects.forEach(select => {
-    Array.from(select.selectedOptions).forEach(option => {
-      if (option.value && option.value !== "" && option.value !== "All") {
+    Array.from(select.options).forEach(option => {
+      if (option.selected && option.value && option.value !== "" && option.value !== "All") {
         activeFilters.push({
           label: option.textContent?.trim() || option.value,
           select,
@@ -61,11 +63,6 @@ function initActiveFilterPills(view: Element): void {
   const pillsContainer = document.createElement("div");
   pillsContainer.className = "bsi-searchfilter__pills";
 
-  const heading = document.createElement("span");
-  heading.className = "bsi-searchfilter__pills-label";
-  heading.textContent = "Aktive Filter";
-  pillsContainer.appendChild(heading);
-
   activeFilters.forEach(({ label, select, value }) => {
     const pill = document.createElement("button");
     pill.type = "button";
@@ -75,11 +72,20 @@ function initActiveFilterPills(view: Element): void {
       <span class="bsi-icon bsi-icon--cross bsi-button__icon--after" aria-hidden="true"></span>`;
 
     pill.addEventListener("click", () => {
+      // Deselect the option
       const option = select.querySelector<HTMLOptionElement>(
         `option[value="${CSS.escape(value)}"]`
       );
       if (option) option.selected = false;
-      select.dispatchEvent(new Event("change", { bubbles: true }));
+
+      // Also uncheck the multi-select checkbox
+      const container = select.closest(".js-multiselect");
+      const checkbox = container?.querySelector<HTMLInputElement>(
+        `input[type="checkbox"][value="${CSS.escape(value)}"]`
+      );
+      if (checkbox) checkbox.checked = false;
+
+      // Submit form
       const form = select.closest("form");
       if (form) {
         const submit = form.querySelector<HTMLButtonElement>(

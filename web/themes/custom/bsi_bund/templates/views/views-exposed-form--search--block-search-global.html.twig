@@ -1,31 +1,33 @@
 {#
 /**
  * @file
- * Exposed form for global search.
+ * Exposed form for global search — matches Figma design.
  *
- * Matches the Storybook searchfilter layout:
- * 1. Searchbar — full width (above the grid)
- * 2. Filter grid — 4 columns at lg, each as bsi-search-dropdown
- * 3. Actions — Apply / Reset below the grid
- *
- * sort_bef_combine is NOT rendered here — the parent view template
- * places it in the bsi-search-result area.
+ * 1. Searchbar with search icon (bsi-searchbar)
+ * 2. Filter grid with custom multi-select dropdowns
+ * 3. Hidden form elements + submit
  */
 #}
 
-{# Searchbar — full width, above the filter grid #}
+{# Searchbar — full width, bsi-searchbar styling #}
 {% if form.search is defined %}
-  <div class="form-item-search">
+  <div class="bsi-searchbar">
     {{ form.search }}
+    <button type="submit" class="bsi-button bsi-button--tertiary bsi-searchbar__button" aria-label="{{ 'Suche'|t }}">
+      {% include '@bsi_bund/components/icon.twig' with {
+        name: 'search',
+        decorative: true,
+      } only %}
+    </button>
   </div>
 {% endif %}
 
-{# Filter grid — 4 columns matching bsi-searchfilter__top #}
+{# Filter grid — custom multi-select dropdowns #}
 <div class="bsi-searchfilter__top">
   {% set facet_keys = ['type', 'topics', 'audiences', 'year'] %}
   {% for key in facet_keys %}
     {% if form[key] is defined %}
-      <div class="bsi-search-dropdown">
+      <div class="bsi-multiselect js-multiselect" data-filter-key="{{ key }}">
         {{ form[key] }}
       </div>
     {% endif %}
@@ -37,9 +39,9 @@
 {{ form.form_token }}
 {{ form.form_id }}
 
-{# Actions (Apply / Reset) #}
+{# Hidden submit for JS to trigger #}
 {% if form.actions is defined %}
-  <div class="bsi-searchfilter__actions">
+  <div class="bsi-searchfilter__actions visually-hidden">
     {{ form.actions }}
   </div>
 {% endif %}

@@ -3,11 +3,15 @@
  * @file
  * Theme override for the Global Search block display.
  *
- * Layout matches the Storybook searchfilter + search-result pattern:
- * - searchfilter: result count, searchbar (full width), filter grid, pills
- * - search-result: sort dropdown (right-aligned), result list, pagination
- *
- * @see views--search.html.twig
+ * Layout matches the Figma design:
+ * 1. Searchbar (full width, search icon)
+ * 2. Result count
+ * 3. Dotted separator
+ * 4. Filter dropdowns (custom multi-select)
+ * 5. Active filter pills + reset
+ * 6. Sort dropdown (right-aligned in results)
+ * 7. Result list
+ * 8. Pagination
  */
 #}
 {%
@@ -26,38 +30,37 @@
   {% endif %}
   {{ title_suffix }}
 
-  {# Filter area: searchfilter pattern #}
   {% if exposed %}
-    <div class="bsi-searchfilter">
+    <div class="bsi-searchfilter bsi-searchfilter--flat">
       <div class="bsi-searchfilter__inner">
-        {# Result count #}
+        {# Exposed form renders: searchbar, result count, separator, filters, actions #}
+        {{ exposed|without('sort_bef_combine') }}
+
+        {# Result count — placed after form via CSS order #}
         {% if header %}
-          <p class="bsi-searchfilter__text">
+          <div class="bsi-searchfilter__text">
             {{ header }}
-          </p>
+          </div>
         {% endif %}
 
-        <hr />
+        {# Dotted separator #}
+        <hr class="bsi-searchfilter__separator" />
 
         {# Mobile filter toggle #}
         <button class="bsi-searchfilter__toggle js-searchfilter-toggle" type="button" aria-expanded="true">
           {{ 'Filter'|t }}
         </button>
 
-        {# Exposed form: searchbar + filter grid + actions rendered inside #}
-        {{ exposed|without('sort_bef_combine') }}
-
-        {# Active filter pills + reset (populated by JS) #}
+        {# Active filter pills (populated by JS) #}
         <div class="bsi-searchfilter__bottom js-searchfilter-bottom"></div>
       </div>
     </div>
   {% endif %}
 
-  {# Results area: search-result pattern #}
+  {# Results area #}
   {% if rows or empty %}
     <div class="bsi-search-result">
       <div class="bsi-search-result__inner">
-        {# Sort dropdown in results head — right-aligned #}
         {% if exposed['sort_bef_combine'] %}
           <div class="bsi-search-result__head">
             <div class="bsi-search-dropdown bsi-search-dropdown--sort">
