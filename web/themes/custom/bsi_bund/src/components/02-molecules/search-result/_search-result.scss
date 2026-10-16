@@ -102,13 +102,13 @@
       width: 100%;
     }
 
-    input[type="text"],
-    input[type="search"],
-    input.form-autocomplete {
+    // Override Drupal's size="60" attribute which constrains input width
+    input {
       background: transparent;
       border: 0;
       color: var(--#{$nsp}-color-typo-primary);
       font-size: 16px;
+      min-width: 0;
       padding: var(--#{$nsp}-space-sm) 0;
       width: 100%;
 

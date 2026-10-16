@@ -2,7 +2,7 @@
  * Global search filter behavior:
  * - Initializes custom multi-select dropdown filters
  * - Renders active filter pills from selected values
- * - Provides "Alle Filter zurücksetzen" reset link
+ * - Pill removal and reset work by URL manipulation (reload without filters)
  * - Mobile toggle to show/hide filter sections
  */
 
@@ -10,15 +10,15 @@ import MultiSelectDropdown from "./MultiSelectDropdown";
 
 // SVG icon helper — uses the theme's icon sprite
 function svgIcon(name: string): string {
-  const iconPath = document.querySelector<HTMLElement>(".bsi-icon use")
-    ?.getAttribute("href")?.replace(/#.*$/, "") || "/themes/custom/bsi_bund/dist/icons.svg";
-  return `<svg class="bsi-icon" aria-hidden="true" focusable="false"><use href="${iconPath}#${name}"></use></svg>`;
+  const existing = document.querySelector<SVGUseElement>(".bsi-icon use");
+  const base = existing?.getAttribute("href")?.replace(/#.*$/, "")
+    || "/themes/custom/bsi_bund/dist/icons.svg";
+  return `<svg class="bsi-icon" aria-hidden="true" focusable="false"><use href="${base}#${name}"></use></svg>`;
 }
 
 export default function SearchFilter(): void {
   applySearchFilter();
 
-  // Re-apply after Drupal AJAX updates
   if (typeof Drupal !== "undefined" && Drupal.behaviors) {
     Drupal.behaviors.bsiSearchFilter = {
       attach() {
@@ -29,9 +29,7 @@ export default function SearchFilter(): void {
 }
 
 function applySearchFilter(): void {
-  const view = document.querySelector(
-    ".view-display-id-block_search_global"
-  );
+  const view = document.querySelector(".view-display-id-block_search_global");
   if (!view) return;
 
   MultiSelectDropdown();
@@ -39,23 +37,45 @@ function applySearchFilter(): void {
   initMobileToggle(view);
 }
 
+/**
+ * Get current filter state from URL query parameters.
+ * BEF facets use identifiers like audiences[], topics[], year[], type[].
+ */
+function getActiveFiltersFromUrl(): Map<string, { values: string[]; labels: Map<string, string> }> {
+  const params = new URLSearchParams(window.location.search);
+  const filterKeys = ["type", "topics", "audiences", "year"];
+  const result = new Map<string, { values: string[]; labels: Map<string, string> }>();
+
+  filterKeys.forEach(key => {
+    const values = params.getAll(`${key}[]`).concat(params.getAll(key));
+    if (values.length > 0) {
+      result.set(key, { values, labels: new Map() });
+    }
+  });
+
+  return result;
+}
+
 function initActiveFilterPills(view: Element): void {
   const bottom = view.querySelector(".js-searchfilter-bottom");
   if (!bottom) return;
 
-  // Collect selected options from hidden selects inside multiselect wrappers
+  // Collect from both URL params and select state
   const selects = view.querySelectorAll<HTMLSelectElement>(
     ".bsi-searchfilter__top .js-multiselect select"
   );
 
-  const activeFilters: { label: string; select: HTMLSelectElement; value: string }[] = [];
+  const activeFilters: { label: string; key: string; value: string }[] = [];
 
   selects.forEach(select => {
+    const container = select.closest<HTMLElement>(".js-multiselect");
+    const key = container?.dataset.filterKey || "";
+
     Array.from(select.options).forEach(option => {
       if (option.selected && option.value && option.value !== "" && option.value !== "All") {
         activeFilters.push({
           label: option.textContent?.trim() || option.value,
-          select,
+          key,
           value: option.value,
         });
       }
@@ -70,7 +90,7 @@ function initActiveFilterPills(view: Element): void {
   const pillsContainer = document.createElement("div");
   pillsContainer.className = "bsi-searchfilter__pills";
 
-  activeFilters.forEach(({ label, select, value }) => {
+  activeFilters.forEach(({ label, key, value }) => {
     const pill = document.createElement("button");
     pill.type = "button";
     pill.className = "bsi-button bsi-button--tertiary bsi-pill bsi-pill--default";
@@ -78,21 +98,13 @@ function initActiveFilterPills(view: Element): void {
     pill.innerHTML = `<span class="bsi-button__text">${label}</span>${svgIcon("cross")}`;
 
     pill.addEventListener("click", () => {
-      // Deselect the option
-      const option = select.querySelector<HTMLOptionElement>(
-        `option[value="${CSS.escape(value)}"]`
-      );
-      if (option) option.selected = false;
-
-      // Also uncheck the multi-select checkbox
-      const container = select.closest(".js-multiselect");
-      const checkbox = container?.querySelector<HTMLInputElement>(
-        `input[type="checkbox"][value="${CSS.escape(value)}"]`
-      );
-      if (checkbox) checkbox.checked = false;
-
-      // Submit form
-      submitForm(view);
+      // Remove this specific filter value from URL and reload
+      const url = new URL(window.location.href);
+      const allValues = url.searchParams.getAll(`${key}[]`);
+      url.searchParams.delete(`${key}[]`);
+      url.searchParams.delete(key);
+      allValues.filter(v => v !== value).forEach(v => url.searchParams.append(`${key}[]`, v));
+      window.location.href = url.toString();
     });
 
     pillsContainer.appendChild(pill);
@@ -104,38 +116,19 @@ function initActiveFilterPills(view: Element): void {
   resetBtn.innerHTML = `${svgIcon("cross")}<span class="bsi-button__text">Alle Filter zurücksetzen</span>`;
 
   resetBtn.addEventListener("click", () => {
-    // Deselect all options in all facet selects
-    selects.forEach(select => {
-      Array.from(select.options).forEach(opt => { opt.selected = false; });
-    });
-
-    // Uncheck all checkboxes in multi-select panels
-    view.querySelectorAll<HTMLInputElement>(
-      ".js-multiselect input[type='checkbox']"
-    ).forEach(cb => { cb.checked = false; });
-
-    // Submit form to reload with no filters
-    submitForm(view);
+    // Keep only the search term, remove all filter params
+    const url = new URL(window.location.href);
+    const searchTerm = url.searchParams.get("search");
+    const newUrl = new URL(window.location.pathname, window.location.origin);
+    if (searchTerm) {
+      newUrl.searchParams.set("search", searchTerm);
+    }
+    window.location.href = newUrl.toString();
   });
 
   bottom.innerHTML = "";
   bottom.appendChild(pillsContainer);
   bottom.appendChild(resetBtn);
-}
-
-function submitForm(view: Element): void {
-  const form = view.querySelector<HTMLFormElement>("form");
-  if (!form) return;
-
-  // Try BEF submit button first, then generic submit
-  const submit = form.querySelector<HTMLElement>(
-    '[data-drupal-selector="edit-submit-search"], [type="submit"]'
-  );
-  if (submit) {
-    (submit as HTMLButtonElement).click();
-  } else {
-    form.submit();
-  }
 }
 
 function initMobileToggle(view: Element): void {
