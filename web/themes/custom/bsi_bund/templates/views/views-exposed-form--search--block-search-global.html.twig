@@ -3,28 +3,34 @@
  * @file
  * Exposed form for global search.
  *
- * Renders facet filters as bsi-search-dropdown select components with counts.
- * The sort_bef_combine element is excluded here — the parent view template
- * places it separately in the bsi-search-result area.
+ * Matches the Storybook searchfilter layout:
+ * 1. Searchbar — full width (above the grid)
+ * 2. Filter grid — 4 columns at lg, each as bsi-search-dropdown
+ * 3. Actions — Apply / Reset below the grid
+ *
+ * sort_bef_combine is NOT rendered here — the parent view template
+ * places it in the bsi-search-result area.
  */
 #}
 
-{# Fulltext search input #}
+{# Searchbar — full width, above the filter grid #}
 {% if form.search is defined %}
   <div class="form-item-search">
     {{ form.search }}
   </div>
 {% endif %}
 
-{# Facet filter dropdowns #}
-{% set facet_keys = ['type', 'topics', 'audiences', 'year'] %}
-{% for key in facet_keys %}
-  {% if form[key] is defined %}
-    <div class="bsi-search-dropdown">
-      {{ form[key] }}
-    </div>
-  {% endif %}
-{% endfor %}
+{# Filter grid — 4 columns matching bsi-searchfilter__top #}
+<div class="bsi-searchfilter__top">
+  {% set facet_keys = ['type', 'topics', 'audiences', 'year'] %}
+  {% for key in facet_keys %}
+    {% if form[key] is defined %}
+      <div class="bsi-search-dropdown">
+        {{ form[key] }}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
 
 {# Hidden form elements #}
 {{ form.form_build_id }}

@@ -66,19 +66,17 @@
 // Global search: wire Drupal exposed form to searchfilter component
 // -----------------------------------------------------------------------------
 .view-display-id-block_search_global {
-  .#{$nsp}-searchfilter {
-    .view-filters {
-      // Remove default Drupal form styling
-      .form-actions {
-        display: flex;
-        gap: var(--#{$nsp}-space-xs);
-        margin-top: var(--#{$nsp}-space-sm);
-      }
-    }
+  // The Drupal <form> element inside searchfilter__inner must not
+  // break the flex layout — its children should flow naturally.
+  .#{$nsp}-searchfilter__inner > form,
+  .#{$nsp}-searchfilter__inner > .view-filters > form {
+    display: contents;
+  }
 
-    // The fulltext search input inside filter area
+  .#{$nsp}-searchfilter {
+    // Fulltext search input — full width, above the filter grid
     .form-item-search {
-      grid-column: 1 / -1;
+      position: relative;
 
       input[type="text"] {
         background-color: var(--#{$nsp}-color-base-white);
@@ -103,50 +101,33 @@
       }
     }
 
-    // Facet filter dropdowns — style select elements to match Storybook
-    .#{$nsp}-search-dropdown {
-      position: relative;
+    // Facet dropdowns: Drupal renders bare <select> without the Storybook
+    // __select class, so we apply the same styles here.
+    .#{$nsp}-search-dropdown select {
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: var(--#{$nsp}-color-blue-150);
+      border: 0;
+      border-radius: 4px;
+      color: var(--#{$nsp}-color-blue-800);
+      cursor: pointer;
+      font-size: 16px;
+      padding-block: var(--#{$nsp}-space-sm);
+      padding-inline: var(--#{$nsp}-space-lg) 50px;
+      width: 100%;
 
-      // Chevron arrow
-      &::after {
-        border-bottom: 1.5px solid var(--#{$nsp}-color-blue-800);
-        border-right: 1.5px solid var(--#{$nsp}-color-blue-800);
-        content: "";
-        height: var(--#{$nsp}-space-2xs);
-        pointer-events: none;
-        position: absolute;
-        right: var(--#{$nsp}-space-lg);
-        top: 50%;
-        transform: translateY(-65%) rotate(45deg);
-        width: var(--#{$nsp}-space-2xs);
+      &:focus-visible {
+        outline: 2px solid;
+        outline-color: var(--#{$nsp}-color-base-focus);
+        outline-offset: 2px;
       }
+    }
 
-      select {
-        -webkit-appearance: none;
-        appearance: none;
-        background-color: var(--#{$nsp}-color-blue-150);
-        border: 0;
-        border-radius: 4px;
-        color: var(--#{$nsp}-color-blue-800);
-        cursor: pointer;
-        font-size: 16px;
-        padding-block: var(--#{$nsp}-space-sm);
-        padding-inline: var(--#{$nsp}-space-lg) 50px;
-        width: 100%;
-
-        &:focus-visible {
-          outline: 2px solid;
-          outline-color: var(--#{$nsp}-color-base-focus);
-          outline-offset: 2px;
-        }
-      }
-
-      label {
-        overflow: hidden;
-        position: absolute;
-        white-space: nowrap;
-        width: 1px;
-      }
+    .#{$nsp}-search-dropdown label {
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
     }
   }
 
@@ -180,7 +161,7 @@
     }
   }
 
-  // Mobile filter toggle (placed before __top in DOM for ~ selector)
+  // Mobile filter toggle
   .#{$nsp}-searchfilter__toggle {
     display: none;
 
@@ -203,19 +184,25 @@
     }
   }
 
-  // Sort dropdown inside results head — uses sort variant (SVG icon, no chevron)
-  .#{$nsp}-search-result__head {
-    .#{$nsp}-search-dropdown--sort {
-      // Hide the BEF form-type--select wrapper label
-      .form-type--select label {
+  // Sort dropdown — uses bsi-search-dropdown--sort variant
+  // Must hide the BEF form-type--select inner ::after chevron
+  .#{$nsp}-search-dropdown--sort {
+    .form-type--select {
+      // Kill the inner wrapper styles — our outer wrapper handles everything
+      position: static;
+
+      &::after {
+        display: none;
+      }
+
+      label {
         overflow: hidden;
         position: absolute;
         white-space: nowrap;
         width: 1px;
       }
 
-      // Override BEF select styling to match sort variant
-      .form-type--select select {
+      select {
         -webkit-appearance: none;
         appearance: none;
         background-color: var(--#{$nsp}-color-blue-150);
@@ -233,11 +220,6 @@
           outline-color: var(--#{$nsp}-color-base-focus);
           outline-offset: 2px;
         }
-      }
-
-      // Remove the default chevron from BEF wrapper
-      .form-type--select::after {
-        display: none;
       }
     }
   }
