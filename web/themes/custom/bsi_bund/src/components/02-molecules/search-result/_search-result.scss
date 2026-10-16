@@ -77,6 +77,7 @@
     // Fulltext search input — full width, above the filter grid
     .form-item-search {
       position: relative;
+      width: 100%;
 
       input[type="text"] {
         background-color: var(--#{$nsp}-color-base-white);
@@ -184,13 +185,14 @@
     }
   }
 
-  // Sort dropdown — uses bsi-search-dropdown--sort variant
-  // Must hide the BEF form-type--select inner ::after chevron
+  // Sort dropdown — uses bsi-search-dropdown--sort variant from
+  // _search-dropdown.scss. Override the base .form-type--select styles
+  // from bsi-search-result so they don't conflict.
   .#{$nsp}-search-dropdown--sort {
     .form-type--select {
-      // Kill the inner wrapper styles — our outer wrapper handles everything
       position: static;
 
+      // No ::after here — the outer --sort wrapper provides the SVG icon
       &::after {
         display: none;
       }
@@ -202,24 +204,11 @@
         width: 1px;
       }
 
+      // Override base search-result select styles: use sort padding
+      // (icon on left, no right padding for chevron)
       select {
-        -webkit-appearance: none;
-        appearance: none;
-        background-color: var(--#{$nsp}-color-blue-150);
-        border: 0;
-        border-radius: 4px;
-        color: var(--#{$nsp}-color-blue-800);
-        cursor: pointer;
-        font-size: 16px;
-        padding-block: var(--#{$nsp}-space-sm);
         padding-inline: 48px var(--#{$nsp}-space-sm);
         width: auto;
-
-        &:focus-visible {
-          outline: 2px solid;
-          outline-color: var(--#{$nsp}-color-base-focus);
-          outline-offset: 2px;
-        }
       }
     }
   }

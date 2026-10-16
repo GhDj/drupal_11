@@ -3,9 +3,24 @@
  * - Renders active filter pills from selected facet values
  * - Provides "Alle Filter zurücksetzen" reset link
  * - Mobile toggle to show/hide filter sections
+ *
+ * Runs on DOMContentLoaded and re-runs after Drupal AJAX updates.
  */
 
 export default function SearchFilter(): void {
+  applySearchFilter();
+
+  // Re-apply after Drupal AJAX updates (views ajax, form rebuilds)
+  if (typeof Drupal !== "undefined" && Drupal.behaviors) {
+    Drupal.behaviors.bsiSearchFilter = {
+      attach() {
+        applySearchFilter();
+      },
+    };
+  }
+}
+
+function applySearchFilter(): void {
   const view = document.querySelector(
     ".view-display-id-block_search_global"
   );
@@ -101,10 +116,15 @@ function initActiveFilterPills(view: Element): void {
 
 function initMobileToggle(view: Element): void {
   const toggle = view.querySelector<HTMLButtonElement>(".js-searchfilter-toggle");
-  if (!toggle) return;
+  if (!toggle || toggle.dataset.initialized) return;
 
+  toggle.dataset.initialized = "true";
   toggle.addEventListener("click", () => {
     const expanded = toggle.getAttribute("aria-expanded") === "true";
     toggle.setAttribute("aria-expanded", String(!expanded));
   });
 }
+
+declare const Drupal: {
+  behaviors: Record<string, { attach: (context?: Element, settings?: unknown) => void }>;
+};
