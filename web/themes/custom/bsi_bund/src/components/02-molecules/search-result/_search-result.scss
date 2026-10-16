@@ -96,26 +96,29 @@
       width: 1px;
     }
 
-    // The Drupal form-item wrapper must stretch to fill
-    .form-item,
-    .form-item-search,
-    .js-form-type-search-api-autocomplete,
-    .form-type--textfield,
-    .form-type--search-api-autocomplete {
+    // Every wrapper between searchbar and the input must stretch
+    > * {
       flex: 1;
       min-width: 0;
+    }
+
+    // All nested Drupal wrappers (form-item, autocomplete, etc.)
+    div {
       width: 100%;
     }
 
-    // Override Drupal's size="60" attribute which constrains input width
-    input {
+    // The actual input — override Drupal's size="60" attribute
+    input[type="text"],
+    input[type="search"],
+    input.form-text,
+    input.form-autocomplete {
       background: transparent;
       border: 0;
       color: var(--#{$nsp}-color-typo-primary);
       font-size: 16px;
       min-width: 0;
       padding: var(--#{$nsp}-space-sm) 0;
-      width: 100%;
+      width: 100% !important;
 
       &:focus {
         outline: none;
