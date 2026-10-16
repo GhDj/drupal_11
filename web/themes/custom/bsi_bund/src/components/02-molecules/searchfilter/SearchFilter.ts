@@ -2,7 +2,7 @@
  * Global search filter behavior:
  * - Initializes custom multi-select dropdown filters
  * - Renders active filter pills from selected values
- * - Pill removal and reset work by URL manipulation (reload without filters)
+ * - Pill removal and reset via form manipulation + submission
  * - Mobile toggle to show/hide filter sections
  */
 
@@ -38,44 +38,48 @@ function applySearchFilter(): void {
 }
 
 /**
- * Get current filter state from URL query parameters.
- * BEF facets use identifiers like audiences[], topics[], year[], type[].
+ * Find and click the form submit button.
  */
-function getActiveFiltersFromUrl(): Map<string, { values: string[]; labels: Map<string, string> }> {
-  const params = new URLSearchParams(window.location.search);
-  const filterKeys = ["type", "topics", "audiences", "year"];
-  const result = new Map<string, { values: string[]; labels: Map<string, string> }>();
+function submitExposedForm(view: Element): void {
+  const form = view.querySelector<HTMLFormElement>("form");
+  if (!form) return;
 
-  filterKeys.forEach(key => {
-    const values = params.getAll(`${key}[]`).concat(params.getAll(key));
-    if (values.length > 0) {
-      result.set(key, { values, labels: new Map() });
+  // Find submit button — try multiple selectors
+  const submit = form.querySelector<HTMLElement>(
+    'input[type="submit"][data-drupal-selector="edit-submit-search"],' +
+    'input[type="submit"][id="edit-submit-search"],' +
+    'input[type="submit"]:not([id="edit-reset"]),' +
+    'button[type="submit"]'
+  );
+
+  if (submit) {
+    // Use jQuery trigger if available (for Drupal AJAX handlers)
+    if (typeof jQuery !== "undefined") {
+      jQuery(submit).trigger("click");
+    } else {
+      submit.click();
     }
-  });
-
-  return result;
+  } else {
+    form.submit();
+  }
 }
 
 function initActiveFilterPills(view: Element): void {
   const bottom = view.querySelector(".js-searchfilter-bottom");
   if (!bottom) return;
 
-  // Collect from both URL params and select state
   const selects = view.querySelectorAll<HTMLSelectElement>(
     ".bsi-searchfilter__top .js-multiselect select"
   );
 
-  const activeFilters: { label: string; key: string; value: string }[] = [];
+  const activeFilters: { label: string; select: HTMLSelectElement; value: string }[] = [];
 
   selects.forEach(select => {
-    const container = select.closest<HTMLElement>(".js-multiselect");
-    const key = container?.dataset.filterKey || "";
-
     Array.from(select.options).forEach(option => {
       if (option.selected && option.value && option.value !== "" && option.value !== "All") {
         activeFilters.push({
           label: option.textContent?.trim() || option.value,
-          key,
+          select,
           value: option.value,
         });
       }
@@ -90,7 +94,7 @@ function initActiveFilterPills(view: Element): void {
   const pillsContainer = document.createElement("div");
   pillsContainer.className = "bsi-searchfilter__pills";
 
-  activeFilters.forEach(({ label, key, value }) => {
+  activeFilters.forEach(({ label, select, value }) => {
     const pill = document.createElement("button");
     pill.type = "button";
     pill.className = "bsi-button bsi-button--tertiary bsi-pill bsi-pill--default";
@@ -98,13 +102,21 @@ function initActiveFilterPills(view: Element): void {
     pill.innerHTML = `<span class="bsi-button__text">${label}</span>${svgIcon("cross")}`;
 
     pill.addEventListener("click", () => {
-      // Remove this specific filter value from URL and reload
-      const url = new URL(window.location.href);
-      const allValues = url.searchParams.getAll(`${key}[]`);
-      url.searchParams.delete(`${key}[]`);
-      url.searchParams.delete(key);
-      allValues.filter(v => v !== value).forEach(v => url.searchParams.append(`${key}[]`, v));
-      window.location.href = url.toString();
+      // Deselect the option in the native select
+      const option = select.querySelector<HTMLOptionElement>(
+        `option[value="${CSS.escape(value)}"]`
+      );
+      if (option) option.selected = false;
+
+      // Uncheck the corresponding multi-select checkbox
+      const container = select.closest(".js-multiselect");
+      const checkbox = container?.querySelector<HTMLInputElement>(
+        `input[type="checkbox"][value="${CSS.escape(value)}"]`
+      );
+      if (checkbox) checkbox.checked = false;
+
+      // Submit form to apply the change
+      submitExposedForm(view);
     });
 
     pillsContainer.appendChild(pill);
@@ -116,7 +128,7 @@ function initActiveFilterPills(view: Element): void {
   resetBtn.innerHTML = `${svgIcon("cross")}<span class="bsi-button__text">Alle Filter zurücksetzen</span>`;
 
   resetBtn.addEventListener("click", () => {
-    // Keep only the search term, remove all filter params
+    // Keep search term, remove all filters by navigating
     const url = new URL(window.location.href);
     const searchTerm = url.searchParams.get("search");
     const newUrl = new URL(window.location.pathname, window.location.origin);
@@ -145,3 +157,5 @@ function initMobileToggle(view: Element): void {
 declare const Drupal: {
   behaviors: Record<string, { attach: (context?: Element, settings?: unknown) => void }>;
 };
+
+declare const jQuery: (selector: Element) => { trigger: (event: string) => void };

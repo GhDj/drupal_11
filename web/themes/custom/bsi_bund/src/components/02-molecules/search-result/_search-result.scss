@@ -72,11 +72,16 @@
     padding: 0;
   }
 
-  // Form must not break flex layout
+  // Form must flow in flex layout without breaking form serialization
+  // (display:contents breaks form submission in some browsers)
   .#{$nsp}-searchfilter__inner > form,
   .#{$nsp}-searchfilter__inner > .view-filters > form,
-  .#{$nsp}-searchfilter__inner > .views-exposed-form {
-    display: contents;
+  .#{$nsp}-searchfilter__inner > .views-exposed-form,
+  .#{$nsp}-searchfilter__inner > .view-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
   }
 
   // Searchbar — uses existing bsi-searchbar component styles
@@ -271,14 +276,16 @@
     }
   }
 
-  // Sort — hide BEF inner wrapper, use outer --sort variant
+  // Sort — only the outer .bsi-search-dropdown--sort::after should show
+  // (the SVG sort icon on the left). Kill everything else inside.
   .#{$nsp}-search-dropdown--sort {
+    // Kill ALL inner ::after pseudo-elements (BEF wrappers, Claro, etc.)
+    *::after {
+      display: none !important;
+    }
+
     .form-type--select {
       position: static;
-
-      &::after {
-        display: none;
-      }
 
       label {
         overflow: hidden;
@@ -286,10 +293,24 @@
         white-space: nowrap;
         width: 1px;
       }
+    }
 
-      select {
-        padding-inline: 48px var(--#{$nsp}-space-sm);
-        width: auto;
+    select {
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: var(--#{$nsp}-color-blue-150);
+      border: 0;
+      border-radius: 4px;
+      color: var(--#{$nsp}-color-blue-800);
+      cursor: pointer;
+      font-size: 16px;
+      padding-block: var(--#{$nsp}-space-sm);
+      padding-inline: 48px var(--#{$nsp}-space-sm);
+      width: auto;
+
+      &:focus-visible {
+        outline: 2px solid var(--#{$nsp}-color-base-focus);
+        outline-offset: 2px;
       }
     }
   }
