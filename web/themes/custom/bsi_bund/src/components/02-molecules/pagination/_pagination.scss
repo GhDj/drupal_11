@@ -11,6 +11,7 @@
   display: flex;
   gap: var(--#{$nsp}-space-sm);
   justify-content: center;
+  margin-top: var(--#{$nsp}-space-lg);
 
   &__list {
     align-items: center;
