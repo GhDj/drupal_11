@@ -1,0 +1,93 @@
+{#
+/**
+ * @file
+ * Theme override for the pager — renders as bsi-pagination component.
+ *
+ * Available variables:
+ * - heading_id: Pagination heading ID.
+ * - items: List of pager items.
+ *   - items.first: Link to first page.
+ *   - items.previous: Link to previous page.
+ *   - items.next: Link to next page.
+ *   - items.last: Link to last page.
+ *   - items.pages: Pages in the pager list.
+ * - current: The current page number.
+ * - ellipses: Ellipsis indicators.
+ *   - ellipses.previous: If an ellipsis before visible pages is needed.
+ *   - ellipses.next: If an ellipsis after visible pages is needed.
+ *
+ * @see template_preprocess_pager()
+ */
+#}
+{% if items %}
+  <nav class="bsi-pagination" role="navigation" aria-label="{{ 'Pagination'|t }}">
+    {# Previous #}
+    {% if items.previous %}
+      <a href="{{ items.previous.href }}" class="bsi-link-button bsi-link-button--primary bsi-pagination__control" title="{{ 'Zur vorherigen Seite gehen'|t }}" rel="prev" aria-label="{{ 'Zur vorherigen Seite gehen'|t }}">
+        {% include '@bsi_bund/components/icon.twig' with {
+          name: 'chevron-left',
+          decorative: true,
+        } only %}
+      </a>
+    {% else %}
+      <span class="bsi-link-button bsi-link-button--primary bsi-pagination__control" aria-disabled="true" tabindex="-1">
+        {% include '@bsi_bund/components/icon.twig' with {
+          name: 'chevron-left',
+          decorative: true,
+        } only %}
+      </span>
+    {% endif %}
+
+    {# Page numbers #}
+    {% if items.pages %}
+      <div class="bsi-pagination__list">
+        {% if ellipses.previous %}
+          <span class="bsi-pagination__ellipsis" aria-hidden="true">
+            {% include '@bsi_bund/components/icon.twig' with {
+              name: 'ellipses',
+              decorative: true,
+            } only %}
+          </span>
+        {% endif %}
+
+        {% for key, item in items.pages %}
+          {% if current == key %}
+            <a href="{{ item.href }}" class="bsi-link-button bsi-link-button--tertiary bsi-pagination__item" aria-current="page">
+              {{ key }}
+            </a>
+          {% else %}
+            <a href="{{ item.href }}" class="bsi-link-button bsi-link-button--tertiary bsi-pagination__item">
+              {{ key }}
+            </a>
+          {% endif %}
+        {% endfor %}
+
+        {% if ellipses.next %}
+          <span class="bsi-pagination__ellipsis" aria-hidden="true">
+            {% include '@bsi_bund/components/icon.twig' with {
+              name: 'ellipses',
+              decorative: true,
+            } only %}
+          </span>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {# Next #}
+    {% if items.next %}
+      <a href="{{ items.next.href }}" class="bsi-link-button bsi-link-button--primary bsi-pagination__control" title="{{ 'Zur nächsten Seite gehen'|t }}" rel="next" aria-label="{{ 'Zur nächsten Seite gehen'|t }}">
+        {% include '@bsi_bund/components/icon.twig' with {
+          name: 'chevron-right',
+          decorative: true,
+        } only %}
+      </a>
+    {% else %}
+      <span class="bsi-link-button bsi-link-button--primary bsi-pagination__control" aria-disabled="true" tabindex="-1">
+        {% include '@bsi_bund/components/icon.twig' with {
+          name: 'chevron-right',
+          decorative: true,
+        } only %}
+      </span>
+    {% endif %}
+  </nav>
+{% endif %}

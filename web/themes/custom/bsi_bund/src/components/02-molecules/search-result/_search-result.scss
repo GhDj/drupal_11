@@ -23,7 +23,7 @@
 
   &__head {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 
   &__list-item {
@@ -58,6 +58,59 @@
         outline-color: var(--#{$nsp}-color-base-focus);
         outline-offset: 2px;
       }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Sort dropdown fix — applies globally (all views using sort dropdown)
+// Match Storybook search-result molecule: sort SVG icon on the left, NO native arrow.
+// -----------------------------------------------------------------------------
+.#{$nsp}-search-dropdown--sort {
+  // Kill ALL inner ::after pseudo-elements (BEF, Claro, etc.)
+  *::after {
+    display: none !important;
+  }
+
+  // Flatten BEF's inner wrapper
+  .form-type--select {
+    position: static;
+  }
+
+  // Hide all labels inside
+  label {
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  // Kill native select arrow — Drupal doesn't add bsi-search-dropdown__select
+  // class, so we apply the same styles directly on bare select.
+  select,
+  select.form-element,
+  select.form-select {
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background-color: var(--#{$nsp}-color-blue-150);
+    background-image: none !important;
+    border: 0 !important;
+    border-radius: 4px;
+    color: var(--#{$nsp}-color-blue-800);
+    cursor: pointer;
+    font-size: 16px;
+    padding-block: var(--#{$nsp}-space-sm);
+    padding-inline: 48px var(--#{$nsp}-space-sm);
+    width: auto;
+
+    &:focus-visible {
+      outline: 2px solid var(--#{$nsp}-color-base-focus);
+      outline-offset: 2px;
+    }
+
+    &::-ms-expand {
+      display: none;
     }
   }
 }
