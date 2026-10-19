@@ -66,22 +66,54 @@
 // Global search: Figma-matching layout
 // -----------------------------------------------------------------------------
 .view-display-id-block_search_global {
-  // Flat variant — no shadow box
-  .#{$nsp}-searchfilter--flat {
-    box-shadow: none;
-    padding: 0;
+  // Global search variant — box shadow wraps the opener + search area
+  .#{$nsp}-searchfilter--global {
+    border-radius: 4px;
+    box-shadow: 0 0 4px 0 rgba(33, 35, 40, 0.25);
+    padding: 24px;
+
+    @include breakpoint-lg {
+      padding: 40px;
+    }
   }
 
-  // Form must flow in flex layout without breaking form serialization
-  // (display:contents breaks form submission in some browsers)
+  // Form uses display:contents so its children participate in the
+  // parent flex layout and can be reordered with CSS order.
   .#{$nsp}-searchfilter__inner > form,
   .#{$nsp}-searchfilter__inner > .view-filters > form,
   .#{$nsp}-searchfilter__inner > .views-exposed-form,
   .#{$nsp}-searchfilter__inner > .view-filters {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    width: 100%;
+    display: contents;
+  }
+
+  // CSS order to interleave form children with non-form elements:
+  // 1: searchbar, 2: result count, 3: separator, 4: filters+toggle, 5: pills
+  .#{$nsp}-searchbar {
+    order: 1;
+  }
+
+  .#{$nsp}-searchfilter__text {
+    order: 2;
+  }
+
+  .#{$nsp}-searchfilter__separator {
+    order: 3;
+  }
+
+  .#{$nsp}-searchfilter__toggle {
+    order: 4;
+  }
+
+  .#{$nsp}-searchfilter__top {
+    order: 4;
+  }
+
+  .#{$nsp}-searchfilter__actions {
+    order: 4;
+  }
+
+  .#{$nsp}-searchfilter__bottom {
+    order: 5;
   }
 
   // Searchbar — let the bsi-searchbar component SCSS handle all styling.
@@ -112,17 +144,18 @@
     }
   }
 
-  // Result count text
+  // Result count text — order:2 places it after searchbar
   .#{$nsp}-searchfilter__text {
     font-size: 16px;
-    margin-top: var(--#{$nsp}-space-sm);
+    width: 100%;
   }
 
-  // Dotted separator
+  // Dotted separator — order:3 places it before filters
   .#{$nsp}-searchfilter__separator {
     border: 0;
     border-top: 1px dashed var(--#{$nsp}-color-neutral-250);
-    margin: var(--#{$nsp}-space-md) 0;
+    margin: 0;
+    width: 100%;
   }
 
   // Custom multi-select dropdown

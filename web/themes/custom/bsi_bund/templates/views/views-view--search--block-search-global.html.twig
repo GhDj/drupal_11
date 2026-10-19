@@ -3,15 +3,16 @@
  * @file
  * Theme override for the Global Search block display.
  *
- * Layout matches the Figma design:
+ * Layout order (matching Figma full-top-block.png):
  * 1. Searchbar (full width, search icon)
- * 2. Result count
+ * 2. Result count text
  * 3. Dotted separator
- * 4. Filter dropdowns (custom multi-select)
+ * 4. Filter dropdowns
  * 5. Active filter pills + reset
- * 6. Sort dropdown (right-aligned in results)
- * 7. Result list
- * 8. Pagination
+ *
+ * The searchbar and filters are inside the same <form>, but the result
+ * count (header) is a separate Views area. CSS order + display:contents
+ * on the form interleaves them in the correct visual order.
  */
 #}
 {%
@@ -31,27 +32,27 @@
   {{ title_suffix }}
 
   {% if exposed %}
-    <div class="bsi-searchfilter bsi-searchfilter--flat">
+    <div class="bsi-searchfilter bsi-searchfilter--global">
       <div class="bsi-searchfilter__inner">
-        {# Exposed form renders: searchbar, result count, separator, filters, actions #}
+        {# Form (display:contents) — searchbar gets order:1, filters get order:4 #}
         {{ exposed|without('sort_bef_combine') }}
 
-        {# Result count — placed after form via CSS order #}
+        {# Result count — order:2 (after searchbar, before separator) #}
         {% if header %}
           <div class="bsi-searchfilter__text">
             {{ header }}
           </div>
         {% endif %}
 
-        {# Dotted separator #}
+        {# Dotted separator — order:3 #}
         <hr class="bsi-searchfilter__separator" />
 
-        {# Mobile filter toggle #}
+        {# Mobile filter toggle — order:4 (same as filters) #}
         <button class="bsi-searchfilter__toggle js-searchfilter-toggle" type="button" aria-expanded="true">
           {{ 'Filter'|t }}
         </button>
 
-        {# Active filter pills (populated by JS) #}
+        {# Active filter pills — order:5 #}
         <div class="bsi-searchfilter__bottom js-searchfilter-bottom"></div>
       </div>
     </div>
