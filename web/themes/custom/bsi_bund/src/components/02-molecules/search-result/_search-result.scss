@@ -63,6 +63,59 @@
 }
 
 // -----------------------------------------------------------------------------
+// Sort dropdown fix — applies globally (global search + dynamic list + any view)
+// Match Storybook search-result molecule: sort SVG icon on the left, NO native arrow.
+// -----------------------------------------------------------------------------
+.#{$nsp}-search-dropdown--sort {
+  // Kill ALL inner ::after pseudo-elements (BEF, Claro, etc.)
+  *::after {
+    display: none !important;
+  }
+
+  // Flatten BEF's inner wrapper
+  .form-type--select {
+    position: static;
+  }
+
+  // Hide all labels inside
+  label {
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  // Kill native select arrow — Drupal doesn't add bsi-search-dropdown__select
+  // class, so we apply the same styles directly on bare select.
+  select,
+  select.form-element,
+  select.form-select {
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background-color: var(--#{$nsp}-color-blue-150);
+    background-image: none !important;
+    border: 0 !important;
+    border-radius: 4px;
+    color: var(--#{$nsp}-color-blue-800);
+    cursor: pointer;
+    font-size: 16px;
+    padding-block: var(--#{$nsp}-space-sm);
+    padding-inline: 48px var(--#{$nsp}-space-sm);
+    width: auto;
+
+    &:focus-visible {
+      outline: 2px solid var(--#{$nsp}-color-base-focus);
+      outline-offset: 2px;
+    }
+
+    &::-ms-expand {
+      display: none;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
 // Global search: Figma-matching layout
 // -----------------------------------------------------------------------------
 .view-display-id-block_search_global {
@@ -293,61 +346,6 @@
 
       &[aria-expanded="false"] ~ .#{$nsp}-searchfilter__top,
       &[aria-expanded="false"] ~ .#{$nsp}-searchfilter__bottom {
-        display: none;
-      }
-    }
-  }
-
-  // Sort — match Storybook search-result molecule exactly:
-  // .bsi-search-dropdown--sort wraps a <select> with sort SVG icon
-  // on the left (via ::after on the wrapper) and NO native arrow.
-  .#{$nsp}-search-dropdown--sort {
-    // Kill ALL inner ::after pseudo-elements
-    *::after {
-      display: none !important;
-    }
-
-    // Flatten BEF's inner wrapper
-    .form-type--select {
-      position: static;
-    }
-
-    // Hide all labels inside
-    label {
-      overflow: hidden;
-      position: absolute;
-      white-space: nowrap;
-      width: 1px;
-    }
-
-    // The select must have NO native arrow — Storybook uses
-    // bsi-search-dropdown__select class, Drupal doesn't add it,
-    // so we apply the same styles with high specificity.
-    select,
-    select.form-element,
-    select.form-select {
-      -moz-appearance: none !important;
-      -webkit-appearance: none !important;
-      appearance: none !important;
-      background-color: var(--#{$nsp}-color-blue-150);
-      background-image: none !important;
-      border: 0 !important;
-      border-radius: 4px;
-      color: var(--#{$nsp}-color-blue-800);
-      cursor: pointer;
-      font-size: 16px;
-      padding-block: var(--#{$nsp}-space-sm);
-      // Sort variant: icon on left, text, no right padding for arrow
-      padding-inline: 48px var(--#{$nsp}-space-sm);
-      width: auto;
-
-      &:focus-visible {
-        outline: 2px solid var(--#{$nsp}-color-base-focus);
-        outline-offset: 2px;
-      }
-
-      // Firefox still shows arrow via pseudo — hide it
-      &::-ms-expand {
         display: none;
       }
     }
