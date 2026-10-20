@@ -5,7 +5,8 @@
  *
  * 1. Searchbar with search icon (bsi-searchbar)
  * 2. Filter grid with custom multi-select dropdowns
- * 3. Hidden form elements + submit
+ * 3. Sort dropdown (inside form for submission, CSS positions it in results area)
+ * 4. Hidden form elements + submit
  */
 #}
 
@@ -33,6 +34,15 @@
     {% endif %}
   {% endfor %}
 </div>
+
+{# Sort dropdown — stays inside form, CSS moves it to results area #}
+{% if form.sort_bef_combine is defined %}
+  <div class="sort-wrapper">
+    <div class="bsi-search-dropdown bsi-search-dropdown--sort">
+      {{ form.sort_bef_combine }}
+    </div>
+  </div>
+{% endif %}
 
 {# Hidden form elements #}
 {{ form.form_build_id }}

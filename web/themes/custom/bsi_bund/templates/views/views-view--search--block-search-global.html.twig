@@ -9,20 +9,21 @@
  * 3. Dotted separator
  * 4. Filter dropdowns
  * 5. Active filter pills + reset
+ * 6. Sort dropdown (right-aligned, in results area)
+ * 7. Results + pagination
  *
- * The searchbar and filters are inside the same <form>, but the result
- * count (header) is a separate Views area. CSS order + display:contents
- * on the form interleaves them in the correct visual order.
+ * The sort stays INSIDE the <form> so its value is submitted.
+ * CSS positions the .sort-wrapper visually in the results area.
  */
 #}
 {%
   set classes = [
-    'view',
-    'view-' ~ id|clean_class,
-    'view-id-' ~ id,
-    'view-display-id-' ~ display_id,
-    dom_id ? 'js-view-dom-id-' ~ dom_id,
-  ]
+  'view',
+  'view-' ~ id|clean_class,
+  'view-id-' ~ id,
+  'view-display-id-' ~ display_id,
+  dom_id ? 'js-view-dom-id-' ~ dom_id,
+]
 %}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
@@ -34,8 +35,8 @@
   {% if exposed %}
     <div class="bsi-searchfilter bsi-searchfilter--global">
       <div class="bsi-searchfilter__inner">
-        {# Form (display:contents) — searchbar gets order:1, filters get order:4 #}
-        {{ exposed|without('sort_bef_combine') }}
+        {# Full form including sort — sort stays inside <form> for submission #}
+        {{ exposed }}
 
         {# Result count — order:2 (after searchbar, before separator) #}
         {% if header %}
@@ -47,7 +48,7 @@
         {# Dotted separator — order:3 #}
         <hr class="bsi-searchfilter__separator" />
 
-        {# Mobile filter toggle — order:4 (same as filters) #}
+        {# Mobile filter toggle — order:4 #}
         <button class="bsi-searchfilter__toggle js-searchfilter-toggle" type="button" aria-expanded="true">
           {{ 'Filter'|t }}
         </button>
@@ -62,14 +63,6 @@
   {% if rows or empty %}
     <div class="bsi-search-result">
       <div class="bsi-search-result__inner">
-        {% if exposed['sort_bef_combine'] %}
-          <div class="bsi-search-result__head">
-            <div class="bsi-search-dropdown bsi-search-dropdown--sort">
-              {{ exposed['sort_bef_combine'] }}
-            </div>
-          </div>
-        {% endif %}
-
         {% if rows %}
           <div class="view-content">
             {{ rows }}

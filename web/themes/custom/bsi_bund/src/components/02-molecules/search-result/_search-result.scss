@@ -169,6 +169,11 @@
     order: 5;
   }
 
+  // Sort wrapper — inside the form but visually positioned after pills
+  .sort-wrapper {
+    order: 6;
+  }
+
   // Searchbar — let the bsi-searchbar component SCSS handle all styling.
   // Only fix Drupal/Claro-specific overrides here.
   .#{$nsp}-searchbar {
