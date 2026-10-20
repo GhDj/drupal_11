@@ -72,6 +72,12 @@
     display: none !important;
   }
 
+  // Ensure the outer ::after (sort SVG icon) is vertically centered
+  &::after {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+
   // Flatten BEF's inner wrapper
   .form-type--select {
     position: static;

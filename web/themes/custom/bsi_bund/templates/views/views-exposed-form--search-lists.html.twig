@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Exposed form for search_lists (dynamic list).
+ * Separates filters and sort — sort wrapped in bsi-search-dropdown--sort.
+ */
+#}
+
+{# Filters (if any) #}
+<div class="filters-wrapper">
+  {{ form|without('sort_bef_combine') }}
+</div>
+
+{# Sort — inside form for submission, styled as sort dropdown #}
+{% if form.sort_bef_combine is defined %}
+  <div class="sort-wrapper">
+    <div class="bsi-search-dropdown bsi-search-dropdown--sort">
+      {{ form.sort_bef_combine }}
+    </div>
+  </div>
+{% endif %}
