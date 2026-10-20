@@ -8,12 +8,11 @@
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
-  {% if exposed and exposed['sort_bef_combine'] %}
-    <div class="bsi-search-result__head">
-      <div class="bsi-search-dropdown bsi-search-dropdown--sort">
-        {{ exposed['sort_bef_combine'] }}
-      </div>
-    </div>
+  {# Full form including sort — sort stays inside <form> for submission.
+     The exposed form template (views-exposed-form.html.twig) separates
+     filters and sort into .filters-wrapper and .sort-wrapper divs. #}
+  {% if exposed %}
+    {{ exposed }}
   {% endif %}
 
   {% if rows %}

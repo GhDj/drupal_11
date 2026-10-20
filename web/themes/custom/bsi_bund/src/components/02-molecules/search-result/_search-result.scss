@@ -116,6 +116,27 @@
 }
 
 // -----------------------------------------------------------------------------
+// Sort wrapper — used when sort stays inside the form (for submission)
+// but needs to be visually positioned like bsi-search-result__head
+// -----------------------------------------------------------------------------
+.sort-wrapper {
+  display: flex;
+  justify-content: flex-end;
+
+  // Hide the filters-wrapper wrapper when it's empty (no visible filters)
+  &:empty {
+    display: none;
+  }
+}
+
+// Hide the filters-wrapper when view has no visible filter inputs
+.filters-wrapper {
+  &:empty {
+    display: none;
+  }
+}
+
+// -----------------------------------------------------------------------------
 // Annual report search (injected via hook_node_view)
 // -----------------------------------------------------------------------------
 .#{$nsp}-report-search {
