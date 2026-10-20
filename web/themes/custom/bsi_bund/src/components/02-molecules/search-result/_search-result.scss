@@ -171,7 +171,10 @@
 
   // Sort wrapper — inside the form but visually positioned after pills
   .sort-wrapper {
+    display: flex;
+    justify-content: flex-end;
     order: 6;
+    width: 100%;
   }
 
   // Searchbar — let the bsi-searchbar component SCSS handle all styling.
