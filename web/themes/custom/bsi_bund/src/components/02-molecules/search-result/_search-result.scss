@@ -72,6 +72,14 @@
     display: none !important;
   }
 
+  // Re-ensure the outer ::after (sort SVG icon) is vertically centered.
+  // The base _search-dropdown.scss sets top:50% but it may get lost
+  // when the element's layout context changes.
+  &::after {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+
   // Flatten BEF's inner wrapper
   .form-type--select {
     position: static;
