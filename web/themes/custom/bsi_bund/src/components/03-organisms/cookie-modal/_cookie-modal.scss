@@ -149,6 +149,7 @@
   }
   .cm-footer-buttons {
     flex-wrap: wrap;
+    gap: var(--#{$nsp}-space-sm);
     justify-content: center;
     @include breakpoint-md {
       flex-flow: row;
