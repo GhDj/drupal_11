@@ -28,6 +28,7 @@ third_party_settings:
   field_group:
     group_tagline:
       children:
+        - field_article_type
         - field_location
         - created
       label: Tagline

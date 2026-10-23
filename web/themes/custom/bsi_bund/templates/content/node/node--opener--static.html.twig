@@ -59,9 +59,9 @@
             </h1>
           {% endif %}
 
-          {% if content.field_article_type.0 %}
+          {% if content.group_tagline.field_article_type.0 %}
             <div class="bsi-opener__text">
-              {{ content.field_article_type.0 }}
+              {{ content.group_tagline.field_article_type.0 }}
             </div>
           {% endif %}
 
@@ -74,7 +74,7 @@
           {% if entity_type_id == 'media' %}
             <h1 class="bsi-heading bsi-heading--2">{{ name }}</h1>
           {% else %}
-            {{ content|without('title', 'field_media', 'body', 'field_article_type', 'group_tagline', 'group_header') }}
+            {{ content|without('title', 'field_media', 'body', 'group_tagline', 'group_header') }}
           {% endif %}
         </div>
       </div>
@@ -105,46 +105,35 @@
     {% endif %}
   </div>
 
-  {# tagline #}
-  {% if content.group_tagline.field_location.0 or content.group_tagline.created.0 or content.group_tagline.field_date_range.0 %}
+  {# tagline — render badges dynamically from group_tagline children #}
+  {% set badge_labels = {
+    field_article_type: 'Type'|t,
+    field_location: 'Location'|t,
+    created: 'Date'|t,
+    field_date_range: 'Date'|t,
+  } %}
+  {% set tagline_children = content.group_tagline|filter((v, k) => k|first != '#') %}
+  {% if tagline_children is not empty %}
     <ul class="bsi-opener__badges">
-      {# article type #}
-      {% if content.field_article_type.0 %}
-        <li class="bsi-opener__badge-item">
-          <span class="bsi-opener__badge-prefix">{{ "Type"|t }}</span>
-          <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ content.field_article_type.0 }}</span>
-        </li>
-      {% endif %}
-
-      {# date (range) #}
-      {% if content.group_tagline.field_date_range.0 %}
-        <li class="bsi-opener__badge-item">
-          <span class="bsi-opener__badge-prefix">{{ "Begin"|t }}</span>
-          <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ content.group_tagline.field_date_range.0.start_date }}</span>
-        </li>
-
-        <li class="bsi-opener__badge-item">
-          <span class="bsi-opener__badge-prefix">{{ "End"|t }}</span>
-          <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ content.group_tagline.field_date_range.0.end_date }}</span>
-        </li>
-      {% endif %}
-
-      {# location #}
-      {% if content.group_tagline.field_location.0 %}
-        <li class="bsi-opener__badge-item">
-          <span class="bsi-opener__badge-prefix">{{ "Location"|t }}</span>
-          <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ content.group_tagline.field_location.0 }}</span>
-        </li>
-      {% endif %}
-
-      {# date (single) #}
-      {% if content.group_tagline.created.0 %}
-        <li class="bsi-opener__badge-item">
-          <span class="bsi-opener__badge-prefix">{{ "Date"|t }}</span>
-          <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ content.group_tagline.created.0 }}</span>
-        </li>
-      {% endif %}
+      {% for key, child in tagline_children %}
+        {% if key == 'field_date_range' and child.0.start_date is defined %}
+          <li class="bsi-opener__badge-item">
+            <span class="bsi-opener__badge-prefix">{{ "Begin"|t }}</span>
+            <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ child.0.start_date }}</span>
+          </li>
+          <li class="bsi-opener__badge-item">
+            <span class="bsi-opener__badge-prefix">{{ "End"|t }}</span>
+            <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ child.0.end_date }}</span>
+          </li>
+        {% elseif child.0 is not empty %}
+          <li class="bsi-opener__badge-item">
+            <span class="bsi-opener__badge-prefix">{{ badge_labels[key]|default(key) }}</span>
+            <span class="bsi-badge bsi-opener__badge bsi-badge--date">{{ child.0 }}</span>
+          </li>
+        {% endif %}
+      {% endfor %}
     </ul>
+    {{ content.group_tagline['#cache']|render }}
   {% endif %}
 
 {% else %}

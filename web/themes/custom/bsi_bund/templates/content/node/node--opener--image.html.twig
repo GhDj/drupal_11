@@ -39,9 +39,9 @@
             </h1>
           {% endif %}
 
-          {% if content.field_article_type.0 %}
+          {% if content.group_tagline.field_article_type.0 %}
             <div class="bsi-opener__text">
-              {{ content.field_article_type.0 }}
+              {{ content.group_tagline.field_article_type.0 }}
             </div>
           {% endif %}
 
@@ -50,7 +50,7 @@
               {{ content.body.0 }}
             </div>
           {% endif %}
-          {{ content|without('title', 'field_media', 'body', 'field_article_type', 'group_tagline') }}
+          {{ content|without('title', 'field_media', 'body', 'group_tagline') }}
         </div>
       </div>
     </div>
