@@ -126,6 +126,20 @@
 
 // card centered
 .#{$nsp}-opener--centered {
+  margin-inline: auto;
+  max-width: 1440px;
+
+  .#{$nsp}-opener__image {
+    max-height: 360px;
+    overflow: hidden;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+
   .#{$nsp}-opener__content {
     align-items: center;
     text-align: center;
@@ -240,6 +254,8 @@
 
 // slider
 .#{$nsp}-opener--slider {
+  margin-inline: auto;
+  max-width: 1440px;
   .#{$nsp}-opener {
     &__page-title {
       @include typography("display-2");
