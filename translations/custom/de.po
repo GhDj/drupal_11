@@ -16,3 +16,7 @@ msgstr "Lagebericht durchsuchen"
 
 msgid "Enter a search term"
 msgstr "Suchbegriff eingeben"
+
+msgctxt "search term"
+msgid "for your search for %term"
+msgstr "für Ihre Suche nach %term"
