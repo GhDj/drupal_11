@@ -67,15 +67,11 @@
 // Match Storybook search-result molecule: sort SVG icon on the left, NO native arrow.
 // -----------------------------------------------------------------------------
 .#{$nsp}-search-dropdown--sort {
-  // Kill ALL inner ::after pseudo-elements (BEF, Claro, etc.)
-  *::after {
+  // Kill inner ::after pseudo-elements (BEF, Claro) but preserve the
+  // sort icon ::after on the wrapper itself (from _search-dropdown.scss)
+  .form-type--select::after,
+  select::after {
     display: none !important;
-  }
-
-  // Ensure the outer ::after (sort SVG icon) is vertically centered
-  &::after {
-    top: 50% !important;
-    transform: translateY(-50%) !important;
   }
 
   // Flatten BEF's inner wrapper
@@ -122,20 +118,41 @@
 }
 
 // -----------------------------------------------------------------------------
-// Sort wrapper — used when sort stays inside the form (for submission)
-// but needs to be visually positioned like bsi-search-result__head
+// Exposed form layout — filters left, sort right, vertically aligned
 // -----------------------------------------------------------------------------
+.views-exposed-form:has(.filters-wrapper):has(.sort-wrapper) {
+  align-items: flex-end;
+  display: flex;
+  gap: var(--#{$nsp}-space-sm);
+
+  .filters-wrapper {
+    flex: 1;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .sort-wrapper {
+    flex-shrink: 0;
+
+    &:empty {
+      display: none;
+    }
+  }
+}
+
+// Fallback when form has only sort (no filters)
 .sort-wrapper {
   display: flex;
   justify-content: flex-end;
 
-  // Hide the filters-wrapper wrapper when it's empty (no visible filters)
   &:empty {
     display: none;
   }
 }
 
-// Hide the filters-wrapper when view has no visible filter inputs
+// Hide empty filters wrapper
 .filters-wrapper {
   &:empty {
     display: none;
