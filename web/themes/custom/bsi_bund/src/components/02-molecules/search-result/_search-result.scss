@@ -145,6 +145,11 @@
 
   .form-actions {
     margin: 0;
+
+    .button,
+    .form-submit {
+      margin: 0;
+    }
   }
 }
 
