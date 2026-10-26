@@ -143,15 +143,18 @@
   gap: var(--#{$nsp}-space-sm);
   justify-content: flex-end;
 
+  // Reset all inner margins so alignment is controlled by the wrapper
   .form-actions,
-  .view-form__item--actions {
+  .view-form__item--actions,
+  .#{$nsp}-search-dropdown--sort,
+  .form-type--select {
     margin: 0 !important;
+  }
 
-    .button,
-    .form-submit {
-      height: 48px;
-      margin: 0;
-    }
+  .button,
+  .form-submit {
+    height: 48px;
+    margin: 0;
   }
 }
 
