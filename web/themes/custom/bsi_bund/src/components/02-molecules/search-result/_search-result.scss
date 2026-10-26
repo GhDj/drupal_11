@@ -79,7 +79,11 @@
     position: static;
   }
 
-  // Force icon to vertically center relative to select height
+  // Ensure the wrapper matches the select height so ::after centers correctly
+  display: flex;
+  align-items: center;
+  position: relative;
+
   &::after {
     top: 50% !important;
     transform: translateY(-50%) !important;
@@ -146,6 +150,10 @@
   flex-shrink: 0;
   gap: var(--#{$nsp}-space-sm);
   justify-content: flex-end;
+
+  .form-actions {
+    margin: 0;
+  }
 }
 
 // Hide empty wrappers
