@@ -2,20 +2,23 @@
 /**
  * @file
  * Exposed form for search_lists (dynamic list).
- * Separates filters and sort — sort wrapped in bsi-search-dropdown--sort.
+ * Separates filters, actions and sort.
+ * Actions (Apply) and sort are grouped on the right.
  */
 #}
 
-{# Filters (if any) #}
+{# Filters (without sort and actions) #}
 <div class="filters-wrapper">
-  {{ form|without('sort_bef_combine') }}
+  {{ form|without('sort_bef_combine', 'actions') }}
 </div>
 
-{# Sort — inside form for submission, styled as sort dropdown #}
-{% if form.sort_bef_combine is defined %}
-  <div class="sort-wrapper">
+{# Actions + Sort — right-aligned together #}
+<div class="actions-sort-wrapper">
+  {{ form.actions }}
+
+  {% if form.sort_bef_combine is defined %}
     <div class="bsi-search-dropdown bsi-search-dropdown--sort">
       {{ form.sort_bef_combine }}
     </div>
-  </div>
-{% endif %}
+  {% endif %}
+</div>

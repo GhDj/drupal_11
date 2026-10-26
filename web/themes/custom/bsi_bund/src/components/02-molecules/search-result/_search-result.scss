@@ -74,9 +74,15 @@
     display: none !important;
   }
 
-  // Flatten BEF's inner wrapper
+  // Flatten BEF's inner wrapper and let the select define the height
   .form-type--select {
     position: static;
+  }
+
+  // Force icon to vertically center relative to select height
+  &::after {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
   }
 
   // Hide all labels inside
@@ -118,9 +124,9 @@
 }
 
 // -----------------------------------------------------------------------------
-// Exposed form layout — filters left, sort right, vertically aligned
+// Exposed form layout — filters left, actions + sort right-aligned
 // -----------------------------------------------------------------------------
-.views-exposed-form:has(.filters-wrapper):has(.sort-wrapper) {
+.views-exposed-form:has(.filters-wrapper):has(.actions-sort-wrapper) {
   align-items: flex-end;
   display: flex;
   gap: var(--#{$nsp}-space-sm);
@@ -132,31 +138,20 @@
       display: none;
     }
   }
-
-  .sort-wrapper {
-    flex-shrink: 0;
-
-    &:empty {
-      display: none;
-    }
-  }
 }
 
-// Fallback when form has only sort (no filters)
-.sort-wrapper {
+.actions-sort-wrapper {
+  align-items: center;
   display: flex;
+  flex-shrink: 0;
+  gap: var(--#{$nsp}-space-sm);
   justify-content: flex-end;
-
-  &:empty {
-    display: none;
-  }
 }
 
-// Hide empty filters wrapper
-.filters-wrapper {
-  &:empty {
-    display: none;
-  }
+// Hide empty wrappers
+.filters-wrapper:empty,
+.actions-sort-wrapper:empty {
+  display: none;
 }
 
 // -----------------------------------------------------------------------------
