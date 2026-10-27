@@ -65,6 +65,11 @@
   not paragraph.isPublished() ? 'paragraph--unpublished',
 ] %}
 
+{% if lightbox_url %}
+  {{ attach_library('core/drupal.ajax') }}
+  {{ attach_library('core/drupal.dialog.ajax') }}
+{% endif %}
+
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }} data-theme="{{ variant }}">
 
@@ -107,7 +112,7 @@
 
                 {# Check if full text are available. #}
                 {% if has_more and lightbox_url %}
-                  <a class="bsi-card__more-link use-ajax" href="{{ lightbox_url }}">
+                  <a class="bsi-card__more-link use-ajax" href="{{ lightbox_url }}" data-dialog-type="modal">
                     {{"[more]"|t}}
 
                     <span class="visually-hidden">
