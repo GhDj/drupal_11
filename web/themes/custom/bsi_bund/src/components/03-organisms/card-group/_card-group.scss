@@ -44,12 +44,25 @@
       height: 100%;
       max-width: none;
     }
+
+    &:has(.paragraph--type--teaser-single) {
+      grid-column: 1 / -1;
+    }
   }
 }
 
 // -----------------------------------------------------------------------------
 // Variants
 // -----------------------------------------------------------------------------
+// ONE Columns
+// ----------------------------------------------
+.#{$nsp}-card-group--one-columns {
+  .#{$nsp}-card-group__items {
+    @include breakpoint-lg {
+      @include grid-columns(1);
+    }
+  }
+}
 
 // Two Columns
 // ----------------------------------------------
@@ -67,6 +80,23 @@
   .#{$nsp}-card-group__items {
     @include breakpoint-lg {
       @include grid-columns(4);
+    }
+  }
+}
+
+// Large Padding
+// ----------------------------------------------
+.#{$nsp}-card-group--large-padding {
+  .#{$nsp}-card {
+    padding: var(--#{$nsp}-space-lg);
+
+    &:not(.#{$nsp}-card--image-left) {
+      .#{$nsp}-card__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
     }
   }
 }

@@ -10,7 +10,6 @@ dependencies:
     - field.field.media.chart.field_unit
     - media.type.chart
   module:
-    - bsi_custom
     - charts
     - layout_builder
     - link
@@ -29,14 +28,14 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 0
     region: content
   field_media_chart:
     type: chart_config_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 2
     region: content
   field_source:
     type: link
@@ -48,24 +47,14 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 5
+    weight: 3
     region: content
   field_unit:
     type: text_default
-    label: hidden
+    label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 3
-    region: content
-  name:
-    type: plain_text_formatted
-    label: hidden
-    settings:
-      link_to_entity: false
-      link_rel: canonical
-      text_format: plain_text
-    third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   changed: true
@@ -74,6 +63,7 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   langcode: true
+  name: true
   search_api_excerpt: true
   thumbnail: true
   uid: true

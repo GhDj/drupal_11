@@ -10,6 +10,7 @@ dependencies:
     - field.field.media.contact.field_mail
     - field.field.media.contact.field_phone
     - field.field.media.contact.field_social_media
+    - field.field.media.contact.field_subtitle
     - field.field.media.contact.field_vat_number
     - field.field.media.contact.field_website
     - media.type.contact
@@ -17,6 +18,7 @@ dependencies:
     - address
     - bsi_custom
     - link
+    - text
 id: media.contact.default
 targetEntityType: media
 bundle: contact
@@ -27,14 +29,14 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
   field_mail:
     type: email_mailto
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 4
     region: content
   field_phone:
     type: phone_link
@@ -42,7 +44,7 @@ content:
     settings:
       title_tooltip: true
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
   field_social_media:
     type: link
@@ -54,7 +56,35 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 3
+    weight: 6
+    region: content
+  field_subtitle:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_vat_number:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_website:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 5
     region: content
 hidden:
   changed: true
@@ -65,8 +95,6 @@ hidden:
   field_availability: true
   field_geolocation: true
   field_icon: true
-  field_vat_number: true
-  field_website: true
   langcode: true
   name: true
   search_api_excerpt: true

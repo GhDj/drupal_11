@@ -23,7 +23,7 @@ settings:
   show_top_item: false
   use_top_level_title: true
   starting_level: 1
-  max_depth: 0
+  max_depth: 5
   book_select: 0
   expanded: true
 visibility:

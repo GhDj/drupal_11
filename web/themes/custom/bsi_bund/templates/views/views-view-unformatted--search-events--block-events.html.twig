@@ -1,0 +1,25 @@
+{% for day_data in event_days %}
+
+  <div class="events-day">
+
+    <div class="events-day__header">
+
+      <span class="events-day__number">
+        {{ day_data.date|date('d') }}
+      </span>
+
+      <span class="events-day__weekday">
+        {{ day_data.date|date('D')|upper }}
+      </span>
+
+    </div>
+
+    <div class="events-day__events">
+      {% for row in day_data.rows %}
+        {{ row.content }}
+      {% endfor %}
+    </div>
+
+  </div>
+
+{% endfor %}

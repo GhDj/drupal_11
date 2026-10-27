@@ -12,14 +12,14 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: training
-      label: 'Vocational training'
-    -
       value: master
-      label: Master/Diploma
+      label: 'Master/Diploma (University)'
     -
       value: bachelor
-      label: Bachelor/Diploma
+      label: 'Bachelor/Diploma (FH)'
+    -
+      value: training
+      label: 'Vocational training'
     -
       value: other
       label: 'Other qualifications'

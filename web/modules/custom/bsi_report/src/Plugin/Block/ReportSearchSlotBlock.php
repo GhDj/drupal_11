@@ -66,7 +66,7 @@ class ReportSearchSlotBlock extends BlockBase implements ContainerFactoryPluginI
     $bookLink = $this->bookManager->loadBookLink((int) $node->id());
     if (empty($bookLink['bid'])) {
       return [
-        '#plain_text' => $this->t('No book found.'),
+        '#plain_text' => '',
       ];
     }
 

@@ -11,7 +11,7 @@ charts_default_settings:
     data_labels: false
     data_markers: false
     connect_nulls: false
-    legend_position: right
+    legend_position: bottom
     background: ''
     three_dimensional: 0
     colors:

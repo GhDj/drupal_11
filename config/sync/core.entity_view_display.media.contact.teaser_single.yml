@@ -11,12 +11,14 @@ dependencies:
     - field.field.media.contact.field_mail
     - field.field.media.contact.field_phone
     - field.field.media.contact.field_social_media
+    - field.field.media.contact.field_subtitle
     - field.field.media.contact.field_vat_number
     - field.field.media.contact.field_website
     - media.type.contact
   module:
     - bsi_custom
     - layout_builder
+    - link
     - ui_icons_field
 third_party_settings:
   layout_builder:
@@ -50,6 +52,18 @@ content:
     third_party_settings: {  }
     weight: 3
     region: content
+  field_website:
+    type: link
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
   name:
     type: plain_text_formatted
     label: hidden
@@ -70,8 +84,8 @@ hidden:
   field_availability: true
   field_geolocation: true
   field_social_media: true
+  field_subtitle: true
   field_vat_number: true
-  field_website: true
   langcode: true
   search_api_excerpt: true
   thumbnail: true

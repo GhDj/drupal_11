@@ -10,27 +10,22 @@ display:
           action_title: Aktion
         thumbnail__target_id:
           label: Miniaturbild
-          separator: ', '
         name:
           label: Medienname
-          separator: ', '
         bundle:
           label: Typ
-          separator: ', '
         uid:
           label: Autor
-          separator: ', '
         status:
-          label: Status
           settings:
             format_custom_false: 'Nicht veröffentlicht'
             format_custom_true: Veröffentlicht
-          separator: ', '
         changed:
           label: Aktualisiert
-          separator: ', '
         operations:
           label: Aktionen
+        directory:
+          label: Verzeichnis
       pager:
         options:
           tags:
@@ -44,7 +39,6 @@ display:
             offset_label: Versatz
       exposed_form:
         options:
-          submit_button: Filter
           reset_button_label: Zurücksetzen
           exposed_sorts_label: Sortierung
           sort_asc_label: Aufsteigend
@@ -72,6 +66,9 @@ display:
         langcode:
           expose:
             label: Sprache
+        directory:
+          expose:
+            label: Verzeichnis
   media_page_list:
     display_title: Medien
     display_options:

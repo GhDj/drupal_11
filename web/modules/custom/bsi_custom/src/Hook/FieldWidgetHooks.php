@@ -41,7 +41,10 @@ class FieldWidgetHooks {
     $description[] = $this->t('Displayed on certain teaser view modes in place of the full @label field.', [
       '@label' => $element['#title'],
     ]);
-    if (!$items->getFieldDefinition()->getSetting('required_summary')) {
+    if (
+      !$items->getFieldDefinition()->getSetting('required_summary')
+      && $items->getEntity()->bundle() !== 'tile_item'
+    ) {
       $description[] = $this->t('Leave blank to display no text.');
     }
     $element['summary']['#description'] = array_map(

@@ -52,20 +52,22 @@ const nestedNavigation = (items: SideNavLinkType[], parentId: string): string =>
       return `
         <li class="${nsp("sidemenu__item sidemenu__item--parent")}">
 
-          ${navigationLink(item)}
+          <div class="${nsp("sidemenu__item-wrapper")}">
+            ${navigationLink(item)}
 
-          ${buttonTemplate({
-            buttonVariant: "tertiary",
-            buttonIconAfter: "chevron-down",
-            buttonAriaLabel: `${item.text} Untermenü öffnen`,
-            buttonExtraClasses: "sidemenu__toggle",
-            additionalButtonAttributes: {
-              type: "button",
-              "aria-controls": panelId,
-              "aria-expanded": "false",
-              "data-js-sidemenu-toggle": ""
-            }
-          })}
+            ${buttonTemplate({
+              buttonVariant: "tertiary",
+              buttonIconAfter: "chevron-down",
+              buttonAriaLabel: `${item.text} Untermenü öffnen`,
+              buttonExtraClasses: "sidemenu__toggle",
+              additionalButtonAttributes: {
+                type: "button",
+                "aria-controls": panelId,
+                "aria-expanded": "false",
+                "data-js-sidemenu-toggle": ""
+              }
+            })}
+          </div>
 
           <div
             id="${panelId}"

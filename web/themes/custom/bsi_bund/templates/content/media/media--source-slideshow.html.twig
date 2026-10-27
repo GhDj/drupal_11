@@ -48,7 +48,9 @@
 
         <ul class="splide__pagination bsi-image-slider__pagination bsi-grid"></ul>
     </div>
-    <div class="bsi-bodytext">
-        {{ content.field_body }}
-    </div>
+    {% if content.field_body.0 %}
+        <div class="bsi-bodytext bsi-image-slider__description">
+            {{ content.field_body }}
+        </div>
+    {% endif %}
 </div>

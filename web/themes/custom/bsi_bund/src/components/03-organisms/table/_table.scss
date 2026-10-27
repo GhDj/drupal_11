@@ -39,11 +39,11 @@
     th,
     td {
       padding: 0;
+      vertical-align: top;
 
       .tablesaw-cell-label {
         @include typography("heading-5");
         background-color: var(--#{$nsp}-thead-row-background-color);
-        font-family: var(--font-family-serif);
         padding: var(--#{$nsp}-space-2xs) var(--#{$nsp}-space-sm);
         width: 100%;
       }
@@ -72,7 +72,6 @@
       @include breakpoint-md {
         @include typography("heading-5");
         background-color: var(--#{$nsp}-thead-row-background-color);
-        font-family: var(--font-family-serif);
         padding: var(--#{$nsp}-space-2xs) var(--#{$nsp}-space-sm);
       }
     }

@@ -20,13 +20,14 @@
 
     {% if content.field_copyright.0 or content.field_caption.0 or view_mode starts with 'inline_' %}
       <figcaption class="bsi-image__caption bsi-bodytext">
+        {% if content.field_copyright.0 or content.field_caption.0 %}
+          <div class="bsi-image__caption-text">{{ content.field_caption }}</div>
+        {% endif %}
+
         {% if content.field_copyright.0 %}
           <div class="bsi-copyright bsi-image__copyright">
             <span class="bsi-copyright__text">{{ content.field_copyright }}</span>
           </div>
-        {% endif %}
-        {% if content.field_copyright.0 or content.field_caption.0 %}
-          <div class="bsi-image__caption-text">{{ content.field_caption }}</div>
         {% endif %}
      </figcaption>
     {% endif %}

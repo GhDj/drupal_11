@@ -5434,7 +5434,7 @@ display:
         - 'search_api_list:default'
   keywords:
     id: keywords
-    display_title: Keywords
+    display_title: 'Keywords - Content & Media'
     display_plugin: embed
     position: 5
     display_options:
@@ -5492,7 +5492,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: false
+            link_to_entity: true
             link_rel: canonical
           group_column: value
           group_columns: {  }
@@ -5682,7 +5682,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: false
+            link_to_entity: true
             link_rel: canonical
           group_column: value
           group_columns: {  }
@@ -5770,7 +5770,7 @@ display:
           field: search_api_all_terms
           relationship: none
           group_type: group
-          admin_label: ''
+          admin_label: Tags
           plugin_id: search_api_all_terms
           default_action: ignore
           exception:
@@ -5928,7 +5928,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: search_api_options
-          operator: or
+          operator: 'not empty'
           value:
             article: article
             certificate: certificate
@@ -6204,7 +6204,8 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: false
+            link_to_entity: true
+            link_rel: canonical
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -6703,7 +6704,7 @@ display:
           field: search_api_all_terms
           relationship: none
           group_type: group
-          admin_label: ''
+          admin_label: Terms
           plugin_id: search_api_all_terms
           default_action: ignore
           exception:

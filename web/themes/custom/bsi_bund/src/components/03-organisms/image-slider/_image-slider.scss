@@ -9,10 +9,14 @@
 
 .#{$nsp}-image-slider {
   background-color: var(--#{$nsp}-color-blue-950);
-  display: flex;
-  flex-direction: column;
   max-width: calc(100vw - 2 * (1rem));
   position: relative;
+
+  &.media--view-mode-full .splide {
+    @include breakpoint-md {
+      @include grid-indented();
+    }
+  }
 
   .splide__track {
     overflow: hidden;
@@ -54,5 +58,14 @@
   &__prev,
   &__next {
     --#{$nsp}-button-border-color: var(--#{$nsp}-color-white);
+  }
+
+  &__description {
+    @include breakpoint-md {
+      @include grid-indented();
+    }
+    .paragraph--type--media & {
+      display: none;
+    }
   }
 }

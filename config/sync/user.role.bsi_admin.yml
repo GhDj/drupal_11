@@ -27,12 +27,12 @@ dependencies:
     - taxonomy.vocabulary.contact_topics
     - taxonomy.vocabulary.dictionary
     - taxonomy.vocabulary.it_sik_categories
+    - taxonomy.vocabulary.media_directory
     - taxonomy.vocabulary.media_types
     - taxonomy.vocabulary.tags
     - taxonomy.vocabulary.topics
     - workflows.workflow.nodes
   module:
-    - asset_injector
     - block
     - book
     - bsi_charts
@@ -51,6 +51,7 @@ dependencies:
     - layout_builder
     - locale
     - media
+    - media_directories_browser
     - menu_admin_per_menu
     - metatag
     - node
@@ -87,6 +88,7 @@ permissions:
   - 'access files overview'
   - 'access group overview'
   - 'access help pages'
+  - 'access media directories browser'
   - 'access media overview'
   - 'access node_keep widget'
   - 'access registration overview'
@@ -100,7 +102,6 @@ permissions:
   - 'addrow tablefield'
   - 'administer blocks'
   - 'administer book outlines'
-  - 'administer css assets injector'
   - 'administer footer menu items'
   - 'administer header menu items'
   - 'administer honeypot'
@@ -147,6 +148,7 @@ permissions:
   - 'create terms in contact_topics'
   - 'create terms in dictionary'
   - 'create terms in it_sik_categories'
+  - 'create terms in media_directory'
   - 'create terms in media_types'
   - 'create terms in tags'
   - 'create terms in topics'
@@ -180,6 +182,7 @@ permissions:
   - 'delete terms in contact_topics'
   - 'delete terms in dictionary'
   - 'delete terms in it_sik_categories'
+  - 'delete terms in media_directory'
   - 'delete terms in media_types'
   - 'delete terms in tags'
   - 'delete terms in topics'
@@ -216,6 +219,7 @@ permissions:
   - 'edit terms in contact_topics'
   - 'edit terms in dictionary'
   - 'edit terms in it_sik_categories'
+  - 'edit terms in media_directory'
   - 'edit terms in media_types'
   - 'edit terms in tags'
   - 'edit terms in topics'
@@ -269,6 +273,7 @@ permissions:
   - 'view term revisions in contact_topics'
   - 'view term revisions in dictionary'
   - 'view term revisions in it_sik_categories'
+  - 'view term revisions in media_directory'
   - 'view term revisions in media_types'
   - 'view term revisions in tags'
   - 'view term revisions in topics'

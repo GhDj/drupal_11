@@ -10,10 +10,10 @@ dependencies:
 third_party_settings:
   bsi_custom:
     preset_options:
-      standard: Standard
-      medium: 'Medium blue'
-      dark: 'Dark blue'
-    preset_other: Other…
+      blue-100: Standard
+      blue-800: 'Medium blue'
+      blue-900: 'Dark blue'
+    preset_other: ''
 id: paragraph.tile_item.field_display_variant
 field_name: field_display_variant
 entity_type: paragraph

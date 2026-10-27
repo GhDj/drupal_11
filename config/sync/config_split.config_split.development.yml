@@ -16,6 +16,8 @@ module:
 theme: {  }
 complete_list:
   - devel.settings
+  - environment_indicator.switcher.bsi
+  - environment_indicator.switcher.jlb
 partial_list:
   - search_api.server.default
   - tfa.settings

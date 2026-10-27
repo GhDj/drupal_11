@@ -27,4 +27,8 @@
       margin-bottom: 0;
     }
   }
+
+  &__copyright{
+    margin-top: var(--#{$nsp}-space-4xs);
+  }
 }

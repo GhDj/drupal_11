@@ -15,10 +15,11 @@
 
     _deduplicateLegend(event) {
       const options = event.detail.options;
-      const originalGenerateLabels = options.plugins.legend.labels.generateLabels
+      const originalGenerateLabels = options.plugins.legend.labels?.generateLabels
         ?? Chart.overrides[event.detail.type]?.plugins?.legend.labels.generateLabels
         ?? Chart.defaults.plugins.legend.labels.generateLabels;
 
+      options.plugins.legend.labels = options.plugins.legend.labels ?? {};
       options.plugins.legend.labels.generateLabels = (chart) => {
         const items = originalGenerateLabels(chart);
         const seen = new Set();

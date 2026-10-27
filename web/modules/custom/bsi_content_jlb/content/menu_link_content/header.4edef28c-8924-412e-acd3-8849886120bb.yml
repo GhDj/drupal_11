@@ -1,0 +1,51 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 4edef28c-8924-412e-acd3-8849886120bb
+  bundle: menu_link_content
+  default_langcode: de
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'The BSI'
+  menu_name:
+    -
+      value: header
+  link:
+    -
+      uri: 'https://www.bsi.bund.de/'
+      resolvable_uri: 'https://www.bsi.bund.de/'
+      title: ''
+      options:
+        attributes:
+          target: _blank
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1792978865

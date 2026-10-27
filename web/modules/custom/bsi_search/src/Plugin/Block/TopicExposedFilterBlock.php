@@ -90,6 +90,10 @@ class TopicExposedFilterBlock extends BlockBase implements ContainerFactoryPlugi
       '#title' => $this->t('Use node topic'),
       '#description' => $this->t('When enabled, article and content pages will pass the Topics field as a Views argument.'),
       '#default_value' => $this->configuration['use_node_topic'] ?? FALSE,
+      '#access' => !str_starts_with(
+        $this->currentRouteMatch->getRouteName(),
+        'layout_builder.'
+      ),
     ];
 
     return $form;
@@ -122,7 +126,7 @@ class TopicExposedFilterBlock extends BlockBase implements ContainerFactoryPlugi
       }
       else {
         return [
-          '#plain_text' => $this->t('No topic found.'),
+          '#plain_text' => '',
         ];
       }
     }
@@ -182,8 +186,27 @@ class TopicExposedFilterBlock extends BlockBase implements ContainerFactoryPlugi
       return $build;
     }
 
-    if ($tid = $this->configuration['topic_tid']) {
-      $build['#exposed']['topic'] = [
+    $tid = NULL;
+
+    // Use the node's topic when configured.
+    if (!empty($this->configuration['use_node_topic'])) {
+      $node = $this->currentRouteMatch->getParameter('node');
+
+      if (
+        $node instanceof NodeInterface &&
+        $node->hasField('field_topics') &&
+        !$node->get('field_topics')->isEmpty()
+      ) {
+        $tid = $node->get('field_topics')->target_id;
+      }
+    }
+    // Fall back to the configured topic.
+    elseif (!empty($this->configuration['topic_tid'])) {
+      $tid = $this->configuration['topic_tid'];
+    }
+
+    if ($tid) {
+      $build['#exposed']['topic_filter'] = [
         '#type' => 'hidden',
         '#name' => 'f[0]',
         '#value' => 'topics:' . $tid,

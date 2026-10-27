@@ -62,6 +62,12 @@ targetEntityType: media
 bundle: publication
 mode: default
 content:
+  directory:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_accessibility:
     type: boolean_checkbox
     weight: 8

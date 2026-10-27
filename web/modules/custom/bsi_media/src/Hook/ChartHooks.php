@@ -82,10 +82,9 @@ final class ChartHooks {
         $paragraph_id = $paragraph->id();
 
         $variables['lightbox_url'] = Url::fromRoute(
-          'bsi_media.chart_lightbox',
+          'bsi_media.lightbox',
           [
             'paragraph' => $paragraph_id,
-            'media' => $media->id(),
           ]
         )->toString();
       }

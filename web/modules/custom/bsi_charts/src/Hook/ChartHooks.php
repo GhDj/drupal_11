@@ -32,9 +32,6 @@ class ChartHooks {
     }
     $element['#attached']['library'][] = 'bsi_charts/chart.js';
 
-    // Ensure stacking is applied vertically, not horizontally.
-    unset($definition['options']['indexAxis']);
-
     if ($definition['type'] === 'radar') {
       // Ensure radial axis starts at 0.
       $definition['options']['scales']['r']['min'] = 0;

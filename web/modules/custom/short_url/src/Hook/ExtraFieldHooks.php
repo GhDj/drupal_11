@@ -43,7 +43,7 @@ class ExtraFieldHooks {
   #[Hook('entity_extra_field_info')]
   public function addExtraFields(): array {
     $extra = [];
-    foreach ($this->config->get('entity_types') as $entity_type_id) {
+    foreach ($this->config->get('entity_types') ?? [] as $entity_type_id) {
       $bundle_ids = array_keys($this->entityTypeBundleInfo->getBundleInfo($entity_type_id));
       foreach ($bundle_ids as $bundle_id) {
         $extra[$entity_type_id][$bundle_id] = $this->addEntityExtraField();

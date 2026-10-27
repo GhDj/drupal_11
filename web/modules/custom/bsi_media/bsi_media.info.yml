@@ -8,3 +8,4 @@ core_version_requirement: ^10 || ^11
 dependencies:
   - media:media
   - media_entity_download:media_entity_download
+  - media_directories:media_directories_browser

@@ -88,7 +88,11 @@ export const Featured: Story = {
 // Story for menu card
 export const Menu: Story = {
   args: {
-    hasDivider: true,
+    hasDivider: false,
+    cardImagePosition: "image-left",
+    cardImage: {
+      imageSrc: "demo-image-4_3.jpg"
+    },
     additionalCardAttributes: {
       "data-theme": "blue-100"
     }

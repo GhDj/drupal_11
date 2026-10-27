@@ -1,0 +1,22 @@
+--- a/src/BookBreadcrumbBuilder.php
++++ b/src/BookBreadcrumbBuilder.php
+@@ -13,6 +13,7 @@
+ use Drupal\Core\Routing\RouteMatchInterface;
+ use Drupal\Core\Session\AccountInterface;
+ use Drupal\Core\StringTranslation\StringTranslationTrait;
++use Drupal\Core\Url;
+
+ /**
+  * Provides a breadcrumb builder for nodes in a book.
+@@ -71,6 +72,11 @@
+           if ($access->isAllowed()) {
+             $breadcrumb->addCacheableDependency($parent_book);
+             $links[] = $parent_book->toLink();
++            if ($uri = $parent_book->getBook()['link_uri']) {
++              /** @var \Drupal\Core\Link $link */
++              $link = end($links);
++              $link->setUrl(Url::fromUri($uri));
++            }
+           }
+         }
+         $depth++;

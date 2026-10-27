@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 391c6232-5466-4016-946d-330140b7c9e0
+  bundle: certification_type
+  default_langcode: de
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Zertifikat allgemein'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1789731614

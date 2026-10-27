@@ -15,10 +15,6 @@
   '': false,
 }[link_type|default('')] %}
 
-{% if link_type in ['span', 'button'] %}
-  {% set base_class = 'bsi-nolink' %}
-{% endif %}
-
 {% if link_type == 'external' %}
   {% set target = '_blank' %}
 {% endif %}

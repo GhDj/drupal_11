@@ -15,6 +15,7 @@ dependencies:
     - editoria11y
     - group
     - layout_builder
+    - media_directories_browser
     - node
     - paragraphs_type_permissions
     - path
@@ -26,6 +27,7 @@ weight: -5
 is_admin: false
 permissions:
   - 'access content overview'
+  - 'access media directories browser'
   - 'administer users'
   - 'assign csn_admin role'
   - 'assign csn_deh role'

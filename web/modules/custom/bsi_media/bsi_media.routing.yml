@@ -1,12 +1,10 @@
-bsi_media.chart_lightbox:
-  path: '/chart-lightbox/{paragraph}/{media}'
+bsi_media.lightbox:
+  path: '/lightbox/{paragraph}'
   defaults:
-    _controller: '\Drupal\bsi_media\Controller\ChartLightboxController'
+    _controller: '\Drupal\bsi_media\Controller\LightboxController'
   requirements:
     _permission: 'access content'
   options:
     parameters:
       paragraph:
         type: entity:paragraph
-      media:
-        type: entity:media

@@ -21,12 +21,29 @@
 [data-theme="blue-900"] {
   --#{$nsp}-theme-bg-color: var(--#{$nsp}-color-blue-900);
   --#{$nsp}-theme-text-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-theme-link-color: var(--#{$nsp}-color-base-white);
   --#{$nsp}-ruler-color: var(--#{$nsp}-color-base-white);
   --#{$nsp}-color-base-focus: var(--#{$nsp}-color-base-focus-inverted);
   --#{$nsp}-link-color: var(--#{$nsp}-color-base-white);
   --#{$nsp}-link-color-hover: var(--#{$nsp}-color-base-white);
   --#{$nsp}-link-hover-border-color: var(--#{$nsp}-color-base-white);
   --#{$nsp}-link-underline-color-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-card-body-color: var(--#{$nsp}-color-base-white);
+}
+
+// Blue-800 Theme
+// ----------------------------------------------
+[data-theme="blue-800"] {
+  --#{$nsp}-theme-bg-color: var(--#{$nsp}-color-blue-800);
+  --#{$nsp}-theme-text-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-theme-link-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-ruler-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-color-base-focus: var(--#{$nsp}-color-base-focus-inverted);
+  --#{$nsp}-link-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-color-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-hover-border-color: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-link-underline-color-hover: var(--#{$nsp}-color-base-white);
+  --#{$nsp}-card-body-color: var(--#{$nsp}-color-base-white);
 }
 
 // Neutral-50 Theme

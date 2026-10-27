@@ -11,6 +11,7 @@ dependencies:
     - field.field.media.contact.field_mail
     - field.field.media.contact.field_phone
     - field.field.media.contact.field_social_media
+    - field.field.media.contact.field_subtitle
     - field.field.media.contact.field_vat_number
     - field.field.media.contact.field_website
     - image.style.media_library
@@ -46,6 +47,7 @@ hidden:
   field_mail: true
   field_phone: true
   field_social_media: true
+  field_subtitle: true
   field_vat_number: true
   field_website: true
   langcode: true

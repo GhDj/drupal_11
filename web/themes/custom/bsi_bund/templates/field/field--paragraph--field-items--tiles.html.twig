@@ -1,0 +1,90 @@
+{#
+/**
+ * @file
+ * Theme override for a field.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The field label.
+ * - multiple: TRUE if the field contains multiple items.
+ * - items: List of field items.
+ * - entity_type: Entity type the field belongs to.
+ * - field_name: Machine name of the field.
+ * - field_type: Field type.
+ * - label_display: Label display setting.
+ *
+ * @see \Drupal\Core\Field\FieldPreprocess::preprocessField()
+ */
+#}
+
+{% set base_name = base_name|default('field') %}
+{% set field_wrapper = field_wrapper|default(true) %}
+{% set fully_inline = not multiple and label_display == 'inline' %}
+
+{% set classes = [
+  base_name,
+  base_name == 'field' ? 'field--label-' ~ label_display,
+  label_display == 'inline' and not fully_inline ? 'clearfix',
+] %}
+
+{% set title_classes = [
+  base_name ~ '__label',
+  label_display == 'visually_hidden' ? 'visually-hidden',
+] %}
+
+{% block content %}
+  <div class="bsi-grid-indented">
+    {% if field_wrapper %}
+      <div{{ attributes.addClass(classes, 'bsi-card-group__items') }}>
+    {% endif %}
+
+    {% block label %}
+      {% if not label_hidden %}
+        {% if fully_inline %}
+          <span{{ title_attributes.addClass(title_classes) }}>
+            {{ label }}:
+          </span>
+        {% else %}
+          <div{{ title_attributes.addClass(title_classes) }}>
+            {{ label }}
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endblock %}
+
+    {% block items %}
+      {% if not label_hidden and multiple %}
+        <div class="{{ base_name }}__items">
+      {% endif %}
+
+      {% for item in items %}
+        {% block item %}
+          {% set item_classes = [
+            base_name ~ '__item',
+            not fully_inline ? 'bsi-card-group__item',
+          ] %}
+
+          {% if fully_inline %}
+            <span{{ item.attributes.addClass(item_classes) }}>
+              {{ item.content }}
+            </span>
+          {% else %}
+            <div{{ item.attributes.addClass(item_classes) }}>
+              {{ item.content }}
+            </div>
+          {% endif %}
+        {% endblock %}
+      {% endfor %}
+
+      {% if not label_hidden and multiple %}
+        </div>
+      {% endif %}
+    {% endblock %}
+
+    {% if field_wrapper %}
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

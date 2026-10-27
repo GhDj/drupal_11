@@ -2,8 +2,8 @@ uuid: 31cddfe4-53b6-4161-99cb-aac4f2b9f3ce
 langcode: en
 status: true
 dependencies: {  }
-name: 'Media types'
+name: 'Publication types'
 vid: media_types
-description: 'Used to categorize media entities.'
+description: 'Used to categorize Publication media entities.'
 weight: 0
 new_revision: false

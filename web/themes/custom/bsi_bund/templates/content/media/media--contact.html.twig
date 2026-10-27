@@ -43,13 +43,12 @@
     {{ title_suffix }}
 
     {% block info %}
-    {% set address_data = media.field_address.0 %}
+      {% set address_data = media.field_address.0 %}
       {% if address_data.organization
         or address_data.given_name
         or address_data.family_name
-        or address_data.additional_name %}
+        or content.field_subtitle %}
           <div class="bsi-contact__info">
-
 
             {% if address_data.organization %}
               <span class="bsi-contact__info-row">
@@ -68,9 +67,9 @@
               </span>
             {% endif %}
 
-            {% if address_data.additional_name %}
+            {% if content.field_subtitle %}
               <span class="bsi-contact__info-row">
-                {{ address_data.additional_name }}
+                {{ content.field_subtitle }}
               </span>
             {% endif %}
           </div>
@@ -81,6 +80,7 @@
       {% set details = content|without(
         'field_icon',
         'name',
+        'field_subtitle',
         not has_address ? 'field_address',
         'field_social_media',
       )|filter((field) => field.0) %}
@@ -166,7 +166,7 @@
   {% set phone_label_map = {
     'phone': 'Phone'|trans({}, {context: 'Phone label abbreviation'}),
     'service': 'Service'|trans({}, {context: 'Phone label abbreviation'}),
-    'fac': 'Fax'|trans({}, {context: 'Phone label abbreviation'}),
+    'fax': 'Fax'|trans({}, {context: 'Phone label abbreviation'}),
     'mobile': 'Mobile'|trans({}, {context: 'Phone label abbreviation'}),
   } %}
 

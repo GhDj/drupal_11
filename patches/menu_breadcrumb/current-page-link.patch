@@ -1,0 +1,12 @@
+--- a/src/MenuBasedBreadcrumbBuilder.php
++++ b/src/MenuBasedBreadcrumbBuilder.php
+@@ -393,7 +393,7 @@
+       $current = array_pop($links);
+       if ($this->config->get('append_' . $page_type)) {
+         if (!$this->config->get($page_type . '_as_link')) {
+-          $current->setUrl(new Url('<none>'));
++          $current->setUrl(new Url('<nolink>'));
+         }
+         array_push($links, $current);
+       }
+

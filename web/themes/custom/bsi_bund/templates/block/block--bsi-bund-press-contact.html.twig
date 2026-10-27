@@ -38,14 +38,14 @@
 <div{{ attributes.addClass(classes) }}>
   <div class="bsi-contact bsi-contact--detail">
     {% include '@bsi_bund/components/icon.twig' with {
-      name: "badge",
+      name: 'badge',
       decorative: true,
       extra_classes: 'bsi-contact__icon',
     } %}
-    <div class="bsi-contact__content">
+    <div class="bsi-contact__wrapper">
       {{ title_prefix }}
       {% if label %}
-        <h2{{ title_attributes.addClass(['bsi-heading', 'bsi-heading--5', 'bsi-contact__title']) }}>
+        <h2{{ title_attributes }}>
           {{ label }}
         </h2>
       {% endif %}

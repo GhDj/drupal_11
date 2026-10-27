@@ -28,14 +28,14 @@ content:
       rows: 9
       summary_rows: 3
       placeholder: ''
-      show_summary: false
+      show_summary: true
     third_party_settings:
       maxlength:
         maxlength_js: null
         maxlength_js_label: ''
         maxlength_js_summary: 300
         maxlength_js_label_summary: ''
-        maxlength_js_enforce: false
+        maxlength_js_enforce: true
   field_display_variant:
     type: string_textfield
     weight: 3

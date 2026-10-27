@@ -16,6 +16,12 @@ targetEntityType: media
 bundle: download
 mode: media_library
 content:
+  directory:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_copyright:
     type: string_textfield
     weight: 2

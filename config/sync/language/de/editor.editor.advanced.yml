@@ -14,3 +14,7 @@ settings:
           label: 'Graue Box (sekundär)'
         -
           label: 'Button (sekundär)'
+    ckeditor5_codeBlock:
+      languages:
+        -
+          label: Klartext

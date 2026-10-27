@@ -1,0 +1,23 @@
+--- a/src/MenuBasedBreadcrumbBuilder.php
++++ b/src/MenuBasedBreadcrumbBuilder.php
+@@ -426,11 +426,19 @@
+     // This can happen if the active trail is only partial, and doesn't reach
+     // the current page, or if a taxonomy attachment is used.
+     $route = $route_match->getRouteObject();
+-    $request = Request::create($route->getPath());
++    $request = Request::create(Url::fromRouteMatch($route_match)->toString());
+     // Performance optimization: set a short accept header to reduce overhead in
+     // AcceptHeaderMatcher when matching the request.
+     $request->headers->set('Accept', 'text/html');
+     $request->attributes->add($route_match->getParameters()->all());
++    try {
++      $request->attributes->add(
++        \Drupal::service('router')->matchRequest($request),
++      );
++    }
++    catch (\Exception) {
++      // Ignore.
++    }
+     $title = $this->titleResolver->getTitle($request, $route);
+     if (isset($title)) {
+       $links[] = Link::fromTextAndUrl($title,

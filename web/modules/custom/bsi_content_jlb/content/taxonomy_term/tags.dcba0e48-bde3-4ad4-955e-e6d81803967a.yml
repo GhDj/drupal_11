@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: dcba0e48-bde3-4ad4-955e-e6d81803967a
+  bundle: tags
+  default_langcode: de
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Allianz für Cybersicherheit'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1785324133

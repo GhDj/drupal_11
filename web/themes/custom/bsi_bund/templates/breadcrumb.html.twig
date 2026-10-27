@@ -35,7 +35,11 @@
                 icon_position: 'before'
               } only %}
             {% else %}
-                {# general links #}
+              {# general links #}
+              {% set url = links[loop.index0].url %}
+              {% if url.isRouted() and url.getRouteName() == '<nolink>' %}
+                <span class="bsi-link bsi-breadcrumb__link">{{ item.text }}</span>
+              {% else %}
                 {% include '@bsi_bund/elements/link.html.twig' with {
                   url: item.url,
                   title: item.text,
@@ -46,6 +50,7 @@
                   ]),
                   link_type: 'internal',
                 } only %}
+              {% endif %}
             {% endif %}
           </li>
 

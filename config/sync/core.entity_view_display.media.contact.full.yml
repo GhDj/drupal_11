@@ -11,6 +11,7 @@ dependencies:
     - field.field.media.contact.field_mail
     - field.field.media.contact.field_phone
     - field.field.media.contact.field_social_media
+    - field.field.media.contact.field_subtitle
     - field.field.media.contact.field_vat_number
     - field.field.media.contact.field_website
     - media.type.contact
@@ -128,6 +129,7 @@ hidden:
   entity_print_view_word_docx: true
   field_geolocation: true
   field_icon: true
+  field_subtitle: true
   langcode: true
   name: true
   search_api_excerpt: true

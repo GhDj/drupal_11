@@ -82,6 +82,7 @@
         "drupal/layout_builder_st": "^2.0",
         "drupal/linkit": "^7.0",
         "drupal/maxlength": "^3.1",
+        "drupal/media_directories": "^3.0",
         "drupal/media_entity_download": "^2.4",
         "drupal/media_entity_slideshow": "^2.6",
         "drupal/media_thumbnails": "^2.0",
@@ -229,8 +230,12 @@
             "drupal/book": {
                 "Use Book::toUrl over hard-coded entity.node.canonical route":
                     "patches/book/use-entity-tourl-over-route-name.patch",
-                "Visibility states for book[weight] do not work with old book selector (3595869-MR187)":
-                    "patches/book/fix-legacy-weight-visibility-3595869.patch"
+                "Update breadcrumb to support unlinked book pages":
+                    "patches/book/breadcrumb-link-uri-override.patch"
+            },
+            "drupal/charts": {
+                "Config subscriber may block config import (3631251-MR238)":
+                    "patches/charts/config_import_blocked-3631251.patch"
             },
             "drupal/core": {
                 "Entity view/form mode formatter/widget settings have no translation UI (2546212-336.patch)":
@@ -290,7 +295,11 @@
                 "Make group_update_11401 more robust":
                     "patches/group/more_robust_update_hook.patch",
                 "Group updb error (3620824)":
-                    "patches/group/group_updb_error.patch"
+                    "patches/group/group_updb_error.patch",
+                "Incorrect data-table joins cause duplicate revision rows and empty JSON:API results (3515609-MR336)":
+                    "patches/group/views_incorrect_data_table_joins-3515609.patch",
+                "Sql rewrite causing Duplicate entitiy entries in views (3477792-MR303)":
+                    "patches/group/views_sql_rewrite_causing_duplicate_results-3477792.patch"
             },
             "drupal/klaro": {
                 "Require consent even if all apps are required":
@@ -304,6 +313,12 @@
                 "Allow users to type past the character limit on hard limits and display an error upon save (3267849, MR17+)":
                     "patches/maxlength/add_backend_maxlength_validation-3267849.patch"
             },
+            "drupal/media_directories": {
+                "Browser: Use translated media bundle label":
+                    "patches/media_directories/browser_translate-bundle.patch",
+                "Browser: Use translated base field labels":
+                    "patches/media_directories/browser_translate-base-fields.patch"
+            },
             "drupal/media_entity_download": {
                 "Add formatter link title options":
                     "patches/media_entity_download/media_entity_download-formatter_link_label.patch"
@@ -313,6 +328,12 @@
                     "patches/media_thumbnails/default-thumbnail-detection.patch",
                 "Add bundle configuration":
                     "patches/media_thumbnails/bundle_configuration.patch"
+            },
+            "drupal/menu_breadcrumb": {
+                "Fix current page title sometimes coming up as empty":
+                    "patches/menu_breadcrumb/current-page-title.patch",
+                "Fix current page link to use <nolink> over <none>":
+                    "patches/menu_breadcrumb/current-page-link.patch"
             },
             "drupal/menu_entity_index": {
                 "Fix broken tests on main (3583444)":

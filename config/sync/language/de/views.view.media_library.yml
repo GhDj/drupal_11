@@ -4,13 +4,34 @@ display:
   default:
     display_title: Standard
     display_options:
+      filters:
+        status:
+          expose:
+            label: Veröffentlichungsstatus
+          group_info:
+            label: Veröffentlicht
+            group_items:
+              1:
+                title: Veröffentlicht
+              2:
+                title: 'Nicht veröffentlicht'
+        bundle:
+          group_info:
+            label: Medientyp
+          expose:
+            label: Medientyp
+        langcode:
+          expose:
+            label: Sprache
+        directory:
+          expose:
+            label: Verzeichnis
       title: Medien
       fields:
         media_bulk_form:
           action_title: Aktion
       pager:
         options:
-          tags: {  }
           expose:
             items_per_page_label: 'Elemente pro Seite'
             items_per_page_options_all_label: '- Alle -'
@@ -29,40 +50,12 @@ display:
         created:
           expose:
             label: 'Neueste zuerst'
-        name:
-          expose: {  }
-        name_1:
-          expose: {  }
-      filters:
-        status:
-          expose:
-            label: Veröffentlichungsstatus
-            description: ''
-          group_info:
-            label: Veröffentlicht
-            group_items:
-              1:
-                title: Veröffentlicht
-              2:
-                title: 'Nicht veröffentlicht'
-        name:
-          expose: {  }
-        bundle:
-          expose:
-            label: Medientyp
-          group_info:
-            label: Medientyp
-            description: ''
-        langcode:
-          expose:
-            label: Sprache
   page:
     display_title: Seite
     display_options:
       fields:
         media_bulk_form:
           action_title: Aktion
-        name: {  }
         edit_media:
           alter:
             text: '{{ name }} bearbeiten'
@@ -80,9 +73,6 @@ display:
         bundle:
           exception:
             title: Alle
-      filters:
-        name:
-          expose: {  }
       header:
         display_link_grid:
           label: Raster
@@ -94,7 +84,6 @@ display:
       fields:
         thumbnail__target_id:
           label: Miniaturbild
-        name: {  }
         uid:
           label: Autor
         changed:
@@ -103,9 +92,6 @@ display:
         bundle:
           exception:
             title: Alle
-      filters:
-        name:
-          expose: {  }
       header:
         display_link_grid:
           label: Raster

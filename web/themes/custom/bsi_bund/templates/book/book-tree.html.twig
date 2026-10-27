@@ -31,6 +31,12 @@
   {% if items %}
     <ul class="bsi-sidemenu__list">
       {% for item in items %}
+        {% set link_type = null %}
+        {# @see \Drupal\Core\Utility\LinkGenerator::generate #}
+        {% if item.url.isRouted() and item.url.getRouteName() in ['<nolink>', '<button>'] %}
+          {% set link_type = item.url.getRouteName() == '<nolink>' ? 'span' : 'button' %}
+        {% endif %}
+
         {% if item.below %}
           {% set submenu_id = parent_id ~ '-' ~ loop.index0 %}
 
@@ -38,6 +44,7 @@
             {% include '@bsi_bund/elements/link.html.twig' with {
               url: item.url,
               title: item.title,
+              link_type: link_type,
               extra_classes: 'bsi-sidemenu__link',
             } only %}
 
@@ -58,6 +65,7 @@
             {% include '@bsi_bund/elements/link.html.twig' with {
               url: item.url,
               title: item.title,
+              link_type: link_type,
               extra_classes: 'bsi-sidemenu__link',
             } only %}
           </li>
@@ -77,13 +85,6 @@
         'extra_classes': ['bsi-sidemenu__title'],
         'attributes': create_attribute().setAttribute('data-js-sidemenu-close', '')
       } only %}
-
-      {# phone link #}
-      {% include '@bsi_bund/elements/link.html.twig' with {
-        'url': 'tel:0228999582-6388',
-        'title': '0228 99 9582-6388',
-        'extra_classes': ['bsi-sidemenu__tel']
-      } only %}
     </div>
 
     {# close button #}
@@ -96,13 +97,20 @@
     </button>
   </header>
 
-  <nav class="bsi-sidemenu__navigation" aria-label="{{'Sidenavigation'|t}}">
+  <nav class="bsi-sidemenu__navigation" aria-label="{{'Side navigation'|t}}">
     {% for item in items %}
       <section class="bsi-sidemenu__group">
         <h2 class="bsi-sidemenu__heading">
+          {% set link_type = null %}
+          {# @see \Drupal\Core\Utility\LinkGenerator::generate #}
+          {% if item.url.isRouted() and item.url.getRouteName() in ['<nolink>', '<button>'] %}
+            {% set link_type = item.url.getRouteName() == '<nolink>' ? 'span' : 'button' %}
+          {% endif %}
+
           {% include '@bsi_bund/elements/link.html.twig' with {
             url: item.url,
             title: item.title,
+            link_type: link_type,
             extra_classes: ['bsi-sidemenu__heading-link'],
           } only %}
         </h2>

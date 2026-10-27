@@ -19,7 +19,6 @@
       var(--drupal-toolbar-height, 0px) +
       var(--drupal-environment-indicator-height, 0px)
   );
-  bottom: 0;
   position: fixed;
   right: 0;
   top: var(--#{$nsp}-sidemenu-top);
@@ -27,6 +26,10 @@
 
   @include breakpoint-xl {
     margin-block: 20px;
+  }
+
+  &:has([aria-expanded="true"]) {
+    bottom: 0;
   }
 
   &__trigger {
@@ -106,7 +109,7 @@
   // Navigation
   &__navigation {
     overflow-y: auto;
-    padding-right: var(--#{$nsp}-space-lg);
+    padding-right: var(--#{$nsp}-space-2xs);
   }
 
   // Section heading
@@ -139,6 +142,17 @@
     font-weight: 700;
   }
 
+  &__link {
+    flex: 0 1 auto;
+    line-height: 1.4;
+  }
+
+  &__item-wrapper {
+    align-items: center;
+    display: flex;
+    gap: var(--#{$nsp}-space-4xs);
+  }
+
   // Toggle
   &__toggle {
     --#{$nsp}-icon-width: 16px;
@@ -149,6 +163,5 @@
   // Nested navigation
   &__submenu {
     --#{$nsp}-link-color: var(--#{$nsp}-color-typo-secondary);
-    padding-left: var(--#{$nsp}-space-lg);
   }
 }

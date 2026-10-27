@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.media.full
     - field.field.media.video.field_body
+    - field.field.media.video.field_copyright
     - field.field.media.video.field_media_source
     - field.field.media.video.field_tracks
     - media.type.video
@@ -47,6 +48,15 @@ content:
     type: text_default
     label: hidden
     settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_copyright:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+      link_rel: canonical
     third_party_settings: {  }
     weight: 3
     region: content

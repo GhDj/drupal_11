@@ -20,6 +20,7 @@ class GlossifyQueryHooks {
    */
   #[Hook('query_glossify_taxonomy_tooltip_alter')]
   public function alterTermQuery(AlterableInterface $query): void {
+    /** @var \Drupal\Core\Database\Query\Select $query */
     $conditions = &$query->conditions();
     foreach ($conditions as $key => $condition) {
       if (isset($condition['field']) && $condition['field'] === 'tfd.langcode') {
@@ -33,6 +34,18 @@ class GlossifyQueryHooks {
         break;
       }
     }
+
+    // Exclude ambiguous terms.
+    $fields = $query->getFields();
+    foreach ($fields as $key => $field) {
+      $query->addExpression(
+        sprintf('MIN(%s.%s)', $field['table'], $field['field']),
+        $field['alias'] ?? NULL,
+      );
+      unset($fields[$key]);
+    }
+    $query->groupBy('tfd.name');
+    $query->having('COUNT(tfd.name) = 1');
   }
 
 }

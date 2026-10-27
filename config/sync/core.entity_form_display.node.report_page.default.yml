@@ -244,7 +244,7 @@ content:
       other_placeholder: ''
       other_option: Other…
       other_field_label: 'Custom heading'
-      add_other_value_to_allowed_values: true
+      add_other_value_to_allowed_values: false
     third_party_settings: {  }
   field_media:
     type: media_library_widget

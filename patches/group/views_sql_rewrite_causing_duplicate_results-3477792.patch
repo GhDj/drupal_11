@@ -1,0 +1,241 @@
+diff --git a/src/QueryAccess/EntityQueryAlter.php b/src/QueryAccess/EntityQueryAlter.php
+index 7ca0203c737b2871ece8f4e3a12520663349f514..f7da2ec39d9e65478b38e2e4b5e980b840cad81c 100644
+--- a/src/QueryAccess/EntityQueryAlter.php
++++ b/src/QueryAccess/EntityQueryAlter.php
+@@ -114,6 +114,7 @@ class EntityQueryAlter extends PluginBasedQueryAlterBase {
+       "$base_table.$id_key=%alias.entity_id AND %alias.plugin_id IN (:plugin_ids_in_use[])",
+       [':plugin_ids_in_use[]' => $plugin_ids_in_use]
+     );
++    $this->query->distinct();
+
+     // Retrieve the full list of group permissions for the user.
+     $this->cacheableMetadata->addCacheContexts(['user.group_permissions']);
+diff --git a/tests/modules/group_test_views/test_views/views.view.test_group_entity_access_duplicates.yml b/tests/modules/group_test_views/test_views/views.view.test_group_entity_access_duplicates.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..224ce17ae07df29f6d1a6c6b0204570f64262364
+--- /dev/null
++++ b/tests/modules/group_test_views/test_views/views.view.test_group_entity_access_duplicates.yml
+@@ -0,0 +1,137 @@
++langcode: en
++status: true
++dependencies:
++  module:
++    - node
++id: test_group_entity_access_duplicates
++label: test_group_entity_access_duplicates
++module: views
++description: ''
++tag: ''
++base_table: node_field_data
++base_field: nid
++display:
++  default:
++    id: default
++    display_title: Default
++    display_plugin: default
++    position: 0
++    display_options:
++      access:
++        type: none
++        options: {  }
++      cache:
++        type: none
++        options: {  }
++      query:
++        type: views_query
++        options:
++          disable_sql_rewrite: false
++          distinct: false
++          replica: false
++          query_comment: ''
++          query_tags: {  }
++      exposed_form:
++        type: basic
++        options:
++          submit_button: Apply
++          reset_button: false
++          reset_button_label: Reset
++          exposed_sorts_label: 'Sort by'
++          expose_sort_order: true
++          sort_asc_label: Asc
++          sort_desc_label: Desc
++      pager:
++        type: full
++        options:
++          items_per_page: 10
++          offset: 0
++          id: 0
++          total_pages: null
++          expose:
++            items_per_page: false
++            items_per_page_label: 'Items per page'
++            items_per_page_options: '5, 10, 25, 50'
++            items_per_page_options_all: false
++            items_per_page_options_all_label: '- All -'
++            offset: false
++            offset_label: Offset
++          tags:
++            previous: Previous
++            next: Next
++            first: First
++            last: Last
++          quantity: 9
++      style:
++        type: default
++        options: {  }
++      row:
++        type: fields
++        options: {  }
++      fields:
++        nid:
++          id: nid
++          table: node_field_data
++          field: nid
++          relationship: none
++          group_type: group
++          admin_label: ''
++          entity_type: node
++          entity_field: nid
++          plugin_id: field
++          label: Nid
++          exclude: false
++          alter:
++            alter_text: false
++            text: ''
++            make_link: false
++            path: ''
++            absolute: false
++            external: false
++            replace_spaces: false
++            path_case: none
++            trim_whitespace: false
++            alt: ''
++            rel: ''
++            link_class: ''
++            prefix: ''
++            suffix: ''
++            target: ''
++            nl2br: false
++            max_length: 0
++            word_boundary: true
++            ellipsis: true
++            more_link: false
++            more_link_text: ''
++            more_link_path: ''
++            strip_tags: false
++            trim: false
++            preserve_tags: ''
++            html: false
++          element_type: ''
++          element_class: ''
++          element_label_type: ''
++          element_label_class: ''
++          element_label_colon: true
++          element_wrapper_type: ''
++          element_wrapper_class: ''
++          element_default_classes: true
++          empty: ''
++          hide_empty: false
++          empty_zero: false
++          hide_alter_empty: true
++      filters: {  }
++      sorts: {  }
++      title: test_group_entity_access_duplicates
++      header: {  }
++      footer: {  }
++      empty: {  }
++      relationships: {  }
++      arguments: {  }
++    cache_metadata:
++      max-age: -1
++      contexts:
++        - 'languages:language_content'
++        - 'languages:language_interface'
++        - user.group_permissions
++      tags: {  }
+diff --git a/tests/src/Kernel/QueryAlter/EntityQueryAlterTestBase.php b/tests/src/Kernel/QueryAlter/EntityQueryAlterTestBase.php
+index e6d6d022c8e76929c37b5af1eeef24b6d920d808..11a83e590bd7329184779b190fd61516b6ac3c15 100644
+--- a/tests/src/Kernel/QueryAlter/EntityQueryAlterTestBase.php
++++ b/tests/src/Kernel/QueryAlter/EntityQueryAlterTestBase.php
+@@ -60,6 +60,7 @@ abstract class EntityQueryAlterTestBase extends QueryAlterTestBase {
+       "$base_table.$id_key=%alias.entity_id AND %alias.plugin_id IN (:plugin_ids_in_use[])",
+       [':plugin_ids_in_use[]' => [static::$pluginId]]
+     );
++    $query->distinct();
+   }
+
+   /**
+diff --git a/tests/src/Kernel/Views/EntityQueryAlterTest.php b/tests/src/Kernel/Views/EntityQueryAlterTest.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..6d20ce837bb575a3fc52abac3b5103229d128f95
+--- /dev/null
++++ b/tests/src/Kernel/Views/EntityQueryAlterTest.php
+@@ -0,0 +1,68 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Tests\group\Kernel\Views;
++
++use Drupal\Tests\group\Traits\NodeTypeCreationTrait;
++use Drupal\group\Entity\Storage\GroupRelationshipTypeStorageInterface;
++use Drupal\views\Views;
++use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
++
++/**
++ * Tests entity query access alterations in Views.
++ *
++ * @group group
++ */
++#[RunTestsInSeparateProcesses]
++class EntityQueryAlterTest extends GroupViewsKernelTestBase {
++
++  use NodeTypeCreationTrait;
++
++  /**
++   * {@inheritdoc}
++   */
++  protected static $modules = ['group_test_plugin', 'node'];
++
++  /**
++   * Views used by this test.
++   *
++   * @var array
++   */
++  public static $testViews = ['test_group_entity_access_duplicates'];
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setUp($import_test_views = TRUE): void {
++    parent::setUp($import_test_views);
++    $this->installEntitySchema('node');
++    $this->createNodeType(['type' => 'page']);
++
++    $storage = $this->entityTypeManager->getStorage('group_relationship_type');
++    assert($storage instanceof GroupRelationshipTypeStorageInterface);
++    $storage->createFromPlugin($this->groupType, 'node_relation:page')->save();
++  }
++
++  /**
++   * Tests that access joins do not duplicate entities related to many groups.
++   */
++  public function testEntityInMultipleGroupsIsNotDuplicated(): void {
++    $node = $this->entityTypeManager->getStorage('node')->create([
++      'type' => 'page',
++      'title' => $this->randomString(),
++    ]);
++    $node->save();
++
++    $this->createGroup()->addRelationship($node, 'node_relation:page');
++    $this->createGroup()->addRelationship($node, 'node_relation:page');
++
++    $view = Views::getView('test_group_entity_access_duplicates');
++    $view->setDisplay();
++    $view->execute();
++
++    $this->assertCount(1, $view->result);
++    $this->assertSame(1, (int) $view->total_rows);
++  }
++
++}

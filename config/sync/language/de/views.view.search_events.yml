@@ -27,7 +27,3 @@ display:
           facet:
             missing_label: andere
       block_description: 'Veranstaltungen (Kalender)'
-  attachment_events_next_month:
-    display_title: 'Veranstaltungen – Anhang im nächsten Monat'
-  attachment_events_two_months:
-    display_title: 'Veranstaltungen – Anhang +2 Monate'

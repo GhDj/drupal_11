@@ -20,11 +20,8 @@
   {% endif %}
   {% if exposed %}
     <div class="view-filters">
-      {{ exposed|without('sort_bef_combine') }}
+      {{ exposed }}
     </div>
-    {% if exposed['sort_bef_combine'] %}
-      {{ exposed['sort_bef_combine'] }}
-    {% endif %}
   {% endif %}
   {% if attachment_before %}
     <div class="attachment attachment-before">

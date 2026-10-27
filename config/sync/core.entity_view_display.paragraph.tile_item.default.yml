@@ -20,9 +20,10 @@ bundle: tile_item
 mode: default
 content:
   field_body:
-    type: text_default
+    type: text_summary_or_trimmed
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 300
     third_party_settings: {  }
     weight: 4
     region: content

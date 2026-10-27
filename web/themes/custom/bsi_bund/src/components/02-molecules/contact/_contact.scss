@@ -77,6 +77,7 @@
 
   &__label {
     display: inline-block;
+    align-self: start;
     min-width: 103px;
   }
 
@@ -88,9 +89,7 @@
     }
   }
 
-  &--teaser {
-    .#{$nsp}-contact__info-row--person {
-      font-weight: 700;
-    }
+  .#{$nsp}-contact__info-row--person {
+    font-weight: 700;
   }
 }

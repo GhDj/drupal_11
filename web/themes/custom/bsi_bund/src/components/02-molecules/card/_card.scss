@@ -19,13 +19,17 @@
   padding: var(--#{$nsp}-space-sm);
   position: relative;
 
+  &--large-padding {
+    padding: var(--#{$nsp}-space-lg);
+  }
+
   &__image {
     border-radius: var(--#{$nsp}-space-4xs);
     overflow: clip;
 
     .ajax-progress {
-      position: absolute;
       inset: 50% auto auto 50%;
+      position: absolute;
       translate: -50% -50%;
     }
   }
@@ -41,6 +45,11 @@
   &__topline {
     @include typography("body-small-compact");
     margin-bottom: var(--#{$nsp}-space-2xs);
+
+    &--large {
+      font-size: var(--#{$nsp}-size-6xl);
+      line-height: 1.1;
+    }
   }
 
   &__heading {
@@ -65,25 +74,59 @@
     color: var(--#{$nsp}-card-body-color, var(--#{$nsp}-color-neutral-750));
     font-size: 20px;
     line-height: 1.4;
+
+    &.has-more > p:last-of-type {
+      display: inline;
+    }
   }
 
   &__link {
-    --#{$nsp}-link-color: var(--#{$nsp}-color-blue-750);
+    --#{$nsp}-link-color: var(
+      --#{$nsp}-theme-link-color,
+      var(--#{$nsp}-color-blue-750)
+    );
     --#{$nsp}-link-decoration-line: none;
     margin-block-end: var(--#{$nsp}-space-xs);
+  }
 
-    &::after {
-      bottom: 0;
-      content: "";
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
+  &__more {
+    color: var(--#{$nsp}-theme-link-color, var(--#{$nsp}-color-blue-750));
+  }
+
+  &__more-link {
+    color: var(--#{$nsp}-theme-link-color, var(--#{$nsp}-color-blue-750));
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
     }
+  }
+
+  &:not(.#{$nsp}-card--no-full-link) .#{$nsp}-card__link::after {
+    content: "";
+    inset: 0;
+    position: absolute;
   }
 
   &__text + &__link {
     margin-block-start: var(--#{$nsp}-space-md);
+  }
+
+  &__chart {
+    background: var(--#{$nsp}-color-base-white);
+    display: block;
+    position: relative;
+
+    .#{$nsp}-icon {
+      background: var(--#{$nsp}-color-alpha-dark-40);
+      bottom: 0;
+      color: var(--#{$nsp}-color-base-white);
+      height: var(--#{$nsp}-size-3xl);
+      padding: var(--#{$nsp}-space-2xs);
+      position: absolute;
+      right: 0;
+      width: var(--#{$nsp}-size-3xl);
+    }
   }
 }
 
@@ -105,6 +148,10 @@
     @include breakpoint-lg {
       grid-template-columns: 1fr;
     }
+  }
+
+  .#{$nsp}-card__content {
+    justify-content: flex-start;
   }
 }
 

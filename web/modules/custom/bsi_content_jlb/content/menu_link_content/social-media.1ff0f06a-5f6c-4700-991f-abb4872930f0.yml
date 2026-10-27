@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 1ff0f06a-5f6c-4700-991f-abb4872930f0
+  bundle: menu_link_content
+  default_langcode: zxx
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Xing
+  menu_name:
+    -
+      value: social-media
+  link:
+    -
+      uri: 'https://www.xing.com/pages/bsibund'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -47
+  expanded:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_status:
+    -
+      value: true
+  content_translation_created:
+    -
+      value: 1779451773

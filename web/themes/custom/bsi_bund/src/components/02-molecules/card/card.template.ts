@@ -54,6 +54,13 @@ export type CardImagePosition = "" | "image-left" | "image-right";
 export type CardHeadingLevel = 2 | 3;
 export type CardHeadingStyle = 2 | 3 | 4;
 export type CardTag = "div" | "li";
+export type CardToplineSize = "small" | "large";
+
+export interface CardChart {
+  id?: string;
+  type?: string;
+  data?: string;
+}
 
 // Arguments accepted by the template
 export interface CardTemplateArgs {
@@ -61,10 +68,12 @@ export interface CardTemplateArgs {
   cardExtraClasses?: string;
   cardImagePosition?: CardImagePosition;
   additionalCardAttributes?: AdditionalCardAttributes;
+  cardChart?: CardChart;
   cardImage?: ImageTemplateArgs;
   cardDate?: DateBoxTemplateArgs;
   cardIcon?: string;
   cardTopline?: string | boolean;
+  cardToplineSize?: CardToplineSize;
   cardHeading?: string | boolean;
   cardHeadingHref?: string;
   cardHeadingLevel?: CardHeadingLevel;
@@ -82,9 +91,11 @@ export function cardTemplate({
   cardImagePosition = "",
   additionalCardAttributes = {},
   cardImage,
+  cardChart,
   cardDate,
   cardIcon,
   cardTopline = "",
+  cardToplineSize = "small",
   cardHeading = "",
   cardHeadingHref,
   cardHeadingLevel = 3,
@@ -115,6 +126,15 @@ export function cardTemplate({
       </div>`
     : "";
 
+  // Chart section
+  const chartSection = cardChart
+    ? `<div
+      class="${nsp("card__chart")}"
+      ${cardChart.id ? `data-chart-id="${cardChart.id}"` : ""}
+      ${cardChart.type ? `data-chart-type="${cardChart.type}"` : ""}
+    ></div>`
+    : "";
+
   // Image section
   const imageSection = cardImage
     ? `<div class="${nsp("card__image")}">
@@ -136,7 +156,7 @@ export function cardTemplate({
   const headingSection =
     cardTopline || cardHeading
       ? `<div class="${nsp("card__heading-wrapper")}">
-        ${cardTopline ? `<p class="${nsp("card__topline")}">${cardTopline}</p>` : ""}
+        ${cardTopline ? `<p class="${nsp( `card__topline card__topline--${cardToplineSize}` )}">${cardTopline}</p>` : ""}
         ${
           cardHeadingText
             ? headingTemplate({
@@ -154,6 +174,8 @@ export function cardTemplate({
   // Return the final card HTML
   return html`
     <${cardTag} class="${nsp("card", cardExtraClasses)}" ${attrs}>
+      ${chartSection}
+
       ${imageSection}
 
       ${iconSection}

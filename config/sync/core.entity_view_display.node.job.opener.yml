@@ -30,6 +30,7 @@ dependencies:
     - field_group
     - layout_builder
     - options
+    - text_summary_formatter
 third_party_settings:
   layout_builder:
     enabled: false
@@ -48,7 +49,7 @@ third_party_settings:
       label: Header
       parent_name: ''
       region: content
-      weight: 1
+      weight: 2
       format_type: html_element
       format_settings:
         classes: ''
@@ -67,7 +68,7 @@ third_party_settings:
       label: Tiles
       parent_name: ''
       region: hidden
-      weight: 19
+      weight: 21
       format_type: html_element
       format_settings:
         classes: ''
@@ -86,6 +87,13 @@ targetEntityType: node
 bundle: job
 mode: opener
 content:
+  body:
+    type: text_summary_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
   field_code:
     type: string
     label: inline
@@ -161,7 +169,6 @@ content:
     weight: 0
     region: content
 hidden:
-  body: true
   changed: true
   content_moderation_control: true
   created: true

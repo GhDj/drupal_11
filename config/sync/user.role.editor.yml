@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.advanced
     - media.type.audio
     - media.type.bits
     - media.type.chart
@@ -26,7 +27,9 @@ dependencies:
     - contextual
     - duplicate_node
     - editoria11y
+    - filter
     - media
+    - media_directories_browser
     - node
     - paragraphs_type_permissions
     - path
@@ -40,6 +43,7 @@ is_admin: false
 permissions:
   - 'access content overview'
   - 'access contextual links'
+  - 'access media directories browser'
   - 'access media overview'
   - 'access toolbar'
   - 'addrow tablefield'
@@ -55,6 +59,7 @@ permissions:
   - 'create inventory content'
   - 'create it_security_label content'
   - 'create job content'
+  - 'create media'
   - 'create page content'
   - 'create paragraph content view'
   - 'create publication media'
@@ -78,6 +83,14 @@ permissions:
   - 'edit any job content'
   - 'edit any page content'
   - 'edit any report_page content'
+  - 'edit own audio media'
+  - 'edit own chart media'
+  - 'edit own contact media'
+  - 'edit own download media'
+  - 'edit own gallery media'
+  - 'edit own image media'
+  - 'edit own publication media'
+  - 'edit own video media'
   - 'export tablefield'
   - 'import tablefield'
   - 'revert all revisions'
@@ -86,6 +99,7 @@ permissions:
   - 'use nodes transition request_approval'
   - 'use nodes transition revise'
   - 'use nodes transition withdraw'
+  - 'use text format advanced'
   - 'view all revisions'
   - 'view any unpublished content'
   - 'view editoria11y checker'

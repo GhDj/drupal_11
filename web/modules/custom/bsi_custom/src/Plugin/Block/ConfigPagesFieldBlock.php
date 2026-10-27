@@ -69,7 +69,7 @@ final class ConfigPagesFieldBlock extends ConfigPagesBlock {
    */
   public function build(): array {
     $parent_build = parent::build();
-    if (!$parent_build['#config_pages'] instanceof ConfigPages) {
+    if (!($parent_build['#config_pages'] ?? NULL) instanceof ConfigPages) {
       return [];
     }
 

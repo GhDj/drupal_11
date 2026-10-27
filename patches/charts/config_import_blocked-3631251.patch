@@ -1,0 +1,33 @@
+diff --git a/src/DependenciesCalculatorTrait.php b/src/DependenciesCalculatorTrait.php
+index 3fad82cb36a91cc09f5e74b9b627aa2747d824e8..23d8997b31736ca0fff4750bcd223bbee3c8d195 100644
+--- a/src/DependenciesCalculatorTrait.php
++++ b/src/DependenciesCalculatorTrait.php
+@@ -37,13 +37,13 @@ trait DependenciesCalculatorTrait {
+   public function calculateDependencies(string $chart_library_id, string $chart_type_id):array {
+     $calculated_dependencies = [];
+     $dependent_modules = [];
+-    if ($chart_library_id) {
++    if ($chart_library_id && $this->chartPluginManager()->hasDefinition($chart_library_id)) {
+       // Getting charting library provider and set it as one of the
+       // dependencies for the chart settings.
+       $plugin_definition = $this->chartPluginManager()->getDefinition($chart_library_id);
+       $dependent_modules = [$plugin_definition['provider']];
+     }
+-    if ($chart_type_id) {
++    if ($chart_type_id && $this->chartTypePluginManager()->hasDefinition($chart_type_id)) {
+       // Do the same thing for the chart type unless it was added by the main
+       // "charts" module.
+       $plugin_definition = $this->chartTypePluginManager()->getDefinition($chart_type_id);
+diff --git a/src/EventSubscriber/ConfigImportSubscriber.php b/src/EventSubscriber/ConfigImportSubscriber.php
+index 412c5633b2789a3040951fdb7121b294bb4cda23..2842a1e659057dbac5f881fac728b3ad3f18d2b9 100644
+--- a/src/EventSubscriber/ConfigImportSubscriber.php
++++ b/src/EventSubscriber/ConfigImportSubscriber.php
+@@ -79,7 +79,7 @@ class ConfigImportSubscriber implements EventSubscriberInterface {
+       $settings = $charts_config['charts_default_settings'];
+       $library = $settings['library'] ?? '';
+       $type = $settings['type'] ?? '';
+-      $charts_config['dependencies'] = $this->calculateDependencies($library, $type);
++      $charts_config['dependencies'] = $this->calculateDependencies($library, $type) ?: $charts_config['dependencies'];
+       $storage->write('charts.settings', $charts_config);
+     }
+   }

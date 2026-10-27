@@ -1,0 +1,6 @@
+type: module
+name: 'BSI Content JLB'
+description: 'Default content for JLB'
+package: BSI
+
+core_version_requirement: ^10 || ^11

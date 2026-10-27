@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.media.field_accessibility
     - field.storage.media.field_body
+    - field.storage.media.field_explanation
     - field.storage.media.field_media_source
     - field.storage.media.field_media_type
     - field.storage.media.field_publication_date
@@ -156,6 +157,29 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_event_type
+  field_explanation:
+    label: Explanation
+    datasource_id: 'entity:media'
+    property_path: field_explanation
+    type: text
+    boost: 1.3
+    dependencies:
+      config:
+        - field.storage.media.field_explanation
+  field_explanation_1:
+    label: 'Paragraphs » Paragraph » Background image » Media » Explanation'
+    datasource_id: 'entity:node'
+    property_path: 'field_paragraphs:entity:field_media:entity:field_explanation'
+    type: text
+    boost: 1.3
+    dependencies:
+      config:
+        - field.storage.media.field_explanation
+        - field.storage.node.field_paragraphs
+        - field.storage.paragraph.field_media
+      module:
+        - media
+        - paragraphs
   field_import_status:
     label: 'Import status'
     datasource_id: 'entity:node'
@@ -562,6 +586,8 @@ processor_settings:
       - aggregated_paragraph_text_boost_1_5
       - field_article_type
       - field_event_type
+      - field_explanation
+      - field_explanation_1
       - field_import_status
       - field_producer
       - field_year

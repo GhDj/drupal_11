@@ -31,7 +31,8 @@ class AbbreviationsAutocompleteController extends ControllerBase {
       ->condition('langcode', $langcode)
       ->range(0, static::MAX_RESULT_COUNT)
       ->sort('name', 'ASC')
-      ->accessCheck(TRUE);
+      ->accessCheck(TRUE)
+      ->range(NULL, NULL);
     if ($input !== NULL && strlen($input) > 0) {
       // Match abbreviation (term name) and definition (description).
       // @todo Also add for partial matches

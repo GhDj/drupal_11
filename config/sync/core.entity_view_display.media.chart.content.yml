@@ -8,34 +8,48 @@ dependencies:
     - field.field.media.chart.field_media_chart
     - field.field.media.chart.field_source
     - field.field.media.chart.field_unit
-    - image.style.thumbnail
     - media.type.chart
   module:
-    - image
+    - charts
+    - link
+    - text
 id: media.chart.content
 targetEntityType: media
 bundle: chart
 mode: content
 content:
-  thumbnail:
-    type: image
+  field_media_chart:
+    type: chart_config_default
     label: hidden
-    settings:
-      image_link: ''
-      image_style: thumbnail
-      image_loading:
-        attribute: lazy
+    settings: {  }
     third_party_settings: {  }
-    weight: 5
+    weight: 1
+    region: content
+  field_source:
+    type: link
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_unit:
+    type: text_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   changed: true
   created: true
   field_explanation: true
-  field_media_chart: true
-  field_source: true
-  field_unit: true
   langcode: true
   name: true
   search_api_excerpt: true
+  thumbnail: true
   uid: true

@@ -1,0 +1,11 @@
+--- a/modules/media_directories_browser/src/Service/MediaService.php
++++ b/modules/media_directories_browser/src/Service/MediaService.php
+@@ -464,7 +464,7 @@
+         'attributes' => [
+           'drupal_internal__mid' => $item->id(),
+           'name' => $item->label(),
+-          'bundle' => $bundle_id,
++          'bundle' => $item->getBundleEntity()->label(),
+           'created' => $created,
+           'created_formatted' => $this->formatConfiguredDate($created, 'media_list_date_format'),
+         ],

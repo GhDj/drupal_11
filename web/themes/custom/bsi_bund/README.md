@@ -34,7 +34,8 @@ Components follow Atomic Design principles with a template-driven architecture.
 ## Prerequisites
 
 - **Node.js:** Version 22 or higher (^22)
-- **Playwright:** `npx playwright install`
+- **Playwright:** `npx playwright install` (for local browser-driven tests)
+- **Docker:** Required for visual regression snapshot tests (see [Testing](#testing))
 
 ## First Install
 
@@ -77,10 +78,11 @@ you can run the most important commands from your status bar.
 
 ### Testing
 
-| Command                       | Description                                                 |
-| ----------------------------- | ----------------------------------------------------------- |
-| `npm run test:components`     | Build Storybook and run vitest with visual regression tests |
-| `npm run test:visual:approve` | Update visual regression test snapshots                     |
+| Command                          | Description                                                       |
+| -------------------------------- | ----------------------------------------------------------------- |
+| `npm run test:components:docker` | Build Storybook and run visual regression tests in Docker         |
+| `npm run test:storybook:docker`  | Run visual regression tests in Docker (Storybook already built)   |
+| `npm run test:visual:approve`    | Promote received snapshots to baselines                           |
 
 #### Controlling Visual Regression Tests with Tags
 
@@ -124,6 +126,39 @@ export const MyStory: Story = {
 - `tablet` → tablet (834px)
 - `laptop` → laptop (1024px)
 - `desktop` → desktop (1432px)
+
+#### Snapshot Policy
+
+> **Snapshots dürfen nur aus dem Docker-Container erzeugt und committed werden.**
+> Direkt auf dem Host-Betriebssystem (macOS, Windows, Linux) generierte Snapshots
+> liefern auf anderen Maschinen abweichende Ergebnisse und sollen nicht committed werden.
+
+**Workflow zum Aktualisieren von Snapshots:**
+
+1. Storybook bauen und Snapshot-Tests im Container starten:
+
+   ```bash
+   npm run test:components:docker
+   ```
+
+2. Diffs prüfen — sie liegen in `__snapshots__/__diff_output__/`.
+
+3. Neue Snapshots übernehmen:
+
+   ```bash
+   npm run test:visual:approve
+   ```
+
+4. Geänderte `__snapshots__/*.png`-Dateien committen.
+
+**Ersteinrichtung (einmalig nach Docker-Setup):**
+
+```bash
+npm run test:components:docker   # erzeugt neue Baselines
+npm run test:visual:approve      # übernimmt alle received als Baselines
+git add __snapshots__/
+git commit -m "test: regenerate snapshots from Docker environment"
+```
 
 ### Linting & Code Quality
 

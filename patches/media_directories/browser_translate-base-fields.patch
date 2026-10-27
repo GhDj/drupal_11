@@ -1,0 +1,46 @@
+--- a/modules/media_directories_browser/src/Service/MediaTypeService.php
++++ a/modules/media_directories_browser/src/Service/MediaTypeService.php
+@@ -6,6 +6,7 @@
+ use Drupal\Core\Entity\EntityFieldManagerInterface;
+ use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Extension\ModuleHandlerInterface;
++use Drupal\Core\StringTranslation\StringTranslationTrait;
+ use Drupal\media_directories_browser\Event\MediaUploadMetadataSuggestionEvent;
+ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+@@ -13,6 +14,8 @@
+  * Service for media type metadata and field definitions.
+  */
+ class MediaTypeService {
++
++  use StringTranslationTrait;
+
+   /**
+    * Fields to exclude from editable field lists.
+@@ -297,7 +300,7 @@
+     // Always include the name field.
+     $fields[] = [
+       'name' => 'name',
+-      'label' => 'Name',
++      'label' => $field_definitions['name']->getLabel(),
+       'type' => 'string',
+       'widget' => 'string_textfield',
+       'required' => FALSE,
+@@ -308,7 +311,7 @@
+       if (!empty($source_settings['alt_field'])) {
+         $fields[] = [
+           'name' => $source_field_name . ':alt',
+-          'label' => 'Alternative text',
++          'label' => $this->t('Alternative text'),
+           'type' => 'string',
+           'widget' => 'string_textfield',
+           'required' => !empty($source_settings['alt_field_required']),
+@@ -317,7 +320,7 @@
+       if (!empty($source_settings['title_field'])) {
+         $fields[] = [
+           'name' => $source_field_name . ':title',
+-          'label' => 'Title',
++          'label' => $this->t('Title'),
+           'type' => 'string',
+           'widget' => 'string_textfield',
+           'required' => !empty($source_settings['title_field_required']),

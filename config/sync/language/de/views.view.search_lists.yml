@@ -80,6 +80,26 @@ display:
         node_created:
           expose:
             label: Datum
+      arguments:
+        search_api_all_terms:
+          admin_label: Begriffe
+          exception:
+            title: Alle
+        node_bundle:
+          exception:
+            title: Alle
+      exposed_form:
+        options:
+          submit_button: Bewerben
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: 'Sortieren nach'
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+          text_input_required: 'Wählen Sie einen beliebigen Filter aus und klicken Sie auf Anwenden, um die Ergebnisse anzuzeigen.'
+          text_input_required_format: advanced
+          bef:
+            general:
+              secondary_label: 'Erweiterte Optionen'
   block_search_lists_jobs:
     display_options:
       block_description: 'Stellenausschreibungen (Tabelle)'
@@ -185,3 +205,10 @@ display:
           label: Beschreibung
         media_summary:
           label: Beschreibung
+        effective_date:
+          label: Datum
+      arguments:
+        search_api_all_terms:
+          admin_label: Schlagworte
+          exception:
+            title: Alle

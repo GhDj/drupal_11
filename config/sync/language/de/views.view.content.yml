@@ -39,12 +39,12 @@ display:
           label: Seite
         type:
           label: Inhaltstyp
-        name:
-          label: Autor
         changed:
           label: Aktualisiert
         operations:
           label: Aktionen
+        uid:
+          label: Autor
   default:
     display_title: Standard
     display_options:
@@ -54,8 +54,6 @@ display:
           label: Titel
         type:
           label: Inhaltstyp
-        name:
-          label: Autor
         status:
           settings:
             format_custom_false: 'Nicht veröffentlicht'
@@ -66,6 +64,8 @@ display:
           label: Sprache
         operations:
           label: Aktionen
+        uid:
+          label: Autor
       pager:
         options:
           tags:
@@ -91,7 +91,6 @@ display:
           expose:
             label: Inhaltstyp
         status:
-          expose: {  }
           group_info:
             label: Veröffentlichungsstatus
             group_items:
@@ -124,7 +123,6 @@ display:
           expose:
             label: Inhaltstyp
         status:
-          expose: {  }
           group_info:
             label: Veröffentlichungsstatus
             group_items:

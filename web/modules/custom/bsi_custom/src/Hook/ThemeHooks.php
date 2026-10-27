@@ -8,6 +8,7 @@ use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Theme\ThemeManagerInterface;
+use Drupal\media\Entity\Media;
 
 /**
  * Hooks related to frontend theming and general preprocessing.
@@ -207,6 +208,31 @@ class ThemeHooks {
           ->get('label') ?? $config->get('label');
       }
     }
+  }
+
+  /**
+   * Implements hook_theme_suggestions_field_alter().
+   */
+  #[Hook('theme_suggestions_field_alter')]
+  public function themeSuggestionsFieldAlter(array &$suggestions, array $variables): void {
+    $element = $variables['element'];
+    if (($element['#field_name'] ?? '') !== 'field_media_image') {
+      return;
+    }
+
+    $media = $element['#object'] ?? NULL;
+
+    if (!$media instanceof Media || $media->bundle() !== 'image') {
+      return;
+    }
+
+    $paragraph = $media->parent_paragraph ?? NULL;
+
+    if ($paragraph && $paragraph->getType() !== 'tile_item') {
+      return;
+    }
+
+    $suggestions[] = 'field__media__image__tile_item';
   }
 
 }
