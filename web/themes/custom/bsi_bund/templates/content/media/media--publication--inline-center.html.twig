@@ -18,7 +18,9 @@
     <div class="bsi-downloads__media">
       <div class="bsi-downloads__media-frame">
         {% block fileImage %}
-          {{ content.thumbnail }}
+          <div class="bsi-downloads__thumbnail">
+            {{ content.thumbnail }}
+          </div>
         {% endblock %}
       </div>
     </div>
