@@ -95,10 +95,18 @@
 
   &__more-link {
     color: var(--#{$nsp}-theme-link-color, var(--#{$nsp}-color-blue-750));
-    text-decoration: none;
+    text-decoration: underline;
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  &[data-theme="blue-800"],
+  &[data-theme="blue-900"] {
+    .#{$nsp}-card__more,
+    .#{$nsp}-card__more-link {
+      color: var(--#{$nsp}-color-base-white);
     }
   }
 
@@ -118,9 +126,9 @@
     position: relative;
 
     .#{$nsp}-icon {
-      background: var(--#{$nsp}-color-alpha-dark-40);
+      background: var(--#{$nsp}-color-base-white);
       bottom: 0;
-      color: var(--#{$nsp}-color-base-white);
+      color: var(--#{$nsp}-color-black);
       height: var(--#{$nsp}-size-3xl);
       padding: var(--#{$nsp}-space-2xs);
       position: absolute;

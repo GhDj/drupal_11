@@ -46,12 +46,9 @@
 {% set links = content.field_links ?? null %}
 {% set variant = paragraph.field_display_variant.value %}
 
-{# Generate the lightbox URL for chart media. #}
-{% set has_more = (paragraph.field_body.summary and paragraph.field_body.value)
-  or (body
-    and paragraph.field_body.value starts with (body ~ '')
-    and paragraph.field_body.value|length > body|length
-  )
+{# Show [more] when summary is explicitly provided OR when body text was truncated. #}
+{% set has_more = paragraph.field_body.summary
+  or paragraph.field_body.value|striptags|trim|length > 300
 %}
 {% set lightbox_url = paragraph.field_media.entity or has_more
   ? path('bsi_media.lightbox', { paragraph: paragraph.id() })
@@ -62,7 +59,7 @@
   'bsi-card',
   'bsi-block',
   'paragraph',
-  media ? 'bsi-card--no-full-link',
+  (media or has_more) ? 'bsi-card--no-full-link',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
   not paragraph.isPublished() ? 'paragraph--unpublished',
