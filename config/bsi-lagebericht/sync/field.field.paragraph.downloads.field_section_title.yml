@@ -1,0 +1,21 @@
+uuid: 5fdc64b4-c35d-4376-a86f-94333eeb0ceb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_title
+    - paragraphs.paragraphs_type.downloads
+id: paragraph.downloads.field_section_title
+field_name: field_section_title
+entity_type: paragraph
+bundle: downloads
+label: Heading
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: Downloads
+default_value_callback: ''
+settings: {  }
+field_type: string

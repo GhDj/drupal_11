@@ -1,0 +1,21 @@
+_core:
+  default_config_hash: jdY7AU0tU-QsjmiOw3W8vwpYMb-By--_MSFgbqKUTYM
+definitions:
+  'header__language:de':
+    menu_name: header
+    parent: ''
+    weight: -50
+    expanded: false
+    enabled: true
+  'header__language:en':
+    menu_name: header
+    parent: ''
+    weight: -49
+    expanded: false
+    enabled: true
+  header__login:
+    menu_name: header
+    parent: ''
+    weight: -42
+    expanded: false
+    enabled: false

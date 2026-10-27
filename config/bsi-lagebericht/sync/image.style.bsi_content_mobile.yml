@@ -1,0 +1,21 @@
+uuid: 1d36c98b-7283-4ee2-9d1b-13d81f9367f8
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_content_mobile
+label: 'BSI Content (mobile)'
+effects:
+  e7bd3bb4-7b9e-4bca-b5bd-f48c2f2859b6:
+    uuid: e7bd3bb4-7b9e-4bca-b5bd-f48c2f2859b6
+    id: image_scale
+    weight: 1
+    data:
+      width: 575
+      height: null
+      upscale: true
+  0e7c199d-0a3f-4bf5-8768-c5d5353f46f2:
+    uuid: 0e7c199d-0a3f-4bf5-8768-c5d5353f46f2
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

@@ -1,0 +1,14 @@
+uuid: e75d88d5-eee9-48f0-a58d-f82a2b4075a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.download
+id: media_type_download
+entity_type_id: media_type
+entity_id: download
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

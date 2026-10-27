@@ -1,0 +1,11 @@
+uuid: f97a202b-49fd-402b-8c5c-d21704d9c83f
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.stage
+label: Stage
+description: null
+targetEntityType: paragraph
+cache: true

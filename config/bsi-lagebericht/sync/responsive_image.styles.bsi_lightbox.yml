@@ -1,0 +1,36 @@
+uuid: 3812b514-e3b0-4165-86c1-12a1a5a29ce5
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.bsi_lightbox_narrow
+    - image.style.bsi_lightbox_standard
+    - image.style.bsi_lightbox_wide
+    - image.style.bsi_lightbox_wide_2x
+  theme:
+    - bsi_bund
+id: bsi_lightbox
+label: 'BSI Lightbox'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_lightbox_wide
+    breakpoint_id: bsi_custom.wide
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_lightbox_wide_2x
+    breakpoint_id: bsi_custom.wide
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_lightbox_standard
+    breakpoint_id: bsi_custom.standard
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_lightbox_narrow
+    breakpoint_id: bsi_custom.narrow
+    multiplier: 1x
+breakpoint_group: bsi_bund
+fallback_image_style: bsi_lightbox_standard

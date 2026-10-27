@@ -1,0 +1,76 @@
+uuid: 7d5f6ca0-138a-42e5-b6f3-5069bf72de96
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.advanced
+    - media.type.audio
+    - media.type.chart
+    - media.type.contact
+    - media.type.download
+    - media.type.gallery
+    - media.type.image
+    - media.type.publication
+    - media.type.video
+    - node.type.entry_page
+    - node.type.report_page
+    - workflows.workflow.nodes
+  module:
+    - content_moderation
+    - contextual
+    - duplicate_node
+    - editoria11y
+    - filter
+    - media
+    - media_directories_browser
+    - node
+    - paragraphs_type_permissions
+    - path
+    - system
+    - toolbar
+id: editor
+label: Editor
+weight: -8
+is_admin: false
+permissions:
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access media directories browser'
+  - 'access media overview'
+  - 'access toolbar'
+  - 'create audio media'
+  - 'create chart media'
+  - 'create contact media'
+  - 'create download media'
+  - 'create gallery media'
+  - 'create image media'
+  - 'create media'
+  - 'create paragraph content view'
+  - 'create publication media'
+  - 'create report_page content'
+  - 'create url aliases'
+  - 'create video media'
+  - 'delete all revisions'
+  - 'duplicate entry_page content'
+  - 'duplicate report_page content'
+  - 'edit any entry_page content'
+  - 'edit any report_page content'
+  - 'edit own audio media'
+  - 'edit own chart media'
+  - 'edit own contact media'
+  - 'edit own download media'
+  - 'edit own gallery media'
+  - 'edit own image media'
+  - 'edit own publication media'
+  - 'edit own video media'
+  - 'revert all revisions'
+  - 'update paragraph content view'
+  - 'use nodes transition create_new_draft'
+  - 'use nodes transition request_approval'
+  - 'use nodes transition revise'
+  - 'use nodes transition withdraw'
+  - 'use text format advanced'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view editoria11y checker'
+  - 'view the administration theme'

@@ -1,0 +1,11 @@
+uuid: c46362ff-6bb6-484a-a0d1-7a3cc68508f5
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.linkbox
+label: Linkbox
+description: null
+targetEntityType: node
+cache: true

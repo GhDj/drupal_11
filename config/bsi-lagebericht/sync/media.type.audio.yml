@@ -1,0 +1,15 @@
+uuid: eec12575-f437-437b-9217-07cf08b58975
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_remote_file
+id: audio
+label: Audio
+description: ''
+source: remote_file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_source
+field_map: {  }

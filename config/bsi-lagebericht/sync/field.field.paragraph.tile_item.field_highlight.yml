@@ -1,0 +1,24 @@
+uuid: c91fea23-d21d-46c3-8e58-1dbe1fc27258
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_highlight
+    - filter.format.plain_text
+    - paragraphs.paragraphs_type.tile_item
+  module:
+    - text
+id: paragraph.tile_item.field_highlight
+field_name: field_highlight
+entity_type: paragraph
+bundle: tile_item
+label: Highlight
+description: 'Is prominently displayed as the first element, e.g. a key figure.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - plain_text
+field_type: text_long

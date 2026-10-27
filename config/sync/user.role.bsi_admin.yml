@@ -33,6 +33,7 @@ dependencies:
     - taxonomy.vocabulary.topics
     - workflows.workflow.nodes
   module:
+    - asset_injector
     - block
     - book
     - bsi_charts
@@ -102,6 +103,7 @@ permissions:
   - 'addrow tablefield'
   - 'administer blocks'
   - 'administer book outlines'
+  - 'administer css assets injector'
   - 'administer footer menu items'
   - 'administer header menu items'
   - 'administer honeypot'

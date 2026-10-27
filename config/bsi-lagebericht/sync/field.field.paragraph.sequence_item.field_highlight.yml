@@ -1,0 +1,22 @@
+uuid: 95c5dab1-e259-41a0-a81c-184d693faf4b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_highlight
+    - paragraphs.paragraphs_type.sequence_item
+  module:
+    - text
+id: paragraph.sequence_item.field_highlight
+field_name: field_highlight
+entity_type: paragraph
+bundle: sequence_item
+label: Notes
+description: 'Displayed separately on the side.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

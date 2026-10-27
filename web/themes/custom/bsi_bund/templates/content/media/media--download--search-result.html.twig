@@ -1,0 +1,47 @@
+{#
+/**
+ * @file
+ * Theme override for download media in search_result view mode.
+ *
+ * Renders as a bsi-card--search component with download info
+ * (file format, size, accessibility).
+ */
+#}
+{% set media_label = media.bundle.entity.label %}
+{% set date = media.getCreatedTime()|date('d.m.Y') %}
+{% if media.hasField('field_publication_date') and media.field_publication_date.value %}
+  {% set date = media.field_publication_date.value|date('d.m.Y') %}
+{% endif %}
+<div class="bsi-card bsi-card--search">
+  <div class="bsi-card__content">
+    <div class="bsi-card__text">
+      <div class="bsi-card__heading-wrapper">
+        <p class="bsi-card__topline">{{ media_label }} &middot; {{ date }}</p>
+        <h3 class="bsi-heading bsi-heading--4 bsi-heading--linked bsi-card__heading">
+          <a href="{{ url }}" class="bsi-heading__link" rel="bookmark">{{ media.label() }}</a>
+        </h3>
+      </div>
+      {% if content.search_api_excerpt is not empty %}
+        <div class="bsi-card__body">
+          {{ content.search_api_excerpt }}
+        </div>
+      {% elseif content.field_body is not empty %}
+        <div class="bsi-card__body">
+          {{ content.field_body }}
+        </div>
+      {% endif %}
+    </div>
+    {# Download info: file link with format + size #}
+    {% if content.field_media_file is not empty %}
+      <hr class="bsi-card__divider" />
+      <div class="bsi-card__cta">
+        {{ content.field_media_file }}
+        {% if content.field_accessibility is not empty %}
+          <span class="bsi-card__accessibility">
+            {{ content.field_accessibility }}
+          </span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>

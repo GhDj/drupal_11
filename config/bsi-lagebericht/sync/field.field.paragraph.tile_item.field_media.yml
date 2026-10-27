@@ -1,0 +1,31 @@
+uuid: 70eba5fb-7aae-4abb-99df-b87651861411
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media
+    - media.type.chart
+    - media.type.image
+    - paragraphs.paragraphs_type.tile_item
+id: paragraph.tile_item.field_media
+field_name: field_media
+entity_type: paragraph
+bundle: tile_item
+label: Media
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      chart: chart
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: chart
+field_type: entity_reference

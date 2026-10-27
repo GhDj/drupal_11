@@ -1,0 +1,10 @@
+uuid: 9d4ae650-e9f3-4c25-a507-1bcabb2fa4ca
+langcode: en
+status: true
+dependencies: {  }
+id: downloads
+label: Downloads
+icon_uuid: null
+icon_default: null
+description: 'Add teasers for publications to the content.'
+behavior_plugins: {  }

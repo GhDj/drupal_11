@@ -1,0 +1,8 @@
+display:
+  block_children:
+    display_options:
+      block_category: 'BSI Bericht'
+  block_children_filter:
+    display_options:
+      block_description: 'Explorer mit Filtern'
+      block_category: 'BSI Bericht'

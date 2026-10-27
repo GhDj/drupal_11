@@ -1,0 +1,9 @@
+uuid: 7a9d5837-f58a-4822-9397-60008ff8ed60
+langcode: en
+status: true
+dependencies: {  }
+name: Dictionary
+vid: dictionary
+description: 'Contains terms in foreign languages, used in automatic detection.'
+weight: 0
+new_revision: false

@@ -1,0 +1,11 @@
+uuid: 31764126-1673-4404-8372-c37aaa4f0739
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.opener_stage
+label: 'Opener (Stage)'
+description: null
+targetEntityType: media
+cache: true

@@ -5,6 +5,7 @@ module:
   admin_toolbar: 0
   admin_toolbar_tools: 0
   anchor_link: 0
+  asset_injector: 0
   base_field_override_ui: 0
   better_exposed_filters: 0
   block: 0
@@ -19,6 +20,7 @@ module:
   bsi_social: 0
   bsi_user_registration: 0
   bsi_webform: 0
+  calendar_view: 0
   captcha: 0
   charts: 0
   charts_chartjs: 0

@@ -1,0 +1,18 @@
+uuid: b5c109ae-755c-479c-ae8c-caee4aaf2eda
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.field_mail
+field_name: field_mail
+entity_type: media
+type: email
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

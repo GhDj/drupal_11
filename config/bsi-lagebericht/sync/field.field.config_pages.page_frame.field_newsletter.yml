@@ -1,0 +1,70 @@
+uuid: d4304652-5945-4e69-b6ae-4dc9a1d49c38
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.page_frame
+    - field.storage.config_pages.field_newsletter
+    - paragraphs.paragraphs_type.teaser_single
+  module:
+    - entity_reference_revisions
+id: config_pages.page_frame.field_newsletter
+field_name: field_newsletter
+entity_type: config_pages
+bundle: page_frame
+label: Newsletter
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      teaser_single: teaser_single
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 15
+        enabled: false
+      banner:
+        weight: 16
+        enabled: false
+      definition_item:
+        weight: 17
+        enabled: false
+      downloads:
+        weight: 18
+        enabled: false
+      facts_figures:
+        weight: 19
+        enabled: false
+      introduction:
+        weight: 20
+        enabled: false
+      key_facts:
+        weight: 21
+        enabled: false
+      media:
+        weight: 22
+        enabled: false
+      quick_overview:
+        weight: 23
+        enabled: false
+      quote:
+        weight: 24
+        enabled: false
+      table_section:
+        weight: 25
+        enabled: false
+      teaser_single:
+        weight: 26
+        enabled: true
+      text_section:
+        weight: 27
+        enabled: false
+      view:
+        weight: 28
+        enabled: false
+field_type: entity_reference_revisions

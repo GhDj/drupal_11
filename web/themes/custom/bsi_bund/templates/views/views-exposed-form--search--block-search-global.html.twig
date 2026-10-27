@@ -1,0 +1,58 @@
+{#
+/**
+ * @file
+ * Exposed form for global search — matches Figma design.
+ *
+ * 1. Searchbar with search icon (bsi-searchbar)
+ * 2. Filter grid with custom multi-select dropdowns
+ * 3. Hidden form elements + submit
+ */
+#}
+
+{# Searchbar — full width, bsi-searchbar styling #}
+{% if form.search is defined %}
+  <div class="bsi-searchbar">
+    {{ form.search }}
+    <button type="submit" class="bsi-button bsi-button--tertiary bsi-searchbar__button" aria-label="{{ 'Suche'|t }}">
+      {% include '@bsi_bund/components/icon.twig' with {
+        name: 'search',
+        decorative: true,
+      } only %}
+    </button>
+  </div>
+{% endif %}
+
+{# Filter grid — custom multi-select dropdowns.
+   Keys are explicit to control display order (matches Figma).
+   Update this list when facets are added/removed in the view config. #}
+<div class="bsi-searchfilter__top">
+  {% set facet_keys = ['type', 'topics', 'audiences', 'year'] %}
+  {% for key in facet_keys %}
+    {% if form[key] is defined %}
+      <div class="bsi-multiselect js-multiselect" data-filter-key="{{ key }}">
+        {{ form[key] }}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{# Sort dropdown — stays inside form, CSS moves it to results area #}
+{% if form.sort_bef_combine is defined %}
+  <div class="sort-wrapper">
+    <div class="bsi-search-dropdown bsi-search-dropdown--sort">
+      {{ form.sort_bef_combine }}
+    </div>
+  </div>
+{% endif %}
+
+{# Hidden form elements #}
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}
+
+{# Hidden submit for JS to trigger #}
+{% if form.actions is defined %}
+  <div class="bsi-searchfilter__actions visually-hidden">
+    {{ form.actions }}
+  </div>
+{% endif %}

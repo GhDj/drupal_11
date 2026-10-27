@@ -1,0 +1,54 @@
+uuid: b62a43eb-aa41-492d-9efd-edb8b3463d70
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - node
+_core:
+  default_config_hash: 0Jw_BFJCCtWk187tIYvME58VFpYwPaAdrc4eRtAyHH0
+label: Default
+id: default
+description: 'A default Linkit profile'
+matchers:
+  556010a3-e317-48b3-b4ed-854c10f4b950:
+    id: 'entity:node'
+    uuid: 556010a3-e317-48b3-b4ed-854c10f4b950
+    settings:
+      metadata: '[node:content-type:name] #[node:nid] | [node:created:medium] by [node:author]'
+      bundles: {  }
+      group_by_bundle: true
+      substitution_type: canonical
+      limit: 100
+      include_unpublished: true
+    weight: -9
+  37a4ea42-0a49-4bae-b0f5-6cbfbd955af2:
+    id: 'entity:media'
+    uuid: 37a4ea42-0a49-4bae-b0f5-6cbfbd955af2
+    settings:
+      metadata: '[media:bundle] #[media:mid] | [media:changed:date:medium] by [media:uid:entity:display-name] '
+      bundles:
+        audio: audio
+        gallery: gallery
+        video: video
+      group_by_bundle: true
+      substitution_type: canonical
+      limit: 100
+    weight: -8
+  19c62c26-c323-45ba-8cb6-71dae8febd63:
+    id: 'entity:media'
+    uuid: 19c62c26-c323-45ba-8cb6-71dae8febd63
+    settings:
+      metadata: 'Download [media:bundle] #[media:mid] | [media:changed:date:medium] by [media:uid:entity:display-name]'
+      bundles:
+        download: download
+        publication: publication
+      group_by_bundle: false
+      substitution_type: media_download_inline
+      limit: 100
+    weight: -7
+  66d25d14-3ff9-4d80-93a3-371072b5d246:
+    id: external
+    uuid: 66d25d14-3ff9-4d80-93a3-371072b5d246
+    settings: {  }
+    weight: -10

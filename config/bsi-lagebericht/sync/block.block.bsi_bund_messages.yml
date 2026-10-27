@@ -1,0 +1,22 @@
+uuid: 3c048260-3d35-45da-80a3-431c58e90728
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - bsi_bund
+_core:
+  default_config_hash: '-Ac3ISpIT0PQ-whzD7_dw0SdKi6dAbRFNWdSjOiVDqg'
+id: bsi_bund_messages
+theme: bsi_bund
+region: highlighted
+weight: -6
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

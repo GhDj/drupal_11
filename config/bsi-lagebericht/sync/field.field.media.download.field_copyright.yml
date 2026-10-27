@@ -1,0 +1,19 @@
+uuid: 30272ae8-c05e-4fbf-9bbe-10e9ea6f088c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_copyright
+    - media.type.download
+id: media.download.field_copyright
+field_name: field_copyright
+entity_type: media
+bundle: download
+label: Copyright
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

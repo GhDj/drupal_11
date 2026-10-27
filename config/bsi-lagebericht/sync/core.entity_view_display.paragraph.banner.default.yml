@@ -1,0 +1,65 @@
+uuid: b32b6f66-8c0d-4067-addd-7e5909f0b31d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.banner.field_jumplink
+    - field.field.paragraph.banner.field_link
+    - field.field.paragraph.banner.field_media
+    - field.field.paragraph.banner.field_section_text
+    - field.field.paragraph.banner.field_section_title
+    - paragraphs.paragraphs_type.banner
+  module:
+    - bsi_custom
+    - link
+    - text
+id: paragraph.banner.default
+targetEntityType: paragraph
+bundle: banner
+mode: default
+content:
+  field_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_section_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_section_title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_jumplink: true
+  search_api_excerpt: true

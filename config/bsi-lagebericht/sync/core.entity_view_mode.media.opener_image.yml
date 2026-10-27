@@ -1,0 +1,11 @@
+uuid: b3cbb555-724b-4fac-8988-44b8878fed2c
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.opener_image
+label: 'Opener (Image)'
+description: null
+targetEntityType: media
+cache: true

@@ -1,0 +1,61 @@
+uuid: 3597f4a7-4df4-4b12-bbdd-e0d59f78c74d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_stage_items
+    - node.type.entry_page
+    - paragraphs.paragraphs_type.teaser_single
+  module:
+    - entity_reference_revisions
+id: node.entry_page.field_stage_items
+field_name: field_stage_items
+entity_type: node
+bundle: entry_page
+label: 'Stage items'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      teaser_single: teaser_single
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 12
+        enabled: false
+      banner:
+        weight: 13
+        enabled: false
+      definition_item:
+        weight: 14
+        enabled: false
+      downloads:
+        weight: 15
+        enabled: false
+      facts_figures:
+        weight: 16
+        enabled: false
+      introduction:
+        weight: 17
+        enabled: false
+      media:
+        weight: 18
+        enabled: false
+      table_section:
+        weight: 19
+        enabled: false
+      teaser_single:
+        weight: 20
+        enabled: true
+      text_section:
+        weight: 21
+        enabled: false
+      view:
+        weight: 22
+        enabled: false
+field_type: entity_reference_revisions

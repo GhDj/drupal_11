@@ -1,0 +1,36 @@
+uuid: d59fcf8c-55d7-4a9a-8a65-4e3fc57da1ee
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - taxonomy
+id: taxonomy_term.field_language
+field_name: field_language
+entity_type: taxonomy_term
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: de
+      label: German
+    -
+      value: en
+      label: English
+    -
+      value: fr
+      label: French
+    -
+      value: jp
+      label: Japanese
+    -
+      value: es
+      label: Spanish
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

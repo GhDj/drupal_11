@@ -1,0 +1,19 @@
+uuid: 51d86d27-02f7-4634-8d53-c756567b32a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_copyright
+    - media.type.publication
+id: media.publication.field_copyright
+field_name: field_copyright
+entity_type: media
+bundle: publication
+label: Copyright
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

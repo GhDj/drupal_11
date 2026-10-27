@@ -1,0 +1,5 @@
+content:
+  field_step_label:
+    settings:
+      other_option: Andere…
+      other_field_label: 'Eigene Beschriftung'

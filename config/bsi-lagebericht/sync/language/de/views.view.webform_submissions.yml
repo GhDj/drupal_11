@@ -1,0 +1,107 @@
+label: Webformular-Eingaben
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: Sortierung
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      pager:
+        options:
+          tags:
+            first: '« Anfang'
+            last: 'Ende »'
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      fields:
+        sid: {  }
+        in_draft: {  }
+        created:
+          label: Erstellt
+        remote_addr:
+          label: IP-Adresse
+        view_webform_submission:
+          label: Aktionen
+          text: Ansicht
+      header:
+        result:
+          content: '@start - @end von @total wird angezeigt'
+      arguments:
+        in_draft:
+          exception:
+            title: Alle
+      title: Webformular-Eingaben
+  embed_administer:
+    display_options:
+      fields:
+        webform_submission_bulk_form:
+          action_title: Aktion
+        sid: {  }
+        in_draft: {  }
+        sticky: {  }
+        locked:
+          label: Gesperrt
+        created:
+          label: Erstellt
+        completed:
+          label: Abgeschlossen
+        remote_addr:
+          label: IP-Adresse
+        operations:
+          label: Aktionen
+      filters:
+        locked:
+          expose:
+            label: Gesperrt
+  embed_manage:
+    display_options:
+      fields:
+        webform_submission_bulk_form:
+          action_title: Aktion
+        sid: {  }
+        in_draft: {  }
+        sticky: {  }
+        locked:
+          label: Gesperrt
+        created:
+          label: Erstellt
+        completed:
+          label: Abgeschlossen
+        remote_addr:
+          label: IP-Adresse
+        view_webform_submission:
+          label: Aktionen
+          text: Ansicht
+        edit_webform_submission:
+          label: Aktionen
+          text: Bearbeiten
+      filters:
+        locked:
+          expose:
+            label: Gesperrt
+  embed_review:
+    display_options:
+      fields:
+        sid: {  }
+        in_draft: {  }
+        sticky: {  }
+        locked:
+          label: Gesperrt
+        created:
+          label: Erstellt
+        completed:
+          label: Abgeschlossen
+        remote_addr:
+          label: IP-Adresse
+        view_webform_submission:
+          label: Aktionen
+          text: Ansicht
+      filters:
+        locked:
+          expose:
+            label: Gesperrt

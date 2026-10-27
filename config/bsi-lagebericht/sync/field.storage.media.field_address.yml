@@ -1,0 +1,19 @@
+uuid: 96de79a5-47af-4f1c-b87e-eaf3fedcd204
+langcode: en
+status: true
+dependencies:
+  module:
+    - address
+    - media
+id: media.field_address
+field_name: field_address
+entity_type: media
+type: address
+settings: {  }
+module: address
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

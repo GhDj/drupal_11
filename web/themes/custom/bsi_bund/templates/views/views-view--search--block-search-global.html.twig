@@ -1,33 +1,93 @@
 {#
 /**
  * @file
- * Theme override for a main view template.
+ * Theme override for the Global Search block display.
  *
- * Available variables:
- * - attributes: Remaining HTML attributes for the element.
- * - css_name: A CSS-safe version of the view name.
- * - css_class: The user-specified classes names, if any.
- * - header: The optional header.
- * - footer: The optional footer.
- * - rows: The results of the view query, if any.
- * - empty: The content to display if there are no rows.
- * - pager: The optional pager next/prev links to display.
- * - exposed: Exposed widget form/info to display.
- * - feed_icons: Optional feed icons to display.
- * - more: An optional link to the next page of results.
- * - title: Title of the view, only used when displaying in the admin preview.
- * - title_prefix: Additional output populated by modules, intended to be
- *   displayed in front of the view title.
- * - title_suffix: Additional output populated by modules, intended to be
- *   displayed after the view title.
- * - attachment_before: An optional attachment view to be displayed before the
- *   view content.
- * - attachment_after: An optional attachment view to be displayed after the
- *   view content.
- * - dom_id: Unique id for every view being printed to give unique class for
- *   JavaScript.
+ * Layout order (matching Figma full-top-block.png):
+ * 1. Searchbar (full width, search icon)
+ * 2. Result count text
+ * 3. Dotted separator
+ * 4. Filter dropdowns
+ * 5. Active filter pills + reset
+ * 6. Sort dropdown (right-aligned, in results area)
+ * 7. Results + pagination
  *
- * @see template_preprocess_views_view()
+ * The sort stays INSIDE the <form> so its value is submitted.
+ * CSS positions the .sort-wrapper visually in the results area.
  */
 #}
-{% extends "@bsi_bund/views/views--search.html.twig" %}
+{%
+  set classes = [
+  'view',
+  'view-' ~ id|clean_class,
+  'view-id-' ~ id,
+  'view-display-id-' ~ display_id,
+  dom_id ? 'js-view-dom-id-' ~ dom_id,
+]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {% if exposed %}
+    <div class="bsi-searchfilter bsi-searchfilter--global">
+      <div class="bsi-searchfilter__inner">
+        {# Title — inside the box, above searchbar.
+           Use view.getTitle() as fallback since the block label is
+           suppressed in the block template (to keep it inside the box). #}
+        {% set search_title = title|default(view.getTitle()) %}
+        {% if search_title %}
+          <h2 class="bsi-searchfilter__title">{{ search_title }}</h2>
+        {% endif %}
+
+        {# Result count — above searchbar #}
+        {% if header %}
+          <div class="bsi-searchfilter__text">
+            {{ header }}
+          </div>
+        {% endif %}
+
+        {# Full form (searchbar + filters + sort) — sort repositioned via CSS #}
+        {{ exposed }}
+
+        {# Dotted separator — between searchbar and filters #}
+        <hr class="bsi-searchfilter__separator" />
+
+        {# Mobile filter toggle #}
+        <button class="bsi-searchfilter__toggle js-searchfilter-toggle" type="button" aria-expanded="true">
+          {{ 'Filter'|t }}
+        </button>
+
+        {# Active filter pills #}
+        <div class="bsi-searchfilter__bottom js-searchfilter-bottom"></div>
+      </div>
+    </div>
+  {% endif %}
+
+  {# Results area #}
+  {% if rows or empty %}
+    <div class="bsi-search-result">
+      <div class="bsi-search-result__inner">
+        {% if rows %}
+          <div class="view-content">
+            {{ rows }}
+          </div>
+        {% elseif empty %}
+          <div class="view-empty">
+            {{ empty }}
+          </div>
+        {% endif %}
+
+        {% if pager %}
+          {{ pager }}
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if footer %}
+    <div class="view-footer">
+      {{ footer }}
+    </div>
+  {% endif %}
+</div>

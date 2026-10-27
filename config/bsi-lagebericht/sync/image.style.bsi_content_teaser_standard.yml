@@ -1,0 +1,21 @@
+uuid: 3488c89f-bc03-4dfc-a19b-986423b014ea
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_content_teaser_standard
+label: 'BSI Content Teaser (standard)'
+effects:
+  49c25524-8c8b-4fb0-9d4b-c812ea9b8963:
+    uuid: 49c25524-8c8b-4fb0-9d4b-c812ea9b8963
+    id: image_scale
+    weight: 1
+    data:
+      width: 498
+      height: null
+      upscale: true
+  2c839137-d123-4261-ab10-7a595fafdcc2:
+    uuid: 2c839137-d123-4261-ab10-7a595fafdcc2
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

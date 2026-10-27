@@ -1,0 +1,11 @@
+uuid: 502f75e2-c4ab-45d4-a48b-2776f6aac15c
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.cart
+label: Cart
+description: null
+targetEntityType: media
+cache: true

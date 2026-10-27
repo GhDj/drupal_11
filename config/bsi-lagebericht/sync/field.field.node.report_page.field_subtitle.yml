@@ -1,0 +1,19 @@
+uuid: b82e34fa-6afa-4215-93e7-b62c572c17f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subtitle
+    - node.type.report_page
+id: node.report_page.field_subtitle
+field_name: field_subtitle
+entity_type: node
+bundle: report_page
+label: Subtitle
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

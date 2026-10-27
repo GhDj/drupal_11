@@ -1,0 +1,15 @@
+uuid: 72146b11-9408-4c58-bdba-df3a1dcf3957
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_charts
+id: chart
+label: Chart
+description: ''
+source: chart
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_chart
+field_map: {  }

@@ -1,0 +1,6 @@
+label: Darstellung
+third_party_settings:
+  bsi_custom:
+    preset_options:
+      blue-800: Mittelblau
+      blue-900: Dunkelblau

@@ -1,0 +1,21 @@
+uuid: 2d63b566-d858-41ad-88a0-b1873c43f0af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_accessibility
+    - media.type.publication
+id: media.publication.field_accessibility
+field_name: field_accessibility
+entity_type: media
+bundle: publication
+label: Accessibility
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'File is accessible'
+  off_label: 'File is not accessible'
+field_type: boolean

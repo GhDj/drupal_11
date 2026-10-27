@@ -1,0 +1,21 @@
+uuid: 76d138b8-3a94-4147-b936-fede358a6de5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_display_animate
+    - paragraphs.paragraphs_type.sequence
+id: paragraph.sequence.field_display_animate
+field_name: field_display_animate
+entity_type: paragraph
+bundle: sequence
+label: 'Animate timeline'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

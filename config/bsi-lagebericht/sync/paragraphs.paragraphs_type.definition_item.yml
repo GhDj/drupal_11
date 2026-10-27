@@ -1,0 +1,10 @@
+uuid: ce4996e1-3acf-4413-865c-83e6a7a15096
+langcode: en
+status: true
+dependencies: {  }
+id: definition_item
+label: 'Definition item'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

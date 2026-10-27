@@ -1,0 +1,18 @@
+uuid: 2340aa9c-1ade-420b-9a9e-11d1b146a6e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dictionary
+id: taxonomy_term.dictionary.name
+field_name: name
+entity_type: taxonomy_term
+bundle: dictionary
+label: Name
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

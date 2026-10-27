@@ -27,7 +27,7 @@ display:
             label: Relevanz
       header:
         result:
-          content: '@start bis @end von @total Ergebnissen'
+          content: '<strong>@start bis @end</strong>&nbsp;von&nbsp;<strong>@total</strong>&nbsp;Ergebnissen'
       filters:
         search_api_fulltext_1:
           expose:
@@ -47,6 +47,11 @@ display:
             label: Jahr
           facet:
             missing_label: andere
+        facets_node_bundle:
+          expose:
+            label: Typ
+          facet:
+            missing_label: andere
   block_search_global:
     display_options:
       exposed_form:
@@ -57,9 +62,23 @@ display:
           sort_asc_label: Aufsteigend
           sort_desc_label: Absteigend
           text_input_required: 'Wählen Sie einen beliebigen Filter aus und klicken Sie auf Anwenden, um die Ergebnisse anzuzeigen'
+          bef:
+            sort:
+              advanced:
+                combine_rewrite: "Relevanz Absteigend|Relevanz\r\nDatum Absteigend|Datum (neueste zuerst)\r\nDatum Aufsteigend|Datum (älteste zuerst)\r\nTitel Aufsteigend|Titel A-Z\r\nTitel Absteigend|Titel Z-A\r\nRelevanz Aufsteigend|"
+      sorts:
+        search_api_relevance:
+          expose:
+            label: Relevanz
+        effective_date:
+          expose:
+            label: Datum
+        node_label:
+          expose:
+            label: Titel
       header:
         result:
-          content: '@start bis @end von @total Ergebnissen'
+          content: '<strong>@start bis @end</strong>&nbsp;von&nbsp;<strong>@total</strong>&nbsp;Ergebnissen'
       block_description: 'Globale Suche'
       title: 'Globale Suche'
     display_title: 'Block – Globale Suche'

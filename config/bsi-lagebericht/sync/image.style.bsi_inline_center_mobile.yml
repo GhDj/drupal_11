@@ -1,0 +1,21 @@
+uuid: f156c15d-e946-42e5-bf1e-1ecf264a0d8f
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_inline_center_mobile
+label: 'BSI Inline center (mobile)'
+effects:
+  1a01aee3-f4d7-4cf4-982b-391d4b9419b9:
+    uuid: 1a01aee3-f4d7-4cf4-982b-391d4b9419b9
+    id: image_scale
+    weight: 1
+    data:
+      width: 544
+      height: null
+      upscale: true
+  dc3708a9-867f-4432-90b2-79e84d6c752c:
+    uuid: dc3708a9-867f-4432-90b2-79e84d6c752c
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

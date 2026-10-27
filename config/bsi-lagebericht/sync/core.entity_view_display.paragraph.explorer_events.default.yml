@@ -1,0 +1,24 @@
+uuid: e7ef39d1-1266-4d50-adf1-91f378399943
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.explorer_events.field_events
+    - paragraphs.paragraphs_type.explorer_events
+id: paragraph.explorer_events.default
+targetEntityType: paragraph
+bundle: explorer_events
+mode: default
+content:
+  field_events:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: explorer
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  search_api_excerpt: true

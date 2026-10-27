@@ -1,0 +1,32 @@
+uuid: 0d016e6c-73cb-408c-91b3-3573e3ec0502
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.dictionary.field_language
+    - taxonomy.vocabulary.dictionary
+  module:
+    - bsi_custom
+id: taxonomy_term.dictionary.default
+targetEntityType: taxonomy_term
+bundle: dictionary
+mode: default
+content:
+  name:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  description: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_language: true
+  langcode: true
+  search_api_excerpt: true

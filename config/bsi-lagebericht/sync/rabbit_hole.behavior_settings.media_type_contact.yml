@@ -1,0 +1,14 @@
+uuid: af354f2a-76a1-4ca9-99ff-269df7abb80a
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.contact
+id: media_type_contact
+entity_type_id: media_type
+entity_id: contact
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

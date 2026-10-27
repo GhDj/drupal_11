@@ -1,0 +1,24 @@
+uuid: 294aa992-443f-4c2a-8ca5-f95565666b26
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_body
+    - media.type.audio
+  module:
+    - text
+id: media.audio.field_body
+field_name: field_body
+entity_type: media
+bundle: audio
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

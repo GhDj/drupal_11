@@ -1,0 +1,11 @@
+uuid: 6a5cf672-3706-46a4-964a-bade232c7d7a
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.stage_extra
+label: 'Stage extra'
+description: null
+targetEntityType: paragraph
+cache: true

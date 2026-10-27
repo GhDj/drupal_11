@@ -1,0 +1,63 @@
+label: Taxonomie-Begriffe
+description: 'Taxonomie-Begriffe Vokabular-übergreifend suchen und verwalten.'
+display:
+  default:
+    display_options:
+      title: Taxonomie-Begriffe
+      fields:
+        taxonomy_term_bulk_form:
+          action_title: Aktion
+        name:
+          label: Begriffsname
+        vid:
+          label: Vokabular
+        content_translation_uid:
+          label: Autor
+        changed:
+          label: Aktualisiert
+        operations:
+          label: Aktionen
+        status:
+          settings:
+            format_custom_false: 'Nicht veröffentlicht'
+            format_custom_true: Veröffentlicht
+      pager:
+        options:
+          tags:
+            first: '« Erste'
+            last: 'Letzte »'
+          expose:
+            items_per_page_label: 'Ergebnisse pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: 'Sortieren nach'
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      filters:
+        name:
+          expose:
+            label: Begriffsname
+        vid:
+          expose:
+            label: Vokabular
+        status:
+          expose:
+            label: Veröffentlichungsstatus
+          group_info:
+            label: Veröffentlichungsstatus
+            group_items:
+              1:
+                title: Veröffentlicht
+              2:
+                title: 'Nicht veröffentlicht'
+        content_translation_uid:
+          expose:
+            label: Autor
+  admin_table:
+    display_options:
+      menu:
+        title: Begriffe

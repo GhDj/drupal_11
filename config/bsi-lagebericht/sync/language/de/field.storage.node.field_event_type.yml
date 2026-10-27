@@ -1,0 +1,10 @@
+settings:
+  allowed_values:
+    -
+      label: 'Eigene Veranstaltungen des BSI'
+    -
+      label: 'BSI als Teilnehmer'
+    -
+      label: Karriereveranstaltungen
+    -
+      label: Verschiedenes

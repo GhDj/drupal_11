@@ -1,0 +1,19 @@
+uuid: f773c42b-65eb-4330-aec4-b9a5fb750ee3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_title
+    - paragraphs.paragraphs_type.tabs
+id: paragraph.tabs.field_section_title
+field_name: field_section_title
+entity_type: paragraph
+bundle: tabs
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

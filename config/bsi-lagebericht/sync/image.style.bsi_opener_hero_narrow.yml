@@ -1,0 +1,21 @@
+uuid: 4beef761-e55d-430e-bbec-a6aba37e1721
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_opener_hero_narrow
+label: 'BSI Opener Hero (narrow)'
+effects:
+  6787a61a-6700-4aef-916d-26cd5ced73b2:
+    uuid: 6787a61a-6700-4aef-916d-26cd5ced73b2
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 991
+      height: 360
+      anchor: center-center
+  3f91c03a-dbb8-4f8b-97a1-cbb20de381f3:
+    uuid: 3f91c03a-dbb8-4f8b-97a1-cbb20de381f3
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

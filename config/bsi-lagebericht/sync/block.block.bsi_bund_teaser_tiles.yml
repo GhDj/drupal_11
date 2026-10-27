@@ -1,0 +1,30 @@
+uuid: 5d02afd6-8acf-466e-a335-a4553db1ff16
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+  theme:
+    - bsi_bund
+id: bsi_bund_teaser_tiles
+theme: bsi_bund
+region: content
+weight: -8
+provider: null
+plugin: bsi_custom_teaser_tiles
+settings:
+  id: bsi_custom_teaser_tiles
+  label: 'Teaser tiles'
+  label_display: '0'
+  provider: bsi_custom
+  context_mapping:
+    entity: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      page: page

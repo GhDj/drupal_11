@@ -1,0 +1,42 @@
+uuid: 530df832-0206-4b5d-95a4-4a445ad1e06a
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.bsi_video_mobile
+    - image.style.bsi_video_narrow
+    - image.style.bsi_video_standard
+    - image.style.bsi_video_wide
+    - image.style.bsi_video_wide_2x
+  theme:
+    - bsi_bund
+id: bsi_video
+label: 'BSI Video'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_video_wide
+    breakpoint_id: bsi_custom.wide
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_video_wide_2x
+    breakpoint_id: bsi_custom.wide
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_video_standard
+    breakpoint_id: bsi_custom.standard
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_video_narrow
+    breakpoint_id: bsi_custom.narrow
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_video_mobile
+    breakpoint_id: bsi_custom.mobile
+    multiplier: 1x
+breakpoint_group: bsi_bund
+fallback_image_style: bsi_video_standard

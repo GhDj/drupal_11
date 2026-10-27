@@ -1,0 +1,9 @@
+field_validation_rules:
+  dbffc191-95e3-470c-8569-89d9fb9f9b15:
+    title: 'Highlight ist NULL'
+    data:
+      message: 'Geben Sie entweder Highlight oder Media ein, nicht beides.'
+  a05213f2-b235-48a6-92e6-ac2ce9f025f5:
+    title: 'Media ist NULL'
+    data:
+      message: 'Geben Sie entweder Highlight oder Media ein, nicht beides.'

@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Theme override for the Global Search views block.
+ *
+ * Suppresses the default block label rendering — the view template
+ * renders the title inside the bsi-searchfilter box instead.
+ */
+#}
+{%
+  set classes = [
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</div>

@@ -1,0 +1,19 @@
+uuid: ad81d7e7-703c-4c12-a196-e186401ee6f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_jumplink
+    - paragraphs.paragraphs_type.quick_overview
+id: paragraph.quick_overview.field_jumplink
+field_name: field_jumplink
+entity_type: paragraph
+bundle: quick_overview
+label: Jumplink
+description: "Used to create a link anchor allowing easy navigation to this paragraph. Must be unique for the page. \r\nIf filled, creates a link in the \"sticky jump links\" block with the same text."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

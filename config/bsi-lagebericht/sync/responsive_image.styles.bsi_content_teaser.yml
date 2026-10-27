@@ -1,0 +1,42 @@
+uuid: 5fe01f31-38c6-48f4-bb9f-783414aba746
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.bsi_content_teaser_mobile
+    - image.style.bsi_content_teaser_narrow
+    - image.style.bsi_content_teaser_standard
+    - image.style.bsi_content_teaser_wide
+    - image.style.bsi_content_teaser_wide_2x
+  theme:
+    - bsi_bund
+id: bsi_content_teaser
+label: 'BSI Content Teaser'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_content_teaser_wide
+    breakpoint_id: bsi_custom.wide
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_content_teaser_wide_2x
+    breakpoint_id: bsi_custom.wide
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_content_teaser_standard
+    breakpoint_id: bsi_custom.standard
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_content_teaser_narrow
+    breakpoint_id: bsi_custom.narrow
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_content_teaser_mobile
+    breakpoint_id: bsi_custom.mobile
+    multiplier: 1x
+breakpoint_group: bsi_bund
+fallback_image_style: bsi_content_teaser_standard

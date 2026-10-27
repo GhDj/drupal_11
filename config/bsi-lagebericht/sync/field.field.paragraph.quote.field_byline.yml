@@ -1,0 +1,19 @@
+uuid: b78ee350-4679-422e-8946-ae355671e3da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_byline
+    - paragraphs.paragraphs_type.quote
+id: paragraph.quote.field_byline
+field_name: field_byline
+entity_type: paragraph
+bundle: quote
+label: Position/Role
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

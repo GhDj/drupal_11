@@ -1,0 +1,36 @@
+uuid: 689e9c1e-09e8-42f4-8bd6-4f8c1d613888
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.bsi_inline_side_mobile
+    - image.style.bsi_inline_side_narrow
+    - image.style.bsi_inline_side_standard
+    - image.style.bsi_inline_side_wide_2x
+  theme:
+    - bsi_bund
+id: bsi_inline_side
+label: 'BSI Inline (side)'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_inline_side_wide_2x
+    breakpoint_id: bsi_custom.wide
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_inline_side_standard
+    breakpoint_id: bsi_custom.standard
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_inline_side_narrow
+    breakpoint_id: bsi_custom.narrow
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_inline_side_mobile
+    breakpoint_id: bsi_custom.mobile
+    multiplier: 1x
+breakpoint_group: bsi_bund
+fallback_image_style: bsi_inline_side_standard

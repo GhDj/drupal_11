@@ -1,0 +1,15 @@
+third_party_settings:
+  field_group:
+    group_language:
+      label: Sprache
+    group_workflow:
+      label: Arbeitsablauf
+content:
+  field_body:
+    third_party_settings:
+      maxlength: {  }
+  field_media_source:
+    settings: {  }
+  name:
+    third_party_settings:
+      maxlength: {  }

@@ -1,0 +1,10 @@
+uuid: c593730d-ec9d-4f72-bea0-dc0e2da2bc42
+langcode: en
+status: true
+dependencies: {  }
+id: teaser_single
+label: Teaser
+icon_uuid: null
+icon_default: null
+description: 'Teaser site content using text, image and a read more link.'
+behavior_plugins: {  }

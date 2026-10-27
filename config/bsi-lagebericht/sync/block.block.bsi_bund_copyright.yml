@@ -1,0 +1,23 @@
+uuid: 22bf2654-8931-411a-ab12-1a6f1dd94f85
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+  theme:
+    - bsi_bund
+id: bsi_bund_copyright
+theme: bsi_bund
+region: legal
+weight: -10
+provider: null
+plugin: config_pages_field
+settings:
+  id: config_pages_field
+  label: Copyright
+  label_display: '0'
+  provider: bsi_custom
+  config_page_type: page_frame
+  config_page_view_mode: full
+  field_name: field_copyright
+visibility: {  }

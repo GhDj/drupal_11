@@ -1,0 +1,21 @@
+uuid: 474c73c1-91b2-497a-9268-164b3646b50b
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_teaser_list_wide_2x
+label: 'BSI Teaser List (wide, 2x)'
+effects:
+  8ef16e97-bb7b-417b-a9fc-8b2d68c10e4a:
+    uuid: 8ef16e97-bb7b-417b-a9fc-8b2d68c10e4a
+    id: image_scale
+    weight: 1
+    data:
+      width: 360
+      height: null
+      upscale: true
+  dc5fe660-5ff0-44e1-88f1-d699c350a3fa:
+    uuid: dc5fe660-5ff0-44e1-88f1-d699c350a3fa
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

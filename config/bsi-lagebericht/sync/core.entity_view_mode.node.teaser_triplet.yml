@@ -1,0 +1,11 @@
+uuid: 25a23565-ea2d-4c0a-ab9e-ac8372b0986d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.teaser_triplet
+label: 'Teaser (Triplet)'
+description: null
+targetEntityType: node
+cache: true

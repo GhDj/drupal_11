@@ -1,0 +1,19 @@
+uuid: 3474bcce-6144-4555-9587-2611af35470b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_title
+    - paragraphs.paragraphs_type.quick_overview
+id: paragraph.quick_overview.field_section_title
+field_name: field_section_title
+entity_type: paragraph
+bundle: quick_overview
+label: Heading
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

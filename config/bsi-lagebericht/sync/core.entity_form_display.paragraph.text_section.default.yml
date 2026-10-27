@@ -1,0 +1,44 @@
+uuid: f5049e4a-71e2-4865-a542-5af571680572
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.text_section.field_jumplink
+    - field.field.paragraph.text_section.field_section_text
+    - field.field.paragraph.text_section.field_section_title
+    - paragraphs.paragraphs_type.text_section
+  module:
+    - text
+id: paragraph.text_section.default
+targetEntityType: paragraph
+bundle: text_section
+mode: default
+content:
+  field_jumplink:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_text:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  translation: true

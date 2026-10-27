@@ -1,0 +1,14 @@
+uuid: 8cbca29b-6a3b-4f75-9782-1bb81131cc72
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.bsi_admin
+  module:
+    - user
+id: user_remove_role_action.bsi_admin
+label: 'Remove the BSI Admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: bsi_admin

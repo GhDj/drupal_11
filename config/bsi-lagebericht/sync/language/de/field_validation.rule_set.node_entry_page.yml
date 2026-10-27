@@ -1,0 +1,13 @@
+field_validation_rules:
+  e6ea5cbb-6314-40a5-8eeb-896f7adbc0c6:
+    data:
+      message: 'Bitte geben Sie eine Überschrift für die Linkbox-Einträge an.'
+    title: 'Verpflichtende Überschrift bei Links'
+  9bd59734-cf58-481f-8e76-10daf43b4abf:
+    title: 'Verpflichtende Überschrift bei Downloads'
+    data:
+      message: 'Bitte geben Sie eine Überschrift für die Linkbox-Downloads an.'
+  b17d5c0d-6a94-458b-85e7-4f3ae4d4a34c:
+    title: 'Textkörper muss leer sein, wenn Bühnenelemente verwendet werden'
+    data:
+      message: 'Dieses Feld sollte leer bleiben, wenn Bühnenelemente verwendet werden.'

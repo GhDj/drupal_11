@@ -1,0 +1,21 @@
+uuid: ed2d0143-4291-4a59-978b-5a2a611677ba
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_opener_image_mobile
+label: 'BSI Opener Image (mobile)'
+effects:
+  185d26d7-eaf8-4756-a66d-4fdd66700bd1:
+    uuid: 185d26d7-eaf8-4756-a66d-4fdd66700bd1
+    id: image_scale
+    weight: 1
+    data:
+      width: 575
+      height: null
+      upscale: true
+  08505814-e659-44f4-96a2-8faa24aaf7b5:
+    uuid: 08505814-e659-44f4-96a2-8faa24aaf7b5
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

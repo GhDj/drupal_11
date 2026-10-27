@@ -1,0 +1,21 @@
+uuid: dc12aa33-50ed-4533-826b-d18e58fad4be
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_opener_stage_narrow
+label: 'BSI Opener Stage (narrow)'
+effects:
+  2d3ef1c6-325f-4e79-b978-3df4b0d397ce:
+    uuid: 2d3ef1c6-325f-4e79-b978-3df4b0d397ce
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 991
+      height: 580
+      anchor: center-center
+  54c1b7a8-1928-4994-a26a-11a348cc0999:
+    uuid: 54c1b7a8-1928-4994-a26a-11a348cc0999
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

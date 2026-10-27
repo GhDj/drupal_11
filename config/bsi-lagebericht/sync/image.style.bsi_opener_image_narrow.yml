@@ -1,0 +1,21 @@
+uuid: 7e487c27-c89a-44be-a4d9-04cc30952bce
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_opener_image_narrow
+label: 'BSI Opener Image (narrow)'
+effects:
+  6389b4c4-1219-4e48-8c93-ea2e62d91ff2:
+    uuid: 6389b4c4-1219-4e48-8c93-ea2e62d91ff2
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 943
+      height: 340
+      anchor: center-center
+  4d3752cd-0fef-44a8-8306-36053ae37b1d:
+    uuid: 4d3752cd-0fef-44a8-8306-36053ae37b1d
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

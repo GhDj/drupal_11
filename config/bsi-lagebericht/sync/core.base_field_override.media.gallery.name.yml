@@ -1,0 +1,20 @@
+uuid: 33add021-8eae-43bd-a014-ba5044af5ec0
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.gallery
+id: media.gallery.name
+field_name: name
+entity_type: media
+bundle: gallery
+label: Title
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string

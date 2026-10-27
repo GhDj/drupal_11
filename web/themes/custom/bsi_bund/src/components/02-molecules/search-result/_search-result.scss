@@ -23,7 +23,7 @@
 
   &__head {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 
   &__list-item {
@@ -57,6 +57,360 @@
         outline: 2px solid;
         outline-color: var(--#{$nsp}-color-base-focus);
         outline-offset: 2px;
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Global search: Figma-matching layout
+// -----------------------------------------------------------------------------
+.view-display-id-block_search_global {
+  // Global search variant — box shadow wraps the opener + search area
+  .#{$nsp}-searchfilter--global {
+    border-radius: 4px;
+    box-shadow: 0 0 4px 0 rgba(33, 35, 40, 0.25);
+    padding: 24px;
+
+    @include breakpoint-lg {
+      padding: 40px;
+    }
+  }
+
+  // Form uses display:contents so its children participate in the
+  // parent flex layout and can be reordered with CSS order.
+  .#{$nsp}-searchfilter__inner > form,
+  .#{$nsp}-searchfilter__inner > .view-filters > form,
+  .#{$nsp}-searchfilter__inner > .views-exposed-form,
+  .#{$nsp}-searchfilter__inner > .view-filters {
+    display: contents;
+  }
+
+  // CSS order: title → result count → searchbar → separator → filters → pills
+  .#{$nsp}-searchfilter__title {
+    @include typography("heading-5");
+    margin: 0;
+    order: 1;
+    width: 100%;
+  }
+
+  .#{$nsp}-searchfilter__text {
+    order: 3;
+  }
+
+  .#{$nsp}-searchbar {
+    order: 2;
+  }
+
+  .#{$nsp}-searchfilter__separator {
+    order: 4;
+  }
+
+  .#{$nsp}-searchfilter__toggle {
+    order: 5;
+  }
+
+  .views-exposed-form-wrapper,
+  .filters-wrapper {
+    order: 5;
+    width: 100%;
+  }
+
+  .#{$nsp}-searchfilter__top {
+    order: 5;
+  }
+
+  .#{$nsp}-searchfilter__actions {
+    order: 5;
+  }
+
+  .#{$nsp}-searchfilter__bottom {
+    order: 6;
+  }
+
+  // Sort — stays inside form for submission, visually moved below the box
+  .sort-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    order: 99;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+  }
+
+  // Searchbar — let the bsi-searchbar component SCSS handle all styling.
+  // Only fix Drupal/Claro-specific overrides here.
+  .#{$nsp}-searchbar {
+    width: 100%;
+
+    // Hide the Drupal label
+    label {
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    // Claro wraps autocomplete in a constraining div
+    .claro-autocomplete {
+      min-width: 0;
+      width: 100%;
+    }
+
+    // Kill Claro's background search icon and border on the input.
+    // Claro targets .form-autocomplete and .form-element (which JS
+    // may re-add after render). Our search icon is the button.
+    input {
+      background-image: none !important;
+      border: 0 !important;
+
+      &:focus, {
+        box-shadow: none !important;
+      }
+
+      &:focus-visible {
+        outline: none !important;
+      }
+
+      &:hover {
+        box-shadow: none !important;
+      }
+
+      &:hover:focus {
+        box-shadow: none !important;
+      }
+    }
+  }
+
+  // Result count text — order:2 places it after searchbar
+  .#{$nsp}-searchfilter__text {
+    font-size: 16px;
+    width: 100%;
+  }
+
+  // Dotted separator — order:3 places it before filters
+  .#{$nsp}-searchfilter__separator {
+    border: 0;
+    border-top: 1px dashed var(--#{$nsp}-color-neutral-250);
+    margin: 0;
+    width: 100%;
+  }
+
+  // Custom multi-select dropdown
+  .#{$nsp}-multiselect {
+    position: relative;
+
+    &__trigger {
+      -webkit-appearance: none;
+      align-items: center;
+      appearance: none;
+      background-color: var(--#{$nsp}-color-blue-150);
+      border: 0;
+      border-radius: 4px;
+      color: var(--#{$nsp}-color-blue-800);
+      cursor: pointer;
+      display: flex;
+      font-size: 16px;
+      justify-content: space-between;
+      padding: var(--#{$nsp}-space-sm) var(--#{$nsp}-space-lg);
+      text-align: left;
+      width: 100%;
+
+      &:focus-visible {
+        outline: 2px solid var(--#{$nsp}-color-base-focus);
+        outline-offset: 2px;
+      }
+
+      &[aria-expanded="true"] {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+
+    &__label {
+      font-weight: 400;
+    }
+
+    &__chevron {
+      border-bottom: 1.5px solid var(--#{$nsp}-color-blue-800);
+      border-right: 1.5px solid var(--#{$nsp}-color-blue-800);
+      flex-shrink: 0;
+      height: 8px;
+      transform: rotate(45deg);
+      transition: transform 0.2s ease;
+      width: 8px;
+    }
+
+    &__trigger[aria-expanded="true"] &__chevron {
+      transform: rotate(-135deg);
+    }
+
+    &__panel {
+      background: var(--#{$nsp}-color-base-white);
+      border: 1px solid var(--#{$nsp}-color-neutral-250);
+      border-radius: 0 0 4px 4px;
+      left: 0;
+      max-height: 240px;
+      overflow-y: auto;
+      padding: var(--#{$nsp}-space-xs) 0;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      z-index: 10;
+    }
+
+    &__option {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      gap: var(--#{$nsp}-space-xs);
+      padding: var(--#{$nsp}-space-3xs) var(--#{$nsp}-space-lg);
+
+      &:hover {
+        background-color: var(--#{$nsp}-color-neutral-50);
+      }
+    }
+
+    &__checkbox {
+      accent-color: var(--#{$nsp}-color-blue-800);
+      cursor: pointer;
+      flex-shrink: 0;
+      height: 18px;
+      width: 18px;
+    }
+
+    &__option-text {
+      font-size: 14px;
+    }
+  }
+
+  // Active filter pills — Figma: pills left, reset right
+  .#{$nsp}-searchfilter__bottom {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--#{$nsp}-space-sm);
+    justify-content: space-between;
+
+    @include breakpoint-md {
+      align-items: center;
+      flex-direction: row;
+    }
+
+    &:empty {
+      display: none;
+    }
+
+    .#{$nsp}-searchfilter__pills {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--#{$nsp}-space-2xs);
+    }
+
+    .#{$nsp}-searchfilter__reset {
+      white-space: nowrap;
+    }
+  }
+
+  // Mobile filter toggle
+  .#{$nsp}-searchfilter__toggle {
+    display: none;
+
+    @media (max-width: 767px) {
+      background: none;
+      border: 1px solid var(--#{$nsp}-color-blue-800);
+      border-radius: 4px;
+      color: var(--#{$nsp}-color-blue-800);
+      cursor: pointer;
+      display: block;
+      font-size: 16px;
+      padding: var(--#{$nsp}-space-xs) var(--#{$nsp}-space-lg);
+      text-align: center;
+      width: 100%;
+
+      &[aria-expanded="false"] ~ .#{$nsp}-searchfilter__top,
+      &[aria-expanded="false"] ~ .#{$nsp}-searchfilter__bottom {
+        display: none;
+      }
+    }
+  }
+
+  // Sort — match Storybook search-result molecule exactly:
+  // .bsi-search-dropdown--sort wraps a <select> with sort SVG icon
+  // on the left (via ::after on the wrapper) and NO native arrow.
+  .#{$nsp}-search-dropdown--sort {
+    // Kill ALL inner ::after pseudo-elements
+    *::after {
+      display: none !important;
+    }
+
+    &::after {
+      top: 55% !important;
+    }
+
+    // Flatten BEF's inner wrapper
+    .form-type--select {
+      position: static;
+    }
+
+    // Hide all labels inside
+    label {
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    // The select must have NO native arrow — Storybook uses
+    // bsi-search-dropdown__select class, Drupal doesn't add it,
+    // so we apply the same styles with high specificity.
+    select,
+    select.form-element,
+    select.form-select {
+      -moz-appearance: none !important;
+      -webkit-appearance: none !important;
+      appearance: none !important;
+      background-color: var(--#{$nsp}-color-blue-150);
+      background-image: none !important;
+      border: 0 !important;
+      border-radius: 4px;
+      color: var(--#{$nsp}-color-blue-800);
+      cursor: pointer;
+      font-size: 16px;
+      padding-block: var(--#{$nsp}-space-sm);
+      // Sort variant: icon on left, text, no right padding for arrow
+      padding-inline: 48px var(--#{$nsp}-space-sm);
+      width: auto;
+
+      &:focus-visible {
+        outline: 2px solid var(--#{$nsp}-color-base-focus);
+        outline-offset: 2px;
+      }
+
+      // Firefox still shows arrow via pseudo — hide it
+      &::-ms-expand {
+        display: none;
+      }
+    }
+  }
+
+  // Result list items
+  .view-content {
+    .views-row {
+      border-top: solid 1px var(--#{$nsp}-color-blue-200);
+      padding: var(--#{$nsp}-space-md) 0;
+    }
+  }
+
+  // Result card — title as bold text (not link style), whole card clickable
+  .#{$nsp}-card--search {
+    .#{$nsp}-card__title {
+      font-weight: 700;
+
+      a {
+        color: inherit;
+        text-decoration: none;
       }
     }
   }

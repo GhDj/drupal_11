@@ -1,0 +1,5 @@
+label: 'Bilder im Explorer anzeigen'
+description: 'Aktivieren Sie das Kontrollkästchen, wenn Sie das entsprechende Explorer-Bild in jedem Seiten-Teaser anzeigen möchten.'
+settings:
+  on_label: Am
+  off_label: Aus

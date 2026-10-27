@@ -1,0 +1,21 @@
+uuid: 55b64a81-e330-4631-90aa-9ec2d959407a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_language
+    - taxonomy.vocabulary.dictionary
+  module:
+    - options
+id: taxonomy_term.dictionary.field_language
+field_name: field_language
+entity_type: taxonomy_term
+bundle: dictionary
+label: Language
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

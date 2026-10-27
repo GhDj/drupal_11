@@ -1,0 +1,14 @@
+uuid: ce663fb6-cedc-4031-9db6-8640033dc051
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.media_directory
+id: taxonomy_vocabulary_media_directory
+entity_type_id: taxonomy_vocabulary
+entity_id: media_directory
+action: access_denied
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

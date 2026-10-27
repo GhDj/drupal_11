@@ -54,7 +54,7 @@ class ViewsHooks {
         if ($handler instanceof Result) {
           $summary = $handler->options['content'];
           if (!empty($summary)) {
-            $view->display_handler->getHandlers('header')[$delta]->options['content'] .= ' ' . $this->t("for your search for %term", ['%term' => $term], ['context' => 'search term']);
+            $view->display_handler->getHandlers('header')[$delta]->options['content'] .= '&nbsp;' . $this->t("for your search for <strong>@term</strong>", ['@term' => $term], ['context' => 'search term']);
           }
         }
       }

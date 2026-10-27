@@ -1,0 +1,24 @@
+uuid: efda1c79-2887-4291-85c3-77f6b5931513
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_text
+    - filter.format.basic
+    - paragraphs.paragraphs_type.introduction
+  module:
+    - text
+id: paragraph.introduction.field_section_text
+field_name: field_section_text
+entity_type: paragraph
+bundle: introduction
+label: Introduction
+description: 'Displayed on the right.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic
+field_type: text_long

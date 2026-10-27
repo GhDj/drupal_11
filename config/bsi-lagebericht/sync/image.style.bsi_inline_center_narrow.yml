@@ -1,0 +1,21 @@
+uuid: f08a88c5-9355-46f3-bbaa-9eee764f2fad
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_inline_center_narrow
+label: 'BSI Inline center (narrow)'
+effects:
+  86c556e2-8597-4c67-a9d9-fafd601464d8:
+    uuid: 86c556e2-8597-4c67-a9d9-fafd601464d8
+    id: image_scale
+    weight: 1
+    data:
+      width: 960
+      height: null
+      upscale: true
+  81d5705c-f276-4bc8-8970-b79aba6afa5e:
+    uuid: 81d5705c-f276-4bc8-8970-b79aba6afa5e
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

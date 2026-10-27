@@ -1,0 +1,24 @@
+uuid: 730f7df2-2888-4b09-be92-af69363a5cd4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_body
+    - media.type.gallery
+  module:
+    - text
+id: media.gallery.field_body
+field_name: field_body
+entity_type: media
+bundle: gallery
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

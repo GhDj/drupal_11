@@ -1,0 +1,51 @@
+uuid: 101bf04a-82df-4065-96e5-32c4bc36e16f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.accordion.field_items
+    - field.field.paragraph.accordion.field_jumplink
+    - field.field.paragraph.accordion.field_section_text
+    - field.field.paragraph.accordion.field_section_title
+    - paragraphs.paragraphs_type.accordion
+  module:
+    - bsi_custom
+    - entity_reference_revisions
+    - text
+id: paragraph.accordion.default
+targetEntityType: paragraph
+bundle: accordion
+mode: default
+content:
+  field_items:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_section_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_section_title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_jumplink: true
+  search_api_excerpt: true

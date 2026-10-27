@@ -1,0 +1,44 @@
+label: 'Suche: Mediathek'
+display:
+  default:
+    display_options:
+      pager:
+        options:
+          tags:
+            first: '« Erste'
+            last: 'Letzte »'
+          expose:
+            items_per_page_label: 'Ergebnisse pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: Sortieren
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      filters:
+        search_api_fulltext:
+          expose:
+            label: Suche
+  block_media:
+    display_title: Mediathek
+    display_options:
+      empty:
+        area_text_custom:
+          content: 'Ihre Suche ergab keine Treffer.'
+      header:
+        result:
+          content: '@start bis @end von @total Ergebnissen'
+      filters:
+        facets_media_bundle:
+          facet:
+            missing_label: andere
+        facets_field_year:
+          expose:
+            label: Jahr
+          facet:
+            missing_label: andere
+  media_attachment:
+    display_title: 'Mediathek (Highlight)'

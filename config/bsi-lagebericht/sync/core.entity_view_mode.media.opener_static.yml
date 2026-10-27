@@ -1,0 +1,11 @@
+uuid: 63c699db-a402-4334-8b0c-c8f543e96fa8
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.opener_static
+label: 'Opener (Static)'
+description: null
+targetEntityType: media
+cache: true

@@ -1,0 +1,47 @@
+display:
+  default:
+    display_options:
+      title: Mitglieder
+      fields:
+        name:
+          label: Benutzer
+        group_roles:
+          label: Rollen
+        changed:
+          label: Aktualisiert
+        created:
+          label: Beigetreten
+        view_group_relationship:
+          text: 'Zuordnung ansehen'
+        edit_group_relationship:
+          text: 'Zuordnung bearbeiten'
+        delete_group_relationship:
+          text: 'Zuordnung löschen'
+        dropbutton:
+          label: Aktionen
+      pager:
+        options:
+          tags:
+            first: '« Anfang'
+            last: 'Ende »'
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: Sortierung
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      arguments:
+        gid:
+          exception:
+            title: Alle
+          title: '{{ arguments.gid|placeholder }} Mitglieder'
+  page_1:
+    display_title: Seite
+    display_options:
+      menu:
+        title: Mitglieder

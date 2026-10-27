@@ -1,0 +1,9 @@
+label: Anzeigevariante
+third_party_settings:
+  bsi_custom:
+    preset_options:
+      timeline: Zeitstrahl
+      progess: Prozessablauf
+default_value:
+  -
+    value: Zeitstrahl

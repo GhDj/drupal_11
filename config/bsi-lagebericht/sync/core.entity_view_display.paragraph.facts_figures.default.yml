@@ -1,0 +1,29 @@
+uuid: a273d28b-c0f8-4f70-b08d-ce4572da7a83
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.facts_figures.field_items
+    - paragraphs.paragraphs_type.facts_figures
+  module:
+    - entity_reference_revisions
+id: paragraph.facts_figures.default
+targetEntityType: paragraph
+bundle: facts_figures
+mode: default
+content:
+  field_items:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  search_api_excerpt: true

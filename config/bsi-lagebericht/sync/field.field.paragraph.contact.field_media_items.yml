@@ -1,0 +1,29 @@
+uuid: 76bd7f16-7b43-41c3-adfc-33a8fef9b42d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_items
+    - media.type.contact
+    - paragraphs.paragraphs_type.contact
+id: paragraph.contact.field_media_items
+field_name: field_media_items
+entity_type: paragraph
+bundle: contact
+label: Contacts
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      contact: contact
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: contact
+field_type: entity_reference

@@ -1,0 +1,35 @@
+label: 'Jahresbericht suchen'
+display:
+  default:
+    display_options:
+      pager:
+        options:
+          tags:
+            first: '« Erste'
+            last: 'Letzte »'
+          expose:
+            items_per_page_label: 'Einträge pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: Sortieren
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      empty:
+        area_text_custom:
+          content: 'Es wurden keine Ergebnisse gefunden.'
+      arguments:
+        node_book:
+          exception:
+            title: Alle
+      header:
+        result:
+          content: '<strong>@start bis @end</strong>&nbsp;von&nbsp;<strong>@total</strong>&nbsp;Ergebnissen'
+  block_search_report_slot:
+    display_title: Suchbericht-Feld
+    display_options:
+      title: Suchbericht-Feld
+      block_description: Suchbericht-Feld

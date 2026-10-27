@@ -1,0 +1,21 @@
+uuid: c347868b-a147-4c72-b52a-e74bb33f1937
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_teaser_triplet_narrow
+label: 'BSI Teaser Triplet (narrow)'
+effects:
+  ebe4c5d9-b313-4abf-aa4e-13e794b73221:
+    uuid: ebe4c5d9-b313-4abf-aa4e-13e794b73221
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 289
+      height: 217
+      anchor: center-center
+  debb0ac4-1a81-48c4-942a-e5c62e35a6d8:
+    uuid: debb0ac4-1a81-48c4-942a-e5c62e35a6d8
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

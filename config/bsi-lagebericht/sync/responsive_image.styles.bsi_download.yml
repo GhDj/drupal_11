@@ -1,0 +1,24 @@
+uuid: 4401a57d-8576-472b-8eff-ddc37fb082f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.bsi_download
+    - image.style.bsi_download_wide_2x
+  theme:
+    - bsi_bund
+id: bsi_download
+label: 'BSI Download'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_download_wide_2x
+    breakpoint_id: bsi_custom.wide
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_download
+    breakpoint_id: bsi_custom.mobile
+    multiplier: 1x
+breakpoint_group: bsi_bund
+fallback_image_style: bsi_download

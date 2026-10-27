@@ -1,0 +1,28 @@
+uuid: 35d2245b-7ada-4429-a699-2023151059ae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - filter.format.basic
+    - filter.format.plain_text
+    - node.type.entry_page
+  module:
+    - text
+id: node.entry_page.body
+field_name: body
+entity_type: node
+bundle: entry_page
+label: Body
+description: 'Stage items and body text are mutually exclusive. The page opener will display the body text only when no stage items are configured.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats:
+    - basic
+    - plain_text
+field_type: text_with_summary

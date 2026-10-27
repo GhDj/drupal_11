@@ -1,0 +1,52 @@
+uuid: af96c1af-53fd-4a38-b59f-d59bab972b0b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sequence_item.field_highlight
+    - field.field.paragraph.sequence_item.field_section_text
+    - field.field.paragraph.sequence_item.field_section_title
+    - field.field.paragraph.sequence_item.field_step_label
+    - paragraphs.paragraphs_type.sequence_item
+  module:
+    - bsi_custom
+    - options
+    - text
+id: paragraph.sequence_item.default
+targetEntityType: paragraph
+bundle: sequence_item
+mode: default
+content:
+  field_highlight:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_section_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_section_title:
+    type: plain_text_formatted
+    label: hidden
+    settings:
+      link_to_entity: false
+      text_format: plain_text
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_step_label:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  search_api_excerpt: true

@@ -1,0 +1,10 @@
+uuid: 551f8098-dca7-48b8-a76e-2aa709c926ee
+langcode: en
+status: true
+dependencies: {  }
+id: explorer_events
+label: 'Explorer - Events'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

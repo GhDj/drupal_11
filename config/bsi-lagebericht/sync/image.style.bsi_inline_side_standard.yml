@@ -1,0 +1,21 @@
+uuid: 48be20ee-307d-4d83-aac1-9706e0acb0f1
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_inline_side_standard
+label: 'BSI Inline side (standard)'
+effects:
+  9ff34661-c212-416a-828a-728b4acfc2f2:
+    uuid: 9ff34661-c212-416a-828a-728b4acfc2f2
+    id: image_scale
+    weight: 1
+    data:
+      width: 480
+      height: null
+      upscale: true
+  0ebc302d-04be-4b4b-a424-76fb67bc18d4:
+    uuid: 0ebc302d-04be-4b4b-a424-76fb67bc18d4
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

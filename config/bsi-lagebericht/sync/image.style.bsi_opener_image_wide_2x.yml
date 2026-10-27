@@ -1,0 +1,15 @@
+uuid: 698e5b23-7769-4bd7-bd4c-5df4e63a8f6d
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_opener_image_wide_2x
+label: 'BSI Opener Image (wide, 2x)'
+effects:
+  73e6ff20-6c7f-44d2-867a-fa3f6a24b636:
+    uuid: 73e6ff20-6c7f-44d2-867a-fa3f6a24b636
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 960
+      height: 680
+      anchor: center-center

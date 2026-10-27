@@ -1,0 +1,19 @@
+uuid: ae4ca367-d525-4bdc-924c-730676e0218f
+langcode: en
+status: true
+dependencies:
+  module:
+    - charts
+    - media
+id: media.field_media_chart
+field_name: field_media_chart
+entity_type: media
+type: chart_config
+settings: {  }
+module: charts
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

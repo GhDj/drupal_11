@@ -1,0 +1,22 @@
+uuid: 29507210-d73f-4c5e-92e7-d608c3dd26d4
+langcode: en
+status: true
+dependencies:
+  theme:
+    - bsi_bund
+_core:
+  default_config_hash: 2L0geP-ixCbCkEpW6BVF6H7vDUZN4ea07_Y9CociQm4
+id: bsi_bund_secondary_local_tasks
+theme: bsi_bund
+region: pre_content
+weight: -9
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

@@ -1,0 +1,20 @@
+uuid: e99475e5-c920-4eca-a419-db28b61a6bc1
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+  theme:
+    - bsi_bund
+id: bsi_bund_top
+theme: bsi_bund
+region: legal
+weight: -9
+provider: null
+plugin: bsi_custom_to_top
+settings:
+  id: bsi_custom_to_top
+  label: To-Top
+  label_display: '0'
+  provider: bsi_custom
+visibility: {  }

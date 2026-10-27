@@ -1,0 +1,20 @@
+uuid: 1dc513c1-4791-40b1-9771-4d0f54064fe9
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - text
+id: media.field_unit
+field_name: field_unit
+entity_type: media
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

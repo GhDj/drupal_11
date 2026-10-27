@@ -1,0 +1,11 @@
+uuid: 01a75008-ccb1-4b10-b08e-02359101bed8
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.teaser_highlight
+label: 'Teaser (Highlight)'
+description: null
+targetEntityType: media
+cache: true

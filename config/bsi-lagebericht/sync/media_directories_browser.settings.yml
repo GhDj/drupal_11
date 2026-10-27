@@ -1,0 +1,47 @@
+_core:
+  default_config_hash: SrDrtlbXZkWBv3dDAQY2ANm8zDLLhthKVrHtb9cwNAM
+remember_sort: false
+remember_directory: false
+remember_sidebar: true
+remember_view_mode: true
+expand_directories_default: true
+remember_expanded_directories: false
+enable_bulk_actions: false
+bulk_action_fields:
+  audio:
+    - name
+  chart:
+    - name
+  contact:
+    - name
+  download:
+    - name
+  gallery:
+    - name
+  image:
+    - name
+    - 'field_media_image:alt'
+    - 'field_media_image:title'
+  publication:
+    - name
+  bits:
+    - name
+  video:
+    - name
+enable_preview_drawer: false
+enable_preview_drawer_in_modal: false
+enable_selection_drawer: true
+show_existing_media_in_drawer: false
+show_directory_counts: true
+enable_combined_upload: false
+combined_upload_media_types: {  }
+page_size: 100
+directory_sort: alphabetical
+experimental_fullscreen: false
+experimental_fab: false
+experimental_topbar_add: false
+translation_types: {  }
+enable_file_link_in_link_form: false
+embed_image_styles: {  }
+media_list_date_format: ''
+details_drawer_date_format: ''

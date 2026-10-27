@@ -1,0 +1,24 @@
+uuid: 64c50d6d-53c5-400f-aff7-2409f25c1200
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_subtitle
+    - filter.format.basic
+    - media.type.contact
+  module:
+    - text
+id: media.contact.field_subtitle
+field_name: field_subtitle
+entity_type: media
+bundle: contact
+label: Subtitle
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic
+field_type: text

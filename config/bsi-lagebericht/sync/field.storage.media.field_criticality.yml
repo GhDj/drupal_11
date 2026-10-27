@@ -1,0 +1,33 @@
+uuid: 77803055-b0ce-47eb-bdd5-88732f9ffc09
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - options
+id: media.field_criticality
+field_name: field_criticality
+entity_type: media
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 1
+      label: Medium
+    -
+      value: 2
+      label: High
+    -
+      value: 3
+      label: 'Very high'
+    -
+      value: 4
+      label: Critical
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

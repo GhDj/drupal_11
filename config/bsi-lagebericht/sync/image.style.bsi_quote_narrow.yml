@@ -1,0 +1,21 @@
+uuid: 8b26b7ec-d9df-4762-a1ca-27d78573ecde
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_quote_narrow
+label: 'BSI Quote (narrow)'
+effects:
+  e20e6bbf-21b5-4eb7-8864-3bd3ba0ed034:
+    uuid: e20e6bbf-21b5-4eb7-8864-3bd3ba0ed034
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 305
+      height: 305
+      anchor: center-center
+  6fd41b9f-17f5-4e88-ae68-1e8a139b695e:
+    uuid: 6fd41b9f-17f5-4e88-ae68-1e8a139b695e
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

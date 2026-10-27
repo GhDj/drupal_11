@@ -1,0 +1,9 @@
+uuid: d47c7b19-a128-4766-8535-517be6a40171
+langcode: en
+status: true
+dependencies: {  }
+name: Abbreviations
+vid: abbreviations
+description: 'Contains terms and their abbreviations, used for automatic detection.'
+weight: 0
+new_revision: true

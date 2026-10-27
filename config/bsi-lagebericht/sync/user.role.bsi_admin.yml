@@ -1,0 +1,198 @@
+uuid: 93bf74ef-a687-49d3-a25d-3ca2ccb734d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_display.node.entry_page.full
+    - filter.format.advanced
+    - media.type.audio
+    - media.type.chart
+    - media.type.contact
+    - media.type.download
+    - media.type.gallery
+    - media.type.image
+    - media.type.publication
+    - media.type.video
+    - node.type.entry_page
+    - node.type.report_page
+    - taxonomy.vocabulary.abbreviations
+    - taxonomy.vocabulary.audiences
+    - taxonomy.vocabulary.dictionary
+    - taxonomy.vocabulary.media_directory
+    - taxonomy.vocabulary.media_types
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.topics
+    - workflows.workflow.nodes
+  module:
+    - asset_injector
+    - block
+    - book
+    - bsi_charts
+    - config_pages
+    - content_moderation
+    - content_translation
+    - contextual
+    - duplicate_node
+    - editoria11y
+    - environment_indicator
+    - file
+    - filter
+    - group
+    - help
+    - layout_builder
+    - locale
+    - media
+    - media_directories_browser
+    - menu_admin_per_menu
+    - metatag
+    - node
+    - node_keep
+    - paragraphs
+    - paragraphs_type_permissions
+    - path
+    - pathauto
+    - rabbit_hole
+    - redirect
+    - role_delegation
+    - short_url
+    - simple_sitemap
+    - system
+    - taxonomy
+    - toolbar
+    - update
+id: bsi_admin
+label: 'BSI Admin'
+weight: -7
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access book list'
+  - 'access config_pages overview'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access environment indicator'
+  - 'access files overview'
+  - 'access group overview'
+  - 'access help pages'
+  - 'access media directories browser'
+  - 'access media overview'
+  - 'access node_keep widget'
+  - 'access site reports'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'add content to books'
+  - 'administer blocks'
+  - 'administer book outlines'
+  - 'administer css assets injector'
+  - 'administer footer menu items'
+  - 'administer header menu items'
+  - 'administer main menu items'
+  - 'administer media'
+  - 'administer meta tags'
+  - 'administer node published status'
+  - 'administer node_keep per node'
+  - 'administer nodes'
+  - 'administer redirects'
+  - 'administer social-media menu items'
+  - 'administer url aliases'
+  - 'administer users'
+  - 'assign bsi_admin role'
+  - 'assign editor role'
+  - 'bsi_chart customize chart axis'
+  - 'bsi_chart customize chart display'
+  - 'bsi_chart use import csv'
+  - 'bulk delete aliases'
+  - 'bulk update aliases'
+  - 'bypass paragraphs type content access'
+  - 'configure editable entry_page node layout overrides'
+  - 'create and edit custom blocks'
+  - 'create content translations'
+  - 'create entry_page content'
+  - 'create media'
+  - 'create new books'
+  - 'create paragraph content view'
+  - 'create report_page content'
+  - 'create terms in abbreviations'
+  - 'create terms in audiences'
+  - 'create terms in dictionary'
+  - 'create terms in media_directory'
+  - 'create terms in media_types'
+  - 'create terms in tags'
+  - 'create terms in topics'
+  - 'create url aliases'
+  - 'delete all revisions'
+  - 'delete all taxonomy revisions'
+  - 'delete any entry_page content'
+  - 'delete any file'
+  - 'delete any media'
+  - 'delete any report_page content'
+  - 'delete content translations'
+  - 'delete entry_page revisions'
+  - 'delete report_page revisions'
+  - 'delete terms in abbreviations'
+  - 'delete terms in audiences'
+  - 'delete terms in dictionary'
+  - 'delete terms in media_directory'
+  - 'delete terms in media_types'
+  - 'delete terms in tags'
+  - 'delete terms in topics'
+  - 'duplicate entry_page content'
+  - 'duplicate report_page content'
+  - 'edit any entry_page content'
+  - 'edit any report_page content'
+  - 'edit config_pages entity'
+  - 'edit entity sitemap settings'
+  - 'edit short_url'
+  - 'edit terms in abbreviations'
+  - 'edit terms in audiences'
+  - 'edit terms in dictionary'
+  - 'edit terms in media_directory'
+  - 'edit terms in media_types'
+  - 'edit terms in tags'
+  - 'edit terms in topics'
+  - 'manage editoria11y results'
+  - 'mark as ok in editoria11y'
+  - 'rabbit hole administer media'
+  - 'rabbit hole bypass media'
+  - 'rabbit hole bypass taxonomy_term'
+  - 'reorder book pages'
+  - 'revert all revisions'
+  - 'revert all taxonomy revisions'
+  - 'revert any audio media revisions'
+  - 'revert any chart media revisions'
+  - 'revert any contact media revisions'
+  - 'revert any download media revisions'
+  - 'revert any gallery media revisions'
+  - 'revert any image media revisions'
+  - 'revert any publication media revisions'
+  - 'revert any video media revisions'
+  - 'select account cancellation method'
+  - 'translate interface'
+  - 'update any media'
+  - 'update content translations'
+  - 'update paragraph content view'
+  - 'use nodes transition create_new_draft'
+  - 'use nodes transition publish'
+  - 'use nodes transition reject'
+  - 'use nodes transition request_approval'
+  - 'use nodes transition request_deletion'
+  - 'use nodes transition revise'
+  - 'use nodes transition unpublish'
+  - 'use nodes transition withdraw'
+  - 'use text format advanced'
+  - 'view all revisions'
+  - 'view all taxonomy revisions'
+  - 'view any unpublished content'
+  - 'view config_pages entity'
+  - 'view editoria11y checker'
+  - 'view term revisions in abbreviations'
+  - 'view term revisions in audiences'
+  - 'view term revisions in dictionary'
+  - 'view term revisions in media_directory'
+  - 'view term revisions in media_types'
+  - 'view term revisions in tags'
+  - 'view term revisions in topics'
+  - 'view the administration theme'
+  - 'view unpublished paragraphs'
+  - 'view update notifications'

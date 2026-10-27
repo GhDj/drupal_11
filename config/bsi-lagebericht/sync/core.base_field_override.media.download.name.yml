@@ -1,0 +1,20 @@
+uuid: 842c6dd6-69e8-46b4-a256-8d5b47642394
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.download
+id: media.download.name
+field_name: name
+entity_type: media
+bundle: download
+label: Title
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string

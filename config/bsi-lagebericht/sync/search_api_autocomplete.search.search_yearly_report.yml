@@ -1,0 +1,31 @@
+uuid: 296182cc-5595-4e02-8e13-052b876614bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.default
+    - views.view.search_yearly_report
+  module:
+    - search_api_solr_autocomplete
+    - views
+id: search_yearly_report
+label: 'Search: Yearly Report'
+index_id: default
+suggester_settings:
+  search_api_solr_terms:
+    fields: {  }
+suggester_weights:
+  search_api_solr_terms: 0
+suggester_limits: {  }
+search_settings:
+  'views:search_yearly_report':
+    displays:
+      default: true
+      selected: {  }
+options:
+  limit: 10
+  min_length: 1
+  show_count: false
+  delay: null
+  submit_button_selector: ':submit'
+  autosubmit: true

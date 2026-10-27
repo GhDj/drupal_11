@@ -1,0 +1,73 @@
+uuid: 7bd908b0-8f69-41bf-bc24-bccebaa59eae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_items
+    - paragraphs.paragraphs_type.definition_item
+    - paragraphs.paragraphs_type.tabs
+  module:
+    - entity_reference_revisions
+id: paragraph.tabs.field_items
+field_name: field_items
+entity_type: paragraph
+bundle: tabs
+label: Elements
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      definition_item: definition_item
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 7
+        enabled: false
+      banner:
+        weight: 17
+        enabled: false
+      definition_item:
+        weight: 9
+        enabled: true
+      downloads:
+        weight: 19
+        enabled: false
+      facts_figures:
+        weight: 10
+        enabled: false
+      introduction:
+        weight: 21
+        enabled: false
+      key_facts:
+        weight: 22
+        enabled: false
+      media:
+        weight: 23
+        enabled: false
+      quick_overview:
+        weight: 24
+        enabled: false
+      quote:
+        weight: 25
+        enabled: false
+      table_section:
+        weight: 11
+        enabled: false
+      tabs:
+        weight: 27
+        enabled: false
+      teaser_single:
+        weight: 28
+        enabled: false
+      text_section:
+        weight: 12
+        enabled: false
+      view:
+        weight: 30
+        enabled: false
+field_type: entity_reference_revisions

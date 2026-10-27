@@ -1,0 +1,26 @@
+uuid: 7fc689fe-2e8a-406e-ad1f-db602143a535
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - system
+  theme:
+    - bsi_bund
+id: bsi_bund_sticky_contact
+theme: bsi_bund
+region: pre_content
+weight: -7
+provider: null
+plugin: bsi_custom_sticky_contact
+settings:
+  id: bsi_custom_sticky_contact
+  label: 'Sticky contact (contact form)'
+  label_display: '0'
+  provider: bsi_custom
+  default: 29
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/kontakt\r\n/contact"

@@ -1,0 +1,34 @@
+uuid: 2cfe21d9-6d22-4e49-adc0-5eda495b9b27
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_file
+    - media.type.download
+  module:
+    - content_translation
+    - file
+third_party_settings:
+  content_translation:
+    translation_sync:
+      target_id: target_id
+      description: description
+      display: '0'
+id: media.download.field_media_file
+field_name: field_media_file
+entity_type: media
+bundle: download
+label: File
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: 'download/[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'pdf doc docx xls xlsx zip asc txt crt crl 7z tar tgz cer cerm perm mp3 mp4 pgp gpg html jpg png tif svg gif'
+  max_filesize: ''
+  description_field: true
+field_type: file

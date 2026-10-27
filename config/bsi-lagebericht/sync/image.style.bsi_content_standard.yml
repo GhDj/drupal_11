@@ -1,0 +1,21 @@
+uuid: 14082091-b0c0-447e-b74a-22aacf2db4dd
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_content_standard
+label: 'BSI Content (standard)'
+effects:
+  424a7a3c-e90d-49d0-b8a6-77d707b1a77b:
+    uuid: 424a7a3c-e90d-49d0-b8a6-77d707b1a77b
+    id: image_scale
+    weight: 1
+    data:
+      width: 1024
+      height: null
+      upscale: true
+  22c7c0e1-bbfc-445e-8c7d-9ae04ef645cb:
+    uuid: 22c7c0e1-bbfc-445e-8c7d-9ae04ef645cb
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

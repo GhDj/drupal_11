@@ -1,0 +1,11 @@
+uuid: f9804b61-6458-416a-a076-095b4ee49142
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.inline_side
+label: 'Inline (side)'
+description: 'A media element within a CKEditor textfield to be displayed to the side alongside other text content.'
+targetEntityType: media
+cache: true

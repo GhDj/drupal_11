@@ -1,0 +1,18 @@
+uuid: c825ce1c-e97a-4756-805b-7e701c709a0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.abbreviations
+id: taxonomy_term.abbreviations.name
+field_name: name
+entity_type: taxonomy_term
+bundle: abbreviations
+label: Abbreviation
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

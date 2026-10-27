@@ -1,0 +1,11 @@
+uuid: b8b55d81-7a33-4485-9c7c-b9ac253b061c
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.opener_hero
+label: 'Opener (Hero)'
+description: null
+targetEntityType: media
+cache: true

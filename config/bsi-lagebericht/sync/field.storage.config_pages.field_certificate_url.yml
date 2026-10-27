@@ -1,0 +1,19 @@
+uuid: c0fc191f-412b-4f64-bc24-8a71e89efe5a
+langcode: en
+status: true
+dependencies:
+  module:
+    - config_pages
+    - link
+id: config_pages.field_certificate_url
+field_name: field_certificate_url
+entity_type: config_pages
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,21 @@
+uuid: a2427b62-6505-45d2-b22a-29ce53a5746c
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_inline_side_wide_2x
+label: 'BSI Inline side (wide, 2x)'
+effects:
+  b67f4a63-f7dc-4cc5-bd3c-def546caf109:
+    uuid: b67f4a63-f7dc-4cc5-bd3c-def546caf109
+    id: image_scale
+    weight: 1
+    data:
+      width: 960
+      height: null
+      upscale: true
+  07132a8d-4bc1-46fa-bb36-5e08c3ff8ecf:
+    uuid: 07132a8d-4bc1-46fa-bb36-5e08c3ff8ecf
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

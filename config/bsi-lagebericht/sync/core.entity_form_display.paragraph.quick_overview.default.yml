@@ -1,0 +1,56 @@
+uuid: c7a2884d-cf1c-4902-bf60-a0a53a16969b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.quick_overview.field_items
+    - field.field.paragraph.quick_overview.field_jumplink
+    - field.field.paragraph.quick_overview.field_section_title
+    - paragraphs.paragraphs_type.quick_overview
+  module:
+    - paragraphs
+id: paragraph.quick_overview.default
+targetEntityType: paragraph
+bundle: quick_overview
+mode: default
+content:
+  field_items:
+    type: paragraphs
+    weight: 2
+    region: content
+    settings:
+      title: Element
+      title_plural: Elements
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        convert: '0'
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_jumplink:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  translation: true

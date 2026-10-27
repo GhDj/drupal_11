@@ -1,0 +1,44 @@
+uuid: b439ffe4-9307-4ebc-a268-bf98cf66bf35
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.introduction.field_highlight
+    - field.field.paragraph.introduction.field_section_text
+    - paragraphs.paragraphs_type.introduction
+  module:
+    - maxlength
+    - text
+id: paragraph.introduction.default
+targetEntityType: paragraph
+bundle: introduction
+mode: default
+content:
+  field_highlight:
+    type: text_textarea
+    weight: 0
+    region: content
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings:
+      maxlength:
+        maxlength_js: null
+        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+        maxlength_js_enforce: false
+  field_section_text:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings:
+      maxlength:
+        maxlength_js: null
+        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+        maxlength_js_enforce: false
+hidden:
+  created: true
+  status: true
+  translation: true

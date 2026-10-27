@@ -1,0 +1,10 @@
+uuid: 22ee8bd9-dfa8-4394-8c96-e0bfddbbb2e3
+langcode: en
+status: true
+dependencies: {  }
+id: facts_figures
+label: 'Facts & Figures'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -1,0 +1,21 @@
+uuid: f4dc378f-804e-401e-8c73-bfdbdfcf71e6
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_inline_center_wide_2x
+label: 'BSI Inline center (wide, 2x)'
+effects:
+  4dd3fe6d-9601-4067-bfb2-1c7881b506a4:
+    uuid: 4dd3fe6d-9601-4067-bfb2-1c7881b506a4
+    id: image_scale
+    weight: 1
+    data:
+      width: 1920
+      height: null
+      upscale: true
+  37a58173-b108-4f8a-a80a-da1a35cbc910:
+    uuid: 37a58173-b108-4f8a-a80a-da1a35cbc910
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

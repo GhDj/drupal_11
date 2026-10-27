@@ -1,0 +1,23 @@
+uuid: 0b9a0cf6-2244-4c0c-bf1c-99cf8fbd8e97
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.page_frame
+    - field.storage.config_pages.field_suggestions
+  module:
+    - link
+id: config_pages.page_frame.field_suggestions
+field_name: field_suggestions
+entity_type: config_pages
+bundle: page_frame
+label: Suggestions
+description: 'Search quick links to be displayed below the search bar in the top navigation.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 1
+field_type: link

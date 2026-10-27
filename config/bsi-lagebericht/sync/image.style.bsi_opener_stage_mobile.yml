@@ -1,0 +1,21 @@
+uuid: 4e8139ef-e0ef-49d0-bd7c-a3130a09f0d0
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_opener_stage_mobile
+label: 'BSI Opener Stage (mobile)'
+effects:
+  e0acde9a-e557-4779-8f3c-d044329af43f:
+    uuid: e0acde9a-e557-4779-8f3c-d044329af43f
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 575
+      height: 580
+      anchor: center-center
+  e9aebe72-b51f-4c4f-9414-664df43b2ca5:
+    uuid: e9aebe72-b51f-4c4f-9414-664df43b2ca5
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

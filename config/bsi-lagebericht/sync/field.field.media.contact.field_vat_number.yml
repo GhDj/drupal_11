@@ -1,0 +1,19 @@
+uuid: b1ed22ac-edb6-4457-9ae5-03a5fdc43eda
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_vat_number
+    - media.type.contact
+id: media.contact.field_vat_number
+field_name: field_vat_number
+entity_type: media
+bundle: contact
+label: 'VAT number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

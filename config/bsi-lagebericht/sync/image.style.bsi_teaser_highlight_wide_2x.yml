@@ -1,0 +1,21 @@
+uuid: d67462db-2598-4ace-bf45-fa1ff33615f5
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_teaser_highlight_wide_2x
+label: 'BSI Teaser Highlight (wide, 2x)'
+effects:
+  f454c914-f802-4fd7-b339-72e7482f3cc9:
+    uuid: f454c914-f802-4fd7-b339-72e7482f3cc9
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1132
+      height: 566
+      anchor: center-center
+  7282f0bd-c59d-4bfa-bbf4-820b2b2c8194:
+    uuid: 7282f0bd-c59d-4bfa-bbf4-820b2b2c8194
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

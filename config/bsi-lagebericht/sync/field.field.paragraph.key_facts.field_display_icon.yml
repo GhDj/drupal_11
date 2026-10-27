@@ -1,0 +1,23 @@
+uuid: 71575619-2bac-42f5-a25f-f26f39197277
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_display_icon
+    - paragraphs.paragraphs_type.key_facts
+id: paragraph.key_facts.field_display_icon
+field_name: field_display_icon
+entity_type: paragraph
+bundle: key_facts
+label: 'Display icon'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

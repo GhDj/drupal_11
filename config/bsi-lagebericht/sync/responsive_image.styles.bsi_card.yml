@@ -1,0 +1,36 @@
+uuid: 2653148e-80c4-444b-a3a9-6b07189da625
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.bsi_card_mobile
+    - image.style.bsi_card_narrow
+    - image.style.bsi_card_wide
+    - image.style.bsi_card_wide_2x
+  theme:
+    - bsi_bund
+id: bsi_card
+label: 'BSI Card'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_card_wide
+    breakpoint_id: bsi_custom.wide
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_card_wide_2x
+    breakpoint_id: bsi_custom.wide
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_card_narrow
+    breakpoint_id: bsi_custom.narrow
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: bsi_card_mobile
+    breakpoint_id: bsi_custom.mobile
+    multiplier: 1x
+breakpoint_group: bsi_bund
+fallback_image_style: bsi_card_narrow

@@ -1,0 +1,21 @@
+uuid: f2793cd8-b2c3-46dc-abc9-44b8dc1cdfb7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_publication_date
+    - media.type.publication
+  module:
+    - datetime
+id: media.publication.field_publication_date
+field_name: field_publication_date
+entity_type: media
+bundle: publication
+label: 'Authored on'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

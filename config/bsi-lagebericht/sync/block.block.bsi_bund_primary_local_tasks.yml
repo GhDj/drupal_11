@@ -1,0 +1,22 @@
+uuid: 0bef91cb-7f9b-46ea-b7f8-0484643840aa
+langcode: en
+status: true
+dependencies:
+  theme:
+    - bsi_bund
+_core:
+  default_config_hash: ACjBZI5shAMiiUpsz-inLYVXDqNNXRnSzAWV3kV_8Hw
+id: bsi_bund_primary_local_tasks
+theme: bsi_bund
+region: pre_content
+weight: -10
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Primary tabs'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: false
+visibility: {  }

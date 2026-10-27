@@ -1,0 +1,41 @@
+uuid: 9054281f-1da8-4ff8-90d4-bb9b9b366be1
+langcode: en
+status: true
+dependencies: {  }
+name: paragraph_tile_item
+label: 'paragraph tile_item validation'
+entity_type: paragraph
+bundle: tile_item
+field_validation_rules:
+  dbffc191-95e3-470c-8569-89d9fb9f9b15:
+    id: null_constraint_rule
+    title: 'Highlight is NULL'
+    data:
+      validate_mode: default
+      message: 'Populate either Highlight or Media, not both.'
+    weight: 1
+    uuid: dbffc191-95e3-470c-8569-89d9fb9f9b15
+    field_name: field_highlight
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_media
+      operator: not_empty
+      value: ''
+  a05213f2-b235-48a6-92e6-ac2ce9f025f5:
+    id: null_constraint_rule
+    title: 'Media is NULL'
+    data:
+      validate_mode: default
+      message: 'Populate either Highlight or Media, not both.'
+    weight: 2
+    uuid: a05213f2-b235-48a6-92e6-ac2ce9f025f5
+    field_name: field_media
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: field_highlight
+      operator: not_empty
+      value: ''

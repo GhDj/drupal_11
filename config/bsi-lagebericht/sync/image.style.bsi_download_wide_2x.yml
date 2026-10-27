@@ -1,0 +1,21 @@
+uuid: 7ed027f8-b601-4e07-9d82-46b5a3c8953a
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_download_wide_2x
+label: 'BSI Download (wide, 2x)'
+effects:
+  a4412b02-54c0-4008-bd70-4c512c38b3eb:
+    uuid: a4412b02-54c0-4008-bd70-4c512c38b3eb
+    id: image_scale
+    weight: 1
+    data:
+      width: 304
+      height: 304
+      upscale: true
+  cc93c57e-c13b-4652-9ab1-fc49c0ec87c1:
+    uuid: cc93c57e-c13b-4652-9ab1-fc49c0ec87c1
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

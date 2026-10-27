@@ -1,0 +1,75 @@
+uuid: ae8d07e0-dbc9-4b4f-90ff-652ae64de100
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.full
+    - field.field.media.audio.field_body
+    - field.field.media.audio.field_copyright
+    - field.field.media.audio.field_media_source
+    - field.field.media.audio.field_tags
+    - media.type.audio
+    - responsive_image.styles.bsi_content
+  module:
+    - layout_builder
+    - media_remote_file
+    - responsive_image
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.audio.full
+targetEntityType: media
+bundle: audio
+mode: full
+content:
+  field_body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_copyright:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_media_source:
+    type: remote_file_audio
+    label: hidden
+    settings:
+      controls: true
+      autoplay: false
+      loop: false
+      multiple_file_display_type: sources
+      track_field: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  thumbnail:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: bsi_content
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_tags: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  uid: true

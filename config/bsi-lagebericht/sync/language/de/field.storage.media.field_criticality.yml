@@ -1,0 +1,10 @@
+settings:
+  allowed_values:
+    -
+      label: Mittel
+    -
+      label: Hoch
+    -
+      label: 'Sehr hoch'
+    -
+      label: Kritisch

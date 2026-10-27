@@ -1,0 +1,17 @@
+uuid: 0d9ad724-576b-47c7-8cb2-48e4dd6c9fd0
+langcode: en
+status: true
+dependencies: {  }
+id: page_frame
+label: 'Page frame'
+token: false
+context:
+  show_warning: true
+  group:
+    language: true
+  fallback:
+    language: en
+menu:
+  path: /admin/config/system/page-frame
+  weight: 0
+  description: "Global settings that apply to every page's header and footer."

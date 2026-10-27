@@ -1,0 +1,53 @@
+uuid: 7e18c3a8-962c-4b73-9e3b-570565ce2454
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.contact.field_address
+    - field.field.media.contact.field_availability
+    - field.field.media.contact.field_geolocation
+    - field.field.media.contact.field_icon
+    - field.field.media.contact.field_mail
+    - field.field.media.contact.field_phone
+    - field.field.media.contact.field_social_media
+    - field.field.media.contact.field_vat_number
+    - field.field.media.contact.field_website
+    - media.type.contact
+id: media.contact.media_library
+targetEntityType: media
+bundle: contact
+mode: media_library
+content:
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  changed: true
+  created: true
+  field_address: true
+  field_availability: true
+  field_geolocation: true
+  field_icon: true
+  field_mail: true
+  field_phone: true
+  field_social_media: true
+  field_vat_number: true
+  field_website: true
+  path: true
+  status: true
+  thumbnail: true
+  translation: true
+  uid: true

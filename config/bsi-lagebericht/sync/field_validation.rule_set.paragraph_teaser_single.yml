@@ -1,0 +1,73 @@
+uuid: 9f4c2e39-4761-4356-80f9-545d8807e3ef
+langcode: en
+status: true
+dependencies: {  }
+name: paragraph_teaser_single
+label: 'paragraph teaser_single validation'
+entity_type: paragraph
+bundle: teaser_single
+field_validation_rules:
+  1639004a-af16-4a72-8edf-cface70896dd:
+    id: not_null_constraint_rule
+    title: 'Require image position in field_paragraphs'
+    data:
+      validate_mode: default
+      message: 'This value should not be null.'
+    weight: -7
+    uuid: 1639004a-af16-4a72-8edf-cface70896dd
+    field_name: field_display_variant
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: parent_field_name
+      operator: equals
+      value: field_paragraphs
+  1f996be1-c6b0-4beb-ad58-ecc59bd94e23:
+    id: not_null_constraint_rule
+    title: 'Require image in field_paragraphs'
+    data:
+      validate_mode: default
+      message: 'This value should not be null.'
+    weight: -8
+    uuid: 1f996be1-c6b0-4beb-ad58-ecc59bd94e23
+    field_name: field_media
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: parent_field_name
+      operator: equals
+      value: field_paragraphs
+  0e228d94-8471-463a-bee3-c45d043fa9d5:
+    id: not_blank_constraint_rule
+    title: 'Require teaser text in field_paragraphs'
+    data:
+      validate_mode: default
+      message: 'This value should not be blank.'
+    weight: -10
+    uuid: 0e228d94-8471-463a-bee3-c45d043fa9d5
+    field_name: field_section_text
+    column: value
+    error_message: ''
+    roles: {  }
+    condition:
+      field: parent_field_name
+      operator: equals
+      value: field_paragraphs
+  dc8fcb72-aff3-4a52-8305-18a4d5f617f2:
+    id: not_null_constraint_rule
+    title: 'Require image in field_stage_items'
+    data:
+      validate_mode: default
+      message: 'This value should not be null.'
+    weight: -9
+    uuid: dc8fcb72-aff3-4a52-8305-18a4d5f617f2
+    field_name: field_media
+    column: ''
+    error_message: ''
+    roles: {  }
+    condition:
+      field: parent_field_name
+      operator: equals
+      value: field_stage_items

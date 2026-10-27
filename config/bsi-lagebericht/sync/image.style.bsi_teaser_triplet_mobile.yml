@@ -1,0 +1,21 @@
+uuid: ccec0299-1039-489f-a5d4-e821d698a503
+langcode: en
+status: true
+dependencies: {  }
+name: bsi_teaser_triplet_mobile
+label: 'BSI Teaser Triplet (mobile)'
+effects:
+  caad14a2-ba88-492d-b34a-cb7e2e1abcc0:
+    uuid: caad14a2-ba88-492d-b34a-cb7e2e1abcc0
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 544
+      height: 306
+      anchor: center-center
+  4238e8e2-a585-4d74-bb6a-fec8ce6c2bb8:
+    uuid: 4238e8e2-a585-4d74-bb6a-fec8ce6c2bb8
+    id: image_convert_avif
+    weight: 2
+    data:
+      extension: webp

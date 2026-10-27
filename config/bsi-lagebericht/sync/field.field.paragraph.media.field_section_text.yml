@@ -1,0 +1,22 @@
+uuid: c579410e-1e8c-4414-b7da-5a8884b82393
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_text
+    - paragraphs.paragraphs_type.media
+  module:
+    - text
+id: paragraph.media.field_section_text
+field_name: field_section_text
+entity_type: paragraph
+bundle: media
+label: Introduction
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

@@ -1,0 +1,9 @@
+uuid: a315a4d5-8909-4f52-870c-c234a363bf6d
+langcode: en
+status: true
+dependencies: {  }
+name: 'Media directory'
+vid: media_directory
+description: 'Used to group media entities into a directory'
+weight: 0
+new_revision: false

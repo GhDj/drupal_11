@@ -1,0 +1,11 @@
+uuid: 875da3f7-e626-4e7e-9747-215c9e1cb9c1
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.quote
+label: Quote
+description: null
+targetEntityType: media
+cache: true

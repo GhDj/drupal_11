@@ -1,0 +1,17 @@
+field_validation_rules:
+  1639004a-af16-4a72-8edf-cface70896dd:
+    title: 'Verpflichtende Bild-Position in field_paragraphs'
+    data:
+      message: 'Dieser Wert sollte nicht leer sein.'
+  1f996be1-c6b0-4beb-ad58-ecc59bd94e23:
+    title: 'Verpflichtendes Bild in field_paragraphs'
+    data:
+      message: 'Dieser Wert sollte nicht leer sein.'
+  0e228d94-8471-463a-bee3-c45d043fa9d5:
+    title: 'Verpflichtender Einleitungstext in field_paragraphs'
+    data:
+      message: 'Dieser Wert sollte nicht leer sein.'
+  dc8fcb72-aff3-4a52-8305-18a4d5f617f2:
+    title: 'Verpflichtendes Bild in field_stage_items'
+    data:
+      message: 'Dieser Wert sollte nicht leer sein.'

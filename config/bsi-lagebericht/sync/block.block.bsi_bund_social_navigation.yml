@@ -1,0 +1,27 @@
+uuid: 54c8ecf0-a05e-4c0f-96ae-484091d172a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.social-media
+  module:
+    - menu_item_fields
+  theme:
+    - bsi_bund
+id: bsi_bund_social_navigation
+theme: bsi_bund
+region: footer
+weight: -7
+provider: null
+plugin: 'menu_item_fields:social-media'
+settings:
+  id: 'menu_item_fields:social-media'
+  label: 'Follow us'
+  label_display: visible
+  provider: menu_item_fields
+  level: '1'
+  depth: '1'
+  expand_all_items: 0
+  view_mode: default
+  view_mode_override_field: _none
+visibility: {  }
