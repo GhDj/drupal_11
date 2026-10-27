@@ -66,6 +66,7 @@ $cover_file = File::create([
 $cover_file->save();
 
 // --- 3. Create Publication media (with cover thumbnail + PDF) ---
+// First save creates the entity (media_thumbnails auto-generates a generic icon).
 $publication = Media::create([
   'bundle' => 'publication',
   'name' => 'BSIR-131 Test Publikation - BSI Magazin',
@@ -80,12 +81,36 @@ $publication = Media::create([
     'value' => 'Dies ist eine Testpublikation fuer BSIR-131. Das Vorschaubild sollte im Hochformat (Portrait) angezeigt werden, nicht quadratisch zugeschnitten.',
     'format' => 'plain_text',
   ],
-  'thumbnail' => [
-    'target_id' => $cover_file->id(),
-    'alt' => 'BSI Magazin Cover',
-  ],
 ]);
 $publication->save();
+
+// Override the auto-generated thumbnail with our portrait cover image.
+// media_thumbnails only generates on creation (no_thumbnail_update: true),
+// so this second save preserves our custom thumbnail.
+$publication->set('thumbnail', [
+  'target_id' => $cover_file->id(),
+  'alt' => 'BSI Magazin Cover',
+]);
+$publication->save();
+
+// Verify the thumbnail was set correctly.
+$thumb = $publication->get('thumbnail')->entity;
+if ($thumb && $thumb->id() == $cover_file->id()) {
+  echo "  -> Thumbnail set to cover image (portrait 400x600): OK\n";
+} else {
+  // Fallback: force update via database if hooks interfere.
+  echo "  -> Thumbnail override failed, forcing via DB update...\n";
+  \Drupal::database()->update('media_field_data')
+    ->fields(['thumbnail__target_id' => $cover_file->id(), 'thumbnail__alt' => 'BSI Magazin Cover'])
+    ->condition('mid', $publication->id())
+    ->execute();
+  \Drupal::database()->update('media_field_revision')
+    ->fields(['thumbnail__target_id' => $cover_file->id(), 'thumbnail__alt' => 'BSI Magazin Cover'])
+    ->condition('mid', $publication->id())
+    ->execute();
+  \Drupal::entityTypeManager()->getStorage('media')->resetCache([$publication->id()]);
+  echo "  -> Thumbnail forced via DB: OK\n";
+}
 
 echo "Created Publication media: " . $publication->id() . " (" . $publication->label() . ")\n";
 
