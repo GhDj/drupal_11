@@ -46,7 +46,7 @@
     align-items: stretch;
     background: var(--#{$nsp}-downloads-media-background);
     display: flex;
-    height: var(--#{$nsp}-downloads-media-size);
+    min-height: var(--#{$nsp}-downloads-media-size);
     padding: var(--#{$nsp}-downloads-media-padding);
     width: var(--#{$nsp}-downloads-media-size);
   }
