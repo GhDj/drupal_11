@@ -21,6 +21,7 @@ dependencies:
     - path
     - role_delegation
     - short_url
+    - tfa
 id: csn_admin
 label: 'CSN Admin'
 weight: -5
@@ -51,6 +52,7 @@ permissions:
   - 'duplicate page content'
   - 'duplicate report_page content'
   - 'edit short_url'
+  - 'setup own tfa'
   - 'update paragraph content view'
   - 'use nodes transition create_new_draft'
   - 'use nodes transition request_approval'

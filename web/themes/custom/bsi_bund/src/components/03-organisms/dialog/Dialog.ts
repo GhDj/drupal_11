@@ -45,6 +45,12 @@ const Dialog = (): void => {
     // Reposition chart dialogs after content size changes.
     if (!dialog.classList.contains("bsi-chart-dialog")) return;
 
+    //close dialog, one click not in dialog
+    const overlay = document.querySelector<HTMLElement>(".ui-widget-overlay");
+    overlay?.addEventListener("click", () => {
+      Drupal.dialog(element).close();
+    });
+
     element.addEventListener("click", clickEvent => {
       const target = clickEvent.target;
 

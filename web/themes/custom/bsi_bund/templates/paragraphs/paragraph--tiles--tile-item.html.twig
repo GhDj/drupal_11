@@ -46,12 +46,9 @@
 {% set links = content.field_links ?? null %}
 {% set variant = paragraph.field_display_variant.value %}
 
-{# Generate the lightbox URL for chart media. #}
-{% set has_more = (paragraph.field_body.summary and paragraph.field_body.value)
-  or (body
-    and paragraph.field_body.value starts with (body ~ '')
-    and paragraph.field_body.value|length > body|length
-  )
+{# Show [more] when summary is explicitly provided OR when body text was truncated. #}
+{% set has_more = paragraph.field_body.summary
+  or paragraph.field_body.value|striptags|trim|length > 300
 %}
 {% set lightbox_url = paragraph.field_media.entity or has_more
   ? path('bsi_media.lightbox', { paragraph: paragraph.id() })
@@ -62,7 +59,7 @@
   'bsi-card',
   'bsi-block',
   'paragraph',
-  media ? 'bsi-card--no-full-link',
+  (media or has_more) ? 'bsi-card--no-full-link',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
   not paragraph.isPublished() ? 'paragraph--unpublished',
@@ -90,8 +87,27 @@
     {% endblock %}
 
     {% if media %}
-      <div class="bsi-card__image">
-        {{ content.field_media }}
+      <div class="bsi-card__image bsi-card__image--chart">
+        {% if lightbox_url %}
+          {{ attach_library('core/drupal.ajax') }}
+          {{ attach_library('core/drupal.dialog.ajax') }}
+
+          {{ content.field_media }}
+          <a
+            class="use-ajax bsi-card__link--lightbox"
+            href="{{ lightbox_url }}"
+            data-dialog-type="modal"
+          >
+            {% include '@bsi_bund/components/icon.twig' with {
+              name: "maximize",
+              extra_classes: "bsi-card__icon-lightbox",
+              decorative: true,
+            } %}
+          </a>
+      {% else %}
+          {{ content.field_media }}
+      {% endif %}
+
       </div>
     {% endif %}
 
@@ -110,7 +126,7 @@
 
                 {# Check if full text are available. #}
                 {% if has_more and lightbox_url %}
-                  <a class="bsi-card__more-link use-ajax" href="{{ lightbox_url }}">
+                  <a class="bsi-card__more-link use-ajax" href="{{ lightbox_url }}" data-dialog-type="modal">
                     {{"[more]"|t}}
 
                     <span class="visually-hidden">

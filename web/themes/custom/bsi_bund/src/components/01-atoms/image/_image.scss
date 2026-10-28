@@ -28,7 +28,13 @@
     }
   }
 
-  &__copyright{
+  &__copyright {
     margin-top: var(--#{$nsp}-space-4xs);
+  }
+
+  [data-theme="blue-900"] & {
+    .#{$nsp}-image__caption {
+      color: var(--bsi-color-base-white);
+    }
   }
 }

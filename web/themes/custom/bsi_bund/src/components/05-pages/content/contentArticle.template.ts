@@ -11,6 +11,7 @@ import { blockTemplate } from "@organisms/block/block.template";
 import { textTemplate } from "@atoms/text/text.template";
 import { bodytextExampleContent } from "@atoms/text/text.constants";
 import { openerTemplate } from "@organisms/opener/opener.template";
+import { lastUpdatedTemplate } from "@molecules/last-updated/last-updated.template.ts";
 
 // Return the HTML string for the Content page
 export function contentArticleTemplate(): string {
@@ -30,6 +31,10 @@ export function contentArticleTemplate(): string {
             bodytext: bodytextExampleContent
           }),
           contentIndented: true
+        })}
+        ${lastUpdatedTemplate({
+          date: "15.03.2026",
+          dateTime: "2026-03-15"
         })}
       `
     })}

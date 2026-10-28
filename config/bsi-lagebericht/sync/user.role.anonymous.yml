@@ -5,6 +5,8 @@ dependencies:
   config:
     - media.type.download
     - media.type.publication
+    - search_api_autocomplete.search.search
+    - search_api_autocomplete.search.search_media
     - search_api_autocomplete.search.search_yearly_report
   module:
     - bsi_media
@@ -26,6 +28,8 @@ permissions:
   - 'download media'
   - 'download publication media'
   - 'use klaro'
+  - 'use search_api_autocomplete for search'
+  - 'use search_api_autocomplete for search_media'
   - 'use search_api_autocomplete for search_yearly_report'
   - 'view media'
   - 'view paragraph content accordion'

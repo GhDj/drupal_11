@@ -65,31 +65,25 @@ final class ChartHooks {
       return;
     }
 
-    if ($media->bundle() !== 'chart') {
+    if (!in_array($media->bundle(), ['chart', 'image'], TRUE)) {
       return;
     }
 
-    if (
-      !$media->hasField('field_media_chart') ||
-      $media->get('field_media_chart')->isEmpty()
-    ) {
+    if (!isset($media->parent_paragraph)) {
       return;
     }
 
-    if ($media->parent_paragraph) {
-      $paragraph = $media->parent_paragraph;
-      if ($paragraph instanceof ParagraphInterface) {
-        $paragraph_id = $paragraph->id();
-
-        $variables['lightbox_url'] = Url::fromRoute(
-          'bsi_media.lightbox',
-          [
-            'paragraph' => $paragraph_id,
-          ]
-        )->toString();
-      }
+    $paragraph = $media->parent_paragraph;
+    if (!$paragraph instanceof ParagraphInterface) {
+      return;
     }
 
+    $variables['lightbox_url'] = Url::fromRoute(
+      'bsi_media.lightbox',
+      [
+        'paragraph' => $paragraph->id(),
+      ]
+    )->toString();
   }
 
 }

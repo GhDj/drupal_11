@@ -24,7 +24,8 @@
     }
   }
 
-  .field__label, .bsi-link__text {
+  .field__label,
+  .bsi-link__text {
     @include typography("text-support");
     color: var(--#{$nsp}-color-typo-secondary);
     font-size: 14px;
@@ -32,6 +33,17 @@
     padding: var(--#{$nsp}-space-5xs) var(--#{$nsp}-space-4xs);
   }
 
+  .#{$nsp}-chart-unit {
+    p {
+      all: unset;
+    }
+  }
+  .#{$nsp}-copyright,
+  .#{$nsp}-copyright a {
+    @include typography("text-support");
+    color: var(--#{$nsp}-color-typo-secondary);
+    font-weight: normal;
+  }
   .charts-figure-caption,
   .charts-accordion-trigger {
     margin: var(--#{$nsp}-space-sm) 0;
@@ -50,7 +62,6 @@
 // Chart Lightbox
 // -----------------------------------------------------------------------------
 .#{$nsp}-chart-lightbox {
-
   &__title {
     margin-bottom: var(--#{$nsp}-space-2xs);
   }
@@ -59,5 +70,27 @@
     color: var(--#{$nsp}-color-typo-secondary);
     margin: 0 auto;
     max-width: 640px;
+  }
+  .#{$nsp}-copyright {
+    @include typography("text-support");
+    color: var(--#{$nsp}-color-typo-secondary);
+    font-weight: normal;
+    margin-top: var(--bsi-space-sm);
+
+    a {
+      @include typography("text-support");
+      color: var(--#{$nsp}-color-typo-secondary);
+    }
+  }
+
+  .charts-figure-caption {
+    @include typography("body");
+    color: var(--#{$nsp}-color-typo-secondary);
+  }
+
+  .#{$nsp}-chart-unit {
+    p {
+      all: unset;
+    }
   }
 }

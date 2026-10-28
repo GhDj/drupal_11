@@ -39,6 +39,7 @@
     th,
     td {
       padding: 0;
+      vertical-align: top;
 
       .tablesaw-cell-label {
         @include typography("heading-5");

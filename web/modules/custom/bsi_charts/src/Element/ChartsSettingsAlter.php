@@ -14,6 +14,11 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 class ChartsSettingsAlter implements TrustedCallbackInterface {
 
   /**
+   * Chart types that are not offered in any chart settings form.
+   */
+  const array DISALLOWED_TYPES = ['bubble'];
+
+  /**
    * {@inheritdoc}
    */
   public static function trustedCallbacks(): array {
@@ -24,6 +29,11 @@ class ChartsSettingsAlter implements TrustedCallbackInterface {
    * Process callback handler for the charts_settings form element.
    */
   public static function process(array $element): array {
+    // Remove chart types that must not be available to editors.
+    foreach (static::DISALLOWED_TYPES as $type) {
+      unset($element['type']['#options'][$type]);
+    }
+
     if ($element['#used_in'] !== 'basic_form') {
       return $element;
     }
@@ -79,8 +89,14 @@ class ChartsSettingsAlter implements TrustedCallbackInterface {
    * Process callback handler for the charts_data_collector_table form element.
    */
   public static function processSeriesData(array $element): array {
+    $heading = &$element['data_collector_table'][0];
+    foreach (Element::children($heading) as $key) {
+      foreach (static::DISALLOWED_TYPES as $type) {
+        unset($heading[$key]['chart_type']['#options'][$type]);
+      }
+    }
+
     if (!\Drupal::currentUser()->hasPermission('bsi_chart customize chart display')) {
-      $heading = &$element['data_collector_table'][0];
       foreach (Element::children($heading) as $key) {
         ChartsSettingsAlter::restrictElement($heading[$key]['color']);
         ChartsSettingsAlter::restrictElement($heading[$key]['chart_type']);

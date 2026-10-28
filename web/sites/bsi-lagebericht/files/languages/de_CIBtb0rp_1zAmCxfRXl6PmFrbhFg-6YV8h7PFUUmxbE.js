@@ -1,0 +1,1 @@
+window.drupalTranslations = {"strings":{"":{"more":"mehr"}}};

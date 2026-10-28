@@ -18,10 +18,11 @@
 
   // image
   &__image {
-    --#{$nsp}-image-ratio: 4/3;
+    //set ratio to auto.
+    --#{$nsp}-image-ratio: auto;
 
     @include breakpoint-lg {
-      --#{$nsp}-image-ratio: 3/1;
+      --#{$nsp}-image-ratio: auto;
     }
   }
 
@@ -120,14 +121,27 @@
   }
 }
 
-// -----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // Variants
 // -----------------------------------------------------------------------------
 
 // card centered
 .#{$nsp}-opener--centered {
+  --#{$nsp}-image-width: auto;
+  margin: auto;
+
+  .#{$nsp}-opener__image {
+    margin: auto;
+    overflow: hidden;
+
+    .#{$nsp}-image__image {
+      margin: auto;
+    }
+  }
+
   .#{$nsp}-opener__content {
     align-items: center;
+    margin-bottom: var(--#{$nsp}-space-lg);
     text-align: center;
   }
 }
@@ -176,6 +190,19 @@
     &__text {
       font-size: 20px;
     }
+
+    &__image {
+      --bsi-image-height: 400px;
+      // @include breakpoint-lg {
+      //   --bsi-image-height: 440px;
+      // }
+      .bsi-image__image {
+        object-position: right;
+        @include breakpoint-lg {
+          object-position: center center;
+        }
+      }
+    }
   }
 }
 
@@ -204,6 +231,7 @@
     // content
     &__content {
       align-items: center;
+      margin-bottom: var(--#{$nsp}-space-lg);
       text-align: center;
 
       @include breakpoint-lg {
@@ -240,6 +268,9 @@
 
 // slider
 .#{$nsp}-opener--slider {
+  margin: auto;
+  max-width: 1440px;
+
   .#{$nsp}-opener {
     &__page-title {
       @include typography("display-2");
@@ -308,7 +339,7 @@
     list-style: none;
     margin-inline: auto;
     max-width: var(--#{$nsp}-grid-max-width);
-    padding-inline: var(--#{$nsp}-grid-padding);
+    padding-inline: 160px;
     padding-bottom: var(--#{$nsp}-space-lg);
     padding-top: var(--#{$nsp}-space-lg);
     pointer-events: auto;

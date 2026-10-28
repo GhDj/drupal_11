@@ -27,6 +27,7 @@ dependencies:
     - paragraphs_type_permissions
     - path
     - system
+    - tfa
     - toolbar
 id: editor
 label: Editor
@@ -64,6 +65,7 @@ permissions:
   - 'edit own publication media'
   - 'edit own video media'
   - 'revert all revisions'
+  - 'setup own tfa'
   - 'update paragraph content view'
   - 'use nodes transition create_new_draft'
   - 'use nodes transition request_approval'

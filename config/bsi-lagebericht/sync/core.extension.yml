@@ -5,7 +5,6 @@ module:
   admin_toolbar: 0
   admin_toolbar_tools: 0
   anchor_link: 0
-  asset_injector: 0
   base_field_override_ui: 0
   better_exposed_filters: 0
   block: 0
@@ -13,6 +12,7 @@ module:
   breakpoint: 0
   bsi_access: 0
   bsi_charts: 0
+  bsi_content_jlb: 0
   bsi_custom: 0
   bsi_editor: 0
   bsi_report: 0
@@ -35,6 +35,7 @@ module:
   datetime: 0
   datetime_range: 0
   dblog: 0
+  default_content: 0
   diff: 0
   duplicate_node: 0
   dynamic_page_cache: 0

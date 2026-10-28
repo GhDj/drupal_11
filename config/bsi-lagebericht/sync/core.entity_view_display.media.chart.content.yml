@@ -11,6 +11,8 @@ dependencies:
     - media.type.chart
   module:
     - charts
+    - link
+    - text
 id: media.chart.content
 targetEntityType: media
 bundle: chart
@@ -21,14 +23,31 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 1
+    region: content
+  field_source:
+    type: link
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_unit:
+    type: text_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
     weight: 0
     region: content
 hidden:
   changed: true
   created: true
   field_explanation: true
-  field_source: true
-  field_unit: true
   langcode: true
   name: true
   search_api_excerpt: true
