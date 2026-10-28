@@ -23,3 +23,8 @@ search_box.jpg
 # Dependencies (not packed)
 vendor/
 node_modules/
+
+# Transfer archives and spec PDFs
+pack.zip
+pack_transfer/
+*.pdf
