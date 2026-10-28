@@ -37,7 +37,7 @@ content:
     region: content
   changed:
     type: timestamp
-    label: hidden
+    label: inline
     settings:
       date_format: date_short
       custom_date_format: ''

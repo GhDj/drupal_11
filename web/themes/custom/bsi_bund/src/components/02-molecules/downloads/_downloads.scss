@@ -46,7 +46,7 @@
     align-items: stretch;
     background: var(--#{$nsp}-downloads-media-background);
     display: flex;
-    height: var(--#{$nsp}-downloads-media-size);
+    min-height: var(--#{$nsp}-downloads-media-size);
     padding: var(--#{$nsp}-downloads-media-padding);
     width: var(--#{$nsp}-downloads-media-size);
   }
@@ -56,7 +56,7 @@
     background: var(--#{$nsp}-downloads-media-frame-background);
     border-radius: var(--#{$nsp}-downloads-media-border-radius);
     display: flex;
-    height: 100%;
+    flex: 1;
     justify-content: center;
     overflow: hidden;
     width: 100%;
@@ -67,14 +67,15 @@
     --#{$nsp}-icon-width: var(--#{$nsp}-downloads-media-icon-size);
   }
 
-  &__thumbnail,
-  &__thumbnail .#{$nsp}-image {
-    height: 100%;
+  &__thumbnail {
     width: 100%;
   }
 
+  &__thumbnail img,
   &__thumbnail .#{$nsp}-image {
-    object-fit: contain;
+    display: block;
+    height: auto;
+    width: 100%;
   }
 
   &__body {

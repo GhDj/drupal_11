@@ -6,6 +6,8 @@ dependencies:
     - filter.format.basic
     - media.type.download
     - media.type.publication
+    - search_api_autocomplete.search.search
+    - search_api_autocomplete.search.search_media
     - search_api_autocomplete.search.search_yearly_report
     - taxonomy.vocabulary.abbreviations
     - taxonomy.vocabulary.audiences
@@ -121,6 +123,8 @@ permissions:
   - 'update paragraph content tile_item'
   - 'update paragraph content tiles'
   - 'use klaro'
+  - 'use search_api_autocomplete for search'
+  - 'use search_api_autocomplete for search_media'
   - 'use search_api_autocomplete for search_yearly_report'
   - 'use text format basic'
   - 'view all media revisions'

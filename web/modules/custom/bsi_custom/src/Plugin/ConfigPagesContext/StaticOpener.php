@@ -54,6 +54,7 @@ class StaticOpener extends ConfigPagesContextBase {
     'search_pages',
     'search_lists',
     'search_media',
+    'search_yearly_report',
   ];
 
   /**
@@ -256,7 +257,8 @@ class StaticOpener extends ConfigPagesContextBase {
 
           if (
             in_array($view_id, static::$searchViews, TRUE)
-            && ($display_id === 'block_search' || str_starts_with($display_id, 'block_search'))
+            && ($display_id === 'block_search' || str_starts_with($display_id, 'block_search')
+            || $display_id === 'block_search_yearly_reports' || str_starts_with($display_id, 'block_search_yearly_reports_'))
           ) {
             return static::PAGE_SEARCH;
           }

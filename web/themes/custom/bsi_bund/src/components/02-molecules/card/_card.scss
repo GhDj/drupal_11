@@ -32,6 +32,15 @@
       position: absolute;
       translate: -50% -50%;
     }
+
+    &--chart {
+      position: relative;
+
+      //move drupal edit button for image to the right
+      button.trigger.focusable {
+        right: 45px;
+      }
+    }
   }
 
   &__text {
@@ -87,6 +96,17 @@
     );
     --#{$nsp}-link-decoration-line: none;
     margin-block-end: var(--#{$nsp}-space-xs);
+
+    &--lightbox {
+      &::after {
+        bottom: 30px;
+        content: "";
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
   }
 
   &__more {
@@ -95,10 +115,18 @@
 
   &__more-link {
     color: var(--#{$nsp}-theme-link-color, var(--#{$nsp}-color-blue-750));
-    text-decoration: none;
+    text-decoration: underline;
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  &[data-theme="blue-800"],
+  &[data-theme="blue-900"] {
+    .#{$nsp}-card__more,
+    .#{$nsp}-card__more-link {
+      color: var(--#{$nsp}-color-base-white);
     }
   }
 
@@ -113,20 +141,42 @@
   }
 
   &__chart {
-    background: var(--#{$nsp}-color-base-white);
     display: block;
     position: relative;
 
     .#{$nsp}-icon {
-      background: var(--#{$nsp}-color-alpha-dark-40);
+      background: var(--#{$nsp}-color-base-white);
       bottom: 0;
-      color: var(--#{$nsp}-color-base-white);
+      color: var(--#{$nsp}--color-black);
       height: var(--#{$nsp}-size-3xl);
       padding: var(--#{$nsp}-space-2xs);
       position: absolute;
       right: 0;
       width: var(--#{$nsp}-size-3xl);
     }
+    .#{$nsp}-copyright {
+      @include typography("text-support");
+      margin-top: var(--bsi-space-sm);
+      a {
+        @include typography("text-support");
+        [data-theme="blue-900"] & {
+          color: var(--#{$nsp}-color-base-white);
+        }
+      }
+    }
+  }
+  &__chart-thumbnail {
+    background: var(--#{$nsp}-color-base-white);
+  }
+  &__icon-lightbox {
+    background: var(--#{$nsp}-color-alpha-dark-40);
+    color: var(--#{$nsp}-color-base-white);
+    height: var(--#{$nsp}-size-3xl);
+    padding: var(--#{$nsp}-space-2xs);
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: var(--#{$nsp}-size-3xl);
   }
 }
 

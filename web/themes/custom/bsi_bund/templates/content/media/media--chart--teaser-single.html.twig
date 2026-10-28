@@ -12,25 +12,7 @@
 * @ingroup themeable
 */
 #}
-{{ attach_library('core/drupal.ajax') }}
-{{ attach_library('core/drupal.dialog.ajax') }}
 
-<div{{ attributes }}>
-    <a
-      class="use-ajax bsi-card__chart"
-      href="{{ lightbox_url }}"
-      data-dialog-type="modal"
-    >
+<div{{ attributes.addClass("bsi-card__chart") }}>
       {{ content }}
-
-      {% include '@bsi_bund/components/icon.twig' with {
-        name: "maximize",
-        decorative: true,
-      } %}
-    </a>
-
 </div>
-
-
-
-

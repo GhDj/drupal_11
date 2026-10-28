@@ -13,7 +13,7 @@ dependencies:
     - field.field.media.publication.field_tags
     - field.field.media.publication.field_use_cart
     - media.type.publication
-    - responsive_image.styles.bsi_content
+    - responsive_image.styles.bsi_download
   module:
     - bsi_custom
     - datetime
@@ -73,7 +73,7 @@ content:
     type: responsive_image
     label: hidden
     settings:
-      responsive_image_style: bsi_content
+      responsive_image_style: bsi_download
       image_link: ''
       image_loading:
         attribute: lazy

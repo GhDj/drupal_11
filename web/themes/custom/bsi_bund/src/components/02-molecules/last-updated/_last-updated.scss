@@ -1,0 +1,16 @@
+// -----------------------------------------------------------------------------
+// Last updated
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+
+// -----------------------------------------------------------------------------
+// Core
+// -----------------------------------------------------------------------------
+.#{$nsp}-last-updated {
+  border-top: 1px solid var(--#{$nsp}-color-neutral-200);
+  color: var(--#{$nsp}-color-typo-secondary);
+  font-size: var(--#{$nsp}-space-sm);
+  margin-top: var(--#{$nsp}-space-xl);
+  padding-top: var(--#{$nsp}-space-md);
+}

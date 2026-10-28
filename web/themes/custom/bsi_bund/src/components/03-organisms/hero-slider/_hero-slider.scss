@@ -11,6 +11,10 @@
   background-color: var(--#{$nsp}-color-blue-950);
   display: flex;
   flex-direction: column;
+  margin-inline: auto;
+  max-width: 1440px;
+  margin: auto;
+  max-width: 1440px;
   position: relative;
 
   .splide__track {
@@ -55,9 +59,9 @@
 
   &__content {
     background-color: var(--#{$nsp}-color-blue-900);
+    border-radius: var(--#{$nsp}-space-4xs);
     color: var(--#{$nsp}-color-neutral-50);
     padding: var(--#{$nsp}-space-sm);
-    border-radius: var(--#{$nsp}-space-4xs);
 
     @include breakpoint-md {
       padding: var(--#{$nsp}-space-lg);

@@ -6,7 +6,10 @@ dependencies:
     - media.type.bits
     - media.type.download
     - media.type.publication
+    - search_api_autocomplete.search.news
     - search_api_autocomplete.search.search
+    - search_api_autocomplete.search.search_media
+    - search_api_autocomplete.search.search_yearly_report
   module:
     - bsi_media
     - klaro
@@ -30,7 +33,10 @@ permissions:
   - 'download publication media'
   - 'use entity cart'
   - 'use klaro'
+  - 'use search_api_autocomplete for news'
   - 'use search_api_autocomplete for search'
+  - 'use search_api_autocomplete for search_media'
+  - 'use search_api_autocomplete for search_yearly_report'
   - 'view media'
   - 'view paragraph content accordion'
   - 'view paragraph content banner'

@@ -35,6 +35,7 @@ dependencies:
     - path
     - system
     - tablefield
+    - tfa
     - toolbar
 id: editor
 label: Editor
@@ -94,6 +95,7 @@ permissions:
   - 'export tablefield'
   - 'import tablefield'
   - 'revert all revisions'
+  - 'setup own tfa'
   - 'update paragraph content view'
   - 'use nodes transition create_new_draft'
   - 'use nodes transition request_approval'

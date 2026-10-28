@@ -12,7 +12,7 @@
   color: var(--#{$nsp}-color-typo-secondary);
   text-align: right;
 
-  a {
-    color: var(--#{$nsp}-color-typo-secondary);
+  [data-theme="blue-900"] & {
+    color: var(--bsi-color-base-white);
   }
 }
