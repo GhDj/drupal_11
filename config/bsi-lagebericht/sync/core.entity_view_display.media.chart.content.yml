@@ -18,6 +18,13 @@ targetEntityType: media
 bundle: chart
 mode: content
 content:
+  field_explanation:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: -1
+    region: content
   field_media_chart:
     type: chart_config_default
     label: hidden
@@ -39,7 +46,7 @@ content:
     region: content
   field_unit:
     type: text_default
-    label: inline
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 0
@@ -47,7 +54,6 @@ content:
 hidden:
   changed: true
   created: true
-  field_explanation: true
   langcode: true
   name: true
   search_api_excerpt: true

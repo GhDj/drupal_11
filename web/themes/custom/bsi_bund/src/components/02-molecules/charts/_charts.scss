@@ -52,10 +52,16 @@
   .charts-figure-caption {
     @include typography("body");
     color: var(--#{$nsp}-color-typo-secondary);
+    text-align: center;
 
     @include breakpoint-lg {
       padding-inline: var(--#{$nsp}-space-6xl);
     }
+  }
+
+  // Source field right-aligned per Figma.
+  .field--name-field-source {
+    text-align: right;
   }
 }
 

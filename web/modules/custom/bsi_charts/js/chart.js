@@ -10,7 +10,21 @@
     attach (context) {
       once('deduplicate-legend', '.charts-chartjs', context).forEach((element) => {
         element.addEventListener('drupalChartsConfigsInitialization', Drupal.behaviors.bsiCharts._deduplicateLegend);
+        element.addEventListener('drupalChartsConfigsInitialization', Drupal.behaviors.bsiCharts._adjustLegend);
       });
+    },
+
+    _adjustLegend(event) {
+      const options = event.detail.options;
+      options.plugins.legend = options.plugins.legend ?? {};
+      options.plugins.legend.labels = options.plugins.legend.labels ?? {};
+
+      // Increase spacing between chart area and legend.
+      options.plugins.legend.labels.padding = 16;
+
+      // Match Figma legend color box dimensions.
+      options.plugins.legend.labels.boxWidth = 24;
+      options.plugins.legend.labels.boxHeight = 12;
     },
 
     _deduplicateLegend(event) {
