@@ -23,13 +23,6 @@ targetEntityType: media
 bundle: chart
 mode: inline_center
 content:
-  field_explanation:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: -1
-    region: content
   field_media_chart:
     type: chart_config_default
     label: visually_hidden
@@ -51,7 +44,7 @@ content:
     region: content
   field_unit:
     type: text_default
-    label: hidden
+    label: inline
     settings: {  }
     third_party_settings: {  }
     weight: 0
@@ -62,6 +55,7 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_explanation: true
   langcode: true
   name: true
   search_api_excerpt: true
