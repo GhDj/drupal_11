@@ -219,8 +219,14 @@ class OpenerHooks {
       $sub_variant = $entity->get('field_article_type')->value ?? NULL;
     }
     elseif ($has_image) {
-      $variant = static::VARIANT_IMAGE;
-      $sub_variant = $entity->bundle();
+      if ($entity->bundle() === 'report_page') {
+        $variant = static::VARIANT_HERO;
+        $sub_variant = 'image';
+      }
+      else {
+        $variant = static::VARIANT_IMAGE;
+        $sub_variant = $entity->bundle();
+      }
     }
     return [$variant, $sub_variant];
   }

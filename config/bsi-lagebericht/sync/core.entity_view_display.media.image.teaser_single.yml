@@ -12,7 +12,6 @@ dependencies:
   module:
     - layout_builder
     - responsive_image
-    - text
 third_party_settings:
   layout_builder:
     enabled: false
@@ -22,21 +21,6 @@ targetEntityType: media
 bundle: image
 mode: teaser_single
 content:
-  field_caption:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_copyright:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
   field_media_image:
     type: responsive_image
     label: hidden
@@ -54,6 +38,8 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_caption: true
+  field_copyright: true
   langcode: true
   name: true
   search_api_excerpt: true

@@ -1,28 +1,30 @@
 /**
-* Global search filter behavior:
-* - Initializes custom multi-select dropdown filters
-* - Renders active filter pills from selected values
-* - Pill removal and reset work via URL navigation
-* - Mobile toggle to show/hide filter sections
-*/
+ * Global search filter behavior:
+ * - Initializes custom multi-select dropdown filters
+ * - Renders active filter pills from selected values
+ * - Pill removal and reset work via URL navigation
+ * - Mobile toggle to show/hide filter sections
+ */
 
 import MultiSelectDropdown from "./MultiSelectDropdown";
 
 function svgIcon(name: string): string {
   const existing = document.querySelector<SVGUseElement>(".bsi-icon use");
-  const base = existing?.getAttribute("href")?.replace(/#.*$/, "")
-    || "/themes/custom/bsi_bund/dist/icons.svg";
+  const base =
+    existing?.getAttribute("href")?.replace(/#.*$/, "") ??
+    "/themes/custom/bsi_bund/dist/icons.svg";
   return `<svg class="bsi-icon" aria-hidden="true" focusable="false"><use href="${base}#${name}"></use></svg>`;
 }
 
 export default function SearchFilter(): void {
   applySearchFilter();
+  const behaviors = Drupal?.behaviors;
 
-  if (typeof Drupal !== "undefined" && Drupal.behaviors) {
+  if (typeof Drupal !== "undefined" && behaviors) {
     Drupal.behaviors.bsiSearchFilter = {
       attach() {
         applySearchFilter();
-      },
+      }
     };
   }
 }
@@ -70,7 +72,7 @@ function buildSearchUrl(
 
   selects.forEach(select => {
     const container = select.closest<HTMLElement>(".js-multiselect");
-    const key = container?.dataset.filterKey || "";
+    const key = container?.dataset.filterKey ?? "";
     if (!key) return;
 
     Array.from(select.options).forEach(option => {
@@ -98,14 +100,19 @@ function initActiveFilterPills(view: Element): void {
 
   selects.forEach(select => {
     const container = select.closest<HTMLElement>(".js-multiselect");
-    const key = container?.dataset.filterKey || "";
+    const key = container?.dataset.filterKey ?? "";
 
     Array.from(select.options).forEach(option => {
-      if (option.selected && option.value && option.value !== "" && option.value !== "All") {
+      if (
+        option.selected &&
+        option.value &&
+        option.value !== "" &&
+        option.value !== "All"
+      ) {
         activeFilters.push({
           label: option.textContent?.trim() || option.value,
           key,
-          value: option.value,
+          value: option.value
         });
       }
     });
@@ -122,7 +129,8 @@ function initActiveFilterPills(view: Element): void {
   activeFilters.forEach(({ label, key, value }) => {
     const pill = document.createElement("button");
     pill.type = "button";
-    pill.className = "bsi-button bsi-button--tertiary bsi-pill bsi-pill--default";
+    pill.className =
+      "bsi-button bsi-button--tertiary bsi-pill bsi-pill--default";
     pill.setAttribute("aria-label", `${label} entfernen`);
     pill.innerHTML = `<span class="bsi-button__text">${label}</span>${svgIcon("cross")}`;
 
@@ -136,13 +144,16 @@ function initActiveFilterPills(view: Element): void {
 
   const resetBtn = document.createElement("button");
   resetBtn.type = "button";
-  resetBtn.className = "bsi-button bsi-button--tertiary bsi-searchfilter__reset";
+  resetBtn.className =
+    "bsi-button bsi-button--tertiary bsi-searchfilter__reset";
   resetBtn.innerHTML = `${svgIcon("cross")}<span class="bsi-button__text">Alle Filter zurücksetzen</span>`;
 
   resetBtn.addEventListener("click", () => {
     // Navigate with only the search term, no filters
     const url = new URL(window.location.pathname, window.location.origin);
-    const searchTerm = new URLSearchParams(window.location.search).get("search");
+    const searchTerm = new URLSearchParams(window.location.search).get(
+      "search"
+    );
     if (searchTerm) url.searchParams.set("search", searchTerm);
     window.location.href = url.toString();
   });
@@ -153,7 +164,9 @@ function initActiveFilterPills(view: Element): void {
 }
 
 function initMobileToggle(view: Element): void {
-  const toggle = view.querySelector<HTMLButtonElement>(".js-searchfilter-toggle");
+  const toggle = view.querySelector<HTMLButtonElement>(
+    ".js-searchfilter-toggle"
+  );
   if (!toggle || toggle.dataset.initialized) return;
 
   toggle.dataset.initialized = "true";
@@ -164,5 +177,8 @@ function initMobileToggle(view: Element): void {
 }
 
 declare const Drupal: {
-  behaviors: Record<string, { attach: (context?: Element, settings?: unknown) => void }>;
+  behaviors: Record<
+    string,
+    { attach: (context?: Element, settings?: unknown) => void }
+  >;
 };

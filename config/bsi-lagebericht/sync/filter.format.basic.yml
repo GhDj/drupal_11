@@ -10,6 +10,7 @@ dependencies:
     - linkit
     - markup_decorator
     - media
+    - media_directories_browser
     - responsive_tables_filter
 name: Basic
 format: basic
@@ -158,6 +159,21 @@ filters:
     settings:
       title: false
       media_substitution: metadata
+  media_directories_default_view_mode:
+    id: media_directories_default_view_mode
+    provider: media_directories_browser
+    status: false
+    weight: 90
+    settings:
+      view_mode_mapping:
+        audio: ''
+        chart: ''
+        contact: ''
+        download: ''
+        gallery: ''
+        image: ''
+        publication: ''
+        video: ''
   media_embed:
     id: media_embed
     provider: media

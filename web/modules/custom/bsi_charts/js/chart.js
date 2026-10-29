@@ -10,7 +10,28 @@
     attach (context) {
       once('deduplicate-legend', '.charts-chartjs', context).forEach((element) => {
         element.addEventListener('drupalChartsConfigsInitialization', Drupal.behaviors.bsiCharts._deduplicateLegend);
+        element.addEventListener('drupalChartsConfigsInitialization', Drupal.behaviors.bsiCharts._lightboxOverrides);
       });
+    },
+
+    _lightboxOverrides(event) {
+      if (!this.closest('.bsi-chart-lightbox')) {
+        return;
+      }
+      const options = event.detail.options;
+
+      // Force legend below the chart so the source text aligns properly.
+      options.plugins.legend = options.plugins.legend ?? {};
+      options.plugins.legend.position = 'bottom';
+
+      // Symmetric left/right padding for even spacing.
+      options.layout = options.layout ?? {};
+      options.layout.padding = options.layout.padding ?? {};
+      if (typeof options.layout.padding === 'number') {
+        options.layout.padding = { top: options.layout.padding, right: options.layout.padding, bottom: options.layout.padding, left: options.layout.padding };
+      }
+      options.layout.padding.left = options.layout.padding.left ?? 16;
+      options.layout.padding.right = options.layout.padding.right ?? 16;
     },
 
     _deduplicateLegend(event) {
@@ -48,8 +69,8 @@
               chart.toggleDataVisibility(item.index);
             }
           });
-          chart.update();
-        };
+        chart.update();
+      };
     },
     _legendItemKey(item) {
       return JSON.stringify([ item.text, item.fillStyle ]);

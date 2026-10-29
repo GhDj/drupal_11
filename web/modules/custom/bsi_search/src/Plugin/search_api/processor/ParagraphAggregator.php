@@ -2,6 +2,7 @@
 
 namespace Drupal\bsi_search\Plugin\search_api\processor;
 
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\search_api\Attribute\SearchApiProcessor;
@@ -51,27 +52,29 @@ class ParagraphAggregator extends ProcessorPluginBase {
     $boost_groups = [];
 
     foreach ($index->getFields() as $field) {
-
-      // Only include paragraph fields.
       if ($field->getDatasourceId() !== 'entity:paragraph') {
         continue;
       }
 
       if (in_array($field->getType(), ['text', 'text_long', 'string', 'solr_text_unstemmed'])) {
-
         $path = $field->getPropertyPath();
-        $parts = explode('.', $path);
-        $field_name = end($parts);
+        if (str_contains($path, ':')) {
+          $parts = explode(':', $path);
+          $spec = ['field' => $parts[0], 'leaf' => $parts[2] ?? NULL];
+        }
+        else {
+          $parts = explode('.', $path);
+          $spec = ['field' => end($parts), 'leaf' => NULL];
+        }
 
         $boost = (string) $field->getBoost() ?? 1;
-
-        $boost_groups[$boost][] = $field_name;
+        $boost_groups[$boost][] = $spec;
       }
     }
 
     // Create dynamic fields.
     foreach ($boost_groups as $boost => $fields) {
-      $id = "aggregated_paragraph_text_boost_$boost";
+      $id = "aggregated_paragraph_text_boost_" . str_replace('.', '_', $boost);
 
       $this->dynamicProperties[$id] = [
         'boost' => $boost,
@@ -175,15 +178,51 @@ class ParagraphAggregator extends ProcessorPluginBase {
 
       // Match against boost-configured fields.
       foreach ($this->dynamicProperties as $id => $info) {
-        if (in_array($paragraph_field_name, $info['fields'])) {
-          $value = $paragraph->get($paragraph_field_name)->getString();
-          if (!empty($value)) {
-            $output[$id][] = $value;
+        foreach ($info['fields'] as $spec) {
+          if ($spec['field'] !== $paragraph_field_name) {
+            continue;
+          }
+
+          $list = $paragraph->get($paragraph_field_name);
+
+          if ($spec['leaf'] === NULL) {
+            if (in_array($paragraph_definition->getType(), ['entity_reference', 'entity_reference_revisions'], TRUE)) {
+              continue;
+            }
+            $texts = $this->fieldTexts($list);
+          }
+          else {
+            $texts = [];
+            foreach ($list->referencedEntities() as $ref) {
+              if ($ref->hasField($spec['leaf'])) {
+                $texts = array_merge($texts, $this->fieldTexts($ref->get($spec['leaf'])));
+              }
+            }
+          }
+
+          foreach ($texts as $text) {
+            $output[$id][] = $text;
           }
         }
       }
 
     }
+  }
+
+  /**
+   * Returns the raw, tag-free text values of a field list.
+   */
+  protected function fieldTexts(FieldItemListInterface $list): array {
+    $texts = [];
+    foreach ($list->getValue() as $row) {
+      if (isset($row['value']) && is_string($row['value'])) {
+        $text = trim(strip_tags($row['value']));
+        if ($text !== '') {
+          $texts[] = $text;
+        }
+      }
+    }
+    return $texts;
   }
 
 }

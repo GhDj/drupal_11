@@ -1,23 +1,25 @@
 /**
-* Converts native <select multiple> elements inside .js-multiselect
-* containers into custom dropdown buttons with checkbox panels.
-*
-* Structure created:
-*   .bsi-multiselect
-*     <select> (hidden)
-*     button.bsi-multiselect__trigger (label + chevron)
-*     .bsi-multiselect__panel
-*       label > input[checkbox] + text (+ count)
-*/
+ * Converts native <select multiple> elements inside .js-multiselect
+ * containers into custom dropdown buttons with checkbox panels.
+ *
+ * Structure created:
+ *   .bsi-multiselect
+ *     <select> (hidden)
+ *     button.bsi-multiselect__trigger (label + chevron)
+ *     .bsi-multiselect__panel
+ *       label > input[checkbox] + text (+ count)
+ */
 
 const NSP = "bsi";
 
 export default function MultiSelectDropdown(): void {
-  document.querySelectorAll<HTMLElement>(".js-multiselect").forEach(container => {
-    if (container.dataset.initialized) return;
-    container.dataset.initialized = "true";
-    init(container);
-  });
+  document
+    .querySelectorAll<HTMLElement>(".js-multiselect")
+    .forEach(container => {
+      if (container.dataset.initialized) return;
+      container.dataset.initialized = "true";
+      init(container);
+    });
 }
 
 function init(container: HTMLElement): void {
@@ -26,9 +28,10 @@ function init(container: HTMLElement): void {
 
   // Get the label text from the Drupal-rendered label or first option
   const drupalLabel = container.querySelector<HTMLLabelElement>("label");
-  const labelText = drupalLabel?.textContent?.trim()
-    || select.options[0]?.textContent?.trim()
-    || "Filter";
+  const labelText =
+    drupalLabel?.textContent?.trim() ??
+    select.options[0]?.textContent?.trim() ??
+    "Filter";
 
   // Hide native select and label
   select.style.display = "none";
@@ -72,7 +75,7 @@ function init(container: HTMLElement): void {
 
     const text = document.createElement("span");
     text.className = `${NSP}-multiselect__option-text`;
-    text.textContent = option.textContent?.trim() || option.value;
+    text.textContent = option.textContent?.trim() ?? option.value;
 
     item.appendChild(checkbox);
     item.appendChild(text);
@@ -80,25 +83,29 @@ function init(container: HTMLElement): void {
   });
 
   // Toggle dropdown
-  trigger.addEventListener("click", (e) => {
+  trigger.addEventListener("click", e => {
     e.preventDefault();
     e.stopPropagation();
     const isOpen = trigger.getAttribute("aria-expanded") === "true";
 
     // Close all other dropdowns first
-    document.querySelectorAll(".js-multiselect .bsi-multiselect__trigger[aria-expanded='true']").forEach(other => {
-      if (other !== trigger) {
-        other.setAttribute("aria-expanded", "false");
-        (other.nextElementSibling as HTMLElement).hidden = true;
-      }
-    });
+    document
+      .querySelectorAll(
+        ".js-multiselect .bsi-multiselect__trigger[aria-expanded='true']"
+      )
+      .forEach(other => {
+        if (other !== trigger) {
+          other.setAttribute("aria-expanded", "false");
+          (other.nextElementSibling as HTMLElement).hidden = true;
+        }
+      });
 
     trigger.setAttribute("aria-expanded", String(!isOpen));
     panel.hidden = isOpen;
   });
 
   // Close on outside click
-  document.addEventListener("click", (e) => {
+  document.addEventListener("click", e => {
     if (!container.contains(e.target as Node)) {
       trigger.setAttribute("aria-expanded", "false");
       panel.hidden = true;
@@ -106,7 +113,7 @@ function init(container: HTMLElement): void {
   });
 
   // Close on Escape
-  container.addEventListener("keydown", (e) => {
+  container.addEventListener("keydown", e => {
     if (e.key === "Escape") {
       trigger.setAttribute("aria-expanded", "false");
       panel.hidden = true;

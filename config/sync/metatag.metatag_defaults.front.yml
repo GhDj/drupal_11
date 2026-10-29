@@ -9,3 +9,4 @@ label: 'Front page'
 tags:
   canonical_url: '[site:url]'
   shortlink: '[site:url]'
+  twitter_cards_description: 'The Federal Office for Information Security (BSI) is the federal cyber security authority and shapes secure digitalization in Germany.'

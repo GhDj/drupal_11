@@ -50,7 +50,7 @@
 {% set has_more = paragraph.field_body.summary
   or paragraph.field_body.value|striptags|trim|length > 300
 %}
-{% set lightbox_url = paragraph.field_media.entity or has_more
+{% set lightbox_url = paragraph.field_media.entity
   ? path('bsi_media.lightbox', { paragraph: paragraph.id() })
   : null
 %}
@@ -116,16 +116,14 @@
 
         {% block content %}
           {% if body %}
-            <div class="bsi-card__body{% if has_more %} has-more{% endif %}">
+            <div class="bsi-card__body has-more">
               <p>
                 {{ body }}
 
-                {% if has_more %}
-                  <span class="bsi-card__more">&#8230;</span>
-                {% endif %}
+                <span class="bsi-card__more">&#8230;</span>
 
                 {# Check if full text are available. #}
-                {% if has_more and lightbox_url %}
+                {% if lightbox_url %}
                   <a class="bsi-card__more-link use-ajax" href="{{ lightbox_url }}" data-dialog-type="modal">
                     {{"[more]"|t}}
 

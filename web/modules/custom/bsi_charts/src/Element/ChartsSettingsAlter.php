@@ -16,7 +16,15 @@ class ChartsSettingsAlter implements TrustedCallbackInterface {
   /**
    * Chart types that are not offered in any chart settings form.
    */
-  const array DISALLOWED_TYPES = ['bubble'];
+  const array DISALLOWED_TYPES = [
+    'bubble',
+    'donut',
+    'gauge',
+    'polarArea',
+    'scatter',
+    'spline',
+    'treemap',
+  ];
 
   /**
    * {@inheritdoc}
@@ -32,6 +40,16 @@ class ChartsSettingsAlter implements TrustedCallbackInterface {
     // Remove chart types that must not be available to editors.
     foreach (static::DISALLOWED_TYPES as $type) {
       unset($element['type']['#options'][$type]);
+    }
+
+    // Disable the polar coordinate system (radar and polar area charts). The
+    // value must stay present for the chart element, so it is replaced by a
+    // hidden value.
+    if (isset($element['display']['polar'])) {
+      $element['display']['polar'] = [
+        '#type' => 'hidden',
+        '#value' => 0,
+      ];
     }
 
     if ($element['#used_in'] !== 'basic_form') {
@@ -63,8 +81,6 @@ class ChartsSettingsAlter implements TrustedCallbackInterface {
     $element['yaxis']['#weight'] = 20;
     $element['display']['#type'] = 'details';
     $element['display']['#weight'] = 99;
-
-    $element['display']['polar']['#description'] = new TranslatableMarkup('Enable to display the chart data based on a circle. Transforms categories into angles and values into distance from the center point.');
 
     // Restrict certain elements based on user permissions.
     $currentUser = \Drupal::currentUser();

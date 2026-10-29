@@ -184,7 +184,6 @@ filters:
     settings:
       view_mode_mapping:
         audio: ''
-        bits: ''
         chart: ''
         contact: ''
         download: ''
