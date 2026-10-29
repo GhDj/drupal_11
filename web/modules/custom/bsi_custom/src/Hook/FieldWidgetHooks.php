@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\bsi_custom\Hook;
 
+use Drupal\content_moderation\ModerationInformationInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
@@ -20,6 +21,7 @@ class FieldWidgetHooks {
 
   public function __construct(
     protected readonly EntityTypeManagerInterface $entityTypeManager,
+    protected readonly ModerationInformationInterface $moderationInformation,
   ) {}
 
   /**
@@ -100,6 +102,44 @@ class FieldWidgetHooks {
     if ($widget->getSetting('display_label') === FALSE) {
       $elements['widget']['#type'] = 'item';
       $elements['widget']['#input'] = FALSE;
+    }
+  }
+
+  /**
+   * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter() for moderation_state_default.
+   *
+   * After a preview round-trip, the "Current state" label may reflect the
+   * previewed state rather than the actual saved state. This corrects it by
+   * always loading the persisted moderation state from the database.
+   */
+  #[Hook('field_widget_single_element_moderation_state_default_form_alter')]
+  public function alterModerationStateWidget(array &$element, FormStateInterface $form_state, array $context): void {
+    /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
+    $entity = $context['items']->getEntity();
+
+    if ($entity->isNew() || !$entity->getEntityType()->isRevisionable()) {
+      return;
+    }
+
+    $storage = $this->entityTypeManager->getStorage($entity->getEntityTypeId());
+    $original = $storage->loadRevision($entity->getLoadedRevisionId());
+    if ($original === NULL) {
+      return;
+    }
+
+    if (!$entity->isDefaultTranslation() && $original->hasTranslation($entity->language()->getId())) {
+      $original = $original->getTranslation($entity->language()->getId());
+    }
+
+    $workflow = $this->moderationInformation->getWorkflowForEntity($original);
+    if ($workflow === NULL) {
+      return;
+    }
+
+    $saved_state_id = $original->get('moderation_state')->value;
+    $workflow_type = $workflow->getTypePlugin();
+    if ($workflow_type->hasState($saved_state_id)) {
+      $element['current']['#markup'] = $workflow_type->getState($saved_state_id)->label();
     }
   }
 
