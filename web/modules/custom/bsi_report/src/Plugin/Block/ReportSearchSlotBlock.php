@@ -7,6 +7,7 @@ namespace Drupal\bsi_report\Plugin\Block;
 use Drupal\book\BookManagerInterface;
 use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Security\TrustedCallbackInterface;
@@ -59,7 +60,10 @@ class ReportSearchSlotBlock extends BlockBase implements ContainerFactoryPluginI
     $node = $this->currentRouteMatch->getParameter('node');
     if (!$node instanceof NodeInterface) {
       return [
-        '#plain_text' => $this->t('Not a node.'),
+        '#plain_text' => '',
+        '#cache' => [
+          'contexts' => ['route'],
+        ],
       ];
     }
 
@@ -67,6 +71,10 @@ class ReportSearchSlotBlock extends BlockBase implements ContainerFactoryPluginI
     if (empty($bookLink['bid'])) {
       return [
         '#plain_text' => '',
+        '#cache' => [
+          'contexts' => ['route'],
+          'tags' => ['node:' . $node->id()],
+        ],
       ];
     }
 
@@ -111,6 +119,28 @@ class ReportSearchSlotBlock extends BlockBase implements ContainerFactoryPluginI
       ],
       'view' => $render,
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheContexts(): array {
+    return Cache::mergeContexts(parent::getCacheContexts(), [
+      'route',
+      'user.roles',
+    ]);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags(): array {
+    $tags = parent::getCacheTags();
+    $node = $this->currentRouteMatch->getParameter('node');
+    if ($node instanceof NodeInterface) {
+      $tags = Cache::mergeTags($tags, ['node:' . $node->id()]);
+    }
+    return $tags;
   }
 
   /**

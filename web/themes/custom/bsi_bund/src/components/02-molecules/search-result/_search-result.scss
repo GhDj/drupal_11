@@ -420,6 +420,7 @@
 // Annual report search (injected via hook_node_view)
 // -----------------------------------------------------------------------------
 .#{$nsp}-report-search {
+  margin-bottom: var(--#{$nsp}-space-xl);
   padding: var(--#{$nsp}-space-lg) 0;
   position: relative;
   width: 100%;
