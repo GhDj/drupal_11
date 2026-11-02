@@ -1,3 +1,10 @@
+{#
+  Generic search view template — matches Storybook search layout.
+
+  Wraps exposed form in bsi-searchfilter box and results in bsi-search-result.
+  Used by search_pages, search_media, search_events, search_lists views.
+  Global search and yearly report have their own more specific templates.
+#}
 {%
   set classes = [
   'view',
@@ -9,30 +16,51 @@
 %}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
-  {% if title %}
-    {{ title }}
-  {% endif %}
   {{ title_suffix }}
+
   {% if exposed %}
-    <div class="view-filters">
-      {{ exposed }}
+    <div class="bsi-searchfilter bsi-searchfilter--global">
+      <div class="bsi-searchfilter__inner">
+        {# Title #}
+        {% set search_title = title|default(view.getTitle()) %}
+        {% if search_title %}
+          <h2 class="bsi-searchfilter__title">{{ search_title }}</h2>
+        {% endif %}
+
+        {# Result count #}
+        {% if header %}
+          <div class="bsi-searchfilter__text">
+            {{ header }}
+          </div>
+        {% endif %}
+
+        {# Full form (searchbar + filters + sort) #}
+        {{ exposed }}
+
+        {# Dotted separator #}
+        <hr class="bsi-searchfilter__separator" />
+
+        {# Mobile filter toggle #}
+        <button class="bsi-searchfilter__toggle js-searchfilter-toggle" type="button" aria-expanded="true">
+          {{ 'Filter'|t }}
+        </button>
+
+        {# Active filter pills #}
+        <div class="bsi-searchfilter__bottom js-searchfilter-bottom"></div>
+      </div>
     </div>
   {% endif %}
+
   {% if attachment_before %}
     <div class="attachment attachment-before">
       {{ attachment_before }}
     </div>
   {% endif %}
 
+  {# Results area #}
   {% if rows or empty %}
     <div class="bsi-search-result">
       <div class="bsi-search-result__inner">
-        {% if header %}
-          <div class="bsi-search-result__head">
-            {{ header }}
-          </div>
-        {% endif %}
-
         {% if rows %}
           <div class="view-content">
             {{ rows }}
