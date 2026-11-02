@@ -76,8 +76,8 @@
   }
 
   &__label {
-    display: inline-block;
     align-self: start;
+    display: inline-block;
     min-width: 103px;
   }
 
@@ -91,5 +91,9 @@
 
   .#{$nsp}-contact__info-row--person {
     font-weight: 700;
+  }
+
+  &__ctalink {
+    padding-left: 0;
   }
 }

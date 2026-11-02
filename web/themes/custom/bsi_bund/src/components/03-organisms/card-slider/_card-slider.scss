@@ -9,8 +9,6 @@
 // Core
 // -----------------------------------------------------------------------------
 .#{$nsp}-card-slider {
-  overflow: hidden;
-
   &__items {
     align-items: stretch;
   }
@@ -23,5 +21,12 @@
     display: flex;
     gap: 6px;
     justify-content: flex-end;
+    margin-top: var(--#{$nsp}-space-sm);
+  }
+
+  .explorer-hide-images & {
+    .#{$nsp}-card__image {
+      display: none;
+    }
   }
 }

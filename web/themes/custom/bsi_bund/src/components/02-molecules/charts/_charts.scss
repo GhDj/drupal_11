@@ -25,7 +25,7 @@
   }
 
   .field__label,
-  .bsi-link__text {
+  .#{$nsp}-link__text {
     @include typography("text-support");
     color: var(--#{$nsp}-color-typo-secondary);
     font-size: 14px;
@@ -52,10 +52,15 @@
   .charts-figure-caption {
     @include typography("body");
     color: var(--#{$nsp}-color-typo-secondary);
+    text-align: center;
 
     @include breakpoint-lg {
       padding-inline: var(--#{$nsp}-space-6xl);
     }
+  }
+
+  .field--name-field-source {
+    text-align: right;
   }
 }
 

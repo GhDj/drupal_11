@@ -325,3 +325,21 @@
     }
   }
 }
+
+//Explorer Content Typ // Events
+.#{$nsp}-card--explorer {
+  .#{$nsp}-card__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: end;
+  }
+  .#{$nsp}-card__text {
+    height: 100%;
+  }
+  .#{$nsp}-card {
+    .#{$nsp}-link__text {
+      text-underline-offset: 0;
+    }
+  }
+}

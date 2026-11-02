@@ -35,7 +35,7 @@ content:
         maxlength_js_label: ''
         maxlength_js_summary: 300
         maxlength_js_label_summary: ''
-        maxlength_js_enforce: false
+        maxlength_js_enforce: true
   field_display_variant:
     type: string_textfield
     weight: 3

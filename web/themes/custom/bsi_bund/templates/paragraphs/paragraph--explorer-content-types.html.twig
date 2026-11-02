@@ -40,7 +40,7 @@
 #}
 {% if content.field_show_explorer_images %}
   {% set show_images = content.field_show_explorer_images %}
-  {% if show_images[0]['#markup'] %}
+  {% if show_images[0]['#markup'] == 1 %}
     {%
       set explorer_class = 'explorer-show-images'
     %}
@@ -54,6 +54,7 @@
 {%
   set classes = [
   'bsi-block',
+  'bsi-grid',
   'paragraph',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
@@ -62,9 +63,52 @@
 ]
 %}
 {% block paragraph %}
+
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      {{ content }}
+
+      <div class="bsi-block__wrapper">
+          {{ content.field_section_title }}
+
+          {% if content.field_link[0] %}
+              {{ content.field_link|merge({
+                '#modifiers': [],
+                '#extra_classes': ['bsi-link--button', 'bsi-link--tertiary-button', 'bsi-block__link'],
+              }) }}
+        {% endif %}
+      </div>
+      <section class="bsi-card-slider bsi-grid bsi-block__content">
+
+        <div class="splide" data-js-card-slider>
+            <div class="splide__track">
+                {{ content.field_content }}
+            </div>
+
+            <ul class="splide__pagination bsi-image-slider__pagination bsi-grid"></ul>
+
+            <div class="bsi-card-slider__controls">
+                <button type="button" class="bsi-button bsi-button--primary bsi-button--icon-only bsi-card-slider__prev"
+                  aria-label="{{ 'Previous slide'|t }}">
+                  {% include '@bsi_bund/templates/components/icon.twig' with {
+                  name: "chevron-left",
+                  decorative: true,
+                  extra_classes: base_class ~ '__icon'
+                  } %}
+                </button>
+
+            <button type="button" class="bsi-button bsi-button--primary bsi-button--icon-only bsi-card-slider__next"
+                aria-label="{{ 'Next slide'|t }}">
+                {% include '@bsi_bund/templates/components/icon.twig' with {
+                name: "chevron-right",
+                decorative: true,
+                extra_classes: base_class ~ '__icon'
+                } %}
+               </button>
+            </div>
+
+
+        </div>
+
     {% endblock %}
   </div>
 {% endblock paragraph %}

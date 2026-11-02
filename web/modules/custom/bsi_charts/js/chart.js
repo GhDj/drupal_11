@@ -11,6 +11,7 @@
       once('deduplicate-legend', '.charts-chartjs', context).forEach((element) => {
         element.addEventListener('drupalChartsConfigsInitialization', Drupal.behaviors.bsiCharts._deduplicateLegend);
         element.addEventListener('drupalChartsConfigsInitialization', Drupal.behaviors.bsiCharts._lightboxOverrides);
+        element.addEventListener('drupalChartsConfigsInitialization', Drupal.behaviors.bsiCharts._adjustLegend);
       });
     },
 
@@ -34,8 +35,35 @@
       options.layout.padding.right = options.layout.padding.right ?? 16;
     },
 
+    _adjustLegend(event) {
+      const options = event.detail.options;
+      options.plugins.legend = options.plugins.legend ?? {};
+      options.plugins.legend.labels = options.plugins.legend.labels ?? {};
+
+      // Increase spacing between chart area and legend.
+      options.plugins.legend.labels.padding = 16;
+
+      // Match Figma legend color box dimensions.
+      options.plugins.legend.labels.boxWidth = 24;
+      options.plugins.legend.labels.boxHeight = 12;
+    },
+
     _deduplicateLegend(event) {
       const options = event.detail.options;
+
+      if (event.detail.type === 'bar') {
+        options.interaction = options.interaction ?? {};
+
+        if (options.indexAxis === 'y') {
+          options.interaction.mode = 'y';
+        }
+        else {
+          options.interaction.mode = 'x';
+        }
+
+        options.interaction.intersect = false;
+      }
+
       const originalGenerateLabels = options.plugins.legend.labels?.generateLabels
         ?? Chart.overrides[event.detail.type]?.plugins?.legend.labels.generateLabels
         ?? Chart.defaults.plugins.legend.labels.generateLabels;

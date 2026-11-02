@@ -1,0 +1,194 @@
+  {{ attach_library('claro/classy.node') }}
+
+  {%
+    set classes = [
+      'bsi-card',
+      'node',
+      'node--type-' ~ node.bundle|clean_class,
+      node.isPromoted() ? 'node--promoted',
+      node.isSticky() ? 'node--sticky',
+      not node.isPublished() ? 'node--unpublished',
+      view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    ]
+  %}
+
+  {% set created_date = node.getCreatedTime()|date('d.m.Y') %}
+  {% set date_count = node.field_date_range.getValue()|length %}
+
+
+  {% set months = {
+    '01': 'Januar',
+    '02': 'Februar',
+    '03': 'März',
+    '04': 'April',
+    '05': 'Mai',
+    '06': 'Juni',
+    '07': 'Juli',
+    '08': 'August',
+    '09': 'September',
+    '10': 'Oktober',
+    '11': 'November',
+    '12': 'Dezember'
+  } %}
+
+  {% set weekdays = {
+    '1': 'Montag',
+    '2': 'Dienstag',
+    '3': 'Mittwoch',
+    '4': 'Donnerstag',
+    '5': 'Freitag',
+    '6': 'Samstag',
+    '7': 'Sonntag'
+  } %}
+
+  <div{{ attributes.addClass(classes) }} data-theme="blue-100">
+
+    <div class="bsi-card__image">
+
+      {% if date_count > 0 %}
+
+        {# SERIES: multiple field items #}
+        {% if date_count > 1 %}
+
+          <div class="bsi-date-box bsi-date-box--series">
+
+            {% for item in node.field_date_range %}
+              {% set start = item.start_date|date('U') %}
+
+              <div class="bsi-date-box__date">
+
+                {% if loop.first %}
+                  <span class="bsi-date-box__month">
+                    {{ months[start|date('m')] }}
+                  </span>
+                  <span class="bsi-date-box__day">
+                    {{ start|date('j') }}
+                  </span>
+                  <span class="bsi-date-box__weekday">
+                    {{ weekdays[start|date('N')] }}
+                  </span>
+                  <span class="bsi-date-box__year">
+                    {{ start|date('Y') }}
+                  </span>
+                {% else %}
+                  <span class="bsi-date-box__month"></span>
+                {% endif %}
+
+              </div>
+
+            {% endfor %}
+
+          </div>
+
+        {% else %}
+
+          {% set start = node.field_date_range.0.start_date|date('U') %}
+          {% set end = node.field_date_range.0.end_date|date('U') %}
+
+          {# RANGE: one item, different start/end dates #}
+          {% if start|date('Ymd') != end|date('Ymd') %}
+
+            <div class="bsi-date-box bsi-date-box--range">
+
+              <div class="bsi-date-box__date">
+                <span class="bsi-date-box__month">
+                  {{ months[start|date('m')] }}
+                </span>
+                <span class="bsi-date-box__day">
+                  {{ start|date('j') }}
+                </span>
+                <span class="bsi-date-box__weekday">
+                  {{ weekdays[start|date('N')] }}
+                </span>
+                <span class="bsi-date-box__year">
+                  {{ start|date('Y') }}
+                </span>
+              </div>
+
+              <div class="bsi-date-box__date">
+                <span class="bsi-date-box__month">
+                  {{ months[end|date('m')] }}
+                </span>
+                <span class="bsi-date-box__day">
+                  {{ end|date('j') }}
+                </span>
+                <span class="bsi-date-box__weekday">
+                  {{ weekdays[end|date('N')] }}
+                </span>
+                <span class="bsi-date-box__year">
+                  {{ end|date('Y') }}
+                </span>
+              </div>
+
+            </div>
+
+          {# SINGLE DAY EVENT #}
+          {% else %}
+
+            <div class="bsi-date-box">
+              <div class="bsi-date-box__date">
+                <span class="bsi-date-box__month">
+                  {{ months[start|date('m')] }}
+                </span>
+                <span class="bsi-date-box__day">
+                  {{ start|date('j') }}
+                </span>
+                <span class="bsi-date-box__weekday">
+                  {{ weekdays[start|date('N')] }}
+                </span>
+                <span class="bsi-date-box__year">
+                  {{ start|date('Y') }}
+                </span>
+              </div>
+            </div>
+
+          {% endif %}
+
+        {% endif %}
+
+      {% endif %}
+
+    </div>
+
+    <div class="bsi-card__content">
+
+      <div class="bsi-card__text">
+
+        <div class="bsi-card__heading-wrapper">
+
+          <p class="bsi-card__topline bsi-card__topline--small">
+            {{content.field_location }}
+          </p>
+
+          <h3 class="bsi-heading bsi-heading--4 bsi-heading--linked bsi-card__heading">
+            <a href="{{ url }}"
+              class="bsi-heading__link">
+              {{ content.title.0['#title']['#text'] }}
+            </a>
+          </h3>
+
+        </div>
+
+        {% if content.body is not empty %}
+          <div class="bsi-card__body">
+            {{ content.body }}
+          </div>
+        {% endif %}
+
+      </div>
+
+      <hr>
+
+      {% include '@bsi_bund/elements/link.html.twig' with {
+        url: url,
+        title: 'Learn more about'|t ~ ' ' ~ content.title.0['#title']['#text'],
+        title_attr: 'Go to event page'|t ~ ' ' ~ content.title.0['#title']['#text'],
+        extra_classes: 'bsi-card__link',
+        link_type: url.isExternal() ? 'external' : 'internal',
+        target: url.isExternal() ? '_blank' : 'self',
+        icon_position: 'before'
+      } only %}
+
+    </div>
+
+  </div>

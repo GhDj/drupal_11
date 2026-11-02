@@ -1,0 +1,22 @@
+// -----------------------------------------------------------------------------
+// Download Single View
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+
+.#{$nsp}-download-full {
+  &__infowrapper {
+    display: flex;
+    gap: 4px;
+  }
+  &__accessibility {
+    @include typography("text-support");
+    color: var(--#{$nsp}-color-neutral-750);
+  }
+
+  .#{$nsp}-copyright {
+    text-align: left;
+  }
+}

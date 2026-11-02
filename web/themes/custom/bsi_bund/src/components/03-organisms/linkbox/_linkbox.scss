@@ -43,7 +43,7 @@
       flex-direction: row;
       gap: 0 var(--#{$nsp}-size-2xl);
     }
-    .bsi-link__content {
+    .#{$nsp}-link__content {
       display: inline;
     }
 
