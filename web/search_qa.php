@@ -29,8 +29,9 @@ $kernel->preHandle($request);
 $container = $kernel->getContainer();
 
 $renderer = $container->get('renderer');
-$theme_initializer = $container->get('theme.initialization');
-$theme_initializer->initTheme();
+$default_theme = $container->get('config.factory')->get('system.theme')->get('default');
+$container->get('theme.initialization')->initTheme($default_theme);
+$container->get('theme.manager')->setActiveTheme($container->get('theme.initialization')->getActiveThemeByName($default_theme));
 
 // All search view displays to test.
 $search_views = [
