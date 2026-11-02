@@ -13,11 +13,6 @@
     {{ title }}
   {% endif %}
   {{ title_suffix }}
-  {% if header %}
-    <div class="view-header">
-      {{ header }}
-    </div>
-  {% endif %}
   {% if exposed %}
     <div class="view-filters">
       {{ exposed }}
@@ -29,19 +24,32 @@
     </div>
   {% endif %}
 
-  {% if rows %}
-    <div class="view-content">
-      {{ rows }}
-    </div>
-  {% elseif empty %}
-    <div class="view-empty">
-      {{ empty }}
+  {% if rows or empty %}
+    <div class="bsi-search-result">
+      <div class="bsi-search-result__inner">
+        {% if header %}
+          <div class="bsi-search-result__head">
+            {{ header }}
+          </div>
+        {% endif %}
+
+        {% if rows %}
+          <div class="view-content">
+            {{ rows }}
+          </div>
+        {% elseif empty %}
+          <div class="view-empty">
+            {{ empty }}
+          </div>
+        {% endif %}
+
+        {% if pager %}
+          {{ pager }}
+        {% endif %}
+      </div>
     </div>
   {% endif %}
 
-  {% if pager %}
-    {{ pager }}
-  {% endif %}
   {% if attachment_after %}
     <div class="attachment attachment-after">
       {{ attachment_after }}
