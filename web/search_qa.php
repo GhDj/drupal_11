@@ -13,27 +13,20 @@ use Drupal\Core\DrupalKernel;
 use Drupal\views\Views;
 use Symfony\Component\HttpFoundation\Request;
 
-// Bootstrap Drupal fully (handle request to initialize session/auth).
+// Simple access check — dev/QA tool only. Access via /search_qa.php?key=bsi-search-qa
+if (($_GET['key'] ?? '') !== 'bsi-search-qa') {
+  http_response_code(403);
+  echo 'Access denied. Use: /search_qa.php?key=bsi-search-qa';
+  exit;
+}
+
+// Bootstrap Drupal.
 $autoloader = require_once __DIR__ . '/autoload.php';
 $request = Request::createFromGlobals();
 $kernel = DrupalKernel::createFromRequest($request, $autoloader, 'prod');
 $kernel->boot();
 $kernel->preHandle($request);
 $container = $kernel->getContainer();
-
-// Authenticate the current request (session-based).
-$container->get('session_handler.write_safe')->setSessionWritable(TRUE);
-if ($container->has('authentication')) {
-  $container->get('authentication')->authenticate($request);
-}
-
-// Check user is logged in and has admin access.
-$current_user = $container->get('current_user');
-if ($current_user->isAnonymous() || !$current_user->hasPermission('administer site configuration')) {
-  http_response_code(403);
-  echo 'Access denied. Log in as admin at the normal Drupal site first, then reload this page.';
-  exit;
-}
 
 $renderer = $container->get('renderer');
 $theme_initializer = $container->get('theme.initialization');
