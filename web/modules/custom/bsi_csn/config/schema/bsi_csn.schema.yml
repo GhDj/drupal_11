@@ -1,0 +1,13 @@
+bsi_csn.settings:
+  type: config_object
+  label: 'CSN settings'
+  mapping:
+    bsi_url:
+      type: string
+      label: 'BSI homepage URL'
+    csn_dashboard_url:
+      type: string
+      label: 'CSN dashboard URL'
+    logout_redirect_url:
+      type: string
+      label: 'Logout redirect URL'

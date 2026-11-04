@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_theme().
+ */
+function bsi_csn_theme(): array {
+  return [
+    'csn_branding' => [
+      'variables' => [
+        'bsi_logo' => NULL,
+        'bsi_logo_mobile' => NULL,
+        'bsi_url' => NULL,
+        'csn_dashboard_url' => NULL,
+      ],
+    ],
+  ];
+}

@@ -1,0 +1,5 @@
+bsi_csn.settings:
+  title: 'CSN Settings'
+  description: 'Configure CSN branding URLs and logout redirect.'
+  route_name: bsi_csn.settings
+  parent: system.admin_config_system
