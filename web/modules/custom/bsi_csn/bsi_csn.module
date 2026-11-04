@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\block\BlockInterface;
 
 /**
@@ -36,4 +37,25 @@ function bsi_csn_block_access(BlockInterface $block, string $operation, $account
     }
   }
   return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for block_form.
+ *
+ * Removes the visibility conditions UI for the CSN branding block, since
+ * visibility is handled programmatically via blockAccess().
+ * This prevents Drupal from saving stale conditions (e.g. book_level)
+ * that would interfere with the block's access logic.
+ */
+function bsi_csn_form_block_form_alter(array &$form, FormStateInterface $form_state): void {
+  $block = $form_state->getFormObject()->getEntity();
+  if ($block->getPluginId() === 'bsi_csn_branding') {
+    $form['visibility']['#access'] = FALSE;
+    $form['visibility_note'] = [
+      '#type' => 'item',
+      '#title' => t('Visibility'),
+      '#markup' => t('This block is automatically shown only on CSN group content pages. Visibility is managed in code and cannot be changed here.'),
+      '#weight' => 80,
+    ];
+  }
 }
