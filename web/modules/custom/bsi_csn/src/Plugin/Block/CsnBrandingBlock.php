@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Drupal\bsi_csn\Plugin\Block;
 
+use Drupal\bsi_csn\CsnContextChecker;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -28,6 +31,7 @@ final class CsnBrandingBlock extends BlockBase implements ContainerFactoryPlugin
     $plugin_definition,
     private readonly ConfigFactoryInterface $configFactory,
     private readonly ThemeHandlerInterface $themeHandler,
+    private readonly CsnContextChecker $csnContextChecker,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
@@ -42,7 +46,16 @@ final class CsnBrandingBlock extends BlockBase implements ContainerFactoryPlugin
       $plugin_definition,
       $container->get('config.factory'),
       $container->get('theme_handler'),
+      $container->get('bsi_csn.context_checker'),
     );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function blockAccess(AccountInterface $account): AccessResult {
+    return AccessResult::allowedIf($this->csnContextChecker->isCsnPage())
+      ->addCacheContexts(['route']);
   }
 
   /**

@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use Drupal\Core\Access\AccessResult;
+use Drupal\block\BlockInterface;
+
 /**
  * Implements hook_theme().
  */
@@ -16,4 +19,21 @@ function bsi_csn_theme(): array {
       ],
     ],
   ];
+}
+
+/**
+ * Implements hook_block_access().
+ *
+ * Hides the regular site branding block on CSN pages.
+ */
+function bsi_csn_block_access(BlockInterface $block, string $operation, $account): AccessResult {
+  if ($operation === 'view' && $block->getPluginId() === 'system_branding_block') {
+    /** @var \Drupal\bsi_csn\CsnContextChecker $checker */
+    $checker = \Drupal::service('bsi_csn.context_checker');
+    if ($checker->isCsnPage()) {
+      return AccessResult::forbidden('CSN pages use the CSN branding block.')
+        ->addCacheContexts(['route']);
+    }
+  }
+  return AccessResult::neutral();
 }

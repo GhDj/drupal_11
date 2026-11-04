@@ -48,10 +48,20 @@ foreach ($blocks as $block) {
   echo "   - Block: {$block->id()}, region: {$block->getRegion()}, status: " . ($block->status() ? 'enabled' : 'disabled') . "\n";
   $visibility = $block->getVisibility();
   echo "   - Visibility conditions: " . (empty($visibility) ? 'NONE' : implode(', ', array_keys($visibility))) . "\n";
-  if (isset($visibility['group_content_visibility'])) {
-    $conf = $visibility['group_content_visibility'];
-    echo "   - Group types: " . print_r($conf['group_types'] ?? [], TRUE);
-    echo "   - Negate: " . ($conf['negate'] ?? 'false') . "\n";
+
+  // Clean up stale visibility conditions — visibility is now handled in code.
+  $cleaned = FALSE;
+  foreach (['book_level', 'group_content_visibility'] as $stale) {
+    if (isset($visibility[$stale])) {
+      unset($visibility[$stale]);
+      $cleaned = TRUE;
+      echo "   - Removed stale condition: {$stale}\n";
+    }
+  }
+  if ($cleaned) {
+    $block->set('visibility', $visibility);
+    $block->save();
+    echo "   - Block config saved (visibility now handled by blockAccess)\n";
   }
 }
 
