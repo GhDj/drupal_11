@@ -3,12 +3,18 @@
 namespace Drupal\bsi_custom\Plugin\ViewsReferenceSetting;
 
 use Drupal\Core\Entity\Element\EntityAutocomplete;
+use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\Utility\Token;
 use Drupal\views\Plugin\views\argument\ArgumentPluginBase;
 use Drupal\views\ViewExecutable;
 use Drupal\viewsreference\Plugin\ViewsReferenceSetting\ViewsReferenceArgument as ContribViewsReferenceArgument;
+use Drupal\viewsreference_filter\ViewsRefFilterUtility;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Views reference setting plugin to override context arguments.
@@ -25,13 +31,40 @@ class ViewsReferenceArguments extends ContribViewsReferenceArgument {
 
   const int MAX_OPTIONS_TO_DISPLAY = 10;
 
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    CurrentRouteMatch $current_route_match,
+    Token $token,
+    private readonly ViewsRefFilterUtility $viewsReferenceUtility,
+    private readonly EntityTypeManagerInterface $entityTypeManager,
+    private readonly EntityFieldManagerInterface $entityFieldManager,
+  ) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $current_route_match, $token);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('current_route_match'),
+      $container->get('token'),
+      $container->get('viewsreference_filter.views_utility'),
+      $container->get('entity_type.manager'),
+      $container->get('entity_field.manager'),
+    );
+  }
+
   /**
    * {@inheritdoc}
    */
   public function alterFormField(array &$form_field): void {
-    /** @var \Drupal\viewsreference_filter\ViewsRefFilterUtilityInterface $utility */
-    $utility = \Drupal::service('viewsreference_filter.views_utility');
-    $view = $utility->loadView(
+    $view = $this->viewsReferenceUtility->loadView(
       $this->configuration['view_name'],
       $this->configuration['display_id'],
     );
@@ -61,7 +94,6 @@ class ViewsReferenceArguments extends ContribViewsReferenceArgument {
       if ($plugin->options['break_phrase']) {
         $description[] = $this->t('Enter multiple values in the form of 1+2+3 (for OR) or 1,2,3 (for AND).');
       }
-      $description[] = $this->t('Leave empty to use the default.');
 
       $form_field[$plugin->options['id']] = [
         '#type' => 'textfield',
@@ -108,7 +140,7 @@ class ViewsReferenceArguments extends ContribViewsReferenceArgument {
     $options = [];
     if ($plugin->options['validate'] && str_starts_with($plugin->options['validate']['type'], 'entity:')) {
       [, $entity_type_id] = explode(':', $plugin->options['validate']['type']);
-      $storage = \Drupal::entityTypeManager()->getStorage($entity_type_id);
+      $storage = $this->entityTypeManager->getStorage($entity_type_id);
 
       $count = $storage->getQuery()->accessCheck(TRUE)->count();
       $bundles = $plugin->options['validate_options']['bundles'] ?? [];
@@ -132,18 +164,15 @@ class ViewsReferenceArguments extends ContribViewsReferenceArgument {
       }
     }
     if (empty($options) && $plugin->getPluginId() === 'search_api') {
-      // @todo Use dependency injection.
       /** @var \Drupal\search_api\IndexInterface $index */
-      $index = \Drupal::entityTypeManager()->getStorage('search_api_index')
+      $index = $this->entityTypeManager->getStorage('search_api_index')
         ->load(str_replace('search_api_index_', '', $plugin->table));
 
       $sapi_field_settings = $index->get('field_settings')[$plugin->options['field']];
       [, $entity_type_id] = explode(':', $sapi_field_settings['datasource_id']);
       [$field_name] = explode(':', $sapi_field_settings['property_path']);
 
-      /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $efm */
-      $efm = \Drupal::service('entity_field.manager');
-      if ($field_definition = $efm->getFieldStorageDefinitions($entity_type_id)[$field_name] ?? NULL) {
+      if ($field_definition = $this->entityFieldManager->getFieldStorageDefinitions($entity_type_id)[$field_name] ?? NULL) {
         if ($field_options = $field_definition->getSetting('allowed_values') ?? []) {
           $widget = ($plugin->options['break_phrase'] ?? FALSE) ? 'checkboxes' : 'select';
           $options = $field_options;
@@ -170,14 +199,13 @@ class ViewsReferenceArguments extends ContribViewsReferenceArgument {
       $element['#placeholder'] = $this->t('Use default');
       $element['#target_type'] = $widget;
       $element['#selection_settings']['target_bundles'] = $options;
-      $element['#multiple'] = (bool) ($plugin->options['break_phrase'] ?? FALSE);
       $element['#element_validate'][] = [
         static::class,
         'validateEntityAutocomplete',
       ];
 
       if ($element['#default_value']) {
-        $entities = \Drupal::entityTypeManager()->getStorage($widget)
+        $entities = $this->entityTypeManager->getStorage($widget)
           ->loadMultiple((array) $element['#default_value']);
         $element['#default_value'] = $element['#multiple'] ? $entities : reset($entities);
       }

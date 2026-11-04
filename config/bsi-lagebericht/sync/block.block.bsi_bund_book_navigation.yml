@@ -5,7 +5,7 @@ dependencies:
   module:
     - book
     - bsi_custom
-    - node
+    - bsi_report
   theme:
     - bsi_bund
 id: bsi_bund_book_navigation
@@ -27,20 +27,13 @@ settings:
   book_select: 0
   expanded: true
 visibility:
-  book:
-    id: book
-    books: {  }
-    negate: 1
-    context_mapping:
-      node: '@node.node_route_context:node'
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
-    bundles:
-      report_page: report_page
   request_route_name:
     id: request_route_name
     negate: false
     route_names: entity.node.canonical
+  book_level:
+    id: book_level
+    negate: true
+    context_mapping:
+      node: '@node.node_route_context:node'
+    level: '1'

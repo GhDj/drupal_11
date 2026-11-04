@@ -59,6 +59,17 @@ class ParagraphHooks {
   }
 
   /**
+   * Implements hook_preprocess_HOOK() for paragraph.html.twig.
+   *
+   * Defers to individual hook classes.
+   */
+  #[Hook('preprocess_paragraph')]
+  public function preprocessParagraph(array &$variables): void {
+    TabsHooks::processParagraph($variables);
+    JumpLinksHooks::processParagraph($variables);
+  }
+
+  /**
    * Implements hook_preprocess_HOOK() for paragraphs_summary.
    *
    * Alter the paragraph summary used in forms.

@@ -37,17 +37,21 @@ class ChartHooks {
       $definition['options']['scales']['r']['min'] = 0;
     }
 
+    foreach (['prefix', 'suffix', 'decimal_count'] as $property) {
+      if (strlen((string) $element['yaxis']['#' . $property]) > 0) {
+        $element['#attached']['drupalSettings']['bsi_charts'][$element['#id']][$property] = $element['yaxis']['#' . $property];
+      }
+    }
+
     // If a trend dataset is present, ensure it's a line.
     $index = array_find_key($definition['data']['datasets'], static fn (array $dataset)
       => $dataset['label'] === static::LABEL_TRENDLINE);
-    if ($index === NULL) {
-      return;
+    if ($index !== NULL) {
+      $dataset = &$definition['data']['datasets'][$index];
+      $dataset['type'] = 'line';
+      $dataset['order'] = -1;
+      $dataset['borderDash'] = [static::STYLE_DOT_SIZE, static::STYLE_DOT_SIZE];
     }
-
-    $dataset = &$definition['data']['datasets'][$index];
-    $dataset['type'] = 'line';
-    $dataset['order'] = -1;
-    $dataset['borderDash'] = [static::STYLE_DOT_SIZE, static::STYLE_DOT_SIZE];
   }
 
   /**

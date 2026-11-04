@@ -2,16 +2,21 @@
  * @file
  * Behaviors interacting with chart.js.
  */
-(function (Drupal, once) {
+(function (Drupal, once, drupalSettings) {
 
   'use strict';
 
   Drupal.behaviors.bsiCharts = {
     attach (context) {
       once('deduplicate-legend', '.charts-chartjs', context).forEach((element) => {
-        element.addEventListener('drupalChartsConfigsInitialization', Drupal.behaviors.bsiCharts._deduplicateLegend);
-        element.addEventListener('drupalChartsConfigsInitialization', Drupal.behaviors.bsiCharts._lightboxOverrides);
-        element.addEventListener('drupalChartsConfigsInitialization', Drupal.behaviors.bsiCharts._adjustLegend);
+        [
+          Drupal.behaviors.bsiCharts._deduplicateLegend,
+          Drupal.behaviors.bsiCharts._formatTooltip,
+          Drupal.behaviors.bsiCharts._lightboxOverrides,
+          Drupal.behaviors.bsiCharts._adjustLegend,
+        ].forEach(callback => {
+          element.addEventListener('drupalChartsConfigsInitialization', callback);
+        });
       });
     },
 
@@ -33,6 +38,28 @@
       }
       options.layout.padding.left = options.layout.padding.left ?? 16;
       options.layout.padding.right = options.layout.padding.right ?? 16;
+    },
+
+    _formatTooltip(event) {
+      const chartSettings = (drupalSettings.bsi_charts ?? {})[event.target.id] ?? {};
+      if (Object.keys(chartSettings).length === 0) {
+        return;
+      }
+
+      const options = event.detail.options;
+      options.plugins.tooltip ??= {};
+      options.plugins.tooltip.callbacks ??= {};
+      options.plugins.tooltip.callbacks.label = (context) => Drupal.behaviors.bsiCharts.formatTooltipValue(context, chartSettings);
+    },
+    formatTooltipValue(context, chartSettings) {
+      const numberFormat = new Intl.NumberFormat(
+        document.getElementsByTagName('html')[0].lang,
+        {
+          minimumFractionDigits: chartSettings.decimal_count ?? null,
+          maximumFractionDigits: chartSettings.decimal_count ?? null,
+        }
+      );
+      return `${context.dataset.label}: ${chartSettings.prefix ?? ''}${numberFormat.format(context.raw)}${chartSettings.suffix ?? ''}`
     },
 
     _adjustLegend(event) {
@@ -105,4 +132,4 @@
     }
   };
 
-} (Drupal, once));
+} (Drupal, once, drupalSettings));

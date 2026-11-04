@@ -86,7 +86,7 @@
             {% endif %}
 
             {% if title %}
-              <h3 class="bsi-heading bsi-heading--4 bsi-heading--linked bsi-card__heading">
+              <h3{{ title_attributes.addClass('bsi-heading', 'bsi-heading--4', 'bsi-heading--linked', 'bsi-card__heading') }}>
                 {{ title }}
               </h3>
             {% endif %}

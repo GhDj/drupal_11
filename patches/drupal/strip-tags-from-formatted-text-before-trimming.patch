@@ -1,0 +1,429 @@
+diff --git a/core/modules/field/tests/src/Kernel/Views/HandlerFieldFieldTest.php b/core/modules/field/tests/src/Kernel/Views/HandlerFieldFieldTest.php
+index 650a698aac4caa33bb5b41a3ff31ebcafeb3d7da..a0b049547319451cfe243066c695bcc20780785e 100644
+--- a/core/modules/field/tests/src/Kernel/Views/HandlerFieldFieldTest.php
++++ b/core/modules/field/tests/src/Kernel/Views/HandlerFieldFieldTest.php
+@@ -157,6 +157,7 @@ public function doTestFormatterSimpleFieldRender(): void {
+     $view->displayHandlers->get('default')->options['fields'][$this->fieldStorages[5]->getName()]['type'] = 'text_trimmed';
+     $view->displayHandlers->get('default')->options['fields'][$this->fieldStorages[5]->getName()]['settings'] = [
+       'trim_length' => 3,
++      'exclude_html_tags' => FALSE,
+     ];
+     $view->preview();
+
+diff --git a/core/modules/system/tests/modules/olivero_test/config/install/core.entity_view_display.node.article.teaser.yml b/core/modules/system/tests/modules/olivero_test/config/install/core.entity_view_display.node.article.teaser.yml
+index ffc5ebf81839bbad9db028df02cbaa789176ad41..ae69eb1adf42f80c6068a18f640245d0575282e4 100644
+--- a/core/modules/system/tests/modules/olivero_test/config/install/core.entity_view_display.node.article.teaser.yml
++++ b/core/modules/system/tests/modules/olivero_test/config/install/core.entity_view_display.node.article.teaser.yml
+@@ -23,6 +23,7 @@ content:
+     label: hidden
+     settings:
+       trim_length: 600
++      exclude_html_tags: TRUE
+     third_party_settings: {  }
+     weight: 0
+     region: content
+diff --git a/core/modules/text/config/schema/text.schema.yml b/core/modules/text/config/schema/text.schema.yml
+index ea83279fe7256ca8f0ce1a7f5b06693bfd23238d..634b0956a1f7bf853c43564f516572582c8bfb37 100644
+--- a/core/modules/text/config/schema/text.schema.yml
++++ b/core/modules/text/config/schema/text.schema.yml
+@@ -111,6 +111,9 @@ field.formatter.settings.text_summary_or_trimmed:
+     trim_length:
+       type: integer
+       label: 'Trim length'
++    exclude_html_tags:
++      type: boolean
++      label: 'Exclude HTML tags from trim length'
+
+ field.formatter.settings.text_trimmed:
+   type: mapping
+@@ -119,6 +122,9 @@ field.formatter.settings.text_trimmed:
+     trim_length:
+       type: integer
+       label: 'Trim length'
++    exclude_html_tags:
++      type: boolean
++      label: 'Exclude HTML tags from trim length'
+
+ field.widget.settings.text_textarea:
+   type: mapping
+diff --git a/core/modules/text/src/Plugin/Field/FieldFormatter/TextTrimmedFormatter.php b/core/modules/text/src/Plugin/Field/FieldFormatter/TextTrimmedFormatter.php
+index ea52d9b402675767eb80852b0660a036ab62b0f7..0190f1fd8b115c47ee79be8642026b64b2607d8b 100644
+--- a/core/modules/text/src/Plugin/Field/FieldFormatter/TextTrimmedFormatter.php
++++ b/core/modules/text/src/Plugin/Field/FieldFormatter/TextTrimmedFormatter.php
+@@ -2,10 +2,13 @@
+
+ namespace Drupal\text\Plugin\Field\FieldFormatter;
+
++use Drupal\Component\Utility\Html;
+ use Drupal\Core\Field\Attribute\FieldFormatter;
++use Drupal\Core\Field\FieldDefinitionInterface;
+ use Drupal\Core\Field\FormatterBase;
+ use Drupal\Core\Field\FieldItemListInterface;
+ use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Render\ElementInfoManagerInterface;
+ use Drupal\Core\Security\TrustedCallbackInterface;
+ use Drupal\Core\StringTranslation\TranslatableMarkup;
+ use Drupal\text\TextSummary;
+@@ -29,12 +32,17 @@
+ )]
+ class TextTrimmedFormatter extends FormatterBase implements TrustedCallbackInterface {
+
++  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, $label, $view_mode, array $third_party_settings, protected ElementInfoManagerInterface $elementInfo) {
++    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
++  }
++
+   /**
+    * {@inheritdoc}
+    */
+   public static function defaultSettings() {
+     return [
+       'trim_length' => '600',
++      'exclude_html_tags' => TRUE,
+     ] + parent::defaultSettings();
+   }
+
+@@ -51,6 +59,12 @@ public function settingsForm(array $form, FormStateInterface $form_state) {
+       '#min' => 1,
+       '#required' => TRUE,
+     ];
++    $element['exclude_html_tags'] = [
++      '#title' => $this->t('Exclude HTML tags from trim length'),
++      '#type' => 'checkbox',
++      '#default_value' => $this->getSetting('exclude_html_tags'),
++      '#description' => $this->t('If checked, HTML tags will not count toward the character limit.'),
++    ];
+     return $element;
+   }
+
+@@ -60,6 +74,9 @@ public function settingsForm(array $form, FormStateInterface $form_state) {
+   public function settingsSummary() {
+     $summary = [];
+     $summary[] = $this->t('Trimmed limit: @trim_length characters', ['@trim_length' => $this->getSetting('trim_length')]);
++    $summary[] = $this->t('Exclude HTML: @exclude_html_tags', [
++      '@exclude_html_tags' => $this->getSetting('exclude_html_tags') ? $this->t('Yes') : $this->t('No'),
++    ]);
+     return $summary;
+   }
+
+@@ -72,7 +89,7 @@ public function viewElements(FieldItemListInterface $items, $langcode) {
+     $render_as_summary = function (&$element) {
+       // Make sure any default #pre_render callbacks are set on the element,
+       // because text_pre_render_summary() must run last.
+-      $element += \Drupal::service('element_info')->getInfo($element['#type']);
++      $element += $this->elementInfo->getInfo($element['#type']);
+       // Add the #pre_render callback that renders the text into a summary.
+       $element['#pre_render'][] = [TextTrimmedFormatter::class, 'preRenderSummary'];
+       // Pass on the trim length to the #pre_render callback via a property.
+@@ -87,6 +104,7 @@ public function viewElements(FieldItemListInterface $items, $langcode) {
+         '#text' => NULL,
+         '#format' => $item->format,
+         '#langcode' => $item->getLangcode(),
++        '#exclude_html_tags' => $this->getSetting('exclude_html_tags'),
+       ];
+
+       if ($this->getPluginId() == 'text_summary_or_trimmed' && !empty($item->summary)) {
+@@ -112,6 +130,8 @@ public function viewElements(FieldItemListInterface $items, $langcode) {
+    *     filter_fallback_format().
+    *   - #text_summary_trim_length: the desired character length of the summary
+    *     (used by \Drupal\text\TextSummary::generate())
++   *   - #exclude_html_tags: (optional) whether HTML tags should be excluded
++   *     from the trim length count. Defaults to FALSE.
+    *
+    * @return array
+    *   The passed-in element with the filtered text in '#markup' trimmed.
+@@ -120,10 +140,60 @@ public function viewElements(FieldItemListInterface $items, $langcode) {
+    * @see \Drupal\text\TextSummary::generate()
+    */
+   public static function preRenderSummary(array $element) {
+-    $element['#markup'] = \Drupal::service(TextSummary::class)->generate($element['#markup'], $element['#format'], $element['#text_summary_trim_length']);
++    $raw_text = $element['#markup'];
++    $exclude_html = $element['#exclude_html_tags'] ?? FALSE;
++    $summary_service = \Drupal::service(TextSummary::class);
++
++    // When a <!--break--> delimiter is present, preserve that by handing over
++    // the raw text so the comment is not lost to strip_tags().
++    if (!$exclude_html || str_contains($raw_text, '<!--break-->')) {
++      $element['#markup'] = $summary_service->generate($raw_text, $element['#format'], $element['#text_summary_trim_length']);
++      return $element;
++    }
++
++    $trimmed_plain_text = $summary_service->generate(strip_tags($raw_text), $element['#format'], $element['#text_summary_trim_length']);
++    $element['#markup'] = self::truncateHtml($raw_text, strlen($trimmed_plain_text));
++
+     return $element;
+   }
+
++  /**
++   * Truncates an HTML string to a given length while preserving tags.
++   *
++   * @param string $html
++   *   The HTML string to truncate.
++   * @param int $length
++   *   The desired character length.
++   *
++   * @return string
++   *   The truncated HTML string.
++   */
++  public static function truncateHtml(string $html, int $length): string {
++    $visible = 0;
++    $offset = 0;
++    $in_tag = FALSE;
++    $total = strlen($html);
++    while ($offset < $total && $visible < $length) {
++      $char = $html[$offset];
++      if ($char === '<') {
++        $in_tag = TRUE;
++      }
++      elseif ($char === '>') {
++        $in_tag = FALSE;
++      }
++      elseif (!$in_tag) {
++        $visible++;
++      }
++      $offset++;
++    }
++    // Nothing was truncated, so skip the normalization.
++    if ($offset >= $total) {
++      return $html;
++    }
++    // The fragment may end inside unclosed elements; normalize() repairs it.
++    return Html::normalize(substr($html, 0, $offset));
++  }
++
+   /**
+    * {@inheritdoc}
+    */
+diff --git a/core/modules/text/tests/src/Functional/Update/ExcludeHtmlTagsSettingUpdatePathTest.php b/core/modules/text/tests/src/Functional/Update/ExcludeHtmlTagsSettingUpdatePathTest.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..9be97dab557be370e9b0af7a263eca07b3f43a93
+--- /dev/null
++++ b/core/modules/text/tests/src/Functional/Update/ExcludeHtmlTagsSettingUpdatePathTest.php
+@@ -0,0 +1,47 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Tests\text\Functional\Update;
++
++use Drupal\FunctionalTests\Update\UpdatePathTestBase;
++use PHPUnit\Framework\Attributes\Group;
++use PHPUnit\Framework\Attributes\IgnoreDeprecations;
++use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
++
++/**
++ * Tests the exclude_html_tags setting is added.
++ */
++#[Group('Update')]
++#[RunTestsInSeparateProcesses]
++#[IgnoreDeprecations]
++class ExcludeHtmlTagsSettingUpdatePathTest extends UpdatePathTestBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setDatabaseDumpFiles(): void {
++    $this->databaseDumpFiles = [
++      __DIR__ . '/../../../../../system/tests/fixtures/update/drupal-11.3.0.bare.standard.php.gz',
++    ];
++  }
++
++  /**
++   * Tests that exclude_html_tags get added.
++   */
++  public function testRunUpdates(): void {
++    $display = \Drupal::config('core.entity_view_display.node.article.teaser');
++    $components = $display->get('content');
++    $this->assertArrayHasKey('body', $components);
++    $this->assertSame('text_summary_or_trimmed', $components['body']['type']);
++    $this->assertArrayNotHasKey('exclude_html_tags', $components['body']['settings']);
++
++    $this->runUpdates();
++
++    $display = \Drupal::config('core.entity_view_display.node.article.teaser');
++    $components = $display->get('content');
++    $this->assertArrayHasKey('exclude_html_tags', $components['body']['settings']);
++    $this->assertFalse($components['body']['settings']['exclude_html_tags']);
++  }
++
++}
+diff --git a/core/modules/text/tests/src/Kernel/TextFormatterTest.php b/core/modules/text/tests/src/Kernel/TextFormatterTest.php
+index 4f734e810eaad0758a23e47043df11365364cf58..28f8e683d7a2f622165c98325326d07b17148029 100644
+--- a/core/modules/text/tests/src/Kernel/TextFormatterTest.php
++++ b/core/modules/text/tests/src/Kernel/TextFormatterTest.php
+@@ -8,9 +8,12 @@
+ use Drupal\field\Entity\FieldStorageConfig;
+ use Drupal\filter\Entity\FilterFormat;
+ use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
++use Drupal\text\Plugin\Field\FieldFormatter\TextTrimmedFormatter;
++use PHPUnit\Framework\Attributes\DataProvider;
+ use PHPUnit\Framework\Attributes\Group;
+ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
++// cspell:ignore afte
+ /**
+  * Tests the text formatters functionality.
+  */
+@@ -97,4 +100,92 @@ public function testFormatters(): void {
+     }
+   }
+
++  /**
++   * Tests the exclude_html_tags setting on the text_trimmed formatter.
++   */
++  public function testExcludeHtmlTagsSetting(): void {
++    $entity = $this->container->get('entity_type.manager')
++      ->getStorage($this->entityType)
++      ->create(['name' => $this->randomMachineName()]);
++    $entity->formatted_text = [
++      'value' => '<p>abcdefghijklmnopqrst</p>',
++      'format' => 'my_text_format',
++    ];
++    $entity->save();
++
++    $build = $entity->get('formatted_text')->view([
++      'type' => 'text_trimmed',
++      'settings' => [
++        'trim_length' => 10,
++        'exclude_html_tags' => TRUE,
++      ],
++    ]);
++    $this->container->get('renderer')->renderRoot($build[0]);
++    // With tags stripped should get the first 10 letters.
++    $this->assertSame('<p>abcdefghij</p>', (string) $build[0]['#markup']);
++  }
++
++  /**
++   * Tests that <!--break--> is honored when exclude_html_tags is enabled.
++   */
++  public function testExcludeHtmlTagsPreservesBreakDelimiter(): void {
++    $entity = $this->container->get('entity_type.manager')
++      ->getStorage($this->entityType)
++      ->create(['name' => $this->randomMachineName()]);
++    $entity->formatted_text = [
++      'value' => '<p>abcdefghijklmnopqrst</p><!--break--><p>ignored part</p>',
++      'format' => 'my_text_format',
++    ];
++    $entity->save();
++
++    $build = $entity->get('formatted_text')->view([
++      'type' => 'text_trimmed',
++      'settings' => [
++        'trim_length' => 10,
++        'exclude_html_tags' => TRUE,
++      ],
++    ]);
++    $this->container->get('renderer')->renderRoot($build[0]);
++    $markup = (string) $build[0]['#markup'];
++    // The delimiter path returns the substring before <!--break-->.
++    $this->assertStringContainsString('abcdefghij', $markup);
++    $this->assertStringNotContainsString('ignored part', $markup);
++    $this->assertStringNotContainsString('<!--break-->', $markup);
++  }
++
++  /**
++   * Tests TextTrimmedFormatter::truncateHtml() across HTML shapes.
++   */
++  #[DataProvider('providerTruncateHtml')]
++  public function testTruncateHtml(string $input, int $length, string $expected_substring): void {
++    $result = TextTrimmedFormatter::truncateHtml($input, $length);
++    $this->assertStringContainsString($expected_substring, $result);
++  }
++
++  /**
++   * Data provider for ::testTruncateHtml().
++   */
++  public static function providerTruncateHtml(): array {
++    return [
++      'input shorter than limit is returned unchanged' => [
++        '<p>Hello</p>', 100, '<p>Hello</p>',
++      ],
++      'tags are not counted toward the limit' => [
++        '<p>abcdefghij</p>', 5, '<p>abcde</p>',
++      ],
++      'nested tags are repaired when the cut lands inside them' => [
++        '<p><strong>Hello world</strong></p>', 5, '<strong>Hello</strong>',
++      ],
++      'void elements do not corrupt the counter' => [
++        '<p>before<br>after</p>', 10, 'before<br>afte',
++      ],
++      'attribute contents do not count toward the limit' => [
++        '<a href="https://example.com" title="link">click here</a>', 5, '>click</a>',
++      ],
++      'sibling tags share one continuous counter' => [
++        '<p>one</p><p>two</p><p>three</p>', 6, '<p>two</p>',
++      ],
++    ];
++  }
++
+ }
+diff --git a/core/modules/text/text.post_update.php b/core/modules/text/text.post_update.php
+index 730bda0b97f41d9a455bab723efd1a17a1862e67..7720604317ce488c5f05820c7eaa47e9f790d8b6 100644
+--- a/core/modules/text/text.post_update.php
++++ b/core/modules/text/text.post_update.php
+@@ -5,6 +5,8 @@
+  * Contains post update hooks for the text module.
+  */
+
++use Drupal\Core\Config\Entity\ConfigEntityUpdater;
++
+ /**
+  * Implements hook_removed_post_updates().
+  */
+@@ -15,3 +17,21 @@ function text_removed_post_updates(): array {
+     'text_post_update_allowed_formats' => '11.0.0',
+   ];
+ }
++
++/**
++ * Populates the new `exclude_html_tags` setting on text_trimmed formatters.
++ */
++function text_post_update_add_exclude_html_tags_setting(array &$sandbox): void {
++  \Drupal::classResolver(ConfigEntityUpdater::class)->update($sandbox, 'entity_view_display', function ($display) {
++    /** @var \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display */
++    $changed = FALSE;
++    foreach ($display->getComponents() as $name => $component) {
++      if (isset($component['type']) && in_array($component['type'], ['text_trimmed', 'text_summary_or_trimmed']) && !isset($component['settings']['exclude_html_tags'])) {
++        $component['settings']['exclude_html_tags'] = FALSE;
++        $display->setComponent($name, $component);
++        $changed = TRUE;
++      }
++    }
++    return $changed;
++  });
++}
+diff --git a/core/profiles/demo_umami/config/install/core.entity_view_display.node.article.teaser.yml b/core/profiles/demo_umami/config/install/core.entity_view_display.node.article.teaser.yml
+index 6a78714b7a3ee14f7dea8cfede9b54cce498ae5e..82f383ecdf099c93a3b00c513d3bcdb6bfc4e008 100644
+--- a/core/profiles/demo_umami/config/install/core.entity_view_display.node.article.teaser.yml
++++ b/core/profiles/demo_umami/config/install/core.entity_view_display.node.article.teaser.yml
+@@ -21,6 +21,7 @@ content:
+     label: hidden
+     settings:
+       trim_length: 600
++      exclude_html_tags: TRUE
+     third_party_settings: {  }
+     weight: 2
+     region: content
+diff --git a/core/profiles/demo_umami/config/install/core.entity_view_display.node.page.teaser.yml b/core/profiles/demo_umami/config/install/core.entity_view_display.node.page.teaser.yml
+index 25ecff99c742062d3f53d07f4204fdad1bc3c4cc..4759348c7f20ad40e090eb3f57adb1b78b89ccca 100644
+--- a/core/profiles/demo_umami/config/install/core.entity_view_display.node.page.teaser.yml
++++ b/core/profiles/demo_umami/config/install/core.entity_view_display.node.page.teaser.yml
+@@ -19,6 +19,7 @@ content:
+     label: hidden
+     settings:
+       trim_length: 600
++      exclude_html_tags: TRUE
+     third_party_settings: {  }
+     weight: 100
+     region: content
+diff --git a/core/tests/fixtures/recipes/page_content_type/config/core.entity_view_display.node.page.teaser.yml b/core/tests/fixtures/recipes/page_content_type/config/core.entity_view_display.node.page.teaser.yml
+index ea3305a8ca105af588ddaf97935b267c4686471c..bccc57284219f384f0f299e240fe442fc6324406 100644
+--- a/core/tests/fixtures/recipes/page_content_type/config/core.entity_view_display.node.page.teaser.yml
++++ b/core/tests/fixtures/recipes/page_content_type/config/core.entity_view_display.node.page.teaser.yml
+@@ -18,6 +18,7 @@ content:
+     label: hidden
+     settings:
+       trim_length: 600
++      exclude_html_tags: TRUE
+     third_party_settings: {  }
+     weight: 100
+     region: content

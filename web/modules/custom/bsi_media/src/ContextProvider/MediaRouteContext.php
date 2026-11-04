@@ -31,7 +31,7 @@ class MediaRouteContext implements ContextProviderInterface {
     $result = [];
     $context_definition = EntityContextDefinition::create('media')->setRequired(FALSE);
     $value = NULL;
-    if (($route_object = $this->routeMatch->getRouteObject())) {
+    if ($route_object = $this->routeMatch->getRouteObject()) {
       $route_contexts = $route_object->getOption('parameters');
       // Check for a media revision parameter first.
       if (isset($route_contexts['media_revision']) && $revision = $this->routeMatch->getParameter('media_revision')) {

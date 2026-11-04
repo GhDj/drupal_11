@@ -26,19 +26,19 @@ class Chart extends MediaSourceBase {
    *
    * @var string
    */
-  const METADATA_ATTRIBUTE_NAME = 'name';
+  const string METADATA_ATTRIBUTE_NAME = 'name';
 
   /**
    * Key for "type" metadata attribute.
    *
    * @var string
    */
-  const METADATA_ATTRIBUTE_TYPE = 'type';
+  const string METADATA_ATTRIBUTE_TYPE = 'type';
 
   /**
    * {@inheritdoc}
    */
-  public function getMetadataAttributes() {
+  public function getMetadataAttributes(): array {
     return [
       static::METADATA_ATTRIBUTE_NAME => $this->t('Name'),
       static::METADATA_ATTRIBUTE_TYPE => $this->t('Type'),
@@ -48,7 +48,7 @@ class Chart extends MediaSourceBase {
   /**
    * {@inheritdoc}
    */
-  public function getMetadata(MediaInterface $media, $attribute_name) {
+  public function getMetadata(MediaInterface $media, $attribute_name): mixed {
     $field = $media->get($this->configuration['source_field']);
     if ($field->isEmpty()) {
       return parent::getMetadata($media, $attribute_name);

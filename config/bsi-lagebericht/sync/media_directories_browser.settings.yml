@@ -1,7 +1,7 @@
 _core:
   default_config_hash: SrDrtlbXZkWBv3dDAQY2ANm8zDLLhthKVrHtb9cwNAM
-remember_sort: false
-remember_directory: false
+remember_sort: true
+remember_directory: true
 remember_sidebar: true
 remember_view_mode: true
 expand_directories_default: true

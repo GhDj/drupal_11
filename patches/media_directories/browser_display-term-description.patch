@@ -1,0 +1,48 @@
+diff --git a/modules/media_directories_browser/dist/media-directories-browser-app.iife.js b/modules/media_directories_browser/dist/media-directories-browser-app.iife.js
+index 0d67f0d..xxxxxxxx 100644
+--- a/modules/media_directories_browser/dist/media-directories-browser-app.iife.js
++++ b/modules/media_directories_browser/dist/media-directories-browser-app.iife.js
+@@ -13056,7 +13056,7 @@
+               }, null, 8, ["class"])
+             ], 8, _hoisted_8$7)) : (openBlock(), createElementBlock("span", _hoisted_9$6)),
+             createVNode(unref(G$9), { class: "directory-tree__icon" }),
+-            createBaseVNode("span", _hoisted_10$6, toDisplayString(__props.node.attributes.name), 1),
++            createBaseVNode("span", { ..._hoisted_10$6, title: __props.node.attributes.description }, toDisplayString(__props.node.attributes.name), 1),
+             createBaseVNode("span", _hoisted_11$6, [
+               __props.directoryCounts?.[__props.node.id] !== void 0 ? (openBlock(), createElementBlock("span", {
+                 key: 0,
+
+diff --git a/modules/media_directories_browser/js/src/components/ui/DirectoryNode.vue b/modules/media_directories_browser/js/src/components/ui/DirectoryNode.vue
+index 1c4e2d7..xxxxxxxx 100644
+--- a/modules/media_directories_browser/js/src/components/ui/DirectoryNode.vue
++++ b/modules/media_directories_browser/js/src/components/ui/DirectoryNode.vue
+@@ -89,7 +89,7 @@
+       </button>
+       <span v-else class="directory-tree__toggle-spacer"></span>
+       <PhFolder class="directory-tree__icon" />
+-      <span class="directory-tree__label">{{ node.attributes.name }}</span>
++      <span class="directory-tree__label" :title="node.attributes.description">{{ node.attributes.name }}</span>
+       <span class="directory-tree__meta">
+         <span
+           v-if="directoryCounts?.[node.id] !== undefined"
+
+diff --git a/modules/media_directories_browser/src/Service/DirectoryService.php b/modules/media_directories_browser/src/Service/DirectoryService.php
+index 8ef16e1..xxxxxxxx 100644
+--- a/modules/media_directories_browser/src/Service/DirectoryService.php
++++ b/modules/media_directories_browser/src/Service/DirectoryService.php
+@@ -114,6 +114,7 @@
+       }
+
+       // Use the translation matching the current language context.
++      /** @var \Drupal\taxonomy\TermInterface $translated_term */
+       $translated_term = $this->entityRepository->getTranslationFromContext($term);
+
+       $data[] = [
+@@ -121,6 +122,7 @@
+         'type' => "taxonomy_term--{$vocabulary}",
+         'attributes' => [
+           'name' => $translated_term->label(),
++          'description' => strip_tags($translated_term->getDescription()),
+           'drupal_internal__tid' => (int) $term->id(),
+           'weight' => (int) $term->getWeight(),
+         ],

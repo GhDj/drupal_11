@@ -36,9 +36,10 @@ class TabsHooks {
    * Implements hook_preprocess_HOOK for paragraph.html.twig.
    *
    * Replace field_items with tabs render element.
+   *
+   * @see \Drupal\bsi_custom\Hook\ParagraphHooks::preprocessParagraph
    */
-  #[Hook('preprocess_paragraph')]
-  public function processTabsParagraph(array &$variables): void {
+  public static function processParagraph(array &$variables): void {
     /** @var \Drupal\paragraphs\ParagraphInterface $paragraph */
     $paragraph = $variables['elements']['#paragraph'];
     if ($paragraph->bundle() !== 'tabs') {

@@ -69,11 +69,7 @@ final class ChartHooks {
       return;
     }
 
-    if (!isset($media->parent_paragraph)) {
-      return;
-    }
-
-    $paragraph = $media->parent_paragraph;
+    $paragraph = $media->parent_paragraph ?? NULL;
     if (!$paragraph instanceof ParagraphInterface) {
       return;
     }

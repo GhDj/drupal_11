@@ -270,8 +270,15 @@
 .#{$nsp}-opener--slider {
   margin: auto;
   max-width: 1440px;
-
   .#{$nsp}-opener {
+    &__image {
+      --#{$nsp}-image-ratio: 4/3;
+
+      @include breakpoint-md {
+        --#{$nsp}-image-ratio: auto;
+      }
+    }
+
     &__page-title {
       @include typography("display-2");
       padding: var(--#{$nsp}-space-2xl) 0;
@@ -284,7 +291,6 @@
 
     &__content {
       align-items: center;
-      padding-bottom: var(--#{$nsp}-space-6xl);
 
       @include breakpoint-md {
         padding-bottom: var(--#{$nsp}-space-lg);
@@ -313,22 +319,17 @@
     }
 
     &__controls {
-      bottom: 70px;
-      display: flex;
-      gap: var(--#{$nsp}-space-xs);
       padding: 0 var(--#{$nsp}-space-lg);
       position: absolute;
-      right: var(--#{$nsp}-grid-padding);
+      text-align: right;
+      width: 100%;
 
       @include breakpoint-md {
-        bottom: 90px;
-      }
-
-      @include breakpoint-lg {
-        padding: 0 var(--#{$nsp}-space-3xl);
-        right: max(
-          var(--#{$nsp}-grid-padding),
-          calc((100vw - var(--#{$nsp}-grid-max-width)) / 2)
+        // bottom width and space and box shadow.
+        bottom: calc(48px + var(--bsi-space-xl) + 4px);
+        right: calc(
+          (1440px - var(--bsi-grid-max-width)) / 2 +
+            (var(--bsi-grid-module-padding))
         );
       }
     }

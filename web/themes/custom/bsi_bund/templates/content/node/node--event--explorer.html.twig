@@ -181,8 +181,8 @@
 
       {% include '@bsi_bund/elements/link.html.twig' with {
         url: url,
-        title: 'Learn more about'|t ~ ' ' ~ content.title.0['#title']['#text'],
-        title_attr: 'Go to event page'|t ~ ' ' ~ content.title.0['#title']['#text'],
+        title: 'Learn more about @title'|t({ '@title': content.title.0['#title']['#text'] }),
+        title_attr: 'Go to event page @title'|t({ '@title': content.title.0['#title']['#text'] }),
         extra_classes: 'bsi-card__link',
         link_type: url.isExternal() ? 'external' : 'internal',
         target: url.isExternal() ? '_blank' : 'self',

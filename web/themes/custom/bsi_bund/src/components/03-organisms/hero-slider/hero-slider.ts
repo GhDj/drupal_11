@@ -36,6 +36,14 @@ export default class HeroSlider {
       this.el.querySelectorAll<HTMLElement>(".splide__slide").forEach(slide => {
         slide.removeAttribute("role");
       });
+
+      const slideCount = this.el.querySelectorAll(
+        ".splide__slide:not(.splide__slide--clone)"
+      ).length;
+
+      if (slideCount <= 1) {
+        this.el.classList.add("bsi-hero-slider--single-slide");
+      }
     });
 
     this.splide.mount();

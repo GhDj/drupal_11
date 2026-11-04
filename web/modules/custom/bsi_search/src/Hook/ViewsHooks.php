@@ -3,6 +3,7 @@
 namespace Drupal\bsi_search\Hook;
 
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\views\Plugin\views\area\Result;
 use Drupal\views\ViewExecutable;
@@ -49,13 +50,16 @@ class ViewsHooks {
 
     // Only append if a term exists.
     if (!empty($term)) {
-      /** @var Result $handler */
-      foreach ($view->display_handler->getHandlers('header') as $delta => $handler) {
-        if ($handler instanceof Result) {
-          $summary = $handler->options['content'];
-          if (!empty($summary)) {
-            $view->display_handler->getHandlers('header')[$delta]->options['content'] .= '&nbsp;' . $this->t("for your search for <strong>@term</strong>", ['@term' => $term], ['context' => 'search term']);
-          }
+      /** @var \Drupal\views\Plugin\views\area\Result $handler */
+      foreach ($view->display_handler->getHandlers('header') as $handler) {
+        if (!$handler instanceof Result || !($summary = $handler->options['content'])) {
+          continue;
+        }
+        if (!empty($summary)) {
+          $handler->options['content'] = $this->t('@result_summary for your search for&nbsp;<strong>@term</strong>', [
+            '@term' => $term,
+            '@result_summary' => Markup::create($handler->options['content']),
+          ], ['context' => 'search term']);
         }
       }
     }

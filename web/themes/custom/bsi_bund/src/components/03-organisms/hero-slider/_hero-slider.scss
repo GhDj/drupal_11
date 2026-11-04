@@ -11,9 +11,8 @@
   background-color: var(--#{$nsp}-color-blue-950);
   display: flex;
   flex-direction: column;
-  margin-inline: auto;
-  max-width: 1440px;
   margin: auto;
+  margin-inline: auto;
   max-width: 1440px;
   position: relative;
 
@@ -136,5 +135,12 @@
   &__prev,
   &__next {
     --#{$nsp}-button-border-color: var(--#{$nsp}-color-white);
+  }
+
+  &--single-slide {
+    .#{$nsp}-hero-slider__prev,
+    .#{$nsp}-hero-slider__next {
+      display: none;
+    }
   }
 }

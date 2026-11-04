@@ -63,20 +63,63 @@
 }
 
 // -----------------------------------------------------------------------------
-// Global search: Figma-matching layout
+// Sort wrapper — shared across all search views (exposed-sorting template)
 // -----------------------------------------------------------------------------
-.view-display-id-block_search_global {
-  // Global search variant — box shadow wraps the opener + search area
-  .#{$nsp}-searchfilter--global {
-    border-radius: 4px;
-    box-shadow: 0 0 4px 0 rgba(33, 35, 40, 0.25);
-    padding: 24px;
+.sort-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  width: 100%;
+  z-index: 1;
 
-    @include breakpoint-lg {
-      padding: 40px;
-    }
+  // Flatten BEF's inner wrapper
+  .form-type--select {
+    position: static;
   }
 
+  // Hide all labels inside
+  label {
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  // Override Claro/Drupal select styles for the sort dropdown
+  .#{$nsp}-search-dropdown--sort {
+    select,
+    select.form-element,
+    select.form-select {
+      -moz-appearance: none !important;
+      -webkit-appearance: none !important;
+      appearance: none !important;
+      background-color: var(--#{$nsp}-color-blue-150);
+      background-image: none !important;
+      border: 0 !important;
+      border-radius: 4px;
+      color: var(--#{$nsp}-color-blue-800);
+      cursor: pointer;
+      font-size: 16px;
+      padding-block: var(--#{$nsp}-space-sm);
+      padding-inline: 48px var(--#{$nsp}-space-sm);
+      width: auto;
+
+      &:focus-visible {
+        outline: 2px solid var(--#{$nsp}-color-base-focus);
+        outline-offset: 2px;
+      }
+
+      &::-ms-expand {
+        display: none;
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Searchfilter box — shared layout for all search views
+// -----------------------------------------------------------------------------
+.#{$nsp}-searchfilter--global {
   // Form uses display:contents so its children participate in the
   // parent flex layout and can be reordered with CSS order.
   .#{$nsp}-searchfilter__inner > form,
@@ -86,7 +129,7 @@
     display: contents;
   }
 
-  // CSS order: title → result count → searchbar → separator → filters → pills
+  // CSS order: title → searchbar → result count → separator → filters → pills → sort
   .#{$nsp}-searchfilter__title {
     @include typography("heading-5");
     margin: 0;
@@ -94,12 +137,12 @@
     width: 100%;
   }
 
-  .#{$nsp}-searchfilter__text {
-    order: 3;
-  }
-
   .#{$nsp}-searchbar {
     order: 2;
+  }
+
+  .#{$nsp}-searchfilter__text {
+    order: 3;
   }
 
   .#{$nsp}-searchfilter__separator {
@@ -130,12 +173,7 @@
 
   // Sort — stays inside form for submission, visually moved below the box
   .sort-wrapper {
-    display: flex;
-    justify-content: flex-end;
     order: 99;
-    position: relative;
-    width: 100%;
-    z-index: 1;
   }
 
   // Searchbar — let the bsi-searchbar component SCSS handle all styling.
@@ -158,8 +196,6 @@
     }
 
     // Kill Claro's background search icon and border on the input.
-    // Claro targets .form-autocomplete and .form-element (which JS
-    // may re-add after render). Our search icon is the button.
     input {
       background-image: none !important;
       border: 0 !important;
@@ -182,13 +218,13 @@
     }
   }
 
-  // Result count text — order:2 places it after searchbar
+  // Result count text
   .#{$nsp}-searchfilter__text {
     font-size: 16px;
     width: 100%;
   }
 
-  // Dotted separator — order:3 places it before filters
+  // Dotted separator
   .#{$nsp}-searchfilter__separator {
     border: 0;
     border-top: 1px dashed var(--#{$nsp}-color-neutral-250);
@@ -336,82 +372,28 @@
     }
   }
 
-  // Sort — match Storybook search-result molecule exactly:
-  // .bsi-search-dropdown--sort wraps a <select> with sort SVG icon
-  // on the left (via ::after on the wrapper) and NO native arrow.
-  .#{$nsp}-search-dropdown--sort {
-    // Kill ALL inner ::after pseudo-elements
-    *::after {
-      display: none !important;
-    }
+}
 
-    &::after {
-      top: 55% !important;
-    }
-
-    // Flatten BEF's inner wrapper
-    .form-type--select {
-      position: static;
-    }
-
-    // Hide all labels inside
-    label {
-      overflow: hidden;
-      position: absolute;
-      white-space: nowrap;
-      width: 1px;
-    }
-
-    // The select must have NO native arrow — Storybook uses
-    // bsi-search-dropdown__select class, Drupal doesn't add it,
-    // so we apply the same styles with high specificity.
-    select,
-    select.form-element,
-    select.form-select {
-      -moz-appearance: none !important;
-      -webkit-appearance: none !important;
-      appearance: none !important;
-      background-color: var(--#{$nsp}-color-blue-150);
-      background-image: none !important;
-      border: 0 !important;
-      border-radius: 4px;
-      color: var(--#{$nsp}-color-blue-800);
-      cursor: pointer;
-      font-size: 16px;
-      padding-block: var(--#{$nsp}-space-sm);
-      // Sort variant: icon on left, text, no right padding for arrow
-      padding-inline: 48px var(--#{$nsp}-space-sm);
-      width: auto;
-
-      &:focus-visible {
-        outline: 2px solid var(--#{$nsp}-color-base-focus);
-        outline-offset: 2px;
-      }
-
-      // Firefox still shows arrow via pseudo — hide it
-      &::-ms-expand {
-        display: none;
-      }
-    }
-  }
-
-  // Result list items
+// -----------------------------------------------------------------------------
+// Search result items — shared across all search views
+// -----------------------------------------------------------------------------
+.#{$nsp}-search-result {
   .view-content {
     .views-row {
       border-top: solid 1px var(--#{$nsp}-color-blue-200);
       padding: var(--#{$nsp}-space-md) 0;
     }
   }
+}
 
-  // Result card — title as bold text (not link style), whole card clickable
-  .#{$nsp}-card--search {
-    .#{$nsp}-card__title {
-      font-weight: 700;
+// Result card — title as bold text (not link style), whole card clickable
+.#{$nsp}-card--search {
+  .#{$nsp}-card__title {
+    font-weight: 700;
 
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
+    a {
+      color: inherit;
+      text-decoration: none;
     }
   }
 }
@@ -420,6 +402,7 @@
 // Annual report search (injected via hook_node_view)
 // -----------------------------------------------------------------------------
 .#{$nsp}-report-search {
+  margin-bottom: var(--#{$nsp}-space-xl);
   padding: var(--#{$nsp}-space-lg) 0;
   position: relative;
   width: 100%;

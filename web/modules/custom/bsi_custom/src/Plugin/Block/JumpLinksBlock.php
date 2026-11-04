@@ -9,6 +9,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityRepositoryInterface;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\Context\EntityContextDefinition;
@@ -51,24 +52,7 @@ final class JumpLinksBlock extends BlockBase implements ContainerFactoryPluginIn
       return [];
     }
 
-    $links = [];
-    foreach ($entity->get('field_paragraphs') as $item) {
-      /** @var \Drupal\paragraphs\ParagraphInterface $paragraph */
-      $paragraph = $this->entityRepository->getTranslationFromContext(
-        $item->entity,
-        $entity->language()->getId()
-      );
-      if (!$paragraph->hasField('field_jumplink') || $paragraph->get('field_jumplink')->isEmpty()) {
-        continue;
-      }
-
-      $text = $paragraph->get('field_jumplink')->value;
-      $link = new Link($text, Url::fromRoute('<none>', [], [
-        'fragment' => 'anchor-' . Html::getId($text),
-      ]));
-      // Optional: Add #wrapper_attributes to add class to <li>.
-      $links[] = $link->toRenderable();
-    }
+    $links = $this->getLinks($entity->get('field_paragraphs'), $entity->language()->getId());
 
     if ($links === []) {
       return [];
@@ -83,6 +67,33 @@ final class JumpLinksBlock extends BlockBase implements ContainerFactoryPluginIn
     ];
 
     return $build;
+  }
+
+  /**
+   * Get all jump links configured in (nested) paragraphs.
+   */
+  public function getLinks(FieldItemListInterface $items, string $langcode): array {
+    $links = [];
+    foreach ($items as $item) {
+      /** @var \Drupal\paragraphs\ParagraphInterface $paragraph */
+      $paragraph = $this->entityRepository->getTranslationFromContext(
+        $item->entity,
+        $langcode,
+      );
+      if ($paragraph->hasField('field_jumplink')
+        && !$paragraph->get('field_jumplink')->isEmpty()) {
+        $text = $paragraph->get('field_jumplink')->value;
+        $link = new Link($text, Url::fromRoute('<none>', [], [
+          'fragment' => 'anchor-' . Html::getId($text),
+        ]));
+        // Optional: Add #wrapper_attributes to add class to <li>.
+        $links[] = $link->toRenderable();
+      }
+      if ($paragraph->hasField('field_items')) {
+        $links = array_merge($links, $this->getLinks($paragraph->get('field_items'), $langcode));
+      }
+    }
+    return $links;
   }
 
   /**

@@ -25,7 +25,7 @@ class LanguageSelect extends Language {
     // @todo Language names are not translated.
     $languages = &$config['language']['textPartLanguage'];
     $languages = array_values(array_filter(
-      $config['language']['textPartLanguage'],
+      $languages,
       function (array $language) use ($desiredLangcodes) {
         return in_array($language['languageCode'], $desiredLangcodes);
       }

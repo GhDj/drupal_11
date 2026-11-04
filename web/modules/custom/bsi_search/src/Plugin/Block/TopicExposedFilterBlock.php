@@ -110,11 +110,9 @@ class TopicExposedFilterBlock extends BlockBase implements ContainerFactoryPlugi
   /**
    * {@inheritdoc}
    */
-  public function build(): array|NULL {
-    $use_node_topic = $this->configuration['use_node_topic'];
-
+  public function build(): array {
     $tid = $this->configuration['topic_tid'];
-    if ($use_node_topic) {
+    if ($this->configuration['use_node_topic']) {
       $node = $this->currentRouteMatch->getParameter('node');
 
       if ($node instanceof NodeInterface &&
@@ -125,17 +123,16 @@ class TopicExposedFilterBlock extends BlockBase implements ContainerFactoryPlugi
         $tid = $node->get('field_topics')->target_id;
       }
       else {
-        return [
-          '#plain_text' => '',
-        ];
+        return [];
       }
     }
 
     // Load the view.
     $view = Views::getView(self::SEARCH_VIEW_NAME);
     if (!$view) {
-      return ['#plain_text' => $this->t('View not found')];
+      return [];
     }
+
     $view->setDisplay('block_search_slot');
     // Inject contextual filter argument.
     $view->setArguments($tid ? [$tid] : []);
@@ -144,23 +141,16 @@ class TopicExposedFilterBlock extends BlockBase implements ContainerFactoryPlugi
     $view->execute();
 
     $render = $view->render();
-
-    // If render() returns NULL, return a safe fallback.
-    // Required by Layout Builder.
     if (!is_array($render)) {
-      return [
-        '#plain_text' => $this->t('Unable to render the view.'),
-      ];
+      return [];
     }
-
     $render['#pre_render'][] = [$this, 'preRender'];
 
     $term = $tid ? $this->entityTypeManager->getStorage('taxonomy_term')->load($tid) : NULL;
-    $term_name = $term ? $term->getName() : NULL;
 
     return [
       'view' => $render,
-      '#term' => $term_name,
+      '#term' => $term?->getName(),
     ];
   }
 

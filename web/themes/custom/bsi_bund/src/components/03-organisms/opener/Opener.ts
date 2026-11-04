@@ -50,21 +50,18 @@ export default class Opener {
   }
 
   private updateContentGridHeight(): void {
-    const track = this.el.querySelector<HTMLElement>(".splide__track");
-    if (!track) return;
+    const contentGrids = Array.from(
+      this.el.querySelectorAll<HTMLElement>(".bsi-opener__content-grid")
+    );
 
-    const trackHeight = track.offsetHeight;
+    contentGrids.forEach(grid => {
+      grid.style.height = "auto";
+    });
 
-    this.el.querySelectorAll<HTMLElement>(".splide__slide").forEach(slide => {
-      const image = slide.querySelector<HTMLElement>(".bsi-opener__image");
-      const contentGrid = slide.querySelector<HTMLElement>(
-        ".bsi-opener__content-grid"
-      );
-      if (!image || !contentGrid) return;
+    const maxHeight = Math.max(...contentGrids.map(grid => grid.offsetHeight));
 
-      // marginTop is negative (calc(var(--bsi-space-7xl) * -1)); subtracting it adds the overlap back
-      const marginTop = parseFloat(getComputedStyle(contentGrid).marginTop);
-      contentGrid.style.height = `${trackHeight - image.offsetHeight - marginTop}px`;
+    contentGrids.forEach(grid => {
+      grid.style.height = `${maxHeight}px`;
     });
   }
 

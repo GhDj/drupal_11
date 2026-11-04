@@ -6,7 +6,7 @@
       }
 
       const [, AbbreviationUI] = window.CKEditor5.abbreviation.Abbreviation.requires;
-      if (typeof AbbreviationUI === 'undefined') {
+      if (AbbreviationUI === undefined) {
         return;
       }
       const originalCreateFormView = AbbreviationUI.prototype._createFormView;

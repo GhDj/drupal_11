@@ -27,12 +27,30 @@ targetEntityType: media
 bundle: publication
 mode: search_result
 content:
+  field_accessibility:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
   field_body:
     type: text_summary_formatter
     label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 3
+    region: content
+  field_media_file:
+    type: file_default
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 5
     region: content
   field_media_type:
     type: entity_reference_label
@@ -50,24 +68,6 @@ content:
       format_type: date_short
     third_party_settings: {  }
     weight: 1
-    region: content
-  field_media_file:
-    type: file_default
-    label: hidden
-    settings:
-      use_description_as_link_text: true
-    third_party_settings: {  }
-    weight: 5
-    region: content
-  field_accessibility:
-    type: boolean
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 6
     region: content
   field_use_cart:
     type: boolean

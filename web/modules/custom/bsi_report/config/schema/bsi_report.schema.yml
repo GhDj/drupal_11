@@ -1,0 +1,6 @@
+condition.plugin.book_level:
+  type: condition.plugin
+  label: 'Book level'
+  mapping:
+    level:
+      type: string

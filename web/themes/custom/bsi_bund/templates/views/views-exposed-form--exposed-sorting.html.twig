@@ -1,20 +1,67 @@
 {#
-Custom exposed form template for separating filters and sort in a block display.
+Shared exposed form template for search views with Storybook styling.
+
+Renders:
+1. Searchbar (bsi-searchbar) — the fulltext search input + icon button
+2. Filter grid (bsi-searchfilter__top) — facet/select filters as multiselects
+3. Sort dropdown (bsi-search-dropdown--sort) — outside the form wrapper
+
+Elements excluded from the filter grid:
+- search, sort_bef_combine, form_build_id, form_token, form_id, actions
 #}
 
-<div class="views-exposed-form-wrapper">
-    {# Filters Section #}
-    <div class="filters-wrapper">
-        {{ form|without('sort_bef_combine') }}
-    </div>
+{% set skip_keys = ['search', 'sort_bef_combine', 'form_build_id', 'form_token', 'form_id', 'actions'] %}
 
-</div>
+{# 1. Searchbar #}
+{% if form.search is defined %}
+  <div class="bsi-searchbar">
+    {{ form.search }}
+    <button type="submit" class="bsi-button bsi-button--tertiary bsi-searchbar__button" aria-label="{{ 'Suche'|t }}">
+      {% include '@bsi_bund/components/icon.twig' with {
+        name: 'search',
+        decorative: true,
+      } only %}
+    </button>
+  </div>
+{% endif %}
 
-{# Sort Section — can be styled or moved separately #}
-<div class="sort-wrapper">
-  {% if form.sort_bef_combine is defined %}
-    <div class="sort-bef-combined">
+{# 2. Filter grid — render all remaining exposed filters as multiselects #}
+{% set has_filters = false %}
+{% for key, element in form %}
+  {% if key not in skip_keys and key|first != '#' and element['#type'] is defined %}
+    {% set has_filters = true %}
+  {% endif %}
+{% endfor %}
+
+{% if has_filters %}
+  <div class="bsi-searchfilter__top">
+    {% for key, element in form %}
+      {% if key not in skip_keys and key|first != '#' and element['#type'] is defined %}
+        <div class="bsi-multiselect js-multiselect" data-filter-key="{{ key }}">
+          {{ element }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+
+{# Hidden form elements #}
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}
+
+{# Hidden submit for JS to trigger #}
+{% if form.actions is defined %}
+  <div class="bsi-searchfilter__actions visually-hidden">
+    {{ form.actions }}
+  </div>
+{% endif %}
+
+{# 3. Sort dropdown — outside the form wrapper, styled per Storybook #}
+{% if form.sort_bef_combine is defined %}
+  <div class="sort-wrapper">
+    <div class="bsi-search-dropdown bsi-search-dropdown--sort">
       {{ form.sort_bef_combine }}
     </div>
-  {% endif %}
-</div>
+  </div>
+{% endif %}
