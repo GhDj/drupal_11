@@ -63,12 +63,12 @@
   &__marker {
     background: var(--#{$nsp}-color-base-white);
     height: var(--#{$nsp}-space-sm);
-    width: var(--#{$nsp}-space-sm);
     left: 0;
     margin-left: 1px;
     outline: solid var(--#{$nsp}-space-3xs) var(--#{$nsp}-color-base-white);
     position: absolute;
     top: calc(50% - var(--#{$nsp}-space-2xs));
+    width: var(--#{$nsp}-space-sm);
     z-index: 2;
 
     @include breakpoint-lg {

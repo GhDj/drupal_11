@@ -40,7 +40,6 @@ settings:
       - blockQuote
       - code
       - codeBlock
-      - nbsp
   plugins:
     ckeditor5_alignment:
       enabled_alignments:

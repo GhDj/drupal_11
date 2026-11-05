@@ -20,6 +20,8 @@
   }
 
   &__item {
+    align-items: flex-start;
+    display: inline-flex;
     line-height: 1;
   }
 
@@ -30,6 +32,10 @@
 
     @include breakpoint-lg {
       @include typography("body-small");
+    }
+
+    .#{$nsp}-link__text {
+      text-box-trim: trim-both;
     }
   }
 }

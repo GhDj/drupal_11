@@ -8,6 +8,7 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Path\PathMatcherInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\node\NodeInterface;
 use Drupal\paragraphs\ParagraphInterface;
 use Symfony\Component\DependencyInjection\Container;
@@ -16,6 +17,9 @@ use Symfony\Component\DependencyInjection\Container;
  * Theme hooks related to the field widgets.
  */
 class ParagraphHooks {
+  use StringTranslationTrait;
+
+  public const string TILE_ANCHOR_PREFIX = 't';
 
   public function __construct(
     protected readonly PathMatcherInterface $pathMatcher,
@@ -87,6 +91,26 @@ class ParagraphHooks {
     ], TRUE)) {
       // Display only the first field (element title) for stage items.
       $variables['content'] = [array_shift($variables['content'])];
+    }
+  }
+
+  /**
+   * Implements hook_field_widget_single_element_WIDGET_TYPE_form_alter() for paragraphs.
+   */
+  #[Hook('field_widget_single_element_paragraphs_form_alter')]
+  public function alterParagraphWidget(array &$element, FormStateInterface $form_state, array $context): void {
+    /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+    $paragraph = $context['items']->offsetGet($context['delta'])->entity;
+    if ($paragraph && $paragraph->getParentEntity()->bundle() === 'tiles') {
+      $element['top']['summary']['anchor'] = [
+        '#type' => 'inline_template',
+        '#template' => '<small>{{ text }}</small>',
+        '#context' => [
+          'text' => $this->t('Link to this element using the anchor <code>#@fragment</code>.', [
+            '@fragment' => static::TILE_ANCHOR_PREFIX . $paragraph->id(),
+          ]),
+        ],
+      ];
     }
   }
 

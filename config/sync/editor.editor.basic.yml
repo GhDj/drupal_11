@@ -23,7 +23,6 @@ settings:
       - underline
       - strikethrough
       - sourceEditing
-      - nbsp
   plugins:
     ckeditor5_heading:
       enabled_headings:

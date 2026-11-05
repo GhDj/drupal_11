@@ -70,7 +70,7 @@ third_party_settings:
     allowed_block_categories:
       - '@entity'
       - BSI
-      - 'BSI Report'
+      - 'BSI Bericht'
       - 'BSI Search'
       - 'Chaos Tools'
       - 'Config Pages'
@@ -92,8 +92,10 @@ third_party_settings:
         - layout_onecol
       denylisted_blocks: {  }
       allowlisted_blocks:
-        'BSI Report':
+        'BSI Bericht':
           - bsi_report_search_slot
+        'Lists (Views)':
+          - 'views_block:search_yearly_report-block_search_yearly_reports'
         Webform:
           - webform_block
       restricted_categories:
@@ -105,7 +107,6 @@ third_party_settings:
         - Editoria11y
         - Forms
         - Help
-        - 'Lists (Views)'
         - 'Menu item Fields'
         - Menus
         - System

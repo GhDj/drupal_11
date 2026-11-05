@@ -8,6 +8,7 @@ import { linkTemplate } from "@molecules/link/link.template";
 // Data
 import { defaultMainNav } from "./mainmenu.constants";
 import { cardTemplate } from "@molecules/card/card.template";
+import { headingTemplate } from "@atoms/heading/heading.template";
 
 export interface NavLinkType {
   text: string;
@@ -25,7 +26,11 @@ export function mainMenuTemplate(
 ): string {
   // submenu panel for level 2 and level 3
   // ==========================================================================
-  const submenuPanel = (id: string, level: "l2" | "l3", content: string) => `
+  const submenuPanel = (
+    id: string,
+    level: "l2" | "l3" | "l4",
+    content: string
+  ) => `
     <div
       class="${nsp("mainmenu__panel", `mainmenu__panel--${level}`)}"
       id="${id}"
@@ -67,7 +72,7 @@ export function mainMenuTemplate(
         `
           <!-- submenu back-button -->
           ${buttonTemplate({
-            buttonText: link.text,
+            buttonText: "Zurück",
             buttonExtraClasses: "button--inline-action mainmenu__back",
             buttonIconBefore: "chevron-left",
             additionalButtonAttributes: {
@@ -84,18 +89,20 @@ export function mainMenuTemplate(
               "mainmenu__overview-link mainmenu__overview-link--mobile"
           })}
 
-          <!-- overview column: desktop only -->
-          <div class="${nsp("mainmenu__overview-column")}">
-            ${linkTemplate({
-              linkUrl: "#",
-              linkText: `Im Überblick: ${link.text}`,
-              linkExtraClasses: "mainmenu__overview-link"
-            })}
-          </div>
+         <div class="${nsp("mainmenu__wrapper")}">
+            <!-- overview column: desktop only -->
+            <div class="${nsp("mainmenu__overview-column")}">
+           ${linkTemplate({
+             linkUrl: "#",
+             linkText: `Im Überblick: ${link.text}`,
+             linkExtraClasses: "mainmenu__overview-link"
+           })}
+           </div>
 
-          <ul class="${nsp("mainmenu__submenu")}">
-            ${link.subnav?.map((item, l2Index) => level2Link(item, index, l2Index)).join("") ?? ""}
-          </ul>
+            <ul class="${nsp("mainmenu__submenu")}">
+              ${link.subnav?.map((item, l2Index) => level2Link(item, index, l2Index)).join("") ?? ""}
+            </ul>
+          </div>
          ${
            link.cardTitle
              ? `
@@ -132,29 +139,113 @@ export function mainMenuTemplate(
       `
         <ul class="${nsp("mainmenu__submenu")}">
           <!-- overview link: first item in L3 list -->
-          <li class="${nsp("mainmenu__submenu-item mainmenu__submenu-item--overview")}">
+          <li class="${nsp("mainmenu__submenu-item")}">
             ${linkTemplate({
               linkUrl: "#",
-              linkText: parentLinkText,
-              linkExtraClasses: "mainmenu__link mainmenu__link--overview"
+              linkText: "Über " + parentLinkText,
+              linkExtraClasses: "mainmenu__link"
             })}
           </li>
           ${items
             .map(
-              item =>
+              (item, l3Index) =>
                 `
                   <li class="${nsp("mainmenu__submenu-item")}">
-                    ${linkTemplate({
-                      linkUrl: "#",
-                      linkText: item.text,
-                      linkExtraClasses: "mainmenu__link"
-                    })}
+                    ${
+                      item.subnav?.length
+                        ? buttonTemplate({
+                            buttonText: item.text,
+                            buttonExtraClasses: "mainmenu__overlay-toggle",
+                            buttonIconAfter: "chevron-right",
+                            additionalButtonAttributes: {
+                              "aria-controls": `mainMenuL4-${l1Index}-${l2Index}-${l3Index}`,
+                              "aria-expanded": "false",
+                              "data-js-mainmenu-toggle": "l3"
+                            }
+                          })
+                        : linkTemplate({
+                            linkUrl: "#",
+                            linkText: item.text,
+                            linkExtraClasses: "mainmenu__link"
+                          })
+                    }
+
+                ${
+                  item.subnav?.length
+                    ? level4Submenu(
+                        item.subnav,
+                        item.text,
+                        parentLinkText,
+                        l1Index,
+                        l2Index,
+                        l3Index
+                      )
+                    : ""
+                }
                   </li>
                 `
             )
             .join("")}
         </ul>
       `
+    );
+
+  // third-level toggle-button with level 4 submenu
+  // ==========================================================================
+  const level4Submenu = (
+    items: NavLinkType[],
+    parentLinkText: string,
+    l2LinkText: string,
+    l1Index: number,
+    l2Index: number,
+    l3Index: number
+  ) =>
+    submenuPanel(
+      `mainMenuL4-${l1Index}-${l2Index}-${l3Index}`,
+      "l4",
+      `
+        <!-- submenu back-button -->
+      ${buttonTemplate({
+        buttonText: l2LinkText,
+        buttonExtraClasses: "button--inline-action mainmenu__back",
+        buttonIconBefore: "chevron-left",
+        additionalButtonAttributes: {
+          "data-js-mainmenu-back": "l4",
+          "aria-label": `Zurück zu ${parentLinkText}`
+        }
+      })}
+
+       ${headingTemplate({
+         headingText: parentLinkText,
+         layout: 4,
+         style: 4,
+         headingExtraClasses: "mainmenu__submenu__heading"
+       })}
+
+      <ul class="${nsp("mainmenu__submenu mainmenu__submenu--l4")}">
+        <li class="${nsp("mainmenu__submenu-item")}">
+          ${linkTemplate({
+            linkUrl: "#",
+            linkText: "Über " + parentLinkText,
+            linkExtraClasses: "mainmenu__link"
+          })}
+        </li>
+
+        ${items
+          .map(
+            item => `
+              <li class="${nsp("mainmenu__submenu-item")}">
+                ${linkTemplate({
+                  linkUrl: "#",
+                  linkText: item.text,
+                  linkExtraClasses: "mainmenu__link"
+                })}
+              </li>
+            `
+          )
+          .join("")}
+      </ul>
+    `
     );
 
   // second-level menu item (link or parent toggle with level 3 panel)

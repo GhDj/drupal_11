@@ -1,9 +1,9 @@
 uuid: 8f4bc84a-8c97-4a10-9cc3-b67d66cc6e27
 langcode: en
 status: true
-dependencies: {  }
+dependencies: {}
 name: bsi_lightbox_wide
-label: 'BSI Lightbox (wide)'
+label: "BSI Lightbox (wide)"
 effects:
   5fce6f3c-59f2-4bcb-af68-dbb338b44078:
     uuid: 5fce6f3c-59f2-4bcb-af68-dbb338b44078

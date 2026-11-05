@@ -1,139 +1,346 @@
-{# Main-Navigation #}
+{# Main navigation. #}
 
-{% import _self as menus %}
+{% import _self as menu %}
 
-{{ menus.level1(items) }}
+{% if items %}
+  <ul class="bsi-mainmenu__list">
+    {{ menu.items(items, 1) }}
+  </ul>
+{% endif %}
 
-{% macro level1(items) %}
-  {% import _self as menus %}
-  {% if items %}
-    <ul class="bsi-mainmenu__list">
-      {% for item in items %}
-        {% set l1Index = loop.index0 %}
-        <li class="bsi-mainmenu__list-item">
-          {% if item.below %}
-            {% set panelId = 'mainMenuL2-' ~ l1Index %}
-            <button type="button"
-                    class="bsi-button bsi-button--primary bsi-mainmenu__collapse-toggle"
-                    aria-controls="{{ panelId }}"
-                    aria-expanded="false"
-                    data-js-mainmenu-toggle="l1">
-              <span class="bsi-button__text">{{ item.title }}</span>
-            </button>
-            {{ menus.l2_panel(item, item.below, panelId, l1Index) }}
-          {% else %}
-            {% include '@bsi_bund/elements/link.html.twig' with {
-              url: item.url,
-              title: item.title,
-              extra_classes: 'bsi-mainmenu__link',
-            } only %}
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
+{# -----------------------------------------------------------------------------
+ Helper macros
+----------------------------------------------------------------------------- #}
+
+{# Shared link helper #}
+{% macro link(url, title, classes) %}
+  {% include '@bsi_bund/elements/link.html.twig' with {
+    url: url,
+    title: title,
+    extra_classes: classes,
+  } only %}
 {% endmacro %}
 
-{% macro l2_panel(parent, items, panelId, l1Index) %}
-  {% import _self as menus %}
-  <div class="bsi-mainmenu__panel bsi-mainmenu__panel--l2"
-       id="{{ panelId }}"
-       data-js-mainmenu-panel="l2"
-       hidden>
-    <button type="button"
-            class="bsi-button bsi-button--inline-action bsi-mainmenu__back"
-            data-js-mainmenu-back=""
-            aria-label="{{ 'Back to main menu'|t }}">
-      {% include '@bsi_bund/components/icon.twig' with {
-        name: 'chevron-left',
-        decorative: true,
-        extra_classes: 'bsi-button__icon',
-      } only %}
-      <span class="bsi-button__text">{{ parent.title }}</span>
+{# Shared icon helper #}
+{% macro icon(name) %}
+  {% include '@bsi_bund/components/icon.twig' with {
+    name: name,
+    decorative: true,
+    extra_classes: 'bsi-button__icon',
+  } only %}
+{% endmacro %}
+
+{#
+ * Overview list item for Level 3 and Level 4 panels.
+ *
+ * Links to the parent page itself, so users can reach it
+ * without only opening its submenu.
+#}
+{% macro overviewItem(parent) %}
+  {% import _self as menu %}
+
+  <li class="bsi-mainmenu__submenu-item">
+    {{ menu.link(
+      parent.url,
+      'About @title'|t({
+        '@title': parent.title,
+      }),
+      'bsi-mainmenu__link'
+    ) }}
+  </li>
+{% endmacro %}
+
+
+{#
+ * Toggle for Level 1 and Level 2 items.
+ *
+ * Level 1: opens the Level 2 panel, no chevron.
+ * Level 2: opens the Level 3 panel, chevron-down.
+ *
+#}
+{% macro toggle(title, panel_id, level) %}
+  {% import _self as menu %}
+
+  <button
+    type="button"
+    class="bsi-button bsi-button--primary bsi-mainmenu__collapse-toggle"
+    aria-controls="{{ panel_id }}"
+    aria-expanded="false"
+    data-js-mainmenu-toggle="l{{ level }}"
+  >
+    <span class="bsi-button__text">
+      {{ title }}
+    </span>
+
+    {% if level > 1 %}
+      {{ menu.icon('chevron-down') }}
+    {% endif %}
+  </button>
+{% endmacro %}
+
+
+{#
+/**
+ * Toggle for Level 3 items, opens the Level 4 overlay.
+ *
+ * Uses a different button style and chevron than the collapse toggles.
+ */
+#}
+{% macro overlayToggle(title, panel_id) %}
+  {% import _self as menu %}
+
+  <button
+    type="button"
+    class="bsi-button bsi-button--primary bsi-mainmenu__overlay-toggle"
+    aria-controls="{{ panel_id }}"
+    aria-expanded="false"
+    data-js-mainmenu-toggle="l3"
+  >
+    <span class="bsi-button__text">
+      {{ title }}
+    </span>
+
+    {{ menu.icon('chevron-right') }}
+  </button>
+{% endmacro %}
+
+{#
+/**
+ * Render all items of one level (Level 1 to 3).
+ *
+ * parent_path contains the index chain of the parent item.
+ *
+ * Examples:
+ * - 0
+ * - 0-2
+ * - 0-2-1
+ */
+#}
+{% macro items(items, level, parent_path = null) %}
+  {% import _self as menu %}
+
+  {% set item_class = level == 1
+    ? 'bsi-mainmenu__list-item'
+    : 'bsi-mainmenu__submenu-item'
+  %}
+
+  {% for item in items %}
+    {% set item_path = parent_path is not null
+      ? parent_path ~ '-' ~ loop.index0
+      : loop.index0
+    %}
+
+    <li class="{{ item_class }}">
+      {{ menu.entry(
+        item,
+        level,
+        item_path
+      ) }}
+    </li>
+  {% endfor %}
+{% endmacro %}
+
+
+
+{# -----------------------------------------------------------------------------
+ Helper Panel
+----------------------------------------------------------------------------- #}
+
+{#
+ * Level 2 panel.
+ *
+ * Contains:
+ * - back button
+ * - mobile overview link
+ * - desktop overview column
+ * - Level 2 items
+ * - optional teaser
+#}
+{% macro l2_panel(parent, items, panel_id, item_path) %}
+  {% import _self as menu %}
+
+  {% set overview_title = 'Overview: @title'|t({
+    '@title': parent.title,
+  }) %}
+
+  <div
+    id="{{ panel_id }}"
+    class="bsi-mainmenu__panel bsi-mainmenu__panel--l2"
+    data-js-mainmenu-panel="l2"
+    hidden
+  >
+
+    {# Back to main menu. #}
+    <button
+      type="button"
+      class="bsi-button bsi-button--inline-action bsi-mainmenu__back"
+      data-js-mainmenu-back
+      aria-label="{{ 'Back to main menu'|t }}"
+    >
+      {{ menu.icon('chevron-left') }}
+
+      <span class="bsi-button__text">
+        {{ 'Back'|t }}
+      </span>
     </button>
 
-    {# Overview link is rendered twice: --mobile variant is visible on small screens,
-       the column variant is visible on large screens. Both are in the DOM at all times. #}
-    {% include '@bsi_bund/elements/link.html.twig' with {
-      url: parent.url,
-      title: 'Overview: @title'|t({'@title': parent.title}),
-      extra_classes: 'bsi-mainmenu__overview-link bsi-mainmenu__overview-link--mobile',
-    } only %}
+    {# Mobile overview link.
+       Overview link is rendered twice: --mobile variant is visible on small screens,
+       the column variant is visible on large screens. Both are in the DOM at all times.
+    #}
+    {{ menu.link(
+      parent.url,
+      overview_title,
+      'bsi-mainmenu__overview-link bsi-mainmenu__overview-link--mobile'
+    ) }}
 
-    <div class="bsi-mainmenu__overview-column">
-      {% include '@bsi_bund/elements/link.html.twig' with {
-        url: parent.url,
-        title: 'Overview: @title'|t({'@title': parent.title}),
-        extra_classes: 'bsi-mainmenu__overview-link',
-      } only %}
+    <div class="bsi-mainmenu__wrapper">
+      {# Desktop overview column. #}
+      <div class="bsi-mainmenu__overview-column">
+        {{ menu.link(
+          parent.url,
+          overview_title,
+          'bsi-mainmenu__overview-link'
+        ) }}
+      </div>
+
+      {# Level 2 items. #}
+      <ul class="bsi-mainmenu__submenu">
+        {{ menu.items(items, 2, item_path) }}
+      </ul>
     </div>
 
-    <ul class="bsi-mainmenu__submenu">
-      {% for item in items %}
-        {{ menus.l2_item(item, l1Index, loop.index0) }}
-      {% endfor %}
-    </ul>
-
-    {# menu teaser #}
+    {# Optional menu teaser. #}
     {% if parent.content %}
       <div class="bsi-mainmenu__card">
         {{ parent.content }}
       </div>
     {% endif %}
-
   </div>
 {% endmacro %}
 
-{% macro l2_item(item, l1Index, l2Index) %}
-  {% import _self as menus %}
-  <li class="bsi-mainmenu__submenu-item">
-    {% if item.below %}
-      {% set panelId = 'mainMenuL3-' ~ l1Index ~ '-' ~ l2Index %}
-      <button type="button"
-              class="bsi-button bsi-button--primary bsi-mainmenu__collapse-toggle"
-              aria-controls="{{ panelId }}"
-              aria-expanded="false"
-              data-js-mainmenu-toggle="l2">
-        <span class="bsi-button__text">{{ item.title }}</span>
-        {% include '@bsi_bund/components/icon.twig' with {
-          name: 'chevron-down',
-          decorative: true,
-          extra_classes: 'bsi-button__icon',
-        } only %}
-      </button>
-      {{ menus.l3_panel(item, item.below, panelId) }}
-    {% else %}
-      {% include '@bsi_bund/elements/link.html.twig' with {
-        url: item.url,
-        title: item.title,
-        extra_classes: 'bsi-mainmenu__link',
-      } only %}
-    {% endif %}
-  </li>
+
+{#
+ * Level 3 panel.
+ *
+ * Contains:
+ * - overview link
+ * - Level 3 items
+ *
+ * Level 3 entries may open a Level 4 overlay.
+#}
+{% macro l3_panel(parent, items, panel_id, item_path) %}
+  {% import _self as menu %}
+
+  <div
+    id="{{ panel_id }}"
+    class="bsi-mainmenu__panel bsi-mainmenu__panel--l3"
+    data-js-mainmenu-panel="l3"
+    hidden
+  >
+    <ul class="bsi-mainmenu__submenu">
+      {{ menu.overviewItem(parent) }}
+
+      {# Level 3 items. #}
+      {{ menu.items(items, 3, item_path) }}
+
+    </ul>
+  </div>
 {% endmacro %}
 
-{% macro l3_panel(parent, items, panelId) %}
-  <div class="bsi-mainmenu__panel bsi-mainmenu__panel--l3"
-       id="{{ panelId }}"
-       data-js-mainmenu-panel="l3"
-       hidden>
-    <ul class="bsi-mainmenu__submenu">
-      <li class="bsi-mainmenu__submenu-item bsi-mainmenu__submenu-item--overview">
-        {% include '@bsi_bund/elements/link.html.twig' with {
-          url: parent.url,
-          title: parent.title,
-          extra_classes: 'bsi-mainmenu__link bsi-mainmenu__link--overview',
-        } only %}
-      </li>
+{#
+ * Level 4 overlay panel.
+ *
+ * Level 4 differs from Level 3 and therefore has its own macro.
+ * This is the last supported level: its items are plain links.
+ *
+ * Contains:
+ * - back button
+ * - heading
+ * - overview link
+ * - Level 4 items
+#}
+{% macro l4_panel(parent, items, panel_id) %}
+  {% import _self as menu %}
+
+  <div
+    id="{{ panel_id }}"
+    class="bsi-mainmenu__panel bsi-mainmenu__panel--l4"
+    data-js-mainmenu-panel="l4"
+    hidden
+  >
+
+    {# Back to Level 3. #}
+    <button
+      type="button"
+      class="bsi-button bsi-button--inline-action bsi-mainmenu__back"
+      data-js-mainmenu-back="l4"
+      aria-label="{{ 'Back to @title'|t({
+        '@title': parent.title,
+      }) }}"
+    >
+      {{ menu.icon('chevron-left') }}
+
+      <span class="bsi-button__text">
+        {{ 'Back'|t }}
+      </span>
+    </button>
+
+    {# Current Level 3 parent heading. #}
+    <h4 class="bsi-heading bsi-heading--4 bsi-mainmenu__submenu__heading">
+      {{ parent.title }}
+    </h4>
+
+    <ul class="bsi-mainmenu__submenu bsi-mainmenu__submenu--l4">
+      {{ menu.overviewItem(parent) }}
+
+      {# Level 4 links. #}
       {% for item in items %}
         <li class="bsi-mainmenu__submenu-item">
-          {% include '@bsi_bund/elements/link.html.twig' with {
-            url: item.url,
-            title: item.title,
-            extra_classes: 'bsi-mainmenu__link',
-          } only %}
+          {{ menu.link(
+            item.url,
+            item.title,
+            'bsi-mainmenu__link'
+          ) }}
         </li>
       {% endfor %}
     </ul>
   </div>
+{% endmacro %}
+
+{#
+ * Render one menu entry (Level 1 to 3).
+ *
+ * Without children: plain link.
+ *
+ * With children:
+ * - Level 1: toggle + Level 2 panel
+ * - Level 2: toggle + Level 3 panel
+ * - Level 3: overlay toggle + Level 4 overlay panel
+ *
+ * Level 4 items are rendered directly in l4_panel.
+#}
+{% macro entry(item, level, item_path) %}
+  {% import _self as menu %}
+
+  {% if item.below %}
+    {% set panel_id = 'mainMenuL' ~ (level + 1) ~ '-' ~ item_path %}
+
+    {% if level == 1 %}
+      {{ menu.toggle(item.title, panel_id, level) }}
+      {{ menu.l2_panel(item, item.below, panel_id, item_path) }}
+    {% elseif level == 2 %}
+      {{ menu.toggle(item.title, panel_id, level) }}
+      {{ menu.l3_panel(item, item.below, panel_id, item_path) }}
+    {% else %}
+      {{ menu.overlayToggle(item.title, panel_id) }}
+      {{ menu.l4_panel(item, item.below, panel_id) }}
+    {% endif %}
+  {% else %}
+    {{ menu.link(
+      item.url,
+      item.title,
+      'bsi-mainmenu__link'
+    ) }}
+  {% endif %}
 {% endmacro %}

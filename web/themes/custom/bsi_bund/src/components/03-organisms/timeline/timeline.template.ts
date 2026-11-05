@@ -5,7 +5,7 @@ import {
   imageTemplate,
   type ImageTemplateArgs
 } from "@atoms/image/image.template";
-import {iconTemplate} from "@atoms/icon/icon.template.ts";
+import { iconTemplate } from "@atoms/icon/icon.template.ts";
 // Components
 
 interface TimelineItem {

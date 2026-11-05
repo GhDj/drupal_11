@@ -129,6 +129,7 @@
 .#{$nsp}-opener--centered {
   --#{$nsp}-image-width: auto;
   margin: auto;
+  max-width: 1440px;
 
   .#{$nsp}-opener__image {
     margin: auto;
@@ -319,14 +320,15 @@
     }
 
     &__controls {
+      margin-top: var(--#{$nsp}-space-lg);
       padding: 0 var(--#{$nsp}-space-lg);
-      position: absolute;
       text-align: right;
       width: 100%;
-
       @include breakpoint-md {
         // bottom width and space and box shadow.
         bottom: calc(48px + var(--bsi-space-xl) + 4px);
+        margin-top: 0;
+        position: absolute;
         right: calc(
           (1440px - var(--bsi-grid-max-width)) / 2 +
             (var(--bsi-grid-module-padding))
@@ -340,14 +342,13 @@
     list-style: none;
     margin-inline: auto;
     max-width: var(--#{$nsp}-grid-max-width);
-    padding-inline: 160px;
     padding-bottom: var(--#{$nsp}-space-lg);
     padding-top: var(--#{$nsp}-space-lg);
     pointer-events: auto;
     position: unset;
-
     @include breakpoint-md {
       gap: var(--#{$nsp}-space-sm);
+      padding-inline: 160px;
       padding-top: var(--#{$nsp}-space-xl);
     }
 

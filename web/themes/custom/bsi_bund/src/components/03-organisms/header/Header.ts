@@ -1,13 +1,17 @@
 // Initializes all interactive header behavior: main menu toggles, back buttons,
 // and responsive switching between desktop (always-visible) and mobile (popover)
 // layout modes for the search bar and main menu.
+import { initEnvironmentIndicator } from "./EnvIndicatorHeight";
+
 import {
   MenuBack,
   MenuCollapseL1,
-  MenuCollapseL2
+  MenuCollapseL2,
+  MenuCollapseL3
 } from "@molecules/mainmenu/MainMenu";
 
 export default function Header() {
+  initEnvironmentIndicator();
   const mq: MediaQueryList = window.matchMedia("(min-width: 992px)");
 
   document
@@ -16,6 +20,9 @@ export default function Header() {
   document
     .querySelectorAll<HTMLButtonElement>('[data-js-mainmenu-toggle="l2"]')
     .forEach(toggle => new MenuCollapseL2(toggle));
+  document
+    .querySelectorAll<HTMLButtonElement>('[data-js-mainmenu-toggle="l3"]')
+    .forEach(toggle => new MenuCollapseL3(toggle));
   document
     .querySelectorAll<HTMLButtonElement>("[data-js-mainmenu-back]")
     .forEach(button => new MenuBack(button));

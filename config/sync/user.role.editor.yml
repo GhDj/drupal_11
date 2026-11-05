@@ -42,67 +42,67 @@ label: Editor
 weight: -8
 is_admin: false
 permissions:
-  - 'access content overview'
-  - 'access contextual links'
-  - 'access media directories browser'
-  - 'access media overview'
-  - 'access toolbar'
-  - 'addrow tablefield'
-  - 'create article content'
-  - 'create audio media'
-  - 'create bits media'
-  - 'create chart media'
-  - 'create contact media'
-  - 'create download media'
-  - 'create event content'
-  - 'create gallery media'
-  - 'create image media'
-  - 'create inventory content'
-  - 'create it_security_label content'
-  - 'create job content'
-  - 'create media'
-  - 'create page content'
-  - 'create paragraph content view'
-  - 'create publication media'
-  - 'create report_page content'
-  - 'create url aliases'
-  - 'create video media'
-  - 'delete all revisions'
-  - 'duplicate article content'
-  - 'duplicate entry_page content'
-  - 'duplicate event content'
-  - 'duplicate inventory content'
-  - 'duplicate it_security_label content'
-  - 'duplicate job content'
-  - 'duplicate page content'
-  - 'duplicate report_page content'
-  - 'edit any article content'
-  - 'edit any entry_page content'
-  - 'edit any event content'
-  - 'edit any inventory content'
-  - 'edit any it_security_label content'
-  - 'edit any job content'
-  - 'edit any page content'
-  - 'edit any report_page content'
-  - 'edit own audio media'
-  - 'edit own chart media'
-  - 'edit own contact media'
-  - 'edit own download media'
-  - 'edit own gallery media'
-  - 'edit own image media'
-  - 'edit own publication media'
-  - 'edit own video media'
-  - 'export tablefield'
-  - 'import tablefield'
-  - 'revert all revisions'
-  - 'setup own tfa'
-  - 'update paragraph content view'
-  - 'use nodes transition create_new_draft'
-  - 'use nodes transition request_approval'
-  - 'use nodes transition revise'
-  - 'use nodes transition withdraw'
-  - 'use text format advanced'
-  - 'view all revisions'
-  - 'view any unpublished content'
-  - 'view editoria11y checker'
-  - 'view the administration theme'
+  - "access content overview"
+  - "access contextual links"
+  - "access media directories browser"
+  - "access media overview"
+  - "access toolbar"
+  - "addrow tablefield"
+  - "create article content"
+  - "create audio media"
+  - "create bits media"
+  - "create chart media"
+  - "create contact media"
+  - "create download media"
+  - "create event content"
+  - "create gallery media"
+  - "create image media"
+  - "create inventory content"
+  - "create it_security_label content"
+  - "create job content"
+  - "create media"
+  - "create page content"
+  - "create paragraph content view"
+  - "create publication media"
+  - "create report_page content"
+  - "create url aliases"
+  - "create video media"
+  - "delete all revisions"
+  - "duplicate article content"
+  - "duplicate entry_page content"
+  - "duplicate event content"
+  - "duplicate inventory content"
+  - "duplicate it_security_label content"
+  - "duplicate job content"
+  - "duplicate page content"
+  - "duplicate report_page content"
+  - "edit any article content"
+  - "edit any entry_page content"
+  - "edit any event content"
+  - "edit any inventory content"
+  - "edit any it_security_label content"
+  - "edit any job content"
+  - "edit any page content"
+  - "edit any report_page content"
+  - "edit own audio media"
+  - "edit own chart media"
+  - "edit own contact media"
+  - "edit own download media"
+  - "edit own gallery media"
+  - "edit own image media"
+  - "edit own publication media"
+  - "edit own video media"
+  - "export tablefield"
+  - "import tablefield"
+  - "revert all revisions"
+  - "setup own tfa"
+  - "update paragraph content view"
+  - "use nodes transition create_new_draft"
+  - "use nodes transition request_approval"
+  - "use nodes transition revise"
+  - "use nodes transition withdraw"
+  - "use text format advanced"
+  - "view all revisions"
+  - "view any unpublished content"
+  - "view editoria11y checker"
+  - "view the administration theme"

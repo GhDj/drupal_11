@@ -41,7 +41,10 @@ export const defaultMainNav: NavLinkType[] = [
           { text: "Unterseite 1" },
           { text: "Unterseite 2" },
           { text: "Unterseite 3" },
-          { text: "Unterseite 4" }
+          {
+            text: "Unterseite 4",
+            subnav: [{ text: "Unterebene 1" }, { text: "Unterebene 2" }]
+          }
         ]
       },
       {

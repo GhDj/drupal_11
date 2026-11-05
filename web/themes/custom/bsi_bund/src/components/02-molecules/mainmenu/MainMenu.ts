@@ -39,6 +39,14 @@ abstract class MainMenuComponent {
       this.open();
     }
   }
+  protected handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key !== "Escape") {
+      return;
+    }
+
+    this.close();
+    this.toggle.focus();
+  };
 
   // Shows the panel and updates aria-expanded
   protected open() {
@@ -93,6 +101,7 @@ export class MenuCollapseL1 extends MainMenuComponent {
     MenuCollapseL1.closeAll();
     super.open();
     document.addEventListener("click", this.handleDocumentClick);
+    document.addEventListener("keydown", this.handleKeyDown);
     window.addEventListener("resize", this.handleResize);
     this.updateLevel3Offset();
   }
@@ -106,8 +115,15 @@ export class MenuCollapseL1 extends MainMenuComponent {
       )
       .forEach(btn => MenuCollapseL2.closeInstanceFor(btn));
 
+    this.menu
+      .querySelectorAll<HTMLButtonElement>(
+        '[data-js-mainmenu-toggle="l3"][aria-expanded="true"]'
+      )
+      .forEach(btn => MenuCollapseL3.closeInstanceFor(btn));
+
     document.removeEventListener("click", this.handleDocumentClick);
     window.removeEventListener("resize", this.handleResize);
+    document.removeEventListener("keydown", this.handleKeyDown);
     super.close();
   }
 
@@ -124,7 +140,7 @@ export class MenuCollapseL1 extends MainMenuComponent {
     // Set the CSS custom property used by the L3 panel to align with the submenu's right edge
     this.menu.style.setProperty(
       "--mainmenu-l3-left",
-      `${submenu.offsetLeft + submenu.offsetWidth + 40}px`
+      `${submenu.offsetLeft + submenu.offsetWidth + 80}px`
     );
   }
 
@@ -193,6 +209,67 @@ export class MenuCollapseL2 extends MainMenuComponent {
   }
 }
 
+export class MenuCollapseL3 extends MainMenuComponent {
+  private static instances: MenuCollapseL3[] = [];
+  private parentPanel: HTMLElement | null;
+
+  constructor(toggle: HTMLButtonElement) {
+    super(toggle);
+
+    this.parentPanel = toggle.closest<HTMLElement>(
+      '[data-js-mainmenu-panel="l3"]'
+    );
+
+    MenuCollapseL3.instances.push(this);
+  }
+
+  protected override open() {
+    MenuCollapseL3.instances.forEach(instance => {
+      if (instance !== this && instance.parentPanel === this.parentPanel) {
+        instance.close();
+      }
+    });
+
+    super.open();
+
+    const l2Panel = this.menu.closest<HTMLElement>(
+      '[data-js-mainmenu-panel="l2"]'
+    );
+
+    if (l2Panel) {
+      l2Panel.style.minHeight = `${this.menu.scrollHeight + 40}px`;
+    }
+  }
+
+  public override close() {
+    const l2Panel = this.menu.closest<HTMLElement>(
+      '[data-js-mainmenu-panel="l2"]'
+    );
+
+    if (l2Panel) {
+      l2Panel.style.minHeight = "";
+    }
+
+    super.close();
+  }
+
+  protected override handleFocusOut = (e: FocusEvent) => {
+    const related = e.relatedTarget as HTMLElement | null;
+
+    const container = this.parentPanel ?? this.menu;
+
+    if (!container.contains(related)) {
+      this.close();
+    }
+  };
+
+  static closeInstanceFor(toggle: HTMLButtonElement) {
+    MenuCollapseL3.instances
+      .filter(instance => instance.toggle === toggle)
+      .forEach(instance => instance.close());
+  }
+}
+
 // Handles the mobile back button inside an L2 panel
 // closes the panel and returns focus to the L1 toggle
 export class MenuBack {
@@ -208,16 +285,36 @@ export class MenuBack {
   private handleClick = (e: MouseEvent) => {
     e.stopPropagation();
 
+    const l4Panel = this.button.closest<HTMLElement>(
+      '[data-js-mainmenu-panel="l4"]'
+    );
+
+    if (l4Panel?.id) {
+      const l3Toggle = document.querySelector<HTMLButtonElement>(
+        `[data-js-mainmenu-toggle="l3"][aria-controls="${l4Panel.id}"]`
+      );
+
+      if (!l3Toggle) return;
+
+      MenuCollapseL3.closeInstanceFor(l3Toggle);
+
+      l3Toggle.focus();
+
+      return;
+    }
+
     // Walk up to the enclosing L2 panel to identify which L1 panel owns this back button
-    const panel = this.button.closest<HTMLElement>(
+    const l2Panel = this.button.closest<HTMLElement>(
       '[data-js-mainmenu-panel="l2"]'
     );
-    if (!panel?.id) return;
+
+    if (!l2Panel?.id) return;
 
     // Find the L1 toggle that controls this L2 panel by matching aria-controls
     const l1Toggle = document.querySelector<HTMLButtonElement>(
-      `[data-js-mainmenu-toggle="l1"][aria-controls="${panel.id}"]`
+      `[data-js-mainmenu-toggle="l1"][aria-controls="${l2Panel.id}"]`
     );
+
     if (!l1Toggle) return;
 
     // Close the L1 panel (which also closes nested L2 panels via the cascade)

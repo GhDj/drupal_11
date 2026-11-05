@@ -249,6 +249,7 @@
     justify-content: flex-start;
     line-height: 100%;
     max-width: 100%;
+    overflow-wrap: anywhere;
     text-decoration: none;
     text-decoration-color: var(--#{$nsp}-link-underline-color);
     text-decoration-thickness: 1px;
@@ -265,6 +266,7 @@
     &:not(:has(svg))[href^="https://"]::before {
       background-color: currentColor;
       content: "";
+      flex: 0 0 auto;
       height: 16px;
       margin-left: 2px;
       margin-top: 2px;
@@ -277,6 +279,7 @@
       &::before {
         background-color: currentColor;
         content: "";
+        flex: 0 0 auto;
         height: 16px;
         mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.4141 12L9.70703 18.707L8.29297 17.293L13.5859 12L8.29297 6.70703L9.70703 5.29297L16.4141 12Z' fill='black'/%3E%3C/svg%3E");
         width: 16px;
@@ -292,6 +295,7 @@
     &:not(:has(svg)).#{$nsp}-link--download-richtext::before {
       background-color: currentColor;
       content: "";
+      flex: 0 0 auto;
       height: 16px;
       margin-left: 2px;
       margin-top: 2px;

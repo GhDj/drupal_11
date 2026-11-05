@@ -1,0 +1,7 @@
+bsi_csn.settings:
+  path: '/admin/config/system/csn'
+  defaults:
+    _title: 'CSN Settings'
+    _form: 'Drupal\bsi_csn\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

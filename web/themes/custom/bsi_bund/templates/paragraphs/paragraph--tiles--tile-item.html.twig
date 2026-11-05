@@ -66,7 +66,9 @@
 ] %}
 
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }} data-theme="{{ variant }}">
+  <div{{ attributes.addClass(classes)
+    .setAttribute('id', constant('\\Drupal\\bsi_custom\\Hook\\ParagraphHooks::TILE_ANCHOR_PREFIX') ~ paragraph.id())
+  }} data-theme="{{ variant }}">
 
     {% block title %}
       {% if highlight or title %}

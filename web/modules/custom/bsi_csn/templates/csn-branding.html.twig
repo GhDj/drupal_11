@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Template for the CSN branding block.
+ *
+ * Available variables:
+ * - bsi_logo: Path to the BSI desktop logo.
+ * - bsi_logo_mobile: Path to the BSI mobile logo.
+ * - bsi_url: URL the BSI logo links to (external, new tab).
+ * - csn_dashboard_url: URL the CSN logo links to.
+ */
+#}
+<div class="bsi-csn-branding">
+  {% if bsi_url %}
+    <div class="bsi-csn-branding__logo">
+      <div class="bsi-csn-branding__logo--desktop">
+        <a href="{{ bsi_url }}" target="_blank" rel="noopener noreferrer" class="bsi-csn-branding__link">
+          <img src="{{ bsi_logo }}" alt="{{ 'Federal Office for Information Security'|t }}" fetchpriority="high" />
+        </a>
+      </div>
+      <div class="bsi-csn-branding__logo--mobile">
+        <a href="{{ bsi_url }}" target="_blank" rel="noopener noreferrer" class="bsi-csn-branding__link">
+          <img src="{{ bsi_logo_mobile }}" alt="{{ 'Federal Office for Information Security'|t }}" fetchpriority="high" />
+        </a>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if csn_dashboard_url %}
+    <div class="bsi-csn-branding__csn-logo">
+      <a href="{{ csn_dashboard_url }}" class="bsi-csn-branding__link">
+        <img src="{{ bsi_logo }}" alt="{{ 'Cybersicherheitsnetzwerk'|t }}" />
+      </a>
+    </div>
+  {% else %}
+    <div class="bsi-csn-branding__csn-logo">
+      <img src="{{ bsi_logo }}" alt="{{ 'Cybersicherheitsnetzwerk'|t }}" />
+    </div>
+  {% endif %}
+</div>

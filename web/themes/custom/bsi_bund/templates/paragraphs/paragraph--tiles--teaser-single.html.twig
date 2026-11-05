@@ -66,7 +66,9 @@
 ] %}
 
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }} data-theme="blue-100">
+  <div{{ attributes.addClass(classes)
+    .setAttribute('id', constant('\\Drupal\\bsi_custom\\Hook\\ParagraphHooks::TILE_ANCHOR_PREFIX') ~ paragraph.id())
+  }} data-theme="blue-100">
 
     {% if has_media %}
       <div class="bsi-card__image">

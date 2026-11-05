@@ -43,7 +43,7 @@
   padding: var(--#{$nsp}-space-md) var(--#{$nsp}-grid-padding);
   right: 0;
   top: calc(
-    var(--#{$nsp}-header-height) + var(--drupal-toolbar-height, 0px) +
+    var(--#{$nsp}-header-height) + var(--drupal-displace-offset-top, 0px) +
       var(--drupal-environment-indicator-height, 0px)
   );
   width: 100%;
@@ -57,12 +57,21 @@
 
   // handle popover
   @at-root html {
-    &:has(#mainmenu:popover-open) {
-      overflow: hidden;
-    }
-
     // switch button icons if menu is opened/closed
     &:has(#mainmenu:popover-open) {
+      overflow: hidden;
+
+      .#{$nsp}-header__search-button,
+      .#{$nsp}-mainmenu__menu-button {
+        --#{$nsp}-icon-color: var(--#{$nsp}-color-base-black);
+
+        &:hover,
+        &:active,
+        &:focus {
+          --#{$nsp}-icon-color: var(--#{$nsp}-color-blue-750);
+        }
+      }
+
       .#{$nsp}-mainmenu__menu-button {
         .#{$nsp}-button__icon--menu-burger {
           display: none;
@@ -73,10 +82,31 @@
         }
       }
     }
+
+    &:has(.#{$nsp}-mainmenu__panel--open) {
+      overflow: hidden;
+
+      &::before {
+        background-color: var(--#{$nsp}-color-blue-800);
+        content: "";
+        height: 100dvh;
+        left: 0;
+        opacity: 0.8;
+        position: fixed;
+        right: 0;
+        top: calc(
+          var(--#{$nsp}-header-height) +
+            var(--drupal-displace-offset-top, 0px) +
+            var(--environment-indicator-height, 0px)
+        );
+        z-index: 10;
+      }
+    }
   }
 
   // mainmenu button
   &__menu-button {
+    anchor-name: --menu-anchor;
     order: 2;
 
     @include breakpoint-lg {
@@ -90,18 +120,17 @@
 
   &:popover-open {
     @include divider;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     gap: var(--#{$nsp}-space-xl);
-    height: calc(
-      100dvh -
-        (
-          var(--#{$nsp}-header-height) + var(--drupal-toolbar-height, 0px) +
-            var(--drupal-environment-indicator-height, 0px)
-        )
-    );
+    height: auto;
     justify-content: space-between;
+    left: 0;
     overflow: hidden auto;
+    position-anchor: --menu-anchor;
+    right: 0;
+    top: calc(anchor(bottom) + 17px);
 
     @include breakpoint-lg {
       display: block;
@@ -201,6 +230,7 @@
 
     @include breakpoint-lg {
       display: block;
+      grid-column: -1;
       margin-left: auto;
       max-width: 330px;
     }
@@ -232,7 +262,19 @@
 
       @include breakpoint-lg {
         display: block;
+        position: absolute;
       }
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Level 2 submenu
+  // ---------------------------------------------------------------------------
+  &__panel {
+    height: 100%;
+
+    @include breakpoint-lg {
+      height: auto;
     }
   }
 
@@ -252,7 +294,7 @@
     position: fixed;
     right: 0;
     top: calc(
-      var(--#{$nsp}-header-height) + var(--drupal-toolbar-height, 0px) +
+      var(--#{$nsp}-header-height) + var(--drupal-displace-offset-top, 0px) +
         var(--drupal-environment-indicator-height, 0px)
     );
     transform: translateX(100%);
@@ -266,12 +308,12 @@
       background-color: var(--#{$nsp}-color-base-white);
       display: none;
       gap: var(--#{$nsp}-space-2xl);
-      grid-template-columns: fit-content(33%) 1fr 1fr;
       left: 0;
       margin-inline: auto;
       margin-bottom: 0;
       max-width: var(--bsi-grid-max-width);
-      padding: var(--#{$nsp}-space-2xl) var(--#{$nsp}-grid-padding);
+      padding: var(--#{$nsp}-space-sm) var(--#{$nsp}-grid-padding)
+        var(--#{$nsp}-space-2xl) var(--#{$nsp}-grid-padding);
       position: absolute;
       right: 0;
       transform: translateX(0);
@@ -297,6 +339,7 @@
 
       @include breakpoint-lg {
         display: grid;
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
@@ -312,17 +355,17 @@
           align-items: flex-start;
           gap: var(--#{$nsp}-space-lg);
           grid-column: 2;
-          padding: 0 var(--#{$nsp}-space-sm);
+          margin-top: var(--#{$nsp}-space-5xl);
         }
 
         // level 2 submenu list
         &-item {
-          align-items: center;
           border-bottom: 1px solid var(--#{$nsp}-color-neutral-350);
           display: flex;
           flex-direction: column;
 
           @include breakpoint-lg {
+            align-items: center;
             border: 0;
             flex-direction: row;
             min-height: 34px;
@@ -342,7 +385,7 @@
           padding: 0;
         }
 
-        &:hover {
+        &:hover:not(:focus) {
           .#{$nsp}-button__icon {
             background-color: var(--#{$nsp}-color-base-white);
             color: var(--#{$nsp}-color-blue-800);
@@ -360,7 +403,7 @@
           width: 48px;
 
           @include breakpoint-lg {
-            --bsi-icon-width: 16px;
+            --#{$nsp}-icon-width: 16px;
             background-color: transparent;
             border: 0;
             color: var(--#{$nsp}-color-black);
@@ -403,14 +446,41 @@
 
     @include breakpoint-lg {
       bottom: 0;
-      left: var(--mainmenu-l3-left, 66%);
+      left: calc(
+        var(--mainmenu-l3-left, 66%) - 2 * var(--#{$nsp}-grid-padding)
+      );
       position: absolute;
       right: 0;
-      top: var(--#{$nsp}-space-2xl);
+      top: var(--#{$nsp}-space-sm);
     }
 
     // more level 3 elements
     .#{$nsp}-mainmenu {
+      &__overlay-toggle {
+        --#{$nsp}-button-background: none;
+        --#{$nsp}-button-border-color: var(--#{$nsp}-color-base-white);
+        --#{$nsp}-button-text-color: var(--#{$nsp}-color-typo-secondary);
+        --#{$nsp}-button-border-color-hover: var(--#{$nsp}-color-base-white);
+        --#{$nsp}-button-text-color-hover: var(--#{$nsp}-color-blue-750);
+        --#{$nsp}-button-border-color-active: var(--#{$nsp}-color-base-white);
+        --#{$nsp}-button-border-color-disabled: var(--#{$nsp}-color-base-white);
+        --#{$nsp}-button-background-disabled: var(--#{$nsp}-color-base-white);
+        --#{$nsp}-icon-width: var(--#{$nsp}-size-sm);
+
+        height: auto;
+        padding: var(--bsi-space-2xs) 0;
+
+        @include breakpoint-lg {
+          font-size: 18px;
+          padding: var(--#{$nsp}-space-2xs) 0;
+        }
+
+        &:hover {
+          text-decoration: underline;
+          text-underline-offset: var(--#{$nsp}-space-3xs);
+        }
+      }
+
       // level 3 submenu list
       &__submenu {
         display: flex;
@@ -420,20 +490,19 @@
           var(--#{$nsp}-space-lg);
 
         @include breakpoint-lg {
-          padding: 0 var(--#{$nsp}-space-2xs) var(--#{$nsp}-space-2xs);
+          align-items: start;
+          margin-top: var(--#{$nsp}-space-5xl);
+          padding: 0 var(--#{$nsp}-space-2xs);
+          row-gap: var(--#{$nsp}-space-lg);
         }
 
         // level 2 submenu list
         &-item {
+          align-items: baseline;
           border: 0;
 
           @include breakpoint-lg {
             min-height: auto;
-            padding-left: var(--#{$nsp}-space-sm);
-          }
-
-          &--overview {
-            padding-left: 0;
           }
         }
       }
@@ -445,15 +514,76 @@
 
         @include breakpoint-lg {
           font-size: 18px;
-          padding: 0;
+        }
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Level 4 submenu
+  // ---------------------------------------------------------------------------
+  &__panel--l4 {
+    --#{$nsp}-link-decoration-line-hover: underline;
+    --#{$nsp}-link-color: var(--#{$nsp}-color-neutral-750);
+    --#{$nsp}-link-color-hover: var(--#{$nsp}-color-blue-750);
+    background: var(--#{$nsp}-color-base-white);
+    left: 0;
+    padding: var(--#{$nsp}-space-md);
+
+    position: fixed;
+    top: 1px;
+    width: 100%;
+
+    @include breakpoint-lg {
+      left: 50%;
+      max-width: 50%;
+      padding: var(--#{$nsp}-space-2xs);
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    // more level 4 elements
+    .#{$nsp}-mainmenu {
+      // level 4 submenu list
+      &__submenu {
+        display: flex;
+        flex-direction: column;
+        gap: var(--#{$nsp}-space-lg);
+        padding: var(--#{$nsp}-space-2xs) var(--#{$nsp}-space-sm)
+          var(--#{$nsp}-space-lg);
+
+        @include breakpoint-lg {
+          margin-top: var(--#{$nsp}-space-4xl);
+          padding: 0 var(--#{$nsp}-space-2xs) var(--#{$nsp}-space-2xs);
         }
 
-        &--overview {
+        &__heading {
+          display: block;
+          padding: var(--#{$nsp}-space-2xl) 0;
+
           @include breakpoint-lg {
-            @include typography("body-lead", 400);
-            --#{$nsp}-link-color: var(--#{$nsp}-color-neutral-1000);
-            --#{$nsp}-link-color-hover: var(--#{$nsp}-color-blue-750);
+            display: none;
           }
+        }
+
+        // level 3 submenu list
+        &-item {
+          border: 0;
+
+          @include breakpoint-lg {
+            min-height: auto;
+          }
+        }
+      }
+
+      // level 4 menu links
+      &__link {
+        font-size: 16px;
+        padding: var(--#{$nsp}-space-2xs) 0;
+
+        @include breakpoint-lg {
+          font-size: 18px;
         }
       }
     }

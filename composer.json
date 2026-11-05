@@ -255,7 +255,9 @@
                 "Media: Retain thumbnail alt text if thumbnail is unchanged":
                     "patches/drupal/media-retain_thumbnail_alt.patch",
                 "Wrong language field labels after `drush cr` (3221375-MR13139)":
-                    "patches/drupal/config-translation-overrides-incorrectly-cached.patch"
+                    "patches/drupal/config-translation-overrides-incorrectly-cached.patch",
+                "Strip tags from formatted text before trimming (3473241)":
+                    "patches/drupal/strip-tags-from-formatted-text-before-trimming.patch"
             },
             "drupal/default_content": {
                 "Add export action plugin":
@@ -317,7 +319,9 @@
                 "Browser: Use translated media bundle label":
                     "patches/media_directories/browser_translate-bundle.patch",
                 "Browser: Use translated base field labels":
-                    "patches/media_directories/browser_translate-base-fields.patch"
+                    "patches/media_directories/browser_translate-base-fields.patch",
+                "Browser: Display term descriptions in directory tooltip":
+                    "patches/media_directories/browser_display-term-description.patch"
             },
             "drupal/media_entity_download": {
                 "Add formatter link title options":

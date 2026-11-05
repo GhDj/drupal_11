@@ -47,16 +47,7 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_show_explorer_images:
-    type: boolean
-    label: above
-    settings:
-      format: boolean
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 3
-    region: content
 hidden:
   created: true
+  field_show_explorer_images: true
   search_api_excerpt: true

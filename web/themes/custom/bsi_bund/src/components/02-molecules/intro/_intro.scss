@@ -12,9 +12,9 @@
 // -----------------------------------------------------------------------------
 .#{$nsp}-intro {
   &__content {
-    display: grid;
     border-bottom: 1px solid var(--#{$nsp}-color-neutral-150);
     border-top: 1px solid var(--#{$nsp}-color-neutral-150);
+    display: grid;
     padding-block: var(--#{$nsp}-space-module);
     row-gap: var(--bsi-space-lg);
 

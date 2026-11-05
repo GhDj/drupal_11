@@ -21,7 +21,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Search annual report'
+      title: 'Search Yearly Report'
       fields: {  }
       pager:
         type: full
@@ -85,8 +85,8 @@ display:
           plugin_id: search_api
           order: DESC
           expose:
-            label: Relevance
-            field_identifier: search_api_relevance
+            label: ''
+            field_identifier: ''
           exposed: false
         node_created:
           id: node_created
@@ -98,8 +98,8 @@ display:
           plugin_id: search_api
           order: DESC
           expose:
-            label: Date
-            field_identifier: date
+            label: ''
+            field_identifier: ''
           exposed: false
       arguments:
         node_book:
@@ -387,6 +387,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
+      title: 'Search Report Slot'
       empty: {  }
       filters:
         node_bundle:
@@ -599,7 +600,7 @@ display:
           1: AND
       defaults:
         empty: false
-        title: true
+        title: false
         filters: false
         filter_groups: false
       display_description: ''
@@ -623,20 +624,10 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      defaults:
-        title: true
       display_description: ''
       exposed_block: false
       display_extenders: {  }
       block_description: 'Search Yearly Report'
-      block_category: 'BSI Search'
-      allow:
-        items_per_page: false
-        contextual_filter: contextual_filter
-        exposed_sort: exposed_sort
-        more_link_text: 0
-        more_link_custom_url: 0
-        pager_id: 0
     cache_metadata:
       max-age: -1
       contexts:

@@ -2856,7 +2856,7 @@ display:
       display_description: ''
       display_extenders: {  }
       block_description: 'Keywords (Table)'
-      block_category: 'BSI Search'
+      block_category: ' BSI Search'
     cache_metadata:
       max-age: -1
       contexts:

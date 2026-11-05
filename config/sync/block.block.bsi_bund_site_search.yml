@@ -9,7 +9,7 @@ dependencies:
 id: bsi_bund_site_search
 theme: bsi_bund
 region: header
-weight: 0
+weight: -12
 provider: null
 plugin: block_search_topic
 settings:

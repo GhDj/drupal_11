@@ -1,0 +1,10 @@
+services:
+  bsi_csn.context_checker:
+    class: Drupal\bsi_csn\CsnContextChecker
+    arguments: ['@current_route_match', '@entity_type.manager']
+
+  bsi_csn.logout_redirect_subscriber:
+    class: Drupal\bsi_csn\EventSubscriber\LogoutRedirectSubscriber
+    arguments: ['@config.factory']
+    tags:
+      - { name: event_subscriber }
