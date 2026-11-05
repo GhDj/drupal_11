@@ -1,0 +1,39 @@
+{#
+/**
+ * @file
+ * Template for the CSN footer block.
+ *
+ * Available variables:
+ * - copyright_text: The copyright text string.
+ * - utility_links: Array of links with 'title' and 'url' keys.
+ * - back_to_top_url: URL for the back-to-top button.
+ * - back_to_top_title: Accessible title for the back-to-top button.
+ */
+#}
+<div class="bsi-csn-footer">
+  {% if copyright_text %}
+    <div class="bsi-csn-footer__copyright">
+      {{ copyright_text }}
+    </div>
+  {% endif %}
+
+  {% if utility_links %}
+    <nav class="bsi-csn-footer__utility-links" aria-label="{{ 'Footer navigation'|t }}">
+      <ul class="bsi-csn-footer__link-list">
+        {% for link in utility_links %}
+          <li class="bsi-csn-footer__link-item">
+            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
+
+  {% if back_to_top_url %}
+    <div class="bsi-csn-footer__back-to-top">
+      <a href="{{ back_to_top_url }}" class="bsi-csn-footer__top-link" aria-label="{{ back_to_top_title }}">
+        <span class="bsi-icon bsi-icon--to-top"></span>
+      </a>
+    </div>
+  {% endif %}
+</div>

@@ -11,3 +11,6 @@ bsi_csn.settings:
     logout_redirect_url:
       type: string
       label: 'Logout redirect URL'
+    copyright_text:
+      type: label
+      label: 'Copyright text'

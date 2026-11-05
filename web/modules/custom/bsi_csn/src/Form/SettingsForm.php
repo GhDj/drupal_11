@@ -53,6 +53,14 @@ final class SettingsForm extends ConfigFormBase {
       '#required' => TRUE,
     ];
 
+    $form['copyright_text'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Copyright text'),
+      '#description' => $this->t('Copyright text displayed in the CSN footer.'),
+      '#config_target' => 'bsi_csn.settings:copyright_text',
+      '#required' => TRUE,
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
