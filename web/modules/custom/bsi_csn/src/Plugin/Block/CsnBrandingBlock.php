@@ -8,15 +8,17 @@ use Drupal\bsi_csn\CsnContextChecker;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Extension\ThemeHandlerInterface;
+use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides the CSN branding block.
+ * Provides the CSN branding block (CSN logo only).
+ *
+ * The regular BSI logo is retained via the main branding block.
+ * This block adds the CSN logo on the right side of the header.
  */
 #[Block(
   id: 'bsi_csn_branding',
@@ -27,10 +29,9 @@ final class CsnBrandingBlock extends BlockBase implements ContainerFactoryPlugin
 
   public function __construct(
     array $configuration,
-          $plugin_id,
-          $plugin_definition,
-    private readonly ConfigFactoryInterface $configFactory,
-    private readonly ThemeHandlerInterface $themeHandler,
+    string $plugin_id,
+    mixed $plugin_definition,
+    private readonly ImmutableConfig $config,
     private readonly CsnContextChecker $csnContextChecker,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -44,8 +45,7 @@ final class CsnBrandingBlock extends BlockBase implements ContainerFactoryPlugin
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('config.factory'),
-      $container->get('theme_handler'),
+      $container->get('config.factory')->get('bsi_csn.settings'),
       $container->get('bsi_csn.context_checker'),
     );
   }
@@ -61,18 +61,19 @@ final class CsnBrandingBlock extends BlockBase implements ContainerFactoryPlugin
   /**
    * {@inheritdoc}
    */
-  public function build(): array {
-    $config = $this->configFactory->get('bsi_csn.settings');
-    $theme_path = $this->themeHandler->getTheme('bsi_bund')?->getPath() ?? '';
+  public function getCacheContexts(): array {
+    return array_merge(parent::getCacheContexts(), ['route']);
+  }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function build(): array {
     return [
       '#theme' => 'csn_branding',
-      '#bsi_logo' => '/' . $theme_path . '/logo.svg',
-      '#bsi_logo_mobile' => '/' . $theme_path . '/logo_mobile.svg',
-      '#bsi_url' => $config->get('bsi_url') ?: '',
-      '#csn_dashboard_url' => $config->get('csn_dashboard_url') ?: '',
+      '#csn_dashboard_url' => $this->config->get('csn_dashboard_url') ?: '',
       '#cache' => [
-        'tags' => $config->getCacheTags(),
+        'tags' => $this->config->getCacheTags(),
       ],
     ];
   }
