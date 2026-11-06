@@ -8,7 +8,7 @@ use Drupal\bsi_csn\CsnContextChecker;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\Menu\MenuLinkTreeInterface;
 use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -29,9 +29,9 @@ final class CsnFooterBlock extends BlockBase implements ContainerFactoryPluginIn
 
   public function __construct(
     array $configuration,
-    $plugin_id,
-    $plugin_definition,
-    private readonly ConfigFactoryInterface $configFactory,
+    string $plugin_id,
+    mixed $plugin_definition,
+    private readonly ImmutableConfig $config,
     private readonly MenuLinkTreeInterface $menuLinkTree,
     private readonly CsnContextChecker $csnContextChecker,
   ) {
@@ -46,7 +46,7 @@ final class CsnFooterBlock extends BlockBase implements ContainerFactoryPluginIn
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('config.factory'),
+      $container->get('config.factory')->get('bsi_csn.settings'),
       $container->get('menu.link_tree'),
       $container->get('bsi_csn.context_checker'),
     );
@@ -63,9 +63,14 @@ final class CsnFooterBlock extends BlockBase implements ContainerFactoryPluginIn
   /**
    * {@inheritdoc}
    */
-  public function build(): array {
-    $config = $this->configFactory->get('bsi_csn.settings');
+  public function getCacheContexts(): array {
+    return array_merge(parent::getCacheContexts(), ['route']);
+  }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function build(): array {
     // Load the footer menu (utility links).
     $parameters = new MenuTreeParameters();
     $parameters->setMaxDepth(1);
@@ -89,13 +94,13 @@ final class CsnFooterBlock extends BlockBase implements ContainerFactoryPluginIn
 
     return [
       '#theme' => 'csn_footer',
-      '#copyright_text' => $config->get('copyright_text') ?: '',
+      '#copyright_text' => $this->config->get('copyright_text') ?: '',
       '#utility_links' => $utility_links,
       '#back_to_top_url' => Url::fromUri('route:<none>', ['fragment' => 'main-content']),
       '#back_to_top_title' => $this->t('To top'),
       '#cache' => [
         'tags' => array_merge(
-          $config->getCacheTags(),
+          $this->config->getCacheTags(),
           ['config:system.menu.footer'],
         ),
       ],
