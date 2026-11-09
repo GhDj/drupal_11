@@ -25,23 +25,37 @@ export default class CardSlider {
   }
 
   init() {
+    const slideCount = this.el.querySelectorAll(
+      ".splide__slide"
+    ).length;
+
+    const perPageDesktop = 3;
+    const perPageTablet = 2;
+
+    // Disable slider when there are not enough items to scroll.
+    const needsSlider = slideCount > perPageDesktop;
+
     this.splide = new Splide(this.el, {
-      type: "loop",
-      perPage: 3,
+      type: needsSlider ? "loop" : "slide",
+      perPage: perPageDesktop,
       perMove: 1,
       gap: 32,
       arrows: false,
-      pagination: true,
-      drag: true,
-      keyboard: "focused",
+      pagination: needsSlider,
+      drag: needsSlider,
+      keyboard: needsSlider ? "focused" : false,
       breakpoints: {
         [parseToNumbers(breakpoint.lg)]: {
-          perPage: 2,
-          gap: 24
+          perPage: perPageTablet,
+          gap: 24,
+          pagination: slideCount > perPageTablet,
+          drag: slideCount > perPageTablet
         },
         [parseToNumbers(breakpoint.md)]: {
           perPage: 1,
-          gap: 24
+          gap: 24,
+          pagination: slideCount > 1,
+          drag: slideCount > 1
         }
       }
     });
@@ -53,7 +67,21 @@ export default class CardSlider {
     });
 
     this.splide.mount();
-    this.bindSliderControls();
+
+    if (needsSlider) {
+      this.bindSliderControls();
+    } else {
+      this.hideControls();
+    }
+  }
+
+  hideControls() {
+    const controls = this.el.querySelector<HTMLElement>(
+      ".bsi-card-slider__controls"
+    );
+    if (controls) {
+      controls.style.display = "none";
+    }
   }
 
   bindSliderControls() {
