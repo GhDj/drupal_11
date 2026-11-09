@@ -5,3 +5,30 @@ bsi_csn.settings:
     _form: 'Drupal\bsi_csn\Form\SettingsForm'
   requirements:
     _permission: 'administer site configuration'
+
+bsi_csn.comments.list:
+  path: '/csn/api/comments/{node}'
+  defaults:
+    _controller: '\Drupal\bsi_csn\Controller\CsnCommentController::list'
+  requirements:
+    _permission: 'access csn comments'
+    node: \d+
+  methods: [GET]
+  options:
+    parameters:
+      node:
+        type: entity:node
+
+bsi_csn.comments.create:
+  path: '/csn/api/comments/{node}'
+  defaults:
+    _controller: '\Drupal\bsi_csn\Controller\CsnCommentController::create'
+  requirements:
+    _permission: 'access csn comments'
+    _csrf_token: 'TRUE'
+    node: \d+
+  methods: [POST]
+  options:
+    parameters:
+      node:
+        type: entity:node
