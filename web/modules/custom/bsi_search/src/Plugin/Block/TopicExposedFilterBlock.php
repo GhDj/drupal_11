@@ -113,6 +113,7 @@ class TopicExposedFilterBlock extends BlockBase implements ContainerFactoryPlugi
   public function build(): array {
     $tid = $this->configuration['topic_tid'];
     if ($this->configuration['use_node_topic']) {
+      // @todo Use optional entity:node context instead of route match.
       $node = $this->currentRouteMatch->getParameter('node');
 
       if ($node instanceof NodeInterface &&

@@ -1,0 +1,34 @@
+--- a/src/MenuBasedBreadcrumbBuilder.php
++++ b/src/MenuBasedBreadcrumbBuilder.php
+@@ -345,7 +345,7 @@
+         }
+       }
+     }
+-    $this->addMissingCurrentPage($links, $route_match);
++    /*$this->addMissingCurrentPage($links, $route_match);
+
+     // Create a breadcrumb for <front> which may be either added or replaced:
+     $langcode = $this->contentLanguage;
+@@ -383,16 +383,15 @@
+       if ($this->config->get('add_home')) {
+         array_unshift($links, $home_link);
+       }
+-    }
+-
+-    if (!empty($links)) {
+-      $page_type = $this->taxonomyAttachment ? 'member_page' : 'current_page';
++    }*/
++
++    if (!empty($links) && $this->taxonomyAttachment) {
+       // Display the last item of the breadcrumbs trail as the options indicate.
+       /** @var \Drupal\Core\Link $current */
+       $current = array_pop($links);
+-      if ($this->config->get('append_' . $page_type)) {
+-        if (!$this->config->get($page_type . '_as_link')) {
+-          $current->setUrl(new Url('<none>'));
++      if ($this->config->get('append_member_page')) {
++        if (!$this->config->get('member_page_as_link')) {
++          $current->setUrl(new Url('<nolink>'));
+         }
+         array_push($links, $current);
+       }

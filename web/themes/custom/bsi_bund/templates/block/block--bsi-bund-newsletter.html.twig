@@ -28,20 +28,19 @@
 #}
 {%
   set classes = [
-    'block',
-    'block-' ~ configuration.provider|clean_class,
-    'block-' ~ plugin_id|clean_class,
-    'bsi-footer__newsletter'
-  ]
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  'bsi-footer__newsletter'
+]
 %}
 
 
 
 <div{{ attributes.addClass(classes) }}>
-
+  {{ title_prefix }}
+  {{ title_suffix }}
   {% block content %}
-  {{content}}
-
-
+    {{ content }}
   {% endblock %}
 </div>

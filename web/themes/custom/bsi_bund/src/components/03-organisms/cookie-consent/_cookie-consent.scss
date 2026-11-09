@@ -1,0 +1,94 @@
+// -----------------------------------------------------------------------------
+// Cookie context
+// -----------------------------------------------------------------------------
+
+@use "@globals/foundation/variables" as *;
+@use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/typography" as *;
+@use "@globals/mixins/grid" as *;
+// .klaro .context-notice .cm-btn.cm-btn-success, .klaro .cookie-notice .cm-btn.cm-btn-success
+
+[data-name="multimedia"] .klaro .context-notice {
+  @include typography("body-compact");
+  font-family: var(--font-family-base);
+  p.cm-dialog-link a {
+    align-items: flex-start;
+    color: var(--#{$nsp}-link-color);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: var(--font-family-base);
+    font-style: normal;
+    font-weight: 400;
+    gap: var(--#{$nsp}-space-4xs);
+    justify-content: flex-start;
+    line-height: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    text-decoration: none;
+    text-decoration-color: var(--#{$nsp}-link-underline-color);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--#{$nsp}-link-color-hover);
+      text-decoration: underline;
+      text-decoration-color: var(--#{$nsp}-link-color-hover);
+    }
+  }
+  .cm-buttons {
+    display: flex;
+    gap: var(--#{$nsp}-space-xs);
+    .cm-btn-success,
+    .cm-btn-success-var {
+      --#{$nsp}-btn-background-color: var(--#{$nsp}-color-blue-800);
+      --#{$nsp}-btn-background-color-hover: var(--#{$nsp}-color-base-white);
+      --#{$nsp}-btn-text-color-hover: var(--#{$nsp}-color-blue-800);
+      --#{$nsp}-btn-text-color: var(--#{$nsp}-color-base-white);
+      --#{$nsp}-btn-border-color: var(--#{$nsp}-color-blue-800);
+      --#{$nsp}-btn-button-border-width-active: 2px;
+      --#{$nsp}-btn-button-border-width: 1px;
+
+      &.cm-btn {
+        align-items: center;
+        background: var(--#{$nsp}-btn-background-color);
+        border: var(--#{$nsp}-link-button-border-width) solid
+          var(--#{$nsp}-btn-background-color);
+        border-radius: 4px;
+        box-shadow: none;
+        color: var(--#{$nsp}-btn-text-color);
+        display: inline-flex;
+        font-family: var(--font-family-base);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        height: 48px;
+        line-height: 1em;
+        margin-block: 0;
+        margin-right: 0;
+        margin-top: 0;
+        padding: var(--#{$nsp}-size-sm) var(--#{$nsp}-size-lg);
+        text-decoration: none;
+        transition: all 0.2s ease-in-out;
+        width: auto;
+
+        &:hover {
+          background: var(--#{$nsp}-btn-background-color-hover);
+          border-color: var(--#{$nsp}-btn-border-color-hover);
+          color: var(--#{$nsp}-btn-text-color-hover);
+        }
+        &:active {
+          background: var(--#{$nsp}-btn-background-color-hover);
+          border-color: var(--#{$nsp}-btn-border-color-hover);
+          border-width: var(--#{$nsp}-btn-button-border-width-active);
+          color: var(--#{$nsp}-btn-text-color-hover);
+        }
+        &:focus-visible {
+          outline: 2px solid;
+          outline-color: var(--#{$nsp}-color-base-focus);
+          outline-offset: 2px;
+        }
+      }
+    }
+  }
+}

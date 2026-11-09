@@ -334,10 +334,10 @@
                     "patches/media_thumbnails/bundle_configuration.patch"
             },
             "drupal/menu_breadcrumb": {
+                "Apply breadcrumb settings globally using bsi_custom's decorator; Fix current page link to use <nolink> over <none>":
+                "patches/menu_breadcrumb/leave-global-settings-to-breadcrumb-builder.patch",
                 "Fix current page title sometimes coming up as empty":
-                    "patches/menu_breadcrumb/current-page-title.patch",
-                "Fix current page link to use <nolink> over <none>":
-                    "patches/menu_breadcrumb/current-page-link.patch"
+                    "patches/menu_breadcrumb/current-page-title.patch"
             },
             "drupal/menu_entity_index": {
                 "Fix broken tests on main (3583444)":

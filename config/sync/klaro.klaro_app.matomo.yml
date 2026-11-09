@@ -1,6 +1,6 @@
 uuid: de5bc237-2795-450d-9347-df4b6eb2c6a0
 langcode: en
-status: false
+status: true
 dependencies: {  }
 _core:
   default_config_hash: n6Mv2ssZaK6w9tKtiTQVgW7HiBz-iALHiB2QlGlE-FE
@@ -30,8 +30,8 @@ cookies:
 required: false
 opt_out: false
 only_once: false
-contextual_consent_only: null
-contextual_consent_text: null
+contextual_consent_only: false
+contextual_consent_text: ''
 info_url: 'https://matomo.org'
 privacy_policy_url: 'https://matomo.org/privacy-policy'
 javascripts:

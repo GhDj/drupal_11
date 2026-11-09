@@ -9,6 +9,10 @@
   &__text {
     margin-block-start: var(--#{$nsp}-space-md);
   }
+
+  .#{$nsp}-copyright {
+    margin-top: var(--#{$nsp}-space-sm);
+  }
   // PLYR CUSTOMIZATIONS
   .plyr {
     --plyr-color-main: var(--#{$nsp}-color-blue-800);

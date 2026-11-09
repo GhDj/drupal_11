@@ -6,6 +6,7 @@ namespace Drupal\bsi_charts\Hook;
 
 use Drupal\bsi_charts\Element\ChartsSettingsAlter;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\Render\Element;
 
 /**
  * Hooks related to chart media.
@@ -60,6 +61,29 @@ class ChartHooks {
   #[Hook('chart_alter')]
   public function alterChart(array &$element, $chart_id): void {
     $element['#accessible_table_button_class'] = 'bsi-button bsi-button--primary';
+
+    if ($element['#chart_library'] !== 'chartjs' || $element['#chart_type'] !== 'scatter') {
+      return;
+    }
+
+    // Extend scatter plot handling to support singe column data sets.
+    // @see \Drupal\charts_chartjs\Plugin\chart\Library\Chartjs::populateDatasets
+    foreach (Element::children($element) as $key) {
+      if ($element[$key]['#type'] !== 'chart_data') {
+        continue;
+      }
+      $numeric_labels = array_all($element['xaxis']['#labels'],
+        static fn (mixed $value, int|string $key) => is_numeric($value)
+      );
+      foreach ($element[$key]['#data'] as $series) {
+        foreach ($series as $index => $record) {
+          $element[$key]['#data'][$index] = [
+            $numeric_labels ? $element['xaxis']['#labels'][$index] : $index,
+            $record,
+          ];
+        }
+      }
+    }
   }
 
   /**

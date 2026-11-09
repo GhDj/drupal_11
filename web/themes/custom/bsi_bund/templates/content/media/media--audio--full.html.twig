@@ -24,15 +24,17 @@
 %}
 <div{{ attributes.addClass(classes) }}>
   <div class="bsi-block__content bsi-block__content--indented">
-    {{ content.thumbnail }}
-    <div class="bsi-audio">
-      <div class="bsi-audio__content">
-        {{ content.field_media_source }}
+    <div class="bsi-audio-wrapper">
+      {{ content.thumbnail }}
+      <div class="bsi-audio">
+        <div class="bsi-audio__content">
+          {{ content.field_media_source }}
+        </div>
       </div>
-    </div>
-    <div class="bsi-audio__text">
-      {{ content.field_copyright }}
-      {{ content.field_body }}
+        <div class="bsi-audio__text">
+          {{ content.field_copyright }}
+          {{ content.field_body }}
+        </div>
     </div>
   </div>
 </div>

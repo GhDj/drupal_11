@@ -42,10 +42,11 @@
       decorative: true,
       extra_classes: 'bsi-contact__icon',
     } %}
-    <div class="bsi-contact__wrapper">
+    <div class="bsi-contact__content">
       {{ title_prefix }}
       {% if label %}
-        <h2{{ title_attributes }}>
+
+        <h2{{ title_attributes.addClass('bsi-heading', 'bsi-heading--5', 'bsi-contact__title') }}>
           {{ label }}
         </h2>
       {% endif %}

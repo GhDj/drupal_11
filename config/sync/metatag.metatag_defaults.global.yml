@@ -8,10 +8,24 @@ id: global
 label: Global
 tags:
   apple_mobile_web_app_title: BSIWEB
+  apple_touch_icon: /themes/custom/bsi_bund/src/assets/default/favicon/apple-touch-icon-60-60.png
+  apple_touch_icon_114x114: /themes/custom/bsi_bund/src/assets/default/favicon/apple-touch-icon-114-114.png
+  apple_touch_icon_120x120: /themes/custom/bsi_bund/src/assets/default/favicon/apple-touch-icon-120-120.png
+  apple_touch_icon_144x144: /themes/custom/bsi_bund/src/assets/default/favicon/apple-touch-icon-144-144.png
+  apple_touch_icon_152x152: /themes/custom/bsi_bund/src/assets/default/favicon/apple-touch-icon-152-152.png
+  apple_touch_icon_180x180: /themes/custom/bsi_bund/src/assets/default/favicon/apple-touch-icon-180-180.png
+  apple_touch_icon_72x72: /themes/custom/bsi_bund/src/assets/default/favicon/apple-touch-icon-72-72.png
+  apple_touch_icon_76x76: /themes/custom/bsi_bund/src/assets/default/favicon/apple-touch-icon-76-76.png
+  apple_touch_icon_precomposed: /themes/custom/bsi_bund/src/assets/default/favicon/apple-touch-icon-precomposed.png
   canonical_url: '[current-page:url:absolute]'
   description: '[site:slogan]'
   generator: 'Drupal 11 (https://www.drupal.org)'
   google_site_verification: PQGOwbYQDXCrOHMoHTFCh1I3b_OXc7qOYH8RsROhtQk
+  icon_16x16: /themes/custom/bsi_bund/src/assets/default/favicon/favicon-16x16.png
+  icon_32x32: /themes/custom/bsi_bund/src/assets/default/favicon/favicon-32x32.png
+  mask_icon:
+    href: /themes/custom/bsi_bund/src/assets/default/favicon/safari-pinned-tab.svg
+    color: ''
   msapplication_square150x150logo: /themes/custom/bsi_bund/src/assets/default/favicon/mstile-150x150.png
   msapplication_square310x310logo: /themes/custom/bsi_bund/src/assets/default/favicon/mstile-310x310.png
   msapplication_square70x70logo: /themes/custom/bsi_bund/src/assets/default/favicon/mstile-70x70.png

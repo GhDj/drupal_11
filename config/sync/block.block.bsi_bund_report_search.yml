@@ -18,6 +18,8 @@ settings:
   label: 'Report search slot'
   label_display: '0'
   provider: bsi_report
+  context_mapping:
+    node: '@node.node_route_context:node'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'

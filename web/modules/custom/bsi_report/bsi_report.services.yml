@@ -5,12 +5,3 @@ services:
     arguments:
       - '@bsi_report.book.outline.inner'
       - '@book.manager'
-
-  bsi_report.book.breadcrumb:
-    class: Drupal\bsi_report\BookBreadcrumbDecorator
-    decorates: book.breadcrumb
-    arguments:
-      - '@bsi_report.book.breadcrumb.inner'
-      - '@menu_breadcrumb.breadcrumb.default'
-      - '@config.factory'
-      - '@language_manager'

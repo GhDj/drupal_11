@@ -13,7 +13,9 @@
           Drupal.behaviors.bsiCharts._deduplicateLegend,
           Drupal.behaviors.bsiCharts._formatTooltip,
           Drupal.behaviors.bsiCharts._lightboxOverrides,
+          Drupal.behaviors.bsiCharts._adjustAxes,
           Drupal.behaviors.bsiCharts._adjustLegend,
+          Drupal.behaviors.bsiCharts._adjustChartWidth,
         ].forEach(callback => {
           element.addEventListener('drupalChartsConfigsInitialization', callback);
         });
@@ -42,7 +44,7 @@
 
     _formatTooltip(event) {
       const chartSettings = (drupalSettings.bsi_charts ?? {})[event.target.id] ?? {};
-      if (Object.keys(chartSettings).length === 0) {
+      if (Object.keys(chartSettings).length === 0 && event.detail.type !== 'scatter') {
         return;
       }
 
@@ -55,11 +57,26 @@
       const numberFormat = new Intl.NumberFormat(
         document.getElementsByTagName('html')[0].lang,
         {
-          minimumFractionDigits: chartSettings.decimal_count ?? null,
-          maximumFractionDigits: chartSettings.decimal_count ?? null,
+          minimumFractionDigits: chartSettings.decimal_count ?? 0,
+          // Need to provide or defaults to 3 digits.
+          maximumFractionDigits: chartSettings.decimal_count ?? 100,
         }
       );
-      return `${context.dataset.label}: ${chartSettings.prefix ?? ''}${numberFormat.format(context.raw)}${chartSettings.suffix ?? ''}`
+
+      let value = context.raw;
+      if (context.dataset.type === 'scatter') {
+        value = context.raw.y;
+      }
+      return `${context.dataset.label}: ${chartSettings.prefix ?? ''}${numberFormat.format(value)}${chartSettings.suffix ?? ''}`
+    },
+
+    _adjustAxes(event) {
+      const options = event.detail.options;
+      options.scales.x.ticks = options.scales.x.ticks ?? {};
+      // Render labels as configured in the field, no number formatting.
+      options.scales.x.ticks.callback = function (value, index, ticks) {
+        return event.detail.data.labels[value] ?? null;
+      };
     },
 
     _adjustLegend(event) {
@@ -73,6 +90,13 @@
       // Match Figma legend color box dimensions.
       options.plugins.legend.labels.boxWidth = 24;
       options.plugins.legend.labels.boxHeight = 12;
+
+      if (window.innerWidth < 768) {
+        options.aspectRatio = 1.5;
+        options.plugins.legend.labels.boxWidth = 12;
+        options.plugins.legend.labels.boxHeight = 8;
+        options.plugins.legend.labels.padding = 8;
+      }
     },
 
     _deduplicateLegend(event) {
@@ -126,6 +150,42 @@
           });
         chart.update();
       };
+    },
+    _adjustChartWidth(event) {
+      if (window.innerWidth >= 768) {
+        return;
+      }
+
+      const canvas = document.getElementById(event.target.id);
+        if (window.innerWidth >= 768) {
+         return;
+        }
+
+        const labelCount = event.detail.data?.labels?.length ?? 0;
+        if (labelCount <= 10) {
+          return;
+        }
+      if (!canvas) {
+        return;
+      }
+
+      const figure = canvas.closest('.charts-figure');
+
+      if (figure) {
+        figure.style.minWidth = `${labelCount * 80}px`;
+
+        console.log('width gesetzt', figure.style.minWidth);
+      }
+
+      document.querySelectorAll('.charts-figure').forEach((figure) => {
+        if (!figure.parentElement.classList.contains('charts-wrapper')) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'bsi-charts-wrapper bsi-grid';
+
+          figure.parentNode.insertBefore(wrapper, figure);
+          wrapper.appendChild(figure);
+        }
+      });
     },
     _legendItemKey(item) {
       return JSON.stringify([ item.text, item.fillStyle ]);

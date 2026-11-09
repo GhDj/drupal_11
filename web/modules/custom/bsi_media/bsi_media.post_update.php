@@ -8,14 +8,18 @@
 /**
  * Populate publication date from media created date.
  */
-function bsi_media_post_update_set_publication_date_from_created(&$sandbox): void {
+function bsi_media_post_update_fix_media_publication_date_values(&$sandbox): void {
+
+  $bundles = ['publication', 'download'];
+  $field_to_update = 'field_publication_date';
 
   if (!isset($sandbox['total'])) {
 
     $sandbox['mids'] = array_values(
       \Drupal::entityQuery('media')
         ->accessCheck(FALSE)
-        ->condition('bundle', ['publication', 'download'], 'IN')
+        ->condition('bundle', $bundles, 'IN')
+        ->notExists($field_to_update)
         ->execute()
     );
 

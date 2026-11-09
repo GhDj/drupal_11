@@ -1,25 +1,99 @@
 --- a/src/GlossifyBase.php
 +++ b/src/GlossifyBase.php
-@@ -119,15 +119,15 @@
-     }
+@@ -113,26 +113,25 @@
+     $pattern_parts = $replaced = [];
+
+     // Transform terms into normalized search pattern.
+-    $options = 'u';
+-    if (!$case_sensitivity) {
+-      $options .= 'i';
+-    }
      $term_patterns = [];
      foreach ($terms as $term) {
 -      // Matches when preceded by: start or whitespace.
-+      // Matches when preceded by: start, whitespace or non-word character.
-       // Matches when followed by: end, whitespace, or punctuation.
+-      // Matches when followed by: end, whitespace, or punctuation.
 -      $pattern_parts[$term->name] = '/(?<=^|\s)(' . preg_quote($term->name, '/') . ')(?=\s|$|[^\w\s])/' . $options;
-+      $pattern_parts[$term->name] = '/(?<!\w)(' . preg_quote($term->name, '/') . ')(?!\w)/' . $options;
-       $term_patterns[$term->name] = $term;
-
-       // Add patterns for synonyms if they exist.
-       if (!empty($term->synonyms)) {
-         foreach ($term->synonyms as $synonym) {
+-      $term_patterns[$term->name] = $term;
+-
+-      // Add patterns for synonyms if they exist.
+-      if (!empty($term->synonyms)) {
+-        foreach ($term->synonyms as $synonym) {
 -          $pattern_parts[$synonym] = '/(?<=^|\s)(' . preg_quote($synonym, '/') . ')(?=\s|$|[^\w\s])/' . $options;
-+          $pattern_parts[$synonym] = '/(?<!\w)(' . preg_quote($synonym, '/') . ')(?!\w)/' . $options;
-           $term_patterns[$synonym] = $term;
-         }
+-          $term_patterns[$synonym] = $term;
+-        }
+-      }
+-    }
+-    ksort($pattern_parts);
++      // @note Conflicts on non-unique term name/synonym or different case.
++      $term_patterns[mb_strtolower($term->name)] = $term;
++      foreach ($term->synonyms ?? [] as $synonym) {
++        $term_patterns[mb_strtolower($synonym)] = $term;
++      }
++    }
++    // Longer terms first, to reduce backtracking.
++    uksort($term_patterns, static fn (string $a, string $b): int
++      => strlen($b) <=> strlen($a) ?: $a <=> $b
++    );
++    foreach (array_chunk($term_patterns, 100, TRUE) as $chunk) {
++      $lookup_names = array_keys($chunk);
++      // We search case-insensitive and filter out false positives later.
++      $pattern_parts[] = '/\b(' . implode('|',
++        array_map(static fn(string $v) => preg_quote($v, '/'), $lookup_names)
++      ) . ')\b/ui';
++    }
+
+     // Glossified terms already wrapped in <a> or <abbr>, should be considered
+     // as the first occurrence, so we consider them as already handled:
+@@ -169,10 +168,10 @@
+         continue;
        }
-@@ -269,6 +269,7 @@
+       $matches = [];
+-      foreach ($pattern_parts as $pattern => $pattern_part) {
++      foreach ($pattern_parts as $pattern_part) {
+         preg_match_all($pattern_part, $text, $matches_part, PREG_OFFSET_CAPTURE);
+-        if (count($matches_part[0])) {
+-          foreach ($matches_part[0] as $match_part) {
++        // if (count($matches_part[0])) {
++          foreach ($matches_part[0] ?? [] as $match_part) {
+             $term = $match_part[0];
+             $byte_offset = $match_part[1];
+             $byte_length = strlen($match_part[0]);
+@@ -180,8 +179,16 @@
+             $char_length = mb_strlen($match_part[0]);
+             $verification = mb_substr($text, $char_offset, $char_length);
+
++            $matched_lookup = $term_patterns[mb_strtolower($term)] ?? NULL;
++            $pattern = $matched_lookup?->name ?? $term;
++            if ($case_sensitivity && $pattern !== $term) {
++              continue;
++            }
++
+             $matches[$char_offset] = [
++              // Actual text match from the content being filtered.
+               'term' => $term,
++              // Lookup string as provided by the glossary source.
+               'pattern' => $pattern,
+               'byte_offset' => $byte_offset,
+               'char_offset' => $char_offset,
+@@ -190,7 +197,7 @@
+               'verification' => $verification,
+             ];
+           }
+-        }
++        // }
+       }
+       // Sort by position in text.
+       ksort($matches);
+@@ -226,7 +233,7 @@
+           $pattern_key = $match['pattern'];
+           // We need the pattern to terms here, when we lookup synonyms and
+           // case sensitivity is enabled:
+-          $term = $term_patterns[$pattern_key] ?? NULL;
++          $term = $term_patterns[mb_strtolower($pattern_key)] ?? NULL;
+
+           // Skip if no term found.
+           if (!$term) {
+@@ -269,6 +276,7 @@
                  '#tip' => $tip,
                  '#tip_raw' => $tip_raw,
                  '#tipurl' => $tipurl,
@@ -27,7 +101,7 @@
                ];
                $replacementTextOrHtml = $this->renderLink($word_link);
              }
-@@ -284,6 +285,7 @@
+@@ -284,6 +292,7 @@
                  '#tip' => $tip,
                  '#tip_raw' => $tip_raw,
                  '#langcode' => $langcode,

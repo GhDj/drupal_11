@@ -24,6 +24,7 @@ content:
     label: hidden
     settings:
       trim_length: 300
+      exclude_html_tags: true
     third_party_settings: {  }
     weight: 4
     region: content

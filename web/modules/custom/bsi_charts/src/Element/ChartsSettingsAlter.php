@@ -21,7 +21,6 @@ class ChartsSettingsAlter implements TrustedCallbackInterface {
     'donut',
     'gauge',
     'polarArea',
-    'scatter',
     'spline',
     'treemap',
   ];
@@ -37,21 +36,6 @@ class ChartsSettingsAlter implements TrustedCallbackInterface {
    * Process callback handler for the charts_settings form element.
    */
   public static function process(array $element): array {
-    // Remove chart types that must not be available to editors.
-    foreach (static::DISALLOWED_TYPES as $type) {
-      unset($element['type']['#options'][$type]);
-    }
-
-    // Disable the polar coordinate system (radar and polar area charts). The
-    // value must stay present for the chart element, so it is replaced by a
-    // hidden value.
-    if (isset($element['display']['polar'])) {
-      $element['display']['polar'] = [
-        '#type' => 'hidden',
-        '#value' => 0,
-      ];
-    }
-
     if ($element['#used_in'] !== 'basic_form') {
       return $element;
     }
@@ -59,6 +43,12 @@ class ChartsSettingsAlter implements TrustedCallbackInterface {
     // Add context to chart types to let translations make sense.
     $element['type']['#type'] = 'select';
     foreach ($element['type']['#options'] as $option => $label) {
+      if (in_array($option, static::DISALLOWED_TYPES)) {
+        // Remove chart types that must not be available to editors.
+        unset($element['type']['#options'][$option]);
+        continue;
+      }
+
       if (!$label instanceof TranslatableMarkup) {
         continue;
       }
@@ -86,6 +76,9 @@ class ChartsSettingsAlter implements TrustedCallbackInterface {
     $currentUser = \Drupal::currentUser();
     $element['series']['#import_csv'] = $currentUser
       ->hasPermission('bsi_chart use import csv');
+
+    // Disable the polar coordinate system (radar and polar area charts).
+    ChartsSettingsAlter::restrictElement($element['display']['polar']);
 
     if (!$currentUser->hasPermission('bsi_chart customize chart display')) {
       ChartsSettingsAlter::restrictElement($element['plot_lines']);

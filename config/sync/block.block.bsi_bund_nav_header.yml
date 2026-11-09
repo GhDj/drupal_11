@@ -16,7 +16,7 @@ third_party_settings:
 id: bsi_bund_nav_header
 theme: bsi_bund
 region: header
-weight: -14
+weight: -7
 provider: null
 plugin: 'system_menu_block:header'
 settings:

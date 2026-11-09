@@ -26,7 +26,9 @@ libraries-override:
   claro/global-styling:
     css:
       base:
-        css/base/elements.css: {}
+        css/base/elements.css: false
+      component:
+        css/classy/components/field.css: false
   claro/claro.drupal.dialog:
     css:
       theme:

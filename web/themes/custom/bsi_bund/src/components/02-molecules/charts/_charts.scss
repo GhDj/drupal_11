@@ -5,12 +5,23 @@
 @use "@globals/foundation/variables" as *;
 @use "@globals/mixins/typography" as *;
 @use "@globals/mixins/breakpoints" as *;
+@use "@globals/mixins/grid" as *;
 
 // -----------------------------------------------------------------------------
 // Core
 // -----------------------------------------------------------------------------
 .charts-chartjs {
   max-height: 672px;
+}
+
+.#{$nsp}-charts-wrapper {
+  // @include grid-container;
+  overflow-x: auto;
+  width: 100%;
+
+  @include breakpoint-md {
+    overflow-x: visible;
+  }
 }
 
 .media--type-chart {

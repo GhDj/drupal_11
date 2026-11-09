@@ -6,6 +6,25 @@
   margin-right: 0;
 }
 
+.field__label {
+  font-weight: bold;
+}
+.field--label-inline .field__label,
+.field--label-inline .field__items {
+  float: left; /* LTR */
+}
+.field--label-inline .field__label,
+.field--label-inline > .field__item,
+.field--label-inline .field__items {
+  padding-right: 0.5em;
+}
+
+[dir="rtl"] .field--label-inline .field__label,
+[dir="rtl"] .field--label-inline .field__items {
+  padding-left: 0.5em;
+  padding-right: 0;
+}
+
 /* Breakpoint 38em (Toolbar / No Toolbar) */
 @media screen and (min-width: 38em) {
   body:not(.toolbar-tray-open) .layout-container,

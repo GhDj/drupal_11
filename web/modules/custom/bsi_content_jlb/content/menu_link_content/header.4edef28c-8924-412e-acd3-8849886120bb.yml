@@ -10,7 +10,7 @@ default:
       value: true
   title:
     -
-      value: 'The BSI'
+      value: 'Das BSI'
   menu_name:
     -
       value: header
