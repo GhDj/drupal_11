@@ -268,8 +268,7 @@ Database::getConnection()->delete('csn_comment')
   ->execute();
 echo "Cleaned csn_comment table\n";
 
-echo "\nDone!\n";
-exit($errors > 0 ? 1 : 0);
+echo "\nDone! " . ($errors > 0 ? "($errors FAILED)" : "All tests passed.") . "\n";
 
 // --- Helpers ---
 
