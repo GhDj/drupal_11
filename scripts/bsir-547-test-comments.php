@@ -7,23 +7,16 @@
  * Prerequisites:
  *   ddev drush en bsi_csn -y && ddev drush cr
  *
- * Usage: ddev drush php:script scripts/bsir-547-test-comments.php
+ * Commands:
+ *   Setup + test:  ddev drush php:script scripts/bsir-547-test-comments.php
+ *   Cleanup:       ddev drush php:script scripts/bsir-547-test-comments.php -- --cleanup
  *
- * What it does:
- * 1. Ensures the csn_comment table exists (creates it directly if needed)
- * 2. Creates a temporary "vorfallsbericht" node type (if missing)
- * 3. Creates a CSN group relationship type for vorfallsbericht (if missing)
- * 4. Creates a CSN group + test node + adds node to group
- * 5. Creates test users (csn_admin + ersthelfer) and adds them to the group
- * 6. Grants the "access csn comments" permission
- * 7. Tests the CsnCommentManager service directly:
- *    - Role detection
- *    - Comment creation (admin + ersthelfer)
- *    - Comment listing
- *    - Validation (empty body, >1000 chars)
- * 8. Cleans up all test data
+ * After running, test content stays so you can inspect it in the browser
+ * and test the HTTP endpoints manually:
+ *   GET  /csn/api/comments/{nid}
+ *   POST /csn/api/comments/{nid}  (with X-CSRF-Token header + JSON body)
  *
- * Cleanup only: ddev drush php:script scripts/bsir-547-test-comments.php -- --cleanup
+ * Run --cleanup when done to remove all test data.
  */
 
 use Drupal\Core\Database\Database;
@@ -244,31 +237,17 @@ echo "\n=== Results ===\n";
 echo "Passed: $passed\n";
 echo "Failed: $errors\n";
 
-// --- Cleanup ---
-echo "\nCleaning up test data...\n";
-cleanup_entities($outsider, $page_node, $node, $group, $admin_user, $ersthelfer_user);
-
-// Remove test relationship type.
-$rel_type = GroupRelationshipType::load($rel_type_id);
-if ($rel_type) {
-  $rel_type->delete();
-  echo "Deleted relationship type $rel_type_id\n";
-}
-
-// Remove test node type (only if we created it).
-$vb_type = NodeType::load('vorfallsbericht');
-if ($vb_type && str_starts_with($vb_type->label(), TEST_PREFIX)) {
-  $vb_type->delete();
-  echo "Deleted vorfallsbericht node type\n";
-}
-
-// Clean csn_comment table entries.
-Database::getConnection()->delete('csn_comment')
-  ->condition('nid', $node->id())
-  ->execute();
-echo "Cleaned csn_comment table\n";
-
-echo "\nDone! " . ($errors > 0 ? "($errors FAILED)" : "All tests passed.") . "\n";
+echo "\n=== Test content left in place for manual inspection ===\n";
+echo "Vorfallsbericht node: /node/{$node->id()}\n";
+echo "CSN group:            /group/{$group->id()}\n";
+echo "CSN-Admin user:       uid={$admin_user->id()} ({$admin_user->getAccountName()})\n";
+echo "Ersthelfer user:      uid={$ersthelfer_user->id()} ({$ersthelfer_user->getAccountName()})\n";
+echo "\nTest the API endpoints:\n";
+echo "  GET  /csn/api/comments/{$node->id()}\n";
+echo "  POST /csn/api/comments/{$node->id()}  (JSON body: {\"body\": \"text\"})\n";
+echo "\nTo get a CSRF token: GET /session/token\n";
+echo "\nWhen done, clean up with:\n";
+echo "  ddev drush php:script scripts/bsir-547-test-comments.php -- --cleanup\n";
 
 // --- Helpers ---
 
