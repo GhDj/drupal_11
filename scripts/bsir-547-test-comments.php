@@ -4,10 +4,13 @@
  * @file
  * Tests the BSIR-547 CSN comment API end-to-end.
  *
+ * Prerequisites:
+ *   ddev drush en bsi_csn -y && ddev drush cr
+ *
  * Usage: ddev drush php:script scripts/bsir-547-test-comments.php
  *
  * What it does:
- * 1. Ensures the csn_comment table exists
+ * 1. Ensures the csn_comment table exists (creates it directly if needed)
  * 2. Creates a temporary "vorfallsbericht" node type (if missing)
  * 3. Creates a CSN group relationship type for vorfallsbericht (if missing)
  * 4. Creates a CSN group + test node + adds node to group
@@ -45,12 +48,31 @@ $passed = 0;
 
 // --- Setup ---
 
-// 1. Ensure csn_comment table.
+// 0. Ensure bsi_csn module is enabled.
+if (!\Drupal::moduleHandler()->moduleExists('bsi_csn')) {
+  echo "ERROR: bsi_csn module is not enabled.\n";
+  echo "Run: ddev drush en bsi_csn -y && ddev drush cr\n";
+  exit(1);
+}
+
+// 1. Ensure csn_comment table (create directly via DB schema if missing).
 $schema = Database::getConnection()->schema();
 if (!$schema->tableExists('csn_comment')) {
-  echo "Running update hook to create csn_comment table...\n";
-  module_load_install('bsi_csn');
-  bsi_csn_update_10001();
+  echo "Creating csn_comment table...\n";
+  $table = [
+    'description' => 'Stores comments/corrections on Vorfallsbericht nodes.',
+    'fields' => [
+      'id' => ['type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE],
+      'nid' => ['type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE],
+      'uid' => ['type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE],
+      'author_role' => ['type' => 'varchar', 'length' => 32, 'not null' => TRUE],
+      'body' => ['type' => 'varchar', 'length' => 1000, 'not null' => TRUE],
+      'created' => ['type' => 'int', 'not null' => TRUE],
+    ],
+    'primary key' => ['id'],
+    'indexes' => ['nid' => ['nid'], 'nid_created' => ['nid', 'created']],
+  ];
+  $schema->createTable('csn_comment', $table);
 }
 assert_true($schema->tableExists('csn_comment'), 'csn_comment table exists', $passed, $errors);
 
