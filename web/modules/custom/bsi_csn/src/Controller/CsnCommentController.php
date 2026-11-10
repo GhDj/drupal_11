@@ -65,7 +65,7 @@ final class CsnCommentController extends ControllerBase {
   /**
    * Creates a comment on a Vorfallsbericht node.
    */
-  public function create(NodeInterface $node, Request $request): JsonResponse {
+  public function add(NodeInterface $node, Request $request): JsonResponse {
     if ($node->bundle() !== 'vorfallsbericht') {
       return new JsonResponse(['error' => 'Invalid content type.'], Response::HTTP_BAD_REQUEST);
     }

@@ -22,7 +22,7 @@ bsi_csn.comments.list:
 bsi_csn.comments.create:
   path: '/csn/api/comments/{node}'
   defaults:
-    _controller: '\Drupal\bsi_csn\Controller\CsnCommentController::create'
+    _controller: '\Drupal\bsi_csn\Controller\CsnCommentController::add'
   requirements:
     _permission: 'access csn comments'
     _csrf_token: 'TRUE'
