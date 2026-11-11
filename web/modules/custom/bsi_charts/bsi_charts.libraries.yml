@@ -5,4 +5,7 @@ chart.js:
     - core/drupal
     - core/drupalSettings
     - core/once
-    - charts_chartjs/chartjs
+    # Not actually relying on charts_chartjs, because loading order in lightbox
+    # is problematic otherwise. We always load with it, though.
+    # @see \Drupal\bsi_charts\Hook\ChartHooks::alterChartDefinition
+    #- charts_chartjs/chartjs

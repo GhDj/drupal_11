@@ -1,9 +1,9 @@
 uuid: 3aa53510-5d4d-4a35-b95f-e03147783e04
 langcode: en
 status: true
-dependencies: {}
+dependencies: {  }
 name: bsi_lightbox_wide_2x
-label: "BSI Lightbox (wide, 2x)"
+label: 'BSI Lightbox (wide, 2x)'
 effects:
   eb31b997-61b6-4f98-8ef4-33aa28b17bd1:
     uuid: eb31b997-61b6-4f98-8ef4-33aa28b17bd1

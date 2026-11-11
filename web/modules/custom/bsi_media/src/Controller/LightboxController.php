@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace Drupal\bsi_media\Controller;
 
-use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
+use Drupal\Core\Cache\CacheableAjaxResponse;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\paragraphs\ParagraphInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
  * Controller to build Chart lightbox.
@@ -34,26 +38,43 @@ final class LightboxController extends ControllerBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Open a dialog that displays the provided paragraph.
    */
-  public function __invoke(ParagraphInterface $paragraph): AjaxResponse {
-    $title = $paragraph->get('field_section_title')->value ?? '';
-    $body = [];
+  public function __invoke(Request $request, ParagraphInterface $paragraph): Response|array {
+    if (!$request->isXmlHttpRequest()) {
+      throw new AccessDeniedHttpException('Invalid request.');
+    }
+    if (!$paragraph->access('view')) {
+      throw new AccessDeniedHttpException('Invalid paragraph.');
+    }
 
+    $title = $paragraph->get('field_section_title')->value ?? '';
+    $build = [
+      '#theme' => 'bsi_chart_lightbox',
+      '#media_view' => NULL,
+      '#body' => NULL,
+    ];
+
+    $cache = CacheableMetadata::createFromObject($paragraph);
     $langcode = $this->languageManager
       ->getCurrentLanguage()
       ->getId();
 
+    // Lightbox might display media, e.g. image or diagram.
     $media = $paragraph->hasField('field_media')
       ? $paragraph->get('field_media')->entity
       : NULL;
-    if ($media && $media->hasTranslation($langcode)) {
+    $cache->addCacheableDependency($media);
+    if ($media?->hasTranslation($langcode)) {
       $media = $media->getTranslation($langcode);
     }
-
-    $media_view = $media ? $this->entityTypeManager->getViewBuilder('media')
+    if (!$media?->access('view')) {
+      $media = NULL;
+    }
+    $build['#media_view'] = $media ? $this->entityTypeManager->getViewBuilder('media')
       ->view($media, 'lightbox') : NULL;
 
+    // Add paragraph content to lightbox.
     if ($paragraph->hasTranslation($langcode)) {
       $paragraph = $paragraph->getTranslation($langcode);
     }
@@ -61,18 +82,17 @@ final class LightboxController extends ControllerBase {
       $paragraph->hasField('field_body') &&
       !$paragraph->get('field_body')->isEmpty()
     ) {
-      $body = $paragraph->get('field_body')->view([
+      $build['#body'] = $paragraph->get('field_body')->view([
         'label' => 'hidden',
       ]);
     }
 
-    $build = [
-      '#theme' => 'bsi_chart_lightbox',
-      '#media_view' => $media_view,
-      '#body' => $body,
-    ];
+    CacheableMetadata::createFromRenderArray($build)
+      ->addCacheContexts(['user.permissions'])
+      ->merge($cache)
+      ->applyTo($build);
 
-    $response = new AjaxResponse();
+    $response = new CacheableAjaxResponse();
     $response->addCommand(
       new OpenModalDialogCommand(
         $title,
@@ -84,7 +104,6 @@ final class LightboxController extends ControllerBase {
       )
     );
     return $response;
-
   }
 
 }

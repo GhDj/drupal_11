@@ -3,7 +3,7 @@ _core:
 langcode: en
 uuid: 5e5fac55-a0d6-4d9c-94c2-b5cf55bfbfb5
 name: Jahreslagebericht
-mail: admin@example.com
+mail: bsi-webseite@init.de
 slogan: ''
 page:
   403: ''

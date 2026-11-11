@@ -21,6 +21,13 @@ class BreadcrumbManagerDecorator implements BreadcrumbBuilderInterface {
   use StringTranslationTrait;
 
   /**
+   * Refers to the front_title="Menu link title" option on menu_breadcrumb.
+   *
+   * @see \Drupal\menu_breadcrumb\Form\SettingsForm::buildForm
+   */
+  private const int LINK_LABEL_FROM_MENU = 2;
+
+  /**
    * Configuration object of menu_breadcrumb.settings.
    */
   private ImmutableConfig $config;
@@ -132,50 +139,56 @@ class BreadcrumbManagerDecorator implements BreadcrumbBuilderInterface {
   /**
    * Frontpage link handling, copied from decorated service due to bad arch.
    *
-   * If options are set to remove <front>, strip off that link, otherwise
-   * replace it with a breadcrumb named according to option settings:
+   * Removes leading links targeting <front>. If desired, re-add a consistent
+   * home link according to configuration.
+   *
+   * @param list<\Drupal\Core\Link> $links
+   *   The links that build the breadcrumb.
+   * @param RouteMatchInterface $routeMatch
+   *   The current route match.
    */
   protected function ensureFrontPage(array &$links, RouteMatchInterface $routeMatch): void {
     $langcode = $this->languageManager
       ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
       ->getId();
 
-    // Create a breadcrumb for <front> which may be either added or replaced:
+    // Default link text for the <front> breadcrumb link.
     $label = $this->config->get('front_title')
       ? $this->siteConfig->get('name')
       : $this->t('Home', [], ['langcode' => $langcode]);
-    $home_link = Link::createFromRoute($label, '<front>');
 
-    /** @var \Drupal\Core\Url $first_url */
-    $first_url = ($links[0] ?? NULL)?->getUrl();
-    if ($first_url && $this->urlIsFront($first_url)) {
-      // According to the confusion hopefully cleared up in issue 2754521, the
-      // sense of "remove_home" is slightly different in Menu Breadcrumb:
-      // we remove any match with <front> rather than replacing it.
-      if ($this->config->get('remove_home')) {
-        array_shift($links);
-      }
-      elseif ($this->config->get('front_title') != 2) {
-        $links[0] = $home_link;
-      }
+    $home_link = NULL;
+    while ($this->urlIsFront(($links[0] ?? NULL)?->getUrl())) {
+      // Remove leading links to <front>.
+      $home_link ??= $links[0];
+      array_shift($links);
     }
-    else {
-      // If trail *doesn't* begin with the home page, add it if that option set.
-      if ($this->config->get('add_home')) {
-        array_unshift($links, $home_link);
-      }
+    if ($this->config->get('remove_home')) {
+      // Link should not be shown, was removed or not present.
+      return;
     }
+
+    if ($home_link === NULL && $this->config->get('add_home')) {
+      $home_link = Link::createFromRoute($label, '<front>');
+    }
+    if ($home_link && $this->config->get('front_title') !== static::LINK_LABEL_FROM_MENU) {
+      $home_link->setText($label);
+    }
+    if (!$home_link) {
+      // Link should not be added and is missing.
+      return;
+    }
+    array_unshift($links, $home_link);
   }
 
   /**
    * Helper to determine if a URL targets the front page.
    */
-  protected function urlIsFront(Url $url): bool {
-    $front_url = Url::fromUri('internal:' . $this->siteConfig->get('page.front'));
-
-    if (!$url->isRouted()) {
+  protected function urlIsFront(?Url $url): bool {
+    if (!$url || !$url->isRouted()) {
       return FALSE;
     }
+    $front_url = Url::fromUri('internal:' . $this->siteConfig->get('page.front'));
     if (!$front_url->isRouted()) {
       return FALSE;
     }

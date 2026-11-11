@@ -50,10 +50,7 @@
 {% set has_more = paragraph.field_body.summary
   or paragraph.field_body.value|striptags|trim|length > 300
 %}
-{% set lightbox_url = paragraph.field_media.entity or has_more
-  ? path('bsi_media.lightbox', { paragraph: paragraph.id() })
-  : null
-%}
+{% set has_lightbox = paragraph.field_media.entity or has_more %}
 
 {% set classes = [
   'bsi-card',
@@ -90,16 +87,9 @@
 
     {% if media %}
       <div class="bsi-card__image bsi-card__image--chart">
-        {% if lightbox_url %}
-          {{ attach_library('core/drupal.ajax') }}
-          {{ attach_library('core/drupal.dialog.ajax') }}
-
+        {% if has_lightbox %}
           {{ content.field_media }}
-          <a
-            class="use-ajax bsi-card__link--lightbox"
-            href="{{ lightbox_url }}"
-            data-dialog-type="modal"
-          >
+          <a{{ lightbox_attributes.addClass('bsi-card__link--lightbox') }}>
             {% include '@bsi_bund/components/icon.twig' with {
               name: "maximize",
               extra_classes: "bsi-card__icon-lightbox",
@@ -127,8 +117,8 @@
                 {% endif %}
 
                 {# Check if full text are available. #}
-                {% if has_more and lightbox_url %}
-                  <a class="bsi-card__more-link use-ajax" href="{{ lightbox_url }}" data-dialog-type="modal">
+                {% if has_more and has_lightbox %}
+                  <a{{ lightbox_attributes.addClass('bsi-card__more-link') }}>
                     {{"[more]"|t}}
 
                     <span class="visually-hidden">

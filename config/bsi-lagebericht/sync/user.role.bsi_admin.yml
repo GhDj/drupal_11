@@ -46,6 +46,7 @@ dependencies:
     - metatag
     - node
     - node_keep
+    - node_keep_token
     - paragraphs
     - paragraphs_type_permissions
     - path
@@ -91,6 +92,7 @@ permissions:
   - 'administer meta tags'
   - 'administer node published status'
   - 'administer node_keep per node'
+  - 'administer node_keep_token per node'
   - 'administer nodes'
   - 'administer redirects'
   - 'administer social-media menu items'

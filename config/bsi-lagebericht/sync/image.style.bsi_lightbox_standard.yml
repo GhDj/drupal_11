@@ -1,9 +1,9 @@
 uuid: cf7169cc-9fc3-4ef5-8694-a76ded4804d3
 langcode: en
 status: true
-dependencies: {}
+dependencies: {  }
 name: bsi_lightbox_standard
-label: "BSI Lightbox (standard)"
+label: 'BSI Lightbox (standard)'
 effects:
   b231a9e1-45ab-4bb1-86d1-f8d60644c2d2:
     uuid: b231a9e1-45ab-4bb1-86d1-f8d60644c2d2

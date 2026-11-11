@@ -1,19 +1,16 @@
 _core:
   default_config_hash: 68A3PDsSIoX2q7iFOa2lMdnYkgKgem4uh1_RBxcRVWU
 report-only:
-  enable: false
+  enable: true
   directives:
+    default-src:
+      base: self
     object-src:
       base: none
     script-src:
       base: self
-      flags:
-        - report-sample
-        - unsafe-eval
     style-src:
       base: self
-      flags:
-        - report-sample
     worker-src:
       base: self
       sources:
@@ -23,25 +20,20 @@ report-only:
     form-action:
       base: self
     frame-ancestors:
-      base: self
+      base: none
   reporting:
     plugin: none
 enforce:
-  enable: true
+  enable: false
   directives:
+    default-src:
+      base: self
     object-src:
       base: none
     script-src:
-      base: any
-      flags:
-        - report-sample
-        - unsafe-inline
-        - unsafe-eval
+      base: self
     style-src:
-      base: any
-      flags:
-        - report-sample
-        - unsafe-inline
+      base: self
     worker-src:
       base: self
       sources:
@@ -51,6 +43,7 @@ enforce:
     form-action:
       base: self
     frame-ancestors:
-      base: self
+      base: none
+    upgrade-insecure-requests: true
   reporting:
     plugin: none

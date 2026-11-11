@@ -1,0 +1,71 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @file
+ * Install, update and uninstall functions for the BSI CSN module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function bsi_csn_schema(): array {
+  $schema['csn_comment'] = [
+    'description' => 'Stores comments/corrections on Vorfallsbericht nodes.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary key.',
+      ],
+      'nid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'The node ID of the Vorfallsbericht.',
+      ],
+      'uid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'The user ID of the comment author.',
+      ],
+      'author_role' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'description' => 'The author role: csn_admin or ersthelfer.',
+      ],
+      'body' => [
+        'type' => 'varchar',
+        'length' => 1000,
+        'not null' => TRUE,
+        'description' => 'The comment text.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Unix timestamp when the comment was created.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'nid' => ['nid'],
+      'nid_created' => ['nid', 'created'],
+    ],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Create the csn_comment table.
+ */
+function bsi_csn_update_10001(): void {
+  $schema = \Drupal::database()->schema();
+  if (!$schema->tableExists('csn_comment')) {
+    $schema->createTable('csn_comment', bsi_csn_schema()['csn_comment']);
+  }
+}

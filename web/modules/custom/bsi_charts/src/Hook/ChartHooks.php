@@ -44,6 +44,15 @@ class ChartHooks {
       }
     }
 
+    // Apply prefix/suffix only to tooltip, not Y axis.
+    unset(
+      $definition['options']['scales']['y']['ticks']['prefix'],
+      $definition['options']['scales']['y']['ticks']['suffix'],
+    );
+
+    // Use the entity's language to more easily spot missing translations.
+    $definition['options']['locale'] = $element['#entity']->language()->getId();
+
     // If a trend dataset is present, ensure it's a line.
     $index = array_find_key($definition['data']['datasets'], static fn (array $dataset)
       => $dataset['label'] === static::LABEL_TRENDLINE);

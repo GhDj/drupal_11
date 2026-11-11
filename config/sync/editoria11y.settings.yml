@@ -43,7 +43,7 @@ ignore_tests:
   tableEmptyHeaderCell: '0'
   tableContainsContentHeading: '0'
   embedVideo: '0'
-  embedAudio: '0'
+  embedAudio: embedAudio
   embedVisualization: '0'
   embedTwitter: '0'
   embedCustom: '0'

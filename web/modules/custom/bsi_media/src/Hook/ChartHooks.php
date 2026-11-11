@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Drupal\bsi_media\Hook;
 
+use Drupal\bsi_media\Controller\LightboxController;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 use Drupal\media\MediaInterface;
 use Drupal\paragraphs\ParagraphInterface;
@@ -32,30 +34,47 @@ final class ChartHooks {
   }
 
   /**
-   * Implements hook_preprocess_paragraph().
+   * Implements hook_preprocess_HOOK() for paragraph.html.twig.
    */
   #[Hook('preprocess_paragraph')]
   public function preprocessParagraph(array &$variables): void {
     $paragraph = $variables['paragraph'];
-
-    if (!$paragraph instanceof ParagraphInterface) {
+    if (!$paragraph instanceof ParagraphInterface || $paragraph->bundle() !== 'tile_item') {
       return;
     }
 
-    if ($paragraph->bundle() !== 'tile_item') {
-      return;
-    }
+    $settings = [
+      'callback' => LightboxController::class,
+      'event' => 'click',
+      'url' => Url::fromRoute('bsi_media.lightbox', [
+        'paragraph' => $paragraph->id(),
+      ])->toString(TRUE)->getGeneratedUrl(),
+      'selector' => '[data-lightbox="' . $paragraph->id() . '"]',
+    ];
+
+    $variables['#attached']['library'][] = 'core/drupal.ajax';
+    $variables['#attached']['library'][] = 'core/drupal.dialog.ajax';
+    // Mark the URL as trusted, see ajax.js.
+    $variables['#attached']['drupalSettings']['ajaxTrustedUrl'][$settings['url']] = TRUE;
+    $variables['#attached']['drupalSettings']['ajax']['open-lightbox-' . $paragraph->id()] = $settings;
+
+    $variables['lightbox_attributes'] = new Attribute([
+      'href' => Url::fromRoute('<none>')
+        ->toString(TRUE)
+        ->getGeneratedUrl(),
+      'class' => ['use-ajax'],
+      'data-lightbox' => $paragraph->id(),
+      'data-dialog-type' => 'modal',
+    ]);
 
     $media = $paragraph->get('field_media')->entity;
-
     if (isset($media)) {
       $media->parent_paragraph = $paragraph;
     }
-
   }
 
   /**
-   * Implements hook_preprocess_media().
+   * Implements hook_preprocess_HOOK() for media.html.twig.
    */
   #[Hook('preprocess_media')]
   public function preprocessMedia(array &$variables): void {

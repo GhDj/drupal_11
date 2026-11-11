@@ -121,6 +121,7 @@
         "drupal/simple_sitemap": "^4.2",
         "drupal/tablefield": "^3.0",
         "drupal/taxonomy_import": "^2.1",
+        "drupal/telephone": "^1.0",
         "drupal/text_summary_formater": "^1.5",
         "drupal/tfa": "^1.13",
         "drupal/token": "^1.13",
@@ -223,10 +224,6 @@
             "drupal-composer/drupal-paranoia": {
                 "Core 11.4, compatibility with new boot method": "patches/drupal-composer/drupal-paranoia-30.patch"
             },
-            "drupal/address": {
-                "Incompatibility with diff ^2.0 (3589015-3)":
-                    "patches/address/incompatibility_with_diff_2.x-3589015-7.patch"
-            },
             "drupal/book": {
                 "Use Book::toUrl over hard-coded entity.node.canonical route":
                     "patches/book/use-entity-tourl-over-route-name.patch",
@@ -306,10 +303,6 @@
             "drupal/klaro": {
                 "Require consent even if all apps are required":
                     "patches/klaro/require-consent-for-required-apps.patch"
-            },
-            "drupal/layout_builder_st": {
-                "Error on status page: Too few arguments to RequirementHooks::runtimeRequirements() - https://www.drupal.org/i/3566683":
-                    "patches/layout_builder_st/3566683-fix-error-on-status-report.patch"
             },
             "drupal/maxlength": {
                 "Allow users to type past the character limit on hard limits and display an error upon save (3267849, MR17+)":

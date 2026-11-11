@@ -1,9 +1,9 @@
 bsi_media.lightbox:
-  path: "/lightbox/{paragraph}"
+  path: '/ajax/lightbox/{paragraph}'
   defaults:
     _controller: '\Drupal\bsi_media\Controller\LightboxController'
   requirements:
-    _permission: "access content"
+    _permission: 'access content'
   options:
     parameters:
       paragraph:

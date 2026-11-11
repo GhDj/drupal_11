@@ -8,7 +8,10 @@
 
   Drupal.behaviors.bsiCharts = {
     attach (context) {
-      once('deduplicate-legend', '.charts-chartjs', context).forEach((element) => {
+      Chart.defaults.font.family = 'BundesSansWeb, Helvetica, Arial, sans-serif';
+      Chart.defaults.font.size = 20;
+
+      once('bsi-charts', '.charts-chartjs', context).forEach((element) => {
         [
           Drupal.behaviors.bsiCharts._deduplicateLegend,
           Drupal.behaviors.bsiCharts._formatTooltip,
@@ -55,7 +58,7 @@
     },
     formatTooltipValue(context, chartSettings) {
       const numberFormat = new Intl.NumberFormat(
-        document.getElementsByTagName('html')[0].lang,
+        context.chart.options.locale,
         {
           minimumFractionDigits: chartSettings.decimal_count ?? 0,
           // Need to provide or defaults to 3 digits.
@@ -72,11 +75,14 @@
 
     _adjustAxes(event) {
       const options = event.detail.options;
-      options.scales.x.ticks = options.scales.x.ticks ?? {};
       // Render labels as configured in the field, no number formatting.
-      options.scales.x.ticks.callback = function (value, index, ticks) {
-        return event.detail.data.labels[value] ?? null;
-      };
+      options.scales.x.ticks = options.scales.x.ticks ?? {};
+      options.scales.x.ticks.callback = Drupal.behaviors.bsiCharts.formatAxisTick;
+    },
+    formatAxisTick(value, index, ticks) {
+      return this.type === 'category'
+        ? (this.chart.data.labels[value] ?? null)
+        : Chart.Ticks.formatters.numeric.call(this, value, index, ticks);
     },
 
     _adjustLegend(event) {
@@ -156,25 +162,19 @@
         return;
       }
 
-      const canvas = document.getElementById(event.target.id);
-        if (window.innerWidth >= 768) {
-         return;
-        }
+      const labelCount = event.detail.data?.labels?.length ?? 0;
+      if (labelCount <= 10) {
+        return;
+      }
 
-        const labelCount = event.detail.data?.labels?.length ?? 0;
-        if (labelCount <= 10) {
-          return;
-        }
+      const canvas = document.getElementById(event.target.id);
       if (!canvas) {
         return;
       }
 
       const figure = canvas.closest('.charts-figure');
-
       if (figure) {
         figure.style.minWidth = `${labelCount * 80}px`;
-
-        console.log('width gesetzt', figure.style.minWidth);
       }
 
       document.querySelectorAll('.charts-figure').forEach((figure) => {
