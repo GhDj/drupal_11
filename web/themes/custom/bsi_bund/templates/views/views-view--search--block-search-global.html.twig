@@ -64,6 +64,9 @@
     </div>
   {% endif %}
 
+  {# Sort anchor — JS moves .sort-wrapper here from inside the form #}
+  <div class="bsi-search-result__sort js-sort-anchor"></div>
+
   {# Results area #}
   {% if rows or empty %}
     <div class="bsi-search-result">

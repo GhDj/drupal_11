@@ -34,8 +34,35 @@ function applySearchFilter(): void {
   if (!view) return;
 
   MultiSelectDropdown();
+  relocateSort(view);
   initActiveFilterPills(view);
   initMobileToggle(view);
+}
+
+/**
+ * Move .sort-wrapper from inside the grey filter box to the sort anchor
+ * between the filter box and results. Adds a change handler that
+ * navigates via URL (same pattern as filter pills).
+ */
+function relocateSort(view: Element): void {
+  const sortWrapper = view.querySelector<HTMLElement>(".sort-wrapper");
+  const anchor = view.querySelector<HTMLElement>(".js-sort-anchor");
+  if (!sortWrapper || !anchor) return;
+  if (anchor.contains(sortWrapper)) return; // already relocated
+
+  anchor.appendChild(sortWrapper);
+
+  // Navigate on sort change (select is now outside the form)
+  const select = sortWrapper.querySelector<HTMLSelectElement>("select");
+  if (!select || select.dataset.sortInit) return;
+  select.dataset.sortInit = "true";
+
+  select.addEventListener("change", () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("sort_bef_combine", select.value);
+    url.searchParams.delete("page"); // reset to first page
+    window.location.href = url.toString();
+  });
 }
 
 /**
