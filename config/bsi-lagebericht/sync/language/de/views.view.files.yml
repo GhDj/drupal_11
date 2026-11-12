@@ -26,6 +26,9 @@ display:
           format_plural_string: !!binary QGNvdW50IFZlcndlbmR1bmcDQGNvdW50IFZlcndlbmR1bmdlbg==
         operations:
           label: Aktionen
+        file_bulk_form:
+          label: Massenaktualisierung
+          action_title: Aktion
       pager:
         options:
           tags:

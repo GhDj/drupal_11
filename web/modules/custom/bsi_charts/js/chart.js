@@ -26,15 +26,35 @@
     },
 
     _lightboxOverrides(event) {
-      if (!this.closest('.bsi-chart-lightbox')) {
+
+      const modalChart = document.querySelector(
+        '#drupal-modal .charts-chartjs'
+      );
+
+      if (!modalChart || modalChart.id !== event.target.id) {
         return;
       }
+
       const options = event.detail.options;
 
-      // Force legend below the chart so the source text aligns properly.
-      options.plugins.legend = options.plugins.legend ?? {};
-      options.plugins.legend.position = 'bottom';
 
+      // Be sure pie charts do not get to big, especially with caption
+      if (['pie', 'doughnut'].includes(event.detail.type)) {
+        requestAnimationFrame(() => {
+          const canvas = document.getElementById(event.target.id);
+
+          if (canvas) {
+            canvas.style.width = '450px';
+            canvas.style.height = '450px';
+            canvas.style.marginInline = 'auto';
+          }
+        });
+      }
+      // Force legend below the chart so the source text aligns properly.
+      if (!['pie', 'doughnut'].includes(event.detail.type)) {
+        options.plugins.legend = options.plugins.legend ?? {};
+        options.plugins.legend.position = 'bottom';
+      }
       // Symmetric left/right padding for even spacing.
       options.layout = options.layout ?? {};
       options.layout.padding = options.layout.padding ?? {};
@@ -75,6 +95,11 @@
 
     _adjustAxes(event) {
       const options = event.detail.options;
+
+      if (!options.scales?.x) {
+        return;
+      }
+
       // Render labels as configured in the field, no number formatting.
       options.scales.x.ticks = options.scales.x.ticks ?? {};
       options.scales.x.ticks.callback = Drupal.behaviors.bsiCharts.formatAxisTick;

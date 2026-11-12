@@ -13,6 +13,7 @@
   flex-direction: column;
   margin: auto;
   margin-inline: auto;
+  margin-bottom: var(--#{$nsp}-space-4xl);
   max-width: 1440px;
   position: relative;
 

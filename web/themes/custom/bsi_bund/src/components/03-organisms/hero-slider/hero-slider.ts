@@ -1,14 +1,14 @@
 import Splide from "@splidejs/splide";
 
 /* ---------------------------------
-  HERO SLIDER CLASS
+HERO SLIDER CLASS
 --------------------------------- */
 
 export default class HeroSlider {
-  private el: HTMLElement;
-  private splide: Splide | null = null;
+private el: HTMLElement;
+private splide: Splide | null = null;
 
-  constructor(el: HTMLElement) {
+constructor(el: HTMLElement) {
     this.el = el;
 
     if (!this.el) return;
@@ -22,11 +22,18 @@ export default class HeroSlider {
   }
 
   init() {
+    const slideCount = this.el.querySelectorAll(
+      ".splide__slide"
+    ).length;
+
+    const needsSlider = slideCount > 1;
+
     this.splide = new Splide(this.el, {
-      type: "loop",
+      type: needsSlider ? "loop" : "slide",
       perPage: 1,
       arrows: false,
-      pagination: true,
+      pagination: needsSlider,
+      drag: needsSlider,
 
       paginationClass: "bsi-hero-slider__pagination",
       pageClass: "bsi-hero-slider__pagination-page"
@@ -37,17 +44,16 @@ export default class HeroSlider {
         slide.removeAttribute("role");
       });
 
-      const slideCount = this.el.querySelectorAll(
-        ".splide__slide:not(.splide__slide--clone)"
-      ).length;
-
-      if (slideCount <= 1) {
+      if (!needsSlider) {
         this.el.classList.add("bsi-hero-slider--single-slide");
       }
     });
 
     this.splide.mount();
-    this.bindSliderControls();
+
+    if (needsSlider) {
+      this.bindSliderControls();
+    }
   }
 
   bindSliderControls() {

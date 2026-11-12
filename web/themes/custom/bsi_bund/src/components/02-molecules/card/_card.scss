@@ -120,6 +120,9 @@
     &:hover {
       text-decoration: underline;
     }
+    &.use-ajax::before {
+      all: unset;
+    }
   }
 
   &[data-theme="blue-800"],

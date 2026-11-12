@@ -1,15 +1,15 @@
 import Splide from "@splidejs/splide";
 
 /* ---------------------------------
-  OPENER SLIDER CLASS
+OPENER SLIDER CLASS
 --------------------------------- */
 
 export default class Opener {
-  private el: HTMLElement;
-  private splide: Splide | null = null;
-  private resizeObserver: ResizeObserver | null = null;
+private el: HTMLElement;
+private splide: Splide | null = null;
+private resizeObserver: ResizeObserver | null = null;
 
-  constructor(el: HTMLElement) {
+constructor(el: HTMLElement) {
     this.el = el;
 
     if (!this.el) return;
@@ -23,11 +23,18 @@ export default class Opener {
   }
 
   init() {
+    const slideCount = this.el.querySelectorAll(
+      ".splide__slide"
+    ).length;
+
+    const needsSlider = slideCount > 1;
+
     this.splide = new Splide(this.el, {
-      type: "loop",
+      type: needsSlider ? "loop" : "slide",
       perPage: 1,
       arrows: false,
-      pagination: true,
+      pagination: needsSlider,
+      drag: needsSlider,
 
       paginationClass: "bsi-opener__pagination",
       pageClass: "bsi-opener__pagination-page"
@@ -41,7 +48,12 @@ export default class Opener {
     });
 
     this.splide.mount();
-    this.bindSliderControls();
+
+    if (needsSlider) {
+      this.bindSliderControls();
+    } else {
+      this.hideControls();
+    }
 
     this.resizeObserver = new ResizeObserver(() => {
       this.updateContentGridHeight();
@@ -63,6 +75,15 @@ export default class Opener {
     contentGrids.forEach(grid => {
       grid.style.height = `${maxHeight}px`;
     });
+  }
+
+  hideControls() {
+    const controls = this.el.querySelector<HTMLElement>(
+      ".bsi-opener__controls"
+    );
+    if (controls) {
+      controls.style.display = "none";
+    }
   }
 
   bindSliderControls() {

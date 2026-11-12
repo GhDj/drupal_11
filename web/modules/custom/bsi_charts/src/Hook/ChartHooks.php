@@ -6,12 +6,18 @@ namespace Drupal\bsi_charts\Hook;
 
 use Drupal\bsi_charts\Element\ChartsSettingsAlter;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Render\Element;
 
 /**
  * Hooks related to chart media.
  */
 class ChartHooks {
+
+  public function __construct(
+    private readonly LanguageManagerInterface $languageManager,
+  ) {}
 
   /**
    * Expected label for the trend line data set.
@@ -51,7 +57,9 @@ class ChartHooks {
     );
 
     // Use the entity's language to more easily spot missing translations.
-    $definition['options']['locale'] = $element['#entity']->language()->getId();
+    // May not be set when previewing a new chart.
+    $definition['options']['locale'] = ($element['#entity'] ?? NULL)?->language()->getId()
+      ?? $this->languageManager->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
 
     // If a trend dataset is present, ensure it's a line.
     $index = array_find_key($definition['data']['datasets'], static fn (array $dataset)

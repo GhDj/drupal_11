@@ -254,7 +254,9 @@
                 "Wrong language field labels after `drush cr` (3221375-MR13139)":
                     "patches/drupal/config-translation-overrides-incorrectly-cached.patch",
                 "Strip tags from formatted text before trimming (3473241)":
-                    "patches/drupal/strip-tags-from-formatted-text-before-trimming.patch"
+                    "patches/drupal/strip-tags-from-formatted-text-before-trimming.patch",
+                "Zend .htaccess preset (https://wim.init.de/x/I4xSHQ)":
+                    "patches/drupal/core-zend-assertions.patch"
             },
             "drupal/default_content": {
                 "Add export action plugin":

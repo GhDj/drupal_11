@@ -1,0 +1,8 @@
+diff --git a/core/assets/scaffold/files/htaccess b/core/assets/scaffold/files/htaccess
+index 902f3cb109d..a1736b05515 100644
+--- a/core/assets/scaffold/files/htaccess
++++ b/core/assets/scaffold/files/htaccess
+@@ -32,2 +32,2 @@ AddEncoding gzip svgz
+   # See https://www.php.net/manual/en/ini.core.php#ini.zend.assertions
+-  php_value zend.assertions 0
++  # php_value zend.assertions 0

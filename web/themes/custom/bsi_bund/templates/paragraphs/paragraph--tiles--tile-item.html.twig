@@ -109,7 +109,7 @@
         {% block content %}
           {% if body %}
             <div class="bsi-bodytext bsi-card__body{% if has_more %} has-more{% endif %}">
-              <p>
+
                 {{ body }}
 
                 {% if has_more %}
@@ -118,7 +118,7 @@
 
                 {# Check if full text are available. #}
                 {% if has_more and has_lightbox %}
-                  <a{{ lightbox_attributes.addClass('bsi-card__more-link') }}>
+                  <a{{ lightbox_attributes.addClass('bsi-card__more-link').removeClass('bsi-card__link--lightbox') }}>
                     {{"[more]"|t}}
 
                     <span class="visually-hidden">
@@ -126,7 +126,7 @@
                     </span>
                   </a>
                 {% endif %}
-              </p>
+
             </div>
           {% endif %}
         {% endblock %}

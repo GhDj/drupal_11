@@ -3,6 +3,7 @@
 namespace Drupal\bsi_editor\Plugin\CKEditor5Plugin;
 
 use Drupal\ckeditor5\Plugin\CKEditor5Plugin\Language;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\editor\EditorInterface;
 
 /**
@@ -30,6 +31,11 @@ class LanguageSelect extends Language {
         return in_array($language['languageCode'], $desiredLangcodes);
       }
     ));
+    // Using string translation, some languages may not exist on the site.
+    array_walk($languages, static function (array &$language) {
+      // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
+      $language['title'] = new TranslatableMarkup($language['title']);
+    });
 
     return $config;
   }
