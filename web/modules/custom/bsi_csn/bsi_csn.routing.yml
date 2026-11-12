@@ -32,3 +32,16 @@ bsi_csn.comments.create:
     parameters:
       node:
         type: entity:node
+
+bsi_csn.vorfallsbericht.intro:
+  path: '/csn/api/vorfallsbericht/{node}/intro'
+  defaults:
+    _controller: '\Drupal\bsi_csn\Controller\VorfallsberichtIntroController::get'
+  requirements:
+    _permission: 'access csn content'
+    node: \d+
+  methods: [GET]
+  options:
+    parameters:
+      node:
+        type: entity:node

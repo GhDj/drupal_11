@@ -1,3 +1,7 @@
 access csn comments:
   title: 'Access CSN comments'
   description: 'Allows the user to create and view comments on Vorfallsbericht nodes.'
+
+access csn content:
+  title: 'Access CSN content'
+  description: 'Allows the user to read CSN content via API.'
