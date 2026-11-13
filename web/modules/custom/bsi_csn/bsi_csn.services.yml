@@ -1,0 +1,3 @@
+services:
+  Drupal\bsi_csn\Hook\ProfileFormHooks:
+    autowire: true

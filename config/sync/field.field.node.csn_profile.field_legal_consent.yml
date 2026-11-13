@@ -1,0 +1,21 @@
+uuid: a1000018-0001-0001-0001-000000000018
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_legal_consent
+    - node.type.csn_profile
+id: node.csn_profile.field_legal_consent
+field_name: field_legal_consent
+entity_type: node
+bundle: csn_profile
+label: 'Einverständniserklärung'
+description: ''
+required: true
+translatable: false
+default_value: 
+  -
+    value: 0
+default_value_callback: ''
+settings: {  }
+field_type: boolean

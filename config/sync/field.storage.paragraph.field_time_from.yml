@@ -1,0 +1,21 @@
+uuid: c020d4e5-f6a7-8b9c-0d1e-f2a3b4c5d620
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_time_from
+field_name: field_time_from
+entity_type: paragraph
+type: string
+settings: 
+  max_length: 5
+  is_ascii: true
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

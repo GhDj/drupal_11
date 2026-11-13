@@ -1,0 +1,19 @@
+uuid: a1000009-0001-0001-0001-000000000009
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_public_first_name
+    - node.type.csn_profile
+id: node.csn_profile.field_public_first_name
+field_name: field_public_first_name
+entity_type: node
+bundle: csn_profile
+label: 'Vorname'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,47 @@
+uuid: a1001001-0001-0001-0002-000000000003
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.csn_profile.field_public_first_name
+    - field.field.node.csn_profile.field_public_last_name
+    - node.type.csn_profile
+id: node.csn_profile.default
+targetEntityType: node
+bundle: csn_profile
+mode: default
+content:
+  field_public_first_name:
+    type: string
+    weight: 0
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_public_last_name:
+    type: string
+    weight: 1
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  field_absence: true
+  field_absence_end: true
+  field_absence_start: true
+  field_csn_team_city: true
+  field_csn_team_country: true
+  field_csn_team_email: true
+  field_csn_team_house_number: true
+  field_csn_team_phone: true
+  field_csn_team_street: true
+  field_csn_team_zip: true
+  field_legal_consent: true
+  field_profile_approved: true
+  field_public_email: true
+  field_public_languages: true
+  field_public_phone: true
+  field_public_title: true
+  field_service_times: true

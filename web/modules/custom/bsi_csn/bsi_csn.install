@@ -1,0 +1,50 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @file
+ * Install, update and uninstall functions for the BSI CSN module.
+ */
+
+/**
+ * Create csn_languages taxonomy terms.
+ */
+function bsi_csn_update_10001(): void {
+  _bsi_csn_seed_languages();
+}
+
+/**
+ * Seed default CSN language terms.
+ */
+function _bsi_csn_seed_languages(): void {
+  $term_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+
+  // Check if vocabulary exists.
+  $vocab = \Drupal::entityTypeManager()->getStorage('taxonomy_vocabulary')->load('csn_languages');
+  if (!$vocab) {
+    return;
+  }
+
+  $languages = [
+    'Deutsch', 'Englisch', 'Französisch', 'Spanisch', 'Italienisch',
+    'Portugiesisch', 'Russisch', 'Polnisch', 'Türkisch', 'Arabisch',
+    'Chinesisch', 'Japanisch', 'Koreanisch', 'Niederländisch',
+  ];
+
+  foreach ($languages as $weight => $name) {
+    $existing = $term_storage->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('vid', 'csn_languages')
+      ->condition('name', $name)
+      ->execute();
+
+    if (empty($existing)) {
+      $term_storage->create([
+        'vid' => 'csn_languages',
+        'name' => $name,
+        'weight' => $weight,
+      ])->save();
+    }
+  }
+}

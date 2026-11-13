@@ -1,0 +1,19 @@
+uuid: a2000003-0001-0001-0001-000000000003
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_time_to
+    - paragraphs.paragraphs_type.service_time
+id: paragraph.service_time.field_time_to
+field_name: field_time_to
+entity_type: paragraph
+bundle: service_time
+label: 'Bis'
+description: 'Format: HH:MM (z.B. 17:00)'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

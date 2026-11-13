@@ -1,0 +1,19 @@
+uuid: a1000016-0001-0001-0001-000000000016
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_absence_start
+    - node.type.csn_profile
+id: node.csn_profile.field_absence_start
+field_name: field_absence_start
+entity_type: node
+bundle: csn_profile
+label: 'Beginn'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

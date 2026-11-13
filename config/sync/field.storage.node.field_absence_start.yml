@@ -1,0 +1,20 @@
+uuid: c016d4e5-f6a7-8b9c-0d1e-f2a3b4c5d616
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_absence_start
+field_name: field_absence_start
+entity_type: node
+type: datetime
+settings: 
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

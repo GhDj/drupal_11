@@ -1,0 +1,18 @@
+uuid: c015d4e5-f6a7-8b9c-0d1e-f2a3b4c5d615
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_absence
+field_name: field_absence
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

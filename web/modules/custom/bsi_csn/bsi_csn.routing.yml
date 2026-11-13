@@ -1,0 +1,7 @@
+bsi_csn.profile:
+  path: '/csn/profil'
+  defaults:
+    _controller: '\Drupal\bsi_csn\Controller\ProfileController::profilePage'
+    _title_callback: '\Drupal\bsi_csn\Controller\ProfileController::profileTitle'
+  requirements:
+    _user_is_logged_in: 'TRUE'

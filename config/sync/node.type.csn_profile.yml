@@ -1,0 +1,17 @@
+uuid: f8a1c2d3-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'CSN Profile'
+type: csn_profile
+description: 'Profile page for CSN Ersthelfer (first responders).'
+help: null
+new_revision: true
+preview_mode: 0
+display_submitted: false

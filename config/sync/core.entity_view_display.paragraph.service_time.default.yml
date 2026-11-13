@@ -1,0 +1,40 @@
+uuid: a1001001-0001-0001-0002-000000000004
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.service_time.field_day
+    - field.field.paragraph.service_time.field_time_from
+    - field.field.paragraph.service_time.field_time_to
+    - paragraphs.paragraphs_type.service_time
+  module:
+    - options
+id: paragraph.service_time.default
+targetEntityType: paragraph
+bundle: service_time
+mode: default
+content:
+  field_day:
+    type: list_default
+    weight: 0
+    region: content
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+  field_time_from:
+    type: string
+    weight: 1
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_time_to:
+    type: string
+    weight: 2
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden: {  }

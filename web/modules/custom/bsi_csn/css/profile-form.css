@@ -1,0 +1,130 @@
+/**
+ * @file
+ * Styles for the CSN Profile form.
+ */
+
+/* Banner styles */
+.csn-profile-banner {
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.csn-profile-banner--info {
+  background-color: #e8f4fd;
+  border-left: 4px solid #0073aa;
+  color: #004085;
+}
+
+.csn-profile-banner--hint {
+  background-color: #fff8e1;
+  border-left: 4px solid #f5a623;
+  color: #856404;
+}
+
+.csn-profile-banner p {
+  margin: 0;
+}
+
+/* Section styles */
+.csn-profile-section {
+  margin-bottom: 1.5rem;
+}
+
+.csn-profile-section > summary {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #004b76;
+}
+
+/* Read-only value display */
+.csn-profile-readonly-value {
+  display: inline-block;
+  padding: 0.375rem 0;
+  color: #545454;
+}
+
+/* Locked (greyed out) fields after approval */
+.csn-profile-field--locked {
+  opacity: 0.6;
+}
+
+.csn-profile-field--locked input,
+.csn-profile-field--locked select,
+.csn-profile-field--locked textarea {
+  background-color: #f0f0f0 !important;
+  cursor: not-allowed;
+}
+
+/* Two-column grid for text fields within sections */
+.csn-profile-section--csn-team .form-item,
+.csn-profile-section--public .form-item {
+  max-width: 48%;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 2%;
+}
+
+/* Full width for certain fields */
+.csn-profile-section--public .form-item-field-public-languages-0-target-id {
+  max-width: 100%;
+  display: block;
+}
+
+/* Service times inline layout */
+.field--name-field-service-times .paragraph-type--service-time .content {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.field--name-field-service-times .paragraph-type--service-time .form-item {
+  flex: 1;
+  max-width: none;
+  display: block;
+  margin-right: 0;
+}
+
+/* Absence section */
+.csn-profile-section--absence .form-item-field-absence-value {
+  max-width: 100%;
+  display: block;
+}
+
+.csn-profile-section--absence .form-item-field-absence-start-0-value,
+.csn-profile-section--absence .form-item-field-absence-end-0-value {
+  max-width: 48%;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 2%;
+}
+
+/* Legal section */
+.csn-profile-section--legal .form-item {
+  max-width: 100%;
+  display: block;
+}
+
+/* Mandatory field hint */
+.csn-profile-mandatory-hint {
+  color: #545454;
+  font-size: 0.8125rem;
+  margin-top: 1rem;
+}
+
+/* Submit buttons */
+.csn-profile-btn--request-approval {
+  background-color: #004b76;
+  color: #fff;
+  border: none;
+  padding: 0.625rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.csn-profile-btn--request-approval:hover {
+  background-color: #003d61;
+}

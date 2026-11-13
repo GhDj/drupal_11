@@ -1,0 +1,6 @@
+profile_form:
+  css:
+    theme:
+      css/profile-form.css: {}
+  dependencies:
+    - core/drupal

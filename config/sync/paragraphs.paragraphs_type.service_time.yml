@@ -1,0 +1,10 @@
+uuid: a1b2c3d4-e5f6-7a8b-9c0d-e1f2a3b4c5d6
+langcode: en
+status: true
+dependencies: {  }
+id: service_time
+label: 'Service Time'
+icon_uuid: null
+icon_default: null
+description: 'A single service time entry with weekday, start time and end time.'
+behavior_plugins: {  }
