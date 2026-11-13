@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 #[Block(
   id: 'short_url',
   admin_label: new TranslatableMarkup('Short URL'),
-  category: new TranslatableMarkup('Content'),
+  category: new TranslatableMarkup('Content fields'),
   deriver: ShortUrlBlockDeriver::class
 )]
 final class ShortUrlBlock extends BlockBase implements ContainerFactoryPluginInterface {

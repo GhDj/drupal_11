@@ -1,0 +1,22 @@
+_core:
+  default_config_hash: L7Q6G9fWNFbrzMeBzG3gacQfIVAm_vKH7gUi3fgNSk8
+button_value: 'Save & Edit'
+button_weight: '-1'
+gin_primary: false
+unpublish: false
+unpublish_new_only: false
+hide_default_save: false
+hide_default_preview: false
+hide_default_delete: false
+enable_node_types_automatically: false
+node_types:
+  article: article
+  certificate: certificate
+  entry_page: entry_page
+  event: event
+  inventory: inventory
+  it_security_label: it_security_label
+  job: job
+  page: page
+  report_page: report_page
+save_button_text: ''

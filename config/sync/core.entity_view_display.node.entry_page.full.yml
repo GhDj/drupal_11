@@ -74,18 +74,16 @@ third_party_settings:
       - 'BSI Search'
       - 'Chaos Tools'
       - 'Config Pages'
-      - Content
       - 'Content fields'
       - Editoria11y
-      - Facets
       - Forms
       - Help
       - 'Lists (Views)'
       - 'Menu item Fields'
       - Menus
       - System
-      - Views
       - Webform
+      - 'Webform Entity Cart'
       - core
     entity_view_mode_restriction:
       allowed_layouts:
@@ -94,14 +92,14 @@ third_party_settings:
       allowlisted_blocks:
         'BSI Report':
           - bsi_report_search_slot
+        'Content fields':
+          - 'field_block:node:entry_page:field_paragraphs'
         Webform:
           - webform_block
       restricted_categories:
         - '@entity'
         - 'Chaos Tools'
         - 'Config Pages'
-        - Content
-        - 'Content fields'
         - Editoria11y
         - Forms
         - Help
@@ -109,6 +107,7 @@ third_party_settings:
         - 'Menu item Fields'
         - Menus
         - System
+        - 'Webform Entity Cart'
         - core
 id: node.entry_page.full
 targetEntityType: node

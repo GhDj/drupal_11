@@ -15,9 +15,10 @@ use Drupal\Core\Render\Element;
  */
 class ChartHooks {
 
-  public function __construct(
-    private readonly LanguageManagerInterface $languageManager,
-  ) {}
+  /**
+   * Number of characters to keep in one line.
+   */
+  const int LABEL_MAX_LINE_LENGTH = 20;
 
   /**
    * Expected label for the trend line data set.
@@ -29,6 +30,10 @@ class ChartHooks {
    */
   const int STYLE_DOT_SIZE = 5;
 
+  public function __construct(
+    private readonly LanguageManagerInterface $languageManager,
+  ) {}
+
   /**
    * Implements hook_chart_definition_alter().
    */
@@ -39,9 +44,8 @@ class ChartHooks {
     }
     $element['#attached']['library'][] = 'bsi_charts/chart.js';
 
-    if ($definition['type'] === 'radar') {
-      // Ensure radial axis starts at 0.
-      $definition['options']['scales']['r']['min'] = 0;
+    if ($definition['type'] === 'pie') {
+      $definition['options']['maintainAspectRatio'] = FALSE;
     }
 
     foreach (['prefix', 'suffix', 'decimal_count'] as $property) {
@@ -55,6 +59,33 @@ class ChartHooks {
       $definition['options']['scales']['y']['ticks']['prefix'],
       $definition['options']['scales']['y']['ticks']['suffix'],
     );
+
+    // Apply chart limits to index axis (= y) when using horizontal alignment.
+    if (($definition['options']['indexAxis'] ?? NULL) === 'y') {
+      $definition['options']['scales']['x']['min'] = $definition['options']['scales']['y']['min'] ?? NULL;
+      $definition['options']['scales']['x']['max'] = $definition['options']['scales']['y']['max'] ?? NULL;
+    }
+
+    if ($definition['type'] === 'radar') {
+      // Ensure radial axis starts at 0.
+      $definition['options']['scales']['r']['min'] = 0;
+    }
+
+    foreach ($definition['options']['scales'] ?? [] as $key => $scale) {
+      if (($scale['ticks']['rotation'] ?? NULL) === 90) {
+        // Avoid font face mis-rendering by not going a full 90°.
+        $definition['options']['scales'][$key]['ticks']['rotation'] = 89.9;
+        $definition['options']['scales'][$key]['ticks']['minRotation'] = min(89.9, $scale['ticks']['minRotation']);
+        $definition['options']['scales'][$key]['ticks']['maxRotation'] = max(89.9, $scale['ticks']['maxRotation']);
+      }
+    }
+
+    $lengths = array_map('mb_strlen', $definition['data']['labels'] ?? []);
+    sort($lengths);
+    $median = min(static::LABEL_MAX_LINE_LENGTH, $lengths[(int) floor(count($lengths) / 2)]);
+    foreach ($definition['data']['labels'] ?? [] as $index => $label) {
+      $definition['data']['labels'][$index] = $this->balanceLabel($label, $median);
+    }
 
     // Use the entity's language to more easily spot missing translations.
     // May not be set when previewing a new chart.
@@ -115,6 +146,50 @@ class ChartHooks {
     if (isset($info['chart_data_collector_table'])) {
       $info['chart_data_collector_table']['#process'][] = [ChartsSettingsAlter::class, 'processSeriesData'];
     }
+  }
+
+  /**
+   * Helper method to add line breaks to long labels.
+   */
+  private function balanceLabel(string $label, int $median): string|array {
+    if (mb_strlen($label) <= $median) {
+      return $label;
+    }
+
+    // Split on whitespace, except for &nbsp;.
+    $tokens = preg_split('/[ \t\r\n\f\v]+/u', trim($label));
+    // Special characters should not stand alone.
+    for ($i = 0; $i < count($tokens); $i++) {
+      if (isset($tokens[$i + 1]) && in_array($tokens[$i], ['(', '[', '{'], TRUE)) {
+        // Attach opening brackets to their successor.
+        $tokens[$i + 1] = $tokens[$i] . $tokens[$i + 1];
+        unset($tokens[$i]);
+      }
+      elseif ($i > 0 && in_array($tokens[$i], [')', ']', '}'], TRUE)) {
+        // Attach closing brackets to their predecessor.
+        $tokens[$i - 1] .= $tokens[$i];
+        unset($tokens[$i]);
+      }
+    }
+    $tokens = array_values($tokens);
+
+    $lines = [];
+    $line = '';
+    foreach ($tokens as $token) {
+      $candidate = $line === '' ? $token : "$line $token";
+      if ($line !== '' && mb_strlen($candidate) > $median) {
+        $lines[] = $line;
+        $line = $token;
+      }
+      else {
+        $line = $candidate;
+      }
+    }
+    if ($line !== '') {
+      $lines[] = $line;
+    }
+
+    return $lines;
   }
 
 }

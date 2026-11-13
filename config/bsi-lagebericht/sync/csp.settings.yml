@@ -13,14 +13,16 @@ report-only:
       base: self
     worker-src:
       base: self
-      sources:
-        - 'blob:'
     base-uri:
       base: self
     form-action:
       base: self
     frame-ancestors:
       base: none
+    img-src:
+      base: self
+      sources:
+        - 'data:'
   reporting:
     plugin: none
 enforce:
@@ -36,8 +38,6 @@ enforce:
       base: self
     worker-src:
       base: self
-      sources:
-        - 'blob:'
     base-uri:
       base: self
     form-action:
@@ -45,5 +45,9 @@ enforce:
     frame-ancestors:
       base: none
     upgrade-insecure-requests: true
+    img-src:
+      base: self
+      sources:
+        - 'data:'
   reporting:
     plugin: none

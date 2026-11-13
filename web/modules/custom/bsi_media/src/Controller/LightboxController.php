@@ -68,11 +68,10 @@ final class LightboxController extends ControllerBase {
     if ($media?->hasTranslation($langcode)) {
       $media = $media->getTranslation($langcode);
     }
-    if (!$media?->access('view')) {
-      $media = NULL;
+    if ($media && $media->access('view')) {
+      $build['#media_view'] = $this->entityTypeManager->getViewBuilder('media')
+        ->view($media, 'lightbox');
     }
-    $build['#media_view'] = $media ? $this->entityTypeManager->getViewBuilder('media')
-      ->view($media, 'lightbox') : NULL;
 
     // Add paragraph content to lightbox.
     if ($paragraph->hasTranslation($langcode)) {

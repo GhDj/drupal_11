@@ -74,18 +74,14 @@ third_party_settings:
       - 'BSI Search'
       - 'Chaos Tools'
       - 'Config Pages'
-      - Content
       - 'Content fields'
       - Editoria11y
-      - Facets
       - Forms
       - Help
       - 'Lists (Views)'
       - 'Menu item Fields'
       - Menus
       - System
-      - Views
-      - Webform
       - core
     entity_view_mode_restriction:
       allowed_layouts:
@@ -94,14 +90,12 @@ third_party_settings:
       allowlisted_blocks:
         'BSI Report':
           - bsi_report_search_slot
-        Webform:
-          - webform_block
+        'Content fields':
+          - 'field_block:node:entry_page:field_paragraphs'
       restricted_categories:
         - '@entity'
         - 'Chaos Tools'
         - 'Config Pages'
-        - Content
-        - 'Content fields'
         - Editoria11y
         - Forms
         - Help

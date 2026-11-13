@@ -9,7 +9,7 @@
   Drupal.behaviors.bsiCharts = {
     attach (context) {
       Chart.defaults.font.family = 'BundesSansWeb, Helvetica, Arial, sans-serif';
-      Chart.defaults.font.size = 20;
+      Chart.defaults.font.size = 17;
 
       once('bsi-charts', '.charts-chartjs', context).forEach((element) => {
         [

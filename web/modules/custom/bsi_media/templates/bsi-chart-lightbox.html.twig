@@ -1,7 +1,9 @@
 <div class="bsi-chart-lightbox">
-  <div class="bsi-chart-lightbox__chart">
-    {{ media_view }}
-  </div>
+  {% if media_view %}
+    <div class="bsi-chart-lightbox__chart">
+      {{ media_view }}
+    </div>
+  {% endif %}
 
   <div class="bsi-grid">
     <div class="bsi-grid-indented">
