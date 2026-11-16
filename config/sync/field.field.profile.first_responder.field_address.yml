@@ -1,0 +1,43 @@
+uuid: a2000005-0001-0001-0001-000000000005
+langcode: en
+status: true
+dependencies:
+  config:
+    - address
+    - field.storage.profile.field_address
+    - profile.type.first_responder
+  module:
+    - address
+id: profile.first_responder.field_address
+field_name: field_address
+entity_type: profile
+bundle: first_responder
+label: 'Adresse'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:   available_countries: {  }
+  langcode_override: ''
+  field_overrides:
+    givenName:
+      override: hidden
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+    organization:
+      override: hidden
+    addressLine2:
+      override: hidden
+    addressLine3:
+      override: hidden
+    sortingCode:
+      override: hidden
+    dependentLocality:
+      override: hidden
+    administrativeArea:
+      override: hidden
+  fields: {  }
+field_type: address

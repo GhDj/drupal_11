@@ -6,7 +6,7 @@ core_version_requirement: ^10 || ^11
 
 dependencies:
   - drupal:block
-  - drupal:datetime
   - drupal:telephone
-  - paragraphs:paragraphs
-  - entity_reference_revisions:entity_reference_revisions
+  - address:address
+  - office_hours:office_hours
+  - profile:profile

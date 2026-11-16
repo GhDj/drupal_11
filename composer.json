@@ -101,6 +101,7 @@
         "drupal/node_keep": "^2.2",
         "drupal/office_hours": "^1.29",
         "drupal/paragraphs": "^1.20",
+        "drupal/profile": "^1.10",
         "drupal/pathauto": "^1.14",
         "drupal/pathauto_condition_ui": "^1.0",
         "drupal/phone_label": "^1.2",

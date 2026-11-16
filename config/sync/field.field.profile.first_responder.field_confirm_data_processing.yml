@@ -1,0 +1,21 @@
+uuid: a2000010-0001-0001-0001-000000000010
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_confirm_data_processing
+    - profile.type.first_responder
+id: profile.first_responder.field_confirm_data_processing
+field_name: field_confirm_data_processing
+entity_type: profile
+bundle: first_responder
+label: 'Datenverarbeitung'
+description: ''
+required: true
+translatable: false
+default_value: 
+  -
+    value: 0
+default_value_callback: ''
+settings: {  }
+field_type: boolean

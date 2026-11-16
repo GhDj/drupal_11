@@ -1,0 +1,20 @@
+uuid: f0080001-0001-0001-0001-000000000008
+langcode: en
+status: true
+dependencies:
+  module:
+    - profile
+    - taxonomy
+id: profile.field_deh_language
+field_name: field_deh_language
+entity_type: profile
+type: entity_reference
+settings:
+  target_type: 'taxonomy_term'
+module: core
+locked: false
+cardinality: -1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

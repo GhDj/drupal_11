@@ -2,27 +2,39 @@
 
 /**
  * @file
- * Import CSN Profile config objects individually.
+ * Import CSN Ersthelfer:in profile config objects individually.
+ *
+ * Prerequisites:
+ *   ddev composer require drupal/profile
+ *   ddev composer install
  *
  * Usage: ddev drush php:script scripts/import-profile-config.php
- *
- * This bypasses full config:import which may fail due to missing modules
- * (encrypt, key, real_aes, tfa). It imports only the BSIR-568 configs.
  */
 
-// Step 0: Enable the bsi_csn module if not already enabled.
+// Step 0: Check and enable required modules.
+$module_installer = \Drupal::service('module_installer');
 $module_handler = \Drupal::service('module_handler');
-if (!$module_handler->moduleExists('bsi_csn')) {
-  echo "==> Enabling bsi_csn module...\n";
-  \Drupal::service('module_installer')->install(['bsi_csn']);
-  echo "    bsi_csn module enabled.\n";
-}
-else {
-  echo "==> bsi_csn module already enabled.\n";
+
+$required_modules = ['profile', 'address', 'office_hours', 'telephone', 'bsi_csn'];
+foreach ($required_modules as $module) {
+  if (!$module_handler->moduleExists($module)) {
+    echo "==> Enabling $module...\n";
+    try {
+      $module_installer->install([$module]);
+      echo "    $module enabled.\n";
+    }
+    catch (\Exception $e) {
+      echo "    ERROR enabling $module: " . $e->getMessage() . "\n";
+      echo "    Run: ddev composer require drupal/$module\n";
+      return;
+    }
+  }
+  else {
+    echo "==> $module already enabled.\n";
+  }
 }
 
 $config_path = DRUPAL_ROOT . '/../config/sync';
-
 if (!is_dir($config_path)) {
   echo "ERROR: Config sync directory not found at $config_path\n";
   return;
@@ -32,101 +44,63 @@ $source = new \Drupal\Core\Config\FileStorage($config_path);
 $config_storage = \Drupal::service('config.storage');
 $entity_type_manager = \Drupal::entityTypeManager();
 
-// Order matters: dependencies must be imported first.
+// Configs in dependency order.
 $configs = [
   // 1. Taxonomy vocabulary.
   'taxonomy.vocabulary.csn_languages',
 
-  // 2. Node type.
-  'node.type.csn_profile',
+  // 2. Profile type.
+  'profile.type.first_responder',
 
-  // 3. Paragraph type.
-  'paragraphs.paragraphs_type.service_time',
+  // 3. Field storages.
+  'field.storage.profile.field_academic_title',
+  'field.storage.profile.field_given_name',
+  'field.storage.profile.field_family_name',
+  'field.storage.profile.field_phone',
+  'field.storage.profile.field_address',
+  'field.storage.profile.field_deh_phone',
+  'field.storage.profile.field_deh_mail',
+  'field.storage.profile.field_deh_language',
+  'field.storage.profile.field_availability',
+  'field.storage.profile.field_confirm_data_processing',
+  'field.storage.profile.field_confirm_terms_conditions',
+  'field.storage.profile.field_confirm_volunteer_conditions',
 
-  // 4. Field storages (node).
-  'field.storage.node.field_csn_team_phone',
-  'field.storage.node.field_csn_team_email',
-  'field.storage.node.field_csn_team_street',
-  'field.storage.node.field_csn_team_house_number',
-  'field.storage.node.field_csn_team_zip',
-  'field.storage.node.field_csn_team_city',
-  'field.storage.node.field_csn_team_country',
-  'field.storage.node.field_public_title',
-  'field.storage.node.field_public_first_name',
-  'field.storage.node.field_public_last_name',
-  'field.storage.node.field_public_phone',
-  'field.storage.node.field_public_email',
-  'field.storage.node.field_public_languages',
-  'field.storage.node.field_service_times',
-  'field.storage.node.field_absence',
-  'field.storage.node.field_absence_start',
-  'field.storage.node.field_absence_end',
-  'field.storage.node.field_legal_consent',
-  'field.storage.node.field_profile_approved',
-
-  // 5. Field storages (paragraph).
-  'field.storage.paragraph.field_day',
-  'field.storage.paragraph.field_time_from',
-  'field.storage.paragraph.field_time_to',
-
-  // 6. Field instances (node).
-  'field.field.node.csn_profile.field_csn_team_phone',
-  'field.field.node.csn_profile.field_csn_team_email',
-  'field.field.node.csn_profile.field_csn_team_street',
-  'field.field.node.csn_profile.field_csn_team_house_number',
-  'field.field.node.csn_profile.field_csn_team_zip',
-  'field.field.node.csn_profile.field_csn_team_city',
-  'field.field.node.csn_profile.field_csn_team_country',
-  'field.field.node.csn_profile.field_public_title',
-  'field.field.node.csn_profile.field_public_first_name',
-  'field.field.node.csn_profile.field_public_last_name',
-  'field.field.node.csn_profile.field_public_phone',
-  'field.field.node.csn_profile.field_public_email',
-  'field.field.node.csn_profile.field_public_languages',
-  'field.field.node.csn_profile.field_service_times',
-  'field.field.node.csn_profile.field_absence',
-  'field.field.node.csn_profile.field_absence_start',
-  'field.field.node.csn_profile.field_absence_end',
-  'field.field.node.csn_profile.field_legal_consent',
-  'field.field.node.csn_profile.field_profile_approved',
-
-  // 7. Field instances (paragraph).
-  'field.field.paragraph.service_time.field_day',
-  'field.field.paragraph.service_time.field_time_from',
-  'field.field.paragraph.service_time.field_time_to',
-
-  // 8. Form displays.
-  'core.entity_form_display.node.csn_profile.default',
-  'core.entity_form_display.paragraph.service_time.default',
-
-  // 9. View displays.
-  'core.entity_view_display.node.csn_profile.default',
-  'core.entity_view_display.paragraph.service_time.default',
+  // 4. Field instances.
+  'field.field.profile.first_responder.field_academic_title',
+  'field.field.profile.first_responder.field_given_name',
+  'field.field.profile.first_responder.field_family_name',
+  'field.field.profile.first_responder.field_phone',
+  'field.field.profile.first_responder.field_address',
+  'field.field.profile.first_responder.field_deh_phone',
+  'field.field.profile.first_responder.field_deh_mail',
+  'field.field.profile.first_responder.field_deh_language',
+  'field.field.profile.first_responder.field_availability',
+  'field.field.profile.first_responder.field_confirm_data_processing',
+  'field.field.profile.first_responder.field_confirm_terms_conditions',
+  'field.field.profile.first_responder.field_confirm_volunteer_conditions',
 ];
 
-$success = 0;
-$errors = 0;
-
-// Map config prefixes to entity types.
 $entity_type_map = [
-  'node.type' => 'node_type',
   'taxonomy.vocabulary' => 'taxonomy_vocabulary',
-  'paragraphs.paragraphs_type' => 'paragraphs_type',
+  'profile.type' => 'profile_type',
   'field.storage' => 'field_storage_config',
   'field.field' => 'field_config',
   'core.entity_form_display' => 'entity_form_display',
   'core.entity_view_display' => 'entity_view_display',
 ];
 
+$success = 0;
+$errors = 0;
+
 foreach ($configs as $config_name) {
   $data = $source->read($config_name);
   if ($data === FALSE) {
-    echo "[MISSING] $config_name — not found in config/sync\n";
+    echo "[MISSING] $config_name\n";
     $errors++;
     continue;
   }
 
-  // Determine config entity type.
   $entity_type_id = NULL;
   foreach ($entity_type_map as $prefix => $type_id) {
     if (str_starts_with($config_name, $prefix)) {
@@ -138,39 +112,21 @@ foreach ($configs as $config_name) {
   try {
     if ($entity_type_id) {
       $storage = $entity_type_manager->getStorage($entity_type_id);
-
-      // Determine ID from data.
       $entity_type_def = $entity_type_manager->getDefinition($entity_type_id);
       $id_key = $entity_type_def->getKey('id');
       $id = $data[$id_key] ?? $data['id'] ?? NULL;
 
       if ($id && $storage->load($id)) {
-        // Update existing.
-        echo "[EXISTS] $config_name — skipping (already imported)\n";
+        echo "[EXISTS] $config_name\n";
       }
       else {
-        // Remove uuid so Drupal generates a fresh one.
         unset($data['uuid']);
-        // Write config directly to active storage first, then create entity.
-        $config_storage->write($config_name, $data);
-        // Reload via entity storage to trigger schema creation.
-        $entity_type_manager->clearCachedDefinitions();
-        $storage->resetCache();
-        $entity = $storage->load($id);
-        if ($entity) {
-          echo "[CREATED] $config_name\n";
-        }
-        else {
-          // Fallback: create from storage record.
-          unset($data['uuid']);
-          $entity = $storage->createFromStorageRecord($data);
-          $entity->save();
-          echo "[CREATED] $config_name (via createFromStorageRecord)\n";
-        }
+        $entity = $storage->createFromStorageRecord($data);
+        $entity->save();
+        echo "[CREATED] $config_name\n";
       }
     }
     else {
-      // Simple config.
       \Drupal::configFactory()->getEditable($config_name)->setData($data)->save();
       echo "[SAVED] $config_name\n";
     }
@@ -186,26 +142,15 @@ echo "\n=== Done: $success imported, $errors errors ===\n";
 
 // Seed language terms.
 echo "\n==> Seeding CSN language terms...\n";
+$module_path = \Drupal::service('extension.list.module')->getPath('bsi_csn');
+$install_file = $module_path . '/bsi_csn.install';
+if (file_exists($install_file)) {
+  require_once $install_file;
+}
 if (function_exists('_bsi_csn_seed_languages')) {
   _bsi_csn_seed_languages();
-  echo "Language terms seeded.\n";
-}
-else {
-  // Load the install file manually.
-  $module_path = \Drupal::service('extension.list.module')->getPath('bsi_csn');
-  $install_file = $module_path . '/bsi_csn.install';
-  if (file_exists($install_file)) {
-    require_once $install_file;
-    if (function_exists('_bsi_csn_seed_languages')) {
-      _bsi_csn_seed_languages();
-      echo "Language terms seeded.\n";
-    }
-  }
-  else {
-    echo "Note: Could not seed languages — install file not found.\n";
-  }
+  echo "    Language terms seeded.\n";
 }
 
-// Clear caches.
 drupal_flush_all_caches();
 echo "Caches cleared.\n";
