@@ -103,21 +103,21 @@ final class ProfileForm extends FormBase {
       '#type' => 'email',
     ]);
 
-    // Sprache autocomplete.
+    // Sprache — multi-select with chip widget.
+    $language_options = $this->getLanguageOptions();
+    $selected_languages = $this->getSelectedLanguageIds();
     $form['public_languages'] = [
-      '#type' => 'entity_autocomplete',
+      '#type' => 'select',
       '#title' => $this->t('Sprache'),
-      '#target_type' => 'taxonomy_term',
-      '#selection_settings' => [
-        'target_bundles' => ['csn_languages'],
-      ],
-      '#tags' => TRUE,
+      '#options' => $language_options,
+      '#multiple' => TRUE,
       '#required' => TRUE,
+      '#default_value' => $selected_languages,
       '#attributes' => [
-        'placeholder' => $this->t('Bitte auswählen'),
+        'data-csn-language-select' => TRUE,
+        'data-placeholder' => $this->t('Bitte auswählen'),
         'class' => ['form-element'],
       ],
-      '#default_value' => $this->getReferencedTerms('field_public_languages'),
     ];
 
     // Lock fields after approval.
@@ -360,9 +360,11 @@ final class ProfileForm extends FormBase {
       $node->set($field_name, $form_state->getValue($form_key));
     }
 
-    // Languages (entity autocomplete returns array of ['target_id' => ...]).
+    // Languages (select multiple returns array of term IDs).
     if (!$this->isApproved() || !in_array('field_public_languages', self::LOCK_AFTER_APPROVAL)) {
-      $node->set('field_public_languages', $form_state->getValue('public_languages'));
+      $lang_values = array_filter($form_state->getValue('public_languages') ?? []);
+      $lang_refs = array_map(fn($tid) => ['target_id' => $tid], array_values($lang_values));
+      $node->set('field_public_languages', $lang_refs);
     }
 
     // Absence.
@@ -485,13 +487,43 @@ final class ProfileForm extends FormBase {
   }
 
   /**
-   * Get referenced taxonomy terms for a field.
+   * Get all language options for the select widget.
+   *
+   * Returns term IDs keyed by tid, with Deutsch first.
    */
-  private function getReferencedTerms(string $field_name): array {
-    if (!$this->profileNode || !$this->profileNode->hasField($field_name)) {
+  private function getLanguageOptions(): array {
+    $terms = $this->entityTypeManager->getStorage('taxonomy_term')->loadByProperties([
+      'vid' => 'csn_languages',
+    ]);
+
+    $deutsch = [];
+    $others = [];
+    foreach ($terms as $term) {
+      if ($term->getName() === 'Deutsch') {
+        $deutsch[$term->id()] = $term->getName();
+      }
+      else {
+        $others[$term->id()] = $term->getName();
+      }
+    }
+    asort($others);
+    return $deutsch + $others;
+  }
+
+  /**
+   * Get selected language term IDs from the profile node.
+   */
+  private function getSelectedLanguageIds(): array {
+    if (!$this->profileNode || !$this->profileNode->hasField('field_public_languages')) {
       return [];
     }
-    return $this->profileNode->get($field_name)->referencedEntities();
+    $ids = [];
+    foreach ($this->profileNode->get('field_public_languages') as $item) {
+      if ($item->target_id) {
+        $ids[] = $item->target_id;
+      }
+    }
+    return $ids;
   }
 
   /**
