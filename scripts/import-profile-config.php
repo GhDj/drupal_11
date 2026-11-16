@@ -10,10 +10,17 @@
  * (encrypt, key, real_aes, tfa). It imports only the BSIR-568 configs.
  */
 
-use Drupal\Core\Config\FileStorage;
-use Drupal\Core\Config\InstallStorage;
+// Step 0: Enable the bsi_csn module if not already enabled.
+$module_handler = \Drupal::service('module_handler');
+if (!$module_handler->moduleExists('bsi_csn')) {
+  echo "==> Enabling bsi_csn module...\n";
+  \Drupal::service('module_installer')->install(['bsi_csn']);
+  echo "    bsi_csn module enabled.\n";
+}
+else {
+  echo "==> bsi_csn module already enabled.\n";
+}
 
-$config_path = \Drupal::service('extension.list.profile')->getPath('standard') ? '' : '';
 $config_path = DRUPAL_ROOT . '/../config/sync';
 
 if (!is_dir($config_path)) {
@@ -21,7 +28,7 @@ if (!is_dir($config_path)) {
   return;
 }
 
-$source = new FileStorage($config_path);
+$source = new \Drupal\Core\Config\FileStorage($config_path);
 $config_storage = \Drupal::service('config.storage');
 $entity_type_manager = \Drupal::entityTypeManager();
 
@@ -98,8 +105,18 @@ $configs = [
 ];
 
 $success = 0;
-$skipped = 0;
 $errors = 0;
+
+// Map config prefixes to entity types.
+$entity_type_map = [
+  'node.type' => 'node_type',
+  'taxonomy.vocabulary' => 'taxonomy_vocabulary',
+  'paragraphs.paragraphs_type' => 'paragraphs_type',
+  'field.storage' => 'field_storage_config',
+  'field.field' => 'field_config',
+  'core.entity_form_display' => 'entity_form_display',
+  'core.entity_view_display' => 'entity_view_display',
+];
 
 foreach ($configs as $config_name) {
   $data = $source->read($config_name);
@@ -109,21 +126,8 @@ foreach ($configs as $config_name) {
     continue;
   }
 
-  // Determine if this is a config entity or simple config.
-  $parts = explode('.', $config_name);
+  // Determine config entity type.
   $entity_type_id = NULL;
-
-  // Map config prefixes to entity types.
-  $entity_type_map = [
-    'node.type' => 'node_type',
-    'taxonomy.vocabulary' => 'taxonomy_vocabulary',
-    'paragraphs.paragraphs_type' => 'paragraphs_type',
-    'field.storage' => 'field_storage_config',
-    'field.field' => 'field_config',
-    'core.entity_form_display' => 'entity_form_display',
-    'core.entity_view_display' => 'entity_view_display',
-  ];
-
   foreach ($entity_type_map as $prefix => $type_id) {
     if (str_starts_with($config_name, $prefix)) {
       $entity_type_id = $type_id;
@@ -133,34 +137,41 @@ foreach ($configs as $config_name) {
 
   try {
     if ($entity_type_id) {
-      $entity_type = $entity_type_manager->getDefinition($entity_type_id);
       $storage = $entity_type_manager->getStorage($entity_type_id);
-      $id_key = $entity_type->getKey('id');
 
-      // Check if entity already exists.
+      // Determine ID from data.
+      $entity_type_def = $entity_type_manager->getDefinition($entity_type_id);
+      $id_key = $entity_type_def->getKey('id');
       $id = $data[$id_key] ?? $data['id'] ?? NULL;
+
       if ($id && $storage->load($id)) {
-        echo "[EXISTS] $config_name — updating\n";
-        $entity = $storage->load($id);
-        foreach ($data as $key => $value) {
-          if ($key !== 'uuid' && $key !== '_core') {
-            $entity->set($key, $value);
-          }
-        }
-        $entity->save();
+        // Update existing.
+        echo "[EXISTS] $config_name — skipping (already imported)\n";
       }
       else {
-        // Remove uuid so Drupal generates a new one to avoid collisions.
+        // Remove uuid so Drupal generates a fresh one.
         unset($data['uuid']);
-        $entity = $storage->createFromStorageRecord($data);
-        $entity->save();
-        echo "[CREATED] $config_name\n";
+        // Write config directly to active storage first, then create entity.
+        $config_storage->write($config_name, $data);
+        // Reload via entity storage to trigger schema creation.
+        $entity_type_manager->clearCachedDefinitions();
+        $storage->resetCache();
+        $entity = $storage->load($id);
+        if ($entity) {
+          echo "[CREATED] $config_name\n";
+        }
+        else {
+          // Fallback: create from storage record.
+          unset($data['uuid']);
+          $entity = $storage->createFromStorageRecord($data);
+          $entity->save();
+          echo "[CREATED] $config_name (via createFromStorageRecord)\n";
+        }
       }
     }
     else {
-      // Simple config object.
-      $config = \Drupal::configFactory()->getEditable($config_name);
-      $config->setData($data)->save();
+      // Simple config.
+      \Drupal::configFactory()->getEditable($config_name)->setData($data)->save();
       echo "[SAVED] $config_name\n";
     }
     $success++;
@@ -171,7 +182,7 @@ foreach ($configs as $config_name) {
   }
 }
 
-echo "\n=== Done: $success imported, $skipped skipped, $errors errors ===\n";
+echo "\n=== Done: $success imported, $errors errors ===\n";
 
 // Seed language terms.
 echo "\n==> Seeding CSN language terms...\n";
@@ -180,7 +191,19 @@ if (function_exists('_bsi_csn_seed_languages')) {
   echo "Language terms seeded.\n";
 }
 else {
-  echo "Note: _bsi_csn_seed_languages() not available. Run 'drush updb' or enable bsi_csn module first.\n";
+  // Load the install file manually.
+  $module_path = \Drupal::service('extension.list.module')->getPath('bsi_csn');
+  $install_file = $module_path . '/bsi_csn.install';
+  if (file_exists($install_file)) {
+    require_once $install_file;
+    if (function_exists('_bsi_csn_seed_languages')) {
+      _bsi_csn_seed_languages();
+      echo "Language terms seeded.\n";
+    }
+  }
+  else {
+    echo "Note: Could not seed languages — install file not found.\n";
+  }
 }
 
 // Clear caches.
