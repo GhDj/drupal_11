@@ -1,130 +1,221 @@
 /**
  * @file
- * Styles for the CSN Profile form.
+ * Styles for the CSN Profile frontend form.
  */
 
-/* Banner styles */
-.csn-profile-banner {
-  padding: 1rem 1.5rem;
+/* Layout */
+.csn-profile {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Title */
+.csn-profile__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--bsi-color-typo-primary, #1a1a1a);
+}
+
+/* Sections */
+.csn-profile__section {
+  margin-bottom: 2.5rem;
+}
+
+.csn-profile__section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--bsi-color-typo-primary, #1a1a1a);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--bsi-color-border-muted, #d0d0d0);
+}
+
+/* Banners / Hinweisbanner */
+.csn-profile__banner {
+  padding: 1rem 1.25rem;
   margin-bottom: 1.5rem;
   border-radius: 4px;
   font-size: 0.875rem;
   line-height: 1.5;
 }
 
-.csn-profile-banner--info {
-  background-color: #e8f4fd;
-  border-left: 4px solid #0073aa;
-  color: #004085;
+.csn-profile__banner--info {
+  background-color: var(--bsi-color-blue-50, #e8f4fd);
+  border-left: 4px solid var(--bsi-color-blue-750, #004b76);
+  color: var(--bsi-color-typo-primary, #1a1a1a);
 }
 
-.csn-profile-banner--hint {
-  background-color: #fff8e1;
-  border-left: 4px solid #f5a623;
-  color: #856404;
+.csn-profile__banner--hint {
+  background-color: #f5f5f5;
+  border-left: 4px solid var(--bsi-color-border-muted, #d0d0d0);
+  color: var(--bsi-color-typo-secondary, #545454);
 }
 
-.csn-profile-banner p {
+.csn-profile__banner p {
   margin: 0;
 }
 
-/* Section styles */
-.csn-profile-section {
-  margin-bottom: 1.5rem;
+/* Text (06) */
+.csn-profile__text {
+  font-size: 0.9375rem;
+  color: var(--bsi-color-typo-secondary, #545454);
+  margin-bottom: 1rem;
 }
 
-.csn-profile-section > summary {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #004b76;
+/* Two-column grid */
+.csn-profile__fields--two-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 1.5rem;
 }
 
-/* Read-only value display */
-.csn-profile-readonly-value {
-  display: inline-block;
-  padding: 0.375rem 0;
-  color: #545454;
+@media (min-width: 768px) {
+  .csn-profile__fields--two-col {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-/* Locked (greyed out) fields after approval */
+/* Form items inside profile */
+.csn-profile .form-item {
+  margin-bottom: 1.25rem;
+}
+
+.csn-profile .form-item__label,
+.csn-profile label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--bsi-color-typo-secondary, #545454);
+  margin-bottom: 0.25rem;
+}
+
+.csn-profile .form-element,
+.csn-profile input[type="text"],
+.csn-profile input[type="email"],
+.csn-profile input[type="tel"],
+.csn-profile input[type="date"],
+.csn-profile input[type="password"],
+.csn-profile select {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
+  border-radius: 0;
+  background: var(--bsi-color-neutral-50, #f9f9f9);
+  font-size: 0.875rem;
+  color: var(--bsi-color-typo-secondary, #545454);
+  box-sizing: border-box;
+}
+
+.csn-profile input:disabled,
+.csn-profile select:disabled {
+  background-color: #e8e8e8;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Locked fields (after approval) */
 .csn-profile-field--locked {
   opacity: 0.6;
 }
 
-.csn-profile-field--locked input,
-.csn-profile-field--locked select,
-.csn-profile-field--locked textarea {
-  background-color: #f0f0f0 !important;
-  cursor: not-allowed;
+/* Checkboxes */
+.csn-profile .form-type--checkbox,
+.csn-profile .form-type-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
 }
 
-/* Two-column grid for text fields within sections */
-.csn-profile-section--csn-team .form-item,
-.csn-profile-section--public .form-item {
-  max-width: 48%;
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 2%;
+.csn-profile .form-type--checkbox input,
+.csn-profile .form-type-checkbox input {
+  width: auto;
+  margin-top: 0.25rem;
 }
 
-/* Full width for certain fields */
-.csn-profile-section--public .form-item-field-public-languages-0-target-id {
-  max-width: 100%;
-  display: block;
+.csn-profile .form-type--checkbox label,
+.csn-profile .form-type-checkbox label {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--bsi-color-typo-primary, #1a1a1a);
 }
 
-/* Service times inline layout */
-.field--name-field-service-times .paragraph-type--service-time .content {
+/* Service times */
+.csn-profile-service-time-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 1rem;
+  align-items: end;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+@media (min-width: 768px) {
+  .csn-profile-service-time-row {
+    grid-template-columns: 2fr 1fr 1fr auto;
+  }
+}
+
+.csn-profile-service-time-remove {
+  background: none;
+  border: none;
+  color: var(--bsi-color-red-100, #c0392b);
+  cursor: pointer;
+  font-size: 0.8125rem;
+  text-decoration: underline;
+  padding: 0.5rem 0;
+}
+
+.csn-profile-add-service-time {
+  background: none;
+  border: none;
+  color: var(--bsi-color-blue-750, #004b76);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: underline;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.csn-profile-add-service-time:hover {
+  color: var(--bsi-color-blue-900, #003050);
+}
+
+/* Required hint */
+.csn-profile__required-hint {
+  font-size: 0.8125rem;
+  color: var(--bsi-color-typo-secondary, #545454);
+  margin: 2rem 0 1rem;
+}
+
+/* Actions / Buttons */
+.csn-profile .form-actions {
   display: flex;
   gap: 1rem;
-  align-items: flex-end;
+  align-items: center;
+  margin-top: 1.5rem;
 }
 
-.field--name-field-service-times .paragraph-type--service-time .form-item {
-  flex: 1;
-  max-width: none;
-  display: block;
-  margin-right: 0;
+/* Secondary button (Abbrechen) */
+.csn-profile .bsi-button--secondary {
+  --bsi-button-background: transparent;
+  --bsi-button-border-color: var(--bsi-color-blue-750, #004b76);
+  --bsi-button-text-color: var(--bsi-color-blue-750, #004b76);
+  --bsi-button-background-hover: var(--bsi-color-blue-50, #e8f4fd);
+  --bsi-button-border-color-hover: var(--bsi-color-blue-750, #004b76);
+  --bsi-button-text-color-hover: var(--bsi-color-blue-750, #004b76);
+  text-decoration: none;
 }
 
-/* Absence section */
-.csn-profile-section--absence .form-item-field-absence-value {
-  max-width: 100%;
-  display: block;
-}
-
-.csn-profile-section--absence .form-item-field-absence-start-0-value,
-.csn-profile-section--absence .form-item-field-absence-end-0-value {
-  max-width: 48%;
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 2%;
-}
-
-/* Legal section */
-.csn-profile-section--legal .form-item {
-  max-width: 100%;
-  display: block;
-}
-
-/* Mandatory field hint */
-.csn-profile-mandatory-hint {
-  color: #545454;
-  font-size: 0.8125rem;
-  margin-top: 1rem;
-}
-
-/* Submit buttons */
-.csn-profile-btn--request-approval {
-  background-color: #004b76;
-  color: #fff;
-  border: none;
-  padding: 0.625rem 1.5rem;
-  font-weight: 600;
-  cursor: pointer;
-  margin-left: 0.5rem;
-}
-
-.csn-profile-btn--request-approval:hover {
-  background-color: #003d61;
+/* Primary button (Freigabe / Speichern) */
+.csn-profile .bsi-button--control {
+  --bsi-button-background: var(--bsi-color-blue-750, #004b76);
+  --bsi-button-border-color: var(--bsi-color-blue-750, #004b76);
+  --bsi-button-text-color: #fff;
+  --bsi-button-background-hover: var(--bsi-color-blue-900, #003050);
+  --bsi-button-border-color-hover: var(--bsi-color-blue-900, #003050);
+  --bsi-button-text-color-hover: #fff;
 }
