@@ -245,14 +245,20 @@ select[data-csn-language-select] {
   color: var(--bsi-color-red-100, #c0392b);
 }
 
-.csn-lang-text-input {
+.csn-lang-text-input,
+.csn-lang-text-input.form-element,
+.csn-lang-input-area input[type="text"] {
   flex: 1 1 80px;
   min-width: 80px;
-  border: none;
-  outline: none;
-  background: transparent;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
   font-size: 0.875rem;
   padding: 0.25rem 0;
+  width: auto;
+  min-height: auto;
+  height: auto;
 }
 
 .csn-lang-dropdown {
