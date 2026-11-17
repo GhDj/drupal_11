@@ -108,6 +108,18 @@
   box-sizing: border-box;
 }
 
+/* Fix select dropdown arrow — prevent tiling of theme's custom arrow */
+.csn-profile select.form-element,
+.csn-profile select.form-element--type-select {
+  background-repeat: no-repeat !important;
+  background-position: right 0.75rem center !important;
+  background-size: 1rem !important;
+  padding-right: 2.5rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .csn-profile input:disabled,
 .csn-profile select:disabled {
   background-color: #e8e8e8;
