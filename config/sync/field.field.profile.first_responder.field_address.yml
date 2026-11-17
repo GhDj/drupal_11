@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - address
     - field.storage.profile.field_address
     - profile.type.first_responder
   module:
@@ -18,7 +17,8 @@ required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:   available_countries: {  }
+settings:
+  available_countries: {  }
   langcode_override: ''
   field_overrides:
     givenName:
