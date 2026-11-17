@@ -366,6 +366,11 @@ select[data-csn-language-select] {
   border-color: var(--bsi-color-blue-900, #003050);
 }
 
+.csn-profile input[type="submit"] {
+  width: auto !important;
+  max-width: none !important;
+}
+
 /* Secondary button (Abbrechen) */
 .csn-profile .bsi-button--secondary,
 .csn-profile a.bsi-button--secondary {
