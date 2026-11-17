@@ -26,7 +26,7 @@ final class ProfileForm extends FormBase {
     'field_deh_mail',
     'field_confirm_data_processing',
     'field_confirm_terms_conditions',
-    'field_confirm_volunteer_conditions',
+    'field_confirm_volunteer',
   ];
 
   /**
@@ -255,7 +255,7 @@ final class ProfileForm extends FormBase {
       '#type' => 'checkbox',
       '#title' => $this->t('Ich akzeptiere die Ehrenamtsvereinbarung.'),
       '#required' => $is_initial,
-      '#default_value' => $this->getFieldValue('field_confirm_volunteer_conditions', 0),
+      '#default_value' => $this->getFieldValue('field_confirm_volunteer', 0),
       '#disabled' => !$is_initial,
       '#attributes' => ['class' => ['form-boolean']],
     ];
@@ -369,7 +369,7 @@ final class ProfileForm extends FormBase {
     if ($is_new) {
       $profile->set('field_confirm_data_processing', $form_state->getValue('confirm_data_processing') ? 1 : 0);
       $profile->set('field_confirm_terms_conditions', $form_state->getValue('confirm_terms_conditions') ? 1 : 0);
-      $profile->set('field_confirm_volunteer_conditions', $form_state->getValue('confirm_volunteer_conditions') ? 1 : 0);
+      $profile->set('field_confirm_volunteer', $form_state->getValue('confirm_volunteer_conditions') ? 1 : 0);
     }
 
     $profile->save();

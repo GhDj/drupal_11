@@ -64,7 +64,7 @@ $configs = [
   'field.storage.profile.field_availability',
   'field.storage.profile.field_confirm_data_processing',
   'field.storage.profile.field_confirm_terms_conditions',
-  'field.storage.profile.field_confirm_volunteer_conditions',
+  'field.storage.profile.field_confirm_volunteer',
 
   // 4. Field instances.
   'field.field.profile.first_responder.field_academic_title',
@@ -78,7 +78,7 @@ $configs = [
   'field.field.profile.first_responder.field_availability',
   'field.field.profile.first_responder.field_confirm_data_processing',
   'field.field.profile.first_responder.field_confirm_terms_conditions',
-  'field.field.profile.first_responder.field_confirm_volunteer_conditions',
+  'field.field.profile.first_responder.field_confirm_volunteer',
 ];
 
 $entity_type_map = [
