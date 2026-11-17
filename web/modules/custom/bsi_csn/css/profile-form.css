@@ -124,7 +124,7 @@
 .csn-profile .form-type--checkbox,
 .csn-profile .form-type-checkbox {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
@@ -137,10 +137,11 @@
   width: 18px;
   height: 18px;
   min-width: 18px;
-  margin-top: 0.125rem;
+  margin: 0;
   flex-shrink: 0;
   cursor: pointer;
   border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
+  align-self: center;
 }
 
 .csn-profile .form-type--checkbox label,
@@ -319,23 +320,52 @@ select[data-csn-language-select] {
   margin-top: 1.5rem;
 }
 
-/* Secondary button (Abbrechen) */
-.csn-profile .bsi-button--secondary {
-  --bsi-button-background: transparent;
-  --bsi-button-border-color: var(--bsi-color-blue-750, #004b76);
-  --bsi-button-text-color: var(--bsi-color-blue-750, #004b76);
-  --bsi-button-background-hover: var(--bsi-color-blue-50, #e8f4fd);
-  --bsi-button-border-color-hover: var(--bsi-color-blue-750, #004b76);
-  --bsi-button-text-color-hover: var(--bsi-color-blue-750, #004b76);
-  text-decoration: none;
-}
-
 /* Primary button (Freigabe / Speichern) */
-.csn-profile .bsi-button--control {
+.csn-profile .bsi-button--control,
+.csn-profile input[type="submit"].bsi-button--control {
   --bsi-button-background: var(--bsi-color-blue-750, #004b76);
   --bsi-button-border-color: var(--bsi-color-blue-750, #004b76);
   --bsi-button-text-color: #fff;
   --bsi-button-background-hover: var(--bsi-color-blue-900, #003050);
   --bsi-button-border-color-hover: var(--bsi-color-blue-900, #003050);
   --bsi-button-text-color-hover: #fff;
+  background: var(--bsi-color-blue-750, #004b76);
+  color: #fff;
+  border: 1px solid var(--bsi-color-blue-750, #004b76);
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  white-space: nowrap;
+  height: auto;
+  line-height: 1;
+}
+
+.csn-profile input[type="submit"].bsi-button--control:hover {
+  background: var(--bsi-color-blue-900, #003050);
+  border-color: var(--bsi-color-blue-900, #003050);
+}
+
+/* Secondary button (Abbrechen) */
+.csn-profile .bsi-button--secondary,
+.csn-profile a.bsi-button--secondary {
+  background: transparent;
+  color: var(--bsi-color-blue-750, #004b76);
+  border: 1px solid var(--bsi-color-blue-750, #004b76);
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  height: auto;
+  line-height: 1;
+}
+
+.csn-profile a.bsi-button--secondary:hover {
+  background: var(--bsi-color-blue-50, #e8f4fd);
 }
