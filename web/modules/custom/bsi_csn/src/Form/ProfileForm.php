@@ -280,7 +280,7 @@ final class ProfileForm extends FormBase {
       '#disabled' => !$is_initial,
       '#attributes' => ['class' => ['form-boolean']],
     ];
-    $form['confirm_volunteer_conditions'] = [
+    $form['confirm_volunteer'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Ich akzeptiere die Ehrenamtsvereinbarung.'),
       '#required' => $is_initial,
@@ -292,7 +292,7 @@ final class ProfileForm extends FormBase {
     if (!$is_initial) {
       $form['confirm_data_processing']['#wrapper_attributes']['class'][] = 'csn-profile-field--locked';
       $form['confirm_terms_conditions']['#wrapper_attributes']['class'][] = 'csn-profile-field--locked';
-      $form['confirm_volunteer_conditions']['#wrapper_attributes']['class'][] = 'csn-profile-field--locked';
+      $form['confirm_volunteer']['#wrapper_attributes']['class'][] = 'csn-profile-field--locked';
     }
 
     // -- Buttons.
@@ -427,7 +427,7 @@ final class ProfileForm extends FormBase {
     if ($is_new) {
       $profile->set('field_confirm_data_processing', $form_state->getValue('confirm_data_processing') ? 1 : 0);
       $profile->set('field_confirm_terms_conditions', $form_state->getValue('confirm_terms_conditions') ? 1 : 0);
-      $profile->set('field_confirm_volunteer', $form_state->getValue('confirm_volunteer_conditions') ? 1 : 0);
+      $profile->set('field_confirm_volunteer', $form_state->getValue('confirm_volunteer') ? 1 : 0);
     }
 
     $profile->save();
