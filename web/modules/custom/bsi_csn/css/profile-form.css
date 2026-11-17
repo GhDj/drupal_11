@@ -203,6 +203,11 @@
   box-sizing: border-box;
 }
 
+/* White background when languages are selected */
+.csn-lang-input-area--has-selection {
+  background: #fff;
+}
+
 /* Hide the native select - JS replaces it */
 select[data-csn-language-select] {
   display: none !important;
@@ -265,7 +270,7 @@ select[data-csn-language-select] {
   display: none;
   position: absolute;
   z-index: 100;
-  background: #fff;
+  background: var(--bsi-color-neutral-50, #f9f9f9);
   border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
   max-height: 200px;
   overflow-y: auto;
