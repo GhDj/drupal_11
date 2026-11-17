@@ -105,6 +105,24 @@
   </section>
 
   {# ================================================================ #}
+  {# Abwesenheit                                                      #}
+  {# ================================================================ #}
+  <section class="csn-profile__section">
+    <h2 class="csn-profile__section-title">{{ 'Abwesenheit'|t }}</h2>
+
+    <div class="csn-profile__banner csn-profile__banner--hint">
+      <p>{{ 'Bitte beachten Sie, dass Sie während Ihrer Abwesenheit nicht in der Liste der verfügbaren Ersthelfenden angezeigt werden und nicht kontaktiert werden können.'|t }}</p>
+    </div>
+
+    {{ form.absence }}
+
+    <div class="csn-profile__fields--two-col">
+      {{ form.absence_start }}
+      {{ form.absence_end }}
+    </div>
+  </section>
+
+  {# ================================================================ #}
   {# Rechtliches                                                      #}
   {# ================================================================ #}
   <section class="csn-profile__section">

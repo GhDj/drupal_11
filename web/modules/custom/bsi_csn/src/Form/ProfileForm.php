@@ -234,6 +234,35 @@ final class ProfileForm extends FormBase {
       '#limit_validation_errors' => [],
     ];
 
+    // -- Section: Abwesenheit.
+    $absence_defaults = $this->getAbsenceDefaults();
+    $form['absence'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Ich möchte eine Abwesenheit melden'),
+      '#default_value' => $absence_defaults['active'] ? 1 : 0,
+      '#attributes' => ['class' => ['form-boolean']],
+    ];
+    $form['absence_start'] = [
+      '#type' => 'date',
+      '#title' => $this->t('Beginn'),
+      '#default_value' => $absence_defaults['start'],
+      '#attributes' => ['class' => ['form-element']],
+      '#states' => [
+        'visible' => [':input[name="absence"]' => ['checked' => TRUE]],
+        'required' => [':input[name="absence"]' => ['checked' => TRUE]],
+      ],
+    ];
+    $form['absence_end'] = [
+      '#type' => 'date',
+      '#title' => $this->t('Ende'),
+      '#default_value' => $absence_defaults['end'],
+      '#attributes' => ['class' => ['form-element']],
+      '#states' => [
+        'visible' => [':input[name="absence"]' => ['checked' => TRUE]],
+        'required' => [':input[name="absence"]' => ['checked' => TRUE]],
+      ],
+    ];
+
     // -- Section: Rechtliches.
     $form['confirm_data_processing'] = [
       '#type' => 'checkbox',
@@ -301,6 +330,16 @@ final class ProfileForm extends FormBase {
         }
       }
     }
+
+    // Validate absence dates.
+    if ($form_state->getValue('absence')) {
+      if (empty($form_state->getValue('absence_start'))) {
+        $form_state->setErrorByName('absence_start', $this->t('Bitte geben Sie ein Startdatum für die Abwesenheit an.'));
+      }
+      if (empty($form_state->getValue('absence_end'))) {
+        $form_state->setErrorByName('absence_end', $this->t('Bitte geben Sie ein Enddatum für die Abwesenheit an.'));
+      }
+    }
   }
 
   /**
@@ -363,6 +402,25 @@ final class ProfileForm extends FormBase {
         'comment' => '',
       ];
     }
+    // Absence → Office Hours exception entries (day = Unix date as Ymd int).
+    if ($form_state->getValue('absence')) {
+      $start = $form_state->getValue('absence_start');
+      $end = $form_state->getValue('absence_end');
+      if ($start && $end) {
+        $current = new \DateTime($start);
+        $end_date = new \DateTime($end);
+        while ($current <= $end_date) {
+          $oh_values[] = [
+            'day' => (int) $current->format('Ymd'),
+            'starthours' => 0,
+            'endhours' => 0,
+            'comment' => '',
+          ];
+          $current->modify('+1 day');
+        }
+      }
+    }
+
     $profile->set('field_availability', $oh_values);
 
     // Legal checkboxes.
@@ -501,13 +559,27 @@ final class ProfileForm extends FormBase {
   }
 
   /**
-   * Count existing Office Hours slots.
+   * Count existing Office Hours regular slots (excludes exceptions).
    */
   private function countAvailabilitySlots(): int {
+    return count($this->getRegularSlots());
+  }
+
+  /**
+   * Get regular (non-exception) Office Hours items.
+   */
+  private function getRegularSlots(): array {
     if (!$this->profileEntity || !$this->profileEntity->hasField('field_availability')) {
-      return 0;
+      return [];
     }
-    return $this->profileEntity->get('field_availability')->count();
+    $slots = [];
+    foreach ($this->profileEntity->get('field_availability') as $item) {
+      // Regular days are 0-6 (Sun-Sat). Exceptions have day >= 100000.
+      if (($item->day ?? 0) <= 6) {
+        $slots[] = $item;
+      }
+    }
+    return $slots;
   }
 
   /**
@@ -515,15 +587,37 @@ final class ProfileForm extends FormBase {
    */
   private function getAvailabilitySlotDefaults(int $index): array {
     $defaults = ['day' => '', 'time_from' => '', 'time_to' => ''];
-    if (!$this->profileEntity || !$this->profileEntity->hasField('field_availability')) {
-      return $defaults;
-    }
-    $items = $this->profileEntity->get('field_availability');
-    if (isset($items[$index])) {
-      $item = $items[$index];
+    $slots = $this->getRegularSlots();
+    if (isset($slots[$index])) {
+      $item = $slots[$index];
       $defaults['day'] = $item->day ?? '';
       $defaults['time_from'] = $this->minutesToTime($item->starthours ?? 0);
       $defaults['time_to'] = $this->minutesToTime($item->endhours ?? 0);
+    }
+    return $defaults;
+  }
+
+  /**
+   * Get absence date range from Office Hours exception entries.
+   */
+  private function getAbsenceDefaults(): array {
+    $defaults = ['active' => FALSE, 'start' => '', 'end' => ''];
+    if (!$this->profileEntity || !$this->profileEntity->hasField('field_availability')) {
+      return $defaults;
+    }
+    $exception_dates = [];
+    foreach ($this->profileEntity->get('field_availability') as $item) {
+      if (($item->day ?? 0) > 6) {
+        $exception_dates[] = (int) $item->day;
+      }
+    }
+    if (!empty($exception_dates)) {
+      sort($exception_dates);
+      $defaults['active'] = TRUE;
+      $first = (string) reset($exception_dates);
+      $last = (string) end($exception_dates);
+      $defaults['start'] = substr($first, 0, 4) . '-' . substr($first, 4, 2) . '-' . substr($first, 6, 2);
+      $defaults['end'] = substr($last, 0, 4) . '-' . substr($last, 4, 2) . '-' . substr($last, 6, 2);
     }
     return $defaults;
   }
