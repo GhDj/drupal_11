@@ -16,7 +16,8 @@ required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:   handler: 'default:taxonomy_term'
+settings:
+  handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
       csn_languages: csn_languages
