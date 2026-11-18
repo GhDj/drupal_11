@@ -45,6 +45,16 @@ final class ProfileForm extends FormBase {
     $this->profileEntity = $this->loadProfile();
     $is_initial = $this->profileEntity === NULL;
 
+    // DEBUG — remove after fix confirmed.
+    if ($this->profileEntity) {
+      $all_items = $this->profileEntity->get('field_availability')->count();
+      $regular = count($this->getRegularSlots());
+      $this->messenger()->addStatus("DEBUG buildForm: entity has {$all_items} availability items, {$regular} regular slots");
+    }
+    else {
+      $this->messenger()->addStatus('DEBUG buildForm: no profile entity');
+    }
+
     $account = \Drupal::entityTypeManager()->getStorage('user')->load(\Drupal::currentUser()->id());
     $email = $account?->getEmail() ?? '';
     $username = $account?->getAccountName() ?? '';
@@ -151,6 +161,9 @@ final class ProfileForm extends FormBase {
         $form_state->set('num_service_slots', $num_slots);
       }
     }
+
+    // DEBUG — remove after fix confirmed.
+    $this->messenger()->addStatus("DEBUG buildForm: num_slots = {$num_slots}");
 
     $form['service_times'] = [
       '#type' => 'container',
