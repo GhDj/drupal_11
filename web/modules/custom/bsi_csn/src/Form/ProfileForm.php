@@ -175,14 +175,16 @@ final class ProfileForm extends FormBase {
         '#title' => $this->t('Von'),
         '#required' => TRUE,
         '#default_value' => $defaults['time_from'],
-        '#attributes' => ['type' => 'time', 'class' => ['form-element']],
+        '#attributes' => ['class' => ['form-element']],
+        '#pre_render' => [[static::class, 'preRenderTimeInput']],
       ];
       $form['service_times'][$i]['time_to'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Bis'),
         '#required' => TRUE,
         '#default_value' => $defaults['time_to'],
-        '#attributes' => ['type' => 'time', 'class' => ['form-element']],
+        '#attributes' => ['class' => ['form-element']],
+        '#pre_render' => [[static::class, 'preRenderTimeInput']],
       ];
       if ($i > 0) {
         $form['service_times'][$i]['remove'] = [
@@ -590,6 +592,14 @@ final class ProfileForm extends FormBase {
       $defaults['end'] = substr($last, 0, 4) . '-' . substr($last, 4, 2) . '-' . substr($last, 6, 2);
     }
     return $defaults;
+  }
+
+  /**
+   * Pre-render callback: override input type to "time" after Drupal sets "text".
+   */
+  public static function preRenderTimeInput(array $element): array {
+    $element['#attributes']['type'] = 'time';
+    return $element;
   }
 
   /**
