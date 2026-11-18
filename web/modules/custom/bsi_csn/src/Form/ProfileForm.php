@@ -134,6 +134,10 @@ final class ProfileForm extends FormBase {
     }
 
     // -- Section: Servicezeiten — use Office Hours module widget.
+    // Set #parents for WidgetBase (normally set by EntityFormDisplay).
+    if (!isset($form['#parents'])) {
+      $form['#parents'] = [];
+    }
     $items = $profile->get('field_availability');
     $widget = $this->getAvailabilityWidget($profile);
     $form['field_availability'] = $widget->form($items, $form, $form_state);
