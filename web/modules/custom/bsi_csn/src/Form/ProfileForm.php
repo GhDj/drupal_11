@@ -7,11 +7,12 @@ namespace Drupal\bsi_csn\Form;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Security\TrustedCallbackInterface;
 
 /**
  * Frontend profile form for CSN Ersthelfer:in (first_responder profile type).
  */
-final class ProfileForm extends FormBase {
+final class ProfileForm extends FormBase implements TrustedCallbackInterface {
 
   /**
    * Fields that become read-only after initial submission.
@@ -25,6 +26,13 @@ final class ProfileForm extends FormBase {
     'field_confirm_terms_conditions',
     'field_confirm_volunteer',
   ];
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function trustedCallbacks(): array {
+    return ['preRenderTimeInput'];
+  }
 
   /**
    * The profile entity being edited (or NULL for new).
