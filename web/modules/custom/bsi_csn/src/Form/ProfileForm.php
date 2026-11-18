@@ -45,6 +45,10 @@ final class ProfileForm extends FormBase {
     $this->profileEntity = $this->loadProfile();
     $is_initial = $this->profileEntity === NULL;
 
+    // Ensure we have a profile entity for the OH widget (even if unsaved).
+    $profile = $this->profileEntity ?? $this->createEmptyProfile();
+    $form_state->set('profile_id', $profile->id());
+
     $account = \Drupal::entityTypeManager()->getStorage('user')->load(\Drupal::currentUser()->id());
     $email = $account?->getEmail() ?? '';
     $username = $account?->getAccountName() ?? '';
@@ -129,103 +133,11 @@ final class ProfileForm extends FormBase {
       }
     }
 
-    // -- Section: Servicezeiten (Office Hours rendered as custom widget).
-    // Office Hours stores data as [{day, starthours, endhours}, ...].
-    $num_slots = $form_state->get('num_service_slots');
-    if ($num_slots === NULL) {
-      $num_slots = max(1, $this->countAvailabilitySlots());
-      $form_state->set('num_service_slots', $num_slots);
-    }
-    // On submit, form state storage may not reflect AJAX-added rows.
-    // Cross-check with user input to ensure all submitted rows are built.
-    $input = $form_state->getUserInput();
-    if (isset($input['service_times']) && is_array($input['service_times'])) {
-      $input_count = 0;
-      foreach ($input['service_times'] as $key => $value) {
-        if (is_numeric($key) && is_array($value)) {
-          $input_count++;
-        }
-      }
-      if ($input_count > $num_slots) {
-        $num_slots = $input_count;
-        $form_state->set('num_service_slots', $num_slots);
-      }
-    }
-
-    $form['service_times'] = [
-      '#type' => 'container',
-      '#tree' => TRUE,
-      '#attributes' => ['class' => ['csn-profile-service-times']],
-      '#prefix' => '<div id="service-times-wrapper">',
-      '#suffix' => '</div>',
-    ];
-
-    $weekdays = [
-      '' => $this->t('- Bitte wählen -'),
-      0 => $this->t('Sonntag'),
-      1 => $this->t('Montag'),
-      2 => $this->t('Dienstag'),
-      3 => $this->t('Mittwoch'),
-      4 => $this->t('Donnerstag'),
-      5 => $this->t('Freitag'),
-      6 => $this->t('Samstag'),
-    ];
-
-    for ($i = 0; $i < $num_slots; $i++) {
-      $defaults = $this->getAvailabilitySlotDefaults($i);
-      $form['service_times'][$i] = [
-        '#type' => 'container',
-        '#attributes' => ['class' => ['csn-profile-service-time-row']],
-      ];
-      $form['service_times'][$i]['day'] = [
-        '#type' => 'select',
-        '#title' => $this->t('Tag'),
-        '#options' => $weekdays,
-        '#required' => TRUE,
-        '#default_value' => $defaults['day'],
-        '#attributes' => ['class' => ['form-element', 'form-element--type-select']],
-      ];
-      $form['service_times'][$i]['time_from'] = [
-        '#type' => 'bsi_time',
-        '#title' => $this->t('Von'),
-        '#required' => TRUE,
-        '#default_value' => $defaults['time_from'],
-        '#attributes' => ['class' => ['form-element']],
-      ];
-      $form['service_times'][$i]['time_to'] = [
-        '#type' => 'bsi_time',
-        '#title' => $this->t('Bis'),
-        '#required' => TRUE,
-        '#default_value' => $defaults['time_to'],
-        '#attributes' => ['class' => ['form-element']],
-      ];
-      if ($i > 0) {
-        $form['service_times'][$i]['remove'] = [
-          '#type' => 'submit',
-          '#value' => $this->t('Löschen'),
-          '#name' => 'remove_slot_' . $i,
-          '#submit' => ['::removeSlotCallback'],
-          '#ajax' => [
-            'callback' => '::slotsAjaxCallback',
-            'wrapper' => 'service-times-wrapper',
-          ],
-          '#attributes' => ['class' => ['csn-profile-service-time-remove']],
-          '#limit_validation_errors' => [],
-        ];
-      }
-    }
-
-    $form['add_service_time'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Servicezeit hinzufügen'),
-      '#submit' => ['::addSlotCallback'],
-      '#ajax' => [
-        'callback' => '::slotsAjaxCallback',
-        'wrapper' => 'service-times-wrapper',
-      ],
-      '#attributes' => ['class' => ['csn-profile-add-service-time']],
-      '#limit_validation_errors' => [],
-    ];
+    // -- Section: Servicezeiten — use Office Hours module widget.
+    $items = $profile->get('field_availability');
+    $widget = $this->getAvailabilityWidget($profile);
+    $form['field_availability'] = $widget->form($items, $form, $form_state);
+    $form['field_availability']['#access'] = TRUE;
 
     // -- Section: Abwesenheit.
     $absence_defaults = $this->getAbsenceDefaults();
@@ -327,6 +239,7 @@ final class ProfileForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $storage = \Drupal::entityTypeManager()->getStorage('profile');
+    $this->profileEntity = $this->loadProfile();
     $is_new = $this->profileEntity === NULL;
 
     if ($is_new) {
@@ -368,33 +281,12 @@ final class ProfileForm extends FormBase {
     $lang_values = array_filter($form_state->getValue('deh_language') ?? []);
     $profile->set('field_deh_language', array_map(fn($tid) => ['target_id' => $tid], array_values($lang_values)));
 
-    // Service times → Office Hours format: [{day, starthours, endhours}, ...].
-    // Read from raw user input: the cached form may have fewer rows than the
-    // user actually submitted (AJAX-added rows not in original form cache).
-    $input = $form_state->getUserInput();
-    $raw_slots = $input['service_times'] ?? [];
-    $oh_values = [];
-    foreach ($raw_slots as $key => $entry) {
-      if (!is_numeric($key) || !is_array($entry)) {
-        continue;
-      }
-      $day = $entry['day'] ?? '';
-      if ($day === '' && $day !== '0') {
-        continue;
-      }
-      $time_from = $entry['time_from'] ?? '';
-      $time_to = $entry['time_to'] ?? '';
-      if ($time_from === '' && $time_to === '') {
-        continue;
-      }
-      $oh_values[] = [
-        'day' => (int) $day,
-        'starthours' => $this->timeToMinutes($time_from),
-        'endhours' => $this->timeToMinutes($time_to),
-        'comment' => '',
-      ];
-    }
-    // Absence → Office Hours exception entries (day = Unix date as Ymd int).
+    // Service times — extract via Office Hours widget.
+    $items = $profile->get('field_availability');
+    $widget = $this->getAvailabilityWidget($profile);
+    $widget->extractFormValues($items, $form, $form_state);
+
+    // Absence → append Office Hours exception entries.
     if ($form_state->getValue('absence')) {
       $start = $form_state->getValue('absence_start');
       $end = $form_state->getValue('absence_end');
@@ -402,12 +294,12 @@ final class ProfileForm extends FormBase {
         $current = new \DateTime($start);
         $end_date = new \DateTime($end);
         while ($current <= $end_date) {
-          $oh_values[] = [
+          $items->appendItem([
             'day' => (int) $current->format('Ymd'),
             'starthours' => 0,
             'endhours' => 0,
             'comment' => '',
-          ];
+          ]);
           $current->modify('+1 day');
         }
       }
@@ -420,43 +312,35 @@ final class ProfileForm extends FormBase {
       $profile->set('field_confirm_volunteer', $form_state->getValue('confirm_volunteer') ? 1 : 0);
     }
 
-    // Save profile without field_availability — the Office Hours module's
-    // preSave filters out items. Write availability directly to DB instead.
-    $profile->set('field_availability', []);
     $profile->save();
-
-    $this->saveAvailabilityDirect($profile, $oh_values);
 
     $this->messenger()->addStatus($this->t('Ihr Profil wurde gespeichert.'));
     $form_state->setRedirect('bsi_csn.profile');
   }
 
   /**
-   * AJAX: add a service time slot.
+   * Get the Office Hours widget instance for field_availability.
    */
-  public function addSlotCallback(array &$form, FormStateInterface $form_state): void {
-    $form_state->set('num_service_slots', $form_state->get('num_service_slots') + 1);
-    $form_state->setRebuild();
+  private function getAvailabilityWidget(mixed $profile): mixed {
+    return \Drupal::service('plugin.manager.field.widget')->getInstance([
+      'field_definition' => $profile->getFieldDefinition('field_availability'),
+      'form_mode' => 'default',
+      'prepare' => TRUE,
+      'configuration' => [
+        'type' => 'office_hours_list',
+        'settings' => [],
+      ],
+    ]);
   }
 
   /**
-   * AJAX: remove a service time slot.
+   * Create an empty (unsaved) profile entity for widget rendering.
    */
-  public function removeSlotCallback(array &$form, FormStateInterface $form_state): void {
-    $trigger = $form_state->getTriggeringElement();
-    $idx = (int) str_replace('remove_slot_', '', $trigger['#name']);
-    $values = $form_state->getValue('service_times') ?? [];
-    unset($values[$idx]);
-    $form_state->setValue('service_times', array_values($values));
-    $form_state->set('num_service_slots', max(1, $form_state->get('num_service_slots') - 1));
-    $form_state->setRebuild();
-  }
-
-  /**
-   * AJAX: return the service times wrapper.
-   */
-  public function slotsAjaxCallback(array &$form, FormStateInterface $form_state): array {
-    return $form['service_times'];
+  private function createEmptyProfile(): mixed {
+    return \Drupal::entityTypeManager()->getStorage('profile')->create([
+      'type' => 'first_responder',
+      'uid' => \Drupal::currentUser()->id(),
+    ]);
   }
 
   /**
@@ -554,45 +438,6 @@ final class ProfileForm extends FormBase {
   }
 
   /**
-   * Count existing Office Hours regular slots (excludes exceptions).
-   */
-  private function countAvailabilitySlots(): int {
-    return count($this->getRegularSlots());
-  }
-
-  /**
-   * Get regular (non-exception) Office Hours items.
-   */
-  private function getRegularSlots(): array {
-    if (!$this->profileEntity || !$this->profileEntity->hasField('field_availability')) {
-      return [];
-    }
-    $slots = [];
-    foreach ($this->profileEntity->get('field_availability') as $item) {
-      // Regular days are 0-6 (Sun-Sat). Exceptions have day >= 100000.
-      if (($item->day ?? 0) <= 6) {
-        $slots[] = $item;
-      }
-    }
-    return $slots;
-  }
-
-  /**
-   * Get defaults for an availability slot.
-   */
-  private function getAvailabilitySlotDefaults(int $index): array {
-    $defaults = ['day' => '', 'time_from' => '', 'time_to' => ''];
-    $slots = $this->getRegularSlots();
-    if (isset($slots[$index])) {
-      $item = $slots[$index];
-      $defaults['day'] = $item->day ?? '';
-      $defaults['time_from'] = $this->minutesToTime($item->starthours ?? 0);
-      $defaults['time_to'] = $this->minutesToTime($item->endhours ?? 0);
-    }
-    return $defaults;
-  }
-
-  /**
    * Get absence date range from Office Hours exception entries.
    */
   private function getAbsenceDefaults(): array {
@@ -615,59 +460,6 @@ final class ProfileForm extends FormBase {
       $defaults['end'] = substr($last, 0, 4) . '-' . substr($last, 4, 2) . '-' . substr($last, 6, 2);
     }
     return $defaults;
-  }
-
-  /**
-   * Convert HH:MM string to minutes-since-midnight (Office Hours format).
-   */
-  private function timeToMinutes(string $time): int {
-    if (!preg_match('/^(\d{2}):(\d{2})$/', $time, $m)) {
-      return 0;
-    }
-    return ((int) $m[1] * 100) + (int) $m[2];
-  }
-
-  /**
-   * Convert Office Hours integer (HHMM) to HH:MM string.
-   */
-  private function minutesToTime(int $value): string {
-    $hours = intdiv($value, 100);
-    $minutes = $value % 100;
-    return sprintf('%02d:%02d', $hours, $minutes);
-  }
-
-  /**
-   * Write field_availability directly to DB, bypassing Office Hours module.
-   *
-   * The Office Hours module's preSave filters out regular-day entries beyond
-   * the first when using the entity API. Direct DB writes avoid this.
-   */
-  private function saveAvailabilityDirect(mixed $profile, array $oh_values): void {
-    $db = \Drupal::database();
-    $table = 'profile__field_availability';
-    $entity_id = $profile->id();
-
-    $db->delete($table)
-      ->condition('entity_id', $entity_id)
-      ->execute();
-
-    foreach ($oh_values as $delta => $value) {
-      $db->insert($table)->fields([
-        'bundle' => 'first_responder',
-        'deleted' => 0,
-        'entity_id' => $entity_id,
-        'revision_id' => $profile->getRevisionId() ?? $entity_id,
-        'langcode' => $profile->language()->getId(),
-        'delta' => $delta,
-        'field_availability_day' => $value['day'],
-        'field_availability_starthours' => $value['starthours'],
-        'field_availability_endhours' => $value['endhours'],
-        'field_availability_comment' => $value['comment'] ?? '',
-      ])->execute();
-    }
-
-    // Clear entity cache so next load picks up the DB data.
-    \Drupal::entityTypeManager()->getStorage('profile')->resetCache([$entity_id]);
   }
 
 }
