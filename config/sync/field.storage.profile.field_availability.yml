@@ -25,7 +25,7 @@ settings:
   cardinality_per_day: 2
 module: office_hours
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: false
 indexes: {  }
 persist_with_no_fields: false

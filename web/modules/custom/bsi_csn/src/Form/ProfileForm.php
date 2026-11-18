@@ -45,23 +45,6 @@ final class ProfileForm extends FormBase {
     $this->profileEntity = $this->loadProfile();
     $is_initial = $this->profileEntity === NULL;
 
-    // DEBUG — remove after fix confirmed.
-    if ($this->profileEntity) {
-      $db_rows = \Drupal::database()->select('profile__field_availability', 'f')
-        ->fields('f', ['delta', 'field_availability_day', 'field_availability_starthours', 'field_availability_endhours'])
-        ->condition('f.entity_id', $this->profileEntity->id())
-        ->orderBy('f.delta')
-        ->execute()
-        ->fetchAll();
-      $this->messenger()->addStatus('DEBUG DB rows: ' . json_encode($db_rows));
-
-      $entity_items = [];
-      foreach ($this->profileEntity->get('field_availability') as $item) {
-        $entity_items[] = ['day' => $item->day, 'sh' => $item->starthours, 'eh' => $item->endhours];
-      }
-      $this->messenger()->addStatus('DEBUG entity items: ' . json_encode($entity_items));
-    }
-
     $account = \Drupal::entityTypeManager()->getStorage('user')->load(\Drupal::currentUser()->id());
     $email = $account?->getEmail() ?? '';
     $username = $account?->getAccountName() ?? '';
@@ -168,9 +151,6 @@ final class ProfileForm extends FormBase {
         $form_state->set('num_service_slots', $num_slots);
       }
     }
-
-    // DEBUG — remove after fix confirmed.
-    $this->messenger()->addStatus("DEBUG buildForm: num_slots = {$num_slots}");
 
     $form['service_times'] = [
       '#type' => 'container',
@@ -433,16 +413,6 @@ final class ProfileForm extends FormBase {
       }
     }
 
-    $profile->set('field_availability', $oh_values);
-
-    // DEBUG — remove after fix confirmed.
-    $cardinality = $profile->getFieldDefinition('field_availability')->getFieldStorageDefinition()->getCardinality();
-    $this->messenger()->addStatus('DEBUG cardinality: ' . $cardinality);
-    $this->messenger()->addStatus('DEBUG oh_values count: ' . count($oh_values));
-    $this->messenger()->addStatus('DEBUG oh_values: ' . json_encode($oh_values));
-    $count_before_save = $profile->get('field_availability')->count();
-    $this->messenger()->addStatus('DEBUG field items before save: ' . $count_before_save);
-
     // Legal checkboxes.
     if ($is_new) {
       $profile->set('field_confirm_data_processing', $form_state->getValue('confirm_data_processing') ? 1 : 0);
@@ -450,19 +420,12 @@ final class ProfileForm extends FormBase {
       $profile->set('field_confirm_volunteer', $form_state->getValue('confirm_volunteer') ? 1 : 0);
     }
 
+    // Save profile without field_availability — the Office Hours module's
+    // preSave filters out items. Write availability directly to DB instead.
+    $profile->set('field_availability', []);
     $profile->save();
 
-    // DEBUG — re-load and check what persisted.
-    $storage = \Drupal::entityTypeManager()->getStorage('profile');
-    $storage->resetCache([$profile->id()]);
-    $reloaded = $storage->load($profile->id());
-    $saved_count = $reloaded->get('field_availability')->count();
-    $saved_values = [];
-    foreach ($reloaded->get('field_availability') as $item) {
-      $saved_values[] = ['day' => $item->day, 'starthours' => $item->starthours, 'endhours' => $item->endhours];
-    }
-    $this->messenger()->addStatus('DEBUG saved field items: ' . $saved_count);
-    $this->messenger()->addStatus('DEBUG saved values: ' . json_encode($saved_values));
+    $this->saveAvailabilityDirect($profile, $oh_values);
 
     $this->messenger()->addStatus($this->t('Ihr Profil wurde gespeichert.'));
     $form_state->setRedirect('bsi_csn.profile');
@@ -671,6 +634,40 @@ final class ProfileForm extends FormBase {
     $hours = intdiv($value, 100);
     $minutes = $value % 100;
     return sprintf('%02d:%02d', $hours, $minutes);
+  }
+
+  /**
+   * Write field_availability directly to DB, bypassing Office Hours module.
+   *
+   * The Office Hours module's preSave filters out regular-day entries beyond
+   * the first when using the entity API. Direct DB writes avoid this.
+   */
+  private function saveAvailabilityDirect(mixed $profile, array $oh_values): void {
+    $db = \Drupal::database();
+    $table = 'profile__field_availability';
+    $entity_id = $profile->id();
+
+    $db->delete($table)
+      ->condition('entity_id', $entity_id)
+      ->execute();
+
+    foreach ($oh_values as $delta => $value) {
+      $db->insert($table)->fields([
+        'bundle' => 'first_responder',
+        'deleted' => 0,
+        'entity_id' => $entity_id,
+        'revision_id' => $profile->getRevisionId() ?? $entity_id,
+        'langcode' => $profile->language()->getId(),
+        'delta' => $delta,
+        'field_availability_day' => $value['day'],
+        'field_availability_starthours' => $value['starthours'],
+        'field_availability_endhours' => $value['endhours'],
+        'field_availability_comment' => $value['comment'] ?? '',
+      ])->execute();
+    }
+
+    // Clear entity cache so next load picks up the DB data.
+    \Drupal::entityTypeManager()->getStorage('profile')->resetCache([$entity_id]);
   }
 
 }
