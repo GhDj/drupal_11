@@ -171,30 +171,18 @@ final class ProfileForm extends FormBase {
         '#attributes' => ['class' => ['form-element', 'form-element--type-select']],
       ];
       $form['service_times'][$i]['time_from'] = [
-        '#type' => 'html_tag',
-        '#tag' => 'input',
-        '#attributes' => [
-          'type' => 'time',
-          'name' => "service_times[$i][time_from]",
-          'value' => $defaults['time_from'],
-          'required' => 'required',
-          'class' => ['form-element'],
-        ],
-        '#prefix' => '<div class="form-item"><label class="form-item__label js-form-required form-required">' . $this->t('Von') . '</label>',
-        '#suffix' => '</div>',
+        '#type' => 'textfield',
+        '#title' => $this->t('Von'),
+        '#required' => TRUE,
+        '#default_value' => $defaults['time_from'],
+        '#attributes' => ['type' => 'time', 'class' => ['form-element']],
       ];
       $form['service_times'][$i]['time_to'] = [
-        '#type' => 'html_tag',
-        '#tag' => 'input',
-        '#attributes' => [
-          'type' => 'time',
-          'name' => "service_times[$i][time_to]",
-          'value' => $defaults['time_to'],
-          'required' => 'required',
-          'class' => ['form-element'],
-        ],
-        '#prefix' => '<div class="form-item"><label class="form-item__label js-form-required form-required">' . $this->t('Bis') . '</label>',
-        '#suffix' => '</div>',
+        '#type' => 'textfield',
+        '#title' => $this->t('Bis'),
+        '#required' => TRUE,
+        '#default_value' => $defaults['time_to'],
+        '#attributes' => ['type' => 'time', 'class' => ['form-element']],
       ];
       if ($i > 0) {
         $form['service_times'][$i]['remove'] = [
