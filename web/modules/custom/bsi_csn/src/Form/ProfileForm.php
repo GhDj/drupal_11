@@ -415,6 +415,14 @@ final class ProfileForm extends FormBase {
 
     $profile->set('field_availability', $oh_values);
 
+    // DEBUG — remove after fix confirmed.
+    $cardinality = $profile->getFieldDefinition('field_availability')->getFieldStorageDefinition()->getCardinality();
+    $this->messenger()->addStatus('DEBUG cardinality: ' . $cardinality);
+    $this->messenger()->addStatus('DEBUG oh_values count: ' . count($oh_values));
+    $this->messenger()->addStatus('DEBUG oh_values: ' . json_encode($oh_values));
+    $count_before_save = $profile->get('field_availability')->count();
+    $this->messenger()->addStatus('DEBUG field items before save: ' . $count_before_save);
+
     // Legal checkboxes.
     if ($is_new) {
       $profile->set('field_confirm_data_processing', $form_state->getValue('confirm_data_processing') ? 1 : 0);
@@ -423,6 +431,18 @@ final class ProfileForm extends FormBase {
     }
 
     $profile->save();
+
+    // DEBUG — re-load and check what persisted.
+    $storage = \Drupal::entityTypeManager()->getStorage('profile');
+    $storage->resetCache([$profile->id()]);
+    $reloaded = $storage->load($profile->id());
+    $saved_count = $reloaded->get('field_availability')->count();
+    $saved_values = [];
+    foreach ($reloaded->get('field_availability') as $item) {
+      $saved_values[] = ['day' => $item->day, 'starthours' => $item->starthours, 'endhours' => $item->endhours];
+    }
+    $this->messenger()->addStatus('DEBUG saved field items: ' . $saved_count);
+    $this->messenger()->addStatus('DEBUG saved values: ' . json_encode($saved_values));
 
     $this->messenger()->addStatus($this->t('Ihr Profil wurde gespeichert.'));
     $form_state->setRedirect('bsi_csn.profile');
