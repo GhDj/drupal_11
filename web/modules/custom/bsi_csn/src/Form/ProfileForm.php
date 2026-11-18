@@ -171,22 +171,30 @@ final class ProfileForm extends FormBase {
         '#attributes' => ['class' => ['form-element', 'form-element--type-select']],
       ];
       $form['service_times'][$i]['time_from'] = [
-        '#type' => 'textfield',
-        '#title' => $this->t('Von'),
-        '#required' => TRUE,
-        '#size' => 5,
-        '#maxlength' => 5,
-        '#default_value' => $defaults['time_from'],
-        '#attributes' => ['placeholder' => '08:00', 'class' => ['form-element']],
+        '#type' => 'html_tag',
+        '#tag' => 'input',
+        '#attributes' => [
+          'type' => 'time',
+          'name' => "service_times[$i][time_from]",
+          'value' => $defaults['time_from'],
+          'required' => 'required',
+          'class' => ['form-element'],
+        ],
+        '#prefix' => '<div class="form-item"><label class="form-item__label js-form-required form-required">' . $this->t('Von') . '</label>',
+        '#suffix' => '</div>',
       ];
       $form['service_times'][$i]['time_to'] = [
-        '#type' => 'textfield',
-        '#title' => $this->t('Bis'),
-        '#required' => TRUE,
-        '#size' => 5,
-        '#maxlength' => 5,
-        '#default_value' => $defaults['time_to'],
-        '#attributes' => ['placeholder' => '17:00', 'class' => ['form-element']],
+        '#type' => 'html_tag',
+        '#tag' => 'input',
+        '#attributes' => [
+          'type' => 'time',
+          'name' => "service_times[$i][time_to]",
+          'value' => $defaults['time_to'],
+          'required' => 'required',
+          'class' => ['form-element'],
+        ],
+        '#prefix' => '<div class="form-item"><label class="form-item__label js-form-required form-required">' . $this->t('Bis') . '</label>',
+        '#suffix' => '</div>',
       ];
       if ($i > 0) {
         $form['service_times'][$i]['remove'] = [
@@ -300,19 +308,6 @@ final class ProfileForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state): void {
-    $service_times = $form_state->getValue('service_times') ?? [];
-    foreach ($service_times as $i => $entry) {
-      if (!is_array($entry)) {
-        continue;
-      }
-      foreach (['time_from', 'time_to'] as $field) {
-        $val = $entry[$field] ?? '';
-        if ($val && !preg_match('/^\d{2}:\d{2}$/', $val)) {
-          $form_state->setErrorByName("service_times][$i][$field", $this->t('Bitte geben Sie die Uhrzeit im Format HH:MM ein.'));
-        }
-      }
-    }
-
     // Validate absence dates.
     if ($form_state->getValue('absence')) {
       if (empty($form_state->getValue('absence_start'))) {

@@ -179,7 +179,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 0 1rem;
-  align-items: end;
+  align-items: start;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #eee;
@@ -188,7 +188,18 @@
 @media (min-width: 768px) {
   .csn-profile-service-time-row {
     grid-template-columns: 2fr 1fr 1fr auto;
+    align-items: end;
   }
+}
+
+/* Time inputs */
+.csn-profile-service-time-row input[type="time"] {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
+  background: var(--bsi-color-neutral-50, #f9f9f9);
+  font-size: 0.875rem;
+  box-sizing: border-box;
 }
 
 .csn-profile-service-time-remove {
