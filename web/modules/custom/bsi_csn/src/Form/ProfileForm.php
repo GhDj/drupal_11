@@ -369,10 +369,17 @@ final class ProfileForm extends FormBase {
     $profile->set('field_deh_language', array_map(fn($tid) => ['target_id' => $tid], array_values($lang_values)));
 
     // Service times → Office Hours format: [{day, starthours, endhours}, ...].
-    $slots = $form_state->getValue('service_times') ?? [];
+    // Read from raw user input: the cached form may have fewer rows than the
+    // user actually submitted (AJAX-added rows not in original form cache).
+    $input = $form_state->getUserInput();
+    $raw_slots = $input['service_times'] ?? [];
     $oh_values = [];
-    foreach ($slots as $entry) {
-      if (!is_array($entry) || empty($entry['day']) && $entry['day'] !== '0') {
+    foreach ($raw_slots as $key => $entry) {
+      if (!is_numeric($key) || !is_array($entry)) {
+        continue;
+      }
+      $day = $entry['day'] ?? '';
+      if ($day === '' && $day !== '0') {
         continue;
       }
       $time_from = $entry['time_from'] ?? '';
@@ -381,7 +388,7 @@ final class ProfileForm extends FormBase {
         continue;
       }
       $oh_values[] = [
-        'day' => (int) $entry['day'],
+        'day' => (int) $day,
         'starthours' => $this->timeToMinutes($time_from),
         'endhours' => $this->timeToMinutes($time_to),
         'comment' => '',
