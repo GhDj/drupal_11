@@ -7,12 +7,11 @@ namespace Drupal\bsi_csn\Form;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Security\TrustedCallbackInterface;
 
 /**
  * Frontend profile form for CSN Ersthelfer:in (first_responder profile type).
  */
-final class ProfileForm extends FormBase implements TrustedCallbackInterface {
+final class ProfileForm extends FormBase {
 
   /**
    * Fields that become read-only after initial submission.
@@ -26,13 +25,6 @@ final class ProfileForm extends FormBase implements TrustedCallbackInterface {
     'field_confirm_terms_conditions',
     'field_confirm_volunteer',
   ];
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function trustedCallbacks(): array {
-    return ['preRenderTimeInput'];
-  }
 
   /**
    * The profile entity being edited (or NULL for new).
@@ -179,20 +171,18 @@ final class ProfileForm extends FormBase implements TrustedCallbackInterface {
         '#attributes' => ['class' => ['form-element', 'form-element--type-select']],
       ];
       $form['service_times'][$i]['time_from'] = [
-        '#type' => 'textfield',
+        '#type' => 'bsi_time',
         '#title' => $this->t('Von'),
         '#required' => TRUE,
         '#default_value' => $defaults['time_from'],
         '#attributes' => ['class' => ['form-element']],
-        '#pre_render' => [[static::class, 'preRenderTimeInput']],
       ];
       $form['service_times'][$i]['time_to'] = [
-        '#type' => 'textfield',
+        '#type' => 'bsi_time',
         '#title' => $this->t('Bis'),
         '#required' => TRUE,
         '#default_value' => $defaults['time_to'],
         '#attributes' => ['class' => ['form-element']],
-        '#pre_render' => [[static::class, 'preRenderTimeInput']],
       ];
       if ($i > 0) {
         $form['service_times'][$i]['remove'] = [
@@ -600,14 +590,6 @@ final class ProfileForm extends FormBase implements TrustedCallbackInterface {
       $defaults['end'] = substr($last, 0, 4) . '-' . substr($last, 4, 2) . '-' . substr($last, 6, 2);
     }
     return $defaults;
-  }
-
-  /**
-   * Pre-render callback: override input type to "time" after Drupal sets "text".
-   */
-  public static function preRenderTimeInput(array $element): array {
-    $element['#attributes']['type'] = 'time';
-    return $element;
   }
 
   /**
