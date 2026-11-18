@@ -369,13 +369,18 @@ final class ProfileForm extends FormBase {
     $slots = $form_state->getValue('service_times') ?? [];
     $oh_values = [];
     foreach ($slots as $entry) {
-      if (!is_array($entry) || $entry['day'] === '') {
+      if (!is_array($entry) || empty($entry['day']) && $entry['day'] !== '0') {
+        continue;
+      }
+      $time_from = $entry['time_from'] ?? '';
+      $time_to = $entry['time_to'] ?? '';
+      if ($time_from === '' && $time_to === '') {
         continue;
       }
       $oh_values[] = [
         'day' => (int) $entry['day'],
-        'starthours' => $this->timeToMinutes($entry['time_from']),
-        'endhours' => $this->timeToMinutes($entry['time_to']),
+        'starthours' => $this->timeToMinutes($time_from),
+        'endhours' => $this->timeToMinutes($time_to),
         'comment' => '',
       ];
     }
