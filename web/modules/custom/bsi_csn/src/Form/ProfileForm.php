@@ -46,13 +46,18 @@ final class ProfileForm extends FormBase {
     $is_initial = $this->profileEntity === NULL;
 
     // DEBUG — remove after fix confirmed.
-    if ($this->profileEntity) {
-      $all_items = $this->profileEntity->get('field_availability')->count();
-      $regular = count($this->getRegularSlots());
-      $this->messenger()->addStatus("DEBUG buildForm: entity has {$all_items} availability items, {$regular} regular slots");
-    }
-    else {
-      $this->messenger()->addStatus('DEBUG buildForm: no profile entity');
+    // DEBUG — remove after fix confirmed.
+    if ($this->profileEntity && $this->profileEntity->hasField('field_availability')) {
+      $debug_items = [];
+      foreach ($this->profileEntity->get('field_availability') as $item) {
+        $debug_items[] = [
+          'day' => $item->day,
+          'day_type' => gettype($item->day),
+          'starthours' => $item->starthours,
+          'endhours' => $item->endhours,
+        ];
+      }
+      $this->messenger()->addStatus('DEBUG all field items: ' . json_encode($debug_items));
     }
 
     $account = \Drupal::entityTypeManager()->getStorage('user')->load(\Drupal::currentUser()->id());
