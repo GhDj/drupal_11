@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Drupal\bsi_csn\Form;
 
 use Drupal\Component\Utility\Html;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Session\AccountProxyInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Frontend profile form for CSN Ersthelfer:in (first_responder profile type).
@@ -34,21 +31,6 @@ final class ProfileForm extends FormBase {
    */
   private mixed $profileEntity = NULL;
 
-  public function __construct(
-    private readonly EntityTypeManagerInterface $entityTypeManager,
-    private readonly AccountProxyInterface $currentUser,
-  ) {}
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container): static {
-    return new static(
-      $container->get('entity_type.manager'),
-      $container->get('current_user'),
-    );
-  }
-
   /**
    * {@inheritdoc}
    */
@@ -63,7 +45,7 @@ final class ProfileForm extends FormBase {
     $this->profileEntity = $this->loadProfile();
     $is_initial = $this->profileEntity === NULL;
 
-    $account = $this->entityTypeManager->getStorage('user')->load($this->currentUser->id());
+    $account = $this->entityTypeManager()->getStorage('user')->load($this->currentUser()->id());
     $email = $account?->getEmail() ?? '';
     $username = $account?->getAccountName() ?? '';
 
@@ -346,13 +328,13 @@ final class ProfileForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    $storage = $this->entityTypeManager->getStorage('profile');
+    $storage = $this->entityTypeManager()->getStorage('profile');
     $is_new = $this->profileEntity === NULL;
 
     if ($is_new) {
       $profile = $storage->create([
         'type' => 'first_responder',
-        'uid' => $this->currentUser->id(),
+        'uid' => $this->currentUser()->id(),
       ]);
     }
     else {
@@ -468,9 +450,9 @@ final class ProfileForm extends FormBase {
    * Load the current user's first_responder profile.
    */
   private function loadProfile(): mixed {
-    $profiles = $this->entityTypeManager->getStorage('profile')->loadByProperties([
+    $profiles = $this->entityTypeManager()->getStorage('profile')->loadByProperties([
       'type' => 'first_responder',
-      'uid' => $this->currentUser->id(),
+      'uid' => $this->currentUser()->id(),
     ]);
     return $profiles ? reset($profiles) : NULL;
   }
@@ -525,7 +507,7 @@ final class ProfileForm extends FormBase {
    * Get all language options sorted with Deutsch first.
    */
   private function getLanguageOptions(): array {
-    $terms = $this->entityTypeManager->getStorage('taxonomy_term')->loadByProperties([
+    $terms = $this->entityTypeManager()->getStorage('taxonomy_term')->loadByProperties([
       'vid' => 'csn_languages',
     ]);
     $deutsch = [];
