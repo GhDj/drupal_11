@@ -136,6 +136,21 @@ final class ProfileForm extends FormBase {
       $num_slots = max(1, $this->countAvailabilitySlots());
       $form_state->set('num_service_slots', $num_slots);
     }
+    // On submit, form state storage may not reflect AJAX-added rows.
+    // Cross-check with user input to ensure all submitted rows are built.
+    $input = $form_state->getUserInput();
+    if (isset($input['service_times']) && is_array($input['service_times'])) {
+      $input_count = 0;
+      foreach ($input['service_times'] as $key => $value) {
+        if (is_numeric($key) && is_array($value)) {
+          $input_count++;
+        }
+      }
+      if ($input_count > $num_slots) {
+        $num_slots = $input_count;
+        $form_state->set('num_service_slots', $num_slots);
+      }
+    }
 
     $form['service_times'] = [
       '#type' => 'container',
