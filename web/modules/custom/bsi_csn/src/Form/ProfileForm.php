@@ -46,18 +46,20 @@ final class ProfileForm extends FormBase {
     $is_initial = $this->profileEntity === NULL;
 
     // DEBUG — remove after fix confirmed.
-    // DEBUG — remove after fix confirmed.
-    if ($this->profileEntity && $this->profileEntity->hasField('field_availability')) {
-      $debug_items = [];
+    if ($this->profileEntity) {
+      $db_rows = \Drupal::database()->select('profile__field_availability', 'f')
+        ->fields('f', ['delta', 'field_availability_day', 'field_availability_starthours', 'field_availability_endhours'])
+        ->condition('f.entity_id', $this->profileEntity->id())
+        ->orderBy('f.delta')
+        ->execute()
+        ->fetchAll();
+      $this->messenger()->addStatus('DEBUG DB rows: ' . json_encode($db_rows));
+
+      $entity_items = [];
       foreach ($this->profileEntity->get('field_availability') as $item) {
-        $debug_items[] = [
-          'day' => $item->day,
-          'day_type' => gettype($item->day),
-          'starthours' => $item->starthours,
-          'endhours' => $item->endhours,
-        ];
+        $entity_items[] = ['day' => $item->day, 'sh' => $item->starthours, 'eh' => $item->endhours];
       }
-      $this->messenger()->addStatus('DEBUG all field items: ' . json_encode($debug_items));
+      $this->messenger()->addStatus('DEBUG entity items: ' . json_encode($entity_items));
     }
 
     $account = \Drupal::entityTypeManager()->getStorage('user')->load(\Drupal::currentUser()->id());
