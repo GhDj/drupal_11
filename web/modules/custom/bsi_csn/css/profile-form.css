@@ -174,58 +174,143 @@
   max-width: none !important;
 }
 
-/* Service times */
-.csn-profile-service-time-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0 1rem;
-  align-items: start;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
+/* ================================================================ */
+/* Office Hours widget — match form design                          */
+/* ================================================================ */
+
+/* Hide the fieldset legend (redundant with section H2 "Servicezeiten") */
+.csn-profile .field--name-field-availability > fieldset > legend,
+.csn-profile .field--name-field-availability > .fieldset-legend,
+.csn-profile .field--type-office-hours > fieldset > legend,
+.csn-profile .field--widget-office-hours-list > fieldset > legend {
+  display: none !important;
+}
+
+/* Remove fieldset border/background */
+.csn-profile .field--name-field-availability fieldset,
+.csn-profile .field--type-office-hours fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.csn-profile .field--name-field-availability .fieldset-wrapper,
+.csn-profile .field--type-office-hours .fieldset-wrapper {
+  padding: 0;
+}
+
+/* Hide drag handles */
+.csn-profile .field--name-field-availability .tabledrag-handle,
+.csn-profile .field--name-field-availability .handle,
+.csn-profile .field--name-field-availability .sortable-handle,
+.csn-profile .field--name-field-availability a.tabledrag-handle {
+  display: none !important;
+}
+
+/* Hide "Leeren" / "Vorherigen Tag kopieren" / "Letzten Tag kopieren" links */
+.csn-profile .field--name-field-availability .office-hours-link,
+.csn-profile .field--name-field-availability .office-hours-operations,
+.csn-profile .field--name-field-availability td.office-hours-operations,
+.csn-profile .field--name-field-availability .clearfix a[href*="clear"],
+.csn-profile .field--name-field-availability details.office-hours-actions {
+  display: none !important;
+}
+
+/* Remove table styling */
+.csn-profile .field--name-field-availability table {
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  background: none;
+}
+
+.csn-profile .field--name-field-availability table td,
+.csn-profile .field--name-field-availability table th {
+  border: none;
+  background: none;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  vertical-align: middle;
+}
+
+/* Each day row */
+.csn-profile .field--name-field-availability tr,
+.csn-profile .field--name-field-availability .office-hours-slot,
+.csn-profile .field--name-field-availability .draggable {
+  background: none !important;
   border-bottom: 1px solid #eee;
 }
 
-@media (min-width: 768px) {
-  .csn-profile-service-time-row {
-    grid-template-columns: 2fr 1fr 1fr auto;
-    align-items: end;
-  }
+.csn-profile .field--name-field-availability tr:last-child {
+  border-bottom: none;
 }
 
-/* Time inputs */
-.csn-profile-service-time-row input[type="time"] {
-  width: 100%;
-  padding: 0.625rem 0.875rem;
-  border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
-  background: var(--bsi-color-neutral-50, #f9f9f9);
-  font-size: 0.875rem;
-  box-sizing: border-box;
-}
-
-.csn-profile-service-time-remove {
-  background: none;
-  border: none;
-  color: var(--bsi-color-red-100, #c0392b);
-  cursor: pointer;
-  font-size: 0.8125rem;
-  text-decoration: underline;
-  padding: 0.5rem 0;
-}
-
-.csn-profile-add-service-time {
-  background: none;
-  border: none;
-  color: var(--bsi-color-blue-750, #004b76);
-  cursor: pointer;
+/* Day name label */
+.csn-profile .field--name-field-availability .field-label,
+.csn-profile .field--name-field-availability .office-hours__label,
+.csn-profile .field--name-field-availability td:first-child {
   font-size: 0.875rem;
   font-weight: 600;
-  text-decoration: underline;
-  padding: 0;
-  margin-bottom: 1rem;
+  color: var(--bsi-color-typo-secondary, #545454);
+  white-space: nowrap;
+  min-width: 100px;
 }
 
-.csn-profile-add-service-time:hover {
-  color: var(--bsi-color-blue-900, #003050);
+/* Time inputs — match form-element styling */
+.csn-profile .field--name-field-availability input[type="time"],
+.csn-profile .field--name-field-availability input[type="text"].office-hours-time,
+.csn-profile .field--name-field-availability select.office-hours-time {
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
+  border-radius: 0;
+  background: var(--bsi-color-neutral-50, #f9f9f9);
+  font-size: 0.875rem;
+  color: var(--bsi-color-typo-secondary, #545454);
+  box-sizing: border-box;
+  min-width: 110px;
+}
+
+/* Force 24H format on time inputs by setting lang attribute via CSS is not
+   possible — handled via element_type change to office_hours_select or
+   by setting the HTML lang to "de". As fallback, increase input width for
+   AM/PM display. */
+
+/* "Bis" / separator label */
+.csn-profile .field--name-field-availability .office-hours-separator {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--bsi-color-typo-secondary, #545454);
+  padding: 0 0.5rem;
+}
+
+/* Inline slot layout */
+.csn-profile .field--name-field-availability .container-inline,
+.csn-profile .field--name-field-availability .office-hours-slot-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Remove Claro's admin card/box backgrounds from the widget */
+.csn-profile .field--name-field-availability .form-wrapper,
+.csn-profile .field--name-field-availability .office-hours-widget {
+  background: none;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+}
+
+/* Error styling — remove red icons, use subtle border */
+.csn-profile .field--name-field-availability .form-item--error-message,
+.csn-profile .field--name-field-availability .fieldset-wrapper > .form-item--error-message {
+  font-size: 0.8125rem;
+  color: var(--bsi-color-red-100, #c0392b);
+}
+
+.csn-profile .field--name-field-availability .error {
+  border-color: var(--bsi-color-red-100, #c0392b);
 }
 
 /* Language chip widget */
