@@ -373,8 +373,6 @@ final class ProfileForm extends FormBase {
     // user actually submitted (AJAX-added rows not in original form cache).
     $input = $form_state->getUserInput();
     $raw_slots = $input['service_times'] ?? [];
-    // DEBUG — remove after confirming multi-row save works.
-    $this->messenger()->addStatus('DEBUG raw_slots: ' . json_encode($raw_slots));
     $oh_values = [];
     foreach ($raw_slots as $key => $entry) {
       if (!is_numeric($key) || !is_array($entry)) {
@@ -396,8 +394,6 @@ final class ProfileForm extends FormBase {
         'comment' => '',
       ];
     }
-    // DEBUG — remove after confirming multi-row save works.
-    $this->messenger()->addStatus('DEBUG oh_values: ' . json_encode($oh_values));
     // Absence → Office Hours exception entries (day = Unix date as Ymd int).
     if ($form_state->getValue('absence')) {
       $start = $form_state->getValue('absence_start');
