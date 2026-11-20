@@ -1,0 +1,40 @@
+uuid: 89362493-f36d-44a6-a39d-be8c1475393e
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_organisationen_technik
+label: 'Node: Cybersicherheit › Organisationen › Technik'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/organisations/technology/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' f9955dc2-64fe-42b4-97aa-fbe18ec9d6b7'
+    property: null
+  5fe3d43e-1d39-4a0b-b18f-fa0a29366857:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' 01157ece-ca3b-4329-93e8-69dd0de672e3'
+selection_logic: and
+weight: -11
+relationships:
+  'node:langcode:language':
+    label: Language

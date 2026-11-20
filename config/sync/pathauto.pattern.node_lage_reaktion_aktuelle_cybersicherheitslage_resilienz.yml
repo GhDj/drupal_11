@@ -1,0 +1,40 @@
+uuid: b56d84ab-6575-46ad-aabb-47bc6490b2ed
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_lage_reaktion_aktuelle_cybersicherheitslage_resilienz
+label: 'Node: Lage & Reaktion › Aktuelle Cybersicherheitslage › Resilienz'
+type: 'canonical_entities:node'
+pattern: '/lage-reaktion/aktuelle-cybersicherheitslage/resilienz/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: ACL
+    property: null
+  91b13b43-b71f-40bb-a94e-4b2c7e32d108:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Resilienz
+selection_logic: and
+weight: 30
+relationships:
+  'node:langcode:language':
+    label: Language

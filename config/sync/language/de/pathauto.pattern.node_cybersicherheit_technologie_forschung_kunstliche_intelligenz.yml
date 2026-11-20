@@ -1,0 +1,4 @@
+pattern: '/cybersicherheit/technologie-forschung/kuenstliche-intelligenz/[node:title]'
+selection_criteria:
+  0b1b4fa8-97e3-45d2-91bb-bfb57cdf3dd6:
+    value: 'Künstliche Intelligenz'

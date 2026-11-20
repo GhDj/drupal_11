@@ -1,0 +1,40 @@
+uuid: 9b9cf265-595d-460c-9df2-41ed8de3c272
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_lage_reaktion_aktuelle_cybersicherheitslage_bedrohungen
+label: 'Node: Lage & Reaktion › Aktuelle Cybersicherheitslage › Bedrohungen'
+type: 'canonical_entities:node'
+pattern: '/lage-reaktion/aktuelle-cybersicherheitslage/bedrohungen/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: ACL
+    property: null
+  91b13b43-b71f-40bb-a94e-4b2c7e32d108:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Bedrohungen
+selection_logic: and
+weight: 7
+relationships:
+  'node:langcode:language':
+    label: Language

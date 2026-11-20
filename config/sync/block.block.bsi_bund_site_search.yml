@@ -4,12 +4,13 @@ status: true
 dependencies:
   module:
     - bsi_search
+    - csn_custom
   theme:
     - bsi_bund
 id: bsi_bund_site_search
 theme: bsi_bund
 region: header
-weight: 0
+weight: -12
 provider: null
 plugin: block_search_topic
 settings:
@@ -19,4 +20,13 @@ settings:
   provider: bsi_search
   topic_tid: ''
   use_node_topic: 0
-visibility: {  }
+visibility:
+  csn_page:
+    id: csn_page
+    negate: true
+    context_mapping:
+      group: '@group.group_route_context:group'
+      node: '@node.node_route_context:node'
+      media: '@bsi_media.media_route_context:media'
+      user: '@user.current_user_context:current_user'
+    csn_page: true

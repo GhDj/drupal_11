@@ -5,6 +5,7 @@ dependencies:
   config:
     - system.menu.main
   module:
+    - csn_custom
     - menu_multilingual
     - system
   theme:
@@ -16,7 +17,7 @@ third_party_settings:
 id: bsi_bund_mainnavigation
 theme: bsi_bund
 region: header
-weight: -6
+weight: -13
 provider: null
 plugin: 'system_menu_block:main'
 settings:
@@ -27,4 +28,13 @@ settings:
   level: 1
   depth: 4
   expand_all_items: true
-visibility: {  }
+visibility:
+  csn_page:
+    id: csn_page
+    negate: true
+    context_mapping:
+      group: '@group.group_route_context:group'
+      node: '@node.node_route_context:node'
+      media: '@bsi_media.media_route_context:media'
+      user: '@user.current_user_context:current_user'
+    csn_page: true

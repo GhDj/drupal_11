@@ -4,11 +4,10 @@ consentModal:
   privacyPolicy:
     name: Datenschutzhinweise
     text: 'Für weitere Informationen bitte unsere {privacyPolicy} lesen.'
-    url: 'internal:/<front>#TBD'
 consentNotice:
-  title: 'Verwendung von personenbezogenen Daten und Cookies'
+  title: 'Hinweis zur Verwendung von Cookies'
   changeDescription: 'Es gab Änderungen seit dem letzten Besuch und die Einwilligungen müssen aktualisiert werden.'
-  description: 'Wir verwenden Cookies und verarbeiten personenbezogene Daten für die folgenden Zwecke: {purposes}.'
+  description: 'Wir verwenden auf dieser Website technisch notwendige Cookies, die für den Betrieb der Seite erforderlich sind. Mit Ihrer Einwilligung setzen wir darüber hinaus Cookies des Webanalyse-Dienstes Matomo, um die Nutzung unserer Website statistisch auszuwerten. Die Einwilligung ist freiwillig und kann jederzeit widerrufen werden, z. B. über den Link "Datenschutzeinstellungen anpassen". Die Statistik-Cookies bleiben einen Monat gespeichert. Ein Zugriff Dritter erfolgt nicht. Details finden Sie in unserer Datenschutzerklärung.'
   learnMore: 'Datenschutzeinstellungen anpassen'
 ok: 'Alle Cookies akzeptieren'
 save: Speichern

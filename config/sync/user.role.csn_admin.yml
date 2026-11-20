@@ -11,6 +11,7 @@ dependencies:
     - workflows.workflow.nodes
   module:
     - content_moderation
+    - csn_custom
     - duplicate_node
     - editoria11y
     - group
@@ -29,6 +30,7 @@ is_admin: false
 permissions:
   - 'access content overview'
   - 'access media directories browser'
+  - 'administer csn configuration'
   - 'administer users'
   - 'assign csn_admin role'
   - 'assign csn_deh role'

@@ -1,0 +1,48 @@
+uuid: 6a956adc-aa3a-4b5e-85ae-445ca8abeaf4
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_intern_sicherheitsberatung_land_kommune
+label: 'Node: Intern › Sicherheitsberatung › Land & Kommune'
+type: 'canonical_entities:node'
+pattern: '/intern/sicherheitsberatung/land-kommune/[node:title]'
+selection_criteria:
+  11329662-f369-45db-a0ea-8f0d3ac84adf:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Intern
+  98455c11-02fb-446a-8f1f-5b913db70186:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Sicherheitsberatung
+  c0473168-a04b-4b68-91a3-21f4546321e6:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: LandKommune
+selection_logic: and
+weight: -42
+relationships: {  }

@@ -1,0 +1,41 @@
+uuid: 11650d18-9902-4438-a212-111e90fe669c
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_lage_reaktion_bits
+label: 'Node: Lage & Reaktion › BITS'
+type: 'canonical_entities:node'
+pattern: '/lage-reaktion/bits/[node:created:html_date]-[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Lage
+    property: null
+  0b1b4fa8-97e3-45d2-91bb-bfb57cdf3dd6:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: BITS
+    property: null
+selection_logic: and
+weight: 38
+relationships:
+  'node:langcode:language':
+    label: Language

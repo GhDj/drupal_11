@@ -204,7 +204,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
+            de: de
           group: 1
           exposed: false
           expose:
@@ -1090,7 +1090,7 @@ display:
           plugin_id: search_api_language
           operator: in
           value:
-            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
+            de: de
           group: 1
           exposed: false
           expose:

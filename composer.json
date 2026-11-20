@@ -101,7 +101,6 @@
         "drupal/node_keep": "^2.2",
         "drupal/office_hours": "^1.29",
         "drupal/paragraphs": "^1.20",
-        "drupal/profile": "^1.10",
         "drupal/pathauto": "^1.14",
         "drupal/pathauto_condition_ui": "^1.0",
         "drupal/phone_label": "^1.2",
@@ -231,7 +230,11 @@
                 "Use Book::toUrl over hard-coded entity.node.canonical route":
                     "patches/book/use-entity-tourl-over-route-name.patch",
                 "Update breadcrumb to support unlinked book pages":
-                    "patches/book/breadcrumb-link-uri-override.patch"
+                    "patches/book/breadcrumb-link-uri-override.patch",
+                "Add support for <any> in book condition":
+                    "patches/book/book-condition-support-any.patch",
+                "JS: Do not use eval()":
+                    "patches/book/js-no-eval.patch"
             },
             "drupal/charts": {
                 "Config subscriber may block config import (3631251-MR238)":
@@ -259,7 +262,9 @@
                 "Strip tags from formatted text before trimming (3473241)":
                     "patches/drupal/strip-tags-from-formatted-text-before-trimming.patch",
                 "Zend .htaccess preset (https://wim.init.de/x/I4xSHQ)":
-                    "patches/drupal/core-zend-assertions.patch"
+                    "patches/drupal/core-zend-assertions.patch",
+                "CSP: toolbar.anti-flicker (3358392-6)":
+                    "patches/drupal/csp-toolbar_anti_flicker.patch"
             },
             "drupal/default_content": {
                 "Add export action plugin":
@@ -307,7 +312,9 @@
             },
             "drupal/klaro": {
                 "Require consent even if all apps are required":
-                    "patches/klaro/require-consent-for-required-apps.patch"
+                    "patches/klaro/require-consent-for-required-apps.patch",
+                "JS: Prevent CSP warning on empty callbacks (https://git.drupalcode.org/project/klaro_js/-/work_items/3605485)":
+                    "patches/klaro/js-csp-warning.patch"
             },
             "drupal/maxlength": {
                 "Allow users to type past the character limit on hard limits and display an error upon save (3267849, MR17+)":

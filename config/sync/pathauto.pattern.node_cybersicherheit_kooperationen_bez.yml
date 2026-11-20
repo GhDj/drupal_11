@@ -1,0 +1,40 @@
+uuid: bfe7d428-4b28-4d3e-a0b9-80643bc60add
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_kooperationen_bez
+label: 'Node: Cybersicherheit › Kooperationen › BEZ'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/partnerships/bez/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' 5e5cc004-6d3c-440b-a5d4-2a976e0bd7eb'
+    property: null
+  2ebe1999-e0c3-4ced-bca9-96eb84e65e81:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' a31aea31-1bb9-4a5e-b647-465fe1a636e3'
+selection_logic: and
+weight: -20
+relationships:
+  'node:langcode:language':
+    label: Language

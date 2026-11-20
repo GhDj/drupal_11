@@ -26,6 +26,7 @@
             {% if loop.first %}
               {% include '@bsi_bund/elements/link.html.twig' with {
                 url: item.url,
+                title_attr: item.text,
                 attributes: create_attribute().addClass([
                   'bsi-link',
                   'bsi-breadcrumb__home'

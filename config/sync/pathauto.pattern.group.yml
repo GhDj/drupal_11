@@ -10,5 +10,5 @@ type: 'canonical_entities:group'
 pattern: '/[group:type-name]/[group:title]'
 selection_criteria: {  }
 selection_logic: and
-weight: -3
+weight: -39
 relationships: {  }

@@ -1,0 +1,26 @@
+uuid: af976e9c-8225-450b-8c84-2cf1e4fa6f44
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_intern
+label: 'Node: Intern'
+type: 'canonical_entities:node'
+pattern: '/intern/[node:title]'
+selection_criteria:
+  11329662-f369-45db-a0ea-8f0d3ac84adf:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Intern
+selection_logic: and
+weight: -32
+relationships: {  }

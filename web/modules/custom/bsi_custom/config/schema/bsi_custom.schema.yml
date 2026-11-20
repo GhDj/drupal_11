@@ -21,6 +21,37 @@ condition.plugin.request_route_name:
     route_names:
       type: string
 
+condition.plugin.entity_field:*:
+  type: condition.plugin
+  label: 'Entity field condition'
+  mapping:
+    entity_bundle:
+      type: sequence
+      sequence:
+        type: string
+    field_name:
+      type: string
+    field_property:
+      type: sequence
+    operator:
+      type: string
+    value:
+      type: label
+      label: 'Comparison value'
+
+condition.plugin.entity_group_relation:*:
+  type: condition.plugin
+  label: 'Entity group relation condition'
+  mapping:
+    groups:
+      type: sequence
+      sequence:
+        type: string
+    types:
+      type: sequence
+      sequence:
+        type: string
+
 field.field.*.*.*.third_party.bsi_custom:
   type: config_entity
   label: 'BSI Custom settings'

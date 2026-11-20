@@ -42,7 +42,7 @@ index 8ef16e1..xxxxxxxx 100644
          'type' => "taxonomy_term--{$vocabulary}",
          'attributes' => [
            'name' => $translated_term->label(),
-+          'description' => strip_tags($translated_term->getDescription()),
++          'description' => strip_tags($translated_term->getDescription() ?? ''),
            'drupal_internal__tid' => (int) $term->id(),
            'weight' => (int) $term->getWeight(),
          ],

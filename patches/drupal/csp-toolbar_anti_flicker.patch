@@ -1,0 +1,46 @@
+diff --git a/core/modules/toolbar/js/toolbar.anti-flicker.js b/core/modules/toolbar/js/toolbar.anti-flicker.js
+index b5e368df257..f6ddd802157 100644
+--- a/core/modules/toolbar/js/toolbar.anti-flicker.js
++++ b/core/modules/toolbar/js/toolbar.anti-flicker.js
+@@ -3,7 +3,7 @@
+  * Prevents flicker of the toolbar on page load.
+  */
+
+-(() => {
++((drupalSettings) => {
+   const toolbarState = sessionStorage.getItem('Drupal.toolbar.toolbarState')
+     ? JSON.parse(sessionStorage.getItem('Drupal.toolbar.toolbarState'))
+     : false;
+@@ -56,17 +56,21 @@
+       }
+      .toolbar-loading.toolbar-horizontal :not(#${activeTray}) > .toolbar-lining {opacity: 0}`;
+
++      const nonce = drupalSettings.csp?.nonce;
++
+       const style = document.createElement('style');
+       style.textContent = styleContent;
+       style.setAttribute('data-toolbar-anti-flicker-loading', true);
++      if (nonce) style.nonce = nonce;
+       document.querySelector('head').appendChild(style);
+       if (userButtonMinWidth) {
+         const userButtonStyle = document.createElement('style');
+         userButtonStyle.textContent = `
+         #toolbar-item-user {min-width: ${userButtonMinWidth}px;}`;
++        if (nonce) userButtonStyle.nonce = nonce;
+         document.querySelector('head').appendChild(userButtonStyle);
+       }
+     }
+   }
+   document.querySelector('html').classList.add(...classesToAdd);
+-})();
++})(drupalSettings);
+diff --git a/core/modules/toolbar/toolbar.libraries.yml b/core/modules/toolbar/toolbar.libraries.yml
+index af520b8f89a..29ebb613f7e 100644
+--- a/core/modules/toolbar/toolbar.libraries.yml
++++ b/core/modules/toolbar/toolbar.libraries.yml
+@@ -57,3 +57,5 @@ toolbar.anti-flicker:
+   header: true
+   js:
+     js/toolbar.anti-flicker.js: {}
++  dependencies:
++    - core/drupalSettings

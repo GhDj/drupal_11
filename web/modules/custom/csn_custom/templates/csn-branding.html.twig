@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Default template for a CSN branding block (CSN logo only).
+ *
+ * The BSI logo is rendered by the main branding block.
+ *
+ * Available variables:
+ * - dashboard_url: URL the CSN logo links to.
+ */
+#}
+<div class="bsi-header-csn__logo">
+  {% if dashboard_url %}
+    <a href="{{ dashboard_url }}" class="bsi-header-csn__link">
+      <img src="/{{ active_theme_path() }}/logo-csn.png" alt="{{ 'Cyber Security Network'|t }}" />
+    </a>
+  {% else %}
+    <img src="/{{ active_theme_path() }}/logo-csn.png" alt="{{ 'Cyber Security Network'|t }}" />
+  {% endif %}
+</div>

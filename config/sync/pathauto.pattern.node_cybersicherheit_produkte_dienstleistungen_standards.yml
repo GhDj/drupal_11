@@ -1,0 +1,40 @@
+uuid: e084f2c9-4aa9-4fae-8a9b-67db32a8b066
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_produkte_dienstleistungen_standards
+label: 'Node: Cybersicherheit › Produkte & Dienstleistungen › Standards'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/products-services/standards/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: ed063de9-72d2-4a81-863b-17e750bd5ddf
+    property: null
+  f5a03f46-9429-46d7-bce7-0629b78a2026:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: 7af47034-0d62-4c09-96c9-c9b567c0f64d
+selection_logic: and
+weight: -6
+relationships:
+  'node:langcode:language':
+    label: Language

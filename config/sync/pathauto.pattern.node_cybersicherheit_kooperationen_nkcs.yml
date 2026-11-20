@@ -1,0 +1,40 @@
+uuid: d0151b49-b7ce-48a1-b40b-d6b2505ca4bd
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_kooperationen_nkcs
+label: 'Node: Cybersicherheit › Kooperationen › NKCS'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/partnerships/nkcs/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' 5e5cc004-6d3c-440b-a5d4-2a976e0bd7eb'
+    property: null
+  2ebe1999-e0c3-4ced-bca9-96eb84e65e81:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' 83a1c467-8efb-463f-9e9c-0058e07d3312'
+selection_logic: and
+weight: -18
+relationships:
+  'node:langcode:language':
+    label: Language

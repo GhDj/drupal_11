@@ -63,6 +63,23 @@
 }
 
 // -----------------------------------------------------------------------------
+// Sort anchor — between filter box and results (JS relocates .sort-wrapper here)
+// -----------------------------------------------------------------------------
+.#{$nsp}-search-result__sort {
+  display: flex;
+  justify-content: flex-end;
+  margin-inline: auto;
+  max-width: 960px;
+  padding-bottom: var(--#{$nsp}-space-md);
+  padding-top: var(--#{$nsp}-space-4xl);
+  width: 100%;
+
+  &:empty {
+    display: none;
+  }
+}
+
+// -----------------------------------------------------------------------------
 // Sort wrapper — shared across all search views (exposed-sorting template)
 // -----------------------------------------------------------------------------
 .sort-wrapper {
@@ -171,7 +188,8 @@
     order: 6;
   }
 
-  // Sort — stays inside form for submission, visually moved below the box
+  // Sort — JS relocates to .js-sort-anchor outside the grey box.
+  // Keep order:99 as no-JS fallback.
   .sort-wrapper {
     order: 99;
   }
@@ -200,7 +218,7 @@
       background-image: none !important;
       border: 0 !important;
 
-      &:focus, {
+      &:focus {
         box-shadow: none !important;
       }
 
@@ -237,8 +255,8 @@
     position: relative;
 
     &__trigger {
-      -webkit-appearance: none;
       align-items: center;
+      -webkit-appearance: none;
       appearance: none;
       background-color: var(--#{$nsp}-color-blue-150);
       border: 0;
@@ -371,7 +389,6 @@
       }
     }
   }
-
 }
 
 // -----------------------------------------------------------------------------

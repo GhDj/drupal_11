@@ -13,27 +13,26 @@ use Drupal\Core\Url;
 class AbbrAutocompleteHooks {
 
   /**
-   * Attaches required libraries and JavaScript settings.
+   * Implements hook_page_attachments_alter().
    */
-  #[Hook('page_attachments')]
-  public function pageAttachments(array &$attachments): void {
-    if (!\Drupal::currentUser()->hasPermission('view editoria11y checker')) {
-      return;
+  #[Hook('page_attachments_alter')]
+  public function alterPageAttachments(array &$attachments): void {
+    if (in_array('editoria11y/editoria11y-localized', $attachments['#attached']['library'])) {
+      $attachments['#attached']['library'][] = 'bsi_editor/editoria11y';
+      $attachments['#attached']['drupalSettings']['bsi_editor'] = [
+        'abbreviations_endpoint' => Url::fromRoute('bsi_editor.abbreviations_autocomplete')->toString(),
+      ];
     }
-    $route_match = \Drupal::routeMatch();
-    $route_name = $route_match->getRouteName();
-    if (str_starts_with($route_name, 'layout_builder.')) {
-      // Do not load library on layout builder routes.
-      return;
+  }
+
+  /**
+   * Implements hook_library_info_alter().
+   */
+  #[Hook('library_info_alter')]
+  public function libraryInfoAlter(array &$libraries, string $extension): void {
+    if ($extension === 'ckeditor5') {
+      $libraries['internal.drupal.ckeditor5']['dependencies'][] = 'bsi_editor/ckeditor_abbreviation';
     }
-
-    $attachments['#attached']['library'][] = 'bsi_editor/editoria11y';
-    $attachments['#attached']['drupalSettings']['bsi_editor'] = [
-      'abbreviations_endpoint' => Url::fromRoute('bsi_editor.abbreviations_autocomplete')->toString(),
-    ];
-
-    // @todo This does not need to be attached globally, load with ckeditor.
-    $attachments['#attached']['library'][] = 'bsi_editor/ckeditor_abbreviation';
   }
 
 }

@@ -1,0 +1,51 @@
+uuid: 48f26b44-0984-4757-bb4a-ee04af201cd2
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_lage_reaktion_reaktion_krz
+label: 'Node: Lage & Reaktion › Reaktion › KRZ'
+type: 'canonical_entities:node'
+pattern: '/lage-reaktion/reaktion/krisenreaktionszentrum/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Lage
+    property: null
+  91b13b43-b71f-40bb-a94e-4b2c7e32d108:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Reaktion
+  f343a5eb-cf7d-4fd0-9ead-d0db9ca5e81b:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: KRZ
+selection_logic: and
+weight: 35
+relationships:
+  'node:langcode:language':
+    label: Language

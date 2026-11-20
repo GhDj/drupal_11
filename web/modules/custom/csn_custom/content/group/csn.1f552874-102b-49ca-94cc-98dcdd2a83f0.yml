@@ -1,0 +1,55 @@
+_meta:
+  version: '1.0'
+  entity_type: group
+  uuid: 1f552874-102b-49ca-94cc-98dcdd2a83f0
+  bundle: csn
+  default_langcode: de
+translations:
+  en:
+    status:
+      -
+        value: true
+    label:
+      -
+        value: 'Digital First Responders'
+    created:
+      -
+        value: 1784019929
+    path:
+      -
+        alias: /cyber-security-network/digital-first-responders
+        langcode: en
+        pathauto: 1
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  label:
+    -
+      value: 'Digitale Ersthelfende'
+  created:
+    -
+      value: 1784019774
+  path:
+    -
+      alias: /cybersicherheitsnetzwerk/digitale-ersthelfende
+      langcode: de
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false

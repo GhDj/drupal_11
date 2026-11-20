@@ -6,7 +6,7 @@ _core:
   default_config_hash: 5FaC8_PP76ON-gppVAhTdnHRYooCqaMf-cDj-tSBhos
 id: klaro
 label: 'Consent manager'
-description: 'Klaro! Cookie & Consent manager saves your consent status in the browser.'
+description: 'Klaro! Cookie & Consent stores your consent status in your browser.'
 default: true
 purposes:
   - cms

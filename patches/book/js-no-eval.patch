@@ -1,0 +1,13 @@
+--- a/js/third-party/book_select_extractor.js
++++ b/js/third-party/book_select_extractor.js
+@@ -541,9 +541,7 @@
+  */
+ SelectExtractorBook.Get_if_set = function( obj, keys ) {
+   try {
+-    let ret = undefined;
+-    eval ('ret = obj' + '.' + keys);
+-    return ret;
++    return keys.split('.').reduce((value, key) => value?.[key], obj);
+   }
+   catch(e) {
+     return undefined;

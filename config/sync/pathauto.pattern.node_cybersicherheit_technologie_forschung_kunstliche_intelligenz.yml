@@ -1,0 +1,41 @@
+uuid: 4eff2c23-8d45-4876-820e-f771ff732634
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_technologie_forschung_kunstliche_intelligenz
+label: 'Node: Cybersicherheit › Technologie & Forschung › Künstliche Intelligenz'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/technology-research/artificial-intelligence/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: 5ad7138f-e867-4ebf-972e-cacdc22d8082
+    property: null
+  0b1b4fa8-97e3-45d2-91bb-bfb57cdf3dd6:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: 'Artificial Intelligence'
+    property: null
+selection_logic: and
+weight: 22
+relationships:
+  'node:langcode:language':
+    label: Language

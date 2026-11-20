@@ -11,3 +11,4 @@ dependencies:
   - select_or_other:select_or_other
   - viewsreference_filter:viewsreference_filter
   - config_pages:config_pages
+  - csp:csp

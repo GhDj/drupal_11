@@ -1,0 +1,51 @@
+uuid: f651f04d-4863-4a79-a40b-ef69dda1f2cd
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_lage_reaktion_lagezentrum_cyber_az
+label: 'Node: Lage & Reaktion › Lagezentrum › Cyber-AZ'
+type: 'canonical_entities:node'
+pattern: '/lage-reaktion/lagezentrum/cyber-az/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Lage
+    property: null
+  91b13b43-b71f-40bb-a94e-4b2c7e32d108:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Lagezentrum
+  0e4d6e43-e5b9-4a47-a6af-0c9c5fb2a876:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Cyber-AZ
+selection_logic: and
+weight: 12
+relationships:
+  'node:langcode:language':
+    label: Language

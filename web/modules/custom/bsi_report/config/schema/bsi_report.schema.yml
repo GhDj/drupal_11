@@ -3,4 +3,4 @@ condition.plugin.book_level:
   label: 'Book level'
   mapping:
     level:
-      type: string
+      type: integer

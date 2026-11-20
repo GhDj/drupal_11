@@ -78,8 +78,10 @@
     {# footer #}
     <footer class="bsi-footer">
         <div class="bsi-grid">
+          {% if page.footer|filter((v, k) => k|first != '#')|length > 0 %}
             <div class="bsi-footer__top">{{ page.footer }}</div>
             <hr>
+          {% endif %}
             <div class="bsi-footer__bottom">{{ page.legal }}</div>
         </div>
     </footer>

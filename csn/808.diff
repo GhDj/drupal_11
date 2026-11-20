@@ -1,0 +1,3495 @@
+diff --git a/composer.json b/composer.json
+index 7c2ada3d9b64f5b8b39816d25123fdb0b5173091..7d3c1ed89e3ec2c3c9b95f527ea12f04f8868f8b 100644
+--- a/composer.json
++++ b/composer.json
+@@ -58,6 +58,7 @@
+         "drupal/default_content": "^2.0@beta",
+         "drupal/diff": "^2.1",
+         "drupal/duplicate_node": "^2.0",
++        "drupal/duration_field": "^2.2",
+         "drupal/editoria11y": "^2.2",
+         "drupal/email_registration": "^2.0@RC",
+         "drupal/entity_field_condition": "^1.5",
+diff --git a/composer.lock b/composer.lock
+index a5ff00322f2ab479c15227db7357906cd48af0be..533ac2b2532e652dad330176454ca83082d1fc11 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -3702,6 +3702,77 @@
+                 "source": "https://git.drupalcode.org/project/duplicate_node"
+             }
+         },
++        {
++            "name": "drupal/duration_field",
++            "version": "2.2.0",
++            "source": {
++                "type": "git",
++                "url": "https://git.drupalcode.org/project/duration_field.git",
++                "reference": "8.x-2.2"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://artifacts.init.de:443/artifactory/api/composer/drupal-composer-remote/direct-dists/duration_field-8.x-2.2.zip",
++                "reference": "8.x-2.2",
++                "shasum": "64633fa90ee77c9049fe827b6a6eedf176239a6b"
++            },
++            "require": {
++                "drupal/core": "^9.2 || ^10 || ^11"
++            },
++            "require-dev": {
++                "drush/drush": ">=9"
++            },
++            "type": "drupal-module",
++            "extra": {
++                "drupal": {
++                    "version": "8.x-2.2",
++                    "datestamp": "1752764387",
++                    "security-coverage": {
++                        "status": "covered",
++                        "message": "Covered by Drupal's security advisory policy"
++                    }
++                },
++                "drush": {
++                    "services": {
++                        "drush.services.yml": ">=9"
++                    }
++                }
++            },
++            "license": [
++                "GPL-2.0-or-later"
++            ],
++            "authors": [
++                {
++                    "name": "Jay Friendly (jaypan)",
++                    "homepage": "https://www.drupal.org/u/jaypan"
++                },
++                {
++                    "name": "dww",
++                    "homepage": "https://www.drupal.org/user/46549"
++                },
++                {
++                    "name": "jaypan",
++                    "homepage": "https://www.drupal.org/user/324696"
++                },
++                {
++                    "name": "sickness29",
++                    "homepage": "https://www.drupal.org/user/2586096"
++                }
++            ],
++            "description": "Creates a duration Field API field, that collects a period of time, whether that be hours, minutes, seconds, days, months, years, or any combination of those.",
++            "homepage": "https://drupal.org/project/duration_field",
++            "keywords": [
++                "Drupal",
++                "Duration",
++                "Field",
++                "Field API"
++            ],
++            "support": {
++                "source": "http://cgit.drupalcode.org/duration_field",
++                "issues": "https://www.drupal.org/project/issues/duration_field"
++            },
++            "published-time": "2025-07-17T14:59:43+00:00"
++        },
+         {
+             "name": "drupal/editoria11y",
+             "version": "2.2.24",
+diff --git a/config/sync/core.base_field_override.node.incident_report.alias_keeper.yml b/config/sync/core.base_field_override.node.incident_report.alias_keeper.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..5ec36c7bb700824cacc93645a3a057c9e3981263
+--- /dev/null
++++ b/config/sync/core.base_field_override.node.incident_report.alias_keeper.yml
+@@ -0,0 +1,22 @@
++uuid: bd751468-d2f4-4151-9675-a28f7509bbb6
++langcode: en
++status: true
++dependencies:
++  config:
++    - node.type.incident_report
++id: node.incident_report.alias_keeper
++field_name: alias_keeper
++entity_type: node
++bundle: incident_report
++label: "Prevent this node's alias from being changed"
++description: 'This option will prevent node alias changes to avoid accidents. Only users with "administer node_keep per node" permission will be able to change this node alias.'
++required: false
++translatable: true
++default_value:
++  -
++    value: 0
++default_value_callback: ''
++settings:
++  on_label: 'On'
++  off_label: 'Off'
++field_type: boolean
+diff --git a/config/sync/core.base_field_override.node.incident_report.node_keeper.yml b/config/sync/core.base_field_override.node.incident_report.node_keeper.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..96fcb7684497004cf2da3439248040ad6023ead6
+--- /dev/null
++++ b/config/sync/core.base_field_override.node.incident_report.node_keeper.yml
+@@ -0,0 +1,22 @@
++uuid: f8512c46-5f29-4883-a561-8cfd99c13639
++langcode: en
++status: true
++dependencies:
++  config:
++    - node.type.incident_report
++id: node.incident_report.node_keeper
++field_name: node_keeper
++entity_type: node
++bundle: incident_report
++label: 'Prevent this node from being deleted'
++description: 'This option will prevent node deletion to avoid accidents. Only users with "administer node_keep per node" permission will be able to remove this node.'
++required: false
++translatable: true
++default_value:
++  -
++    value: 0
++default_value_callback: ''
++settings:
++  on_label: 'On'
++  off_label: 'Off'
++field_type: boolean
+diff --git a/config/sync/core.base_field_override.taxonomy_term.attack_vectors.description.yml b/config/sync/core.base_field_override.taxonomy_term.attack_vectors.description.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..0856e16f4e700bdffa321cc5f45d6b686da6c8c3
+--- /dev/null
++++ b/config/sync/core.base_field_override.taxonomy_term.attack_vectors.description.yml
+@@ -0,0 +1,23 @@
++uuid: a0889de9-a0b7-40c9-a161-e0607d832557
++langcode: en
++status: true
++dependencies:
++  config:
++    - filter.format.plain_text
++    - taxonomy.vocabulary.attack_vectors
++  module:
++    - text
++id: taxonomy_term.attack_vectors.description
++field_name: description
++entity_type: taxonomy_term
++bundle: attack_vectors
++label: Description
++description: ''
++required: false
++translatable: true
++default_value: {  }
++default_value_callback: ''
++settings:
++  allowed_formats:
++    - plain_text
++field_type: text_long
+diff --git a/config/sync/core.base_field_override.taxonomy_term.incident_types.description.yml b/config/sync/core.base_field_override.taxonomy_term.incident_types.description.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..a7235e287292c7c407e232349285cad0fea04065
+--- /dev/null
++++ b/config/sync/core.base_field_override.taxonomy_term.incident_types.description.yml
+@@ -0,0 +1,23 @@
++uuid: be6f0802-4921-492d-a80f-1657fc94de87
++langcode: en
++status: true
++dependencies:
++  config:
++    - filter.format.plain_text
++    - taxonomy.vocabulary.incident_types
++  module:
++    - text
++id: taxonomy_term.incident_types.description
++field_name: description
++entity_type: taxonomy_term
++bundle: incident_types
++label: Description
++description: ''
++required: false
++translatable: true
++default_value: {  }
++default_value_callback: ''
++settings:
++  allowed_formats:
++    - plain_text
++field_type: text_long
+diff --git a/config/sync/core.entity_form_display.node.incident_report.default.yml b/config/sync/core.entity_form_display.node.incident_report.default.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..ce23dab74f82bd8ad48125d3af6df7594a40bf82
+--- /dev/null
++++ b/config/sync/core.entity_form_display.node.incident_report.default.yml
+@@ -0,0 +1,207 @@
++uuid: d38d3697-d82d-4b41-9145-a3373e0ee18d
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.field.node.incident_report.body
++    - field.field.node.incident_report.field_incident_types
++    - field.field.node.incident_report.field_incident_types_abuse
++    - field.field.node.incident_report.field_incident_types_abuse_other
++    - field.field.node.incident_report.field_incident_types_other
++    - field.field.node.incident_report.field_start_date
++    - field.field.node.incident_report.field_time_duration
++    - node.type.incident_report
++    - workflows.workflow.incident_report
++  module:
++    - content_moderation
++    - csn_custom
++    - datetime
++    - duration_field
++    - field_group
++    - maxlength
++    - text
++third_party_settings:
++  field_group:
++    group_description:
++      children:
++        - body
++        - field_incident_types
++        - field_incident_types_abuse
++        - field_incident_types_abuse_other
++        - field_incident_types_other
++      label: Description
++      region: content
++      parent_name: ''
++      weight: 1
++      format_type: fieldset
++      format_settings:
++        classes: ''
++        show_empty_fields: false
++        id: ''
++        label_as_html: false
++        description: ''
++        required_fields: true
++    group_background:
++      children: {  }
++      label: Background
++      region: content
++      parent_name: ''
++      weight: 3
++      format_type: fieldset
++      format_settings:
++        classes: ''
++        show_empty_fields: false
++        id: ''
++        label_as_html: false
++        description: ''
++        required_fields: true
++    group_measures:
++      children:
++        - field_start_date
++        - field_time_duration
++      label: Measures
++      region: content
++      parent_name: ''
++      weight: 4
++      format_type: fieldset
++      format_settings:
++        classes: ''
++        show_empty_fields: false
++        id: ''
++        label_as_html: false
++        description: ''
++        required_fields: true
++    group_workflow:
++      children:
++        - status
++        - moderation_state
++      label: Workflow
++      region: content
++      parent_name: ''
++      weight: 5
++      format_type: details_sidebar
++      format_settings:
++        classes: ''
++        show_empty_fields: false
++        id: ''
++        label_as_html: false
++        open: true
++        description: ''
++        required_fields: true
++        weight: 0
++    group_language:
++      children:
++        - langcode
++      label: Language
++      region: hidden
++      parent_name: ''
++      weight: 6
++      format_type: details_sidebar
++      format_settings:
++        classes: ''
++        show_empty_fields: false
++        id: ''
++        label_as_html: false
++        open: false
++        description: ''
++        required_fields: true
++        weight: 0
++id: node.incident_report.default
++targetEntityType: node
++bundle: incident_report
++mode: default
++content:
++  body:
++    type: text_textarea_with_summary
++    weight: 2
++    region: content
++    settings:
++      rows: 3
++      summary_rows: 3
++      placeholder: ''
++      show_summary: false
++    third_party_settings:
++      maxlength:
++        maxlength_js: 3000
++        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
++        maxlength_js_summary: 260
++        maxlength_js_label_summary: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
++        maxlength_js_enforce: true
++  field_incident_types:
++    type: csn_taxonomy_subtree
++    weight: 3
++    region: content
++    settings:
++      parent: null
++    third_party_settings: {  }
++  field_incident_types_abuse:
++    type: csn_taxonomy_subtree
++    weight: 4
++    region: content
++    settings:
++      parent: f1a4da8e-d540-45a3-b476-d7e80713f03c
++    third_party_settings: {  }
++  field_incident_types_abuse_other:
++    type: text_textfield
++    weight: 5
++    region: content
++    settings:
++      size: 60
++      placeholder: ''
++    third_party_settings: {  }
++  field_incident_types_other:
++    type: text_textfield
++    weight: 6
++    region: content
++    settings:
++      size: 60
++      placeholder: ''
++    third_party_settings: {  }
++  field_start_date:
++    type: datetime_default
++    weight: 6
++    region: content
++    settings: {  }
++    third_party_settings: {  }
++  field_time_duration:
++    type: duration_widget
++    weight: 7
++    region: content
++    settings: {  }
++    third_party_settings: {  }
++  moderation_state:
++    type: moderation_state_default
++    weight: 7
++    region: content
++    settings: {  }
++    third_party_settings: {  }
++  status:
++    type: boolean_checkbox
++    weight: 6
++    region: content
++    settings:
++      display_label: true
++    third_party_settings: {  }
++  title:
++    type: string_textfield
++    weight: 0
++    region: content
++    settings:
++      size: 60
++      placeholder: ''
++    third_party_settings: {  }
++hidden:
++  alias_keeper: true
++  changed: true
++  created: true
++  keeper_machine_name: true
++  langcode: true
++  menu_entity_index: true
++  node_keeper: true
++  path: true
++  promote: true
++  short_url: true
++  simple_sitemap: true
++  sticky: true
++  uid: true
++  url_redirects: true
+diff --git a/config/sync/core.entity_view_display.node.incident_report.default.yml b/config/sync/core.entity_view_display.node.incident_report.default.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..77aa59241bb5736c0954b1a5c3266f46660b6675
+--- /dev/null
++++ b/config/sync/core.entity_view_display.node.incident_report.default.yml
+@@ -0,0 +1,43 @@
++uuid: aeaab961-6812-4f6d-8e5d-ae261e5d92f7
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.field.node.incident_report.body
++    - field.field.node.incident_report.field_incident_types
++    - field.field.node.incident_report.field_incident_types_abuse
++    - field.field.node.incident_report.field_incident_types_abuse_other
++    - field.field.node.incident_report.field_incident_types_other
++    - field.field.node.incident_report.field_start_date
++    - field.field.node.incident_report.field_time_duration
++    - node.type.incident_report
++id: node.incident_report.default
++targetEntityType: node
++bundle: incident_report
++mode: default
++content:
++  title:
++    type: string
++    label: hidden
++    settings:
++      link_to_entity: true
++      link_rel: canonical
++    third_party_settings: {  }
++    weight: 0
++    region: content
++hidden:
++  body: true
++  changed: true
++  content_moderation_control: true
++  created: true
++  field_incident_types: true
++  field_incident_types_abuse: true
++  field_incident_types_abuse_other: true
++  field_incident_types_other: true
++  field_start_date: true
++  field_time_duration: true
++  langcode: true
++  links: true
++  search_api_excerpt: true
++  short_url: true
++  uid: true
+diff --git a/config/sync/core.entity_view_display.node.incident_report.explorer.yml b/config/sync/core.entity_view_display.node.incident_report.explorer.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..aa9ae1496fd9c7ad706e1256c53c5b0af322c8f1
+--- /dev/null
++++ b/config/sync/core.entity_view_display.node.incident_report.explorer.yml
+@@ -0,0 +1,44 @@
++uuid: 2df53b76-b426-4e4d-8b1c-72df52018913
++langcode: en
++status: true
++dependencies:
++  config:
++    - core.entity_view_mode.node.explorer
++    - field.field.node.incident_report.body
++    - field.field.node.incident_report.field_incident_types
++    - field.field.node.incident_report.field_incident_types_abuse
++    - field.field.node.incident_report.field_incident_types_abuse_other
++    - field.field.node.incident_report.field_incident_types_other
++    - field.field.node.incident_report.field_start_date
++    - field.field.node.incident_report.field_time_duration
++    - node.type.incident_report
++id: node.incident_report.explorer
++targetEntityType: node
++bundle: incident_report
++mode: explorer
++content:
++  title:
++    type: string
++    label: hidden
++    settings:
++      link_to_entity: true
++      link_rel: canonical
++    third_party_settings: {  }
++    weight: 0
++    region: content
++hidden:
++  body: true
++  changed: true
++  content_moderation_control: true
++  created: true
++  field_incident_types: true
++  field_incident_types_abuse: true
++  field_incident_types_abuse_other: true
++  field_incident_types_other: true
++  field_start_date: true
++  field_time_duration: true
++  langcode: true
++  links: true
++  search_api_excerpt: true
++  short_url: true
++  uid: true
+diff --git a/config/sync/core.entity_view_display.node.incident_report.full.yml b/config/sync/core.entity_view_display.node.incident_report.full.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..e55de3be84435a65f55aeaff8e1f92203c837291
+--- /dev/null
++++ b/config/sync/core.entity_view_display.node.incident_report.full.yml
+@@ -0,0 +1,92 @@
++uuid: 3bc11bb3-92a2-409a-8d41-003528945e60
++langcode: en
++status: true
++dependencies:
++  config:
++    - core.entity_view_mode.node.full
++    - field.field.node.incident_report.body
++    - field.field.node.incident_report.field_incident_types
++    - field.field.node.incident_report.field_incident_types_abuse
++    - field.field.node.incident_report.field_incident_types_abuse_other
++    - field.field.node.incident_report.field_incident_types_other
++    - field.field.node.incident_report.field_start_date
++    - field.field.node.incident_report.field_time_duration
++    - node.type.incident_report
++  module:
++    - datetime
++    - duration_field
++    - text
++id: node.incident_report.full
++targetEntityType: node
++bundle: incident_report
++mode: full
++content:
++  body:
++    type: text_default
++    label: hidden
++    settings: {  }
++    third_party_settings: {  }
++    weight: 1
++    region: content
++  content_moderation_control:
++    settings: {  }
++    third_party_settings: {  }
++    weight: 0
++    region: content
++  field_incident_types:
++    type: entity_reference_label
++    label: above
++    settings:
++      link: true
++    third_party_settings: {  }
++    weight: 2
++    region: content
++  field_incident_types_abuse:
++    type: entity_reference_label
++    label: above
++    settings:
++      link: true
++    third_party_settings: {  }
++    weight: 3
++    region: content
++  field_incident_types_abuse_other:
++    type: text_default
++    label: above
++    settings: {  }
++    third_party_settings: {  }
++    weight: 4
++    region: content
++  field_incident_types_other:
++    type: text_default
++    label: above
++    settings: {  }
++    third_party_settings: {  }
++    weight: 5
++    region: content
++  field_start_date:
++    type: datetime_default
++    label: above
++    settings:
++      timezone_override: ''
++      format_type: medium
++    third_party_settings: {  }
++    weight: 6
++    region: content
++  field_time_duration:
++    type: duration_human_display
++    label: above
++    settings:
++      text_length: full
++      separator: space
++    third_party_settings: {  }
++    weight: 7
++    region: content
++hidden:
++  changed: true
++  created: true
++  langcode: true
++  links: true
++  search_api_excerpt: true
++  short_url: true
++  title: true
++  uid: true
+diff --git a/config/sync/core.entity_view_display.node.incident_report.opener.yml b/config/sync/core.entity_view_display.node.incident_report.opener.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..aa90c281994f6a37427672679dd3caff584af69d
+--- /dev/null
++++ b/config/sync/core.entity_view_display.node.incident_report.opener.yml
+@@ -0,0 +1,44 @@
++uuid: 8ab6d04c-ef99-4ecf-b6ae-32fa1a7ea3a8
++langcode: en
++status: true
++dependencies:
++  config:
++    - core.entity_view_mode.node.opener
++    - field.field.node.incident_report.body
++    - field.field.node.incident_report.field_incident_types
++    - field.field.node.incident_report.field_incident_types_abuse
++    - field.field.node.incident_report.field_incident_types_abuse_other
++    - field.field.node.incident_report.field_incident_types_other
++    - field.field.node.incident_report.field_start_date
++    - field.field.node.incident_report.field_time_duration
++    - node.type.incident_report
++id: node.incident_report.opener
++targetEntityType: node
++bundle: incident_report
++mode: opener
++content:
++  title:
++    type: string
++    label: hidden
++    settings:
++      link_to_entity: false
++      link_rel: canonical
++    third_party_settings: {  }
++    weight: 0
++    region: content
++hidden:
++  body: true
++  changed: true
++  content_moderation_control: true
++  created: true
++  field_incident_types: true
++  field_incident_types_abuse: true
++  field_incident_types_abuse_other: true
++  field_incident_types_other: true
++  field_start_date: true
++  field_time_duration: true
++  langcode: true
++  links: true
++  search_api_excerpt: true
++  short_url: true
++  uid: true
+diff --git a/config/sync/core.entity_view_display.node.incident_report.search_result.yml b/config/sync/core.entity_view_display.node.incident_report.search_result.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..a47cc606b8b762793c967fc85f0f6952244b9c8f
+--- /dev/null
++++ b/config/sync/core.entity_view_display.node.incident_report.search_result.yml
+@@ -0,0 +1,67 @@
++uuid: 8f0e346b-c938-4638-8b63-97a4568a830b
++langcode: en
++status: true
++dependencies:
++  config:
++    - core.entity_view_mode.node.search_result
++    - field.field.node.incident_report.body
++    - field.field.node.incident_report.field_incident_types
++    - field.field.node.incident_report.field_incident_types_abuse
++    - field.field.node.incident_report.field_incident_types_abuse_other
++    - field.field.node.incident_report.field_incident_types_other
++    - field.field.node.incident_report.field_start_date
++    - field.field.node.incident_report.field_time_duration
++    - node.type.incident_report
++id: node.incident_report.search_result
++targetEntityType: node
++bundle: incident_report
++mode: search_result
++content:
++  created:
++    type: timestamp
++    label: hidden
++    settings:
++      date_format: date_short
++      custom_date_format: ''
++      timezone: ''
++      tooltip:
++        date_format: ''
++        custom_date_format: ''
++      time_diff:
++        enabled: false
++        future_format: '@interval hence'
++        past_format: '@interval ago'
++        granularity: 2
++        refresh: 60
++        description: ''
++    third_party_settings: {  }
++    weight: 0
++    region: content
++  search_api_excerpt:
++    settings: {  }
++    third_party_settings: {  }
++    weight: 2
++    region: content
++  title:
++    type: string
++    label: hidden
++    settings:
++      link_to_entity: true
++      link_rel: canonical
++    third_party_settings: {  }
++    weight: 1
++    region: content
++hidden:
++  body: true
++  changed: true
++  content_moderation_control: true
++  field_incident_types: true
++  field_incident_types_abuse: true
++  field_incident_types_abuse_other: true
++  field_incident_types_other: true
++  field_start_date: true
++  field_time_duration: true
++  langcode: true
++  links: true
++  short_url: true
++  uid: true
+diff --git a/config/sync/core.entity_view_display.node.incident_report.teaser.yml b/config/sync/core.entity_view_display.node.incident_report.teaser.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..31a9ed1828c29c5a324f42fa6f09fb5267c1794d
+--- /dev/null
++++ b/config/sync/core.entity_view_display.node.incident_report.teaser.yml
+@@ -0,0 +1,44 @@
++uuid: f454009f-dd8a-42f2-a45f-64fbb2faa32c
++langcode: en
++status: true
++dependencies:
++  config:
++    - core.entity_view_mode.node.teaser
++    - field.field.node.incident_report.body
++    - field.field.node.incident_report.field_incident_types
++    - field.field.node.incident_report.field_incident_types_abuse
++    - field.field.node.incident_report.field_incident_types_abuse_other
++    - field.field.node.incident_report.field_incident_types_other
++    - field.field.node.incident_report.field_start_date
++    - field.field.node.incident_report.field_time_duration
++    - node.type.incident_report
++id: node.incident_report.teaser
++targetEntityType: node
++bundle: incident_report
++mode: teaser
++content:
++  title:
++    type: string
++    label: hidden
++    settings:
++      link_to_entity: true
++      link_rel: canonical
++    third_party_settings: {  }
++    weight: 0
++    region: content
++hidden:
++  body: true
++  changed: true
++  content_moderation_control: true
++  created: true
++  field_incident_types: true
++  field_incident_types_abuse: true
++  field_incident_types_abuse_other: true
++  field_incident_types_other: true
++  field_start_date: true
++  field_time_duration: true
++  langcode: true
++  links: true
++  search_api_excerpt: true
++  short_url: true
++  uid: true
+diff --git a/config/sync/core.entity_view_display.node.incident_report.teaser_highlight.yml b/config/sync/core.entity_view_display.node.incident_report.teaser_highlight.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..11df9a5b52993936ba11ea650d234a1706bc343a
+--- /dev/null
++++ b/config/sync/core.entity_view_display.node.incident_report.teaser_highlight.yml
+@@ -0,0 +1,44 @@
++uuid: 0a983ae4-cd1f-4c63-ac74-a8ac88eab327
++langcode: en
++status: true
++dependencies:
++  config:
++    - core.entity_view_mode.node.teaser_highlight
++    - field.field.node.incident_report.body
++    - field.field.node.incident_report.field_incident_types
++    - field.field.node.incident_report.field_incident_types_abuse
++    - field.field.node.incident_report.field_incident_types_abuse_other
++    - field.field.node.incident_report.field_incident_types_other
++    - field.field.node.incident_report.field_start_date
++    - field.field.node.incident_report.field_time_duration
++    - node.type.incident_report
++id: node.incident_report.teaser_highlight
++targetEntityType: node
++bundle: incident_report
++mode: teaser_highlight
++content:
++  title:
++    type: string
++    label: hidden
++    settings:
++      link_to_entity: true
++      link_rel: canonical
++    third_party_settings: {  }
++    weight: 0
++    region: content
++hidden:
++  body: true
++  changed: true
++  content_moderation_control: true
++  created: true
++  field_incident_types: true
++  field_incident_types_abuse: true
++  field_incident_types_abuse_other: true
++  field_incident_types_other: true
++  field_start_date: true
++  field_time_duration: true
++  langcode: true
++  links: true
++  search_api_excerpt: true
++  short_url: true
++  uid: true
+diff --git a/config/sync/core.entity_view_display.node.incident_report.teaser_triplet.yml b/config/sync/core.entity_view_display.node.incident_report.teaser_triplet.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..dbcfd7c2a5f352982ff22ba4b0382e98122ee055
+--- /dev/null
++++ b/config/sync/core.entity_view_display.node.incident_report.teaser_triplet.yml
+@@ -0,0 +1,44 @@
++uuid: 229f8e13-099d-4294-bd81-c171aa84a9cb
++langcode: en
++status: true
++dependencies:
++  config:
++    - core.entity_view_mode.node.teaser_triplet
++    - field.field.node.incident_report.body
++    - field.field.node.incident_report.field_incident_types
++    - field.field.node.incident_report.field_incident_types_abuse
++    - field.field.node.incident_report.field_incident_types_abuse_other
++    - field.field.node.incident_report.field_incident_types_other
++    - field.field.node.incident_report.field_start_date
++    - field.field.node.incident_report.field_time_duration
++    - node.type.incident_report
++id: node.incident_report.teaser_triplet
++targetEntityType: node
++bundle: incident_report
++mode: teaser_triplet
++content:
++  title:
++    type: string
++    label: hidden
++    settings:
++      link_to_entity: true
++      link_rel: canonical
++    third_party_settings: {  }
++    weight: 0
++    region: content
++hidden:
++  body: true
++  changed: true
++  content_moderation_control: true
++  created: true
++  field_incident_types: true
++  field_incident_types_abuse: true
++  field_incident_types_abuse_other: true
++  field_incident_types_other: true
++  field_start_date: true
++  field_time_duration: true
++  langcode: true
++  links: true
++  search_api_excerpt: true
++  short_url: true
++  uid: true
+diff --git a/config/sync/core.extension.yml b/config/sync/core.extension.yml
+index 827b2077ce9377e954b075a9144b2e4c7fdb3dd3..9bb08a976706fb4c9d94ca77a242033e030484c6 100644
+--- a/config/sync/core.extension.yml
++++ b/config/sync/core.extension.yml
+@@ -42,6 +42,7 @@ module:
+   default_content: 0
+   diff: 0
+   duplicate_node: 0
++  duration_field: 0
+   dynamic_page_cache: 0
+   editor: 0
+   editoria11y: 0
+diff --git a/config/sync/field.field.node.incident_report.body.yml b/config/sync/field.field.node.incident_report.body.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..0eee5d8eb93a6ba455d4870cbaf66f59ebdea89b
+--- /dev/null
++++ b/config/sync/field.field.node.incident_report.body.yml
+@@ -0,0 +1,26 @@
++uuid: 4b526f14-eea2-4f6e-8302-52ee35b1b7a4
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.node.body
++    - filter.format.plain_text
++    - node.type.incident_report
++  module:
++    - text
++id: node.incident_report.body
++field_name: body
++entity_type: node
++bundle: incident_report
++label: 'Short description'
++description: ''
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings:
++  display_summary: false
++  required_summary: false
++  allowed_formats:
++    - plain_text
++field_type: text_with_summary
+diff --git a/config/sync/field.field.node.incident_report.field_incident_types.yml b/config/sync/field.field.node.incident_report.field_incident_types.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..ba77a4fc7a2e86cd73a2a1f747b72bca0cb1630a
+--- /dev/null
++++ b/config/sync/field.field.node.incident_report.field_incident_types.yml
+@@ -0,0 +1,29 @@
++uuid: e43d5f41-2945-439e-862a-6b52fcc4f2c1
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.node.field_incident_types
++    - node.type.incident_report
++    - taxonomy.vocabulary.incident_types
++id: node.incident_report.field_incident_types
++field_name: field_incident_types
++entity_type: node
++bundle: incident_report
++label: 'What happened?'
++description: ''
++required: true
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings:
++  handler: 'default:taxonomy_term'
++  handler_settings:
++    target_bundles:
++      incident_types: incident_types
++    sort:
++      field: name
++      direction: asc
++    auto_create: false
++    auto_create_bundle: ''
++field_type: entity_reference
+diff --git a/config/sync/field.field.node.incident_report.field_incident_types_abuse.yml b/config/sync/field.field.node.incident_report.field_incident_types_abuse.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..4c369d982b21868338a1201f11e6f8422e2bf482
+--- /dev/null
++++ b/config/sync/field.field.node.incident_report.field_incident_types_abuse.yml
+@@ -0,0 +1,29 @@
++uuid: 92772234-39f5-4760-afeb-373d4be67452
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.node.field_incident_types_abuse
++    - node.type.incident_report
++    - taxonomy.vocabulary.incident_types
++id: node.incident_report.field_incident_types_abuse
++field_name: field_incident_types_abuse
++entity_type: node
++bundle: incident_report
++label: 'Account misuse / identity theft refers to'
++description: ''
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings:
++  handler: 'default:taxonomy_term'
++  handler_settings:
++    target_bundles:
++      incident_types: incident_types
++    sort:
++      field: name
++      direction: asc
++    auto_create: false
++    auto_create_bundle: ''
++field_type: entity_reference
+diff --git a/config/sync/field.field.node.incident_report.field_incident_types_abuse_other.yml b/config/sync/field.field.node.incident_report.field_incident_types_abuse_other.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..bf37c312d4a39cd258d414396ed7ff546cd2fb0e
+--- /dev/null
++++ b/config/sync/field.field.node.incident_report.field_incident_types_abuse_other.yml
+@@ -0,0 +1,24 @@
++uuid: a8a8fb9f-d86c-4500-94a5-3de4b295a62d
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.node.field_incident_types_abuse_other
++    - filter.format.plain_text
++    - node.type.incident_report
++  module:
++    - text
++id: node.incident_report.field_incident_types_abuse_other
++field_name: field_incident_types_abuse_other
++entity_type: node
++bundle: incident_report
++label: 'Other (account misuse / identity theft) – please specify'
++description: ''
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings:
++  allowed_formats:
++    - plain_text
++field_type: text
+diff --git a/config/sync/field.field.node.incident_report.field_incident_types_other.yml b/config/sync/field.field.node.incident_report.field_incident_types_other.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..4894db56a037801d2cee889255897623d71de3ee
+--- /dev/null
++++ b/config/sync/field.field.node.incident_report.field_incident_types_other.yml
+@@ -0,0 +1,24 @@
++uuid: cb1905ec-090a-4ce6-afa3-d28b885ae858
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.node.field_incident_types_other
++    - filter.format.plain_text
++    - node.type.incident_report
++  module:
++    - text
++id: node.incident_report.field_incident_types_other
++field_name: field_incident_types_other
++entity_type: node
++bundle: incident_report
++label: 'Other – please specify'
++description: ''
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings:
++  allowed_formats:
++    - plain_text
++field_type: text
+diff --git a/config/sync/field.field.node.incident_report.field_start_date.yml b/config/sync/field.field.node.incident_report.field_start_date.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..10d2700abffb82fe7ecb357b2f171aefbe203979
+--- /dev/null
++++ b/config/sync/field.field.node.incident_report.field_start_date.yml
+@@ -0,0 +1,21 @@
++uuid: 093dc7e5-6ccd-4c00-821d-100e8e64b266
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.node.field_start_date
++    - node.type.incident_report
++  module:
++    - datetime
++id: node.incident_report.field_start_date
++field_name: field_start_date
++entity_type: node
++bundle: incident_report
++label: 'Date of the consultation'
++description: ''
++required: true
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: datetime
+diff --git a/config/sync/field.field.node.incident_report.field_time_duration.yml b/config/sync/field.field.node.incident_report.field_time_duration.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..2d9e6b60ee137158ddfd01b96da44b9cde10405e
+--- /dev/null
++++ b/config/sync/field.field.node.incident_report.field_time_duration.yml
+@@ -0,0 +1,23 @@
++uuid: 1c7f1150-74ee-4bdc-b80d-822002c6abb2
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.node.field_time_duration
++    - node.type.incident_report
++  module:
++    - duration_field
++id: node.incident_report.field_time_duration
++field_name: field_time_duration
++entity_type: node
++bundle: incident_report
++label: 'Duration of the consultation'
++description: ''
++required: true
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings:
++  granularity: 'h:i'
++  include_weeks: false
++field_type: duration
+diff --git a/config/sync/field.storage.node.field_incident_types.yml b/config/sync/field.storage.node.field_incident_types.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..19a2c0e45c8b9ae0d19524f14b1e03d638922619
+--- /dev/null
++++ b/config/sync/field.storage.node.field_incident_types.yml
+@@ -0,0 +1,20 @@
++uuid: 6841143f-84d5-451d-b309-28f577b7e55f
++langcode: en
++status: true
++dependencies:
++  module:
++    - node
++    - taxonomy
++id: node.field_incident_types
++field_name: field_incident_types
++entity_type: node
++type: entity_reference
++settings:
++  target_type: taxonomy_term
++module: core
++locked: false
++cardinality: -1
++translatable: true
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.node.field_incident_types_abuse.yml b/config/sync/field.storage.node.field_incident_types_abuse.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..c5c050bcc4a3146190077be00337e1e814430a96
+--- /dev/null
++++ b/config/sync/field.storage.node.field_incident_types_abuse.yml
+@@ -0,0 +1,20 @@
++uuid: 6afe727f-7a25-4e0c-ba92-1e55c4a00fd5
++langcode: en
++status: true
++dependencies:
++  module:
++    - node
++    - taxonomy
++id: node.field_incident_types_abuse
++field_name: field_incident_types_abuse
++entity_type: node
++type: entity_reference
++settings:
++  target_type: taxonomy_term
++module: core
++locked: false
++cardinality: -1
++translatable: true
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.node.field_incident_types_abuse_other.yml b/config/sync/field.storage.node.field_incident_types_abuse_other.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..5f57f4a9225df0c56c5e0a58d41ed5fb9f231526
+--- /dev/null
++++ b/config/sync/field.storage.node.field_incident_types_abuse_other.yml
+@@ -0,0 +1,20 @@
++uuid: a8353719-8a33-4eac-b997-a0f7a5bf0807
++langcode: en
++status: true
++dependencies:
++  module:
++    - node
++    - text
++id: node.field_incident_types_abuse_other
++field_name: field_incident_types_abuse_other
++entity_type: node
++type: text
++settings:
++  max_length: 255
++module: text
++locked: false
++cardinality: 1
++translatable: true
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.node.field_incident_types_other.yml b/config/sync/field.storage.node.field_incident_types_other.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..153249afebe41f51a560f8cc773479edac074ac5
+--- /dev/null
++++ b/config/sync/field.storage.node.field_incident_types_other.yml
+@@ -0,0 +1,20 @@
++uuid: bc0663bc-0ba2-42f6-b317-02aba4d6e110
++langcode: en
++status: true
++dependencies:
++  module:
++    - node
++    - text
++id: node.field_incident_types_other
++field_name: field_incident_types_other
++entity_type: node
++type: text
++settings:
++  max_length: 255
++module: text
++locked: false
++cardinality: 1
++translatable: true
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.node.field_time_duration.yml b/config/sync/field.storage.node.field_time_duration.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..a36cd916ec086468d30238b3ee4e3f26d9ec4bc2
+--- /dev/null
++++ b/config/sync/field.storage.node.field_time_duration.yml
+@@ -0,0 +1,19 @@
++uuid: 5c5599e7-96aa-49e3-b19c-78bfb2e9d21b
++langcode: en
++status: true
++dependencies:
++  module:
++    - duration_field
++    - node
++id: node.field_time_duration
++field_name: field_time_duration
++entity_type: node
++type: duration
++settings: {  }
++module: duration_field
++locked: false
++cardinality: 1
++translatable: true
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/language.content_settings.node.incident_report.yml b/config/sync/language.content_settings.node.incident_report.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..939fd103166ab39fb00964a5e50c6898a8e0beb3
+--- /dev/null
++++ b/config/sync/language.content_settings.node.incident_report.yml
+@@ -0,0 +1,16 @@
++uuid: faf1c7ae-5002-46a9-89f7-43eba356072e
++langcode: en
++status: true
++dependencies:
++  config:
++    - node.type.incident_report
++  module:
++    - content_translation
++third_party_settings:
++  content_translation:
++    enabled: true
++id: node.incident_report
++target_entity_type_id: node
++target_bundle: incident_report
++default_langcode: de
++language_alterable: false
+diff --git a/config/sync/language.content_settings.taxonomy_term.attack_vectors.yml b/config/sync/language.content_settings.taxonomy_term.attack_vectors.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..f960aeb51166e48b8c68452a7b70d22ba8398969
+--- /dev/null
++++ b/config/sync/language.content_settings.taxonomy_term.attack_vectors.yml
+@@ -0,0 +1,16 @@
++uuid: 1fea0915-0479-4b93-ad74-44b344b8791f
++langcode: en
++status: true
++dependencies:
++  config:
++    - taxonomy.vocabulary.attack_vectors
++  module:
++    - content_translation
++third_party_settings:
++  content_translation:
++    enabled: true
++id: taxonomy_term.attack_vectors
++target_entity_type_id: taxonomy_term
++target_bundle: attack_vectors
++default_langcode: de
++language_alterable: false
+diff --git a/config/sync/language.content_settings.taxonomy_term.incident_types.yml b/config/sync/language.content_settings.taxonomy_term.incident_types.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..73b74331412c98e75d7b574ff7792ab2c6cea304
+--- /dev/null
++++ b/config/sync/language.content_settings.taxonomy_term.incident_types.yml
+@@ -0,0 +1,16 @@
++uuid: 17765b79-0cbc-498e-9212-cb81813a1e15
++langcode: en
++status: true
++dependencies:
++  config:
++    - taxonomy.vocabulary.incident_types
++  module:
++    - content_translation
++third_party_settings:
++  content_translation:
++    enabled: true
++id: taxonomy_term.incident_types
++target_entity_type_id: taxonomy_term
++target_bundle: incident_types
++default_langcode: de
++language_alterable: false
+diff --git a/config/sync/language/de/core.base_field_override.taxonomy_term.attack_vectors.description.yml b/config/sync/language/de/core.base_field_override.taxonomy_term.attack_vectors.description.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..2c427553b55c432751bccd707ed6803d61751759
+--- /dev/null
++++ b/config/sync/language/de/core.base_field_override.taxonomy_term.attack_vectors.description.yml
+@@ -0,0 +1 @@
++label: Beschreibung
+diff --git a/config/sync/language/de/core.base_field_override.taxonomy_term.incident_types.description.yml b/config/sync/language/de/core.base_field_override.taxonomy_term.incident_types.description.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..2c427553b55c432751bccd707ed6803d61751759
+--- /dev/null
++++ b/config/sync/language/de/core.base_field_override.taxonomy_term.incident_types.description.yml
+@@ -0,0 +1 @@
++label: Beschreibung
+diff --git a/config/sync/language/de/core.entity_form_display.node.incident_report.default.yml b/config/sync/language/de/core.entity_form_display.node.incident_report.default.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..1c67778232999ebd14ca4e98f0f5f36cb6f51201
+--- /dev/null
++++ b/config/sync/language/de/core.entity_form_display.node.incident_report.default.yml
+@@ -0,0 +1,18 @@
++third_party_settings:
++  field_group:
++    group_description:
++      label: Vorfallsbeschreibung
++    group_background:
++      label: Hintergrund
++    group_measures:
++      label: Maßnahmen
++    group_workflow:
++      label: Arbeitsablauf
++    group_language:
++      label: Sprache
++content:
++  body:
++    third_party_settings:
++      maxlength:
++        maxlength_js_label: 'Eingabe begrenzt auf @limit Zeichen, verbleibend: <strong>@remaining</strong>'
++        maxlength_js_label_summary: 'Eingabe begrenzt auf @limit Zeichen, verbleibend: <strong>@remaining</strong>'
+diff --git a/config/sync/language/de/field.field.node.incident_report.body.yml b/config/sync/language/de/field.field.node.incident_report.body.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..779c29df3011a0fcf9e7265284072e515f358a52
+--- /dev/null
++++ b/config/sync/language/de/field.field.node.incident_report.body.yml
+@@ -0,0 +1 @@
++label: Kurzbeschreibung
+diff --git a/config/sync/language/de/field.field.node.incident_report.field_incident_types.yml b/config/sync/language/de/field.field.node.incident_report.field_incident_types.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..cca2e49a87ba4cb926e539a7c1c44c674e34606d
+--- /dev/null
++++ b/config/sync/language/de/field.field.node.incident_report.field_incident_types.yml
+@@ -0,0 +1 @@
++label: 'Was ist passiert?'
+diff --git a/config/sync/language/de/field.field.node.incident_report.field_incident_types_abuse.yml b/config/sync/language/de/field.field.node.incident_report.field_incident_types_abuse.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..049e97d3b06969ba2eb852b1f437a22a62d78795
+--- /dev/null
++++ b/config/sync/language/de/field.field.node.incident_report.field_incident_types_abuse.yml
+@@ -0,0 +1 @@
++label: 'Bei Accountmissbrauch / Identitätsdiebstahl handelt es sich um'
+diff --git a/config/sync/language/de/field.field.node.incident_report.field_incident_types_abuse_other.yml b/config/sync/language/de/field.field.node.incident_report.field_incident_types_abuse_other.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..ad388d6cedd92a9746e693c2b7212acd51a5d69d
+--- /dev/null
++++ b/config/sync/language/de/field.field.node.incident_report.field_incident_types_abuse_other.yml
+@@ -0,0 +1 @@
++label: 'Sonstiges (Accountmissbrauch / Identitätsdiebstahl) bitte spezifizieren'
+diff --git a/config/sync/language/de/field.field.node.incident_report.field_incident_types_other.yml b/config/sync/language/de/field.field.node.incident_report.field_incident_types_other.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..adf94fca8ed52811cf72a40352f5b9325849f554
+--- /dev/null
++++ b/config/sync/language/de/field.field.node.incident_report.field_incident_types_other.yml
+@@ -0,0 +1 @@
++label: 'Sonstiges bitte spezifizieren'
+diff --git a/config/sync/language/de/field.field.node.incident_report.field_start_date.yml b/config/sync/language/de/field.field.node.incident_report.field_start_date.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..95d938a4a99d33b111324c925199b598378193c1
+--- /dev/null
++++ b/config/sync/language/de/field.field.node.incident_report.field_start_date.yml
+@@ -0,0 +1 @@
++label: 'Datum der Beratung'
+diff --git a/config/sync/language/de/field.field.node.incident_report.field_time_duration.yml b/config/sync/language/de/field.field.node.incident_report.field_time_duration.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..cbc798640f79062d003e0817a4cfaa92b11aca09
+--- /dev/null
++++ b/config/sync/language/de/field.field.node.incident_report.field_time_duration.yml
+@@ -0,0 +1 @@
++label: 'Dauer der Beratung'
+diff --git a/config/sync/language/de/node.type.incident_report.yml b/config/sync/language/de/node.type.incident_report.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..b2ccab0ca67c59da44111e52febe6a3a7b1fbda3
+--- /dev/null
++++ b/config/sync/language/de/node.type.incident_report.yml
+@@ -0,0 +1,3 @@
++name: Vorfallsbericht
++description: ''
++help: ''
+diff --git a/config/sync/language/de/taxonomy.vocabulary.attack_vectors.yml b/config/sync/language/de/taxonomy.vocabulary.attack_vectors.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..dcdf364acdfa80ac2d01299889ca069d59ecd289
+--- /dev/null
++++ b/config/sync/language/de/taxonomy.vocabulary.attack_vectors.yml
+@@ -0,0 +1,2 @@
++name: Angriffsvektoren
++description: ''
+diff --git a/config/sync/language/de/taxonomy.vocabulary.incident_types.yml b/config/sync/language/de/taxonomy.vocabulary.incident_types.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..04a52e4b397f77c44837a222c380956ed2f6d828
+--- /dev/null
++++ b/config/sync/language/de/taxonomy.vocabulary.incident_types.yml
+@@ -0,0 +1,2 @@
++name: Vorfallstypen
++description: ''
+diff --git a/config/sync/language/de/workflows.workflow.incident_report.yml b/config/sync/language/de/workflows.workflow.incident_report.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..23021a7e94b3d3cfb7e97cc690e206890fe14f7a
+--- /dev/null
++++ b/config/sync/language/de/workflows.workflow.incident_report.yml
+@@ -0,0 +1,24 @@
++label: Vorfallsbericht
++type_settings:
++  states:
++    draft:
++      label: Entwurf
++    published:
++      label: Veröffentlicht
++    review_requested:
++      label: 'In Prüfung'
++    revision_requested:
++      label: 'In Korrektur'
++    unpublished:
++      label: Unveröffentlicht
++  transitions:
++    create_draft:
++      label: 'Entwurf erstellen'
++    publish:
++      label: Veröffentlichen
++    request_review:
++      label: 'Bitte um Prüfung'
++    request_revision:
++      label: 'Bitte um Korrektur'
++    unpublish:
++      label: Unveröffentlichen
+diff --git a/config/sync/node.type.incident_report.yml b/config/sync/node.type.incident_report.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..ff1ebc39c1b1dcd396acf25f3d50dfd4998051b3
+--- /dev/null
++++ b/config/sync/node.type.incident_report.yml
+@@ -0,0 +1,24 @@
++uuid: 56ed4655-af56-43ed-bc0d-c05ab22a79d8
++langcode: en
++status: true
++dependencies:
++  module:
++    - menu_ui
++    - node_keep
++    - search_api_exclude
++third_party_settings:
++  menu_ui:
++    available_menus: {  }
++    parent: ''
++  node_keep:
++    node_keeper: false
++    alias_keeper: false
++  search_api_exclude:
++    enabled: false
++name: 'Incident report'
++type: incident_report
++description: null
++help: null
++new_revision: true
++preview_mode: 1
++display_submitted: false
+diff --git a/config/sync/rabbit_hole.behavior_settings.taxonomy_vocabulary_attack_vectors.yml b/config/sync/rabbit_hole.behavior_settings.taxonomy_vocabulary_attack_vectors.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..c2822f91c19b9ea712a25c1ca3229aa6f3ef4062
+--- /dev/null
++++ b/config/sync/rabbit_hole.behavior_settings.taxonomy_vocabulary_attack_vectors.yml
+@@ -0,0 +1,14 @@
++uuid: 9ee7a718-76a3-4564-abfb-204fde064604
++langcode: en
++status: true
++dependencies:
++  config:
++    - taxonomy.vocabulary.attack_vectors
++id: taxonomy_vocabulary_attack_vectors
++entity_type_id: taxonomy_vocabulary
++entity_id: attack_vectors
++action: page_not_found
++allow_override: 0
++redirect: ''
++redirect_code: 301
++redirect_fallback_action: access_denied
+diff --git a/config/sync/rabbit_hole.behavior_settings.taxonomy_vocabulary_incident_types.yml b/config/sync/rabbit_hole.behavior_settings.taxonomy_vocabulary_incident_types.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..fdacb6934baacee25eb1818cb9f76483d02e3c0e
+--- /dev/null
++++ b/config/sync/rabbit_hole.behavior_settings.taxonomy_vocabulary_incident_types.yml
+@@ -0,0 +1,14 @@
++uuid: f897f26d-e0ce-4e8e-9cff-5460af82e136
++langcode: en
++status: true
++dependencies:
++  config:
++    - taxonomy.vocabulary.incident_types
++id: taxonomy_vocabulary_incident_types
++entity_type_id: taxonomy_vocabulary
++entity_id: incident_types
++action: page_not_found
++allow_override: 0
++redirect: ''
++redirect_code: 301
++redirect_fallback_action: access_denied
+diff --git a/config/sync/save_edit.settings.yml b/config/sync/save_edit.settings.yml
+index 150dba11caa26be5108f271bbd62072c12c9280c..26ea424a4e03e7d370c278c4eb6ad4ed94b6b99d 100644
+--- a/config/sync/save_edit.settings.yml
++++ b/config/sync/save_edit.settings.yml
+@@ -19,4 +19,5 @@ node_types:
+   job: job
+   page: page
+   report_page: report_page
++  incident_report: '0'
+ save_button_text: ''
+diff --git a/config/sync/taxonomy.vocabulary.attack_vectors.yml b/config/sync/taxonomy.vocabulary.attack_vectors.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..d24226467a29bdab70c576e6523ee9daef074c10
+--- /dev/null
++++ b/config/sync/taxonomy.vocabulary.attack_vectors.yml
+@@ -0,0 +1,9 @@
++uuid: e7bc949a-c83a-43c0-a118-7eec90dbccac
++langcode: en
++status: true
++dependencies: {  }
++name: 'Attack vectors'
++vid: attack_vectors
++description: CSN
++weight: 0
++new_revision: true
+diff --git a/config/sync/taxonomy.vocabulary.incident_types.yml b/config/sync/taxonomy.vocabulary.incident_types.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..0a8287927cdc096a6790ffb1431f9f59784051bf
+--- /dev/null
++++ b/config/sync/taxonomy.vocabulary.incident_types.yml
+@@ -0,0 +1,9 @@
++uuid: 51b110df-a1bc-4bee-bd54-39e6bbd0d988
++langcode: en
++status: true
++dependencies: {  }
++name: 'Incident types'
++vid: incident_types
++description: CSN
++weight: 0
++new_revision: true
+diff --git a/config/sync/user.role.csn_deh.yml b/config/sync/user.role.csn_deh.yml
+index c418e873ccfb10648df22e19e286780530e86572..47472c4c7442d7ee9a79a27cdb8d684c4a0ec020 100644
+--- a/config/sync/user.role.csn_deh.yml
++++ b/config/sync/user.role.csn_deh.yml
+@@ -5,7 +5,7 @@ dependencies:
+   module:
+     - tfa
+ id: csn_deh
+-label: 'Digital First-Aider'
++label: 'Digital First Responder'
+ weight: -6
+ is_admin: false
+ permissions:
+diff --git a/config/sync/workflows.workflow.incident_report.yml b/config/sync/workflows.workflow.incident_report.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..de2053a3922d007cd6622427a3e1ca8e4e205c76
+--- /dev/null
++++ b/config/sync/workflows.workflow.incident_report.yml
+@@ -0,0 +1,76 @@
++uuid: 8e2be073-0776-4063-8748-2506c8ecaa50
++langcode: en
++status: true
++dependencies:
++  config:
++    - node.type.incident_report
++  module:
++    - content_moderation
++id: incident_report
++label: 'Incident report'
++type: content_moderation
++type_settings:
++  states:
++    draft:
++      label: Draft
++      weight: -3
++      published: false
++      default_revision: false
++    published:
++      label: Published
++      weight: 0
++      published: true
++      default_revision: true
++    review_requested:
++      label: 'Review requested'
++      weight: -2
++      published: false
++      default_revision: false
++    revision_requested:
++      label: 'Revision requested'
++      weight: -1
++      published: false
++      default_revision: false
++    unpublished:
++      label: Unpublished
++      weight: 1
++      published: false
++      default_revision: true
++  transitions:
++    create_draft:
++      label: 'Create draft'
++      from:
++        - draft
++      to: draft
++      weight: -3
++    publish:
++      label: Publish
++      from:
++        - draft
++        - published
++      to: published
++      weight: 0
++    request_review:
++      label: 'Request review'
++      from:
++        - draft
++        - revision_requested
++      to: review_requested
++      weight: -2
++    request_revision:
++      label: 'Request revision'
++      from:
++        - review_requested
++        - revision_requested
++      to: revision_requested
++      weight: -1
++    unpublish:
++      label: Unpublish
++      from:
++        - published
++      to: unpublished
++      weight: 1
++  entity_types:
++    node:
++      - incident_report
++  default_moderation_state: draft
+diff --git a/web/modules/custom/csn_custom/config/schema/csn_custom.schema.yml b/web/modules/custom/csn_custom/config/schema/csn_custom.schema.yml
+index dc1cb8746e71cf57663ef8c5958c6cdbce643a34..8fbd34316d320e89df9b9ef02e5bf2e39a3bd63e 100644
+--- a/web/modules/custom/csn_custom/config/schema/csn_custom.schema.yml
++++ b/web/modules/custom/csn_custom/config/schema/csn_custom.schema.yml
+@@ -16,3 +16,11 @@ condition.plugin.csn_page:
+     csn_page:
+       type: boolean
+       label: Is CSN page
++
++field.widget.settings.csn_taxonomy_subtree:
++  type: mapping
++  label: Taxonomy Subtree widget settings
++  mapping:
++    parent:
++      type: string
++      label: Parent UUID
+diff --git a/web/modules/custom/bsi_custom/content/group/csn.1f552874-102b-49ca-94cc-98dcdd2a83f0.yml b/web/modules/custom/csn_custom/content/group/csn.1f552874-102b-49ca-94cc-98dcdd2a83f0.yml
+similarity index 100%
+rename from web/modules/custom/bsi_custom/content/group/csn.1f552874-102b-49ca-94cc-98dcdd2a83f0.yml
+rename to web/modules/custom/csn_custom/content/group/csn.1f552874-102b-49ca-94cc-98dcdd2a83f0.yml
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.11131a6e-e757-45e0-865c-4e6b878de2a2.yml b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.11131a6e-e757-45e0-865c-4e6b878de2a2.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..417e11ea2b4c9c7778a675716129e3c28eb1f1c6
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.11131a6e-e757-45e0-865c-4e6b878de2a2.yml
+@@ -0,0 +1,50 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 11131a6e-e757-45e0-865c-4e6b878de2a2
++  bundle: attack_vectors
++  default_langcode: de
++  depends:
++    6379f9db-6603-4ec7-8da8-8f704420b6cb: taxonomy_term
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Diebstahl von IT Komponenten'
++  weight:
++    -
++      value: 0
++  parent:
++    -
++      entity: 6379f9db-6603-4ec7-8da8-8f704420b6cb
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835213
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.2958e740-9bd2-4321-9fba-fce50cacbab5.yml b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.2958e740-9bd2-4321-9fba-fce50cacbab5.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..aa464d6f1c859c6e5eb3350e619852e3e0e6215c
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.2958e740-9bd2-4321-9fba-fce50cacbab5.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 2958e740-9bd2-4321-9fba-fce50cacbab5
++  bundle: attack_vectors
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: Sonstiges
++  weight:
++    -
++      value: 6
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835252
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.39e1a400-f26b-45f1-a4dd-46ad019d93f0.yml b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.39e1a400-f26b-45f1-a4dd-46ad019d93f0.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..21a378cb2a754233a52b38eaa1e40e8e56e5935a
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.39e1a400-f26b-45f1-a4dd-46ad019d93f0.yml
+@@ -0,0 +1,50 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 39e1a400-f26b-45f1-a4dd-46ad019d93f0
++  bundle: attack_vectors
++  default_langcode: de
++  depends:
++    d9edce59-2f11-426b-b597-8971a22033fe: taxonomy_term
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Schadsoftware mit Ransomware'
++  weight:
++    -
++      value: 1
++  parent:
++    -
++      entity: d9edce59-2f11-426b-b597-8971a22033fe
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835232
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.5ed267f3-b556-4fa5-8534-f0769de6fb87.yml b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.5ed267f3-b556-4fa5-8534-f0769de6fb87.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..05a6218cbf2405d22621040be1c36cd7948c8c48
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.5ed267f3-b556-4fa5-8534-f0769de6fb87.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 5ed267f3-b556-4fa5-8534-f0769de6fb87
++  bundle: attack_vectors
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Hacking und Manipulation'
++  weight:
++    -
++      value: 5
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835250
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.6379f9db-6603-4ec7-8da8-8f704420b6cb.yml b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.6379f9db-6603-4ec7-8da8-8f704420b6cb.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..2742871219c64a231e336e4458d46f0b730b111c
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.6379f9db-6603-4ec7-8da8-8f704420b6cb.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 6379f9db-6603-4ec7-8da8-8f704420b6cb
++  bundle: attack_vectors
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Physischer Angriff / Zugriff'
++  weight:
++    -
++      value: 1
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835208
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.714e342a-abc5-4fdb-aa36-8a557475b0de.yml b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.714e342a-abc5-4fdb-aa36-8a557475b0de.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..d7475ae674639d118d76079eb012a2cc957c3f72
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.714e342a-abc5-4fdb-aa36-8a557475b0de.yml
+@@ -0,0 +1,52 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 714e342a-abc5-4fdb-aa36-8a557475b0de
++  bundle: attack_vectors
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Social Engineering'
++  description:
++    -
++      value: 'z.B. Phishing'
++      format: plain_text
++  weight:
++    -
++      value: 0
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835170
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.b722ca08-3fe0-4af2-82c4-8c7c62c905ba.yml b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.b722ca08-3fe0-4af2-82c4-8c7c62c905ba.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..24ddf013c57b98d2ff932503d78e1632fc2becc8
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.b722ca08-3fe0-4af2-82c4-8c7c62c905ba.yml
+@@ -0,0 +1,50 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: b722ca08-3fe0-4af2-82c4-8c7c62c905ba
++  bundle: attack_vectors
++  default_langcode: de
++  depends:
++    d9edce59-2f11-426b-b597-8971a22033fe: taxonomy_term
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Schadsoftware mit einer anderen Art von Schadprogramm'
++  weight:
++    -
++      value: 0
++  parent:
++    -
++      entity: d9edce59-2f11-426b-b597-8971a22033fe
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835242
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.bd60028d-2141-493e-852c-9e75aa29d9e5.yml b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.bd60028d-2141-493e-852c-9e75aa29d9e5.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..fbfb42d5c2eb5a42e8cbe913e0597d66dfad1f2d
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.bd60028d-2141-493e-852c-9e75aa29d9e5.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: bd60028d-2141-493e-852c-9e75aa29d9e5
++  bundle: attack_vectors
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: DDoS
++  weight:
++    -
++      value: 4
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835247
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.c61c6c02-2560-46d2-b5b8-690595d87caa.yml b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.c61c6c02-2560-46d2-b5b8-690595d87caa.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..4df46f1a07fe407fb23c2d59a99baf3f615de5c8
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.c61c6c02-2560-46d2-b5b8-690595d87caa.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: c61c6c02-2560-46d2-b5b8-690595d87caa
++  bundle: attack_vectors
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: Botnet
++  weight:
++    -
++      value: 3
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835245
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.c80be198-b4c8-47b5-9999-c5aa0eb23b05.yml b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.c80be198-b4c8-47b5-9999-c5aa0eb23b05.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..0e3bb869a93a09065761f9f46f69a3ce40cef673
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.c80be198-b4c8-47b5-9999-c5aa0eb23b05.yml
+@@ -0,0 +1,50 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: c80be198-b4c8-47b5-9999-c5aa0eb23b05
++  bundle: attack_vectors
++  default_langcode: de
++  depends:
++    6379f9db-6603-4ec7-8da8-8f704420b6cb: taxonomy_term
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'unbefugter Zugriff'
++  weight:
++    -
++      value: 1
++  parent:
++    -
++      entity: 6379f9db-6603-4ec7-8da8-8f704420b6cb
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835224
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.d9edce59-2f11-426b-b597-8971a22033fe.yml b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.d9edce59-2f11-426b-b597-8971a22033fe.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..291d33e8537030f2126b89acc8b7f90d0b61ad12
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.d9edce59-2f11-426b-b597-8971a22033fe.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: d9edce59-2f11-426b-b597-8971a22033fe
++  bundle: attack_vectors
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: Schadsoftware
++  weight:
++    -
++      value: 2
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835227
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.e1049073-cef9-4992-9f63-5e7545ba2d83.yml b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.e1049073-cef9-4992-9f63-5e7545ba2d83.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..5766f0a912f74de6877705c00dae80a92cb0e95e
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/attack_vectors.e1049073-cef9-4992-9f63-5e7545ba2d83.yml
+@@ -0,0 +1,50 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: e1049073-cef9-4992-9f63-5e7545ba2d83
++  bundle: attack_vectors
++  default_langcode: de
++  depends:
++    6379f9db-6603-4ec7-8da8-8f704420b6cb: taxonomy_term
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Zerstörung/Beschädigung von IT Komponenten'
++  weight:
++    -
++      value: 2
++  parent:
++    -
++      entity: 6379f9db-6603-4ec7-8da8-8f704420b6cb
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835218
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.040a53e6-d647-4bf2-84cf-23b6f5ddea49.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.040a53e6-d647-4bf2-84cf-23b6f5ddea49.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..e45ecc4be7949b390eb14d7aeedd002a93859b9f
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.040a53e6-d647-4bf2-84cf-23b6f5ddea49.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 040a53e6-d647-4bf2-84cf-23b6f5ddea49
++  bundle: incident_types
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: Fehlbedienung
++  weight:
++    -
++      value: 13
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835438
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.17c8deba-fea0-4d9f-bd1a-b75df3cecc29.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.17c8deba-fea0-4d9f-bd1a-b75df3cecc29.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..cbc30ad95b9fe1effc4a9f632affb39ddcf212e0
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.17c8deba-fea0-4d9f-bd1a-b75df3cecc29.yml
+@@ -0,0 +1,54 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 17c8deba-fea0-4d9f-bd1a-b75df3cecc29
++  bundle: incident_types
++  default_langcode: de
++  depends:
++    f1a4da8e-d540-45a3-b476-d7e80713f03c: taxonomy_term
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Manipulation von Mitarbeitenden'
++  description:
++    -
++      value: 'z.B. CEO-Fraud'
++      format: plain_text
++  weight:
++    -
++      value: 1
++  parent:
++    -
++      entity: f1a4da8e-d540-45a3-b476-d7e80713f03c
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835481
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.2b3b5aa5-c011-4137-8378-1e88079b6719.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.2b3b5aa5-c011-4137-8378-1e88079b6719.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..175e835fd1d56c53cd2907572ee1f2e5738b4f86
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.2b3b5aa5-c011-4137-8378-1e88079b6719.yml
+@@ -0,0 +1,50 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 2b3b5aa5-c011-4137-8378-1e88079b6719
++  bundle: incident_types
++  default_langcode: de
++  depends:
++    f1a4da8e-d540-45a3-b476-d7e80713f03c: taxonomy_term
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Verlust persönlicher Daten'
++  weight:
++    -
++      value: 4
++  parent:
++    -
++      entity: f1a4da8e-d540-45a3-b476-d7e80713f03c
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835460
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.570f496d-7acf-4bab-91da-77487cb972e3.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.570f496d-7acf-4bab-91da-77487cb972e3.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..7733f19998c9c9c5b355cd4b14d7dfe984785a98
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.570f496d-7acf-4bab-91da-77487cb972e3.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 570f496d-7acf-4bab-91da-77487cb972e3
++  bundle: incident_types
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Verlust persönlicher Daten'
++  weight:
++    -
++      value: 16
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835515
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.5b503d77-8d05-4abd-97ce-6f56f6d93df2.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.5b503d77-8d05-4abd-97ce-6f56f6d93df2.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..661f6f41c41f7c54d7027f615d46f9c929bae5dd
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.5b503d77-8d05-4abd-97ce-6f56f6d93df2.yml
+@@ -0,0 +1,50 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 5b503d77-8d05-4abd-97ce-6f56f6d93df2
++  bundle: incident_types
++  default_langcode: de
++  depends:
++    f1a4da8e-d540-45a3-b476-d7e80713f03c: taxonomy_term
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: Sonstiges
++  weight:
++    -
++      value: 5
++  parent:
++    -
++      entity: f1a4da8e-d540-45a3-b476-d7e80713f03c
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835485
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.85021f68-4b07-4619-be0c-67ab5ada6788.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.85021f68-4b07-4619-be0c-67ab5ada6788.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..e31c5d317498939ea33d9465dc9124c5bf9cef5c
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.85021f68-4b07-4619-be0c-67ab5ada6788.yml
+@@ -0,0 +1,52 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 85021f68-4b07-4619-be0c-67ab5ada6788
++  bundle: incident_types
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Sperrung des Internetzugangs durch Provider'
++  description:
++    -
++      value: 'z.B. wegen Botnet-Infektion'
++      format: plain_text
++  weight:
++    -
++      value: 14
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835512
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.855c1077-590d-438c-b0e6-9c1b4ea9c05b.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.855c1077-590d-438c-b0e6-9c1b4ea9c05b.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..2976ce4e9407945bf47afe3f3168c1662ed3a67d
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.855c1077-590d-438c-b0e6-9c1b4ea9c05b.yml
+@@ -0,0 +1,50 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 855c1077-590d-438c-b0e6-9c1b4ea9c05b
++  bundle: incident_types
++  default_langcode: de
++  depends:
++    f1a4da8e-d540-45a3-b476-d7e80713f03c: taxonomy_term
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Missbrauch von Identitäten'
++  weight:
++    -
++      value: 2
++  parent:
++    -
++      entity: f1a4da8e-d540-45a3-b476-d7e80713f03c
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835474
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.8ae9df3a-b983-427c-9bbb-b52318893ece.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.8ae9df3a-b983-427c-9bbb-b52318893ece.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..705e62c532ac92a16a8a85a21db31e4d2ba8cc59
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.8ae9df3a-b983-427c-9bbb-b52318893ece.yml
+@@ -0,0 +1,50 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 8ae9df3a-b983-427c-9bbb-b52318893ece
++  bundle: incident_types
++  default_langcode: de
++  depends:
++    f1a4da8e-d540-45a3-b476-d7e80713f03c: taxonomy_term
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: Fake-Profile
++  weight:
++    -
++      value: 0
++  parent:
++    -
++      entity: f1a4da8e-d540-45a3-b476-d7e80713f03c
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835469
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.92f42ec0-4a61-4705-9e32-fedeeb17b8a6.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.92f42ec0-4a61-4705-9e32-fedeeb17b8a6.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..7d492046847e5305203ccc4fbed8eae1b66eaf4f
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.92f42ec0-4a61-4705-9e32-fedeeb17b8a6.yml
+@@ -0,0 +1,52 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 92f42ec0-4a61-4705-9e32-fedeeb17b8a6
++  bundle: incident_types
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Technische Störung'
++  description:
++    -
++      value: 'z.B. Internet oder Stromausfall'
++      format: plain_text
++  weight:
++    -
++      value: 15
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835436
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.9602c577-5405-4022-a189-47e8193f648c.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.9602c577-5405-4022-a189-47e8193f648c.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..1a23dae11f9f0ccc2bd456cbfa377d3b78f3b699
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.9602c577-5405-4022-a189-47e8193f648c.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 9602c577-5405-4022-a189-47e8193f648c
++  bundle: incident_types
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: Cyberstalking
++  weight:
++    -
++      value: 11
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835490
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.9d00f6cd-d109-42d3-a427-7c40e495f4ba.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.9d00f6cd-d109-42d3-a427-7c40e495f4ba.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..abdcdfa036835660c69fad09dc064ac772f37335
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.9d00f6cd-d109-42d3-a427-7c40e495f4ba.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: 9d00f6cd-d109-42d3-a427-7c40e495f4ba
++  bundle: incident_types
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: Cybermobbing
++  weight:
++    -
++      value: 9
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835488
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.a515e22c-1973-440c-bb28-d06f82142a2d.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.a515e22c-1973-440c-bb28-d06f82142a2d.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..06214b55b45892872c5ff84c520e7b365f4fe151
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.a515e22c-1973-440c-bb28-d06f82142a2d.yml
+@@ -0,0 +1,50 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: a515e22c-1973-440c-bb28-d06f82142a2d
++  bundle: incident_types
++  default_langcode: de
++  depends:
++    f1a4da8e-d540-45a3-b476-d7e80713f03c: taxonomy_term
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Unbefugter Zugriff auf Online-Konten'
++  weight:
++    -
++      value: 3
++  parent:
++    -
++      entity: f1a4da8e-d540-45a3-b476-d7e80713f03c
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835464
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.bf1c0a01-30fe-4df4-92a4-c9a0f33c83c5.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.bf1c0a01-30fe-4df4-92a4-c9a0f33c83c5.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..01b28f5a8eecd3c4e71a685b3253195955383ebc
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.bf1c0a01-30fe-4df4-92a4-c9a0f33c83c5.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: bf1c0a01-30fe-4df4-92a4-c9a0f33c83c5
++  bundle: incident_types
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: Betrug
++  weight:
++    -
++      value: 5
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835502
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.bf7eb534-025e-4ca5-a629-0912327ef935.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.bf7eb534-025e-4ca5-a629-0912327ef935.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..96a479fbe3e44715db9aab250877668bdfa9e99c
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.bf7eb534-025e-4ca5-a629-0912327ef935.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: bf7eb534-025e-4ca5-a629-0912327ef935
++  bundle: incident_types
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: Sonstiges
++  weight:
++    -
++      value: 17
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835517
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.dc4c4efa-8c4b-4752-a93e-a43f012d1abe.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.dc4c4efa-8c4b-4752-a93e-a43f012d1abe.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..51f60c2dfcff7726a28ad3f8d1c31c863580e570
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.dc4c4efa-8c4b-4752-a93e-a43f012d1abe.yml
+@@ -0,0 +1,52 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: dc4c4efa-8c4b-4752-a93e-a43f012d1abe
++  bundle: incident_types
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Bildbasierte Gewalt'
++  description:
++    -
++      value: 'z.B. Revenge Porn, Deep Fakes'
++      format: plain_text
++  weight:
++    -
++      value: 7
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835498
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.f162c585-1b0e-4044-8a4f-633c9ae5a3b1.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.f162c585-1b0e-4044-8a4f-633c9ae5a3b1.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..b9ee664fd28c2a7035e04ff99d8cd16d677d9b77
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.f162c585-1b0e-4044-8a4f-633c9ae5a3b1.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: f162c585-1b0e-4044-8a4f-633c9ae5a3b1
++  bundle: incident_types
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Angriff auf die Verfügbarkeit von Diensten'
++  weight:
++    -
++      value: 3
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835505
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.f1a4da8e-d540-45a3-b476-d7e80713f03c.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.f1a4da8e-d540-45a3-b476-d7e80713f03c.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..5ffa64664e578e0ca57690ab8811f5486537949b
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.f1a4da8e-d540-45a3-b476-d7e80713f03c.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: f1a4da8e-d540-45a3-b476-d7e80713f03c
++  bundle: incident_types
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Accountmissbrauch / Identitätsdiebstahl'
++  weight:
++    -
++      value: 0
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835455
+diff --git a/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.f9268b03-33e7-4b3c-b60e-7df97b58baec.yml b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.f9268b03-33e7-4b3c-b60e-7df97b58baec.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..86a9675887f41fab9dad9f2a5d8382d183e75499
+--- /dev/null
++++ b/web/modules/custom/csn_custom/content/taxonomy_term/incident_types.f9268b03-33e7-4b3c-b60e-7df97b58baec.yml
+@@ -0,0 +1,48 @@
++_meta:
++  version: '1.0'
++  entity_type: taxonomy_term
++  uuid: f9268b03-33e7-4b3c-b60e-7df97b58baec
++  bundle: incident_types
++  default_langcode: de
++default:
++  revision_user:
++    -
++      target_id: 1
++  status:
++    -
++      value: true
++  name:
++    -
++      value: 'Datenleaks und Doxing'
++  weight:
++    -
++      value: 12
++  parent:
++    -
++      target_id: 0
++  path:
++    -
++      alias: ''
++      langcode: de
++      pathauto: 0
++  rh_action:
++    -
++      value: bundle_default
++  rh_redirect_response:
++    -
++      value: 301
++  rh_redirect_fallback_action:
++    -
++      value: bundle_default
++  content_translation_source:
++    -
++      value: und
++  content_translation_outdated:
++    -
++      value: false
++  content_translation_uid:
++    -
++      target_id: 1
++  content_translation_created:
++    -
++      value: 1794835500
+diff --git a/web/modules/custom/csn_custom/src/Plugin/Field/FieldWidget/CsnTaxonomySubtreeWidget.php b/web/modules/custom/csn_custom/src/Plugin/Field/FieldWidget/CsnTaxonomySubtreeWidget.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..5af144a72722edbf10bd51917cf1069b8dfe8b5f
+--- /dev/null
++++ b/web/modules/custom/csn_custom/src/Plugin/Field/FieldWidget/CsnTaxonomySubtreeWidget.php
+@@ -0,0 +1,144 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\csn_custom\Plugin\Field\FieldWidget;
++
++use Drupal\Core\Entity\Element\EntityAutocomplete;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\Field\Attribute\FieldWidget;
++use Drupal\Core\Field\FieldDefinitionInterface;
++use Drupal\Core\Field\FieldItemListInterface;
++use Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsButtonsWidget;
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
++use Drupal\Core\StringTranslation\TranslatableMarkup;
++use Drupal\taxonomy\TermInterface;
++
++/**
++ * Defines the 'csn_taxnomy_subtree' field widget.
++ */
++#[FieldWidget(
++  id: 'csn_taxonomy_subtree',
++  label: new TranslatableMarkup('Taxonomy Subtree'),
++  field_types: [
++    'entity_reference',
++  ],
++  multiple_values: TRUE,
++)]
++final class CsnTaxonomySubtreeWidget extends OptionsButtonsWidget implements ContainerFactoryPluginInterface {
++
++  /**
++   * The array of options for the widget, filtered by parent.
++   */
++  protected array $subtreeOptions = [];
++
++  /**
++   * Constructs the plugin instance.
++   */
++  public function __construct(
++    string $plugin_id,
++    array $plugin_definition,
++    FieldDefinitionInterface $field_definition,
++    array $settings,
++    array $third_party_settings,
++    private readonly EntityTypeManagerInterface $entityTypeManager,
++  ) {
++    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function defaultSettings(): array {
++    return [
++      'parent' => NULL,
++    ] + parent::defaultSettings();
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function settingsForm(array $form, FormStateInterface $form_state): array {
++    $element['parent'] = [
++      '#type' => 'entity_autocomplete',
++      '#title' => $this->t('Parent'),
++      '#description' => $this->t('Restrict offered terms to direct children of this term.'),
++      '#target_type' => 'taxonomy_term',
++      '#target_bundles' => $this->getFieldSetting('handler_settings')['target_bundles'],
++      '#element_validate' => [
++        [EntityAutocomplete::class, 'validateEntityAutocomplete'],
++        [static::class, 'validateParent'],
++      ],
++      '#default_value' => $this->getParentEntity(),
++    ];
++    return $element;
++  }
++
++  /**
++   * Callback to validate and transform the selected entity to uuid.
++   */
++  public static function validateParent(array $element, FormStateInterface $form_state): void {
++    if ($target_id = $form_state->getValue($element['#parents'])) {
++      $entity = \Drupal::entityTypeManager()->getStorage('taxonomy_term')
++        ->load($target_id);
++      $form_state->setValueForElement($element, $entity?->uuid());
++    }
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function settingsSummary(): array {
++    $entity = $this->getParentEntity();
++    return [
++      $entity
++        ? $this->t('Children of %parent', ['%parent' => $entity->label()])
++        : $this->t('Top level'),
++    ];
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state): array {
++    $element = parent::formElement($items, $delta, $element, $form, $form_state);
++    if (!$this->subtreeOptions) {
++      $entity = $this->getParentEntity();
++      $childTerms = $this->entityTypeManager->getStorage('taxonomy_term')
++        ->loadByProperties([
++          'vid' => $this->getFieldSetting('handler_settings')['target_bundles'],
++          'parent' => $entity?->id() ?? 0,
++        ]);
++
++      // Parent already checked for options, no need to check access again.
++      $options = [];
++      foreach ($this->options as $key => $label) {
++        if (!is_array($label) && isset($childTerms[$key])) {
++          $options[$key] = $childTerms[$key]?->label();
++        }
++      }
++      array_walk_recursive($options, [$this, 'sanitizeLabel']);
++
++      $this->subtreeOptions = $options;
++    }
++
++    $element['#options'] = $this->subtreeOptions;
++
++    return $element;
++  }
++
++  /**
++   * Helper to get the parent entity, if configured.
++   */
++  protected function getParentEntity(): ?TermInterface {
++    $entity = NULL;
++    if ($uuid = $this->getSetting('parent')) {
++      $entity = $this->entityTypeManager->getStorage('taxonomy_term')
++        ->loadByProperties(['uuid' => $uuid]);
++      $entity = reset($entity);
++    }
++    return $entity;
++  }
++
++}

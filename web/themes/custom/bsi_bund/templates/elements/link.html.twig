@@ -15,7 +15,9 @@
   '': false,
 }[link_type|default('')] %}
 
-{% if link_type == 'external' %}
+{% if attributes.target|default(url.options.attributes.target|default(null)) %}
+  {% set target = attributes.target|default(url.options.attributes.target) %}
+{% elseif link_type == 'external' %}
   {% set target = '_blank' %}
 {% endif %}
 

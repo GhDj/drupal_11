@@ -22,7 +22,9 @@ tags:
   generator: 'Drupal 11 (https://www.drupal.org)'
   google_site_verification: PQGOwbYQDXCrOHMoHTFCh1I3b_OXc7qOYH8RsROhtQk
   icon_16x16: /themes/custom/bsi_bund/src/assets/default/favicon/favicon-16x16.png
+  icon_192x192: /themes/custom/bsi_bund/src/assets/default/favicon/android-chrome-192x192.png
   icon_32x32: /themes/custom/bsi_bund/src/assets/default/favicon/favicon-32x32.png
+  icon_96x96: /themes/custom/bsi_bund/src/assets/default/favicon/android-chrome-96x96.png
   mask_icon:
     href: /themes/custom/bsi_bund/src/assets/default/favicon/safari-pinned-tab.svg
     color: ''
@@ -54,3 +56,4 @@ tags:
   schema_web_page_breadcrumb: 'Yes'
   schema_web_page_type: WebPage
   title: '[site:name] - [current-page:title]'
+  web_manifest: /themes/custom/bsi_bund/src/assets/default/manifest.json

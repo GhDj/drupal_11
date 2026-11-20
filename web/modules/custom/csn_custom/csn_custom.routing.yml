@@ -1,0 +1,15 @@
+csn_custom.settings:
+  path: '/admin/config/system/csn'
+  defaults:
+    _title: 'CSN Settings'
+    _form: 'Drupal\csn_custom\Form\SettingsForm'
+  requirements:
+    _permission: 'administer csn configuration'
+
+csn_custom.feedback:
+  path: '/feedback/{token}'
+  defaults:
+    _title: 'Feedback'
+    _controller: '\Drupal\csn_custom\Controller\FeedbackPageController'
+  requirements:
+    _permission: 'access content'

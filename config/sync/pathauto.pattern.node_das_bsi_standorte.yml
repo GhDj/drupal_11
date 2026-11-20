@@ -1,0 +1,41 @@
+uuid: 4bf2b45d-ab81-4207-926e-7734597a9bc5
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_das_bsi_standorte
+label: 'Node: Das BSI › Standorte'
+type: 'canonical_entities:node'
+pattern: '/the-bsi/locations/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: 7946999f-45da-41a0-8da2-6d2ea5bb6efb
+    property: null
+  0b1b4fa8-97e3-45d2-91bb-bfb57cdf3dd6:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Locations
+    property: null
+selection_logic: and
+weight: -24
+relationships:
+  'node:langcode:language':
+    label: Language

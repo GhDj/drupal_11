@@ -1,0 +1,13 @@
+services:
+  Drupal\csn_custom\CsnContextChecker:
+    autowire: true
+
+  path_processor.csn_logout:
+    class: Drupal\csn_custom\PathProcessor\LogoutPathProcessor
+    autowire: true
+    tags:
+      - { name: path_processor_outbound }
+
+  csn_custom.feedback:
+    class: Drupal\csn_custom\FeedbackService
+    autowire: true

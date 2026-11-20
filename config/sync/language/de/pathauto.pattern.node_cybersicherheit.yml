@@ -1,0 +1,4 @@
+pattern: '/cybersicherheit/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    value: Cybersicherheit

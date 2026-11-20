@@ -12,7 +12,7 @@ module:
   breakpoint: 0
   bsi_access: 0
   bsi_charts: 0
-  bsi_custom: 0
+  bsi_csn: 0
   bsi_editor: 0
   bsi_report: 0
   bsi_search: 0
@@ -32,6 +32,7 @@ module:
   config_translation: 0
   content_moderation: 0
   contextual: 0
+  csn_custom: 0
   csp: 0
   ctools: 0
   ctools_block: 0
@@ -46,7 +47,6 @@ module:
   editoria11y: 0
   email_registration: 0
   encrypt: 0
-  entity_field_condition: 0
   entity_reference_revisions: 0
   environment_indicator: 0
   environment_indicator_ui: 0
@@ -183,6 +183,7 @@ module:
   menu_admin_per_menu: 1
   pathauto: 1
   bsi_cert: 10
+  bsi_custom: 10
   bsi_media: 10
   content_translation: 10
   views: 10

@@ -1,0 +1,40 @@
+uuid: 9a643579-63ad-4f42-a8f8-e7b75a69c08f
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_service_e_rechnung
+label: 'Node: Service › E-Rechnung'
+type: 'canonical_entities:node'
+pattern: '/service/e-invoice/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' f64a924e-4818-4a1b-bbec-ebc257e143b1'
+    property: null
+  f3fa2fc2-fe6c-48a6-81a8-8e29e06574c8:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: E-Rechnung
+selection_logic: and
+weight: 17
+relationships:
+  'node:langcode:language':
+    label: Language

@@ -93,7 +93,7 @@ class ChartHooks {
       ?? $this->languageManager->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
 
     // If a trend dataset is present, ensure it's a line.
-    $index = array_find_key($definition['data']['datasets'], static fn (array $dataset)
+    $index = array_find_key($definition['data']['datasets'] ?? [], static fn (array $dataset)
       => $dataset['label'] === static::LABEL_TRENDLINE);
     if ($index !== NULL) {
       $dataset = &$definition['data']['datasets'][$index];
