@@ -14,7 +14,8 @@
 $module_installer = \Drupal::service('module_installer');
 $module_handler = \Drupal::service('module_handler');
 
-$required_modules = ['duration_field', 'csn_custom'];
+// Required: duration_field must be installed.
+$required_modules = ['duration_field'];
 foreach ($required_modules as $module) {
   if (!$module_handler->moduleExists($module)) {
     echo "==> Enabling $module...\n";
@@ -31,6 +32,23 @@ foreach ($required_modules as $module) {
   else {
     echo "==> $module already enabled.\n";
   }
+}
+
+// Optional: csn_custom (depends on group module). Enable if possible.
+if (!$module_handler->moduleExists('csn_custom')) {
+  echo "==> Enabling csn_custom...\n";
+  try {
+    $module_installer->install(['csn_custom']);
+    echo "    csn_custom enabled.\n";
+  }
+  catch (\Exception $e) {
+    echo "    WARNING: Could not enable csn_custom: " . $e->getMessage() . "\n";
+    echo "    The CsnTaxonomySubtreeWidget won't be available — incident type fields will use default widget.\n";
+    echo "    Continuing with config import...\n";
+  }
+}
+else {
+  echo "==> csn_custom already enabled.\n";
 }
 
 $config_path = DRUPAL_ROOT . '/../config/sync';
@@ -74,8 +92,7 @@ $configs = [
   'core.base_field_override.taxonomy_term.attack_vectors.description',
   'core.base_field_override.taxonomy_term.incident_types.description',
 
-  // 6. Form display.
-  'core.entity_form_display.node.incident_report.default',
+  // 6. Form display (depends on csn_custom for widget — imported separately below).
 
   // 7. View displays.
   'core.entity_view_display.node.incident_report.default',
@@ -168,6 +185,46 @@ foreach ($configs as $config_name) {
   catch (\Exception $e) {
     echo "[ERROR] $config_name — " . $e->getMessage() . "\n";
     $errors++;
+  }
+}
+
+// Import form display (may depend on csn_custom for the widget).
+echo "\n==> Importing form display...\n";
+$form_display_name = 'core.entity_form_display.node.incident_report.default';
+$fd_data = $source->read($form_display_name);
+if ($fd_data) {
+  // If csn_custom is not enabled, remove its dependency and use default widget.
+  if (!$module_handler->moduleExists('csn_custom')) {
+    if (isset($fd_data['dependencies']['module'])) {
+      $fd_data['dependencies']['module'] = array_values(
+        array_diff($fd_data['dependencies']['module'], ['csn_custom'])
+      );
+    }
+    // Switch csn_taxonomy_subtree widgets to default options_buttons.
+    foreach ($fd_data['content'] ?? [] as $field_name => &$field_config) {
+      if (isset($field_config['type']) && $field_config['type'] === 'csn_taxonomy_subtree') {
+        $field_config['type'] = 'options_buttons';
+        $field_config['settings'] = [];
+        echo "    Switched $field_name widget to options_buttons (csn_custom not available)\n";
+      }
+    }
+    unset($field_config);
+  }
+  try {
+    $storage = $entity_type_manager->getStorage('entity_form_display');
+    $existing = $storage->load($fd_data['id']);
+    if ($existing) {
+      echo "[EXISTS] $form_display_name\n";
+    }
+    else {
+      unset($fd_data['uuid']);
+      $entity = $storage->createFromStorageRecord($fd_data);
+      $entity->save();
+      echo "[CREATED] $form_display_name\n";
+    }
+  }
+  catch (\Exception $e) {
+    echo "[ERROR] $form_display_name — " . $e->getMessage() . "\n";
   }
 }
 
