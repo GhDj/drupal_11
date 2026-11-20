@@ -5,7 +5,7 @@ dependencies:
   module:
     - tfa
 id: csn_deh
-label: 'Digital First-Aider'
+label: 'Digital First Responder'
 weight: -6
 is_admin: false
 permissions:

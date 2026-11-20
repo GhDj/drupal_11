@@ -41,6 +41,7 @@ module:
   dblog: 0
   default_content: 0
   diff: 0
+  duration_field: 0
   duplicate_node: 0
   dynamic_page_cache: 0
   editor: 0

@@ -1,0 +1,23 @@
+uuid: 1c7f1150-74ee-4bdc-b80d-822002c6abb2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_time_duration
+    - node.type.incident_report
+  module:
+    - duration_field
+id: node.incident_report.field_time_duration
+field_name: field_time_duration
+entity_type: node
+bundle: incident_report
+label: 'Duration of the consultation'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  granularity: 'h:i'
+  include_weeks: false
+field_type: duration

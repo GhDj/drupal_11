@@ -1,0 +1,50 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: e1049073-cef9-4992-9f63-5e7545ba2d83
+  bundle: attack_vectors
+  default_langcode: de
+  depends:
+    6379f9db-6603-4ec7-8da8-8f704420b6cb: taxonomy_term
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Zerstörung/Beschädigung von IT Komponenten'
+  weight:
+    -
+      value: 2
+  parent:
+    -
+      entity: 6379f9db-6603-4ec7-8da8-8f704420b6cb
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1794835218

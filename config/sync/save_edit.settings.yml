@@ -20,3 +20,4 @@ node_types:
   page: page
   report_page: report_page
 save_button_text: ''
+  incident_report: '0'

@@ -1,0 +1,16 @@
+uuid: faf1c7ae-5002-46a9-89f7-43eba356072e
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.incident_report
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.incident_report
+target_entity_type_id: node
+target_bundle: incident_report
+default_langcode: de
+language_alterable: false

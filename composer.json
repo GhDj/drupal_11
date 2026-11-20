@@ -58,6 +58,7 @@
         "drupal/default_content": "^2.0@beta",
         "drupal/diff": "^2.1",
         "drupal/duplicate_node": "^2.0",
+        "drupal/duration_field": "^2.2",
         "drupal/editoria11y": "^2.2",
         "drupal/email_registration": "^2.0@RC",
         "drupal/entity_field_condition": "^1.5",

@@ -1,0 +1,92 @@
+uuid: 3bc11bb3-92a2-409a-8d41-003528945e60
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.incident_report.body
+    - field.field.node.incident_report.field_incident_types
+    - field.field.node.incident_report.field_incident_types_abuse
+    - field.field.node.incident_report.field_incident_types_abuse_other
+    - field.field.node.incident_report.field_incident_types_other
+    - field.field.node.incident_report.field_start_date
+    - field.field.node.incident_report.field_time_duration
+    - node.type.incident_report
+  module:
+    - datetime
+    - duration_field
+    - text
+id: node.incident_report.full
+targetEntityType: node
+bundle: incident_report
+mode: full
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_incident_types:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_incident_types_abuse:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_incident_types_abuse_other:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_incident_types_other:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_start_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_time_duration:
+    type: duration_human_display
+    label: above
+    settings:
+      text_length: full
+      separator: space
+    third_party_settings: {  }
+    weight: 7
+    region: content
+hidden:
+  changed: true
+  created: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  title: true
+  uid: true

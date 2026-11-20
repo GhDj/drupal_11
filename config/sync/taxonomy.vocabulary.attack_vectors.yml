@@ -1,0 +1,9 @@
+uuid: e7bc949a-c83a-43c0-a118-7eec90dbccac
+langcode: en
+status: true
+dependencies: {  }
+name: 'Attack vectors'
+vid: attack_vectors
+description: CSN
+weight: 0
+new_revision: true

@@ -1,0 +1,29 @@
+uuid: 92772234-39f5-4760-afeb-373d4be67452
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_incident_types_abuse
+    - node.type.incident_report
+    - taxonomy.vocabulary.incident_types
+id: node.incident_report.field_incident_types_abuse
+field_name: field_incident_types_abuse
+entity_type: node
+bundle: incident_report
+label: 'Account misuse / identity theft refers to'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      incident_types: incident_types
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
