@@ -92,7 +92,8 @@ $configs = [
   'core.base_field_override.taxonomy_term.attack_vectors.description',
   'core.base_field_override.taxonomy_term.incident_types.description',
 
-  // 6. Form display (depends on csn_custom for widget — imported separately below).
+  // 6. Form display.
+  'core.entity_form_display.node.incident_report.default',
 
   // 7. View displays.
   'core.entity_view_display.node.incident_report.default',
@@ -152,6 +153,24 @@ foreach ($configs as $config_name) {
     }
   }
 
+  // If csn_custom is not enabled, patch form display to use default widget.
+  if ($config_name === 'core.entity_form_display.node.incident_report.default'
+      && !$module_handler->moduleExists('csn_custom')) {
+    if (isset($data['dependencies']['module'])) {
+      $data['dependencies']['module'] = array_values(
+        array_diff($data['dependencies']['module'], ['csn_custom'])
+      );
+    }
+    foreach ($data['content'] ?? [] as $field_name => &$field_config) {
+      if (isset($field_config['type']) && $field_config['type'] === 'csn_taxonomy_subtree') {
+        $field_config['type'] = 'options_buttons';
+        $field_config['settings'] = [];
+        echo "    Switched $field_name widget to options_buttons (csn_custom not available)\n";
+      }
+    }
+    unset($field_config);
+  }
+
   try {
     if ($entity_type_id) {
       $storage = $entity_type_manager->getStorage($entity_type_id);
@@ -159,11 +178,21 @@ foreach ($configs as $config_name) {
       $id_key = $entity_type_def->getKey('id');
       $id = $data[$id_key] ?? $data['id'] ?? NULL;
 
-      if ($id && $storage->load($id)) {
-        // For settings-like entities (save_edit, user.role), update in place.
-        if (in_array($config_name, ['save_edit.settings', 'user.role.csn_deh'])) {
-          \Drupal::configFactory()->getEditable($config_name)->setData($data)->save();
-          echo "[UPDATED] $config_name\n";
+      $existing = $id ? $storage->load($id) : NULL;
+      if ($existing) {
+        // For displays and settings, delete and re-create to ensure full update.
+        $always_update = [
+          'entity_form_display', 'entity_view_display',
+          'user_role',
+        ];
+        if (in_array($entity_type_id, $always_update)
+            || str_starts_with($config_name, 'save_edit.')
+            || str_starts_with($config_name, 'rabbit_hole.')) {
+          $existing->delete();
+          unset($data['uuid']);
+          $entity = $storage->createFromStorageRecord($data);
+          $entity->save();
+          echo "[REPLACED] $config_name\n";
         }
         else {
           echo "[EXISTS] $config_name\n";
@@ -188,45 +217,6 @@ foreach ($configs as $config_name) {
   }
 }
 
-// Import form display (may depend on csn_custom for the widget).
-echo "\n==> Importing form display...\n";
-$form_display_name = 'core.entity_form_display.node.incident_report.default';
-$fd_data = $source->read($form_display_name);
-if ($fd_data) {
-  // If csn_custom is not enabled, remove its dependency and use default widget.
-  if (!$module_handler->moduleExists('csn_custom')) {
-    if (isset($fd_data['dependencies']['module'])) {
-      $fd_data['dependencies']['module'] = array_values(
-        array_diff($fd_data['dependencies']['module'], ['csn_custom'])
-      );
-    }
-    // Switch csn_taxonomy_subtree widgets to default options_buttons.
-    foreach ($fd_data['content'] ?? [] as $field_name => &$field_config) {
-      if (isset($field_config['type']) && $field_config['type'] === 'csn_taxonomy_subtree') {
-        $field_config['type'] = 'options_buttons';
-        $field_config['settings'] = [];
-        echo "    Switched $field_name widget to options_buttons (csn_custom not available)\n";
-      }
-    }
-    unset($field_config);
-  }
-  try {
-    $storage = $entity_type_manager->getStorage('entity_form_display');
-    $existing = $storage->load($fd_data['id']);
-    if ($existing) {
-      echo "[EXISTS] $form_display_name\n";
-    }
-    else {
-      unset($fd_data['uuid']);
-      $entity = $storage->createFromStorageRecord($fd_data);
-      $entity->save();
-      echo "[CREATED] $form_display_name\n";
-    }
-  }
-  catch (\Exception $e) {
-    echo "[ERROR] $form_display_name — " . $e->getMessage() . "\n";
-  }
-}
 
 // Import German translations.
 echo "\n==> Importing German translations...\n";
