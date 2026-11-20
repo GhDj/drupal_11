@@ -12,7 +12,6 @@ module:
   breakpoint: 0
   bsi_access: 0
   bsi_charts: 0
-  bsi_csn: 0
   bsi_editor: 0
   bsi_report: 0
   bsi_search: 0

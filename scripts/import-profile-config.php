@@ -15,7 +15,7 @@
 $module_installer = \Drupal::service('module_installer');
 $module_handler = \Drupal::service('module_handler');
 
-$required_modules = ['profile', 'address', 'office_hours', 'telephone', 'bsi_csn'];
+$required_modules = ['profile', 'address', 'office_hours', 'telephone', 'csn_custom'];
 foreach ($required_modules as $module) {
   if (!$module_handler->moduleExists($module)) {
     echo "==> Enabling $module...\n";
@@ -142,13 +142,13 @@ echo "\n=== Done: $success imported, $errors errors ===\n";
 
 // Seed language terms.
 echo "\n==> Seeding CSN language terms...\n";
-$module_path = \Drupal::service('extension.list.module')->getPath('bsi_csn');
-$install_file = $module_path . '/bsi_csn.install';
+$module_path = \Drupal::service('extension.list.module')->getPath('csn_custom');
+$install_file = $module_path . '/csn_custom.install';
 if (file_exists($install_file)) {
   require_once $install_file;
 }
-if (function_exists('_bsi_csn_seed_languages')) {
-  _bsi_csn_seed_languages();
+if (function_exists('_csn_custom_seed_languages')) {
+  _csn_custom_seed_languages();
   echo "    Language terms seeded.\n";
 }
 

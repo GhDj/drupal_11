@@ -1,7 +1,0 @@
-name: 'Cyber Security Network'
-type: module
-description: 'Customizations for the Cyber Security Network'
-package: CSN
-lifecycle: deprecated
-lifecycle_link: 'https://gitlab.init.de/bsi1/bsi_bund/-/merge_requests/787'
-core_version_requirement: ^10 || ^11

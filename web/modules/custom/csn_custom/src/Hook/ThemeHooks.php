@@ -35,6 +35,10 @@ class ThemeHooks {
           'content' => NULL,
         ],
       ],
+      'csn_profile_form' => [
+        'render element' => 'form',
+        'template' => 'csn-profile-form',
+      ],
     ];
   }
 

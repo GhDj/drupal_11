@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\bsi_csn\Form;
+namespace Drupal\csn_custom\Form;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormBase;
@@ -35,7 +35,7 @@ final class ProfileForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId(): string {
-    return 'bsi_csn_profile_form';
+    return 'csn_custom_profile_form';
   }
 
   /**
@@ -218,7 +218,7 @@ final class ProfileForm extends FormBase {
       '#attributes' => ['class' => ['bsi-button', 'bsi-button--control']],
     ];
 
-    $form['#attached']['library'][] = 'bsi_csn/profile_form';
+    $form['#attached']['library'][] = 'csn_custom/profile_form';
 
     return $form;
   }
@@ -319,7 +319,7 @@ final class ProfileForm extends FormBase {
     $profile->save();
 
     $this->messenger()->addStatus($this->t('Ihr Profil wurde gespeichert.'));
-    $form_state->setRedirect('bsi_csn.profile');
+    $form_state->setRedirect('csn_custom.profile');
   }
 
   /**

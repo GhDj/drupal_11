@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\bsi_csn\Element;
+namespace Drupal\csn_custom\Element;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Attribute\FormElement;
