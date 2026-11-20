@@ -12,11 +12,12 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsButtonsWidget;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\taxonomy\TermInterface;
 
 /**
- * Defines the 'csn_taxnomy_subtree' field widget.
+ * Defines the 'csn_taxonomy_subtree' field widget.
  */
 #[FieldWidget(
   id: 'csn_taxonomy_subtree',
@@ -45,6 +46,20 @@ final class CsnTaxonomySubtreeWidget extends OptionsButtonsWidget implements Con
     private readonly EntityTypeManagerInterface $entityTypeManager,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+    return new static(
+      $plugin_id,
+      $plugin_definition,
+      $configuration['field_definition'],
+      $configuration['settings'],
+      $configuration['third_party_settings'],
+      $container->get('entity_type.manager'),
+    );
   }
 
   /**
@@ -136,7 +151,7 @@ final class CsnTaxonomySubtreeWidget extends OptionsButtonsWidget implements Con
     if ($uuid = $this->getSetting('parent')) {
       $entity = $this->entityTypeManager->getStorage('taxonomy_term')
         ->loadByProperties(['uuid' => $uuid]);
-      $entity = reset($entity);
+      $entity = reset($entity) ?: NULL;
     }
     return $entity;
   }
