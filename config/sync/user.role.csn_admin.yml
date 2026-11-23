@@ -29,6 +29,7 @@ weight: -5
 is_admin: false
 permissions:
   - 'access content overview'
+  - 'access csn'
   - 'access media directories browser'
   - 'administer csn configuration'
   - 'administer users'

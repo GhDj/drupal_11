@@ -1,0 +1,14 @@
+uuid: 9ee7a718-76a3-4564-abfb-204fde064604
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.attack_vectors
+id: taxonomy_vocabulary_attack_vectors
+entity_type_id: taxonomy_vocabulary
+entity_id: attack_vectors
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

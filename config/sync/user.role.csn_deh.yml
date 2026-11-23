@@ -3,10 +3,12 @@ langcode: en
 status: true
 dependencies:
   module:
+    - csn_custom
     - tfa
 id: csn_deh
-label: 'Digital First-Aider'
+label: 'Digital First Responder'
 weight: -6
 is_admin: false
 permissions:
+  - 'access csn'
   - 'setup own tfa'

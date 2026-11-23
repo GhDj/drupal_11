@@ -20,6 +20,7 @@ dependencies:
     - field.storage.node.field_degree
     - field.storage.node.field_event_type
     - field.storage.node.field_import_status
+    - field.storage.node.field_incident_types
     - field.storage.node.field_paragraphs
     - field.storage.node.field_producer
     - field.storage.node.field_tags
@@ -34,6 +35,7 @@ dependencies:
   module:
     - book
     - bsi_search
+    - content_moderation
     - media
     - node
     - paragraphs
@@ -393,6 +395,14 @@ field_settings:
     indexed_locked: true
     type_locked: true
     hidden: true
+  node_incident_types:
+    label: 'Incident types'
+    datasource_id: 'entity:node'
+    property_path: field_incident_types
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_incident_types
   node_label:
     label: Title
     datasource_id: 'entity:node'
@@ -410,6 +420,14 @@ field_settings:
     dependencies:
       module:
         - node
+  node_moderation:
+    label: 'Moderation state'
+    datasource_id: 'entity:node'
+    property_path: moderation_state
+    type: string
+    dependencies:
+      module:
+        - content_moderation
   node_paragraphs:
     label: Paragraphs
     datasource_id: 'entity:node'
@@ -553,7 +571,6 @@ processor_settings:
       preprocess_query: -30
   custom_value: {  }
   effective_date: {  }
-  entity_status: {  }
   entity_type: {  }
   highlight:
     weights:
@@ -593,6 +610,7 @@ processor_settings:
       - node_degree
       - node_label
       - node_langcode
+      - node_moderation
       - node_summary
       - paragraph_field_name
       - paragraph_heading

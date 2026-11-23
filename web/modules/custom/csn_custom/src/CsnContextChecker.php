@@ -47,7 +47,7 @@ final class CsnContextChecker implements CacheableDependencyInterface {
    * Will use provided entities, with fallback to route match.
    */
   public function isCsnPage(?ContentEntityInterface $entity = NULL): bool {
-    if ($this->routeMatch->getRouteName() === 'csn_custom.feedback') {
+    if ($this->isCsnRoute($this->routeMatch->getRouteName() ?? '')) {
       $this->addCacheContexts(['route.name']);
       return TRUE;
     }
@@ -72,23 +72,27 @@ final class CsnContextChecker implements CacheableDependencyInterface {
    * Whether the provided node belongs to a CSN group.
    */
   public function isCsnContent(ContentEntityInterface $entity): bool {
-    if ($entity instanceof UserInterface) {
-      // Ignore users for now, as they can be in many groups which would
-      // display the whole page using CSN branding/elements.
-      return FALSE;
-    }
-    elseif ($entity instanceof GroupInterface) {
-      return $this->isCsnGroup($entity);
-    }
-
     $cid = $entity->getEntityTypeId() . ':' . $entity->id();
     if (!isset(self::$cache[$cid])) {
-      self::$cache[$cid] = FALSE;
-      foreach ($this->storage->loadByEntity($entity) as $relationship) {
-        if ($this->isCsnGroup($relationship->getGroup())) {
-          $this->addCacheTags(['group_relations:' . $relationship->getGroupId()]);
-          self::$cache[$cid] = TRUE;
-          break;
+      if ($entity instanceof UserInterface) {
+        // Ignore users for now, as they can be in many groups which would
+        // display the whole page using CSN branding/elements.
+        self::$cache[$cid] = FALSE;
+      }
+      elseif ($entity instanceof GroupInterface) {
+        self::$cache[$cid] = $this->isCsnGroup($entity);
+      }
+      elseif ($this->isCsnKeeper($entity)) {
+        self::$cache[$cid] = TRUE;
+      }
+      else {
+        self::$cache[$cid] = FALSE;
+        foreach ($this->storage->loadByEntity($entity) as $relationship) {
+          if ($this->isCsnGroup($relationship->getGroup())) {
+            $this->addCacheTags(['group_relations:' . $relationship->getGroupId()]);
+            self::$cache[$cid] = TRUE;
+            break;
+          }
         }
       }
     }
@@ -100,6 +104,28 @@ final class CsnContextChecker implements CacheableDependencyInterface {
    */
   public function isCsnGroup(GroupInterface $group): bool {
     return $group->bundle() === 'csn';
+  }
+
+  /**
+   * Determine if the provided route name is CSN content.
+   */
+  public function isCsnRoute(string $routeName): bool {
+    return in_array($routeName, [
+      'csn_custom.feedback',
+      'csn_custom.incident_report.add',
+      'csn_custom.incident_report.edit',
+    ], TRUE);
+  }
+
+  /**
+   * Determine if the provided content entity has a CSN node_keep machine name.
+   */
+  private function isCsnKeeper(ContentEntityInterface $entity): bool {
+    return $entity->hasField('keeper_machine_name')
+      && !$entity->get('keeper_machine_name')->isEmpty()
+      && in_array($entity->get('keeper_machine_name')->value, [
+        'csn_dashboard',
+      ], TRUE);
   }
 
 }

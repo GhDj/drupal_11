@@ -1,0 +1,23 @@
+uuid: be6f0802-4921-492d-a80f-1657fc94de87
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.plain_text
+    - taxonomy.vocabulary.incident_types
+  module:
+    - text
+id: taxonomy_term.incident_types.description
+field_name: description
+entity_type: taxonomy_term
+bundle: incident_types
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - plain_text
+field_type: text_long

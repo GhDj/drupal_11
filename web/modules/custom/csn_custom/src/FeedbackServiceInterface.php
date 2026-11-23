@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Drupal\csn_custom;
 
+use Drupal\Component\Render\MarkupInterface;
+use Drupal\Core\Url;
+
 /**
  * Stores feedback for the user.
  */
@@ -24,5 +27,20 @@ interface FeedbackServiceInterface {
    *   The token for data lookup.
    */
   public function setFeedback(array $data): string;
+
+  /**
+   * Get the URL for displaying the provided feedback.
+   *
+   * @param string|\Drupal\Component\Render\MarkupInterface $title
+   *   The page title of the feedback page.
+   * @param list<string|\Drupal\Component\Render\MarkupInterface>|null $message
+   *   The optional message(s) to display.
+   * @param array|null $content
+   *   Additional render elements to display.
+   *
+   * @return \Drupal\Core\Url
+   *   The url of the feedback page.
+   */
+  public function getFeedbackUrl(string|MarkupInterface $title, ?array $message = [], ?array $content = []): Url;
 
 }

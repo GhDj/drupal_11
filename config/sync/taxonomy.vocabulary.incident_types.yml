@@ -1,0 +1,9 @@
+uuid: 51b110df-a1bc-4bee-bd54-39e6bbd0d988
+langcode: en
+status: true
+dependencies: {  }
+name: 'Incident types'
+vid: incident_types
+description: CSN
+weight: 0
+new_revision: true

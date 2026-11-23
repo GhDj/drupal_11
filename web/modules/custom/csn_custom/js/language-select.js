@@ -186,9 +186,8 @@
       self.inputArea.insertBefore(chip, self.input);
     });
 
-    // Update placeholder and background state.
+    // Update placeholder — hide when chips present.
     this.input.placeholder = selected.length > 0 ? '' : (this.select.dataset.placeholder || Drupal.t('Bitte auswählen'));
-    this.inputArea.classList.toggle('csn-lang-input-area--has-selection', selected.length > 0);
   };
 
 })(Drupal);

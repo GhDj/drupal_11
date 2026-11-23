@@ -1,0 +1,20 @@
+uuid: a8353719-8a33-4eac-b997-a0f7a5bf0807
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_incident_types_abuse_other
+field_name: field_incident_types_abuse_other
+entity_type: node
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

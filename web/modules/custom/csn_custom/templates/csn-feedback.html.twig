@@ -10,7 +10,11 @@
  */
 #}
 <div{{ attributes }}>
-  {% if message %}
+  {% if message and message is iterable %}
+    {% for item in message %}
+      <p>{{ item }}</p>
+    {% endfor %}
+  {% elseif message %}
     <p>{{ message }}</p>
   {% endif %}
   {% if content %}

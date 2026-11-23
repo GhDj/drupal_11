@@ -1,0 +1,23 @@
+uuid: a0889de9-a0b7-40c9-a161-e0607d832557
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.plain_text
+    - taxonomy.vocabulary.attack_vectors
+  module:
+    - text
+id: taxonomy_term.attack_vectors.description
+field_name: description
+entity_type: taxonomy_term
+bundle: attack_vectors
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - plain_text
+field_type: text_long

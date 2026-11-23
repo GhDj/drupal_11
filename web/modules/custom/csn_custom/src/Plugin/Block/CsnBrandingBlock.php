@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 #[Block(
   id: 'csn_branding',
   admin_label: new TranslatableMarkup('CSN Branding'),
-  category: new TranslatableMarkup('BSI'),
+  category: new TranslatableMarkup('CSN'),
 )]
 final class CsnBrandingBlock extends BlockBase implements ContainerFactoryPluginInterface {
 

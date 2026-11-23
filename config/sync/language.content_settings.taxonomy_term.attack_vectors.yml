@@ -1,0 +1,16 @@
+uuid: 1fea0915-0479-4b93-ad74-44b344b8791f
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.attack_vectors
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.attack_vectors
+target_entity_type_id: taxonomy_term
+target_bundle: attack_vectors
+default_langcode: de
+language_alterable: false

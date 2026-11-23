@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Drupal\csn_custom;
 
+use Drupal\Component\Render\MarkupInterface;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\TempStore\PrivateTempStore;
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
+use Drupal\Core\Url;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -50,6 +52,22 @@ final class FeedbackService implements FeedbackServiceInterface {
     $this->tempStore->set($token, $data);
 
     return $token;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getFeedbackUrl(
+    MarkupInterface|string $title,
+    ?array $message = [],
+    ?array $content = [],
+  ): Url {
+    $token = $this->setFeedback([
+      'title' => $title,
+      'message' => $message,
+      'content' => $content,
+    ]);
+    return Url::fromRoute('csn_custom.feedback', ['token' => $token]);
   }
 
 }

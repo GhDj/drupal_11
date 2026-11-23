@@ -14,3 +14,13 @@ condition.plugin.csn_page:
   label: 'CSN page condition'
   mapping:
     csn_page:
+      type: boolean
+      label: Is CSN page
+
+field.widget.settings.csn_taxonomy_subtree:
+  type: mapping
+  label: Taxonomy Subtree widget settings
+  mapping:
+    parent:
+      type: string
+      label: Parent UUID

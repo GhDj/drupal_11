@@ -1,0 +1,18 @@
+third_party_settings:
+  field_group:
+    group_description:
+      label: Vorfallsbeschreibung
+    group_background:
+      label: Hintergrund
+    group_measures:
+      label: Maßnahmen
+    group_workflow:
+      label: Arbeitsablauf
+    group_language:
+      label: Sprache
+content:
+  body:
+    third_party_settings:
+      maxlength:
+        maxlength_js_label: 'Eingabe begrenzt auf @limit Zeichen, verbleibend: <strong>@remaining</strong>'
+        maxlength_js_label_summary: 'Eingabe begrenzt auf @limit Zeichen, verbleibend: <strong>@remaining</strong>'

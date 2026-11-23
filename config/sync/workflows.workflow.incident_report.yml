@@ -1,0 +1,76 @@
+uuid: 8e2be073-0776-4063-8748-2506c8ecaa50
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.incident_report
+  module:
+    - content_moderation
+id: incident_report
+label: 'Incident report'
+type: content_moderation
+type_settings:
+  states:
+    draft:
+      label: Draft
+      weight: -3
+      published: false
+      default_revision: false
+    published:
+      label: Published
+      weight: 0
+      published: true
+      default_revision: true
+    review_requested:
+      label: 'Review requested'
+      weight: -2
+      published: false
+      default_revision: false
+    revision_requested:
+      label: 'Revision requested'
+      weight: -1
+      published: false
+      default_revision: false
+    unpublished:
+      label: Unpublished
+      weight: 1
+      published: false
+      default_revision: true
+  transitions:
+    create_draft:
+      label: 'Create draft'
+      from:
+        - draft
+      to: draft
+      weight: -3
+    publish:
+      label: Publish
+      from:
+        - draft
+        - published
+      to: published
+      weight: 0
+    request_review:
+      label: 'Request review'
+      from:
+        - draft
+        - revision_requested
+      to: review_requested
+      weight: -2
+    request_revision:
+      label: 'Request revision'
+      from:
+        - review_requested
+        - revision_requested
+      to: revision_requested
+      weight: -1
+    unpublish:
+      label: Unpublish
+      from:
+        - published
+      to: unpublished
+      weight: 1
+  entity_types:
+    node:
+      - incident_report
+  default_moderation_state: draft

@@ -72,6 +72,7 @@ third_party_settings:
       - BSI
       - 'BSI Report'
       - 'BSI Search'
+      - CSN
       - 'Chaos Tools'
       - 'Config Pages'
       - 'Content fields'

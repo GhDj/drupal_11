@@ -1,0 +1,22 @@
+uuid: f8512c46-5f29-4883-a561-8cfd99c13639
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.incident_report
+id: node.incident_report.node_keeper
+field_name: node_keeper
+entity_type: node
+bundle: incident_report
+label: 'Prevent this node from being deleted'
+description: 'This option will prevent node deletion to avoid accidents. Only users with "administer node_keep per node" permission will be able to remove this node.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

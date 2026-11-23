@@ -4,7 +4,7 @@
  * Template for the CSN Ersthelfer:in profile form.
  *
  * Variables:
- * - form: The form render array.
+ * - form: The form render array (ContentEntityForm).
  * - form['#is_initial']: Whether this is the first-time profile completion.
  * - form['#user_email']: The current user's email (escaped).
  */
@@ -54,18 +54,13 @@
     </div>
 
     <div class="csn-profile__fields">
-      {{ form.academic_title }}
+      {{ form.field_academic_title }}
       <div class="csn-profile__fields--two-col">
-        {{ form.given_name }}
-        {{ form.family_name }}
+        {{ form.field_given_name }}
+        {{ form.field_family_name }}
       </div>
-      {{ form.phone }}
-      {{ form.address_line1 }}
-      <div class="csn-profile__fields--two-col">
-        {{ form.postal_code }}
-        {{ form.locality }}
-      </div>
-      {{ form.country_code }}
+      {{ form.field_phone }}
+      {{ form.field_address }}
     </div>
   </section>
 
@@ -81,10 +76,10 @@
 
     <div class="csn-profile__fields">
       <div class="csn-profile__fields--two-col">
-        {{ form.deh_phone }}
-        {{ form.deh_mail }}
+        {{ form.field_deh_phone }}
+        {{ form.field_deh_mail }}
       </div>
-      {{ form.deh_language }}
+      {{ form.field_deh_language }}
     </div>
   </section>
 
@@ -127,9 +122,9 @@
   <section class="csn-profile__section">
     <h2 class="csn-profile__section-title">{{ 'Rechtliches'|t }}</h2>
 
-    {{ form.confirm_data_processing }}
-    {{ form.confirm_terms_conditions }}
-    {{ form.confirm_volunteer }}
+    {{ form.field_confirm_data_processing }}
+    {{ form.field_confirm_terms_conditions }}
+    {{ form.field_confirm_volunteer }}
   </section>
 
   {# 12. Pflichtfeld-Hinweis #}

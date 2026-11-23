@@ -1,0 +1,11 @@
+uuid: 4f541938-221f-45f1-91d2-a461a34a24b4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.first_responder
+label: 'Digital First-Responder'
+description: null
+targetEntityType: node
+cache: true

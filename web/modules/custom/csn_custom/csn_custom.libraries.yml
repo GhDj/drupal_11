@@ -3,7 +3,6 @@ profile_form:
     theme:
       css/profile-form.css: {}
   js:
-    js/language-select.js: {}
+    js/language-select.js: { }
   dependencies:
     - core/drupal
-    - core/once

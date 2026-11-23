@@ -209,11 +209,10 @@
   display: none !important;
 }
 
-/* Hide "Leeren" / "Vorherigen Tag kopieren" / "Letzten Tag kopieren" links */
+/* Hide "Leeren" / "Vorherigen Tag kopieren" links */
 .csn-profile .field--name-field-availability .office-hours-link,
 .csn-profile .field--name-field-availability .office-hours-operations,
 .csn-profile .field--name-field-availability td.office-hours-operations,
-.csn-profile .field--name-field-availability .clearfix a[href*="clear"],
 .csn-profile .field--name-field-availability details.office-hours-actions {
   display: none !important;
 }
@@ -271,11 +270,6 @@
   min-width: 110px;
 }
 
-/* Force 24H format on time inputs by setting lang attribute via CSS is not
-   possible — handled via element_type change to office_hours_select or
-   by setting the HTML lang to "de". As fallback, increase input width for
-   AM/PM display. */
-
 /* "Bis" / separator label */
 .csn-profile .field--name-field-availability .office-hours-separator {
   font-size: 0.875rem;
@@ -302,9 +296,8 @@
   padding: 0;
 }
 
-/* Error styling — remove red icons, use subtle border */
-.csn-profile .field--name-field-availability .form-item--error-message,
-.csn-profile .field--name-field-availability .fieldset-wrapper > .form-item--error-message {
+/* Error styling */
+.csn-profile .field--name-field-availability .form-item--error-message {
   font-size: 0.8125rem;
   color: var(--bsi-color-red-100, #c0392b);
 }
@@ -330,11 +323,6 @@
   border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
   background: var(--bsi-color-neutral-50, #f9f9f9);
   box-sizing: border-box;
-}
-
-/* White background when languages are selected */
-.csn-lang-input-area--has-selection {
-  background: #fff;
 }
 
 /* Hide the native select - JS replaces it */

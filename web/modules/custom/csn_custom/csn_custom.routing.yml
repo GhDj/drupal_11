@@ -14,10 +14,39 @@ csn_custom.feedback:
   requirements:
     _permission: 'access content'
 
+csn_custom.incident_report.add:
+  path: '/report/add'
+  defaults:
+    _title_callback: '\Drupal\csn_custom\Form\FirstResponderContentForm::nodeTitle'
+    _entity_form: 'node.first_responder'
+    node_type: 'incident_report'
+  requirements:
+    _entity_create_access: 'node:incident_report'
+  options:
+    _admin_route: false
+    _access_checks:
+      - 'access_check.entity_create'
+    parameters:
+      node_type:
+        type: 'entity:node_type'
+
+csn_custom.incident_report.edit:
+  path: '/report/{node}'
+  defaults:
+    _title_callback: '\Drupal\csn_custom\Form\FirstResponderContentForm::nodeTitle'
+    _entity_form: 'node.first_responder'
+  requirements:
+    _entity_access: 'node.update'
+    node: '\d+'
+  options:
+    _admin_route: false
+    _access_checks:
+      - 'access_check.entity'
+
 csn_custom.profile:
   path: '/csn/profil'
   defaults:
     _title: 'Mein Profil'
-    _form: 'Drupal\csn_custom\Form\ProfileForm'
+    _controller: '\Drupal\csn_custom\Controller\ProfileController::form'
   requirements:
     _user_is_logged_in: 'TRUE'
