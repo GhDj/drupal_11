@@ -6,3 +6,8 @@ profile_form:
     js/language-select.js: { }
   dependencies:
     - core/drupal
+
+csn_branding:
+  css:
+    theme:
+      css/csn-branding.css: {}
