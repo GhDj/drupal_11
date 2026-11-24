@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Drupal\csn_custom\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\EntityFormBuilderInterface;
 use Drupal\profile\Entity\ProfileInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Controller for the CSN profile page.
@@ -17,25 +15,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 final class ProfileController extends ControllerBase {
 
-  public function __construct(
-    private readonly EntityFormBuilderInterface $entityFormBuilder,
-  ) {}
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container): self {
-    return new self(
-      $container->get('entity.form_builder'),
-    );
-  }
-
   /**
    * Renders the profile form.
    */
   public function form(): array {
     $profile = $this->loadOrCreateProfile();
-    return $this->entityFormBuilder->getForm($profile, 'csn_profile');
+    return $this->entityFormBuilder()->getForm($profile, 'csn_profile');
   }
 
   /**
