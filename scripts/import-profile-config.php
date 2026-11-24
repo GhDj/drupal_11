@@ -79,6 +79,10 @@ $configs = [
   'field.field.profile.first_responder.field_confirm_data_processing',
   'field.field.profile.first_responder.field_confirm_terms_conditions',
   'field.field.profile.first_responder.field_confirm_volunteer',
+
+  // 5. Form mode + form display.
+  'core.entity_form_mode.profile.csn_profile',
+  'core.entity_form_display.profile.first_responder.csn_profile',
 ];
 
 $entity_type_map = [
