@@ -44,8 +44,11 @@ final class LogoutPathProcessor implements OutboundPathProcessorInterface {
     if ($this->contextChecker->isCsnPage()) {
       $bubbleable_metadata->addCacheableDependency($this->config);
 
-      $redirect_url = Url::fromUserInput($this->config->get('logout_redirect'));
-      $options['query']['destination'] = '/' . $redirect_url->getInternalPath();
+      $logout_redirect = $this->config->get('logout_redirect');
+      if (!empty($logout_redirect)) {
+        $redirect_url = Url::fromUserInput($logout_redirect);
+        $options['query']['destination'] = '/' . $redirect_url->getInternalPath();
+      }
     }
     return $path;
   }
