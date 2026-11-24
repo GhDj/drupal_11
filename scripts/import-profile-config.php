@@ -83,6 +83,9 @@ $configs = [
   // 5. Form mode + form display.
   'core.entity_form_mode.profile.csn_profile',
   'core.entity_form_display.profile.first_responder.csn_profile',
+
+  // 6. CSN branding block.
+  'block.block.csn_branding',
 ];
 
 $entity_type_map = [
@@ -90,8 +93,10 @@ $entity_type_map = [
   'profile.type' => 'profile_type',
   'field.storage' => 'field_storage_config',
   'field.field' => 'field_config',
+  'core.entity_form_mode' => 'entity_form_mode',
   'core.entity_form_display' => 'entity_form_display',
   'core.entity_view_display' => 'entity_view_display',
+  'block.block' => 'block',
 ];
 
 $success = 0;
