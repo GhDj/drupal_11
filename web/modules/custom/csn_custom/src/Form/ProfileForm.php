@@ -9,7 +9,9 @@ use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Url;
 use Drupal\csn_custom\FeedbackServiceInterface;
@@ -39,6 +41,7 @@ final class ProfileForm extends ContentEntityForm {
     TimeInterface $time,
     private readonly AccountProxyInterface $currentUser,
     private readonly FeedbackServiceInterface $feedback,
+    private readonly EntityTypeManagerInterface $entityTypeManager,
   ) {
     parent::__construct($entity_repository, $entity_type_bundle_info, $time);
   }
@@ -53,7 +56,28 @@ final class ProfileForm extends ContentEntityForm {
       $container->get('datetime.time'),
       $container->get('current_user'),
       $container->get('csn_custom.feedback'),
+      $container->get('entity_type.manager'),
     );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getEntityFromRouteMatch(RouteMatchInterface $route_match, $entity_type_id): \Drupal\Core\Entity\EntityInterface {
+    $storage = $this->entityTypeManager->getStorage('profile');
+    $profiles = $storage->loadByProperties([
+      'type' => 'first_responder',
+      'uid' => $this->currentUser->id(),
+    ]);
+
+    if ($profiles) {
+      return reset($profiles);
+    }
+
+    return $storage->create([
+      'type' => 'first_responder',
+      'uid' => $this->currentUser->id(),
+    ]);
   }
 
   /**
