@@ -1,0 +1,19 @@
+uuid: b2c3d4e5-f6a7-8901-bcde-200000000007
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_deh_mail
+    - profile.type.first_responder
+id: profile.first_responder.field_deh_mail
+field_name: field_deh_mail
+entity_type: profile
+bundle: first_responder
+label: 'Public email'
+description: ''
+required: true
+translatable: false
+default_value: {}
+default_value_callback: ''
+settings: {}
+field_type: email

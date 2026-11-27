@@ -1,0 +1,21 @@
+uuid: b2c3d4e5-f6a7-8901-bcde-200000000006
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_deh_phone
+    - profile.type.first_responder
+  module:
+    - telephone
+id: profile.first_responder.field_deh_phone
+field_name: field_deh_phone
+entity_type: profile
+bundle: first_responder
+label: 'Public phone number'
+description: ''
+required: false
+translatable: false
+default_value: {}
+default_value_callback: ''
+settings: {}
+field_type: telephone

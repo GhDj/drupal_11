@@ -1,0 +1,12 @@
+uuid: 9a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+langcode: en
+status: true
+dependencies:
+  module:
+    - csn_custom
+id: first_responder
+label: 'First Responder'
+display_label: 'First Responder profile'
+registration: false
+roles:
+  - csn_deh
