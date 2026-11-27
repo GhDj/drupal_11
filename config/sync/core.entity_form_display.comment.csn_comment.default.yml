@@ -1,0 +1,24 @@
+uuid: f6a7b8c9-d0e1-2345-fabc-456789012345
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.csn_comment
+    - field.field.comment.csn_comment.field_comment_body
+  module:
+    - text
+id: comment.csn_comment.default
+targetEntityType: comment
+bundle: csn_comment
+mode: default
+content:
+  field_comment_body:
+    type: text_textarea
+    weight: 0
+    region: content
+    settings:
+      rows: 6
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  subject: true

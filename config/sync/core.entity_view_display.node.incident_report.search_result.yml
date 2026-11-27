@@ -55,6 +55,7 @@ hidden:
   body: true
   changed: true
   content_moderation_control: true
+  field_comments: true
   field_incident_types: true
   field_incident_types_abuse: true
   field_incident_types_abuse_other: true

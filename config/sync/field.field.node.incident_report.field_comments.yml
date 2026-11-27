@@ -1,0 +1,29 @@
+uuid: e5f6a7b8-c9d0-1234-efab-345678901234
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.csn_comment
+    - field.storage.node.field_comments
+    - node.type.incident_report
+  module:
+    - comment
+id: node.incident_report.field_comments
+field_name: field_comments
+entity_type: node
+bundle: incident_report
+label: Comments
+description: 'Comments for correction communication on incident reports.'
+required: false
+translatable: false
+default_value:
+  -
+    status: 2
+    cid: 0
+    last_comment_timestamp: 0
+    last_comment_name: null
+    last_comment_uid: 0
+    comment_count: 0
+default_value_callback: ''
+settings: {  }
+field_type: comment

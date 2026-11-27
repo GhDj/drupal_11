@@ -3,8 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - comment.type.csn_comment
     - core.entity_view_mode.node.full
     - field.field.node.incident_report.body
+    - field.field.node.incident_report.field_comments
     - field.field.node.incident_report.field_incident_types
     - field.field.node.incident_report.field_incident_types_abuse
     - field.field.node.incident_report.field_incident_types_abuse_other
@@ -13,6 +15,7 @@ dependencies:
     - field.field.node.incident_report.field_time_duration
     - node.type.incident_report
   module:
+    - comment
     - datetime
     - duration_field
     - text
@@ -71,6 +74,15 @@ content:
       format_type: medium
     third_party_settings: {  }
     weight: 6
+    region: content
+  field_comments:
+    type: comment_default
+    label: hidden
+    settings:
+      view_mode: default
+      pager_id: 0
+    third_party_settings: {  }
+    weight: 8
     region: content
   field_time_duration:
     type: duration_time_display

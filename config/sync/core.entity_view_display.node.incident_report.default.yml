@@ -30,6 +30,7 @@ hidden:
   changed: true
   content_moderation_control: true
   created: true
+  field_comments: true
   field_incident_types: true
   field_incident_types_abuse: true
   field_incident_types_abuse_other: true

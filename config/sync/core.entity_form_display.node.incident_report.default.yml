@@ -178,6 +178,7 @@ content:
 hidden:
   alias_keeper: true
   changed: true
+  field_comments: true
   created: true
   keeper_machine_name: true
   langcode: true
