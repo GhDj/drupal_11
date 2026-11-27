@@ -1,0 +1,141 @@
+{#
+/**
+ * @file
+ * Template for the CSN Ersthelfer:in profile form.
+ *
+ * Variables:
+ * - form: The form render array (ContentEntityForm).
+ * - form['#is_initial']: Whether this is the first-time profile completion.
+ * - form['#user_email']: The current user's email (escaped).
+ */
+#}
+<div class="csn-profile">
+
+  {# 00. Überschrift #}
+  <h1 class="csn-profile__title">{{ 'Mein Profil'|t }}</h1>
+
+  {# 01. Hinweis zur initialen Anmeldung #}
+  {% if form['#is_initial'] %}
+    <div class="csn-profile__banner csn-profile__banner--info">
+      <p>{{ 'Bitte vervollständigen Sie Ihre Daten, um Ihr Profil zu finalisieren. Erst nach Vervollständigung und Freigabe können Sie als Ersthelfende:r kontaktiert werden.'|t }}</p>
+    </div>
+  {% endif %}
+
+  {# ================================================================ #}
+  {# Daten zum Login                                                  #}
+  {# ================================================================ #}
+  <section class="csn-profile__section">
+    <h2 class="csn-profile__section-title">{{ 'Daten zum Login'|t }}</h2>
+
+    <div class="csn-profile__banner csn-profile__banner--hint">
+      <p>{{ 'Wenn Sie Ihr Passwort ändern möchten, können Sie dies auf der Login-Seite tun.'|t }}</p>
+    </div>
+
+    <div class="csn-profile__fields csn-profile__fields--two-col">
+      <div class="form-item">
+        <label class="form-item__label">{{ 'Benutzername (E-Mail)'|t }}</label>
+        <input type="text" class="form-element" value="{{ form['#user_email'] }}" disabled />
+      </div>
+      <div class="form-item">
+        <label class="form-item__label">{{ 'Passwort'|t }}</label>
+        <input type="password" class="form-element" value="••••••••" disabled />
+      </div>
+    </div>
+  </section>
+
+  {# ================================================================ #}
+  {# Kontaktdaten für CSN Team                                        #}
+  {# ================================================================ #}
+  <section class="csn-profile__section">
+    <h2 class="csn-profile__section-title">{{ 'Kontaktdaten für CSN Team'|t }}</h2>
+
+    <div class="csn-profile__banner csn-profile__banner--hint">
+      <p>{{ 'Die folgenden Daten werden nicht auf der Webseite veröffentlicht, sondern dienen dem CSN Team für die Kontaktaufnahme.'|t }}</p>
+    </div>
+
+    <div class="csn-profile__fields">
+      {{ form.field_academic_title }}
+      <div class="csn-profile__fields--two-col">
+        {{ form.field_given_name }}
+        {{ form.field_family_name }}
+      </div>
+      {{ form.field_phone }}
+      {{ form.field_address }}
+    </div>
+  </section>
+
+  {# ================================================================ #}
+  {# Kontaktdaten für Hilfesuchende                                   #}
+  {# ================================================================ #}
+  <section class="csn-profile__section">
+    <h2 class="csn-profile__section-title">{{ 'Kontaktdaten für Hilfesuchende'|t }}</h2>
+
+    <div class="csn-profile__banner csn-profile__banner--hint">
+      <p>{{ 'Die folgenden Daten werden auf dem Profil des DEH auf der CSN Webseite veröffentlicht.'|t }}</p>
+    </div>
+
+    <div class="csn-profile__fields">
+      <div class="csn-profile__fields--two-col">
+        {{ form.field_deh_phone }}
+        {{ form.field_deh_mail }}
+      </div>
+      {{ form.field_deh_language }}
+    </div>
+  </section>
+
+  {# ================================================================ #}
+  {# Servicezeiten                                                    #}
+  {# ================================================================ #}
+  <section class="csn-profile__section">
+    <h2 class="csn-profile__section-title">{{ 'Servicezeiten'|t }}</h2>
+
+    <div class="csn-profile__banner csn-profile__banner--hint">
+      <p>{{ 'Bitte beachten Sie, dass die ehrenamtliche Tätigkeit nicht mehr als 12 Stunden pro Woche umfassen darf.'|t }}</p>
+    </div>
+
+    <p class="csn-profile__text">{{ 'Ich bin wie folgt erreichbar:'|t }}</p>
+
+    {{ form.field_availability }}
+  </section>
+
+  {# ================================================================ #}
+  {# Abwesenheit                                                      #}
+  {# ================================================================ #}
+  <section class="csn-profile__section">
+    <h2 class="csn-profile__section-title">{{ 'Abwesenheit'|t }}</h2>
+
+    <div class="csn-profile__banner csn-profile__banner--hint">
+      <p>{{ 'Bitte beachten Sie, dass Sie während Ihrer Abwesenheit nicht in der Liste der verfügbaren Ersthelfenden angezeigt werden und nicht kontaktiert werden können.'|t }}</p>
+    </div>
+
+    {{ form.absence }}
+
+    <div class="csn-profile__fields--two-col">
+      {{ form.absence_start }}
+      {{ form.absence_end }}
+    </div>
+  </section>
+
+  {# ================================================================ #}
+  {# Rechtliches                                                      #}
+  {# ================================================================ #}
+  <section class="csn-profile__section">
+    <h2 class="csn-profile__section-title">{{ 'Rechtliches'|t }}</h2>
+
+    {{ form.field_confirm_data_processing }}
+    {{ form.field_confirm_terms_conditions }}
+    {{ form.field_confirm_volunteer }}
+  </section>
+
+  {# 12. Pflichtfeld-Hinweis #}
+  <p class="csn-profile__required-hint">{{ '* Pflichtfeld'|t }}</p>
+
+  {# Buttons #}
+  {{ form.actions }}
+
+  {# Hidden elements needed by Drupal form API #}
+  {{ form.form_build_id }}
+  {{ form.form_token }}
+  {{ form.form_id }}
+
+</div>

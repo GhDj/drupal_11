@@ -1,0 +1,15 @@
+/**
+ * @file
+ * Styles for the CSN branding block (header logo).
+ */
+
+.bsi-header-csn__logo {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.bsi-header-csn__logo img {
+  height: 60px;
+  width: auto;
+}

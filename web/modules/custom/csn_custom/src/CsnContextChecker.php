@@ -114,6 +114,7 @@ final class CsnContextChecker implements CacheableDependencyInterface {
       'csn_custom.feedback',
       'csn_custom.incident_report.add',
       'csn_custom.incident_report.edit',
+      'csn_custom.profile',
     ], TRUE);
   }
 

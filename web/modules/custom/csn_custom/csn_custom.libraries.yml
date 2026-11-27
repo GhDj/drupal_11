@@ -1,0 +1,13 @@
+profile_form:
+  css:
+    theme:
+      css/profile-form.css: {}
+  js:
+    js/language-select.js: { }
+  dependencies:
+    - core/drupal
+
+csn_branding:
+  css:
+    theme:
+      css/csn-branding.css: {}

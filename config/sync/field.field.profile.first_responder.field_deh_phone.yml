@@ -1,0 +1,19 @@
+uuid: a2000006-0001-0001-0001-000000000006
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_deh_phone
+    - profile.type.first_responder
+id: profile.first_responder.field_deh_phone
+field_name: field_deh_phone
+entity_type: profile
+bundle: first_responder
+label: 'Telefonnummer'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

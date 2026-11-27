@@ -1,0 +1,22 @@
+uuid: a2000009-0001-0001-0001-000000000009
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.field_availability
+    - office_hours
+    - profile.type.first_responder
+  module:
+    - office_hours
+id: profile.first_responder.field_availability
+field_name: field_availability
+entity_type: profile
+bundle: first_responder
+label: 'Verfügbarkeit'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: office_hours

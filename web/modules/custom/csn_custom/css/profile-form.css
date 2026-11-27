@@ -1,0 +1,491 @@
+/**
+ * @file
+ * Styles for the CSN Profile frontend form.
+ */
+
+/* Layout */
+.csn-profile {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Title */
+.csn-profile__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--bsi-color-typo-primary, #1a1a1a);
+}
+
+/* Sections */
+.csn-profile__section {
+  margin-bottom: 2.5rem;
+}
+
+.csn-profile__section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--bsi-color-typo-primary, #1a1a1a);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--bsi-color-border-muted, #d0d0d0);
+}
+
+/* Banners / Hinweisbanner */
+.csn-profile__banner {
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.csn-profile__banner--info {
+  background-color: var(--bsi-color-blue-50, #e8f4fd);
+  border-left: 4px solid var(--bsi-color-blue-750, #004b76);
+  color: var(--bsi-color-typo-primary, #1a1a1a);
+}
+
+.csn-profile__banner--hint {
+  background-color: #f5f5f5;
+  border-left: 4px solid var(--bsi-color-border-muted, #d0d0d0);
+  color: var(--bsi-color-typo-secondary, #545454);
+}
+
+.csn-profile__banner p {
+  margin: 0;
+}
+
+/* Text (06) */
+.csn-profile__text {
+  font-size: 0.9375rem;
+  color: var(--bsi-color-typo-secondary, #545454);
+  margin-bottom: 1rem;
+}
+
+/* Two-column grid */
+.csn-profile__fields--two-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .csn-profile__fields--two-col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Form items inside profile */
+.csn-profile .form-item {
+  margin-bottom: 1.25rem;
+}
+
+.csn-profile .form-item__label,
+.csn-profile label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--bsi-color-typo-secondary, #545454);
+  margin-bottom: 0.25rem;
+}
+
+.csn-profile .form-element,
+.csn-profile input[type="text"],
+.csn-profile input[type="email"],
+.csn-profile input[type="tel"],
+.csn-profile input[type="date"],
+.csn-profile input[type="password"],
+.csn-profile select {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
+  border-radius: 0;
+  background: var(--bsi-color-neutral-50, #f9f9f9);
+  font-size: 0.875rem;
+  color: var(--bsi-color-typo-secondary, #545454);
+  box-sizing: border-box;
+}
+
+/* Fix select dropdown arrow — prevent tiling of theme's custom arrow */
+.csn-profile select.form-element,
+.csn-profile select.form-element--type-select {
+  background-repeat: no-repeat !important;
+  background-position: right 0.75rem center !important;
+  background-size: 1rem !important;
+  padding-right: 2.5rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.csn-profile input:disabled,
+.csn-profile select:disabled {
+  background-color: #e8e8e8;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Locked fields (after approval) */
+.csn-profile-field--locked {
+  opacity: 0.6;
+}
+
+/* Checkboxes — override Claro/theme styles */
+.csn-profile .form-type--checkbox,
+.csn-profile .form-type-checkbox,
+.csn-profile .js-form-type-checkbox {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  writing-mode: horizontal-tb !important;
+}
+
+.csn-profile .form-type--checkbox input[type="checkbox"],
+.csn-profile .form-type-checkbox input[type="checkbox"],
+.csn-profile .js-form-type-checkbox input[type="checkbox"] {
+  -webkit-appearance: checkbox !important;
+  -moz-appearance: checkbox !important;
+  appearance: checkbox !important;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: inline-block !important;
+  position: static !important;
+  transform: none !important;
+}
+
+.csn-profile .form-type--checkbox label,
+.csn-profile .form-type-checkbox label,
+.csn-profile .js-form-type-checkbox label {
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+  color: var(--bsi-color-typo-primary, #1a1a1a) !important;
+  display: inline !important;
+  writing-mode: horizontal-tb !important;
+  max-width: none !important;
+}
+
+/* ================================================================ */
+/* Office Hours widget — match form design                          */
+/* ================================================================ */
+
+/* Hide the fieldset legend (redundant with section H2 "Servicezeiten") */
+.csn-profile .field--name-field-availability > fieldset > legend,
+.csn-profile .field--name-field-availability > .fieldset-legend,
+.csn-profile .field--type-office-hours > fieldset > legend,
+.csn-profile .field--widget-office-hours-list > fieldset > legend {
+  display: none !important;
+}
+
+/* Remove fieldset border/background */
+.csn-profile .field--name-field-availability fieldset,
+.csn-profile .field--type-office-hours fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.csn-profile .field--name-field-availability .fieldset-wrapper,
+.csn-profile .field--type-office-hours .fieldset-wrapper {
+  padding: 0;
+}
+
+/* Hide drag handles */
+.csn-profile .field--name-field-availability .tabledrag-handle,
+.csn-profile .field--name-field-availability .handle,
+.csn-profile .field--name-field-availability .sortable-handle,
+.csn-profile .field--name-field-availability a.tabledrag-handle {
+  display: none !important;
+}
+
+/* Hide "Leeren" / "Vorherigen Tag kopieren" links */
+.csn-profile .field--name-field-availability .office-hours-link,
+.csn-profile .field--name-field-availability .office-hours-operations,
+.csn-profile .field--name-field-availability td.office-hours-operations,
+.csn-profile .field--name-field-availability details.office-hours-actions {
+  display: none !important;
+}
+
+/* Remove table styling */
+.csn-profile .field--name-field-availability table {
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  background: none;
+}
+
+.csn-profile .field--name-field-availability table td,
+.csn-profile .field--name-field-availability table th {
+  border: none;
+  background: none;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  vertical-align: middle;
+}
+
+/* Each day row */
+.csn-profile .field--name-field-availability tr,
+.csn-profile .field--name-field-availability .office-hours-slot,
+.csn-profile .field--name-field-availability .draggable {
+  background: none !important;
+  border-bottom: 1px solid #eee;
+}
+
+.csn-profile .field--name-field-availability tr:last-child {
+  border-bottom: none;
+}
+
+/* Day name label */
+.csn-profile .field--name-field-availability .field-label,
+.csn-profile .field--name-field-availability .office-hours__label,
+.csn-profile .field--name-field-availability td:first-child {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--bsi-color-typo-secondary, #545454);
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+/* Time inputs — match form-element styling */
+.csn-profile .field--name-field-availability input[type="time"],
+.csn-profile .field--name-field-availability input[type="text"].office-hours-time,
+.csn-profile .field--name-field-availability select.office-hours-time {
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
+  border-radius: 0;
+  background: var(--bsi-color-neutral-50, #f9f9f9);
+  font-size: 0.875rem;
+  color: var(--bsi-color-typo-secondary, #545454);
+  box-sizing: border-box;
+  min-width: 110px;
+}
+
+/* "Bis" / separator label */
+.csn-profile .field--name-field-availability .office-hours-separator {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--bsi-color-typo-secondary, #545454);
+  padding: 0 0.5rem;
+}
+
+/* Inline slot layout */
+.csn-profile .field--name-field-availability .container-inline,
+.csn-profile .field--name-field-availability .office-hours-slot-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Remove Claro's admin card/box backgrounds from the widget */
+.csn-profile .field--name-field-availability .form-wrapper,
+.csn-profile .field--name-field-availability .office-hours-widget {
+  background: none;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+}
+
+/* Error styling */
+.csn-profile .field--name-field-availability .form-item--error-message {
+  font-size: 0.8125rem;
+  color: var(--bsi-color-red-100, #c0392b);
+}
+
+.csn-profile .field--name-field-availability .error {
+  border-color: var(--bsi-color-red-100, #c0392b);
+}
+
+/* Language chip widget */
+.csn-lang-widget {
+  position: relative;
+}
+
+.csn-lang-input-area {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  min-height: 42px;
+  cursor: text;
+  width: 100%;
+  border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
+  background: var(--bsi-color-neutral-50, #f9f9f9);
+  box-sizing: border-box;
+}
+
+/* Hide the native select - JS replaces it */
+select[data-csn-language-select] {
+  display: none !important;
+}
+
+.csn-lang-input-area--focused {
+  outline: 2px solid var(--bsi-color-base-focus, #2684ff);
+  outline-offset: 2px;
+}
+
+.csn-lang-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--bsi-color-blue-50, #e8f4fd);
+  border: 1px solid var(--bsi-color-blue-750, #004b76);
+  border-radius: 3px;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.8125rem;
+  color: var(--bsi-color-blue-750, #004b76);
+  white-space: nowrap;
+}
+
+.csn-lang-chip__label {
+  line-height: 1.3;
+}
+
+.csn-lang-chip__remove {
+  background: none;
+  border: none;
+  color: var(--bsi-color-blue-750, #004b76);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+  margin-left: 0.125rem;
+}
+
+.csn-lang-chip__remove:hover {
+  color: var(--bsi-color-red-100, #c0392b);
+}
+
+.csn-lang-text-input,
+.csn-lang-text-input.form-element,
+.csn-lang-input-area input[type="text"] {
+  flex: 1 1 80px;
+  min-width: 80px;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 0.875rem;
+  padding: 0.25rem 0;
+  width: auto;
+  min-height: auto;
+  height: auto;
+}
+
+.csn-lang-dropdown {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  background: var(--bsi-color-neutral-50, #f9f9f9);
+  border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
+  max-height: 200px;
+  overflow-y: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.csn-lang-dropdown--open {
+  display: block;
+}
+
+.csn-lang-dropdown__item {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.csn-lang-dropdown__item:hover {
+  background: var(--bsi-color-blue-50, #e8f4fd);
+}
+
+/* Required hint */
+.csn-profile__required-hint {
+  font-size: 0.8125rem;
+  color: var(--bsi-color-typo-secondary, #545454);
+  margin: 2rem 0 1rem;
+}
+
+/* Actions / Buttons */
+.csn-profile .form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.5rem;
+  overflow: visible !important;
+}
+
+/* Ensure form doesn't clip buttons */
+.csn-profile,
+.csn-profile form {
+  overflow: visible !important;
+}
+
+/* Primary button (Freigabe / Speichern) */
+.csn-profile .bsi-button--control,
+.csn-profile input[type="submit"].bsi-button--control {
+  --bsi-button-background: var(--bsi-color-blue-750, #004b76);
+  --bsi-button-border-color: var(--bsi-color-blue-750, #004b76);
+  --bsi-button-text-color: #fff;
+  --bsi-button-background-hover: var(--bsi-color-blue-900, #003050);
+  --bsi-button-border-color-hover: var(--bsi-color-blue-900, #003050);
+  --bsi-button-text-color-hover: #fff;
+  background: var(--bsi-color-blue-750, #004b76);
+  color: #fff;
+  border: 1px solid var(--bsi-color-blue-750, #004b76);
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  white-space: nowrap;
+  height: auto;
+  line-height: 1;
+}
+
+.csn-profile input[type="submit"].bsi-button--control:hover {
+  background: var(--bsi-color-blue-900, #003050);
+  border-color: var(--bsi-color-blue-900, #003050);
+}
+
+.csn-profile input[type="submit"] {
+  width: auto !important;
+  max-width: none !important;
+}
+
+/* Secondary button (Abbrechen) */
+.csn-profile .bsi-button--secondary,
+.csn-profile a.bsi-button--secondary {
+  background: transparent;
+  color: var(--bsi-color-blue-750, #004b76);
+  border: 1px solid var(--bsi-color-blue-750, #004b76);
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  height: auto;
+  line-height: 1;
+}
+
+.csn-profile a.bsi-button--secondary:hover {
+  background: var(--bsi-color-blue-50, #e8f4fd);
+}

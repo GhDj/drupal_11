@@ -1,0 +1,11 @@
+uuid: a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d
+langcode: en
+status: true
+dependencies:
+  module:
+    - profile
+id: profile.csn_profile
+label: 'CSN Profile'
+description: 'Frontend form for CSN first responders.'
+targetEntityType: profile
+cache: true

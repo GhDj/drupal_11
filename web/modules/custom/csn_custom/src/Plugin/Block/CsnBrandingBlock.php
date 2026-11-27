@@ -77,6 +77,7 @@ final class CsnBrandingBlock extends BlockBase implements ContainerFactoryPlugin
     return [
       '#theme' => 'csn_branding',
       '#dashboard_url' => $dashboard_url,
+      '#attached' => ['library' => ['csn_custom/csn_branding']],
     ];
   }
 
