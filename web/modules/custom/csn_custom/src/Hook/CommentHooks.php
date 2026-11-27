@@ -10,12 +10,16 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\node\NodeInterface;
 
 /**
  * Hooks related to CSN comments on incident reports.
  */
 class CommentHooks {
+
+  use StringTranslationTrait;
 
   public function __construct(
     private readonly AccountProxyInterface $currentUser,
@@ -34,17 +38,12 @@ class CommentHooks {
 
     // Set submit button label.
     if (isset($form['actions']['submit'])) {
-      $form['actions']['submit']['#value'] = t('Kommentar senden');
+      $form['actions']['submit']['#value'] = $this->t('Kommentar senden');
     }
 
-    // Enforce 1000 character limit on the comment body.
+    // Enforce 1000 character limit on the comment body textarea.
     if (isset($form['field_comment_body']['widget'][0]['value'])) {
-      $form['field_comment_body']['widget'][0]['value']['#maxlength'] = 1000;
       $form['field_comment_body']['widget'][0]['value']['#attributes']['maxlength'] = 1000;
-    }
-    // For text_textarea widget, the key is #value vs nested format.
-    if (isset($form['field_comment_body']['widget'][0]['#type']) && $form['field_comment_body']['widget'][0]['#type'] === 'text_format') {
-      $form['field_comment_body']['widget'][0]['#attributes']['maxlength'] = 1000;
     }
 
     // Add server-side validation for character limit.
@@ -61,7 +60,7 @@ class CommentHooks {
       $text = $value[0]['value'];
     }
     if (mb_strlen($text) > 1000) {
-      $formState->setErrorByName('field_comment_body', t('The comment may not be longer than 1000 characters.'));
+      $formState->setErrorByName('field_comment_body', new TranslatableMarkup('The comment may not be longer than 1000 characters.'));
     }
   }
 
@@ -88,7 +87,7 @@ class CommentHooks {
     }
 
     // Only CSN admins trigger a status transition.
-    if (!$this->currentUser->hasRole('csn_admin')) {
+    if (!in_array('csn_admin', $this->currentUser->getRoles(), TRUE)) {
       return;
     }
 

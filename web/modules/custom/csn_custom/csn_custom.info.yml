@@ -8,4 +8,5 @@ configure: csn_custom.settings
 
 dependencies:
   - drupal:comment
+  - drupal:content_moderation
   - group:group
