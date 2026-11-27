@@ -34,16 +34,13 @@ final class ProfileForm extends ContentEntityForm {
     'field_confirm_volunteer',
   ];
 
-  private FeedbackServiceInterface $feedback;
-
   public function __construct(
     EntityRepositoryInterface $entity_repository,
     EntityTypeBundleInfoInterface $entity_type_bundle_info,
     TimeInterface $time,
-    FeedbackServiceInterface $feedback,
+    private readonly FeedbackServiceInterface $feedback,
   ) {
     parent::__construct($entity_repository, $entity_type_bundle_info, $time);
-    $this->feedback = $feedback;
   }
 
   /**
