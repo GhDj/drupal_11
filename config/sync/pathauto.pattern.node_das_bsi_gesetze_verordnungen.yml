@@ -1,0 +1,52 @@
+uuid: 35fc03cc-62d0-4be2-9053-ac56f6aa3be5
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_das_bsi_gesetze_verordnungen
+label: 'Node: Das BSI › Gesetze & Verordnungen'
+type: 'canonical_entities:node'
+pattern: '/the-bsi/laws-regulations/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: 7946999f-45da-41a0-8da2-6d2ea5bb6efb
+    property: null
+  0b1b4fa8-97e3-45d2-91bb-bfb57cdf3dd6:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Laws
+    property: null
+  3909d9a2-72ed-44b4-bdac-7b50a8754446:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Regulations
+selection_logic: and
+weight: -28
+relationships:
+  'node:langcode:language':
+    label: Language

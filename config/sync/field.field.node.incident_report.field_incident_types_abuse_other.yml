@@ -1,0 +1,24 @@
+uuid: a8a8fb9f-d86c-4500-94a5-3de4b295a62d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_incident_types_abuse_other
+    - filter.format.plain_text
+    - node.type.incident_report
+  module:
+    - text
+id: node.incident_report.field_incident_types_abuse_other
+field_name: field_incident_types_abuse_other
+entity_type: node
+bundle: incident_report
+label: 'Other (account misuse / identity theft) – please specify'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - plain_text
+field_type: text

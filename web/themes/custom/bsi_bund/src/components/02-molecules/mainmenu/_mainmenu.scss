@@ -99,7 +99,7 @@
             var(--drupal-displace-offset-top, 0px) +
             var(--environment-indicator-height, 0px)
         );
-        z-index: 10;
+        z-index: 11;
       }
     }
   }
@@ -191,7 +191,7 @@
     height: auto;
     justify-content: space-between;
     line-height: 120%;
-    padding: 0;
+    padding: var(--bsi-space-4xs) 0;
     text-align: left;
     white-space: normal;
     width: 100%;
@@ -200,6 +200,7 @@
       font-size: 18px;
       justify-content: center;
       line-height: 100%;
+      padding: 0;
     }
 
     &:hover,
@@ -216,11 +217,19 @@
 
   // submenu back-button
   &__back {
+    --#{$nsp}-button-decoration-line-hover: underline;
+    --#{$nsp}-button-text-color-hover: var(--bsi-color-blue-750);
     color: var(--#{$nsp}-color-blue-750);
     justify-content: flex-start;
+    padding: 0;
 
     @include breakpoint-lg {
       display: none;
+    }
+
+    &:hover {
+      text-underline-offset: var(--bsi-space-3xs);
+      text-underline-position: from-font;
     }
   }
 
@@ -230,9 +239,10 @@
 
     @include breakpoint-lg {
       display: block;
-      grid-column: -1;
+      grid-column: 3;
       margin-left: auto;
       max-width: 330px;
+      width: 100%;
     }
   }
 
@@ -285,18 +295,12 @@
     --#{$nsp}-link-decoration-line-hover: none;
     --#{$nsp}-button-decoration-line-hover: none;
     background-color: var(--#{$nsp}-color-base-white);
-    bottom: auto;
     display: flex;
     flex-direction: column;
     gap: var(--#{$nsp}-space-2xl);
-    left: 0;
+    inset: 0;
     padding: var(--#{$nsp}-space-md) var(--#{$nsp}-grid-padding);
-    position: fixed;
-    right: 0;
-    top: calc(
-      var(--#{$nsp}-header-height) + var(--drupal-displace-offset-top, 0px) +
-        var(--drupal-environment-indicator-height, 0px)
-    );
+    position: absolute;
     transform: translateX(100%);
     transition: transform 0.2s ease;
     z-index: 1;
@@ -306,6 +310,7 @@
       --#{$nsp}-link-decoration-line-hover: underline;
       --#{$nsp}-button-decoration-line-hover: underline;
       background-color: var(--#{$nsp}-color-base-white);
+      bottom: auto;
       display: none;
       gap: var(--#{$nsp}-space-2xl);
       left: 0;
@@ -316,6 +321,10 @@
         var(--#{$nsp}-space-2xl) var(--#{$nsp}-grid-padding);
       position: absolute;
       right: 0;
+      top: calc(
+        var(--#{$nsp}-header-height) + var(--drupal-displace-offset-top, 0px) +
+          var(--drupal-environment-indicator-height, 0px)
+      );
       transform: translateX(0);
       z-index: 99;
 
@@ -527,14 +536,12 @@
     --#{$nsp}-link-color: var(--#{$nsp}-color-neutral-750);
     --#{$nsp}-link-color-hover: var(--#{$nsp}-color-blue-750);
     background: var(--#{$nsp}-color-base-white);
-    left: 0;
+    inset: 0;
     padding: var(--#{$nsp}-space-md);
-
-    position: fixed;
-    top: 1px;
-    width: 100%;
+    position: absolute;
 
     @include breakpoint-lg {
+      bottom: auto;
       left: 50%;
       max-width: 50%;
       padding: var(--#{$nsp}-space-2xs);

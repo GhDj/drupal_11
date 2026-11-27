@@ -282,12 +282,18 @@
 
     &__page-title {
       @include typography("display-2");
-      padding: var(--#{$nsp}-space-2xl) 0;
+      hyphens: none;
+      overflow-wrap: normal;
       text-align: center;
+      word-break: normal;
     }
 
     &__title {
       @include typography("heading-4");
+      hyphens: none;
+      overflow-wrap: normal;
+      text-align: center;
+      word-break: normal;
     }
 
     &__content {

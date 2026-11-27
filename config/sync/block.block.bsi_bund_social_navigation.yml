@@ -5,6 +5,7 @@ dependencies:
   config:
     - system.menu.social-media
   module:
+    - csn_custom
     - menu_item_fields
   theme:
     - bsi_bund
@@ -24,4 +25,13 @@ settings:
   expand_all_items: 0
   view_mode: default
   view_mode_override_field: _none
-visibility: {  }
+visibility:
+  csn_page:
+    id: csn_page
+    negate: true
+    context_mapping:
+      group: '@group.group_route_context:group'
+      node: '@node.node_route_context:node'
+      media: '@bsi_media.media_route_context:media'
+      user: '@user.current_user_context:current_user'
+    csn_page: true

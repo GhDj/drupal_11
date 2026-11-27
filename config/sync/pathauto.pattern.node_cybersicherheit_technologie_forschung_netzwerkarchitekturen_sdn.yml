@@ -1,0 +1,52 @@
+uuid: 15b793b4-d701-4203-a419-1e1ec024dc2e
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_technologie_forschung_netzwerkarchitekturen_sdn
+label: 'Node: Cybersicherheit › Technologie & Forschung › Netzwerkarchitekturen SDN'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/technology-research/network-architectures-sdn/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: 5ad7138f-e867-4ebf-972e-cacdc22d8082
+    property: null
+  0b1b4fa8-97e3-45d2-91bb-bfb57cdf3dd6:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: 226601e2-68e7-4fe3-92f6-fe1552796d88
+    property: null
+  f30f8c3f-b219-43d5-95e6-140067ba148c:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: d36d1aec-15ac-4caa-a1d6-a6cf22bd433a
+selection_logic: and
+weight: 8
+relationships:
+  'node:langcode:language':
+    label: Language

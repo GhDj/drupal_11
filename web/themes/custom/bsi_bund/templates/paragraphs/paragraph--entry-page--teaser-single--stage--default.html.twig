@@ -1,5 +1,6 @@
 {# Entry Page – Slider Opener = Hero Slider Container #}
-
+{# Set parent data to get title #}
+{% set parent = paragraph.getParentEntity() %}
 <div class="bsi-opener__content-wrapper">
   {# IMAGE #}
   <figure class="bsi-image bsi-opener__image">
@@ -11,6 +12,14 @@
 
       {# TITLE #}
       {% if content.field_section_title %}
+        <span class="bsi-heading bsi-opener__page-title">
+        {# page title as visual heading in every slide #}
+         {{parent.label}}
+        </span>
+      {% endif %}
+
+      {% if content.field_section_title %}
+      {# slide title as h2 #}
         <h2 class="bsi-heading bsi-heading--4 bsi-opener__title">
          {{ content.field_section_title.0 }}
         </h2>

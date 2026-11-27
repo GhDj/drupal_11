@@ -19,6 +19,15 @@
     initialize: function () {
       this.registerElements();
       this.registerTests();
+      this.data = fetch(drupalSettings.bsi_editor.abbreviations_endpoint, {
+        credentials: 'same-origin',
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return response.json();
+      });
       this.init = true;
     },
 
@@ -36,7 +45,8 @@
 
           tip += `<ul>`;
           for (const suggestion of suggestions) {
-            tip += `<li><a href="${Drupal.url(suggestion.url)}" target="_blank">${Ed11y.sanitizeForHTML(suggestion.title)}</a></li>`;
+            // Remove leading slash from url.
+            tip += `<li><a href="${Drupal.url(suggestion.url.substr(1))}" target="_blank">${Ed11y.sanitizeForHTML(suggestion.title)}</a></li>`;
           }
           tip += `</ul>`;
           tip += `<p>${Drupal.t('Please edit the content and manually specify the intended suggestion using the "Abbreviation" button.')}</p>`;
@@ -46,18 +56,8 @@
       };
     },
 
-    checkAbbreviations: function (event) {
-      // Preparing the output.
-      fetch(drupalSettings.bsi_editor.abbreviations_endpoint, {
-        credentials: 'same-origin',
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
+    checkAbbreviations: async function (event) {
+      this.data.then(data => {
         const abbreviations = Object.keys(data);
         if (abbreviations.length === 0) {
           return;

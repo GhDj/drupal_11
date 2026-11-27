@@ -1,0 +1,32 @@
+uuid: 50978ade-e018-496d-aedd-ce886e122320
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.entry_page
+  module:
+    - book
+    - node
+id: node_lage_reaktion_jahreslagebericht_jahr
+label: 'Node: Lage & Reaktion › Jahreslagebericht › [Jahr]'
+type: 'canonical_entities:node'
+pattern: '/lage-reaktion/jahreslagebericht/[node:created:html_year]/[node:title]'
+selection_criteria:
+  ccef30d1-94ae-4669-beac-307c58a318cb:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      entry_page: entry_page
+  3d13f916-a678-4fba-ba1f-bc97d3a64727:
+    id: book
+    books: {  }
+    negate: 0
+    context_mapping:
+      node: node
+selection_logic: and
+weight: 19
+relationships:
+  'node:langcode:language':
+    label: Language

@@ -1,0 +1,21 @@
+uuid: 6f5a30fc-f881-483b-98c7-ae8c930b9df3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_certification_date
+    - node.type.product_approval
+  module:
+    - datetime
+id: node.product_approval.field_certification_date
+field_name: field_certification_date
+entity_type: node
+bundle: product_approval
+label: 'Date of issue'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

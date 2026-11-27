@@ -1,0 +1,26 @@
+csn_custom.settings:
+  type: config_object
+  label: 'CSN settings'
+  mapping:
+    dashboard:
+      type: path
+      label: 'Dashboard'
+    logout_redirect:
+      type: path
+      label: 'Logout redirect'
+
+condition.plugin.csn_page:
+  type: condition.plugin
+  label: 'CSN page condition'
+  mapping:
+    csn_page:
+      type: boolean
+      label: Is CSN page
+
+field.widget.settings.csn_taxonomy_subtree:
+  type: mapping
+  label: Taxonomy Subtree widget settings
+  mapping:
+    parent:
+      type: string
+      label: Parent UUID

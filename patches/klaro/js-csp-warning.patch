@@ -1,0 +1,13 @@
+--- a/js/klaro.drupal.js
++++ b/js/klaro.drupal.js
+@@ -43,6 +43,10 @@
+                 }
+               };
+             }
++            else {
++              // Ensure this a data type the library checks for.
++              settings.klaro.config.services[a_index][hook] = undefined;
++            }
+           });
+           // Create regular expressions from config.
+           service.cookies.forEach(function (cookie, c_index) {

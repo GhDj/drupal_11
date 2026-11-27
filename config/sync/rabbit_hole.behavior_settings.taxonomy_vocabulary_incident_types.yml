@@ -1,0 +1,14 @@
+uuid: f897f26d-e0ce-4e8e-9cff-5460af82e136
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.incident_types
+id: taxonomy_vocabulary_incident_types
+entity_type_id: taxonomy_vocabulary
+entity_id: incident_types
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

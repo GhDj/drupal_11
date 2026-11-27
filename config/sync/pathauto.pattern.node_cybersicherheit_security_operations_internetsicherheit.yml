@@ -1,0 +1,40 @@
+uuid: 43db5ad1-384a-46ce-b255-6c6679be376c
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_security_operations_internetsicherheit
+label: 'Node: Cybersicherheit › Security Operations › Internetsicherheit'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/security-operations/internet-security/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: Security-Operations
+    property: null
+  75226fdc-0b43-4fac-be20-38ab3508f653:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: 42e3be04-a4e6-496f-97a5-20fbbc60f370
+selection_logic: and
+weight: 0
+relationships:
+  'node:langcode:language':
+    label: Language

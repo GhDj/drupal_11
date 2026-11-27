@@ -6,7 +6,7 @@ _core:
   default_config_hash: HBeBrdoMQ8HHvIcge46zv21fgnD6c8V6FjQ_h1eiQkY
 id: cms
 label: Functional
-description: 'Store data (e.g. cookie for user session) in your browser (required to use this website).'
+description: 'Storing data (e.g. user session cookies) in your browser (required to use this website).'
 default: true
 purposes:
   - cms

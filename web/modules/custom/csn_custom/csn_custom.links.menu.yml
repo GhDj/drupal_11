@@ -1,0 +1,5 @@
+csn_custom.settings:
+  title: 'CSN Settings'
+  description: 'Configure CSN branding URLs and logout redirect.'
+  route_name: csn_custom.settings
+  parent: system.admin_config_system

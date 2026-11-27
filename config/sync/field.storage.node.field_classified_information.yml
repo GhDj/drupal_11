@@ -1,0 +1,33 @@
+uuid: e942fe84-9b0e-4c41-ae8e-1a5d3b655780
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_classified_information
+field_name: field_classified_information
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: confidential
+      label: VS-Nfd
+    -
+      value: restricted
+      label: VS-Vertraulich
+    -
+      value: secret
+      label: Geheim
+    -
+      value: top_secret
+      label: 'Streng geheim'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

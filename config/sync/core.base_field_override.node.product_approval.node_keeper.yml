@@ -1,0 +1,22 @@
+uuid: 5ad94704-e9ea-4ead-9401-39bfb75abfa2
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.product_approval
+id: node.product_approval.node_keeper
+field_name: node_keeper
+entity_type: node
+bundle: product_approval
+label: 'Prevent this node from being deleted'
+description: 'This option will prevent node deletion to avoid accidents. Only users with "administer node_keep per node" permission will be able to remove this node.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

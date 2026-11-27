@@ -1,0 +1,21 @@
+uuid: ca5cfb48-26c7-4884-b646-b674e81e8ab8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_deadline
+    - node.type.product_approval
+  module:
+    - datetime
+id: node.product_approval.field_deadline
+field_name: field_deadline
+entity_type: node
+bundle: product_approval
+label: 'Valid until'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,44 @@
+csn_custom.settings:
+  path: '/admin/config/system/csn'
+  defaults:
+    _title: 'CSN Settings'
+    _form: 'Drupal\csn_custom\Form\SettingsForm'
+  requirements:
+    _permission: 'administer csn configuration'
+
+csn_custom.feedback:
+  path: '/feedback/{token}'
+  defaults:
+    _title: 'Feedback'
+    _controller: '\Drupal\csn_custom\Controller\FeedbackPageController'
+  requirements:
+    _permission: 'access content'
+
+csn_custom.incident_report.add:
+  path: '/report/add'
+  defaults:
+    _title_callback: '\Drupal\csn_custom\Form\FirstResponderContentForm::nodeTitle'
+    _entity_form: 'node.first_responder'
+    node_type: 'incident_report'
+  requirements:
+    _entity_create_access: 'node:incident_report'
+  options:
+    _admin_route: false
+    _access_checks:
+      - 'access_check.entity_create'
+    parameters:
+      node_type:
+        type: 'entity:node_type'
+
+csn_custom.incident_report.edit:
+  path: '/report/{node}'
+  defaults:
+    _title_callback: '\Drupal\csn_custom\Form\FirstResponderContentForm::nodeTitle'
+    _entity_form: 'node.first_responder'
+  requirements:
+    _entity_access: 'node.update'
+    node: '\d+'
+  options:
+    _admin_route: false
+    _access_checks:
+      - 'access_check.entity'

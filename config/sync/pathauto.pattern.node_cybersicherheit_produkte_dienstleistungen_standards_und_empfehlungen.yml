@@ -1,0 +1,40 @@
+uuid: 9ba8b776-fde1-494c-b1fe-0d28cb50d87f
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_produkte_dienstleistungen_standards_und_empfehlungen
+label: 'Node: Cybersicherheit › Produkte & Dienstleistungen › Standards und Empfehlungen'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/products-services/standards-and-recommendations/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: ed063de9-72d2-4a81-863b-17e750bd5ddf
+    property: null
+  f5a03f46-9429-46d7-bce7-0629b78a2026:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' a799a5cc-fbd7-415a-88f0-d7bd35ed0416'
+selection_logic: and
+weight: -5
+relationships:
+  'node:langcode:language':
+    label: Language

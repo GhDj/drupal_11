@@ -1,20 +1,58 @@
 diff --git a/core/lib/Drupal/Core/Entity/EntityFieldManager.php b/core/lib/Drupal/Core/Entity/EntityFieldManager.php
-index 4c6cdeee84adc75869b7c2b63ae4be52477344ff..382b2c8100fc682d86626945c583a7ad47f20e05 100644
+index 4c6cdeee84adc75869b7c2b63ae4be52477344ff..e6ee02450d1e599f3fc1e6639a333c462ac65e69 100644
 --- a/core/lib/Drupal/Core/Entity/EntityFieldManager.php
 +++ b/core/lib/Drupal/Core/Entity/EntityFieldManager.php
-@@ -425,6 +425,11 @@ protected function buildBundleFieldDefinitions($entity_type_id, $bundle, array $
+@@ -51,10 +51,11 @@ class EntityFieldManager implements EntityFieldManagerInterface, PreWarmableInte
+   protected $fieldDefinitions;
+
+   /**
+-   * Static cache of field storage definitions per entity type.
++   * Static cache of field storage definitions per entity type and language.
+    *
+    * Elements of the array:
+-   *  - $entity_type_id: \Drupal\Core\Field\BaseFieldDefinition[]
++   *  - $entity_type_id: \Drupal\Core\Field\BaseFieldDefinition[] keyed by the
++   *    langauge.
+    *
+    * @var array
+    */
+@@ -68,7 +69,7 @@ class EntityFieldManager implements EntityFieldManagerInterface, PreWarmableInte
+   protected $activeFieldStorageDefinitions;
+
+   /**
+-   * Static cache of base field overrides per entity type and bundle.
++   * Static cache of base field overrides per language, entity type and bundle.
+    *
+    * @var array
+    */
+@@ -425,15 +426,22 @@ protected function buildBundleFieldDefinitions($entity_type_id, $bundle, array $
      // overrides of base fields.
      $bundle_field_definitions = $class::bundleFieldDefinitions($entity_type, $bundle, $base_field_definitions);
 
+-    if (!isset($this->baseFieldOverrides)) {
+-      $this->baseFieldOverrides = [];
 +    // Make sure base field overrides and also configurable fields are loaded in
 +    // the correct language.
++    $language = $this->languageManager->getCurrentLanguage();
++    $langcode = $language->getId();
 +    $overrideLanguage = $this->languageManager->getConfigOverrideLanguage();
-+    $this->languageManager->setConfigOverrideLanguage($this->languageManager->getCurrentLanguage());
++    $this->languageManager->setConfigOverrideLanguage($language);
 +
-     if (!isset($this->baseFieldOverrides)) {
-       $this->baseFieldOverrides = [];
++    if (!isset($this->baseFieldOverrides[$langcode])) {
++      $this->baseFieldOverrides[$langcode] = [];
        $base_field_overrides = $this->entityTypeManager->getStorage('base_field_override')->loadMultiple();
-@@ -469,6 +474,9 @@ function (callable $hook, string $module) use (&$bundle_field_definitions, $enti
+       foreach ($base_field_overrides as $override) {
+-        $this->baseFieldOverrides[$override->getTargetEntityTypeId()][$override->getTargetBundle()][] = $override;
++        $this->baseFieldOverrides[$langcode][$override->getTargetEntityTypeId()][$override->getTargetBundle()][] = $override;
+       }
+     }
+
+-    foreach ($this->baseFieldOverrides[$entity_type_id][$bundle] ?? [] as $base_field_override) {
++    foreach ($this->baseFieldOverrides[$langcode][$entity_type_id][$bundle] ?? [] as $base_field_override) {
+       /** @var \Drupal\Core\Field\Entity\BaseFieldOverride $base_field_override */
+       // Base field definitions can be removed.
+       if (isset($base_field_definitions[$base_field_override->getName()])) {
+@@ -469,6 +477,9 @@ function (callable $hook, string $module) use (&$bundle_field_definitions, $enti
        }
      );
 
@@ -24,12 +62,104 @@ index 4c6cdeee84adc75869b7c2b63ae4be52477344ff..382b2c8100fc682d86626945c583a7ad
      // Automatically set the field name, target entity type and bundle
      // for non-configurable fields.
      foreach ($bundle_field_definitions as $field_name => $field_definition) {
+@@ -491,16 +502,17 @@ function (callable $hook, string $module) use (&$bundle_field_definitions, $enti
+    * {@inheritdoc}
+    */
+   public function getFieldStorageDefinitions($entity_type_id) {
+-    if (!isset($this->fieldStorageDefinitions[$entity_type_id])) {
+-      $this->fieldStorageDefinitions[$entity_type_id] = [];
++    $langcode = $this->languageManager->getCurrentLanguage()->getId();
++    if (!isset($this->fieldStorageDefinitions[$entity_type_id][$langcode])) {
++      $this->fieldStorageDefinitions[$entity_type_id][$langcode] = [];
+       // Add all non-computed base fields.
+       foreach ($this->getBaseFieldDefinitions($entity_type_id) as $field_name => $definition) {
+         if (!$definition->isComputed()) {
+-          $this->fieldStorageDefinitions[$entity_type_id][$field_name] = $definition;
++          $this->fieldStorageDefinitions[$entity_type_id][$langcode][$field_name] = $definition;
+         }
+       }
+       // Not prepared, try to load from cache.
+-      $cid = 'entity_field_storage_definitions:' . $entity_type_id . ':' . $this->languageManager->getCurrentLanguage()->getId();
++      $cid = 'entity_field_storage_definitions:' . $entity_type_id . ':' . $langcode;
+       if ($cache = $this->cacheGet($cid)) {
+         $field_storage_definitions = $cache->data;
+       }
+@@ -509,9 +521,9 @@ public function getFieldStorageDefinitions($entity_type_id) {
+         $field_storage_definitions = $this->buildFieldStorageDefinitions($entity_type_id);
+         $this->cacheSet($cid, $field_storage_definitions, Cache::PERMANENT, ['entity_types', 'entity_field_info']);
+       }
+-      $this->fieldStorageDefinitions[$entity_type_id] += $field_storage_definitions;
++      $this->fieldStorageDefinitions[$entity_type_id][$langcode] += $field_storage_definitions;
+     }
+-    return $this->fieldStorageDefinitions[$entity_type_id];
++    return $this->fieldStorageDefinitions[$entity_type_id][$langcode];
+   }
+
+   /**
+@@ -613,28 +625,38 @@ protected function buildFieldStorageDefinitions($entity_type_id) {
+     $entity_type = $this->entityTypeManager->getDefinition($entity_type_id);
+     $field_definitions = [];
+
+-    // Retrieve base field definitions from modules.
+-    $this->moduleHandler->invokeAllWith(
+-      'entity_field_storage_info',
+-      function (callable $hook, string $module) use (&$field_definitions, $entity_type, $entity_type_id) {
+-        $module_definitions = $hook($entity_type) ?? [];
+-        // Ensure the provider key actually matches the name of the provider
+-        // defining the field.
+-        foreach ($module_definitions as $field_name => $definition) {
+-          // @todo Remove this check once FieldDefinitionInterface exposes a
+-          //   proper provider setter. See https://www.drupal.org/node/2346329.
+-          if ($definition instanceof BaseFieldDefinition) {
+-            $definition->setProvider($module);
+-            $definition->setName($field_name);
+-            $definition->setTargetEntityTypeId($entity_type_id);
++    // Storage settings can contain translated option labels. Load them using
++    // the current language, even outside a regular HTTP request.
++    $override_language = $this->languageManager->getConfigOverrideLanguage();
++    $this->languageManager->setConfigOverrideLanguage($this->languageManager->getCurrentLanguage());
++    try {
++      // Retrieve base field definitions from modules.
++      $this->moduleHandler->invokeAllWith(
++        'entity_field_storage_info',
++        function (callable $hook, string $module) use (&$field_definitions, $entity_type, $entity_type_id) {
++          $module_definitions = $hook($entity_type) ?? [];
++          // Ensure the provider key actually matches the name of the provider
++          // defining the field.
++          foreach ($module_definitions as $field_name => $definition) {
++            // @todo Remove this check once FieldDefinitionInterface exposes a
++            //   proper provider setter.
++            //   See https://www.drupal.org/node/2346329.
++            if ($definition instanceof BaseFieldDefinition) {
++              $definition->setProvider($module);
++              $definition->setName($field_name);
++              $definition->setTargetEntityTypeId($entity_type_id);
++            }
++            $field_definitions[$field_name] = $definition;
+           }
+-          $field_definitions[$field_name] = $definition;
+         }
+-      }
+-    );
++      );
+
+-    // Invoke alter hook.
+-    $this->moduleHandler->alter('entity_field_storage_info', $field_definitions, $entity_type);
++      // Invoke alter hook.
++      $this->moduleHandler->alter('entity_field_storage_info', $field_definitions, $entity_type);
++    }
++    finally {
++      $this->languageManager->setConfigOverrideLanguage($override_language);
++    }
+
+     return $field_definitions;
+   }
 diff --git a/core/modules/field/tests/src/Kernel/FieldConfigLanguageOverrideTest.php b/core/modules/field/tests/src/Kernel/FieldConfigLanguageOverrideTest.php
 new file mode 100644
-index 0000000000000000000000000000000000000000..416d2e343e0691901019629340182ccaac85b2a2
+index 0000000000000000000000000000000000000000..2d5d6b536bdd8d87e0a895bedc2ddce2f40550bc
 --- /dev/null
 +++ b/core/modules/field/tests/src/Kernel/FieldConfigLanguageOverrideTest.php
-@@ -0,0 +1,107 @@
+@@ -0,0 +1,157 @@
 +<?php
 +
 +declare(strict_types=1);
@@ -39,6 +169,7 @@ index 0000000000000000000000000000000000000000..416d2e343e0691901019629340182cca
 +use Drupal\Core\Entity\EntityFieldManagerInterface;
 +use Drupal\entity_test\EntityTestHelper;
 +use Drupal\field\Entity\FieldConfig;
++use Drupal\field\Entity\FieldStorageConfig;
 +use Drupal\language\ConfigurableLanguageManagerInterface;
 +use Drupal\language\Entity\ConfigurableLanguage;
 +use PHPUnit\Framework\Attributes\Group;
@@ -58,6 +189,7 @@ index 0000000000000000000000000000000000000000..416d2e343e0691901019629340182cca
 +    'entity_test',
 +    'field',
 +    'language',
++    'options',
 +    'system',
 +    'user',
 +  ];
@@ -122,6 +254,54 @@ index 0000000000000000000000000000000000000000..416d2e343e0691901019629340182cca
 +  }
 +
 +  /**
++   * Tests translated storage option labels after switching languages.
++   */
++  public function testFieldStorageOptionsAfterLanguageSwitch(): void {
++    $field_name = 'field_status';
++    $english_options = ['draft' => 'Draft', 'published' => 'Published'];
++    $translated_options = [
++      'draft' => 'Draft (Afrikaans override)',
++      'published' => 'Published (Afrikaans override)',
++    ];
++    $storage = FieldStorageConfig::create([
++      'entity_type' => 'entity_test',
++      'field_name' => $field_name,
++      'type' => 'list_string',
++      'settings' => ['allowed_values' => $english_options],
++    ]);
++    $storage->save();
++    FieldConfig::create([
++      'field_storage' => $storage,
++      'bundle' => $this->testBundle,
++      'label' => 'Status',
++    ])->save();
++    $override = $this->languageManager->getLanguageConfigOverride('af', $storage->getConfigDependencyName());
++    $override->set('settings.allowed_values', [
++      ['label' => $translated_options['draft']],
++      ['label' => $translated_options['published']],
++    ])->save();
++    $this->entityFieldManager->clearCachedFieldDefinitions();
++
++    // Keep the same field manager across language changes. A new language must
++    // not reuse storage definitions built with the previous language's labels.
++    foreach (['en', 'af', 'en', 'af'] as $langcode) {
++      $this->config('language.negotiation')->set('selected_langcode', $langcode)->save();
++      $this->languageManager->reset();
++      $this->assertSame($langcode, $this->languageManager->getCurrentLanguage()->getId());
++      $original_override = $this->languageManager->getConfigOverrideLanguage();
++      $expected = $langcode === 'en' ? $english_options : $translated_options;
++      $definitions = $this->entityFieldManager->getFieldStorageDefinitions('entity_test');
++      $this->assertSame($expected, $definitions[$field_name]->getSetting('allowed_values'));
++      $this->assertSame($original_override, $this->languageManager->getConfigOverrideLanguage());
++
++      // Bundle definitions must also retain the correct storage option labels
++      // when they are built and cached under the new language.
++      $fields = $this->entityFieldManager->getFieldDefinitions('entity_test', $this->testBundle);
++      $this->assertSame($expected, $fields[$field_name]->getSetting('allowed_values'));
++    }
++  }
++
++  /**
 +   * Asserts that the field label of the test field matches the expected value.
 +   *
 +   * @param string $expected
@@ -139,10 +319,10 @@ index 0000000000000000000000000000000000000000..416d2e343e0691901019629340182cca
 +}
 diff --git a/core/tests/Drupal/KernelTests/Core/Field/Entity/BaseFieldOverrideLanguageOverrideTest.php b/core/tests/Drupal/KernelTests/Core/Field/Entity/BaseFieldOverrideLanguageOverrideTest.php
 new file mode 100644
-index 0000000000000000000000000000000000000000..9a56b7f8679e5e82412084bd2af60bc3f92fad5c
+index 0000000000000000000000000000000000000000..d4df88bd6c9f29967c7c24daa0cbeb917ba96eb9
 --- /dev/null
 +++ b/core/tests/Drupal/KernelTests/Core/Field/Entity/BaseFieldOverrideLanguageOverrideTest.php
-@@ -0,0 +1,130 @@
+@@ -0,0 +1,171 @@
 +<?php
 +
 +declare(strict_types=1);
@@ -258,6 +438,47 @@ index 0000000000000000000000000000000000000000..9a56b7f8679e5e82412084bd2af60bc3
 +  }
 +
 +  /**
++   * Tests base field overrides after switching languages without clearing caches.
++   */
++  public function testBaseFieldOverridesAreCachedPerLanguage(): void {
++    $second_bundle = 'second_bundle';
++    EntityTestHelper::createBundle($second_bundle);
++    $base_field_definition = $this->entityFieldManager
++      ->getBaseFieldDefinitions($this->testEntityTypeId)[$this->testFieldName];
++    $this->assertInstanceOf(BaseFieldDefinition::class, $base_field_definition);
++
++    // Create all configuration before warming the field definition caches.
++    foreach ([$this->testBundle, $second_bundle] as $bundle) {
++      $override = BaseFieldOverride::createFromBaseFieldDefinition($base_field_definition, $bundle);
++      $override->setLabel("$bundle English")->save();
++      $this->languageManager
++        ->getLanguageConfigOverride('af', $override->getConfigDependencyName())
++        ->set('label', "$bundle Afrikaans")
++        ->save();
++    }
++    $this->entityFieldManager->clearCachedFieldDefinitions();
++    $this->assertTestFieldLabel("$this->testBundle English");
++
++    // Rebuild definitions in another language using the same field manager.
++    // Reading another bundle must also preserve the first bundle's translation
++    // when all bundles are rebuilt together.
++    $this->config('language.negotiation')->set('selected_langcode', 'af')->save();
++    $this->languageManager->reset();
++    $this->assertSame('af', $this->languageManager->getCurrentLanguage()->getId());
++    $fields = $this->entityFieldManager->getFieldDefinitions($this->testEntityTypeId, $second_bundle);
++    $this->assertSame("$second_bundle Afrikaans", $fields[$this->testFieldName]->getLabel());
++    $this->assertTestFieldLabel("$this->testBundle Afrikaans");
++
++    // Switching back must still return the original English definitions.
++    $this->config('language.negotiation')->set('selected_langcode', 'en')->save();
++    $this->languageManager->reset();
++    $this->assertSame('en', $this->languageManager->getCurrentLanguage()->getId());
++    $fields = $this->entityFieldManager->getFieldDefinitions($this->testEntityTypeId, $second_bundle);
++    $this->assertSame("$second_bundle English", $fields[$this->testFieldName]->getLabel());
++    $this->assertTestFieldLabel("$this->testBundle English");
++  }
++
++  /**
 +   * Asserts that the field label of the test field matches the expected value.
 +   *
 +   * @param string $expected
@@ -274,7 +495,7 @@ index 0000000000000000000000000000000000000000..9a56b7f8679e5e82412084bd2af60bc3
 +
 +}
 diff --git a/core/tests/Drupal/Tests/Core/Entity/EntityFieldManagerTest.php b/core/tests/Drupal/Tests/Core/Entity/EntityFieldManagerTest.php
-index bb86cebf7265dbe984c965aa94686f873992624c..54f6c23e8839214422cb9d40e7f8946bbb86de63 100644
+index bb86cebf7265dbe984c965aa94686f873992624c..887f5735b247e89483fe6d4ca609e3588bb4554f 100644
 --- a/core/tests/Drupal/Tests/Core/Entity/EntityFieldManagerTest.php
 +++ b/core/tests/Drupal/Tests/Core/Entity/EntityFieldManagerTest.php
 @@ -173,7 +173,7 @@ protected function setUp(): void {
@@ -296,7 +517,17 @@ index bb86cebf7265dbe984c965aa94686f873992624c..54f6c23e8839214422cb9d40e7f8946b
      // Define bundle fields to be stored on the default Entity class.
      $bundle_fields = [
        'the_entity_id' => [
-@@ -477,6 +480,9 @@ public function testGetFieldDefinitionsWithCaching(): void {
+@@ -303,6 +306,9 @@ public function testGetFieldDefinitions(): void {
+    * @legacy-covers ::buildFieldStorageDefinitions
+    */
+   public function testGetFieldStorageDefinitions(): void {
++    $this
++      ->languageManager
++      ->setConfigOverrideLanguage(Argument::type(Language::class))->shouldBeCalledTimes(2);
+     $field_definition = $this->setUpEntityWithFieldDefinition(TRUE);
+     $field_storage_definition = $this->prophesize(FieldStorageDefinitionInterface::class);
+     $field_storage_definition->getName()->willReturn('field_storage');
+@@ -477,6 +483,9 @@ public function testGetFieldDefinitionsWithCaching(): void {
        ],
      ])->shouldBeCalledTimes(2);
 
@@ -306,7 +537,17 @@ index bb86cebf7265dbe984c965aa94686f873992624c..54f6c23e8839214422cb9d40e7f8946b
      $this->assertSame($expected, $this->entityFieldManager->getFieldDefinitions('test_entity_type', 'test_bundle'));
      $this->entityFieldManager->testClearEntityFieldInfo();
      $this->assertSame($expected, $this->entityFieldManager->getFieldDefinitions('test_entity_type', 'test_bundle'));
-@@ -585,6 +591,9 @@ function () use ($field_definition): array {
+@@ -486,6 +495,9 @@ public function testGetFieldDefinitionsWithCaching(): void {
+    * Tests the getFieldStorageDefinitions() method with caching.
+    */
+   public function testGetFieldStorageDefinitionsWithCaching(): void {
++    $this
++      ->languageManager
++      ->setConfigOverrideLanguage(Argument::type(Language::class))->shouldBeCalledTimes(2);
+     $field_definition = $this->setUpEntityWithFieldDefinition(TRUE, 'id');
+     $field_storage_definition = $this->prophesize(FieldStorageDefinitionInterface::class);
+     $field_storage_definition->getName()->willReturn('field_storage');
+@@ -585,6 +597,9 @@ function () use ($field_definition): array {
          );
        });
 

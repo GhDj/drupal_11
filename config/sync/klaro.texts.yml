@@ -3,15 +3,15 @@ _core:
 langcode: en
 consentModal:
   title: 'Use of personal data and cookies'
-  description: 'Please choose the services and 3rd party applications we would like to use.'
+  description: "Please select the third-party services and applications you wish to use. For further information, please read 'Adjusting our privacy settings'."
   privacyPolicy:
     name: 'privacy policy'
     text: 'To learn more, please read our {privacyPolicy}.'
-    url: 'internal:/<front>#TBD'
+    url: 'internal:/node/102'
 consentNotice:
-  title: 'Use of personal data and cookies'
+  title: 'Notice on the use of cookies'
   changeDescription: 'There were changes since your last visit, please update your consent.'
-  description: 'We use cookies and process personal data for the following purposes: {purposes}.'
+  description: 'We use technically necessary cookies on this website that are required for the operation of the site. With your consent, we also set cookies from the web analytics service Matomo to statistically evaluate the use of our website. Consent is voluntary and can be withdrawn at any time, for example via the link "Customize privacy settings". The statistics cookies are stored for one month. Third-party access does not occur. Details can be found in our privacy policy.'
   learnMore: 'Customize privacy settings'
 ok: 'Accept all cookies'
 save: Save
@@ -22,7 +22,7 @@ acceptSelected: 'Accept selected'
 service:
   disableAll:
     title: 'Toggle all services'
-    description: 'Use this switch to enable/disable all services.'
+    description: 'Use this toggle to enable or disable all services.'
   optOut:
     title: (opt-out)
     description: 'This service is loaded by default (opt-out possible).'

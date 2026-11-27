@@ -2,11 +2,19 @@ uuid: e1e968bb-0a61-44de-b43a-1683afda0e26
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.incident_report
   module:
+    - csn_custom
+    - node
+    - save_edit
     - tfa
 id: csn_deh
-label: 'Digital First-Aider'
+label: 'Digital First Responder'
 weight: -6
 is_admin: false
 permissions:
+  - 'access csn'
+  - 'create incident_report content'
   - 'setup own tfa'
+  - 'use save and edit'

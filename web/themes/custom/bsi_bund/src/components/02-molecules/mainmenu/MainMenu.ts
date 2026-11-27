@@ -64,6 +64,30 @@ abstract class MainMenuComponent {
     this.isOpen = false;
   }
 
+  protected updateParentHeight() {
+    const l2Panel = this.menu.closest<HTMLElement>(
+      '[data-js-mainmenu-panel="l2"]'
+    );
+
+    if (!l2Panel) {
+      return;
+    }
+
+    // zurücksetzen, damit wir neutral messen
+    l2Panel.style.minHeight = "";
+
+    let requiredHeight = l2Panel.scrollHeight;
+
+    l2Panel.querySelectorAll<HTMLElement>(`.${OPEN_CLASS}`).forEach(panel => {
+      requiredHeight = Math.max(
+        requiredHeight,
+        panel.offsetTop + panel.scrollHeight
+      );
+    });
+
+    l2Panel.style.minHeight = `${requiredHeight + 40}px`;
+  }
+
   // Closes when focus moves outside both the panel and its toggle (e.g. tab away)
   protected handleFocusOut = (e: FocusEvent) => {
     const related = e.relatedTarget as HTMLElement | null;
@@ -183,6 +207,7 @@ export class MenuCollapseL2 extends MainMenuComponent {
       }
     });
     super.open();
+    this.updateParentHeight();
   }
 
   // Widens focusout containment to the L2 panel so shift-tab back into the list doesn't close L3
@@ -193,6 +218,7 @@ export class MenuCollapseL2 extends MainMenuComponent {
     // Use the L2 parent as the boundary so focus can move freely within it
     if (!container.contains(related)) {
       this.close();
+      this.updateParentHeight();
     }
   };
 
@@ -232,13 +258,7 @@ export class MenuCollapseL3 extends MainMenuComponent {
 
     super.open();
 
-    const l2Panel = this.menu.closest<HTMLElement>(
-      '[data-js-mainmenu-panel="l2"]'
-    );
-
-    if (l2Panel) {
-      l2Panel.style.minHeight = `${this.menu.scrollHeight + 40}px`;
-    }
+    this.updateParentHeight();
   }
 
   public override close() {
@@ -251,6 +271,7 @@ export class MenuCollapseL3 extends MainMenuComponent {
     }
 
     super.close();
+    this.updateParentHeight();
   }
 
   protected override handleFocusOut = (e: FocusEvent) => {

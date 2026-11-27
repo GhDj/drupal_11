@@ -1,0 +1,18 @@
+uuid: c29e62d2-0494-425c-b402-dac9ebe26021
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.product_approval
+id: node.product_approval.title
+field_name: title
+entity_type: node
+bundle: product_approval
+label: 'Registration number'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

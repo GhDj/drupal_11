@@ -1,0 +1,50 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: b722ca08-3fe0-4af2-82c4-8c7c62c905ba
+  bundle: attack_vectors
+  default_langcode: de
+  depends:
+    d9edce59-2f11-426b-b597-8971a22033fe: taxonomy_term
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Schadsoftware mit einer anderen Art von Schadprogramm'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      entity: d9edce59-2f11-426b-b597-8971a22033fe
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1794835242

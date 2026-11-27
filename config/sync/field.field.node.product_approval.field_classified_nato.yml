@@ -1,0 +1,21 @@
+uuid: 24f7ab63-b520-478a-b110-4f81e3027ef9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_classified_nato
+    - node.type.product_approval
+  module:
+    - options
+id: node.product_approval.field_classified_nato
+field_name: field_classified_nato
+entity_type: node
+bundle: product_approval
+label: 'Classified NATO'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

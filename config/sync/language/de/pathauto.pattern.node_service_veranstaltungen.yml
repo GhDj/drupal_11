@@ -1,0 +1,1 @@
+pattern: '/service/veranstaltungen/[node:title]'

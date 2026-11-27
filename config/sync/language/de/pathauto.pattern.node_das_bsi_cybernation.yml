@@ -1,0 +1,4 @@
+pattern: '/das-bsi/cybernation-deutschland/[node:title]'
+selection_criteria:
+  3909d9a2-72ed-44b4-bdac-7b50a8754446:
+    value: Deutschland

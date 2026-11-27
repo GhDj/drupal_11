@@ -1,0 +1,29 @@
+uuid: 7b4571fd-5cd3-49bc-9b1a-e420fd452467
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_technologie_forschung
+label: 'Node: Cybersicherheit › Technologie & Forschung'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/technology-research/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: 5ad7138f-e867-4ebf-972e-cacdc22d8082
+    property: null
+selection_logic: and
+weight: 23
+relationships:
+  'node:langcode:language':
+    label: Language

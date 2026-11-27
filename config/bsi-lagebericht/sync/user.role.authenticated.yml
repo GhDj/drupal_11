@@ -24,11 +24,13 @@ dependencies:
     - file
     - filter
     - klaro
+    - matomo
     - media
     - media_entity_download
     - node
     - paragraphs_type_permissions
     - search_api_autocomplete
+    - securitytxt
     - system
     - taxonomy
 _core:
@@ -93,6 +95,7 @@ permissions:
   - 'download media'
   - 'download publication media'
   - 'mark as hidden in editoria11y'
+  - 'opt-in or out of matomo tracking'
   - 'revert term revisions in abbreviations'
   - 'revert term revisions in audiences'
   - 'revert term revisions in dictionary'
@@ -153,4 +156,5 @@ permissions:
   - 'view paragraph content tile_item'
   - 'view paragraph content tiles'
   - 'view paragraph content view'
+  - 'view securitytxt'
   - 'view vocabulary labels'

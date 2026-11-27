@@ -1,0 +1,14 @@
+uuid: 2497b370-93a5-48c6-9b15-c903df5fe78e
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.product_approval
+id: node_type_product_approval
+entity_type_id: node_type
+entity_id: product_approval
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

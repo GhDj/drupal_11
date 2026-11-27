@@ -14,7 +14,7 @@
     pointer-events: none;
     position: absolute;
     right: var(--#{$nsp}-space-lg);
-    top: 50%;
+    top: calc(50% + var(--space-s) / 2);
     transform: translateY(-65%) rotate(45deg);
     width: var(--#{$nsp}-space-2xs);
   }

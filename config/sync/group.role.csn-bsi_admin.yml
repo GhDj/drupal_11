@@ -1,0 +1,30 @@
+uuid: 5da03834-3c78-4a8f-a289-1844152e3bbc
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.csn
+    - user.role.bsi_admin
+id: csn-bsi_admin
+label: 'BSI Admin'
+weight: -6
+admin: false
+scope: outsider
+global_role: bsi_admin
+group_type: csn
+permissions:
+  - 'access group_media overview'
+  - 'access group_node overview'
+  - 'create group_node:page entity'
+  - 'create group_node:page relationship'
+  - 'delete any group_node:page entity'
+  - 'update any group_node:page entity'
+  - 'update any group_node:page relationship'
+  - 'view all group revisions'
+  - 'view any unpublished group'
+  - 'view group'
+  - 'view group revisions'
+  - 'view group_node:page entity'
+  - 'view group_node:page relationship'
+  - 'view latest group version'
+  - 'view unpublished group_node:page entity'

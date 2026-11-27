@@ -1,0 +1,3297 @@
+diff --git a/composer.json b/composer.json
+index 1e1b1c2ac7acb8e21f8de43b8110ddb0452237d3..38e98a1176ea6500f7851f824e5889cefe9abcb0 100644
+--- a/composer.json
++++ b/composer.json
+@@ -107,6 +107,7 @@
+         "drupal/pathauto_condition_ui": "^1.0",
+         "drupal/phone_label": "^1.2",
+         "drupal/prevent_version_disclosure": "^1.0",
++        "drupal/profile": "^1.17",
+         "drupal/rabbit_hole": "^1.2",
+         "drupal/real_aes": "^2.6",
+         "drupal/redirect": "^1.13",
+diff --git a/composer.lock b/composer.lock
+index e9c57e3d3ed2abc2701c9e42b44a44197d6b8ddd..171ea7d2027557cc15a239a177bf6f8f7d110725 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -3778,8 +3778,7 @@
+             "support": {
+                 "source": "http://cgit.drupalcode.org/duration_field",
+                 "issues": "https://www.drupal.org/project/issues/duration_field"
+-            },
+-            "published-time": "2025-07-17T14:59:43+00:00"
++            }
+         },
+         {
+             "name": "drupal/editoria11y",
+@@ -4000,6 +3999,85 @@
+                 "source": "https://git.drupalcode.org/project/encrypt"
+             }
+         },
++        {
++            "name": "drupal/entity",
++            "version": "1.8.0",
++            "source": {
++                "type": "git",
++                "url": "https://git.drupalcode.org/project/entity.git",
++                "reference": "8.x-1.8"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://artifacts.init.de:443/artifactory/api/composer/drupal-composer-remote/direct-dists/entity-8.x-1.8.zip",
++                "reference": "8.x-1.8",
++                "shasum": "61349682d0db8dead9d6b571ac6b4aeae08abb0f"
++            },
++            "require": {
++                "drupal/core": "^10.1 || ^11"
++            },
++            "type": "drupal-module",
++            "extra": {
++                "drupal": {
++                    "version": "8.x-1.8",
++                    "datestamp": "1787858234",
++                    "security-coverage": {
++                        "status": "covered",
++                        "message": "Covered by Drupal's security advisory policy"
++                    }
++                }
++            },
++            "license": [
++                "GPL-2.0-or-later"
++            ],
++            "authors": [
++                {
++                    "name": "berdir",
++                    "homepage": "https://www.drupal.org/user/214652"
++                },
++                {
++                    "name": "bojanz",
++                    "homepage": "https://www.drupal.org/user/86106"
++                },
++                {
++                    "name": "dawehner",
++                    "homepage": "https://www.drupal.org/user/99340"
++                },
++                {
++                    "name": "dixon_",
++                    "homepage": "https://www.drupal.org/user/239911"
++                },
++                {
++                    "name": "fago",
++                    "homepage": "https://www.drupal.org/user/16747"
++                },
++                {
++                    "name": "klausi",
++                    "homepage": "https://www.drupal.org/user/262198"
++                },
++                {
++                    "name": "mglaman",
++                    "homepage": "https://www.drupal.org/user/2416470"
++                },
++                {
++                    "name": "tr",
++                    "homepage": "https://www.drupal.org/user/202830"
++                },
++                {
++                    "name": "tstoeckler",
++                    "homepage": "https://www.drupal.org/user/107158"
++                }
++            ],
++            "description": "Provides expanded entity APIs, which will be moved to Drupal core one day.",
++            "homepage": "https://www.drupal.org/project/entity",
++            "keywords": [
++                "Actively maintained"
++            ],
++            "support": {
++                "source": "https://git.drupalcode.org/project/entity",
++                "issues": "https://www.drupal.org/project/issues/entity"
++            }
++        },
+         {
+             "name": "drupal/entity_field_condition",
+             "version": "1.6.0",
+@@ -7032,6 +7110,79 @@
+                 "issues": "http://drupal.org/project/issues/prevent_version_disclosure"
+             }
+         },
++        {
++            "name": "drupal/profile",
++            "version": "1.17.0",
++            "source": {
++                "type": "git",
++                "url": "https://git.drupalcode.org/project/profile.git",
++                "reference": "8.x-1.17"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://artifacts.init.de:443/artifactory/api/composer/drupal-composer-remote/direct-dists/profile-8.x-1.17.zip",
++                "reference": "8.x-1.17",
++                "shasum": "2978351875716a2bb24b1c0e5dff9a6cec6b0d39"
++            },
++            "require": {
++                "drupal/core": "^10.3 || ^11 || ^12",
++                "drupal/entity": "^1.0",
++                "php": "^8.1"
++            },
++            "require-dev": {
++                "drupal/search_api": "~1.30",
++                "drupal/token": "^1.7"
++            },
++            "type": "drupal-module",
++            "extra": {
++                "drupal": {
++                    "version": "8.x-1.17",
++                    "datestamp": "1794939171",
++                    "security-coverage": {
++                        "status": "covered",
++                        "message": "Covered by Drupal's security advisory policy"
++                    }
++                }
++            },
++            "license": [
++                "GPL-2.0-or-later"
++            ],
++            "authors": [
++                {
++                    "name": "bojanz",
++                    "homepage": "https://www.drupal.org/user/86106"
++                },
++                {
++                    "name": "daggerhart",
++                    "homepage": "https://www.drupal.org/user/167806"
++                },
++                {
++                    "name": "fago",
++                    "homepage": "https://www.drupal.org/user/16747"
++                },
++                {
++                    "name": "jsacksick",
++                    "homepage": "https://www.drupal.org/user/972218"
++                },
++                {
++                    "name": "mglaman",
++                    "homepage": "https://www.drupal.org/user/2416470"
++                },
++                {
++                    "name": "pcambra",
++                    "homepage": "https://www.drupal.org/user/122101"
++                }
++            ],
++            "description": "Provides configurable user profiles.",
++            "homepage": "https://drupal.org/project/profile",
++            "keywords": [
++                "Access control",
++                "Actively maintained"
++            ],
++            "support": {
++                "source": "https://git.drupalcode.org/project/profile"
++            }
++        },
+         {
+             "name": "drupal/rabbit_hole",
+             "version": "1.3.0",
+diff --git a/config/sync/bsi_csn.settings.yml b/config/sync/bsi_csn.settings.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..31a9a64bd10448b1dbc05744e68c3dbf16d53d4c
+--- /dev/null
++++ b/config/sync/bsi_csn.settings.yml
+@@ -0,0 +1,5 @@
++_core:
++  default_config_hash: dCSdh5X0ZW0M4AfqdEAikIcnreHhufuT073dQNyR4Lg
++bsi_url: 'https://www.bsi.bund.de'
++csn_dashboard_url: ''
++logout_redirect_url: 'https://www.bsi.bund.de/login'
+diff --git a/config/sync/bsi_social.settings.yml b/config/sync/bsi_social.settings.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..d56ae0559b86fa1117f32dad4d6f6b7f652892f0
+--- /dev/null
++++ b/config/sync/bsi_social.settings.yml
+@@ -0,0 +1 @@
++mastodon_endpoint: 'https://social.bund.de/api/v1/accounts/8667/statuses'
+diff --git a/config/sync/core.entity_form_display.group.csn.default.yml b/config/sync/core.entity_form_display.group.csn.default.yml
+deleted file mode 100644
+index eb04e410fdba9fda2532eb451caec6907b63314d..0000000000000000000000000000000000000000
+--- a/config/sync/core.entity_form_display.group.csn.default.yml
++++ /dev/null
+@@ -1,99 +0,0 @@
+-uuid: b1d3ecdc-5d8e-4f7b-857b-6d7f2fb773f1
+-langcode: en
+-status: true
+-dependencies:
+-  config:
+-    - group.type.csn
+-  module:
+-    - field_group
+-    - path
+-third_party_settings:
+-  field_group:
+-    group_language:
+-      children:
+-        - langcode
+-      label: Language
+-      region: content
+-      parent_name: ''
+-      weight: 6
+-      format_type: details_sidebar
+-      format_settings:
+-        classes: ''
+-        show_empty_fields: false
+-        id: ''
+-        label_as_html: false
+-        open: false
+-        description: ''
+-        required_fields: true
+-        weight: 0
+-    group_workflow:
+-      children:
+-        - status
+-      label: Workflow
+-      region: content
+-      parent_name: ''
+-      weight: 4
+-      format_type: details_sidebar
+-      format_settings:
+-        classes: ''
+-        show_empty_fields: false
+-        id: ''
+-        label_as_html: false
+-        open: false
+-        description: ''
+-        required_fields: true
+-        weight: 0
+-    group_url:
+-      children:
+-        - path
+-      label: URL
+-      region: content
+-      parent_name: ''
+-      weight: 5
+-      format_type: details_sidebar
+-      format_settings:
+-        classes: ''
+-        show_empty_fields: false
+-        id: ''
+-        label_as_html: false
+-        open: false
+-        description: ''
+-        required_fields: true
+-        weight: 0
+-id: group.csn.default
+-targetEntityType: group
+-bundle: csn
+-mode: default
+-content:
+-  label:
+-    type: string_textfield
+-    weight: 0
+-    region: content
+-    settings:
+-      size: 60
+-      placeholder: ''
+-    third_party_settings: {  }
+-  langcode:
+-    type: language_select
+-    weight: 1
+-    region: content
+-    settings:
+-      include_locked: true
+-    third_party_settings: {  }
+-  path:
+-    type: path
+-    weight: 2
+-    region: content
+-    settings: {  }
+-    third_party_settings: {  }
+-  status:
+-    type: boolean_checkbox
+-    weight: 3
+-    region: content
+-    settings:
+-      display_label: true
+-    third_party_settings: {  }
+-hidden:
+-  changed: true
+-  created: true
+-  uid: true
+diff --git a/config/sync/core.entity_form_display.profile.first_responder.csn_profile.yml b/config/sync/core.entity_form_display.profile.first_responder.csn_profile.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..eefb0fdfa39c25169cbcc9927d1d8f2dacb748e1
+--- /dev/null
++++ b/config/sync/core.entity_form_display.profile.first_responder.csn_profile.yml
+@@ -0,0 +1,115 @@
++uuid: b2c3d4e5-f6a7-8b9c-0d1e-2f3a4b5c6d7e
++langcode: en
++status: true
++dependencies:
++  config:
++    - core.entity_form_mode.profile.csn_profile
++    - field.field.profile.first_responder.field_academic_title
++    - field.field.profile.first_responder.field_given_name
++    - field.field.profile.first_responder.field_family_name
++    - field.field.profile.first_responder.field_phone
++    - field.field.profile.first_responder.field_address
++    - field.field.profile.first_responder.field_deh_phone
++    - field.field.profile.first_responder.field_deh_mail
++    - field.field.profile.first_responder.field_deh_language
++    - field.field.profile.first_responder.field_availability
++    - field.field.profile.first_responder.field_confirm_data_processing
++    - field.field.profile.first_responder.field_confirm_terms_conditions
++    - field.field.profile.first_responder.field_confirm_volunteer
++    - profile.type.first_responder
++  module:
++    - address
++    - office_hours
++    - telephone
++id: profile.first_responder.csn_profile
++targetEntityType: profile
++bundle: first_responder
++mode: csn_profile
++content:
++  field_academic_title:
++    type: string_textfield
++    weight: 0
++    region: content
++    settings:
++      size: 60
++      placeholder: ''
++    third_party_settings: {  }
++  field_given_name:
++    type: string_textfield
++    weight: 1
++    region: content
++    settings:
++      size: 60
++      placeholder: ''
++    third_party_settings: {  }
++  field_family_name:
++    type: string_textfield
++    weight: 2
++    region: content
++    settings:
++      size: 60
++      placeholder: ''
++    third_party_settings: {  }
++  field_phone:
++    type: telephone_default
++    weight: 3
++    region: content
++    settings:
++      placeholder: '+49 ...'
++    third_party_settings: {  }
++  field_address:
++    type: address_default
++    weight: 4
++    region: content
++    settings: {  }
++    third_party_settings: {  }
++  field_deh_phone:
++    type: telephone_default
++    weight: 5
++    region: content
++    settings:
++      placeholder: '+49 ...'
++    third_party_settings: {  }
++  field_deh_mail:
++    type: email_default
++    weight: 6
++    region: content
++    settings:
++      size: 60
++      placeholder: ''
++    third_party_settings: {  }
++  field_deh_language:
++    type: options_select
++    weight: 7
++    region: content
++    settings: {  }
++    third_party_settings: {  }
++  field_availability:
++    type: office_hours_list
++    weight: 8
++    region: content
++    settings: {  }
++    third_party_settings: {  }
++  field_confirm_data_processing:
++    type: boolean_checkbox
++    weight: 9
++    region: content
++    settings:
++      display_label: true
++    third_party_settings: {  }
++  field_confirm_terms_conditions:
++    type: boolean_checkbox
++    weight: 10
++    region: content
++    settings:
++      display_label: true
++    third_party_settings: {  }
++  field_confirm_volunteer:
++    type: boolean_checkbox
++    weight: 11
++    region: content
++    settings:
++      display_label: true
++    third_party_settings: {  }
++hidden:
++  status: true
+diff --git a/config/sync/core.entity_form_mode.profile.csn_profile.yml b/config/sync/core.entity_form_mode.profile.csn_profile.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..40592193a76be707ed96bce01e729b1debae8649
+--- /dev/null
++++ b/config/sync/core.entity_form_mode.profile.csn_profile.yml
+@@ -0,0 +1,11 @@
++uuid: a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d
++langcode: en
++status: true
++dependencies:
++  module:
++    - profile
++id: profile.csn_profile
++label: 'CSN Profile'
++description: 'Frontend form for CSN first responders.'
++targetEntityType: profile
++cache: true
+diff --git a/config/sync/core.extension.yml b/config/sync/core.extension.yml
+index 12a0512a9ca729c758fce5fbff3e5ff26945ced1..4b74fc8ab835f21efae4b0dbe8e1cb8961755efd 100644
+--- a/config/sync/core.extension.yml
++++ b/config/sync/core.extension.yml
+@@ -12,7 +12,6 @@ module:
+   breakpoint: 0
+   bsi_access: 0
+   bsi_charts: 0
+-  bsi_csn: 0
+   bsi_editor: 0
+   bsi_report: 0
+   bsi_search: 0
+diff --git a/config/sync/field.field.profile.first_responder.field_academic_title.yml b/config/sync/field.field.profile.first_responder.field_academic_title.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..5c327c4cd3cc6e0839be243444415226efe7cae5
+--- /dev/null
++++ b/config/sync/field.field.profile.first_responder.field_academic_title.yml
+@@ -0,0 +1,19 @@
++uuid: a2000001-0001-0001-0001-000000000001
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.profile.field_academic_title
++    - profile.type.first_responder
++id: profile.first_responder.field_academic_title
++field_name: field_academic_title
++entity_type: profile
++bundle: first_responder
++label: 'Titel'
++description: ''
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: string
+diff --git a/config/sync/field.field.profile.first_responder.field_address.yml b/config/sync/field.field.profile.first_responder.field_address.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..ede0e0fd68889cefd9f96d1e7c48b3d4a91e6d6b
+--- /dev/null
++++ b/config/sync/field.field.profile.first_responder.field_address.yml
+@@ -0,0 +1,43 @@
++uuid: a2000005-0001-0001-0001-000000000005
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.profile.field_address
++    - profile.type.first_responder
++  module:
++    - address
++id: profile.first_responder.field_address
++field_name: field_address
++entity_type: profile
++bundle: first_responder
++label: 'Adresse'
++description: ''
++required: true
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings:
++  available_countries: {  }
++  langcode_override: ''
++  field_overrides:
++    givenName:
++      override: hidden
++    additionalName:
++      override: hidden
++    familyName:
++      override: hidden
++    organization:
++      override: hidden
++    addressLine2:
++      override: hidden
++    addressLine3:
++      override: hidden
++    sortingCode:
++      override: hidden
++    dependentLocality:
++      override: hidden
++    administrativeArea:
++      override: hidden
++  fields: {  }
++field_type: address
+diff --git a/config/sync/field.field.profile.first_responder.field_availability.yml b/config/sync/field.field.profile.first_responder.field_availability.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..4ea5520143e559453fa4fd1c9ecc7d4e6af4240e
+--- /dev/null
++++ b/config/sync/field.field.profile.first_responder.field_availability.yml
+@@ -0,0 +1,22 @@
++uuid: a2000009-0001-0001-0001-000000000009
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.profile.field_availability
++    - office_hours
++    - profile.type.first_responder
++  module:
++    - office_hours
++id: profile.first_responder.field_availability
++field_name: field_availability
++entity_type: profile
++bundle: first_responder
++label: 'Verfügbarkeit'
++description: ''
++required: true
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: office_hours
+diff --git a/config/sync/field.field.profile.first_responder.field_confirm_data_processing.yml b/config/sync/field.field.profile.first_responder.field_confirm_data_processing.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..abc10e6bfdeb1ab20503621413ee306bb82498d1
+--- /dev/null
++++ b/config/sync/field.field.profile.first_responder.field_confirm_data_processing.yml
+@@ -0,0 +1,21 @@
++uuid: a2000010-0001-0001-0001-000000000010
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.profile.field_confirm_data_processing
++    - profile.type.first_responder
++id: profile.first_responder.field_confirm_data_processing
++field_name: field_confirm_data_processing
++entity_type: profile
++bundle: first_responder
++label: 'Datenverarbeitung'
++description: ''
++required: true
++translatable: false
++default_value:
++  -
++    value: 0
++default_value_callback: ''
++settings: {  }
++field_type: boolean
+diff --git a/config/sync/field.field.profile.first_responder.field_confirm_terms_conditions.yml b/config/sync/field.field.profile.first_responder.field_confirm_terms_conditions.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..8e23699f69c9c16aab3f8e4648377fb21ee8f010
+--- /dev/null
++++ b/config/sync/field.field.profile.first_responder.field_confirm_terms_conditions.yml
+@@ -0,0 +1,21 @@
++uuid: a2000011-0001-0001-0001-000000000011
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.profile.field_confirm_terms_conditions
++    - profile.type.first_responder
++id: profile.first_responder.field_confirm_terms_conditions
++field_name: field_confirm_terms_conditions
++entity_type: profile
++bundle: first_responder
++label: 'AGB'
++description: ''
++required: true
++translatable: false
++default_value:
++  -
++    value: 0
++default_value_callback: ''
++settings: {  }
++field_type: boolean
+diff --git a/config/sync/field.field.profile.first_responder.field_confirm_volunteer.yml b/config/sync/field.field.profile.first_responder.field_confirm_volunteer.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..59c111996f757e62957215c68c11d01333208702
+--- /dev/null
++++ b/config/sync/field.field.profile.first_responder.field_confirm_volunteer.yml
+@@ -0,0 +1,21 @@
++uuid: a2000012-0001-0001-0001-000000000012
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.profile.field_confirm_volunteer
++    - profile.type.first_responder
++id: profile.first_responder.field_confirm_volunteer
++field_name: field_confirm_volunteer
++entity_type: profile
++bundle: first_responder
++label: 'Ehrenamtsvereinbarung'
++description: ''
++required: true
++translatable: false
++default_value:
++  -
++    value: 0
++default_value_callback: ''
++settings: {  }
++field_type: boolean
+diff --git a/config/sync/field.field.profile.first_responder.field_confirm_volunteer_conditions.yml b/config/sync/field.field.profile.first_responder.field_confirm_volunteer_conditions.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/config/sync/field.field.profile.first_responder.field_deh_language.yml b/config/sync/field.field.profile.first_responder.field_deh_language.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..461b1b44a33cb79ba960d72bf81a53b34f30311e
+--- /dev/null
++++ b/config/sync/field.field.profile.first_responder.field_deh_language.yml
+@@ -0,0 +1,29 @@
++uuid: a2000008-0001-0001-0001-000000000008
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.profile.field_deh_language
++    - profile.type.first_responder
++    - taxonomy.vocabulary.csn_languages
++id: profile.first_responder.field_deh_language
++field_name: field_deh_language
++entity_type: profile
++bundle: first_responder
++label: 'Sprache'
++description: ''
++required: true
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings:
++  handler: 'default:taxonomy_term'
++  handler_settings:
++    target_bundles:
++      csn_languages: csn_languages
++    sort:
++      field: name
++      direction: asc
++    auto_create: false
++    auto_create_bundle: ''
++field_type: entity_reference
+diff --git a/config/sync/field.field.profile.first_responder.field_deh_mail.yml b/config/sync/field.field.profile.first_responder.field_deh_mail.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..7c43ecce298b5f882f4910bd75824cb9155e82c2
+--- /dev/null
++++ b/config/sync/field.field.profile.first_responder.field_deh_mail.yml
+@@ -0,0 +1,19 @@
++uuid: a2000007-0001-0001-0001-000000000007
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.profile.field_deh_mail
++    - profile.type.first_responder
++id: profile.first_responder.field_deh_mail
++field_name: field_deh_mail
++entity_type: profile
++bundle: first_responder
++label: 'E-Mail-Adresse'
++description: ''
++required: true
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: email
+diff --git a/config/sync/field.field.profile.first_responder.field_deh_phone.yml b/config/sync/field.field.profile.first_responder.field_deh_phone.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..10a93dfb120710a54b3af758c5840218ba1bb8a9
+--- /dev/null
++++ b/config/sync/field.field.profile.first_responder.field_deh_phone.yml
+@@ -0,0 +1,19 @@
++uuid: a2000006-0001-0001-0001-000000000006
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.profile.field_deh_phone
++    - profile.type.first_responder
++id: profile.first_responder.field_deh_phone
++field_name: field_deh_phone
++entity_type: profile
++bundle: first_responder
++label: 'Telefonnummer'
++description: ''
++required: false
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: telephone
+diff --git a/config/sync/field.field.profile.first_responder.field_family_name.yml b/config/sync/field.field.profile.first_responder.field_family_name.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..fd8591a5df4139ff725b3dc74f225ac8f4d27d2a
+--- /dev/null
++++ b/config/sync/field.field.profile.first_responder.field_family_name.yml
+@@ -0,0 +1,19 @@
++uuid: a2000003-0001-0001-0001-000000000003
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.profile.field_family_name
++    - profile.type.first_responder
++id: profile.first_responder.field_family_name
++field_name: field_family_name
++entity_type: profile
++bundle: first_responder
++label: 'Nachname'
++description: ''
++required: true
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: string
+diff --git a/config/sync/field.field.profile.first_responder.field_given_name.yml b/config/sync/field.field.profile.first_responder.field_given_name.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..92ba752a9dd3cd978bea2e728e1a628ec95b71f4
+--- /dev/null
++++ b/config/sync/field.field.profile.first_responder.field_given_name.yml
+@@ -0,0 +1,19 @@
++uuid: a2000002-0001-0001-0001-000000000002
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.profile.field_given_name
++    - profile.type.first_responder
++id: profile.first_responder.field_given_name
++field_name: field_given_name
++entity_type: profile
++bundle: first_responder
++label: 'Vorname'
++description: ''
++required: true
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: string
+diff --git a/config/sync/field.field.profile.first_responder.field_phone.yml b/config/sync/field.field.profile.first_responder.field_phone.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..3033471354d4ff939b755f835c2cec74fa8d1134
+--- /dev/null
++++ b/config/sync/field.field.profile.first_responder.field_phone.yml
+@@ -0,0 +1,19 @@
++uuid: a2000004-0001-0001-0001-000000000004
++langcode: en
++status: true
++dependencies:
++  config:
++    - field.storage.profile.field_phone
++    - profile.type.first_responder
++id: profile.first_responder.field_phone
++field_name: field_phone
++entity_type: profile
++bundle: first_responder
++label: 'Telefonnummer'
++description: ''
++required: true
++translatable: false
++default_value: {  }
++default_value_callback: ''
++settings: {  }
++field_type: telephone
+diff --git a/config/sync/field.storage.profile.field_academic_title.yml b/config/sync/field.storage.profile.field_academic_title.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..f46569dbe1abf52fe276291c2dc5edfe934c26b5
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_academic_title.yml
+@@ -0,0 +1,21 @@
++uuid: f0010001-0001-0001-0001-000000000001
++langcode: en
++status: true
++dependencies:
++  module:
++    - profile
++id: profile.field_academic_title
++field_name: field_academic_title
++entity_type: profile
++type: string
++settings:
++  max_length: 255
++  is_ascii: false
++  case_sensitive: false
++module: core
++locked: false
++cardinality: 1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.profile.field_address.yml b/config/sync/field.storage.profile.field_address.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..6419876c1086ff741c933b5189076d655223faab
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_address.yml
+@@ -0,0 +1,19 @@
++uuid: f0050001-0001-0001-0001-000000000005
++langcode: en
++status: true
++dependencies:
++  module:
++    - address
++    - profile
++id: profile.field_address
++field_name: field_address
++entity_type: profile
++type: address
++settings: {  }
++module: address
++locked: false
++cardinality: 1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.profile.field_availability.yml b/config/sync/field.storage.profile.field_availability.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..e8e08b7656613b2b2f8ae5b399dbb09cc6e58856
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_availability.yml
+@@ -0,0 +1,32 @@
++uuid: f0090001-0001-0001-0001-000000000009
++langcode: en
++status: true
++dependencies:
++  module:
++    - office_hours
++    - profile
++id: profile.field_availability
++field_name: field_availability
++entity_type: profile
++type: office_hours
++settings:
++  time_format: 'H'
++  element_type: 'office_hours_datetime'
++  increment: 30
++  valhrs: true
++  required_start: true
++  limit_start: ''
++  required_end: true
++  limit_end: ''
++  all_day: false
++  exceptions: true
++  seasons: false
++  comment: 0
++  cardinality_per_day: 2
++module: office_hours
++locked: false
++cardinality: 1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.profile.field_confirm_data_processing.yml b/config/sync/field.storage.profile.field_confirm_data_processing.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..2e3cf99316834f8d04898f559904c93f5e1ee14d
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_confirm_data_processing.yml
+@@ -0,0 +1,18 @@
++uuid: f0100001-0001-0001-0001-000000000010
++langcode: en
++status: true
++dependencies:
++  module:
++    - profile
++id: profile.field_confirm_data_processing
++field_name: field_confirm_data_processing
++entity_type: profile
++type: boolean
++settings: {  }
++module: core
++locked: false
++cardinality: 1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.profile.field_confirm_terms_conditions.yml b/config/sync/field.storage.profile.field_confirm_terms_conditions.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..82673c08f1d833930b9c3063333902d95b5540cc
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_confirm_terms_conditions.yml
+@@ -0,0 +1,18 @@
++uuid: f0110001-0001-0001-0001-000000000011
++langcode: en
++status: true
++dependencies:
++  module:
++    - profile
++id: profile.field_confirm_terms_conditions
++field_name: field_confirm_terms_conditions
++entity_type: profile
++type: boolean
++settings: {  }
++module: core
++locked: false
++cardinality: 1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.profile.field_confirm_volunteer.yml b/config/sync/field.storage.profile.field_confirm_volunteer.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..d6ed1c69f9faced0b5d7182083bdd52555ed502b
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_confirm_volunteer.yml
+@@ -0,0 +1,18 @@
++uuid: f0120001-0001-0001-0001-000000000012
++langcode: en
++status: true
++dependencies:
++  module:
++    - profile
++id: profile.field_confirm_volunteer
++field_name: field_confirm_volunteer
++entity_type: profile
++type: boolean
++settings: {  }
++module: core
++locked: false
++cardinality: 1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.profile.field_confirm_volunteer_conditions.yml b/config/sync/field.storage.profile.field_confirm_volunteer_conditions.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..1282591d3e28c6dbfd15500f058bdf84ae99cb99
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_confirm_volunteer_conditions.yml
+@@ -0,0 +1,18 @@
++uuid: b0c1d2e3-f4a5-b6c7-d8e9-f0a1b2c3d4e5
++langcode: en
++status: true
++dependencies:
++  module:
++    - node
++id: node.field_legal_consent
++field_name: field_legal_consent
++entity_type: node
++type: boolean
++settings: {  }
++module: core
++locked: false
++cardinality: 1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.profile.field_deh_language.yml b/config/sync/field.storage.profile.field_deh_language.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..2138ab29cce8ffd23117b9dfa927fb67e7261ce5
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_deh_language.yml
+@@ -0,0 +1,20 @@
++uuid: f0080001-0001-0001-0001-000000000008
++langcode: en
++status: true
++dependencies:
++  module:
++    - profile
++    - taxonomy
++id: profile.field_deh_language
++field_name: field_deh_language
++entity_type: profile
++type: entity_reference
++settings:
++  target_type: 'taxonomy_term'
++module: core
++locked: false
++cardinality: -1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.profile.field_deh_mail.yml b/config/sync/field.storage.profile.field_deh_mail.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..dd46828567f210864de37b6c8c069c0d436c9362
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_deh_mail.yml
+@@ -0,0 +1,18 @@
++uuid: f0070001-0001-0001-0001-000000000007
++langcode: en
++status: true
++dependencies:
++  module:
++    - profile
++id: profile.field_deh_mail
++field_name: field_deh_mail
++entity_type: profile
++type: email
++settings: {  }
++module: core
++locked: false
++cardinality: 1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.profile.field_deh_phone.yml b/config/sync/field.storage.profile.field_deh_phone.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..672874ea3b1765e9a8317da0049c1772d8456b16
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_deh_phone.yml
+@@ -0,0 +1,19 @@
++uuid: f0060001-0001-0001-0001-000000000006
++langcode: en
++status: true
++dependencies:
++  module:
++    - profile
++    - telephone
++id: profile.field_deh_phone
++field_name: field_deh_phone
++entity_type: profile
++type: telephone
++settings: {  }
++module: telephone
++locked: false
++cardinality: 1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.profile.field_family_name.yml b/config/sync/field.storage.profile.field_family_name.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..c502cb81e337ed433038cc97a55870f1f62f2a52
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_family_name.yml
+@@ -0,0 +1,21 @@
++uuid: f0030001-0001-0001-0001-000000000003
++langcode: en
++status: true
++dependencies:
++  module:
++    - profile
++id: profile.field_family_name
++field_name: field_family_name
++entity_type: profile
++type: string
++settings:
++  max_length: 255
++  is_ascii: false
++  case_sensitive: false
++module: core
++locked: false
++cardinality: 1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.profile.field_given_name.yml b/config/sync/field.storage.profile.field_given_name.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..766dbcd85de121909d623e47675cd49d8572349a
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_given_name.yml
+@@ -0,0 +1,21 @@
++uuid: f0020001-0001-0001-0001-000000000002
++langcode: en
++status: true
++dependencies:
++  module:
++    - profile
++id: profile.field_given_name
++field_name: field_given_name
++entity_type: profile
++type: string
++settings:
++  max_length: 255
++  is_ascii: false
++  case_sensitive: false
++module: core
++locked: false
++cardinality: 1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/field.storage.profile.field_phone.yml b/config/sync/field.storage.profile.field_phone.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..94b4ac7e9cd5d5bfdff8a725bce154ab361a3169
+--- /dev/null
++++ b/config/sync/field.storage.profile.field_phone.yml
+@@ -0,0 +1,19 @@
++uuid: f0040001-0001-0001-0001-000000000004
++langcode: en
++status: true
++dependencies:
++  module:
++    - profile
++    - telephone
++id: profile.field_phone
++field_name: field_phone
++entity_type: profile
++type: telephone
++settings: {  }
++module: telephone
++locked: false
++cardinality: 1
++translatable: false
++indexes: {  }
++persist_with_no_fields: false
++custom_storage: false
+diff --git a/config/sync/profile.type.first_responder.yml b/config/sync/profile.type.first_responder.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..9f9d27381ec6e540125f5fd323c0a915023617d1
+--- /dev/null
++++ b/config/sync/profile.type.first_responder.yml
+@@ -0,0 +1,12 @@
++uuid: f8a1c2d3-4e5f-6a7b-8c9d-0e1f2a3b4c5d
++langcode: en
++status: true
++dependencies: {  }
++id: first_responder
++label: 'Ersthelfer:in'
++display_label: 'Ersthelfer:in'
++description: 'Profile for CSN first responders (Digitale Ersthelfende).'
++registration: false
++multiple: false
++roles:
++  - authenticated
+diff --git a/config/sync/search_api.index.default.yml b/config/sync/search_api.index.default.yml
+index 4cc4e16447a92a6b8ee87857329e20b62217c7bb..8dba59e32c5460a361c35ded7aa023c77aca9ccd 100644
+--- a/config/sync/search_api.index.default.yml
++++ b/config/sync/search_api.index.default.yml
+@@ -487,6 +487,14 @@ field_settings:
+     dependencies:
+       module:
+         - node
++  node_moderation:
++    label: 'Moderation state'
++    datasource_id: 'entity:node'
++    property_path: moderation_state
++    type: string
++    dependencies:
++      module:
++        - content_moderation
+   node_media:
+     label: Media
+     datasource_id: 'entity:node'
+@@ -503,14 +511,6 @@ field_settings:
+     dependencies:
+       config:
+         - field.storage.node.field_media_downloads
+-  node_moderation:
+-    label: 'Moderation state'
+-    datasource_id: 'entity:node'
+-    property_path: moderation_state
+-    type: string
+-    dependencies:
+-      module:
+-        - content_moderation
+   node_paragraphs:
+     label: Paragraphs
+     datasource_id: 'entity:node'
+@@ -670,7 +670,6 @@ processor_settings:
+       preprocess_query: -30
+   custom_value: {  }
+   effective_date: {  }
+-  entity_status: {  }
+   entity_type: {  }
+   highlight:
+     weights:
+diff --git a/config/sync/taxonomy.vocabulary.csn_languages.yml b/config/sync/taxonomy.vocabulary.csn_languages.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..348f65af7a39867518f7536a6d2628e771863d9b
+--- /dev/null
++++ b/config/sync/taxonomy.vocabulary.csn_languages.yml
+@@ -0,0 +1,8 @@
++uuid: b2c3d4e5-f6a7-8b9c-0d1e-f2a3b4c5d6e7
++langcode: en
++status: true
++dependencies: {  }
++name: 'CSN Languages'
++vid: csn_languages
++description: 'Languages spoken by CSN Ersthelfer.'
++weight: 0
+diff --git a/config/sync/user.role.csn_deh.yml b/config/sync/user.role.csn_deh.yml
+index ab367baee40a39f99664633da395b8774cb62893..6c3c5388f2ba599b4ed632347b527f2a9fff0018 100644
+--- a/config/sync/user.role.csn_deh.yml
++++ b/config/sync/user.role.csn_deh.yml
+@@ -5,16 +5,18 @@ dependencies:
+   config:
+     - node.type.incident_report
+   module:
++    - csn_custom
+     - csn_custom
+     - node
+     - save_edit
+     - tfa
+ id: csn_deh
+-label: 'Digital First Responder'
++label: 'Digital First-Aider'
+ weight: -6
+ is_admin: false
+ permissions:
+   - 'access csn'
+   - 'create incident_report content'
++  - 'access csn'
+   - 'setup own tfa'
+   - 'use save and edit'
+diff --git a/web/modules/custom/bsi_csn/bsi_csn.info.yml b/web/modules/custom/bsi_csn/bsi_csn.info.yml
+deleted file mode 100644
+index fe581dca57dd2b401aee35f486c69428def872d4..0000000000000000000000000000000000000000
+--- a/web/modules/custom/bsi_csn/bsi_csn.info.yml
++++ /dev/null
+@@ -1,7 +0,0 @@
+-name: 'Cyber Security Network'
+-type: module
+-description: 'Customizations for the Cyber Security Network'
+-package: CSN
+-lifecycle: deprecated
+-lifecycle_link: 'https://gitlab.init.de/bsi1/bsi_bund/-/merge_requests/787'
+-core_version_requirement: ^10 || ^11
+diff --git a/web/modules/custom/bsi_csn/bsi_csn.install b/web/modules/custom/bsi_csn/bsi_csn.install
+deleted file mode 100644
+index a673cc72c93ae033bfa005001fa37fb2601677c3..0000000000000000000000000000000000000000
+--- a/web/modules/custom/bsi_csn/bsi_csn.install
++++ /dev/null
+@@ -1,17 +0,0 @@
+-<?php
+-
+-/**
+- * @file
+- * Install and update hooks for bsi_csn.
+- */
+-
+-declare(strict_types=1);
+-
+-/**
+- * Install csn_custom as a replacement for bsi_csn.
+- */
+-function bsi_csn_update_11001(): void {
+-  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+-  $module_installer = \Drupal::service('module_installer');
+-  $module_installer->install(['csn_custom']);
+-}
+diff --git a/web/modules/custom/bsi_csn/bsi_csn.links.menu.yml b/web/modules/custom/bsi_csn/bsi_csn.links.menu.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..6c47c55f0fec676be298ea82bab3dc38086daeb9
+--- /dev/null
++++ b/web/modules/custom/bsi_csn/bsi_csn.links.menu.yml
+@@ -0,0 +1,5 @@
++bsi_csn.settings:
++  title: 'CSN Settings'
++  description: 'Configure CSN branding URLs and logout redirect.'
++  route_name: bsi_csn.settings
++  parent: system.admin_config_system
+diff --git a/web/modules/custom/bsi_csn/bsi_csn.permissions.yml b/web/modules/custom/bsi_csn/bsi_csn.permissions.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..2d2e71582cbef46a9495f4fbdbbd8887c5ded351
+--- /dev/null
++++ b/web/modules/custom/bsi_csn/bsi_csn.permissions.yml
+@@ -0,0 +1,3 @@
++access csn comments:
++  title: 'Access CSN comments'
++  description: 'Allows the user to create and view comments on Vorfallsbericht nodes.'
+diff --git a/web/modules/custom/bsi_csn/config/install/bsi_csn.settings.yml b/web/modules/custom/bsi_csn/config/install/bsi_csn.settings.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..9fca3fe8af89c3baf2d63cc71a490dc74baa1c68
+--- /dev/null
++++ b/web/modules/custom/bsi_csn/config/install/bsi_csn.settings.yml
+@@ -0,0 +1,3 @@
++bsi_url: 'https://www.bsi.bund.de'
++csn_dashboard_url: ''
++logout_redirect_url: 'https://www.bsi.bund.de/login'
+diff --git a/web/modules/custom/bsi_csn/config/schema/bsi_csn.schema.yml b/web/modules/custom/bsi_csn/config/schema/bsi_csn.schema.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..c8777f1a91d16b6ffd96648995788726e349a4f0
+--- /dev/null
++++ b/web/modules/custom/bsi_csn/config/schema/bsi_csn.schema.yml
+@@ -0,0 +1,13 @@
++bsi_csn.settings:
++  type: config_object
++  label: 'CSN settings'
++  mapping:
++    bsi_url:
++      type: string
++      label: 'BSI homepage URL'
++    csn_dashboard_url:
++      type: string
++      label: 'CSN dashboard URL'
++    logout_redirect_url:
++      type: string
++      label: 'Logout redirect URL'
+diff --git a/web/modules/custom/bsi_csn/src/Controller/CsnCommentController.php b/web/modules/custom/bsi_csn/src/Controller/CsnCommentController.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..58506930631b998fb09afad3390c326627aa3823
+--- /dev/null
++++ b/web/modules/custom/bsi_csn/src/Controller/CsnCommentController.php
+@@ -0,0 +1,101 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\bsi_csn\Controller;
++
++use Drupal\bsi_csn\Service\CsnCommentManager;
++use Drupal\Core\Controller\ControllerBase;
++use Drupal\node\NodeInterface;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++use Symfony\Component\HttpFoundation\JsonResponse;
++use Symfony\Component\HttpFoundation\Request;
++use Symfony\Component\HttpFoundation\Response;
++
++/**
++ * Controller for CSN comment API endpoints.
++ */
++final class CsnCommentController extends ControllerBase {
++
++  public function __construct(
++    private readonly CsnCommentManager $commentManager,
++    protected $entityTypeManager,
++  ) {}
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container): static {
++    return new static(
++      $container->get('bsi_csn.comment_manager'),
++      $container->get('entity_type.manager'),
++    );
++  }
++
++  /**
++   * Returns comments for a Vorfallsbericht node.
++   */
++  public function list(NodeInterface $node): JsonResponse {
++    if ($node->bundle() !== 'vorfallsbericht') {
++      return new JsonResponse(['error' => 'Invalid content type.'], Response::HTTP_BAD_REQUEST);
++    }
++
++    $authorRole = $this->commentManager->determineAuthorRole($node, $this->currentUser());
++    if ($authorRole === NULL) {
++      return new JsonResponse(['error' => 'Access denied.'], Response::HTTP_FORBIDDEN);
++    }
++
++    $comments = $this->commentManager->getComments($node);
++
++    // Enrich comments with author display name.
++    $userStorage = $this->entityTypeManager()->getStorage('user');
++    foreach ($comments as &$comment) {
++      $comment['id'] = (int) $comment['id'];
++      $comment['nid'] = (int) $comment['nid'];
++      $comment['uid'] = (int) $comment['uid'];
++      $comment['created'] = (int) $comment['created'];
++      $author = $userStorage->load($comment['uid']);
++      $comment['author_name'] = $author?->getDisplayName() ?? '';
++    }
++
++    return new JsonResponse($comments);
++  }
++
++  /**
++   * Creates a comment on a Vorfallsbericht node.
++   */
++  public function add(NodeInterface $node, Request $request): JsonResponse {
++    if ($node->bundle() !== 'vorfallsbericht') {
++      return new JsonResponse(['error' => 'Invalid content type.'], Response::HTTP_BAD_REQUEST);
++    }
++
++    $authorRole = $this->commentManager->determineAuthorRole($node, $this->currentUser());
++    if ($authorRole === NULL) {
++      return new JsonResponse(['error' => 'Access denied.'], Response::HTTP_FORBIDDEN);
++    }
++
++    $content = json_decode($request->getContent(), TRUE);
++    $body = $content['body'] ?? '';
++
++    if (!is_string($body) || trim($body) === '') {
++      return new JsonResponse(['error' => 'Comment body is required.'], Response::HTTP_BAD_REQUEST);
++    }
++
++    if (mb_strlen($body) > 1000) {
++      return new JsonResponse(['error' => 'Comment body must not exceed 1000 characters.'], Response::HTTP_BAD_REQUEST);
++    }
++
++    try {
++      $comment = $this->commentManager->createComment($node, $this->currentUser(), $authorRole, $body);
++    }
++    catch (\InvalidArgumentException $e) {
++      return new JsonResponse(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
++    }
++
++    $author = $this->entityTypeManager()->getStorage('user')->load($comment['uid']);
++    $comment['author_name'] = $author?->getDisplayName() ?? '';
++
++    return new JsonResponse($comment, Response::HTTP_CREATED);
++  }
++
++}
+diff --git a/web/modules/custom/bsi_csn/src/CsnContextChecker.php b/web/modules/custom/bsi_csn/src/CsnContextChecker.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..f410b9a574b18028d4d5da5173dedd443aeff1b9
+--- /dev/null
++++ b/web/modules/custom/bsi_csn/src/CsnContextChecker.php
+@@ -0,0 +1,46 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\bsi_csn;
++
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\Routing\RouteMatchInterface;
++use Drupal\node\NodeInterface;
++
++/**
++ * Checks whether the current page is in the CSN context.
++ */
++final class CsnContextChecker {
++
++  public function __construct(
++    private readonly RouteMatchInterface $routeMatch,
++    private readonly EntityTypeManagerInterface $entityTypeManager,
++  ) {}
++
++  /**
++   * Check if the current page belongs to the CSN group.
++   */
++  public function isCsnPage(): bool {
++    // Check if the current route has a CSN group parameter.
++    $group = $this->routeMatch->getParameter('group');
++    if ($group && $group->bundle() === 'csn') {
++      return TRUE;
++    }
++
++    // Check if the current node belongs to the CSN group.
++    $node = $this->routeMatch->getParameter('node');
++    if ($node instanceof NodeInterface) {
++      /** @var \Drupal\group\Entity\Storage\GroupRelationshipStorageInterface $storage */
++      $storage = $this->entityTypeManager->getStorage('group_relationship');
++      foreach ($storage->loadByEntity($node) as $relationship) {
++        if ($relationship->getGroup()->bundle() === 'csn') {
++          return TRUE;
++        }
++      }
++    }
++
++    return FALSE;
++  }
++
++}
+diff --git a/web/modules/custom/bsi_csn/src/EventSubscriber/LogoutRedirectSubscriber.php b/web/modules/custom/bsi_csn/src/EventSubscriber/LogoutRedirectSubscriber.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..89589ff2c5b10cb4bb3b794cc3e1d625d9971693
+--- /dev/null
++++ b/web/modules/custom/bsi_csn/src/EventSubscriber/LogoutRedirectSubscriber.php
+@@ -0,0 +1,52 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\bsi_csn\EventSubscriber;
++
++use Drupal\Core\Config\ConfigFactoryInterface;
++use Drupal\Core\Routing\TrustedRedirectResponse;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++use Symfony\Component\HttpKernel\Event\ResponseEvent;
++use Symfony\Component\HttpKernel\KernelEvents;
++
++/**
++ * Redirects CSN users to the public login page after logout.
++ */
++final class LogoutRedirectSubscriber implements EventSubscriberInterface {
++
++  public function __construct(
++    private readonly ConfigFactoryInterface $configFactory,
++  ) {}
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents(): array {
++    // Run after the default logout handler.
++    return [KernelEvents::RESPONSE => ['onResponse', -100]];
++  }
++
++  /**
++   * Redirect logout responses to the configured external URL.
++   */
++  public function onResponse(ResponseEvent $event): void {
++    $request = $event->getRequest();
++    if ($request->getRequestUri() !== '/user/logout') {
++      return;
++    }
++
++    $response = $event->getResponse();
++    if (!$response->isRedirection()) {
++      return;
++    }
++
++    $redirect_url = $this->configFactory->get('bsi_csn.settings')->get('logout_redirect_url');
++    if (!$redirect_url) {
++      return;
++    }
++
++    $event->setResponse(new TrustedRedirectResponse($redirect_url));
++  }
++
++}
+diff --git a/web/modules/custom/bsi_csn/src/Form/SettingsForm.php b/web/modules/custom/bsi_csn/src/Form/SettingsForm.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..bc89d0db647ccbf7c977ff42f2a9fdc62d12934e
+--- /dev/null
++++ b/web/modules/custom/bsi_csn/src/Form/SettingsForm.php
+@@ -0,0 +1,59 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\bsi_csn\Form;
++
++use Drupal\Core\Form\ConfigFormBase;
++use Drupal\Core\Form\FormStateInterface;
++
++/**
++ * Configure CSN settings for this site.
++ */
++final class SettingsForm extends ConfigFormBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getFormId(): string {
++    return 'bsi_csn_settings';
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function getEditableConfigNames(): array {
++    return ['bsi_csn.settings'];
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function buildForm(array $form, FormStateInterface $form_state): array {
++    $form['bsi_url'] = [
++      '#type' => 'url',
++      '#title' => $this->t('BSI homepage URL'),
++      '#description' => $this->t('URL the BSI logo links to (opens in new tab).'),
++      '#config_target' => 'bsi_csn.settings:bsi_url',
++      '#required' => TRUE,
++    ];
++
++    $form['csn_dashboard_url'] = [
++      '#type' => 'textfield',
++      '#title' => $this->t('CSN dashboard URL'),
++      '#description' => $this->t('URL the CSN logo links to. Leave empty to render the logo without a link.'),
++      '#config_target' => 'bsi_csn.settings:csn_dashboard_url',
++    ];
++
++    $form['logout_redirect_url'] = [
++      '#type' => 'url',
++      '#title' => $this->t('Logout redirect URL'),
++      '#description' => $this->t('URL to redirect to after logout (public login page on bsi.bund.de).'),
++      '#config_target' => 'bsi_csn.settings:logout_redirect_url',
++      '#required' => TRUE,
++    ];
++
++    return parent::buildForm($form, $form_state);
++  }
++
++}
+diff --git a/web/modules/custom/bsi_csn/src/Plugin/Block/CsnBrandingBlock.php b/web/modules/custom/bsi_csn/src/Plugin/Block/CsnBrandingBlock.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..b440acc51dee1ce1d2474fa2c8fc86ed322429ab
+--- /dev/null
++++ b/web/modules/custom/bsi_csn/src/Plugin/Block/CsnBrandingBlock.php
+@@ -0,0 +1,80 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\bsi_csn\Plugin\Block;
++
++use Drupal\bsi_csn\CsnContextChecker;
++use Drupal\Core\Access\AccessResult;
++use Drupal\Core\Block\Attribute\Block;
++use Drupal\Core\Block\BlockBase;
++use Drupal\Core\Config\ConfigFactoryInterface;
++use Drupal\Core\Extension\ThemeHandlerInterface;
++use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
++use Drupal\Core\Session\AccountInterface;
++use Drupal\Core\StringTranslation\TranslatableMarkup;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++
++/**
++ * Provides the CSN branding block.
++ */
++#[Block(
++  id: 'bsi_csn_branding',
++  admin_label: new TranslatableMarkup('CSN Branding'),
++  category: new TranslatableMarkup('BSI'),
++)]
++final class CsnBrandingBlock extends BlockBase implements ContainerFactoryPluginInterface {
++
++  public function __construct(
++    array $configuration,
++    $plugin_id,
++    $plugin_definition,
++    private readonly ConfigFactoryInterface $configFactory,
++    private readonly ThemeHandlerInterface $themeHandler,
++    private readonly CsnContextChecker $csnContextChecker,
++  ) {
++    parent::__construct($configuration, $plugin_id, $plugin_definition);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
++    return new self(
++      $configuration,
++      $plugin_id,
++      $plugin_definition,
++      $container->get('config.factory'),
++      $container->get('theme_handler'),
++      $container->get('bsi_csn.context_checker'),
++    );
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function blockAccess(AccountInterface $account): AccessResult {
++    return AccessResult::allowedIf($this->csnContextChecker->isCsnPage())
++      ->addCacheContexts(['route']);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function build(): array {
++    $config = $this->configFactory->get('bsi_csn.settings');
++    $theme_path = $this->themeHandler->getTheme('bsi_bund')?->getPath() ?? '';
++
++    return [
++      '#theme' => 'csn_branding',
++      '#bsi_logo' => '/' . $theme_path . '/logo.svg',
++      '#bsi_logo_mobile' => '/' . $theme_path . '/logo_mobile.svg',
++      '#bsi_url' => $config->get('bsi_url') ?: '',
++      '#csn_dashboard_url' => $config->get('csn_dashboard_url') ?: '',
++      '#cache' => [
++        'tags' => $config->getCacheTags(),
++      ],
++    ];
++  }
++
++}
+diff --git a/web/modules/custom/bsi_csn/src/Service/CsnCommentManager.php b/web/modules/custom/bsi_csn/src/Service/CsnCommentManager.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..5f54bb14dd8887f51d545dd8212baee6dd1d6deb
+--- /dev/null
++++ b/web/modules/custom/bsi_csn/src/Service/CsnCommentManager.php
+@@ -0,0 +1,134 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\bsi_csn\Service;
++
++use Drupal\Core\Database\Connection;
++use Drupal\Core\Session\AccountInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\node\NodeInterface;
++
++/**
++ * Manages CSN comments on Vorfallsbericht nodes.
++ */
++final class CsnCommentManager {
++
++  /**
++   * The maximum allowed length for comment body text.
++   */
++  private const int MAX_BODY_LENGTH = 1000;
++
++  public function __construct(
++    private readonly Connection $database,
++    private readonly EntityTypeManagerInterface $entityTypeManager,
++  ) {}
++
++  /**
++   * Creates a comment on a Vorfallsbericht node.
++   *
++   * @return array
++   *   The created comment record.
++   *
++   * @throws \InvalidArgumentException
++   *   If the body exceeds the character limit.
++   */
++  public function createComment(NodeInterface $node, AccountInterface $user, string $authorRole, string $body): array {
++    if (mb_strlen($body) > self::MAX_BODY_LENGTH) {
++      throw new \InvalidArgumentException('Comment body must not exceed 1000 characters.');
++    }
++    if (trim($body) === '') {
++      throw new \InvalidArgumentException('Comment body must not be empty.');
++    }
++
++    $created = \Drupal::time()->getRequestTime();
++
++    $id = (int) $this->database->insert('csn_comment')
++      ->fields([
++        'nid' => $node->id(),
++        'uid' => $user->id(),
++        'author_role' => $authorRole,
++        'body' => $body,
++        'created' => $created,
++      ])
++      ->execute();
++
++    // When a CSN-Admin sends a correction, update the report status.
++    if ($authorRole === 'csn_admin') {
++      $this->setNodeCorrectionStatus($node, 'in_correction');
++    }
++
++    return [
++      'id' => $id,
++      'nid' => (int) $node->id(),
++      'uid' => (int) $user->id(),
++      'author_role' => $authorRole,
++      'body' => $body,
++      'created' => $created,
++    ];
++  }
++
++  /**
++   * Loads all comments for a given Vorfallsbericht node.
++   *
++   * @return array
++   *   Array of comment records ordered by creation time.
++   */
++  public function getComments(NodeInterface $node): array {
++    $results = $this->database->select('csn_comment', 'c')
++      ->fields('c')
++      ->condition('c.nid', $node->id())
++      ->orderBy('c.created', 'ASC')
++      ->execute()
++      ->fetchAll(\PDO::FETCH_ASSOC);
++
++    return $results ?: [];
++  }
++
++  /**
++   * Determines the CSN author role for a user on a given node.
++   *
++   * @return string|null
++   *   'csn_admin' or 'ersthelfer', or NULL if the user has no CSN role.
++   */
++  public function determineAuthorRole(NodeInterface $node, AccountInterface $user): ?string {
++    // Site-wide CSN admin role takes precedence.
++    if ($user->hasRole('csn_admin')) {
++      return 'csn_admin';
++    }
++
++    /** @var \Drupal\group\Entity\Storage\GroupRelationshipStorageInterface $storage */
++    $storage = $this->entityTypeManager->getStorage('group_relationship');
++    foreach ($storage->loadByEntity($node) as $relationship) {
++      $group = $relationship->getGroup();
++      if ($group->bundle() !== 'csn') {
++        continue;
++      }
++      $member = $group->getMember($user);
++      if ($member === FALSE) {
++        continue;
++      }
++      foreach ($member->getRoles() as $role) {
++        if ($role->id() === 'csn-admin') {
++          return 'csn_admin';
++        }
++      }
++      // User is a CSN group member but not admin → Ersthelfer.
++      return 'ersthelfer';
++    }
++
++    return NULL;
++  }
++
++  /**
++   * Sets the correction status field on a Vorfallsbericht node.
++   */
++  private function setNodeCorrectionStatus(NodeInterface $node, string $status): void {
++    if (!$node->hasField('field_correction_status')) {
++      return;
++    }
++    $node->set('field_correction_status', $status);
++    $node->save();
++  }
++
++}
+diff --git a/web/modules/custom/bsi_csn/templates/csn-branding.html.twig b/web/modules/custom/bsi_csn/templates/csn-branding.html.twig
+new file mode 100644
+index 0000000000000000000000000000000000000000..48dbcdea35b3dc86445451cd1dbc93842457ebda
+--- /dev/null
++++ b/web/modules/custom/bsi_csn/templates/csn-branding.html.twig
+@@ -0,0 +1,40 @@
++{#
++/**
++ * @file
++ * Template for the CSN branding block.
++ *
++ * Available variables:
++ * - bsi_logo: Path to the BSI desktop logo.
++ * - bsi_logo_mobile: Path to the BSI mobile logo.
++ * - bsi_url: URL the BSI logo links to (external, new tab).
++ * - csn_dashboard_url: URL the CSN logo links to.
++ */
++#}
++<div class="bsi-csn-branding">
++  {% if bsi_url %}
++    <div class="bsi-csn-branding__logo">
++      <div class="bsi-csn-branding__logo--desktop">
++        <a href="{{ bsi_url }}" target="_blank" rel="noopener noreferrer" class="bsi-csn-branding__link">
++          <img src="{{ bsi_logo }}" alt="{{ 'Federal Office for Information Security'|t }}" fetchpriority="high" />
++        </a>
++      </div>
++      <div class="bsi-csn-branding__logo--mobile">
++        <a href="{{ bsi_url }}" target="_blank" rel="noopener noreferrer" class="bsi-csn-branding__link">
++          <img src="{{ bsi_logo_mobile }}" alt="{{ 'Federal Office for Information Security'|t }}" fetchpriority="high" />
++        </a>
++      </div>
++    </div>
++  {% endif %}
++
++  {% if csn_dashboard_url %}
++    <div class="bsi-csn-branding__csn-logo">
++      <a href="{{ csn_dashboard_url }}" class="bsi-csn-branding__link">
++        <img src="{{ bsi_logo }}" alt="{{ 'Cybersicherheitsnetzwerk'|t }}" />
++      </a>
++    </div>
++  {% else %}
++    <div class="bsi-csn-branding__csn-logo">
++      <img src="{{ bsi_logo }}" alt="{{ 'Cybersicherheitsnetzwerk'|t }}" />
++    </div>
++  {% endif %}
++</div>
+diff --git a/web/modules/custom/csn_custom/csn_custom.info.yml b/web/modules/custom/csn_custom/csn_custom.info.yml
+index da3c051466c208ca175b44f0457fd1727a4c66bd..7db8a5277e3345c24cabede08518eff0fdf65eda 100644
+--- a/web/modules/custom/csn_custom/csn_custom.info.yml
++++ b/web/modules/custom/csn_custom/csn_custom.info.yml
+@@ -8,3 +8,4 @@ configure: csn_custom.settings
+ 
+ dependencies:
+   - group:group
++  - profile:profile
+diff --git a/web/modules/custom/csn_custom/csn_custom.libraries.yml b/web/modules/custom/csn_custom/csn_custom.libraries.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..8566f48fbcdd054a2dd30c83a35df5eb9fe74793
+--- /dev/null
++++ b/web/modules/custom/csn_custom/csn_custom.libraries.yml
+@@ -0,0 +1,13 @@
++profile_form:
++  css:
++    theme:
++      css/profile-form.css: {}
++  js:
++    js/language-select.js: { }
++  dependencies:
++    - core/drupal
++
++csn_branding:
++  css:
++    theme:
++      css/csn-branding.css: {}
+diff --git a/web/modules/custom/csn_custom/csn_custom.routing.yml b/web/modules/custom/csn_custom/csn_custom.routing.yml
+index 5e6a35f9f3a2dace4e18922707654971e431e319..2b58e8d9328fab706f2ca3413d5290c1140f8c15 100644
+--- a/web/modules/custom/csn_custom/csn_custom.routing.yml
++++ b/web/modules/custom/csn_custom/csn_custom.routing.yml
+@@ -42,3 +42,11 @@ csn_custom.incident_report.edit:
+     _admin_route: false
+     _access_checks:
+       - 'access_check.entity'
++
++csn_custom.profile:
++  path: '/csn/profil'
++  defaults:
++    _title: 'Mein Profil'
++    _controller: '\Drupal\csn_custom\Controller\ProfileController::form'
++  requirements:
++    _user_is_logged_in: 'TRUE'
+diff --git a/web/modules/custom/csn_custom/css/csn-branding.css b/web/modules/custom/csn_custom/css/csn-branding.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..6a9694ca1653e4861d9b6842d396336f16d299b8
+--- /dev/null
++++ b/web/modules/custom/csn_custom/css/csn-branding.css
+@@ -0,0 +1,16 @@
++/**
++ * @file
++ * Styles for the CSN branding block (header logo).
++ */
++
++.bsi-header-csn__logo {
++  display: flex;
++  align-items: end;
++  margin-left: auto;
++  flex-direction: column;
++}
++
++.bsi-header-csn__logo img {
++  height: 140px;
++  width: auto;
++}
+diff --git a/web/modules/custom/csn_custom/css/profile-form.css b/web/modules/custom/csn_custom/css/profile-form.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..05d4438bcabf27c56a05db86606656487ed89c5b
+--- /dev/null
++++ b/web/modules/custom/csn_custom/css/profile-form.css
+@@ -0,0 +1,491 @@
++/**
++ * @file
++ * Styles for the CSN Profile frontend form.
++ */
++
++/* Layout */
++.csn-profile {
++  max-width: 800px;
++  margin: 0 auto;
++  padding: 2rem 1rem;
++}
++
++/* Title */
++.csn-profile__title {
++  font-size: 2rem;
++  font-weight: 700;
++  margin-bottom: 1.5rem;
++  color: var(--bsi-color-typo-primary, #1a1a1a);
++}
++
++/* Sections */
++.csn-profile__section {
++  margin-bottom: 2.5rem;
++}
++
++.csn-profile__section-title {
++  font-size: 1.25rem;
++  font-weight: 700;
++  color: var(--bsi-color-typo-primary, #1a1a1a);
++  margin-bottom: 1rem;
++  padding-bottom: 0.5rem;
++  border-bottom: 1px solid var(--bsi-color-border-muted, #d0d0d0);
++}
++
++/* Banners / Hinweisbanner */
++.csn-profile__banner {
++  padding: 1rem 1.25rem;
++  margin-bottom: 1.5rem;
++  border-radius: 4px;
++  font-size: 0.875rem;
++  line-height: 1.5;
++}
++
++.csn-profile__banner--info {
++  background-color: var(--bsi-color-blue-50, #e8f4fd);
++  border-left: 4px solid var(--bsi-color-blue-750, #004b76);
++  color: var(--bsi-color-typo-primary, #1a1a1a);
++}
++
++.csn-profile__banner--hint {
++  background-color: #f5f5f5;
++  border-left: 4px solid var(--bsi-color-border-muted, #d0d0d0);
++  color: var(--bsi-color-typo-secondary, #545454);
++}
++
++.csn-profile__banner p {
++  margin: 0;
++}
++
++/* Text (06) */
++.csn-profile__text {
++  font-size: 0.9375rem;
++  color: var(--bsi-color-typo-secondary, #545454);
++  margin-bottom: 1rem;
++}
++
++/* Two-column grid */
++.csn-profile__fields--two-col {
++  display: grid;
++  grid-template-columns: 1fr;
++  gap: 0 1.5rem;
++}
++
++@media (min-width: 768px) {
++  .csn-profile__fields--two-col {
++    grid-template-columns: 1fr 1fr;
++  }
++}
++
++/* Form items inside profile */
++.csn-profile .form-item {
++  margin-bottom: 1.25rem;
++}
++
++.csn-profile .form-item__label,
++.csn-profile label {
++  display: block;
++  font-size: 0.8125rem;
++  font-weight: 600;
++  color: var(--bsi-color-typo-secondary, #545454);
++  margin-bottom: 0.25rem;
++}
++
++.csn-profile .form-element,
++.csn-profile input[type="text"],
++.csn-profile input[type="email"],
++.csn-profile input[type="tel"],
++.csn-profile input[type="date"],
++.csn-profile input[type="password"],
++.csn-profile select {
++  width: 100%;
++  padding: 0.625rem 0.875rem;
++  border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
++  border-radius: 0;
++  background: var(--bsi-color-neutral-50, #f9f9f9);
++  font-size: 0.875rem;
++  color: var(--bsi-color-typo-secondary, #545454);
++  box-sizing: border-box;
++}
++
++/* Fix select dropdown arrow — prevent tiling of theme's custom arrow */
++.csn-profile select.form-element,
++.csn-profile select.form-element--type-select {
++  background-repeat: no-repeat !important;
++  background-position: right 0.75rem center !important;
++  background-size: 1rem !important;
++  padding-right: 2.5rem;
++  -webkit-appearance: none;
++  -moz-appearance: none;
++  appearance: none;
++}
++
++.csn-profile input:disabled,
++.csn-profile select:disabled {
++  background-color: #e8e8e8;
++  color: #999;
++  cursor: not-allowed;
++}
++
++/* Locked fields (after approval) */
++.csn-profile-field--locked {
++  opacity: 0.6;
++}
++
++/* Checkboxes — override Claro/theme styles */
++.csn-profile .form-type--checkbox,
++.csn-profile .form-type-checkbox,
++.csn-profile .js-form-type-checkbox {
++  display: flex !important;
++  flex-direction: row !important;
++  align-items: center !important;
++  gap: 0.5rem;
++  margin-bottom: 1rem;
++  writing-mode: horizontal-tb !important;
++}
++
++.csn-profile .form-type--checkbox input[type="checkbox"],
++.csn-profile .form-type-checkbox input[type="checkbox"],
++.csn-profile .js-form-type-checkbox input[type="checkbox"] {
++  -webkit-appearance: checkbox !important;
++  -moz-appearance: checkbox !important;
++  appearance: checkbox !important;
++  width: 18px !important;
++  height: 18px !important;
++  min-width: 18px !important;
++  max-width: 18px !important;
++  margin: 0 !important;
++  padding: 0 !important;
++  flex-shrink: 0;
++  cursor: pointer;
++  display: inline-block !important;
++  position: static !important;
++  transform: none !important;
++}
++
++.csn-profile .form-type--checkbox label,
++.csn-profile .form-type-checkbox label,
++.csn-profile .js-form-type-checkbox label {
++  font-size: 0.875rem !important;
++  font-weight: 400 !important;
++  color: var(--bsi-color-typo-primary, #1a1a1a) !important;
++  display: inline !important;
++  writing-mode: horizontal-tb !important;
++  max-width: none !important;
++}
++
++/* ================================================================ */
++/* Office Hours widget — match form design                          */
++/* ================================================================ */
++
++/* Hide the fieldset legend (redundant with section H2 "Servicezeiten") */
++.csn-profile .field--name-field-availability > fieldset > legend,
++.csn-profile .field--name-field-availability > .fieldset-legend,
++.csn-profile .field--type-office-hours > fieldset > legend,
++.csn-profile .field--widget-office-hours-list > fieldset > legend {
++  display: none !important;
++}
++
++/* Remove fieldset border/background */
++.csn-profile .field--name-field-availability fieldset,
++.csn-profile .field--type-office-hours fieldset {
++  border: none;
++  padding: 0;
++  margin: 0;
++  background: none;
++  box-shadow: none;
++}
++
++.csn-profile .field--name-field-availability .fieldset-wrapper,
++.csn-profile .field--type-office-hours .fieldset-wrapper {
++  padding: 0;
++}
++
++/* Hide drag handles */
++.csn-profile .field--name-field-availability .tabledrag-handle,
++.csn-profile .field--name-field-availability .handle,
++.csn-profile .field--name-field-availability .sortable-handle,
++.csn-profile .field--name-field-availability a.tabledrag-handle {
++  display: none !important;
++}
++
++/* Hide "Leeren" / "Vorherigen Tag kopieren" links */
++.csn-profile .field--name-field-availability .office-hours-link,
++.csn-profile .field--name-field-availability .office-hours-operations,
++.csn-profile .field--name-field-availability td.office-hours-operations,
++.csn-profile .field--name-field-availability details.office-hours-actions {
++  display: none !important;
++}
++
++/* Remove table styling */
++.csn-profile .field--name-field-availability table {
++  border: none;
++  border-collapse: collapse;
++  width: 100%;
++  background: none;
++}
++
++.csn-profile .field--name-field-availability table td,
++.csn-profile .field--name-field-availability table th {
++  border: none;
++  background: none;
++  padding: 0.5rem 0.5rem 0.5rem 0;
++  vertical-align: middle;
++}
++
++/* Each day row */
++.csn-profile .field--name-field-availability tr,
++.csn-profile .field--name-field-availability .office-hours-slot,
++.csn-profile .field--name-field-availability .draggable {
++  background: none !important;
++  border-bottom: 1px solid #eee;
++}
++
++.csn-profile .field--name-field-availability tr:last-child {
++  border-bottom: none;
++}
++
++/* Day name label */
++.csn-profile .field--name-field-availability .field-label,
++.csn-profile .field--name-field-availability .office-hours__label,
++.csn-profile .field--name-field-availability td:first-child {
++  font-size: 0.875rem;
++  font-weight: 600;
++  color: var(--bsi-color-typo-secondary, #545454);
++  white-space: nowrap;
++  min-width: 100px;
++}
++
++/* Time inputs — match form-element styling */
++.csn-profile .field--name-field-availability input[type="time"],
++.csn-profile .field--name-field-availability input[type="text"].office-hours-time,
++.csn-profile .field--name-field-availability select.office-hours-time {
++  padding: 0.625rem 0.875rem;
++  border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
++  border-radius: 0;
++  background: var(--bsi-color-neutral-50, #f9f9f9);
++  font-size: 0.875rem;
++  color: var(--bsi-color-typo-secondary, #545454);
++  box-sizing: border-box;
++  min-width: 110px;
++}
++
++/* "Bis" / separator label */
++.csn-profile .field--name-field-availability .office-hours-separator {
++  font-size: 0.875rem;
++  font-weight: 600;
++  color: var(--bsi-color-typo-secondary, #545454);
++  padding: 0 0.5rem;
++}
++
++/* Inline slot layout */
++.csn-profile .field--name-field-availability .container-inline,
++.csn-profile .field--name-field-availability .office-hours-slot-inner {
++  display: flex;
++  align-items: center;
++  gap: 0.5rem;
++  flex-wrap: wrap;
++}
++
++/* Remove Claro's admin card/box backgrounds from the widget */
++.csn-profile .field--name-field-availability .form-wrapper,
++.csn-profile .field--name-field-availability .office-hours-widget {
++  background: none;
++  box-shadow: none;
++  border: none;
++  padding: 0;
++}
++
++/* Error styling */
++.csn-profile .field--name-field-availability .form-item--error-message {
++  font-size: 0.8125rem;
++  color: var(--bsi-color-red-100, #c0392b);
++}
++
++.csn-profile .field--name-field-availability .error {
++  border-color: var(--bsi-color-red-100, #c0392b);
++}
++
++/* Language chip widget */
++.csn-lang-widget {
++  position: relative;
++}
++
++.csn-lang-input-area {
++  display: flex !important;
++  flex-wrap: wrap;
++  align-items: center;
++  gap: 0.375rem;
++  padding: 0.375rem 0.625rem;
++  min-height: 42px;
++  cursor: text;
++  width: 100%;
++  border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
++  background: var(--bsi-color-neutral-50, #f9f9f9);
++  box-sizing: border-box;
++}
++
++/* Hide the native select - JS replaces it */
++select[data-csn-language-select] {
++  display: none !important;
++}
++
++.csn-lang-input-area--focused {
++  outline: 2px solid var(--bsi-color-base-focus, #2684ff);
++  outline-offset: 2px;
++}
++
++.csn-lang-chip {
++  display: inline-flex;
++  align-items: center;
++  gap: 0.25rem;
++  background: var(--bsi-color-blue-50, #e8f4fd);
++  border: 1px solid var(--bsi-color-blue-750, #004b76);
++  border-radius: 3px;
++  padding: 0.125rem 0.375rem;
++  font-size: 0.8125rem;
++  color: var(--bsi-color-blue-750, #004b76);
++  white-space: nowrap;
++}
++
++.csn-lang-chip__label {
++  line-height: 1.3;
++}
++
++.csn-lang-chip__remove {
++  background: none;
++  border: none;
++  color: var(--bsi-color-blue-750, #004b76);
++  cursor: pointer;
++  font-size: 1rem;
++  line-height: 1;
++  padding: 0;
++  margin-left: 0.125rem;
++}
++
++.csn-lang-chip__remove:hover {
++  color: var(--bsi-color-red-100, #c0392b);
++}
++
++.csn-lang-text-input,
++.csn-lang-text-input.form-element,
++.csn-lang-input-area input[type="text"] {
++  flex: 1 1 80px;
++  min-width: 80px;
++  border: none !important;
++  outline: none !important;
++  background: transparent !important;
++  box-shadow: none !important;
++  font-size: 0.875rem;
++  padding: 0.25rem 0;
++  width: auto;
++  min-height: auto;
++  height: auto;
++}
++
++.csn-lang-dropdown {
++  display: none;
++  position: absolute;
++  z-index: 100;
++  background: var(--bsi-color-neutral-50, #f9f9f9);
++  border: 1px solid var(--bsi-color-border-muted, #d0d0d0);
++  max-height: 200px;
++  overflow-y: auto;
++  width: 100%;
++  margin: 0;
++  padding: 0;
++  list-style: none;
++  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
++}
++
++.csn-lang-dropdown--open {
++  display: block;
++}
++
++.csn-lang-dropdown__item {
++  padding: 0.5rem 0.75rem;
++  cursor: pointer;
++  font-size: 0.875rem;
++}
++
++.csn-lang-dropdown__item:hover {
++  background: var(--bsi-color-blue-50, #e8f4fd);
++}
++
++/* Required hint */
++.csn-profile__required-hint {
++  font-size: 0.8125rem;
++  color: var(--bsi-color-typo-secondary, #545454);
++  margin: 2rem 0 1rem;
++}
++
++/* Actions / Buttons */
++.csn-profile .form-actions {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 1rem;
++  align-items: center;
++  margin-top: 1.5rem;
++  overflow: visible !important;
++}
++
++/* Ensure form doesn't clip buttons */
++.csn-profile,
++.csn-profile form {
++  overflow: visible !important;
++}
++
++/* Primary button (Freigabe / Speichern) */
++.csn-profile .bsi-button--control,
++.csn-profile input[type="submit"].bsi-button--control {
++  --bsi-button-background: var(--bsi-color-blue-750, #004b76);
++  --bsi-button-border-color: var(--bsi-color-blue-750, #004b76);
++  --bsi-button-text-color: #fff;
++  --bsi-button-background-hover: var(--bsi-color-blue-900, #003050);
++  --bsi-button-border-color-hover: var(--bsi-color-blue-900, #003050);
++  --bsi-button-text-color-hover: #fff;
++  background: var(--bsi-color-blue-750, #004b76);
++  color: #fff;
++  border: 1px solid var(--bsi-color-blue-750, #004b76);
++  border-radius: 4px;
++  padding: 0.75rem 1.5rem;
++  font-size: 1rem;
++  font-weight: 400;
++  cursor: pointer;
++  white-space: nowrap;
++  height: auto;
++  line-height: 1;
++}
++
++.csn-profile input[type="submit"].bsi-button--control:hover {
++  background: var(--bsi-color-blue-900, #003050);
++  border-color: var(--bsi-color-blue-900, #003050);
++}
++
++.csn-profile input[type="submit"] {
++  width: auto !important;
++  max-width: none !important;
++}
++
++/* Secondary button (Abbrechen) */
++.csn-profile .bsi-button--secondary,
++.csn-profile a.bsi-button--secondary {
++  background: transparent;
++  color: var(--bsi-color-blue-750, #004b76);
++  border: 1px solid var(--bsi-color-blue-750, #004b76);
++  border-radius: 4px;
++  padding: 0.75rem 1.5rem;
++  font-size: 1rem;
++  font-weight: 400;
++  cursor: pointer;
++  white-space: nowrap;
++  text-decoration: none;
++  display: inline-flex;
++  align-items: center;
++  height: auto;
++  line-height: 1;
++}
++
++.csn-profile a.bsi-button--secondary:hover {
++  background: var(--bsi-color-blue-50, #e8f4fd);
++}
+diff --git a/web/modules/custom/csn_custom/js/language-select.js b/web/modules/custom/csn_custom/js/language-select.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..de1cf5b283761b99417da9a68a3bdc02980afd80
+--- /dev/null
++++ b/web/modules/custom/csn_custom/js/language-select.js
+@@ -0,0 +1,193 @@
++(function (Drupal) {
++  'use strict';
++
++  /**
++   * Multi-select chip widget for CSN Profile language field.
++   *
++   * Replaces the hidden <select multiple> with a custom UI:
++   * - Combined input area with chips + text input inline
++   * - Dropdown showing all options, Deutsch first
++   * - Selected items as chips with X remove button inside the input
++   * - Type to filter options
++   */
++  Drupal.behaviors.csnLanguageSelect = {
++    attach: function (context) {
++      var selects = context.querySelectorAll('[data-csn-language-select]');
++      selects.forEach(function (select) {
++        if (select.dataset.csnInitialized) return;
++        select.dataset.csnInitialized = '1';
++        new LanguageChipWidget(select);
++      });
++    }
++  };
++
++  function LanguageChipWidget(selectEl) {
++    this.select = selectEl;
++    this.select.style.display = 'none';
++
++    // Wrapper.
++    this.wrapper = document.createElement('div');
++    this.wrapper.className = 'csn-lang-widget';
++    this.select.parentNode.insertBefore(this.wrapper, this.select.nextSibling);
++
++    // Input area — looks like a single input, contains chips + text input.
++    this.inputArea = document.createElement('div');
++    this.inputArea.className = 'csn-lang-input-area form-element';
++    this.wrapper.appendChild(this.inputArea);
++
++    // Text input (inline, grows with available space).
++    this.input = document.createElement('input');
++    this.input.type = 'text';
++    this.input.className = 'csn-lang-text-input';
++    this.input.placeholder = this.select.dataset.placeholder || Drupal.t('Bitte auswählen');
++    this.inputArea.appendChild(this.input);
++
++    // Dropdown.
++    this.dropdown = document.createElement('ul');
++    this.dropdown.className = 'csn-lang-dropdown';
++    this.wrapper.appendChild(this.dropdown);
++
++    // Build options from select element.
++    this.allOptions = [];
++    Array.from(this.select.options).forEach(function (opt) {
++      if (opt.value) {
++        this.allOptions.push({ value: opt.value, label: opt.textContent });
++      }
++    }.bind(this));
++
++    // Sort: Deutsch first, then alphabetical.
++    this.allOptions.sort(function (a, b) {
++      if (a.label === 'Deutsch') return -1;
++      if (b.label === 'Deutsch') return 1;
++      return a.label.localeCompare(b.label);
++    });
++
++    this.bindEvents();
++    this.renderChips();
++  }
++
++  LanguageChipWidget.prototype.getSelectedValues = function () {
++    var values = [];
++    Array.from(this.select.options).forEach(function (opt) {
++      if (opt.selected && opt.value) values.push(opt.value);
++    });
++    return values;
++  };
++
++  LanguageChipWidget.prototype.bindEvents = function () {
++    var self = this;
++
++    // Clicking the input area focuses the text input.
++    this.inputArea.addEventListener('click', function () {
++      self.input.focus();
++    });
++
++    this.input.addEventListener('focus', function () {
++      self.inputArea.classList.add('csn-lang-input-area--focused');
++      self.showDropdown();
++    });
++
++    this.input.addEventListener('blur', function () {
++      self.inputArea.classList.remove('csn-lang-input-area--focused');
++    });
++
++    this.input.addEventListener('input', function () {
++      self.showDropdown();
++    });
++
++    // Backspace on empty input removes last chip.
++    this.input.addEventListener('keydown', function (e) {
++      if (e.key === 'Backspace' && !self.input.value) {
++        var selected = self.getSelectedValues();
++        if (selected.length > 0) {
++          self.removeSelection(selected[selected.length - 1]);
++        }
++      }
++    });
++
++    document.addEventListener('click', function (e) {
++      if (!self.wrapper.contains(e.target)) {
++        self.hideDropdown();
++      }
++    });
++  };
++
++  LanguageChipWidget.prototype.showDropdown = function () {
++    var self = this;
++    var filter = this.input.value.toLowerCase();
++    var selected = this.getSelectedValues();
++
++    this.dropdown.innerHTML = '';
++
++    this.allOptions.forEach(function (opt) {
++      if (selected.indexOf(opt.value) !== -1) return;
++      if (filter && opt.label.toLowerCase().indexOf(filter) === -1) return;
++
++      var li = document.createElement('li');
++      li.className = 'csn-lang-dropdown__item';
++      li.textContent = opt.label;
++      li.addEventListener('mousedown', function (e) {
++        e.preventDefault(); // Prevent blur on input.
++        self.addSelection(opt.value);
++        self.input.value = '';
++        self.showDropdown(); // Refresh dropdown.
++      });
++      self.dropdown.appendChild(li);
++    });
++
++    this.dropdown.classList.add('csn-lang-dropdown--open');
++  };
++
++  LanguageChipWidget.prototype.hideDropdown = function () {
++    this.dropdown.classList.remove('csn-lang-dropdown--open');
++  };
++
++  LanguageChipWidget.prototype.addSelection = function (value) {
++    Array.from(this.select.options).forEach(function (opt) {
++      if (opt.value === value) opt.selected = true;
++    });
++    this.renderChips();
++  };
++
++  LanguageChipWidget.prototype.removeSelection = function (value) {
++    Array.from(this.select.options).forEach(function (opt) {
++      if (opt.value === value) opt.selected = false;
++    });
++    this.renderChips();
++  };
++
++  LanguageChipWidget.prototype.renderChips = function () {
++    var self = this;
++
++    // Remove existing chips (keep the text input).
++    var existingChips = this.inputArea.querySelectorAll('.csn-lang-chip');
++    existingChips.forEach(function (c) { c.remove(); });
++
++    var selected = this.getSelectedValues();
++
++    // Insert chips before the text input.
++    this.allOptions.forEach(function (opt) {
++      if (selected.indexOf(opt.value) === -1) return;
++
++      var chip = document.createElement('span');
++      chip.className = 'csn-lang-chip';
++      chip.innerHTML = '<span class="csn-lang-chip__label">' +
++        Drupal.checkPlain(opt.label) +
++        '</span><button type="button" class="csn-lang-chip__remove" aria-label="' +
++        Drupal.t('Remove @lang', { '@lang': opt.label }) +
++        '">&times;</button>';
++
++      chip.querySelector('.csn-lang-chip__remove').addEventListener('mousedown', function (e) {
++        e.preventDefault();
++        e.stopPropagation();
++        self.removeSelection(opt.value);
++      });
++
++      self.inputArea.insertBefore(chip, self.input);
++    });
++
++    // Update placeholder — hide when chips present.
++    this.input.placeholder = selected.length > 0 ? '' : (this.select.dataset.placeholder || Drupal.t('Bitte auswählen'));
++  };
++
++})(Drupal);
+diff --git a/web/modules/custom/csn_custom/src/Controller/ProfileController.php b/web/modules/custom/csn_custom/src/Controller/ProfileController.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..d3a1ca20d23aa8de7768be7a9774ab4094199fa9
+--- /dev/null
++++ b/web/modules/custom/csn_custom/src/Controller/ProfileController.php
+@@ -0,0 +1,46 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\csn_custom\Controller;
++
++use Drupal\Core\Controller\ControllerBase;
++use Drupal\profile\Entity\ProfileInterface;
++
++/**
++ * Controller for the CSN profile page.
++ *
++ * Loads or creates the first_responder profile entity, then renders
++ * the entity form using the 'csn_profile' form mode.
++ */
++final class ProfileController extends ControllerBase {
++
++  /**
++   * Renders the profile form.
++   */
++  public function form(): array {
++    $profile = $this->loadOrCreateProfile();
++    return $this->entityFormBuilder()->getForm($profile, 'csn_profile');
++  }
++
++  /**
++   * Loads the current user's first_responder profile or creates a new one.
++   */
++  private function loadOrCreateProfile(): ProfileInterface {
++    $storage = $this->entityTypeManager()->getStorage('profile');
++    $profiles = $storage->loadByProperties([
++      'type' => 'first_responder',
++      'uid' => $this->currentUser()->id(),
++    ]);
++
++    if ($profiles) {
++      return reset($profiles);
++    }
++
++    return $storage->create([
++      'type' => 'first_responder',
++      'uid' => $this->currentUser()->id(),
++    ]);
++  }
++
++}
+diff --git a/web/modules/custom/csn_custom/src/CsnContextChecker.php b/web/modules/custom/csn_custom/src/CsnContextChecker.php
+index 17e5ecac053edd6c5f61edd9ae12e6c0bd1a9302..8e0233729e347b47b312deb94cf7093e579563a5 100644
+--- a/web/modules/custom/csn_custom/src/CsnContextChecker.php
++++ b/web/modules/custom/csn_custom/src/CsnContextChecker.php
+@@ -114,6 +114,7 @@ final class CsnContextChecker implements CacheableDependencyInterface {
+       'csn_custom.feedback',
+       'csn_custom.incident_report.add',
+       'csn_custom.incident_report.edit',
++      'csn_custom.profile',
+     ], TRUE);
+   }
+ 
+diff --git a/web/modules/custom/csn_custom/src/Element/TimeElement.php b/web/modules/custom/csn_custom/src/Element/TimeElement.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..6dd35b3f225b142e7dd2988537cf644fefeb6779
+--- /dev/null
++++ b/web/modules/custom/csn_custom/src/Element/TimeElement.php
+@@ -0,0 +1,64 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\csn_custom\Element;
++
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Render\Attribute\FormElement;
++use Drupal\Core\Render\Element;
++use Drupal\Core\Render\Element\FormElementBase;
++
++/**
++ * Provides an HTML5 time input element.
++ *
++ * Drupal's textfield forces type="text" in its pre_render, which breaks
++ * type="time" value handling during AJAX rebuilds. This element properly
++ * supports type="time" through the full form API lifecycle.
++ *
++ * Usage:
++ * @code
++ * $form['start_time'] = [
++ *   '#type' => 'bsi_time',
++ *   '#title' => t('Start time'),
++ *   '#default_value' => '09:00',
++ * ];
++ * @endcode
++ */
++#[FormElement('bsi_time')]
++class TimeElement extends FormElementBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getInfo(): array {
++    $class = static::class;
++    return [
++      '#input' => TRUE,
++      '#size' => 10,
++      '#pre_render' => [[$class, 'preRenderTime']],
++      '#theme' => 'input__textfield',
++      '#theme_wrappers' => ['form_element'],
++    ];
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function valueCallback(&$element, $input, FormStateInterface $form_state): ?string {
++    if ($input !== FALSE && $input !== NULL) {
++      return (string) $input;
++    }
++    return NULL;
++  }
++
++  /**
++   * Pre-render callback: set input type to "time".
++   */
++  public static function preRenderTime(array $element): array {
++    $element['#attributes']['type'] = 'time';
++    Element::setAttributes($element, ['id', 'name', 'value', 'size']);
++    return $element;
++  }
++
++}
+diff --git a/web/modules/custom/csn_custom/src/Form/ProfileForm.php b/web/modules/custom/csn_custom/src/Form/ProfileForm.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..bef5bd3f7e99ba734ea3bf2d6baf96b52e0bae12
+--- /dev/null
++++ b/web/modules/custom/csn_custom/src/Form/ProfileForm.php
+@@ -0,0 +1,280 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\csn_custom\Form;
++
++use Drupal\Component\Datetime\TimeInterface;
++use Drupal\Component\Utility\Html;
++use Drupal\Core\Entity\ContentEntityForm;
++use Drupal\Core\Entity\EntityRepositoryInterface;
++use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
++use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Session\AccountProxyInterface;
++use Drupal\Core\Url;
++use Drupal\csn_custom\FeedbackServiceInterface;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++
++/**
++ * Entity form for CSN Ersthelfer:in profile (first_responder profile type).
++ */
++final class ProfileForm extends ContentEntityForm {
++
++  /**
++   * Fields that become read-only after initial submission.
++   */
++  private const LOCK_AFTER_INITIAL = [
++    'field_academic_title',
++    'field_given_name',
++    'field_family_name',
++    'field_deh_mail',
++    'field_confirm_data_processing',
++    'field_confirm_terms_conditions',
++    'field_confirm_volunteer',
++  ];
++
++  public function __construct(
++    EntityRepositoryInterface $entity_repository,
++    EntityTypeBundleInfoInterface $entity_type_bundle_info,
++    TimeInterface $time,
++    private readonly AccountProxyInterface $currentUser,
++    private readonly FeedbackServiceInterface $feedback,
++  ) {
++    parent::__construct($entity_repository, $entity_type_bundle_info, $time);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container): self {
++    return new self(
++      $container->get('entity.repository'),
++      $container->get('entity_type.bundle.info'),
++      $container->get('datetime.time'),
++      $container->get('current_user'),
++      $container->get('csn_custom.feedback'),
++    );
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function buildForm(array $form, FormStateInterface $form_state): array {
++    $form = parent::buildForm($form, $form_state);
++
++    $is_initial = $this->entity->isNew();
++
++    // Apply custom theme.
++    $form['#theme'] = 'csn_profile_form';
++    $form['#is_initial'] = $is_initial;
++    $form['#user_email'] = Html::escape(
++      $this->currentUser->getEmail() ?: $this->currentUser->getAccountName() ?: ''
++    );
++
++    // Language field: add attributes for the chip widget JS.
++    // options_select widget renders the <select> at widget level.
++    if (isset($form['field_deh_language']['widget'])) {
++      $form['field_deh_language']['widget']['#attributes']['data-csn-language-select'] = TRUE;
++      $form['field_deh_language']['widget']['#attributes']['data-placeholder'] = (string) $this->t('Bitte auswählen');
++    }
++
++    // Absence fields (custom, not entity fields — derived from OH exceptions).
++    $absence_defaults = $this->getAbsenceDefaults();
++    $form['absence'] = [
++      '#type' => 'checkbox',
++      '#title' => $this->t('Ich möchte eine Abwesenheit melden'),
++      '#default_value' => $absence_defaults['active'] ? 1 : 0,
++      '#attributes' => ['class' => ['form-boolean']],
++      '#weight' => 50,
++    ];
++    $form['absence_start'] = [
++      '#type' => 'date',
++      '#title' => $this->t('Beginn'),
++      '#default_value' => $absence_defaults['start'],
++      '#attributes' => ['class' => ['form-element']],
++      '#states' => [
++        'visible' => [':input[name="absence"]' => ['checked' => TRUE]],
++        'required' => [':input[name="absence"]' => ['checked' => TRUE]],
++      ],
++      '#weight' => 51,
++    ];
++    $form['absence_end'] = [
++      '#type' => 'date',
++      '#title' => $this->t('Ende'),
++      '#default_value' => $absence_defaults['end'],
++      '#attributes' => ['class' => ['form-element']],
++      '#states' => [
++        'visible' => [':input[name="absence"]' => ['checked' => TRUE]],
++        'required' => [':input[name="absence"]' => ['checked' => TRUE]],
++      ],
++      '#weight' => 52,
++    ];
++
++    // Lock fields after initial submission.
++    if (!$is_initial) {
++      $this->lockFields($form);
++    }
++
++    // Legal checkboxes: only required on initial.
++    foreach (['field_confirm_data_processing', 'field_confirm_terms_conditions', 'field_confirm_volunteer'] as $field_name) {
++      $this->setCheckboxRequired($form, $field_name, $is_initial);
++    }
++
++    // Custom submit button labels.
++    if (isset($form['actions']['submit'])) {
++      $form['actions']['submit']['#value'] = $is_initial
++        ? $this->t('Freigabe des Accounts anfordern')
++        : $this->t('Profil speichern');
++      $form['actions']['submit']['#attributes']['class'][] = 'bsi-button';
++      $form['actions']['submit']['#attributes']['class'][] = 'bsi-button--control';
++    }
++
++    // Cancel link.
++    $form['actions']['cancel'] = [
++      '#type' => 'link',
++      '#title' => $this->t('Abbrechen'),
++      '#url' => Url::fromRoute('<front>'),
++      '#attributes' => ['class' => ['bsi-button', 'bsi-button--secondary']],
++      '#weight' => -10,
++    ];
++
++    // Hide the advanced/meta sidebar that ContentEntityForm may add.
++    if (isset($form['advanced'])) {
++      $form['advanced']['#access'] = FALSE;
++    }
++
++    $form['#attached']['library'][] = 'csn_custom/profile_form';
++
++    return $form;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function validateForm(array &$form, FormStateInterface $form_state): void {
++    parent::validateForm($form, $form_state);
++
++    if ($form_state->getValue('absence')) {
++      if (empty($form_state->getValue('absence_start'))) {
++        $form_state->setErrorByName('absence_start', $this->t('Bitte geben Sie ein Startdatum für die Abwesenheit an.'));
++      }
++      if (empty($form_state->getValue('absence_end'))) {
++        $form_state->setErrorByName('absence_end', $this->t('Bitte geben Sie ein Enddatum für die Abwesenheit an.'));
++      }
++    }
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function save(array $form, FormStateInterface $form_state): int {
++    $items = $this->entity->get('field_availability');
++
++    // Remove old OH exception entries (day > 6) before appending new ones.
++    $regular_slots = [];
++    foreach ($items as $item) {
++      if (($item->day ?? 0) <= 6) {
++        $regular_slots[] = $item->getValue();
++      }
++    }
++    $items->setValue($regular_slots);
++
++    // Append new absence entries as Office Hours exceptions.
++    if ($form_state->getValue('absence')) {
++      $start = $form_state->getValue('absence_start');
++      $end = $form_state->getValue('absence_end');
++      if ($start && $end) {
++        $current = new \DateTime($start);
++        $end_date = new \DateTime($end);
++        while ($current <= $end_date) {
++          $items->appendItem([
++            'day' => (int) $current->format('Ymd'),
++            'starthours' => 0,
++            'endhours' => 0,
++            'comment' => '',
++          ]);
++          $current->modify('+1 day');
++        }
++      }
++    }
++
++    $result = parent::save($form, $form_state);
++
++    if ($result === SAVED_NEW) {
++      $form_state->setRedirectUrl($this->feedback->getFeedbackUrl(
++        $this->t('Vielen Dank!'),
++        [
++          $this->t('Ihr Profil wurde erfolgreich erstellt.'),
++          $this->t('Sie werden benachrichtigt, sobald Ihr Account freigeschaltet wurde.'),
++        ],
++      ));
++    }
++    else {
++      $this->messenger()->addStatus($this->t('Ihr Profil wurde gespeichert.'));
++      $form_state->setRedirect('csn_custom.profile');
++    }
++
++    return $result;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function showRevisionUi(): bool {
++    return FALSE;
++  }
++
++  /**
++   * Disable locked fields by walking into the widget render tree.
++   */
++  private function lockFields(array &$form): void {
++    foreach (self::LOCK_AFTER_INITIAL as $field_name) {
++      if (!isset($form[$field_name])) {
++        continue;
++      }
++      // Mark the entire field wrapper as disabled — works for most widgets.
++      $form[$field_name]['#disabled'] = TRUE;
++      // Also add CSS class for visual feedback.
++      $form[$field_name]['#attributes']['class'][] = 'csn-profile-field--locked';
++    }
++  }
++
++  /**
++   * Set required state on a boolean_checkbox widget.
++   */
++  private function setCheckboxRequired(array &$form, string $field_name, bool $required): void {
++    if (!isset($form[$field_name]['widget'])) {
++      return;
++    }
++    // boolean_checkbox: widget → value.
++    if (isset($form[$field_name]['widget']['value'])) {
++      $form[$field_name]['widget']['value']['#required'] = $required;
++    }
++  }
++
++  /**
++   * Get absence date range from Office Hours exception entries.
++   */
++  private function getAbsenceDefaults(): array {
++    $defaults = ['active' => FALSE, 'start' => '', 'end' => ''];
++    if ($this->entity->isNew() || !$this->entity->hasField('field_availability')) {
++      return $defaults;
++    }
++    $exception_dates = [];
++    foreach ($this->entity->get('field_availability') as $item) {
++      if (($item->day ?? 0) > 6) {
++        $exception_dates[] = (int) $item->day;
++      }
++    }
++    if (!empty($exception_dates)) {
++      sort($exception_dates);
++      $defaults['active'] = TRUE;
++      $first = (string) reset($exception_dates);
++      $last = (string) end($exception_dates);
++      $defaults['start'] = substr($first, 0, 4) . '-' . substr($first, 4, 2) . '-' . substr($first, 6, 2);
++      $defaults['end'] = substr($last, 0, 4) . '-' . substr($last, 4, 2) . '-' . substr($last, 6, 2);
++    }
++    return $defaults;
++  }
++
++}
+diff --git a/web/modules/custom/csn_custom/src/Hook/ProfileHooks.php b/web/modules/custom/csn_custom/src/Hook/ProfileHooks.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..079567b463551f5aec646d446552612b5b63929f
+--- /dev/null
++++ b/web/modules/custom/csn_custom/src/Hook/ProfileHooks.php
+@@ -0,0 +1,30 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\csn_custom\Hook;
++
++use Drupal\Core\Hook\Attribute\Hook;
++use Drupal\csn_custom\Form\ProfileForm;
++
++/**
++ * Hooks related to the CSN Ersthelfer:in profile.
++ */
++class ProfileHooks {
++
++  /**
++   * Implements hook_entity_type_build().
++   *
++   * Registers the 'csn_profile' form mode on the profile entity type.
++   */
++  #[Hook('entity_type_build')]
++  public function buildEntityType(array &$entity_types): void {
++    if (isset($entity_types['profile'])) {
++      $entity_types['profile']->setFormClass(
++        'csn_profile',
++        ProfileForm::class,
++      );
++    }
++  }
++
++}
+diff --git a/web/modules/custom/csn_custom/src/Hook/ThemeHooks.php b/web/modules/custom/csn_custom/src/Hook/ThemeHooks.php
+index b0c082ca9abfe1ba3182bf4c5e96c904d9717dcd..43e17c37d5bfa0bb7a1deae615fb32680835d379 100644
+--- a/web/modules/custom/csn_custom/src/Hook/ThemeHooks.php
++++ b/web/modules/custom/csn_custom/src/Hook/ThemeHooks.php
+@@ -35,6 +35,10 @@ class ThemeHooks {
+           'content' => NULL,
+         ],
+       ],
++      'csn_profile_form' => [
++        'render element' => 'form',
++        'template' => 'csn-profile-form',
++      ],
+     ];
+   }
+ 
+diff --git a/web/modules/custom/csn_custom/src/PathProcessor/LogoutPathProcessor.php b/web/modules/custom/csn_custom/src/PathProcessor/LogoutPathProcessor.php
+index 76a5f6e209406e75c3998772a507b996088e3e9c..815f84d6b973d5959e49ea7246343eb3cab01cb4 100644
+--- a/web/modules/custom/csn_custom/src/PathProcessor/LogoutPathProcessor.php
++++ b/web/modules/custom/csn_custom/src/PathProcessor/LogoutPathProcessor.php
+@@ -44,8 +44,11 @@ final class LogoutPathProcessor implements OutboundPathProcessorInterface {
+     if ($this->contextChecker->isCsnPage()) {
+       $bubbleable_metadata->addCacheableDependency($this->config);
+ 
+-      $redirect_url = Url::fromUserInput($this->config->get('logout_redirect'));
+-      $options['query']['destination'] = '/' . $redirect_url->getInternalPath();
++      $logout_redirect = $this->config->get('logout_redirect');
++      if (!empty($logout_redirect)) {
++        $redirect_url = Url::fromUserInput($logout_redirect);
++        $options['query']['destination'] = '/' . $redirect_url->getInternalPath();
++      }
+     }
+     return $path;
+   }
+diff --git a/web/modules/custom/csn_custom/src/Plugin/Block/CsnBrandingBlock.php b/web/modules/custom/csn_custom/src/Plugin/Block/CsnBrandingBlock.php
+index ae84c3df9cafb3ba635f0a468d107e6bbac586be..a5e5bdbb7e0960f017c93223860a85c9ac4b114b 100644
+--- a/web/modules/custom/csn_custom/src/Plugin/Block/CsnBrandingBlock.php
++++ b/web/modules/custom/csn_custom/src/Plugin/Block/CsnBrandingBlock.php
+@@ -77,6 +77,7 @@ final class CsnBrandingBlock extends BlockBase implements ContainerFactoryPlugin
+     return [
+       '#theme' => 'csn_branding',
+       '#dashboard_url' => $dashboard_url,
++      '#attached' => ['library' => ['csn_custom/csn_branding']],
+     ];
+   }
+ 
+diff --git a/web/modules/custom/csn_custom/templates/csn-profile-form.html.twig b/web/modules/custom/csn_custom/templates/csn-profile-form.html.twig
+new file mode 100644
+index 0000000000000000000000000000000000000000..6444068dc4fc0ea78fea80158fa076789519e7f5
+--- /dev/null
++++ b/web/modules/custom/csn_custom/templates/csn-profile-form.html.twig
+@@ -0,0 +1,141 @@
++{#
++/**
++ * @file
++ * Template for the CSN Ersthelfer:in profile form.
++ *
++ * Variables:
++ * - form: The form render array (ContentEntityForm).
++ * - form['#is_initial']: Whether this is the first-time profile completion.
++ * - form['#user_email']: The current user's email (escaped).
++ */
++#}
++<div class="csn-profile">
++
++  {# 00. Überschrift #}
++  <h1 class="csn-profile__title">{{ 'Mein Profil'|t }}</h1>
++
++  {# 01. Hinweis zur initialen Anmeldung #}
++  {% if form['#is_initial'] %}
++    <div class="csn-profile__banner csn-profile__banner--info">
++      <p>{{ 'Bitte vervollständigen Sie Ihre Daten, um Ihr Profil zu finalisieren. Erst nach Vervollständigung und Freigabe können Sie als Ersthelfende:r kontaktiert werden.'|t }}</p>
++    </div>
++  {% endif %}
++
++  {# ================================================================ #}
++  {# Daten zum Login                                                  #}
++  {# ================================================================ #}
++  <section class="csn-profile__section">
++    <h2 class="csn-profile__section-title">{{ 'Daten zum Login'|t }}</h2>
++
++    <div class="csn-profile__banner csn-profile__banner--hint">
++      <p>{{ 'Wenn Sie Ihr Passwort ändern möchten, können Sie dies auf der Login-Seite tun.'|t }}</p>
++    </div>
++
++    <div class="csn-profile__fields csn-profile__fields--two-col">
++      <div class="form-item">
++        <label class="form-item__label">{{ 'Benutzername (E-Mail)'|t }}</label>
++        <input type="text" class="form-element" value="{{ form['#user_email'] }}" disabled />
++      </div>
++      <div class="form-item">
++        <label class="form-item__label">{{ 'Passwort'|t }}</label>
++        <input type="password" class="form-element" value="••••••••" disabled />
++      </div>
++    </div>
++  </section>
++
++  {# ================================================================ #}
++  {# Kontaktdaten für CSN Team                                        #}
++  {# ================================================================ #}
++  <section class="csn-profile__section">
++    <h2 class="csn-profile__section-title">{{ 'Kontaktdaten für CSN Team'|t }}</h2>
++
++    <div class="csn-profile__banner csn-profile__banner--hint">
++      <p>{{ 'Die folgenden Daten werden nicht auf der Webseite veröffentlicht, sondern dienen dem CSN Team für die Kontaktaufnahme.'|t }}</p>
++    </div>
++
++    <div class="csn-profile__fields">
++      {{ form.field_academic_title }}
++      <div class="csn-profile__fields--two-col">
++        {{ form.field_given_name }}
++        {{ form.field_family_name }}
++      </div>
++      {{ form.field_phone }}
++      {{ form.field_address }}
++    </div>
++  </section>
++
++  {# ================================================================ #}
++  {# Kontaktdaten für Hilfesuchende                                   #}
++  {# ================================================================ #}
++  <section class="csn-profile__section">
++    <h2 class="csn-profile__section-title">{{ 'Kontaktdaten für Hilfesuchende'|t }}</h2>
++
++    <div class="csn-profile__banner csn-profile__banner--hint">
++      <p>{{ 'Die folgenden Daten werden auf dem Profil des DEH auf der CSN Webseite veröffentlicht.'|t }}</p>
++    </div>
++
++    <div class="csn-profile__fields">
++      <div class="csn-profile__fields--two-col">
++        {{ form.field_deh_phone }}
++        {{ form.field_deh_mail }}
++      </div>
++      {{ form.field_deh_language }}
++    </div>
++  </section>
++
++  {# ================================================================ #}
++  {# Servicezeiten                                                    #}
++  {# ================================================================ #}
++  <section class="csn-profile__section">
++    <h2 class="csn-profile__section-title">{{ 'Servicezeiten'|t }}</h2>
++
++    <div class="csn-profile__banner csn-profile__banner--hint">
++      <p>{{ 'Bitte beachten Sie, dass die ehrenamtliche Tätigkeit nicht mehr als 12 Stunden pro Woche umfassen darf.'|t }}</p>
++    </div>
++
++    <p class="csn-profile__text">{{ 'Ich bin wie folgt erreichbar:'|t }}</p>
++
++    {{ form.field_availability }}
++  </section>
++
++  {# ================================================================ #}
++  {# Abwesenheit                                                      #}
++  {# ================================================================ #}
++  <section class="csn-profile__section">
++    <h2 class="csn-profile__section-title">{{ 'Abwesenheit'|t }}</h2>
++
++    <div class="csn-profile__banner csn-profile__banner--hint">
++      <p>{{ 'Bitte beachten Sie, dass Sie während Ihrer Abwesenheit nicht in der Liste der verfügbaren Ersthelfenden angezeigt werden und nicht kontaktiert werden können.'|t }}</p>
++    </div>
++
++    {{ form.absence }}
++
++    <div class="csn-profile__fields--two-col">
++      {{ form.absence_start }}
++      {{ form.absence_end }}
++    </div>
++  </section>
++
++  {# ================================================================ #}
++  {# Rechtliches                                                      #}
++  {# ================================================================ #}
++  <section class="csn-profile__section">
++    <h2 class="csn-profile__section-title">{{ 'Rechtliches'|t }}</h2>
++
++    {{ form.field_confirm_data_processing }}
++    {{ form.field_confirm_terms_conditions }}
++    {{ form.field_confirm_volunteer }}
++  </section>
++
++  {# 12. Pflichtfeld-Hinweis #}
++  <p class="csn-profile__required-hint">{{ '* Pflichtfeld'|t }}</p>
++
++  {# Buttons #}
++  {{ form.actions }}
++
++  {# Hidden elements needed by Drupal form API #}
++  {{ form.form_build_id }}
++  {{ form.form_token }}
++  {{ form.form_id }}
++
++</div>

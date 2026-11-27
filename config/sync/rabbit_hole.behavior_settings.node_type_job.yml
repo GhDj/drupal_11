@@ -1,0 +1,14 @@
+uuid: b39a9741-bb78-4a73-ac89-e2c336683db3
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.job
+id: node_type_job
+entity_type_id: node_type
+entity_id: job
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

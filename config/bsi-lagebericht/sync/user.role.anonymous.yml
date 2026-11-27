@@ -10,11 +10,13 @@ dependencies:
     - search_api_autocomplete.search.search_yearly_report
   module:
     - bsi_media
+    - config_pages
     - klaro
     - media
     - media_entity_download
     - paragraphs_type_permissions
     - search_api_autocomplete
+    - securitytxt
     - system
 _core:
   default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
@@ -31,6 +33,7 @@ permissions:
   - 'use search_api_autocomplete for search'
   - 'use search_api_autocomplete for search_media'
   - 'use search_api_autocomplete for search_yearly_report'
+  - 'view config_pages entity'
   - 'view media'
   - 'view paragraph content accordion'
   - 'view paragraph content banner'
@@ -53,3 +56,4 @@ permissions:
   - 'view paragraph content tile_item'
   - 'view paragraph content tiles'
   - 'view paragraph content view'
+  - 'view securitytxt'

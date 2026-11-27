@@ -1,0 +1,29 @@
+uuid: ea9ab375-48d4-44b0-ab3f-66b603928e50
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_das_bsi
+label: 'Node: Das BSI'
+type: 'canonical_entities:node'
+pattern: '/the-bsi/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: 7946999f-45da-41a0-8da2-6d2ea5bb6efb
+    property: null
+selection_logic: and
+weight: -23
+relationships:
+  'node:langcode:language':
+    label: Language

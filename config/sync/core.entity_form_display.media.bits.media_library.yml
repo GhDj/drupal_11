@@ -14,19 +14,18 @@ targetEntityType: media
 bundle: bits
 mode: media_library
 content:
+  directory:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_media_file:
     type: file_generic
     weight: 1
     region: content
     settings:
       progress_indicator: throbber
-    third_party_settings: {  }
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
     third_party_settings: {  }
   name:
     type: string_textfield
@@ -40,6 +39,7 @@ hidden:
   changed: true
   created: true
   field_criticality: true
+  langcode: true
   path: true
   status: true
   thumbnail: true

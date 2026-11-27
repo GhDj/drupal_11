@@ -1,0 +1,29 @@
+uuid: a07288d9-6af1-4a4d-9107-f68cd7ae8f9d
+langcode: en
+status: true
+dependencies:
+  module:
+    - csn_custom
+  theme:
+    - bsi_bund
+id: csn_branding
+theme: bsi_bund
+region: header
+weight: -14
+provider: null
+plugin: csn_branding
+settings:
+  id: csn_branding
+  label: 'CSN Branding'
+  label_display: '0'
+  provider: csn_custom
+visibility:
+  csn_page:
+    id: csn_page
+    negate: false
+    context_mapping:
+      group: '@group.group_route_context:group'
+      node: '@node.node_route_context:node'
+      media: '@bsi_media.media_route_context:media'
+      user: '@user.current_user_context:current_user'
+    csn_page: true

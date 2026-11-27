@@ -1,0 +1,41 @@
+uuid: add1b429-e725-4d43-9764-ec947cc7a04e
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_technologie_forschung_ddos
+label: 'Node: Cybersicherheit › Technologie & Forschung › DDOS'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/technology-research/ddos/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: 5ad7138f-e867-4ebf-972e-cacdc22d8082
+    property: null
+  0b1b4fa8-97e3-45d2-91bb-bfb57cdf3dd6:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: 291c58da-f574-457f-9d14-f563fbd202a1
+    property: null
+selection_logic: and
+weight: 7
+relationships:
+  'node:langcode:language':
+    label: Language

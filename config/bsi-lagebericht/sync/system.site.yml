@@ -2,8 +2,8 @@ _core:
   default_config_hash: ijfbzDTN4CbE7Sr-6ubWzy_t1vH4OtU1doNCLssVz-4
 langcode: en
 uuid: 5e5fac55-a0d6-4d9c-94c2-b5cf55bfbfb5
-name: Jahreslagebericht
-mail: bsi-webseite@init.de
+name: 'The State of IT Security in Germany in 2026'
+mail: jlb@bsi-lagebericht.de
 slogan: ''
 page:
   403: ''

@@ -1,0 +1,44 @@
+uuid: 8ab6d04c-ef99-4ecf-b6ae-32fa1a7ea3a8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.opener
+    - field.field.node.incident_report.body
+    - field.field.node.incident_report.field_incident_types
+    - field.field.node.incident_report.field_incident_types_abuse
+    - field.field.node.incident_report.field_incident_types_abuse_other
+    - field.field.node.incident_report.field_incident_types_other
+    - field.field.node.incident_report.field_start_date
+    - field.field.node.incident_report.field_time_duration
+    - node.type.incident_report
+id: node.incident_report.opener
+targetEntityType: node
+bundle: incident_report
+mode: opener
+content:
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  changed: true
+  content_moderation_control: true
+  created: true
+  field_incident_types: true
+  field_incident_types_abuse: true
+  field_incident_types_abuse_other: true
+  field_incident_types_other: true
+  field_start_date: true
+  field_time_duration: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  short_url: true
+  uid: true

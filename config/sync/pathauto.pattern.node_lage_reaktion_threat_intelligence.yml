@@ -1,0 +1,40 @@
+uuid: 94d050c3-957b-4a1c-93e8-61baaf19b220
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_lage_reaktion_threat_intelligence
+label: 'Node: Lage & Reaktion › Threat-Intelligence'
+type: 'canonical_entities:node'
+pattern: '/lage-reaktion/threat-intelligence/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Lage
+    property: null
+  91b13b43-b71f-40bb-a94e-4b2c7e32d108:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Threat-Intelligence
+selection_logic: and
+weight: 37
+relationships:
+  'node:langcode:language':
+    label: Language

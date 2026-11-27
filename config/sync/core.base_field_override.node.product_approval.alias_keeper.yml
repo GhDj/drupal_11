@@ -1,0 +1,22 @@
+uuid: 9a24b44f-cf2a-49f8-bde2-0de455113aa7
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.product_approval
+id: node.product_approval.alias_keeper
+field_name: alias_keeper
+entity_type: node
+bundle: product_approval
+label: "Prevent this node's alias from being changed"
+description: 'This option will prevent node alias changes to avoid accidents. Only users with "administer node_keep per node" permission will be able to change this node alias.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -36,8 +36,8 @@ default:
       value: footer
   link:
     -
-      uri: 'internal:'
-      resolvable_uri: ''
+      uri: 'internal:#klaro'
+      resolvable_uri: '#klaro'
       title: ''
       options:
         container_attributes:

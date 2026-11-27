@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Install, uninstall and update hooks for BSI search module.
+ */
+
+/**
+ * Fix property paths of the aggregated paragraph text fields.
+ */
+function bsi_search_update_11001() {
+  $config = \Drupal::configFactory()->getEditable('search_api.index.default');
+  $field_settings = $config->get('field_settings') ?? [];
+
+  // Old (dotted) field IDs mapped to their new underscore-based IDs.
+  $renames = [
+    'aggregated_paragraph_text_boost_1.3' => 'aggregated_paragraph_text_boost_1_3',
+    'aggregated_paragraph_text_boost_1.5' => 'aggregated_paragraph_text_boost_1_5',
+  ];
+
+  $changed = FALSE;
+
+  foreach ($renames as $old => $new) {
+    // Rename the field key if the old dotted key still exists.
+    if (isset($field_settings[$old]) && !isset($field_settings[$new])) {
+      $field_settings[$new] = $field_settings[$old];
+      unset($field_settings[$old]);
+      $changed = TRUE;
+    }
+
+    // Make sure the property path points to the new property name.
+    if (isset($field_settings[$new])
+      && $field_settings[$new]['property_path'] !== $new) {
+      $field_settings[$new]['property_path'] = $new;
+      $changed = TRUE;
+    }
+  }
+
+  if ($changed) {
+    $config->set('field_settings', $field_settings)->save();
+  }
+}

@@ -1,0 +1,4 @@
+_core:
+  default_config_hash: n1Mgzxgj62JTSFnlGUuI9oPRB12QndsA0BwK6IUNW6U
+dashboard: /cyber-security-network/dashboard
+logout_redirect: /user/login

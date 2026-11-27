@@ -7,7 +7,7 @@ dependencies:
     - user.role.admin
 id: csn-site_admin
 label: 'Site Admin'
-weight: 101
+weight: -4
 admin: true
 scope: outsider
 global_role: admin

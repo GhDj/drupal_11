@@ -4,17 +4,17 @@ status: true
 dependencies:
   config:
     - group.type.csn
-    - user.role.authenticated
+    - user.role.csn_deh
 id: csn-member
 label: Member
-weight: -100
+weight: -8
 admin: false
-scope: insider
-global_role: authenticated
+scope: outsider
+global_role: csn_deh
 group_type: csn
 permissions:
   - 'create group_node:page entity'
   - 'update own group_node:page entity'
   - 'view group'
-  - 'view group_membership relationship'
+  - 'view group_node:page entity'
   - 'view own unpublished group_node:page entity'

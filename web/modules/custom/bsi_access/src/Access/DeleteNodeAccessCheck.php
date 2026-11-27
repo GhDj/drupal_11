@@ -14,14 +14,12 @@ use Drupal\node\NodeInterface;
 class DeleteNodeAccessCheck implements AccessInterface {
 
   /**
-   * Checks whether the node may be deleted.
+   * Restrict deletion access based on moderation_state.
    */
   public function access(NodeInterface $node, AccountInterface $account): AccessResult {
-
     if ($node->hasField('moderation_state')) {
       $state = $node->get('moderation_state')->value;
-
-      if (!in_array($state, EntityAccessHooks::ALLOWED_STATES, TRUE)) {
+      if ($state && !in_array($state, EntityAccessHooks::ALLOWED_STATES, TRUE)) {
         return AccessResult::forbidden()
           ->addCacheableDependency($node);
       }

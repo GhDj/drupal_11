@@ -1,0 +1,37 @@
+uuid: 78fedcbf-c825-44b2-80f0-ee81a7fe6dee
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_intern_beratung
+label: 'Node: Intern › Beratung'
+type: 'canonical_entities:node'
+pattern: '/intern/beratung/[node:title]'
+selection_criteria:
+  11329662-f369-45db-a0ea-8f0d3ac84adf:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Intern
+  98455c11-02fb-446a-8f1f-5b913db70186:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Beratung
+selection_logic: and
+weight: -44
+relationships: {  }

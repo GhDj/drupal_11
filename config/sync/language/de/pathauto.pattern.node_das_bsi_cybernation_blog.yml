@@ -1,0 +1,1 @@
+pattern: '/das-bsi/cybernation-deutschland/blog/[node:created:html_date]-[node:title]'

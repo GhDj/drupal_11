@@ -1,0 +1,22 @@
+uuid: d8f99076-3287-4a7f-8586-516f92661cd8
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.job
+id: node.job.node_keeper
+field_name: node_keeper
+entity_type: node
+bundle: job
+label: 'Prevent this node from being deleted'
+description: 'This option will prevent node deletion to avoid accidents. Only users with "administer node_keep per node" permission will be able to remove this node.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

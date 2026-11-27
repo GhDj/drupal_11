@@ -6,7 +6,7 @@ dependencies:
     - group.type.csn
 id: csn-admin
 label: 'Group Admin'
-weight: 100
+weight: -5
 admin: true
 scope: individual
 global_role: null

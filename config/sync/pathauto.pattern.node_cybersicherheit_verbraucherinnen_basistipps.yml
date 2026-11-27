@@ -1,0 +1,40 @@
+uuid: 334ebae3-85f1-4324-8084-c93b85d3941d
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_verbraucherinnen_basistipps
+label: 'Node: Cybersicherheit › Verbraucherinnen › Basistipps'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/consumers/basic-tips/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: Verbraucherinnen
+    property: null
+  d060cdbe-af2f-4a23-8bd4-976b2291d8c4:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' 93aed685-0d34-45bb-84f4-22e57f2e6f4a'
+selection_logic: and
+weight: 12
+relationships:
+  'node:langcode:language':
+    label: Language

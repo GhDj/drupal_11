@@ -1,0 +1,5 @@
+administer csn configuration:
+  title: 'Administer CSN configuration'
+
+access csn:
+  title: 'Access CSN pages'

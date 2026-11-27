@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: dc4c4efa-8c4b-4752-a93e-a43f012d1abe
+  bundle: incident_types
+  default_langcode: de
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Bildbasierte Gewalt'
+  description:
+    -
+      value: 'z.B. Revenge Porn, Deep Fakes'
+      format: plain_text
+  weight:
+    -
+      value: 7
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: de
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1794835498

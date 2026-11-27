@@ -1,0 +1,41 @@
+uuid: 16a89b60-91c2-4a9c-afcc-73ac55b0d833
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_lage_reaktion_cyberdome
+label: 'Node: Lage & Reaktion › Cyberdome'
+type: 'canonical_entities:node'
+pattern: '/lage-reaktion/cyberdome/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Lage
+    property: null
+  0b1b4fa8-97e3-45d2-91bb-bfb57cdf3dd6:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Cyberdome
+    property: null
+selection_logic: and
+weight: 39
+relationships:
+  'node:langcode:language':
+    label: Language

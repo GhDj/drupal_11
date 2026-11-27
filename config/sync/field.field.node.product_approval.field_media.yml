@@ -1,0 +1,29 @@
+uuid: ab481abe-4fa5-4470-9a60-354f30037bfa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media
+    - media.type.download
+    - node.type.product_approval
+id: node.product_approval.field_media
+field_name: field_media
+entity_type: node
+bundle: product_approval
+label: Document
+description: 'This document <strong>must</strong> be assigned to an administrative group.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      download: download
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

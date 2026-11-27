@@ -1,0 +1,33 @@
+uuid: aeef2b9c-5d7b-43df-a2d4-772400dc894f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_classified_eu
+field_name: field_classified_eu
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: confidential
+      label: 'CONFIDENTIEL UE / EU CONFIDENTIAL'
+    -
+      value: restricted
+      label: 'RESTREINT UE / EU RESTRICTED'
+    -
+      value: secret
+      label: 'SECRET UE / EU SECRET'
+    -
+      value: top_secret
+      label: 'TRÈS SECRET UE / EU TOP SECRET'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

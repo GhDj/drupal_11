@@ -76,6 +76,7 @@ module:
   linkit: 0
   locale: 0
   markup_decorator: 0
+  matomo: 0
   maxlength: 0
   media: 0
   media_directories: 0

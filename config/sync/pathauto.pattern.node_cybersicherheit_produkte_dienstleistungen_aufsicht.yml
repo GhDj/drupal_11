@@ -1,0 +1,40 @@
+uuid: 2b6c5d54-c1b8-40ab-97ad-168cfa014ef0
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_produkte_dienstleistungen_aufsicht
+label: 'Node: Cybersicherheit › Produkte & Dienstleistungen › Aufsicht'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/products-services/supervision/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: ed063de9-72d2-4a81-863b-17e750bd5ddf
+    property: null
+  f5a03f46-9429-46d7-bce7-0629b78a2026:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Supervision
+selection_logic: and
+weight: 24
+relationships:
+  'node:langcode:language':
+    label: Language

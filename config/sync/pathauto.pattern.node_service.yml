@@ -1,0 +1,29 @@
+uuid: 89342d07-2496-4521-aae0-1da061362a47
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_service
+label: 'Node: Service'
+type: 'canonical_entities:node'
+pattern: '/service/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' f64a924e-4818-4a1b-bbec-ebc257e143b1'
+    property: null
+selection_logic: and
+weight: 21
+relationships:
+  'node:langcode:language':
+    label: Language

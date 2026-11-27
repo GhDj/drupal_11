@@ -1,0 +1,14 @@
+uuid: 937f0803-5121-4a69-b2b7-eec744643d57
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.incident_report
+id: node_type_incident_report
+entity_type_id: node_type
+entity_id: incident_report
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

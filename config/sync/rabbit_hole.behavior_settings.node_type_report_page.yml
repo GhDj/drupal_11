@@ -1,0 +1,14 @@
+uuid: 8380e487-d481-4750-930f-8ec8f659fe9f
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.report_page
+id: node_type_report_page
+entity_type_id: node_type
+entity_id: report_page
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

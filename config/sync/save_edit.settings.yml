@@ -19,4 +19,6 @@ node_types:
   job: job
   page: page
   report_page: report_page
+  incident_report: '0'
+  product_approval: '0'
 save_button_text: ''

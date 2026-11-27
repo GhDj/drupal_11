@@ -5,7 +5,7 @@ dependencies: {  }
 id: multimedia
 label: Multimedia
 description: 'Multimedia content hosted by the BSI.'
-default: true
+default: false
 purposes:
   - external_content
 cookies:

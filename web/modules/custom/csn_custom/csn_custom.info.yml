@@ -1,0 +1,10 @@
+name: 'Cyber Security Network'
+type: module
+description: 'Customizations for the Cyber Security Network'
+package: CSN
+core_version_requirement: ^10 || ^11
+
+configure: csn_custom.settings
+
+dependencies:
+  - group:group

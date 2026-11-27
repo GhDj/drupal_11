@@ -1,0 +1,29 @@
+uuid: 940b68ca-f401-43af-96a0-7e1dffb4d88b
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_organisationen
+label: 'Node: Cybersicherheit › Organisationen'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/organisations/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' f9955dc2-64fe-42b4-97aa-fbe18ec9d6b7'
+    property: null
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

@@ -1,0 +1,14 @@
+uuid: 84fff584-5a80-469b-97f6-9079a781eac5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.inventory
+id: node_type_inventory
+entity_type_id: node_type
+entity_id: inventory
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

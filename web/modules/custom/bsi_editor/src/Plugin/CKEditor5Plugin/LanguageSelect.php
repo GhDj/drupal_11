@@ -23,7 +23,6 @@ class LanguageSelect extends Language {
     $config = parent::getDynamicPluginConfig($static_plugin_config, $editor);
     $desiredLangcodes = static::$desiredLangcodes;
 
-    // @todo Language names are not translated.
     $languages = &$config['language']['textPartLanguage'];
     $languages = array_values(array_filter(
       $languages,

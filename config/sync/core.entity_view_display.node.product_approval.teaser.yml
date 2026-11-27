@@ -1,0 +1,61 @@
+uuid: cc5d0b14-8f84-41a7-91fd-8fb9dd2d7a29
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.product_approval.body
+    - field.field.node.product_approval.field_certification_date
+    - field.field.node.product_approval.field_certification_date_eu
+    - field.field.node.product_approval.field_certification_date_nato
+    - field.field.node.product_approval.field_classified_eu
+    - field.field.node.product_approval.field_classified_information
+    - field.field.node.product_approval.field_classified_nato
+    - field.field.node.product_approval.field_contact
+    - field.field.node.product_approval.field_deadline
+    - field.field.node.product_approval.field_further_details
+    - field.field.node.product_approval.field_media
+    - field.field.node.product_approval.field_media_downloads
+    - field.field.node.product_approval.field_product
+    - field.field.node.product_approval.field_product_version
+    - node.type.product_approval
+  module:
+    - text_summary_formatter
+id: node.product_approval.teaser
+targetEntityType: node
+bundle: product_approval
+mode: teaser
+content:
+  body:
+    type: text_summary_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  changed: true
+  created: true
+  field_certification_date: true
+  field_certification_date_eu: true
+  field_certification_date_nato: true
+  field_classified_eu: true
+  field_classified_information: true
+  field_classified_nato: true
+  field_contact: true
+  field_deadline: true
+  field_further_details: true
+  field_media: true
+  field_media_downloads: true
+  field_product: true
+  field_product_version: true
+  langcode: true
+  search_api_excerpt: true
+  short_url: true
+  title: true
+  uid: true

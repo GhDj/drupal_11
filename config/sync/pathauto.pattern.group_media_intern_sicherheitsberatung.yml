@@ -1,0 +1,31 @@
+uuid: 9a28f5e2-9b22-4d3a-8f35-a6a85ad8e703
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - media
+id: group_media_intern_sicherheitsberatung
+label: 'Group Media: Intern › Sicherheitsberatung'
+type: 'canonical_entities:media'
+pattern: '/intern/sicherheitsberatung/[media:name]'
+selection_criteria:
+  59ffb8b1-cacd-4153-b077-af24f4e020bf:
+    id: 'entity_group_relation:media'
+    negate: false
+    context_mapping:
+      entity: media
+    groups:
+      - '1'
+    types: {  }
+  57be50f2-6198-4137-a89d-413c967d3eae:
+    id: 'entity_group_relation:media'
+    negate: false
+    context_mapping:
+      entity: media
+    groups:
+      - '2'
+    types: {  }
+selection_logic: and
+weight: -37
+relationships: {  }

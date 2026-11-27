@@ -1,6 +1,6 @@
 <header class="bsi-header">
     <div class="bsi-header__grid">
-        {{ page.header|without('bsi_bund_nav_header', 'bsi_bund_mainnavigation', 'bsi_bund_site_search') }}
+        {{ page.header|without('bsi_bund_nav_header', 'bsi_bund_mainnavigation', 'bsi_bund_site_search', 'csn_branding') }}
 
         <div class="bsi-header__right">
             {% if page.header.bsi_bund_nav_header %}
@@ -15,6 +15,8 @@
                     {{ page.header.bsi_bund_site_search }}
                 </div>
             {% endif %}
+
+            {{ page.header.csn_branding }}
         </div>
     </div>
 </header>

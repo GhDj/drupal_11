@@ -60,7 +60,8 @@
 
   <div{{ attributes.addClass(default_classes|merge(variant_classes)) }}>
     {{ title_prefix }}
-    <h1 class="bsi-heading bsi-heading--1 bsi-opener__page-title">
+    {# set h1, but hide it #}
+    <h1 class="bsi-heading bsi-heading--1 bsi-opener__page-title visually-hidden">
       {{ content.title.0 }}
     </h1>
     {{ title_suffix }}

@@ -1,0 +1,40 @@
+uuid: c46aef54-94cd-419d-a7bc-c6cfcdc0c1cf
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_verbraucherinnen_csn
+label: 'Node: Cybersicherheit › Verbraucherinnen › CSN'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/consumers/csn/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: Verbraucherinnen
+    property: null
+  2ecd4ea8-7a27-4e94-b067-5c0da50ffdd7:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: c59d4dce-2e3d-47dd-995f-a3cf6eaa1d9b
+selection_logic: and
+weight: 13
+relationships:
+  'node:langcode:language':
+    label: Language

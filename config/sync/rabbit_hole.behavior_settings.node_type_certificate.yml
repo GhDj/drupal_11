@@ -1,0 +1,14 @@
+uuid: 8928e161-2dca-4425-a714-3ce48d89124e
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.certificate
+id: node_type_certificate
+entity_type_id: node_type
+entity_id: certificate
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

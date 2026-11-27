@@ -7,10 +7,14 @@ dependencies:
     - node.type.article
     - node.type.entry_page
     - node.type.event
+    - node.type.incident_report
     - node.type.page
+    - taxonomy.vocabulary.attack_vectors
+    - taxonomy.vocabulary.incident_types
     - workflows.workflow.nodes
   module:
     - content_moderation
+    - csn_custom
     - duplicate_node
     - editoria11y
     - group
@@ -20,7 +24,9 @@ dependencies:
     - paragraphs_type_permissions
     - path
     - role_delegation
+    - save_edit
     - short_url
+    - taxonomy
     - tfa
 id: csn_admin
 label: 'CSN Admin'
@@ -28,7 +34,9 @@ weight: -5
 is_admin: false
 permissions:
   - 'access content overview'
+  - 'access csn'
   - 'access media directories browser'
+  - 'administer csn configuration'
   - 'administer users'
   - 'assign csn_admin role'
   - 'assign csn_deh role'
@@ -37,12 +45,19 @@ permissions:
   - 'create csn group'
   - 'create entry_page content'
   - 'create event content'
+  - 'create incident_report content'
   - 'create page content'
   - 'create paragraph content view'
+  - 'create terms in attack_vectors'
+  - 'create terms in incident_types'
   - 'create url aliases'
   - 'delete any article content'
   - 'delete any event content'
+  - 'delete any incident_report content'
   - 'delete any page content'
+  - 'delete incident_report revisions'
+  - 'delete terms in attack_vectors'
+  - 'delete terms in incident_types'
   - 'duplicate article content'
   - 'duplicate entry_page content'
   - 'duplicate event content'
@@ -51,11 +66,17 @@ permissions:
   - 'duplicate job content'
   - 'duplicate page content'
   - 'duplicate report_page content'
+  - 'edit any incident_report content'
   - 'edit short_url'
+  - 'edit terms in attack_vectors'
+  - 'edit terms in incident_types'
   - 'setup own tfa'
   - 'update paragraph content view'
   - 'use nodes transition create_new_draft'
   - 'use nodes transition request_approval'
   - 'use nodes transition withdraw'
+  - 'use save and edit'
   - 'view any unpublished content'
   - 'view editoria11y checker'
+  - 'view term revisions in attack_vectors'
+  - 'view term revisions in incident_types'

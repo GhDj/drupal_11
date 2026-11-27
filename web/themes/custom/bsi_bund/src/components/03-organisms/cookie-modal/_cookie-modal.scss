@@ -175,19 +175,8 @@
       text-decoration: none;
       transition: all 0.2s ease-in-out;
 
+      &.cm-btn.cm-btn-success,
       &.cm-btn-decline.cn-decline {
-        --#{$nsp}-btn-background-color: var(--#{$nsp}-color-blue-150);
-        --#{$nsp}-btn-background-color-hover: var(--#{$nsp}-color-base-white);
-
-        --#{$nsp}-btn-text-color: var(--#{$nsp}-color-blue-800);
-        --#{$nsp}-btn-text-color-hover: var(--#{$nsp}-color-blue-800);
-
-        --#{$nsp}-btn-border-color: var(--#{$nsp}-color-blue-150);
-        --#{$nsp}-btn-border-color-hover: var(--#{$nsp}-color-blue-800);
-        --#{$nsp}-btn-button-border-width-active: 2px;
-        --#{$nsp}-btn-button-border-width: 1px;
-      }
-      &.cm-btn.cm-btn-success {
         --#{$nsp}-btn-background-color: var(--#{$nsp}-color-blue-800);
         --#{$nsp}-btn-background-color-hover: var(--#{$nsp}-color-base-white);
         --#{$nsp}-btn-text-color-hover: var(--#{$nsp}-color-blue-800);

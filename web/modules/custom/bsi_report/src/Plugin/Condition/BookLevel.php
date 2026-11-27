@@ -18,7 +18,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
   label: new TranslatableMarkup('Book level'),
   context_definitions: [
     'node' => new EntityContextDefinition('entity:node'),
-  ]
+  ],
 )]
 class BookLevel extends ConditionPluginBase implements ContainerFactoryPluginInterface {
 
@@ -27,7 +27,7 @@ class BookLevel extends ConditionPluginBase implements ContainerFactoryPluginInt
    */
   public function defaultConfiguration(): array {
     return [
-      'level' => [],
+      'level' => NULL,
     ] + parent::defaultConfiguration();
   }
 
@@ -91,4 +91,3 @@ class BookLevel extends ConditionPluginBase implements ContainerFactoryPluginInt
   }
 
 }
-

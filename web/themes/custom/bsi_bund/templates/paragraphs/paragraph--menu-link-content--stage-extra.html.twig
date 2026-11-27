@@ -27,17 +27,16 @@
             {{ content.field_section_text }}
           </div>
         </div>
-
-        <hr>
-
-        {% include '@bsi_bund/elements/link.html.twig' with {
-          url: content.field_link.0['#url'],
-          title: content.field_link.0['#title'],
-          icon: 'chevron-right',
-          icon_position: 'before',
-          extra_classes: ['bsi-card__link'],
-        } only %}
-
+        {% if content.field_link.0['#url'] %}
+          <hr>
+          {% include '@bsi_bund/elements/link.html.twig' with {
+            url: content.field_link.0['#url'],
+            title: content.field_link.0['#title'],
+            icon: 'chevron-right',
+            icon_position: 'before',
+            extra_classes: ['bsi-card__link'],
+          } only %}
+        {% endif %}
       </div>
     {% endblock %}
 

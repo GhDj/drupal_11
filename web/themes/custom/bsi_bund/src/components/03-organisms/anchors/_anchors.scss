@@ -15,6 +15,11 @@
   --#{$nsp}-link-decoration-line: none;
 
   background-color: var(--#{$nsp}-color-blue-100);
+  margin-bottom: var(--#{$nsp}-size-lg);
+
+  @include breakpoint-lg {
+    margin-bottom: var(--#{$nsp}-size-4xl);
+  }
 
   @at-root .#{$nsp}-page-grid__anchors {
     position: sticky;

@@ -1,0 +1,21 @@
+uuid: 0aec4c08-d9cb-4634-b0fa-6c00029fb42c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_classified_information
+    - node.type.product_approval
+  module:
+    - options
+id: node.product_approval.field_classified_information
+field_name: field_classified_information
+entity_type: node
+bundle: product_approval
+label: Classified
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

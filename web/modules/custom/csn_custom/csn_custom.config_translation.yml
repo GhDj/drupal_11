@@ -1,0 +1,5 @@
+csn_custom.settings:
+  title: 'CSN settings'
+  base_route_name: csn_custom.settings
+  names:
+    - csn_custom.settings

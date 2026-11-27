@@ -1,0 +1,307 @@
+uuid: 3a6d0a4f-0589-4267-80ce-8c6315a873d0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.product_approval.body
+    - field.field.node.product_approval.field_certification_date
+    - field.field.node.product_approval.field_certification_date_eu
+    - field.field.node.product_approval.field_certification_date_nato
+    - field.field.node.product_approval.field_classified_eu
+    - field.field.node.product_approval.field_classified_information
+    - field.field.node.product_approval.field_classified_nato
+    - field.field.node.product_approval.field_contact
+    - field.field.node.product_approval.field_deadline
+    - field.field.node.product_approval.field_further_details
+    - field.field.node.product_approval.field_media
+    - field.field.node.product_approval.field_media_downloads
+    - field.field.node.product_approval.field_product
+    - field.field.node.product_approval.field_product_version
+    - node.type.product_approval
+  module:
+    - content_moderation
+    - datetime
+    - field_group
+    - maxlength
+    - media_library
+    - text
+third_party_settings:
+  field_group:
+    group_manufacturer:
+      children:
+        - field_contact
+        - field_media_downloads
+        - body
+      label: Manufacturer
+      region: content
+      parent_name: group_tabs
+      weight: 3
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+        open: false
+    group_product:
+      children:
+        - field_product
+        - field_product_version
+        - field_further_details
+      label: Product
+      region: content
+      parent_name: group_tabs
+      weight: 2
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+        open: true
+    group_certification:
+      children:
+        - field_media
+        - field_deadline
+        - field_classified_information
+        - field_certification_date
+        - field_classified_eu
+        - field_certification_date_eu
+        - field_classified_nato
+        - field_certification_date_nato
+      label: Certification
+      region: content
+      parent_name: group_tabs
+      weight: 4
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+        open: false
+    group_workflow:
+      children:
+        - moderation_state
+        - status
+        - created
+      label: Workflow
+      region: content
+      parent_name: ''
+      weight: 5
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: true
+        description: ''
+        required_fields: true
+        weight: 0
+    group_language:
+      children:
+        - langcode
+      label: Language
+      region: content
+      parent_name: ''
+      weight: 6
+      format_type: details_sidebar
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
+        description: ''
+        required_fields: true
+        weight: 0
+    group_tabs:
+      children:
+        - group_product
+        - group_manufacturer
+        - group_certification
+      label: Tabs
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: horizontal
+        width_breakpoint: 640
+id: node.product_approval.default
+targetEntityType: node
+bundle: product_approval
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 11
+    region: content
+    settings:
+      rows: 3
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings:
+      maxlength:
+        maxlength_js: null
+        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+        maxlength_js_summary: null
+        maxlength_js_label_summary: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+        maxlength_js_enforce: true
+  created:
+    type: datetime_timestamp
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_certification_date:
+    type: datetime_default
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_certification_date_eu:
+    type: datetime_default
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_certification_date_nato:
+    type: datetime_default
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_classified_eu:
+    type: options_select
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_classified_information:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_classified_nato:
+    type: options_select
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_contact:
+    type: media_library_widget
+    weight: 9
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_deadline:
+    type: datetime_default
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_further_details:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings:
+      maxlength:
+        maxlength_js: null
+        maxlength_js_label: ''
+        maxlength_js_enforce: false
+  field_media:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_media_downloads:
+    type: media_library_widget
+    weight: 10
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_product:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 1
+      placeholder: ''
+    third_party_settings:
+      maxlength:
+        maxlength_js: null
+        maxlength_js_label: ''
+        maxlength_js_enforce: false
+  field_product_version:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 13
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  alias_keeper: true
+  changed: true
+  keeper_machine_name: true
+  menu_entity_index: true
+  node_keeper: true
+  path: true
+  promote: true
+  short_url: true
+  simple_sitemap: true
+  sticky: true
+  uid: true
+  url_redirects: true

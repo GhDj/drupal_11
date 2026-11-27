@@ -12,7 +12,7 @@ bundle: explorer_content_types
 label: 'Show explorer images'
 description: 'Tick the checkbox if you want to show the respective explorer image on each page teaser.'
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: 1

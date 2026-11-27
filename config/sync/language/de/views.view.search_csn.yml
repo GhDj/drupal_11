@@ -1,0 +1,12 @@
+label: Aktuelles
+display:
+  default:
+    display_options:
+      title: 'Meine Vorfallsberichte'
+      use_more_text: 'Alle meine Vorfallsberichte'
+  block_incident_reports_front:
+    display_options:
+      block_description: 'Startseite: Vorfallsberichte'
+  block_search_incident_reports:
+    display_options:
+      block_description: 'CSN Suche: Vorfallsberichte'

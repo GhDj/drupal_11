@@ -1,0 +1,24 @@
+uuid: 65174b27-107d-4e75-9855-8007dc7368b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_further_details
+    - filter.format.plain_text
+    - node.type.product_approval
+  module:
+    - text
+id: node.product_approval.field_further_details
+field_name: field_further_details
+entity_type: node
+bundle: product_approval
+label: 'Further details'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - plain_text
+field_type: text_long

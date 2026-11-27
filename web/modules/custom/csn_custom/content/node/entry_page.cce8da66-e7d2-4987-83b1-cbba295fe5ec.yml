@@ -1,0 +1,147 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: cce8da66-e7d2-4987-83b1-cbba295fe5ec
+  bundle: entry_page
+  default_langcode: de
+translations:
+  en:
+    status:
+      -
+        value: true
+    uid:
+      -
+        target_id: 1
+    title:
+      -
+        value: 'My incident reports'
+    created:
+      -
+        value: 1795430543
+    moderation_state:
+      -
+        value: published
+    node_keeper:
+      -
+        value: true
+    alias_keeper:
+      -
+        value: true
+    path:
+      -
+        alias: /csn/reports
+        langcode: en
+        pathauto: 0
+    content_translation_source:
+      -
+        value: de
+    content_translation_outdated:
+      -
+        value: false
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Meine Vorfallsberichte'
+  created:
+    -
+      value: 1795200490
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  node_keeper:
+    -
+      value: true
+  alias_keeper:
+    -
+      value: true
+  keeper_machine_name:
+    -
+      value: csn_reports
+  path:
+    -
+      alias: /csn/reports
+      langcode: de
+      pathauto: 0
+  sae_exclude:
+    -
+      value: false
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  layout_builder__layout:
+    -
+      section:
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          63f4f82a-9466-4ef3-9d07-e0f780eda76f:
+            uuid: 63f4f82a-9466-4ef3-9d07-e0f780eda76f
+            region: content
+            configuration:
+              id: 'field_block:node:entry_page:field_paragraphs'
+              label: Seitenabschnitte
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          a2286e42-9664-4ac9-a50f-08674accb627:
+            uuid: a2286e42-9664-4ac9-a50f-08674accb627
+            region: content
+            configuration:
+              id: 'extra_field_block:node:entry_page:content_moderation_control'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: -1
+            additional: {  }
+          9284c982-c2f0-4d48-ae9e-20d11063ecfa:
+            uuid: 9284c982-c2f0-4d48-ae9e-20d11063ecfa
+            region: content
+            configuration:
+              id: 'views_block:search_csn-block_search_incident_reports'
+              label: ''
+              label_display: 0
+              provider: views
+              views_label: ''
+              items_per_page: null
+              contextual_filter:
+                node_author:
+                  enabled: false
+                  value: ''
+              exposed_sort:
+                sort_by: node_created
+                sort_order: DESC
+              context_mapping:
+                node_author: '@user.current_user_context:current_user'
+            weight: 3
+            additional: {  }
+        third_party_settings: {  }

@@ -1,0 +1,6 @@
+pattern: '/das-bsi/gesetze-verordnungen/[node:title]'
+selection_criteria:
+  0b1b4fa8-97e3-45d2-91bb-bfb57cdf3dd6:
+    value: Gesetze
+  3909d9a2-72ed-44b4-bdac-7b50a8754446:
+    value: Verordnungen

@@ -1,0 +1,73 @@
+uuid: af09fac6-8f11-492a-87e8-06596f2ba25f
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.article
+  module:
+    - bsi_custom
+    - node
+id: node_das_bsi_cybernation_blog
+label: 'Node: Das BSI › Cybernation › Blog'
+type: 'canonical_entities:node'
+pattern: '/the-bsi/cybernation-germany/blog/[node:created:html_date]-[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: 7946999f-45da-41a0-8da2-6d2ea5bb6efb
+    property: null
+  0b1b4fa8-97e3-45d2-91bb-bfb57cdf3dd6:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Cybernation
+    property: null
+  3909d9a2-72ed-44b4-bdac-7b50a8754446:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Blog
+  78cc7b7b-13a3-4db9-aead-a47fd2dcad2a:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      article: article
+  6aae9805-278d-4957-9530-e253732e5c31:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle:
+      article: article
+    field_name: field_article_type
+    field_property:
+      value: value
+    operator: equals
+    value: cybernation
+selection_logic: and
+weight: -31
+relationships:
+  'node:langcode:language':
+    label: Language

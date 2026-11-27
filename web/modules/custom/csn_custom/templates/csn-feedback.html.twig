@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Default template for a CSN feedback page.
+ *
+ * Available variables:
+ * - title: The page title for the feedback page.
+ * - message: A simple message to display to the user.
+ * - content: A renderable for additional content.
+ */
+#}
+<div{{ attributes }}>
+  {% if message and message is iterable %}
+    {% for item in message %}
+      <p>{{ item }}</p>
+    {% endfor %}
+  {% elseif message %}
+    <p>{{ message }}</p>
+  {% endif %}
+  {% if content %}
+    {{ content }}
+  {% endif %}
+</div>

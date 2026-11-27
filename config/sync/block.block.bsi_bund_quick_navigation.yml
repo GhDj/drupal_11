@@ -5,6 +5,7 @@ dependencies:
   config:
     - system.menu.main
   module:
+    - csn_custom
     - menu_multilingual
     - system
   theme:
@@ -27,4 +28,13 @@ settings:
   level: 1
   depth: 1
   expand_all_items: false
-visibility: {  }
+visibility:
+  csn_page:
+    id: csn_page
+    negate: true
+    context_mapping:
+      group: '@group.group_route_context:group'
+      node: '@node.node_route_context:node'
+      media: '@bsi_media.media_route_context:media'
+      user: '@user.current_user_context:current_user'
+    csn_page: true

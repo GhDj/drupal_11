@@ -1,0 +1,22 @@
+uuid: 4b511a95-d180-4cd1-9036-a4b56c039613
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.inventory
+id: node.inventory.node_keeper
+field_name: node_keeper
+entity_type: node
+bundle: inventory
+label: 'Prevent this node from being deleted'
+description: 'This option will prevent node deletion to avoid accidents. Only users with "administer node_keep per node" permission will be able to remove this node.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,7 +1,7 @@
 _core:
   default_config_hash: 68A3PDsSIoX2q7iFOa2lMdnYkgKgem4uh1_RBxcRVWU
 report-only:
-  enable: true
+  enable: false
   directives:
     default-src:
       base: self
@@ -23,10 +23,14 @@ report-only:
       base: self
       sources:
         - 'data:'
+    media-src:
+      base: self
+      sources:
+        - 'https://multimedia.gsb.bund.de/'
   reporting:
     plugin: none
 enforce:
-  enable: false
+  enable: true
   directives:
     default-src:
       base: self
@@ -49,5 +53,9 @@ enforce:
       base: self
       sources:
         - 'data:'
+    media-src:
+      base: self
+      sources:
+        - 'https://multimedia.gsb.bund.de'
   reporting:
     plugin: none

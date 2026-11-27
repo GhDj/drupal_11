@@ -111,6 +111,14 @@ display:
             label: Jahr
           facet:
             missing_label: andere
+        search_api_fulltext_1:
+          expose:
+            label: Suche
+        facets_field_media_type_1:
+          expose:
+            label: 'Art der Veröffentlichung'
+          facet:
+            missing_label: andere
       title: 'Suche: Veröffentlichungen'
       sorts:
         search_api_relevance:

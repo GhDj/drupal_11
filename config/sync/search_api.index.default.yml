@@ -16,12 +16,24 @@ dependencies:
     - field.storage.node.field_audiences
     - field.storage.node.field_category
     - field.storage.node.field_certificate_type
+    - field.storage.node.field_certification_date
+    - field.storage.node.field_certification_date_eu
+    - field.storage.node.field_certification_date_nato
+    - field.storage.node.field_classified_eu
+    - field.storage.node.field_classified_information
+    - field.storage.node.field_classified_nato
+    - field.storage.node.field_contact
     - field.storage.node.field_deadline
     - field.storage.node.field_degree
     - field.storage.node.field_event_type
     - field.storage.node.field_import_status
+    - field.storage.node.field_incident_types
+    - field.storage.node.field_media
+    - field.storage.node.field_media_downloads
     - field.storage.node.field_paragraphs
     - field.storage.node.field_producer
+    - field.storage.node.field_product
+    - field.storage.node.field_product_version
     - field.storage.node.field_tags
     - field.storage.node.field_topics
     - field.storage.paragraph.field_highlight
@@ -34,6 +46,7 @@ dependencies:
   module:
     - book
     - bsi_search
+    - content_moderation
     - media
     - node
     - paragraphs
@@ -354,6 +367,30 @@ field_settings:
     dependencies:
       module:
         - node
+  node_certification_date:
+    label: 'Certification date'
+    datasource_id: 'entity:node'
+    property_path: field_certification_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_certification_date
+  node_certification_date_eu:
+    label: 'Classification date (EU)'
+    datasource_id: 'entity:node'
+    property_path: field_certification_date_eu
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_certification_date_eu
+  node_certification_date_nato:
+    label: 'Classification date (NATO)'
+    datasource_id: 'entity:node'
+    property_path: field_certification_date_nato
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_certification_date_nato
   node_changed:
     label: Changed
     datasource_id: 'entity:node'
@@ -362,6 +399,38 @@ field_settings:
     dependencies:
       module:
         - node
+  node_classified:
+    label: Classified
+    datasource_id: 'entity:node'
+    property_path: field_classified_information
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_classified_information
+  node_classified_eu:
+    label: 'Classified EU'
+    datasource_id: 'entity:node'
+    property_path: field_classified_eu
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_classified_eu
+  node_classified_nato:
+    label: 'Classified NATO'
+    datasource_id: 'entity:node'
+    property_path: field_classified_nato
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_classified_nato
+  node_contact:
+    label: Contact
+    datasource_id: 'entity:node'
+    property_path: field_contact
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_contact
   node_created:
     label: Created
     datasource_id: 'entity:node'
@@ -393,6 +462,14 @@ field_settings:
     indexed_locked: true
     type_locked: true
     hidden: true
+  node_incident_types:
+    label: 'Incident types'
+    datasource_id: 'entity:node'
+    property_path: field_incident_types
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_incident_types
   node_label:
     label: Title
     datasource_id: 'entity:node'
@@ -410,6 +487,30 @@ field_settings:
     dependencies:
       module:
         - node
+  node_media:
+    label: Media
+    datasource_id: 'entity:node'
+    property_path: field_media
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_media
+  node_media_downloads:
+    label: 'Media downloads'
+    datasource_id: 'entity:node'
+    property_path: field_media_downloads
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_media_downloads
+  node_moderation:
+    label: 'Moderation state'
+    datasource_id: 'entity:node'
+    property_path: moderation_state
+    type: string
+    dependencies:
+      module:
+        - content_moderation
   node_paragraphs:
     label: Paragraphs
     datasource_id: 'entity:node'
@@ -418,6 +519,22 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_paragraphs
+  node_product_name:
+    label: 'Product name'
+    datasource_id: 'entity:node'
+    property_path: field_product
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_product
+  node_product_version:
+    label: 'Product version'
+    datasource_id: 'entity:node'
+    property_path: field_product_version
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_product_version
   node_promote:
     label: 'Promoted to front page'
     datasource_id: 'entity:node'
@@ -590,9 +707,15 @@ processor_settings:
       - name
       - node_body
       - node_bundle
+      - node_classified
+      - node_classified_eu
+      - node_classified_nato
       - node_degree
       - node_label
       - node_langcode
+      - node_moderation
+      - node_product_name
+      - node_product_version
       - node_summary
       - paragraph_field_name
       - paragraph_heading

@@ -36,6 +36,7 @@ third_party_settings:
   field_group:
     group_workflow:
       children:
+        - created
         - status
         - moderation_state
       label: Workflow
@@ -220,6 +221,12 @@ content:
         maxlength_js_summary: null
         maxlength_js_label_summary: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
         maxlength_js_enforce: true
+  created:
+    type: datetime_timestamp
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_audiences:
     type: options_buttons
     weight: 11
@@ -362,7 +369,7 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 9
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -379,7 +386,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 8
+    weight: 1
     region: content
     settings:
       display_label: true
@@ -399,7 +406,6 @@ content:
 hidden:
   alias_keeper: true
   changed: true
-  created: true
   keeper_machine_name: true
   menu_entity_index: true
   node_keeper: true

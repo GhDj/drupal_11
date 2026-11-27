@@ -96,7 +96,6 @@ display:
           sort_asc_label: Aufsteigend
           sort_desc_label: Absteigend
           text_input_required: 'Wählen Sie einen beliebigen Filter aus und klicken Sie auf Anwenden, um die Ergebnisse anzuzeigen.'
-          text_input_required_format: advanced
           bef:
             general:
               secondary_label: 'Erweiterte Optionen'
@@ -212,3 +211,21 @@ display:
           admin_label: Schlagworte
           exception:
             title: Alle
+  product_approvals:
+    display_title: Zulassungen
+    display_options:
+      fields:
+        field_product:
+          label: IT-Sicherheitsprodukt
+        body:
+          label: Kurzinformation
+        title:
+          label: Zulassung
+        field_classified_information:
+          label: Bis
+        field_deadline:
+          label: Bis
+        field_certification_date:
+          label: Von
+        field_contact:
+          label: 'Hersteller / Vertrieb'

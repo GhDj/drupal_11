@@ -7,7 +7,10 @@
 {% set title = element['#title'] %}
 
 {% if file_size %}
-  {% set title = file_extension ~ ', ' ~ file_size ~ ' ' ~ 'download'|t %}
+  {% set title = '@extension, @filesize download'|t({
+    '@extension': file_extension,
+    '@filesize': file_size,
+  }) %}
 {% endif %}
 
 {% include '@bsi_bund/elements/link.html.twig' with {
@@ -17,5 +20,5 @@
   'icon': 'download',
   'icon_position': 'before',
   'extra_classes': ['bsi-linkbox__downloadlink', 'bsi-linklist__link'],
-  'add_on': 'Download ' ~ element['#title']
+  'add_on': 'Download @title'|t({ '@title': element['#title']|render }),
 } only %}

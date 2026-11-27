@@ -82,10 +82,9 @@ class YearField extends ProcessorPluginBase {
         $translated_media->hasField('field_publication_date')
         && !$translated_media->get('field_publication_date')->isEmpty()
       ) {
-        $timestamp = $translated_media
+        $timestamp = strtotime($translated_media
           ->get('field_publication_date')
-          ->date
-          ->getTimestamp();
+          ->value);
       }
     }
     elseif ($entity instanceof NodeInterface) {

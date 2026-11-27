@@ -1,0 +1,40 @@
+uuid: 35af986a-ccc7-4d5d-8842-3ced07c23a28
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_organisationen_mindeststandards
+label: 'Node: Cybersicherheit › Organisationen › Mindeststandards'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/organisations/minimum-standards/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' f9955dc2-64fe-42b4-97aa-fbe18ec9d6b7'
+    property: null
+  5fe3d43e-1d39-4a0b-b18f-fa0a29366857:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' b682c54e-4e7a-4766-911d-405875a48f72'
+selection_logic: and
+weight: -13
+relationships:
+  'node:langcode:language':
+    label: Language

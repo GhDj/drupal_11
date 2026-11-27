@@ -1,0 +1,29 @@
+uuid: 99917446-1698-44e9-81be-d786b1764e40
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_lage_reaktion
+label: 'Node: Lage & Reaktion'
+type: 'canonical_entities:node'
+pattern: '/lage-reaktion/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Lage
+    property: null
+selection_logic: and
+weight: 42
+relationships:
+  'node:langcode:language':
+    label: Language

@@ -14,12 +14,14 @@ dependencies:
     - media.type.publication
     - media.type.video
     - node.type.article
+    - node.type.certificate
     - node.type.entry_page
     - node.type.event
     - node.type.inventory
     - node.type.it_security_label
     - node.type.job
     - node.type.page
+    - node.type.product_approval
     - node.type.report_page
     - workflows.workflow.nodes
   module:
@@ -33,6 +35,7 @@ dependencies:
     - node
     - paragraphs_type_permissions
     - path
+    - save_edit
     - system
     - tablefield
     - tfa
@@ -51,6 +54,7 @@ permissions:
   - 'create article content'
   - 'create audio media'
   - 'create bits media'
+  - 'create certificate content'
   - 'create chart media'
   - 'create contact media'
   - 'create download media'
@@ -63,6 +67,7 @@ permissions:
   - 'create media'
   - 'create page content'
   - 'create paragraph content view'
+  - 'create product_approval content'
   - 'create publication media'
   - 'create report_page content'
   - 'create url aliases'
@@ -75,14 +80,17 @@ permissions:
   - 'duplicate it_security_label content'
   - 'duplicate job content'
   - 'duplicate page content'
+  - 'duplicate product_approval content'
   - 'duplicate report_page content'
   - 'edit any article content'
+  - 'edit any certificate content'
   - 'edit any entry_page content'
   - 'edit any event content'
   - 'edit any inventory content'
   - 'edit any it_security_label content'
   - 'edit any job content'
   - 'edit any page content'
+  - 'edit any product_approval content'
   - 'edit any report_page content'
   - 'edit own audio media'
   - 'edit own chart media'
@@ -101,6 +109,7 @@ permissions:
   - 'use nodes transition request_approval'
   - 'use nodes transition revise'
   - 'use nodes transition withdraw'
+  - 'use save and edit'
   - 'use text format advanced'
   - 'view all revisions'
   - 'view any unpublished content'

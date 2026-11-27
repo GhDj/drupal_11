@@ -1,0 +1,32 @@
+uuid: ecde31ea-ff4f-4ef1-8973-f95d5cd7c9b6
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: group_node_intern_sicherheitsberatung
+label: 'Group Node: Intern › Sicherheitsberatung'
+type: 'canonical_entities:node'
+pattern: '/intern/sicherheitsberatung/[node:title]'
+selection_criteria:
+  7f1e9ffc-77af-42e8-a789-c5de0ab3d9ec:
+    id: 'entity_group_relation:node'
+    negate: false
+    context_mapping:
+      entity: node
+    groups:
+      - '1'
+    types: {  }
+    bundles: {  }
+  288cc5c6-01e3-4259-bd38-caff9b67c5fa:
+    id: 'entity_group_relation:node'
+    negate: false
+    context_mapping:
+      entity: node
+    groups:
+      - '2'
+    types: {  }
+selection_logic: and
+weight: -38
+relationships: {  }

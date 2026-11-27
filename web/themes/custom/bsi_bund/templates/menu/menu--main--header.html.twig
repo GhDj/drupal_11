@@ -116,7 +116,7 @@
  * - 0-2-1
  */
 #}
-{% macro items(items, level, parent_path = null) %}
+{% macro items(items, level, parent_path = null, parent_title = null) %}
   {% import _self as menu %}
 
   {% set item_class = level == 1
@@ -134,7 +134,8 @@
       {{ menu.entry(
         item,
         level,
-        item_path
+        item_path,
+        parent_title
       ) }}
     </li>
   {% endfor %}
@@ -173,7 +174,7 @@
     {# Back to main menu. #}
     <button
       type="button"
-      class="bsi-button bsi-button--inline-action bsi-mainmenu__back"
+      class="bsi-button bsi-mainmenu__back"
       data-js-mainmenu-back
       aria-label="{{ 'Back to main menu'|t }}"
     >
@@ -242,7 +243,7 @@
       {{ menu.overviewItem(parent) }}
 
       {# Level 3 items. #}
-      {{ menu.items(items, 3, item_path) }}
+      {{ menu.items(items, 3, item_path, parent.title ) }}
 
     </ul>
   </div>
@@ -260,7 +261,7 @@
  * - overview link
  * - Level 4 items
 #}
-{% macro l4_panel(parent, items, panel_id) %}
+{% macro l4_panel(parent, items, panel_id, parent_title = null) %}
   {% import _self as menu %}
 
   <div
@@ -273,16 +274,16 @@
     {# Back to Level 3. #}
     <button
       type="button"
-      class="bsi-button bsi-button--inline-action bsi-mainmenu__back"
+      class="bsi-button bsi-mainmenu__back"
       data-js-mainmenu-back="l4"
       aria-label="{{ 'Back to @title'|t({
-        '@title': parent.title,
+        '@title': parent_title,
       }) }}"
     >
       {{ menu.icon('chevron-left') }}
 
       <span class="bsi-button__text">
-        {{ 'Back'|t }}
+       {{ parent_title }}
       </span>
     </button>
 
@@ -320,7 +321,7 @@
  *
  * Level 4 items are rendered directly in l4_panel.
 #}
-{% macro entry(item, level, item_path) %}
+{% macro entry(item, level, item_path, parent_title = null) %}
   {% import _self as menu %}
 
   {% if item.below %}
@@ -334,7 +335,7 @@
       {{ menu.l3_panel(item, item.below, panel_id, item_path) }}
     {% else %}
       {{ menu.overlayToggle(item.title, panel_id) }}
-      {{ menu.l4_panel(item, item.below, panel_id) }}
+      {{ menu.l4_panel(item, item.below, panel_id, parent_title) }}
     {% endif %}
   {% else %}
     {{ menu.link(

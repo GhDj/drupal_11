@@ -1,0 +1,24 @@
+label: Vorfallsbericht
+type_settings:
+  states:
+    draft:
+      label: Entwurf
+    published:
+      label: Veröffentlicht
+    review_requested:
+      label: 'In Prüfung'
+    revision_requested:
+      label: 'In Korrektur'
+    unpublished:
+      label: Unveröffentlicht
+  transitions:
+    create_draft:
+      label: 'Entwurf erstellen'
+    publish:
+      label: Veröffentlichen
+    request_review:
+      label: 'Bitte um Prüfung'
+    request_revision:
+      label: 'Bitte um Korrektur'
+    unpublish:
+      label: Unveröffentlichen

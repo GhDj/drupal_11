@@ -1,0 +1,23 @@
+uuid: 6385cc1f-b339-4568-8bc4-6c01c3b99741
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - media
+id: group_media_intern_sicherheitsberatung_land_kommune
+label: 'Group Media: Intern › Sicherheitsberatung › Land & Kommune'
+type: 'canonical_entities:media'
+pattern: '/intern/sicherheitsberatung/land-kommune/[media:name]'
+selection_criteria:
+  e62a13f0-9853-4624-82c7-82e26838ca5e:
+    id: 'entity_group_relation:media'
+    negate: false
+    context_mapping:
+      entity: media
+    groups:
+      - '2'
+    types: {  }
+selection_logic: and
+weight: -33
+relationships: {  }

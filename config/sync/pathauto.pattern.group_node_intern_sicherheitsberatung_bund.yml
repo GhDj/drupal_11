@@ -1,0 +1,24 @@
+uuid: 5786d6b6-c8df-4d7e-a5e9-c6eefe39b144
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: group_node_intern_sicherheitsberatung_bund
+label: 'Group Node: Intern › Sicherheitsberatung › Bund'
+type: 'canonical_entities:node'
+pattern: '/intern/sicherheitsberatung/bund/[node:title]'
+selection_criteria:
+  7f1e9ffc-77af-42e8-a789-c5de0ab3d9ec:
+    id: 'entity_group_relation:node'
+    negate: false
+    context_mapping:
+      entity: node
+    groups:
+      - '1'
+    types: {  }
+    bundles: {  }
+selection_logic: and
+weight: -36
+relationships: {  }

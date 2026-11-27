@@ -1,0 +1,4 @@
+pattern: '/cybersicherheit/produkte-dienstleistungen/aufsicht/[node:title]'
+selection_criteria:
+  f5a03f46-9429-46d7-bce7-0629b78a2026:
+    value: Aufsicht

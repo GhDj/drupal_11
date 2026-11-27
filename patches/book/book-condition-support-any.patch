@@ -1,0 +1,53 @@
+--- a/src/Plugin/Condition/Book.php
++++ b/src/Plugin/Condition/Book.php
+@@ -67,7 +67,7 @@
+    * {@inheritdoc}
+    */
+   public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
+-    $options = [];
++    $options = ['_any' => $this->t('- Any -')];
+     $books = $this->bookManager->getAllBooks();
+     foreach ($books as $bid => $book) {
+       $options[$bid] = $book['title'];
+@@ -99,13 +99,19 @@
+     if (count($book_titles) > 1) {
+       $last = array_pop($book_titles);
+       $book_titles = implode(', ', $book_titles);
+-      return $this->t('The node is part of the @books or @last books', ['@books' => $book_titles, '@last' => $last]);
++      return $this->isNegated()
++        ? $this->t('The node is not part of the @books or @last books', ['@books' => $book_titles, '@last' => $last])
++        : $this->t('The node is part of the @books or @last books', ['@books' => $book_titles, '@last' => $last]);
+     }
+     elseif (count($book_titles) == 1) {
+       $book = reset($book_titles);
+-      return $this->t('The node is part of the @book book', ['@book' => $book]);
++      return $this->isNegated()
++        ? $this->t('The node is not part of the @book book', ['@book' => $book])
++        : $this->t('The node is part of the @book book', ['@book' => $book]);
+     }
+-    return $this->t('The node is not part of any books');
++    return $this->isNegated()
++      ? $this->t('The node is not part of any books')
++      : $this->t('The node is part of any book');
+   }
+
+   /**
+@@ -114,16 +120,14 @@
+    * @throws \Drupal\Component\Plugin\Exception\ContextException
+    */
+   public function evaluate(): bool {
+-    if (empty($this->configuration['books']) && !$this->isNegated()) {
+-      return TRUE;
+-    }
+     $node = $this->getContextValue('node');
+     if (!$node instanceof BookInterface) {
+       return FALSE;
+     }
+     $book = $node->getBook();
+     if (!empty($book['bid'])) {
+-      return !empty($this->configuration['books'][$book['bid']]);
++      return !empty($this->configuration['books']['_any'])
++        || !empty($this->configuration['books'][$book['bid']]);
+     }
+     return FALSE;
+   }

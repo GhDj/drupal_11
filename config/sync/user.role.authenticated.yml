@@ -13,9 +13,13 @@ dependencies:
     - search_api_autocomplete.search.search_media
     - search_api_autocomplete.search.search_yearly_report
     - taxonomy.vocabulary.abbreviations
+    - taxonomy.vocabulary.assurance
+    - taxonomy.vocabulary.attack_vectors
     - taxonomy.vocabulary.audiences
+    - taxonomy.vocabulary.certification_type
     - taxonomy.vocabulary.contact_topics
     - taxonomy.vocabulary.dictionary
+    - taxonomy.vocabulary.incident_types
     - taxonomy.vocabulary.it_sik_categories
     - taxonomy.vocabulary.media_directory
     - taxonomy.vocabulary.media_types
@@ -36,6 +40,7 @@ dependencies:
     - node
     - paragraphs_type_permissions
     - search_api_autocomplete
+    - securitytxt
     - system
     - taxonomy
     - webform
@@ -93,9 +98,13 @@ permissions:
   - 'delete paragraph content tiles'
   - 'delete paragraph content view'
   - 'delete term revisions in abbreviations'
+  - 'delete term revisions in assurance'
+  - 'delete term revisions in attack_vectors'
   - 'delete term revisions in audiences'
+  - 'delete term revisions in certification_type'
   - 'delete term revisions in contact_topics'
   - 'delete term revisions in dictionary'
+  - 'delete term revisions in incident_types'
   - 'delete term revisions in it_sik_categories'
   - 'delete term revisions in media_directory'
   - 'delete term revisions in media_types'
@@ -109,9 +118,13 @@ permissions:
   - 'edit own webform submission'
   - 'mark as hidden in editoria11y'
   - 'revert term revisions in abbreviations'
+  - 'revert term revisions in assurance'
+  - 'revert term revisions in attack_vectors'
   - 'revert term revisions in audiences'
+  - 'revert term revisions in certification_type'
   - 'revert term revisions in contact_topics'
   - 'revert term revisions in dictionary'
+  - 'revert term revisions in incident_types'
   - 'revert term revisions in it_sik_categories'
   - 'revert term revisions in media_directory'
   - 'revert term revisions in media_types'
@@ -175,4 +188,5 @@ permissions:
   - 'view paragraph content tile_item'
   - 'view paragraph content tiles'
   - 'view paragraph content view'
+  - 'view securitytxt'
   - 'view vocabulary labels'

@@ -1,0 +1,29 @@
+uuid: 8616c747-0d6d-4f06-8ab8-7ac392f06eb7
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit
+label: 'Node: Cybersicherheit'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: Cybersecurity
+    property: null
+selection_logic: and
+weight: 26
+relationships:
+  'node:langcode:language':
+    label: Language

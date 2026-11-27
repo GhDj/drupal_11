@@ -1,0 +1,40 @@
+uuid: 2e21b8d9-44d9-49b9-8112-98316b5422a3
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_verbraucherinnen_risiken_im_digitalen_alltag
+label: 'Node: Cybersicherheit › Verbraucherinnen › Risiken im digitalen Alltag'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/consumers/risks-in-everyday-digital-life/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: Verbraucherinnen
+    property: null
+  d060cdbe-af2f-4a23-8bd4-976b2291d8c4:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_tags
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' 73765350-1517-410f-a0e2-9c53b8f6870b'
+selection_logic: and
+weight: 14
+relationships:
+  'node:langcode:language':
+    label: Language

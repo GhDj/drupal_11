@@ -1,0 +1,29 @@
+uuid: 45835c92-54c9-455c-bc9d-215cd380ad8f
+langcode: en
+status: true
+dependencies:
+  module:
+    - bsi_custom
+    - node
+id: node_cybersicherheit_kooperationen
+label: 'Node: Cybersicherheit › Kooperationen'
+type: 'canonical_entities:node'
+pattern: '/cybersecurity/partnerships/[node:title]'
+selection_criteria:
+  32c66fd6-aa19-4c1a-b2ba-71581e32a278:
+    id: 'entity_field:node'
+    negate: false
+    context_mapping:
+      entity: node
+    entity_bundle: {  }
+    field_name: field_topics
+    field_property:
+      entity: entity
+    operator: equals
+    value: ' 5e5cc004-6d3c-440b-a5d4-2a976e0bd7eb'
+    property: null
+selection_logic: and
+weight: -17
+relationships:
+  'node:langcode:language':
+    label: Language

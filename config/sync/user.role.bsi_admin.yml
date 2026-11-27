@@ -15,15 +15,19 @@ dependencies:
     - media.type.publication
     - media.type.video
     - node.type.article
+    - node.type.certificate
     - node.type.entry_page
     - node.type.event
     - node.type.inventory
     - node.type.it_security_label
     - node.type.job
     - node.type.page
+    - node.type.product_approval
     - node.type.report_page
     - taxonomy.vocabulary.abbreviations
+    - taxonomy.vocabulary.assurance
     - taxonomy.vocabulary.audiences
+    - taxonomy.vocabulary.certification_type
     - taxonomy.vocabulary.contact_topics
     - taxonomy.vocabulary.dictionary
     - taxonomy.vocabulary.it_sik_categories
@@ -65,6 +69,7 @@ dependencies:
     - redirect
     - registration
     - role_delegation
+    - save_edit
     - short_url
     - simple_sitemap
     - system
@@ -134,6 +139,7 @@ permissions:
   - 'configure editable entry_page node layout overrides'
   - 'create and edit custom blocks'
   - 'create article content'
+  - 'create certificate content'
   - 'create content translations'
   - 'create entry_page content'
   - 'create event content'
@@ -144,10 +150,13 @@ permissions:
   - 'create new books'
   - 'create page content'
   - 'create paragraph content view'
+  - 'create product_approval content'
   - 'create registration'
   - 'create report_page content'
   - 'create terms in abbreviations'
+  - 'create terms in assurance'
   - 'create terms in audiences'
+  - 'create terms in certification_type'
   - 'create terms in contact_topics'
   - 'create terms in dictionary'
   - 'create terms in it_sik_categories'
@@ -160,6 +169,7 @@ permissions:
   - 'delete all revisions'
   - 'delete all taxonomy revisions'
   - 'delete any article content'
+  - 'delete any certificate content'
   - 'delete any entry_page content'
   - 'delete any event content'
   - 'delete any file'
@@ -168,9 +178,11 @@ permissions:
   - 'delete any job content'
   - 'delete any media'
   - 'delete any page content'
+  - 'delete any product_approval content'
   - 'delete any report_page content'
   - 'delete any webform submission'
   - 'delete article revisions'
+  - 'delete certificate revisions'
   - 'delete content translations'
   - 'delete entry_page revisions'
   - 'delete event revisions'
@@ -178,10 +190,14 @@ permissions:
   - 'delete inventory revisions'
   - 'delete it_security_label revisions'
   - 'delete job revisions'
+  - 'delete own webform'
   - 'delete page revisions'
+  - 'delete product_approval revisions'
   - 'delete report_page revisions'
   - 'delete terms in abbreviations'
+  - 'delete terms in assurance'
   - 'delete terms in audiences'
+  - 'delete terms in certification_type'
   - 'delete terms in contact_topics'
   - 'delete terms in dictionary'
   - 'delete terms in it_sik_categories'
@@ -196,14 +212,17 @@ permissions:
   - 'duplicate it_security_label content'
   - 'duplicate job content'
   - 'duplicate page content'
+  - 'duplicate product_approval content'
   - 'duplicate report_page content'
   - 'edit any article content'
+  - 'edit any certificate content'
   - 'edit any entry_page content'
   - 'edit any event content'
   - 'edit any inventory content'
   - 'edit any it_security_label content'
   - 'edit any job content'
   - 'edit any page content'
+  - 'edit any product_approval content'
   - 'edit any report_page content'
   - 'edit any webform'
   - 'edit any webform access settings'
@@ -218,7 +237,9 @@ permissions:
   - 'edit entity sitemap settings'
   - 'edit short_url'
   - 'edit terms in abbreviations'
+  - 'edit terms in assurance'
   - 'edit terms in audiences'
+  - 'edit terms in certification_type'
   - 'edit terms in contact_topics'
   - 'edit terms in dictionary'
   - 'edit terms in it_sik_categories'
@@ -234,6 +255,7 @@ permissions:
   - 'paste tablefield'
   - 'rabbit hole administer media'
   - 'rabbit hole bypass media'
+  - 'rabbit hole bypass node'
   - 'rabbit hole bypass taxonomy_term'
   - 'reorder book pages'
   - 'revert all revisions'
@@ -262,6 +284,7 @@ permissions:
   - 'use nodes transition revise'
   - 'use nodes transition unpublish'
   - 'use nodes transition withdraw'
+  - 'use save and edit'
   - 'use text format advanced'
   - 'view all revisions'
   - 'view all taxonomy revisions'
@@ -273,7 +296,9 @@ permissions:
   - 'view host registration'
   - 'view own registration'
   - 'view term revisions in abbreviations'
+  - 'view term revisions in assurance'
   - 'view term revisions in audiences'
+  - 'view term revisions in certification_type'
   - 'view term revisions in contact_topics'
   - 'view term revisions in dictionary'
   - 'view term revisions in it_sik_categories'

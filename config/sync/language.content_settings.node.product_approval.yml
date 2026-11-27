@@ -1,0 +1,16 @@
+uuid: 9fec6fe2-c0f6-4d02-a504-a9e914f0cbe9
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.product_approval
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.product_approval
+target_entity_type_id: node
+target_bundle: product_approval
+default_langcode: de
+language_alterable: true

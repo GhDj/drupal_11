@@ -1,0 +1,113 @@
+uuid: 1ed6e489-73a4-4ff7-b4b5-4e03add4a630
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.product_approval.body
+    - field.field.node.product_approval.field_certification_date
+    - field.field.node.product_approval.field_certification_date_eu
+    - field.field.node.product_approval.field_certification_date_nato
+    - field.field.node.product_approval.field_classified_eu
+    - field.field.node.product_approval.field_classified_information
+    - field.field.node.product_approval.field_classified_nato
+    - field.field.node.product_approval.field_contact
+    - field.field.node.product_approval.field_deadline
+    - field.field.node.product_approval.field_further_details
+    - field.field.node.product_approval.field_media
+    - field.field.node.product_approval.field_media_downloads
+    - field.field.node.product_approval.field_product
+    - field.field.node.product_approval.field_product_version
+    - node.type.product_approval
+  module:
+    - datetime
+    - options
+id: node.product_approval.default
+targetEntityType: node
+bundle: product_approval
+mode: default
+content:
+  field_certification_date_eu:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_certification_date_nato:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_classified_eu:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_classified_information:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_classified_nato:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_contact:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_media_downloads:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_product_version:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  body: true
+  changed: true
+  created: true
+  field_certification_date: true
+  field_deadline: true
+  field_further_details: true
+  field_media: true
+  field_product: true
+  langcode: true
+  search_api_excerpt: true
+  short_url: true
+  title: true
+  uid: true

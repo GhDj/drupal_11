@@ -7,16 +7,26 @@ dependencies:
     - field.storage.media.field_media_file
     - field.storage.media.field_publication_date
     - field.storage.media.field_use_cart
+    - field.storage.node.body
     - field.storage.node.field_applicant
     - field.storage.node.field_certification_date
+    - field.storage.node.field_certification_date_eu
+    - field.storage.node.field_certification_date_nato
+    - field.storage.node.field_classified_eu
+    - field.storage.node.field_classified_information
+    - field.storage.node.field_classified_nato
+    - field.storage.node.field_contact
     - field.storage.node.field_date_range
     - field.storage.node.field_deadline
     - field.storage.node.field_degree
     - field.storage.node.field_evaluation_target
+    - field.storage.node.field_further_details
     - field.storage.node.field_information_network
     - field.storage.node.field_location
     - field.storage.node.field_media
+    - field.storage.node.field_media_downloads
     - field.storage.node.field_product
+    - field.storage.node.field_product_version
     - field.storage.node.field_protection_profile
     - field.storage.node.field_protection_profile_issuer
     - image.style.media_library
@@ -6914,6 +6924,1417 @@ display:
         - 'config:field.storage.node.field_deadline'
         - 'config:field.storage.node.field_location'
         - 'config:field.storage.node.field_media'
+        - 'config:search_api.index.default'
+        - 'search_api_list:default'
+  product_approvals:
+    id: product_approvals
+    display_title: 'Product Approvals'
+    display_plugin: embed
+    position: 9
+    display_options:
+      fields:
+        field_product:
+          id: field_product
+          table: search_api_datasource_default_entity_node
+          field: field_product
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: 'IT product'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_text
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+            filter_type: xss
+        field_product_version:
+          id: field_product_version
+          table: search_api_datasource_default_entity_node
+          field: field_product_version
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+            link_rel: canonical
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+        field_further_details:
+          id: field_further_details
+          table: search_api_datasource_default_entity_node
+          field: field_further_details
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 1
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_text
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+            filter_type: xss
+        field_contact:
+          id: field_contact
+          table: search_api_datasource_default_entity_node
+          field: field_contact
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: 'Manufacturer / Distributor'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+            display_methods:
+              audio:
+                display_method: label
+                view_mode: default
+              bits:
+                display_method: label
+                view_mode: default
+              chart:
+                display_method: label
+                view_mode: default
+              contact:
+                display_method: label
+                view_mode: default
+              download:
+                display_method: label
+                view_mode: default
+              gallery:
+                display_method: label
+                view_mode: default
+              image:
+                display_method: label
+                view_mode: default
+              publication:
+                display_method: label
+                view_mode: default
+              video:
+                display_method: label
+                view_mode: default
+        field_media_downloads:
+          id: field_media_downloads
+          table: search_api_datasource_default_entity_node
+          field: field_media_downloads
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ''
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: true
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+            display_methods:
+              audio:
+                display_method: label
+                view_mode: default
+              bits:
+                display_method: label
+                view_mode: default
+              chart:
+                display_method: label
+                view_mode: default
+              contact:
+                display_method: label
+                view_mode: default
+              download:
+                display_method: label
+                view_mode: default
+              gallery:
+                display_method: label
+                view_mode: default
+              image:
+                display_method: label
+                view_mode: default
+              publication:
+                display_method: label
+                view_mode: default
+              video:
+                display_method: label
+                view_mode: default
+        body:
+          id: body
+          table: search_api_datasource_default_entity_node
+          field: body
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: 'Short information'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_text
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+            filter_type: xss
+        title:
+          id: title
+          table: search_api_datasource_default_entity_node
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: 'Product approval'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+            link_rel: canonical
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+        field_classified_information:
+          id: field_classified_information
+          table: search_api_datasource_default_entity_node
+          field: field_classified_information
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: Until
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+        field_deadline:
+          id: field_deadline
+          table: search_api_datasource_default_entity_node
+          field: field_deadline
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: Until
+          exclude: false
+          alter:
+            alter_text: true
+            text: "{# Display deadline only if not classified #}\r\n{{ field_classified_information|default(field_deadline) }}"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: date_short
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+        field_certification_date:
+          id: field_certification_date
+          table: search_api_datasource_default_entity_node
+          field: field_certification_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: From
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: date_short
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+        field_classified_eu:
+          id: field_classified_eu
+          table: search_api_datasource_default_entity_node
+          field: field_classified_eu
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: EU
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+        field_certification_date_eu:
+          id: field_certification_date_eu
+          table: search_api_datasource_default_entity_node
+          field: field_certification_date_eu
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: date_short
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+        field_classified_nato:
+          id: field_classified_nato
+          table: search_api_datasource_default_entity_node
+          field: field_classified_nato
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: NATO
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+        field_certification_date_nato:
+          id: field_certification_date_nato
+          table: search_api_datasource_default_entity_node
+          field: field_certification_date_nato
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: date_short
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            delta_limit: 0
+            delta_offset: 0
+            delta_reversed: false
+            delta_first_last: false
+      pager:
+        type: full
+        options:
+          offset: 0
+          pagination_heading_level: h4
+          items_per_page: 20
+          total_pages: null
+          id: 0
+          tags:
+            next: ›
+            previous: ‹
+            first: ''
+            last: ''
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      filters:
+        node_status:
+          id: node_status
+          table: search_api_index_default
+          field: node_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        search_api_language:
+          id: search_api_language
+          table: search_api_index_default
+          field: search_api_language
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        node_bundle:
+          id: node_bundle
+          table: search_api_index_default
+          field: node_bundle
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value:
+            product_approval: product_approval
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            field_product: field_product
+            field_product_version: field_product
+            field_further_details: field_product
+            field_contact: field_contact
+            field_media_downloads: field_contact
+            body: body
+            title: title
+            field_classified_information: title
+            field_deadline: title
+            field_certification_date: title
+            field_classified_eu: title
+            field_certification_date_eu: title
+            field_classified_nato: title
+            field_certification_date_nato: title
+            title_1: title_1
+          default: '-1'
+          info:
+            field_product:
+              align: ''
+              separator: '<br><br>'
+              empty_column: false
+              responsive: ''
+            field_product_version:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_further_details:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_contact:
+              align: ''
+              separator: '<br><br>'
+              empty_column: false
+              responsive: ''
+            field_media_downloads:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            body:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            title:
+              align: ''
+              separator: '<br><br>'
+              empty_column: false
+              responsive: ''
+            field_classified_information:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_deadline:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_certification_date:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_classified_eu:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_certification_date_eu:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_classified_nato:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_certification_date_nato:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            title_1:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
+          class: ''
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        pager: false
+        style: false
+        row: false
+        relationships: true
+        fields: false
+        sorts: true
+        arguments: true
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_certification_date'
+        - 'config:field.storage.node.field_certification_date_eu'
+        - 'config:field.storage.node.field_certification_date_nato'
+        - 'config:field.storage.node.field_classified_eu'
+        - 'config:field.storage.node.field_classified_information'
+        - 'config:field.storage.node.field_classified_nato'
+        - 'config:field.storage.node.field_contact'
+        - 'config:field.storage.node.field_deadline'
+        - 'config:field.storage.node.field_further_details'
+        - 'config:field.storage.node.field_media_downloads'
+        - 'config:field.storage.node.field_product'
+        - 'config:field.storage.node.field_product_version'
         - 'config:search_api.index.default'
         - 'search_api_list:default'
   publications:

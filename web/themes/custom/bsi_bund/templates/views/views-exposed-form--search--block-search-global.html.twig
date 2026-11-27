@@ -29,9 +29,12 @@
   {% set facet_keys = ['type', 'topics', 'audiences', 'year'] %}
   {% for key in facet_keys %}
     {% if form[key] is defined %}
-      <div class="bsi-multiselect js-multiselect" data-filter-key="{{ key }}">
-        {{ form[key] }}
-      </div>
+    {% set field_content = form[key]|render %}
+      {% if field_content|trim is not empty %}
+        <div class="bsi-multiselect js-multiselect" data-filter-key="{{ key }}">
+          {{ form[key] }}
+        </div>
+      {% endif %}
     {% endif %}
   {% endfor %}
 </div>
