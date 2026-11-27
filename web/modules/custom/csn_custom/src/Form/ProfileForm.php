@@ -7,6 +7,7 @@ namespace Drupal\csn_custom\Form;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\ContentEntityForm;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -48,7 +49,7 @@ final class ProfileForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container): self {
-    return new self(
+    return new static(
       $container->get('entity.repository'),
       $container->get('entity_type.bundle.info'),
       $container->get('datetime.time'),
@@ -60,7 +61,7 @@ final class ProfileForm extends ContentEntityForm {
   /**
    * {@inheritdoc}
    */
-  public function getEntityFromRouteMatch(RouteMatchInterface $route_match, $entity_type_id): \Drupal\Core\Entity\EntityInterface {
+  public function getEntityFromRouteMatch(RouteMatchInterface $route_match, $entity_type_id): EntityInterface {
     $storage = $this->entityTypeManager->getStorage('profile');
     $profiles = $storage->loadByProperties([
       'type' => 'first_responder',
