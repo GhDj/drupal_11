@@ -3,61 +3,14 @@ langcode: en
 status: true
 dependencies:
   module:
-    - options
     - profile
 id: profile.field_deh_language
 field_name: field_deh_language
 entity_type: profile
-type: list_string
+type: entity_reference
 settings:
-  allowed_values:
-    -
-      value: de
-      label: German
-    -
-      value: en
-      label: English
-    -
-      value: fr
-      label: French
-    -
-      value: es
-      label: Spanish
-    -
-      value: it
-      label: Italian
-    -
-      value: tr
-      label: Turkish
-    -
-      value: ru
-      label: Russian
-    -
-      value: ar
-      label: Arabic
-    -
-      value: pl
-      label: Polish
-    -
-      value: uk
-      label: Ukrainian
-    -
-      value: zh
-      label: Chinese
-    -
-      value: ja
-      label: Japanese
-    -
-      value: ko
-      label: Korean
-    -
-      value: pt
-      label: Portuguese
-    -
-      value: nl
-      label: Dutch
-  allowed_values_function: ''
-module: options
+  target_type: taxonomy_term
+module: core
 locked: false
 cardinality: -1
 translatable: true
