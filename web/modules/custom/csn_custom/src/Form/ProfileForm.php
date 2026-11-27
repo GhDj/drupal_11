@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\csn_custom\Form;
 
-use Drupal\Component\Datetime\TimeInterface;
+use Drupal\Core\Datetime\TimeInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Entity\EntityInterface;
