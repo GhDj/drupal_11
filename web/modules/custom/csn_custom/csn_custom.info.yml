@@ -8,3 +8,4 @@ configure: csn_custom.settings
 
 dependencies:
   - group:group
+  - profile:profile

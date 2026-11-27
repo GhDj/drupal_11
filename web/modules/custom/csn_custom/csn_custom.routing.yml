@@ -42,3 +42,13 @@ csn_custom.incident_report.edit:
     _admin_route: false
     _access_checks:
       - 'access_check.entity'
+
+csn_custom.profile:
+  path: '/csn/profil'
+  defaults:
+    _title: 'My profile'
+    _entity_form: 'profile.csn_profile'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+  options:
+    _admin_route: false
