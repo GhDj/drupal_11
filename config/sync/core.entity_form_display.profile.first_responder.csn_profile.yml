@@ -18,6 +18,7 @@ dependencies:
     - field.field.profile.first_responder.field_phone
     - profile.type.first_responder
   module:
+    - address
     - office_hours
     - options
     - telephone
@@ -58,12 +59,10 @@ content:
       placeholder: ''
     third_party_settings: {}
   field_address:
-    type: string_textarea
+    type: address_default
     weight: 4
     region: content
-    settings:
-      rows: 3
-      placeholder: ''
+    settings: {}
     third_party_settings: {}
   field_deh_phone:
     type: telephone_default

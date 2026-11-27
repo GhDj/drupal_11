@@ -3,14 +3,14 @@ langcode: en
 status: true
 dependencies:
   module:
+    - address
     - profile
 id: profile.field_address
 field_name: field_address
 entity_type: profile
-type: string_long
-settings:
-  case_sensitive: false
-module: core
+type: address
+settings: {}
+module: address
 locked: false
 cardinality: 1
 translatable: true
