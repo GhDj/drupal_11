@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Drupal\csn_custom\Form;
 
 use Drupal\Component\Datetime\TimeInterface;
-use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
@@ -86,9 +85,7 @@ final class ProfileForm extends ContentEntityForm {
     // Apply custom theme.
     $form['#theme'] = 'csn_profile_form';
     $form['#is_initial'] = $is_initial;
-    $form['#user_email'] = Html::escape(
-      $this->currentUser()->getEmail() ?: $this->currentUser()->getAccountName() ?: ''
-    );
+    $form['#user_email'] = $this->currentUser()->getEmail() ?: $this->currentUser()->getAccountName() ?: '';
 
     // Language field: add attributes for the chip widget JS.
     // options_select widget renders the <select> at widget level.
