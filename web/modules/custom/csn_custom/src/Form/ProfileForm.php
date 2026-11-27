@@ -12,7 +12,6 @@ use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Url;
 use Drupal\csn_custom\FeedbackServiceInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -35,14 +34,16 @@ final class ProfileForm extends ContentEntityForm {
     'field_confirm_volunteer',
   ];
 
+  private FeedbackServiceInterface $feedback;
+
   public function __construct(
     EntityRepositoryInterface $entity_repository,
     EntityTypeBundleInfoInterface $entity_type_bundle_info,
     TimeInterface $time,
-    private readonly AccountProxyInterface $currentUser,
-    private readonly FeedbackServiceInterface $feedback,
+    FeedbackServiceInterface $feedback,
   ) {
     parent::__construct($entity_repository, $entity_type_bundle_info, $time);
+    $this->feedback = $feedback;
   }
 
   /**
@@ -53,7 +54,6 @@ final class ProfileForm extends ContentEntityForm {
       $container->get('entity.repository'),
       $container->get('entity_type.bundle.info'),
       $container->get('datetime.time'),
-      $container->get('current_user'),
       $container->get('csn_custom.feedback'),
     );
   }
@@ -65,7 +65,7 @@ final class ProfileForm extends ContentEntityForm {
     $storage = $this->entityTypeManager->getStorage('profile');
     $profiles = $storage->loadByProperties([
       'type' => 'first_responder',
-      'uid' => $this->currentUser->id(),
+      'uid' => $this->currentUser()->id(),
     ]);
 
     if ($profiles) {
@@ -74,7 +74,7 @@ final class ProfileForm extends ContentEntityForm {
 
     return $storage->create([
       'type' => 'first_responder',
-      'uid' => $this->currentUser->id(),
+      'uid' => $this->currentUser()->id(),
     ]);
   }
 
@@ -90,7 +90,7 @@ final class ProfileForm extends ContentEntityForm {
     $form['#theme'] = 'csn_profile_form';
     $form['#is_initial'] = $is_initial;
     $form['#user_email'] = Html::escape(
-      $this->currentUser->getEmail() ?: $this->currentUser->getAccountName() ?: ''
+      $this->currentUser()->getEmail() ?: $this->currentUser()->getAccountName() ?: ''
     );
 
     // Language field: add attributes for the chip widget JS.
